@@ -109,6 +109,18 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 .result-panel > div:last-child { padding-left: 0.85rem; }
 .metric-value { margin: 0.25rem 0 0; font-family: var(--font-serif); font-size: 1.7rem; font-weight: 400; }
 .result-summary, .copy-status, .info-card li { color: var(--color-text-muted); }
+.info-card li a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.info-card li a:hover { color: var(--color-primary-dark); }
+.filter-row { margin: 0 0 1rem; grid-template-columns: 1fr; }
+.filter-row label { max-width: 320px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.ref-table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 0.86rem; }
+.ref-table th, .ref-table td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.ref-table thead th { font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.66rem; color: var(--color-text-muted); background: var(--color-surface-2); white-space: nowrap; }
+.ref-table tbody tr:last-child td { border-bottom: none; }
+.ref-table tbody tr:hover { background: var(--color-surface-2); }
+.ref-table td.vessel-name { font-family: var(--font-serif); font-weight: 700; color: var(--color-text); white-space: nowrap; }
+.ref-table td { color: var(--color-text-muted); }
 .badge { display: inline-flex; align-items: center; padding: 0.4rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 700; }
 .badge-good { background: var(--color-good-soft); color: var(--color-good); }
 .badge-warn { background: var(--color-warn-soft); color: var(--color-warn); }
@@ -124,7 +136,6 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 @media (max-width: 900px) {
   .hero-card, .setup-grid, .calculator-grid, .form-grid { grid-template-columns: 1fr; }
   .hero-card h1 { max-width: 100%; }
-  .calculator-grid .result-card { order: -1; }
   .sticky-card { position: static; }
   .reset-button { flex: 1 1 100%; }
 }

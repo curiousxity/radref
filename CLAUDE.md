@@ -101,6 +101,9 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Lung-RADS
 - Bosniak 2019
 - Pancreatic cyst surveillance
+- MELD (MELD 3.0 default, MELD-Na option)
+- Vascular diameter reference (quick-reference table, not a calculator)
+- Adrenal washout (APW/RPW calculator)
 
 ## Next development priorities
 

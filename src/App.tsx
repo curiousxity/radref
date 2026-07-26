@@ -7,6 +7,9 @@ import { IncidentalPage } from './pages/IncidentalPage'
 import { LungRadsPage } from './pages/LungRadsPage'
 import { BosniakPage } from './pages/BosniakPage'
 import { PancreaticCystPage } from './pages/PancreaticCystPage'
+import { MeldPage } from './pages/MeldPage'
+import { VascularDiameterPage } from './pages/VascularDiameterPage'
+import { AdrenalWashoutPage } from './pages/AdrenalWashoutPage'
 
 const calculators = [
   { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.' },
@@ -16,6 +19,9 @@ const calculators = [
   { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule categorization with management and impression text.' },
   { path: '/bosniak', name: 'Bosniak 2019', description: 'Cystic renal mass classification with management and impression text.' },
   { path: '/pancreatic-cyst', name: 'Pancreatic cyst', description: 'Dedicated incidental pancreatic cyst surveillance and escalation logic.' },
+  { path: '/meld', name: 'MELD', description: 'MELD 3.0 by default with optional MELD-Na comparison and copyable impression text.' },
+  { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Quick-reference adult vessel caliber, ectasia, and aneurysm thresholds.' },
+  { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW/RPW washout calculator with adenoma thresholds and copyable impression text.' },
 ]
 
 export default function App() {
@@ -51,6 +57,9 @@ export default function App() {
           <Route path="/lungrads" element={<LungRadsPage />} />
           <Route path="/bosniak" element={<BosniakPage />} />
           <Route path="/pancreatic-cyst" element={<PancreaticCystPage />} />
+          <Route path="/meld" element={<MeldPage />} />
+          <Route path="/vascular-diameters" element={<VascularDiameterPage />} />
+          <Route path="/adrenal-washout" element={<AdrenalWashoutPage />} />
         </Routes>
       </main>
     </div>
