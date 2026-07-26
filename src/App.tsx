@@ -3,11 +3,19 @@ import { HomePage } from './pages/HomePage'
 import { TiradsPage } from './pages/TiradsPage'
 import { LiradsPage } from './pages/LiradsPage'
 import { OradsPage } from './pages/OradsPage'
+import { IncidentalPage } from './pages/IncidentalPage'
+import { LungRadsPage } from './pages/LungRadsPage'
+import { BosniakPage } from './pages/BosniakPage'
+import { PancreaticCystPage } from './pages/PancreaticCystPage'
 
 const calculators = [
   { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.' },
   { path: '/lirads', name: 'LI-RADS', description: 'CT/MRI liver lesion categorization with copyable impression text.' },
   { path: '/orads', name: 'O-RADS', description: 'US and MRI adnexal lesion stratification with modality-aware inputs.' },
+  { path: '/incidental', name: 'Incidental', description: 'ACR-style helpers for adrenal incidentalomas, pancreatic cysts, and renal masses.' },
+  { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule categorization with management and impression text.' },
+  { path: '/bosniak', name: 'Bosniak 2019', description: 'Cystic renal mass classification with management and impression text.' },
+  { path: '/pancreatic-cyst', name: 'Pancreatic cyst', description: 'Dedicated incidental pancreatic cyst surveillance and escalation logic.' },
 ]
 
 export default function App() {
@@ -39,6 +47,10 @@ export default function App() {
           <Route path="/tirads" element={<TiradsPage />} />
           <Route path="/lirads" element={<LiradsPage />} />
           <Route path="/orads" element={<OradsPage />} />
+          <Route path="/incidental" element={<IncidentalPage />} />
+          <Route path="/lungrads" element={<LungRadsPage />} />
+          <Route path="/bosniak" element={<BosniakPage />} />
+          <Route path="/pancreatic-cyst" element={<PancreaticCystPage />} />
         </Routes>
       </main>
     </div>

@@ -23,7 +23,7 @@ export function HomePage({ calculators }: { calculators: CalculatorItem[] }) {
         </div>
         <div className="hero-panel">
           <div className="hero-stat">
-            <span>3</span>
+            <span>{calculators.length}</span>
             <p>Core calculators live</p>
           </div>
           <div className="hero-stat">
@@ -77,6 +77,10 @@ export function HomePage({ calculators }: { calculators: CalculatorItem[] }) {
             <li>Import the repo into Cloudflare Pages.</li>
             <li>Add your custom domain after the first successful deploy.</li>
             <li>Keep adding calculators into the same shared shell.</li>
+            <li>Add incidental findings tools for common body CT references.</li>
+            <li>Add Lung-RADS for screening LDCT nodule follow-up.</li>
+            <li>Add Bosniak 2019 for cystic renal mass classification.</li>
+            <li>Add a dedicated pancreatic cyst surveillance calculator.</li>
           </ul>
         </article>
       </section>

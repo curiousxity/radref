@@ -25,6 +25,10 @@ export function LiradsPage() {
     setForm((current) => ({ ...current, [field]: value }))
   }
 
+  function handleReset() {
+    setForm(initialForm)
+  }
+
   return (
     <div className="page page-calculator">
       <section className="section-block calculator-header">
@@ -33,6 +37,7 @@ export function LiradsPage() {
           <h2>LI-RADS calculator</h2>
           <p>Enter the major CT/MRI features to calculate a LI-RADS category and copy a report-ready impression.</p>
         </div>
+        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">

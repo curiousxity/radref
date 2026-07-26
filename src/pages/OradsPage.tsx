@@ -27,6 +27,7 @@ export function OradsPage() {
   const [form, setForm] = useState<OradsForm>(initialForm)
   const result = useMemo(() => calculateOrads(form), [form])
   function updateField<K extends keyof OradsForm>(field: K, value: OradsForm[K]) { setForm((current) => ({ ...current, [field]: value })) }
+  function handleReset() { setForm(initialForm) }
   const isUs = form.modality === 'us'
   return (
     <div className="page page-calculator">
@@ -36,6 +37,7 @@ export function OradsPage() {
           <h2>O-RADS calculator</h2>
           <p>Branch-aware O-RADS form with separate ultrasound and MRI logic paths.</p>
         </div>
+        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
