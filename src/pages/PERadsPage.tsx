@@ -28,6 +28,57 @@ const initialForm: Form = {
   chronicFeatures: false,
 }
 
+function buildManagement(form: Form, code: string) {
+  if (code === 'PE-RADS N') {
+    return 'Central pulmonary arteries cannot be confidently evaluated and acute PE cannot be excluded at the main or lobar level. This study cannot by itself guide management; obtain repeat or alternative imaging.'
+  }
+
+  if (form.nonPECause) {
+    return 'Findings reflect a non-PE cause of the pulmonary arterial filling defect (for example chronic thromboembolism, in situ thrombus, tumor embolus, or cement/air embolus). Management follows a distinct pathway from acute PE treatment; clearly describe the filling defect and presumptive etiology to guide next steps.'
+  }
+
+  const parts: string[] = []
+
+  if (code === 'PE-RADS 0') {
+    parts.push(
+      form.limitedStudy
+        ? 'Classified as PE-RADS 0 with limited assessment of the peripheral vessels; central arteries are confidently clear. Determine next steps based on clinical assessment, and document the level to which vessels were adequately visualized.'
+        : 'Acute PE is not the cause of the current symptoms; consider alternative diagnosis.',
+    )
+  } else {
+    parts.push('Anticoagulation should be considered based on bleeding risk and VTE risk factors, with formal PE risk stratification.')
+    if (code === 'PE-RADS 1') {
+      parts.push(
+        'Isolated subsegmental PE may be appropriate for observation alone in selected patients; consider lower extremity venous imaging to help guide the anticoagulation-versus-surveillance decision.',
+      )
+    }
+    if (form.rvEnlargement) {
+      const rvContext =
+        code === 'PE-RADS 1'
+          ? 'Acute PE is unlikely to be the sole cause of RV enlargement at this level.'
+          : code === 'PE-RADS 2'
+            ? 'Acute PE may be the cause of RV enlargement if extensive obstructive thrombus is present.'
+            : code === 'PE-RADS 3'
+              ? 'Acute PE may be a major contributing cause of RV enlargement.'
+              : 'Acute PE is likely a major contributing cause of RV enlargement; central clot location is the strongest imaging predictor of occult shock.'
+      parts.push(`${rvContext} Assess for right ventricular failure and hemodynamic instability, and consider dedicated cardiovascular assessment (echocardiography, ECG).`)
+      if (code === 'PE-RADS 3' || code === 'PE-RADS 4') {
+        parts.push('Assess for reperfusion therapy and obtain PE specialist consultation (PERT or equivalent).')
+      }
+    }
+  }
+
+  if (form.thrombusInTransit) {
+    parts.push(
+      'Right heart thrombus-in-transit directs the next step in care regardless of ordinal category: obtain PE specialist consultation (critical care, pulmonary, hematology, cardiology, interventional radiology, or PERT), and involve cardiac surgery/interventional consultation if thrombus traverses a patent foramen ovale.',
+    )
+  }
+
+  parts.push('Imaging findings alone cannot define treatment decisions for acute PE; integrate with clinical status and risk factors per institutional PE care pathways.')
+
+  return parts.join(' ')
+}
+
 function classify(form: Form) {
   if (form.location === 'nondiagnostic') {
     return {
@@ -37,6 +88,7 @@ function classify(form: Form) {
       modifiers: [] as string[],
       impression:
         'Nondiagnostic examination for acute pulmonary embolism; acute PE at the main or lobar level cannot be excluded. Correlate clinically and consider repeat or alternative imaging as appropriate.',
+      management: buildManagement(form, 'PE-RADS N'),
     }
   }
 
@@ -70,13 +122,6 @@ function classify(form: Form) {
 
   const suffix = modifiers.length ? ` (${modifiers.join(', ')})` : ''
 
-  const management =
-    base.code === 'PE-RADS 0'
-      ? 'No acute pulmonary embolism identified. Consider alternative diagnosis.'
-      : base.code === 'PE-RADS 1' || base.code === 'PE-RADS 2'
-        ? 'Acute pulmonary embolism present. Correlate with symptoms, bleeding risk, and VTE risk factors.'
-        : 'Acute pulmonary embolism present. Correlate with PE risk stratification and right-heart findings for management escalation.'
-
   const impression =
     base.code === 'PE-RADS 0'
       ? `PE-RADS 0${suffix}: no acute pulmonary embolism identified.${form.nonPECause ? ' Pulmonary arterial abnormality is attributed to a non-PE cause (exception).' : ''}`
@@ -90,12 +135,16 @@ function classify(form: Form) {
                 : 'central'
         } level${detailBits.length ? `; ${detailBits.join(', ')}` : ''}.${form.rvEnlargement ? ' Right ventricular enlargement is present (RV/LV diameter ratio 1.0 or greater).' : ''}${form.thrombusInTransit ? ' Definitive thrombus is present in the right atrium and/or right ventricle.' : ''}`
 
+  let tone: 'good' | 'accent' | 'warn' = base.code === 'PE-RADS 0' ? 'good' : base.code === 'PE-RADS 1' || base.code === 'PE-RADS 2' ? 'accent' : 'warn'
+  if (form.thrombusInTransit) tone = 'warn'
+
   return {
     peRads: `${base.code}${suffix}`,
-    tone: base.code === 'PE-RADS 0' ? ('good' as const) : base.code === 'PE-RADS 1' || base.code === 'PE-RADS 2' ? ('accent' as const) : ('warn' as const),
-    summary: `${base.label} ${management}`,
+    tone,
+    summary: base.label,
     modifiers,
     impression,
+    management: buildManagement(form, base.code),
   }
 }
 
@@ -189,6 +238,7 @@ export function PERadsPage() {
 
           <p className="result-summary">{result.summary}</p>
           <CopyBlock label="Impression" text={result.impression} />
+          <CopyBlock label="Management considerations" text={result.management} />
           {result.modifiers.length > 0 && <p className="copy-status">Applied modifiers: {result.modifiers.join(', ')}</p>}
         </article>
       </section>
