@@ -41,7 +41,6 @@ export function OradsPage() {
             Source: <a href={isUs ? 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/Ultrasound' : 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/MRI'} target="_blank" rel="noopener noreferrer">ACR O-RADS {isUs ? 'Ultrasound' : 'MRI'} risk stratification and management guidance</a>.
           </p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
@@ -119,6 +118,7 @@ export function OradsPage() {
           <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No suspicious features selected.'} />
           <CopyBlock label="O-RADS impression" text={result.impression} />
           <p className="copy-status">{result.recommendation}</p>
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

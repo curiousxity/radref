@@ -162,7 +162,6 @@ export function MeldPage() {
           <p>MELD 3.0 is the default, with a built-in MELD-Na option for allocation-oriented comparison.</p>
           <p className="source-note">Source: <a href={sourceLinks[form.mode].href} target="_blank" rel="noopener noreferrer">{sourceLinks[form.mode].label}</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">
@@ -250,6 +249,7 @@ export function MeldPage() {
           ) : (
             <p className="result-summary">Enter total bilirubin, INR, creatinine, and sodium (plus albumin and sex for MELD 3.0) to calculate a score.</p>
           )}
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

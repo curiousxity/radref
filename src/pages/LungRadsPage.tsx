@@ -310,7 +310,6 @@ export function LungRadsPage() {
           <p>Screening LDCT helper for dominant pulmonary nodules with category assignment, management text, and copyable impression output.</p>
           <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/Lung-RADS" target="_blank" rel="noopener noreferrer">ACR Lung-RADS v2022 update and companion assessment category summaries</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
@@ -405,6 +404,7 @@ export function LungRadsPage() {
           <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

@@ -240,7 +240,6 @@ export function IncidentalPage() {
           <p>Quick management helpers for adrenal lesions, pancreatic cysts, and incidental renal masses.</p>
           <p className="source-note">Source: <a href={sourceLinks[tool].href} target="_blank" rel="noopener noreferrer">{sourceLinks[tool].label}</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
@@ -336,6 +335,7 @@ export function IncidentalPage() {
           <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Recommendation" text={result.rec} />
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

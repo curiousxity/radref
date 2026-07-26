@@ -119,7 +119,6 @@ export function BosniakPage() {
           <p>Cystic renal mass helper with category assignment, management text, and copyable impression output.</p>
           <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/full/10.1148/radiol.2019182646" target="_blank" rel="noopener noreferrer">Silverman et al., "Bosniak Classification of Cystic Renal Masses, Version 2019," Radiology 2019</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">
@@ -207,6 +206,7 @@ export function BosniakPage() {
           <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

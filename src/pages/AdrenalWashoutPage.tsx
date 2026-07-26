@@ -140,7 +140,6 @@ export function AdrenalWashoutPage() {
           <p>Characterize an indeterminate adrenal lesion from unenhanced, portal venous, and delayed CT attenuation, with copyable reporting language.</p>
           <p className="source-note">Source: <a href="https://radiopaedia.org/articles/adrenal-washout" target="_blank" rel="noopener noreferrer">Adrenal washout, Radiopaedia</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">
@@ -186,6 +185,7 @@ export function AdrenalWashoutPage() {
           ) : (
             <p className="result-summary">Enter unenhanced HU (and portal + delayed HU if unenhanced is above 10) to calculate washout.</p>
           )}
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
 

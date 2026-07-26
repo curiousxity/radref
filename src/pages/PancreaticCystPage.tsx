@@ -155,7 +155,6 @@ export function PancreaticCystPage() {
           <p>Dedicated incidental pancreatic cyst helper with surveillance logic, EUS/FNA escalation, and copyable impression text.</p>
           <p className="source-note">Source: <a href="https://pubmed.ncbi.nlm.nih.gov/28533111/" target="_blank" rel="noopener noreferrer">Megibow et al., "Management of Incidental Pancreatic Cysts: A White Paper of the ACR Incidental Findings Committee," JACR 2017</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">
@@ -234,6 +233,7 @@ export function PancreaticCystPage() {
           <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>

@@ -39,7 +39,6 @@ export function LiradsPage() {
           <p>Enter the major CT/MRI features to calculate a LI-RADS category and copy a report-ready impression.</p>
           <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/LI-RADS" target="_blank" rel="noopener noreferrer">ACR LI-RADS resources, including the LI-RADS v2018 CT/MRI diagnostic algorithm</a>.</p>
         </div>
-        <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
 
       <section className="calculator-grid">
@@ -120,6 +119,7 @@ export function LiradsPage() {
           <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No major features selected.'} />
           <CopyBlock label="LI-RADS impression" text={result.impression} />
           <p className="copy-status">{result.recommendation}</p>
+          <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>
     </div>
