@@ -10,6 +10,7 @@ import { PancreaticCystPage } from './pages/PancreaticCystPage'
 import { MeldPage } from './pages/MeldPage'
 import { VascularDiameterPage } from './pages/VascularDiameterPage'
 import { AdrenalWashoutPage } from './pages/AdrenalWashoutPage'
+import { PERadsPage } from './pages/PERadsPage'
 
 const calculators = [
   { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.' },
@@ -22,6 +23,7 @@ const calculators = [
   { path: '/meld', name: 'MELD', description: 'MELD 3.0 by default with optional MELD-Na comparison and copyable impression text.' },
   { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Quick-reference adult vessel caliber, ectasia, and aneurysm thresholds.' },
   { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW/RPW washout calculator with adenoma thresholds and copyable impression text.' },
+  { path: '/pe-rads', name: 'PE-RADS', description: 'PE-RADS v2026 structured reporting helper for acute pulmonary embolism with clot-location hierarchy, modifiers, and copyable impression text.' },
 ]
 
 export default function App() {
@@ -60,6 +62,7 @@ export default function App() {
           <Route path="/meld" element={<MeldPage />} />
           <Route path="/vascular-diameters" element={<VascularDiameterPage />} />
           <Route path="/adrenal-washout" element={<AdrenalWashoutPage />} />
+          <Route path="/pe-rads" element={<PERadsPage />} />
         </Routes>
       </main>
     </div>

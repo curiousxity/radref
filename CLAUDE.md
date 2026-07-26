@@ -104,6 +104,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - MELD (MELD 3.0 default, MELD-Na option)
 - Vascular diameter reference (quick-reference table, not a calculator)
 - Adrenal washout (APW/RPW calculator)
+- PE-RADS v2026 (published July 2026 — revisit as the framework matures)
 
 ## Next development priorities
 
