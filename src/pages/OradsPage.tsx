@@ -36,6 +36,7 @@ export function OradsPage() {
           <p className="eyebrow">O-RADS US / MRI</p>
           <h2>O-RADS calculator</h2>
           <p>Branch-aware O-RADS form with separate ultrasound and MRI logic paths.</p>
+          <p className="source-note">Source: ACR O-RADS Ultrasound and O-RADS MRI risk stratification and management guidance.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

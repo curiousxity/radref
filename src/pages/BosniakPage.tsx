@@ -117,6 +117,7 @@ export function BosniakPage() {
           <p className="eyebrow">Bosniak 2019</p>
           <h2>Bosniak 2019 calculator</h2>
           <p>Cystic renal mass helper with category assignment, management text, and copyable impression output.</p>
+          <p className="source-note">Source: Bosniak 2019 classification update and related review/summary literature.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

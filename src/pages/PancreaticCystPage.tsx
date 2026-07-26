@@ -153,6 +153,7 @@ export function PancreaticCystPage() {
           <p className="eyebrow">ACR incidental pancreatic cysts</p>
           <h2>Pancreatic cyst management</h2>
           <p>Dedicated incidental pancreatic cyst helper with surveillance logic, EUS/FNA escalation, and copyable impression text.</p>
+          <p className="source-note">Source: ACR incidental pancreatic cyst white paper and related follow-up guidance.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

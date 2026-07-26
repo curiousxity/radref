@@ -36,6 +36,7 @@ export function LiradsPage() {
           <p className="eyebrow">LI-RADS CT/MRI</p>
           <h2>LI-RADS calculator</h2>
           <p>Enter the major CT/MRI features to calculate a LI-RADS category and copy a report-ready impression.</p>
+          <p className="source-note">Source: ACR LI-RADS resources, including the LI-RADS v2018 CT/MRI diagnostic algorithm.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

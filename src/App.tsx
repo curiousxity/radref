@@ -25,7 +25,7 @@ export default function App() {
       <header className="site-header">
         <div className="container header-inner">
           <Link to="/" className="brand-mark">
-            <div className="brand-icon">R</div>
+            <img src="/logo-mark-header.png" alt="" className="brand-logo" width="42" height="40" />
             <div>
               <p className="brand-title">Rad Refcalculators</p>
               <p className="brand-subtitle">Mobile-friendly radiology tools</p>

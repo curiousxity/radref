@@ -198,6 +198,12 @@ function toneForCategory(category: string): 'good' | 'warn' | 'accent' {
   return 'accent'
 }
 
+const sourceNotes: Record<Tool, string> = {
+  adrenal: 'Source: ACR Incidental Findings white paper, adrenal section.',
+  pancreas: 'Source: ACR incidental pancreatic cyst white paper.',
+  renal: 'Source: ACR incidental renal mass white paper.',
+}
+
 export function IncidentalPage() {
   const [tool, setTool] = useState<Tool>('adrenal')
   const [adrenal, setAdrenal] = useState(initialAdrenal)
@@ -223,6 +229,7 @@ export function IncidentalPage() {
           <p className="eyebrow">ACR incidental findings</p>
           <h2>Incidental findings tools</h2>
           <p>Quick management helpers for adrenal lesions, pancreatic cysts, and incidental renal masses.</p>
+          <p className="source-note">{sourceNotes[tool]}</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
