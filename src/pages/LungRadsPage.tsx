@@ -308,7 +308,7 @@ export function LungRadsPage() {
           <p className="eyebrow">Lung-RADS v2022</p>
           <h2>Lung-RADS calculator</h2>
           <p>Screening LDCT helper for dominant pulmonary nodules with category assignment, management text, and copyable impression output.</p>
-          <p className="source-note">Source: ACR Lung-RADS v2022 update and companion assessment category summaries.</p>
+          <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/Lung-RADS" target="_blank" rel="noopener noreferrer">ACR Lung-RADS v2022 update and companion assessment category summaries</a>.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

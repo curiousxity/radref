@@ -198,10 +198,19 @@ function toneForCategory(category: string): 'good' | 'warn' | 'accent' {
   return 'accent'
 }
 
-const sourceNotes: Record<Tool, string> = {
-  adrenal: 'Source: ACR Incidental Findings white paper, adrenal section.',
-  pancreas: 'Source: ACR incidental pancreatic cyst white paper.',
-  renal: 'Source: ACR incidental renal mass white paper.',
+const sourceLinks: Record<Tool, { href: string; label: string }> = {
+  adrenal: {
+    href: 'https://pubmed.ncbi.nlm.nih.gov/28651988/',
+    label: 'Mayo-Smith et al., "Management of Incidental Adrenal Masses: A White Paper of the ACR Incidental Findings Committee," JACR 2017',
+  },
+  pancreas: {
+    href: 'https://pubmed.ncbi.nlm.nih.gov/28533111/',
+    label: 'Megibow et al., "Management of Incidental Pancreatic Cysts: A White Paper of the ACR Incidental Findings Committee," JACR 2017',
+  },
+  renal: {
+    href: 'https://pubmed.ncbi.nlm.nih.gov/28651987/',
+    label: 'Management of the Incidental Renal Mass on CT: A White Paper of the ACR Incidental Findings Committee, JACR 2018',
+  },
 }
 
 export function IncidentalPage() {
@@ -229,7 +238,7 @@ export function IncidentalPage() {
           <p className="eyebrow">ACR incidental findings</p>
           <h2>Incidental findings tools</h2>
           <p>Quick management helpers for adrenal lesions, pancreatic cysts, and incidental renal masses.</p>
-          <p className="source-note">{sourceNotes[tool]}</p>
+          <p className="source-note">Source: <a href={sourceLinks[tool].href} target="_blank" rel="noopener noreferrer">{sourceLinks[tool].label}</a>.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>

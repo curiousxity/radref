@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CopyBlock } from '../components/CopyBlock'
 import { Badge } from '../components/Badge'
+import { Definition } from '../components/Definition'
 import { calculateLirads } from '../logic/lirads'
 import type { LiradsForm } from '../types/lirads'
 
@@ -36,7 +37,7 @@ export function LiradsPage() {
           <p className="eyebrow">LI-RADS CT/MRI</p>
           <h2>LI-RADS calculator</h2>
           <p>Enter the major CT/MRI features to calculate a LI-RADS category and copy a report-ready impression.</p>
-          <p className="source-note">Source: ACR LI-RADS resources, including the LI-RADS v2018 CT/MRI diagnostic algorithm.</p>
+          <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/LI-RADS" target="_blank" rel="noopener noreferrer">ACR LI-RADS resources, including the LI-RADS v2018 CT/MRI diagnostic algorithm</a>.</p>
         </div>
         <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
       </section>
@@ -70,19 +71,31 @@ export function LiradsPage() {
               <span>Observation size (cm)</span>
               <input type="number" min="0" step="0.1" inputMode="decimal" value={form.sizeCm} onChange={(e) => updateField('sizeCm', e.target.value)} placeholder="e.g. 2.1" />
             </label>
-            <label className="check-row"><input type="checkbox" checked={form.aphe} onChange={(e) => updateField('aphe', e.target.checked)} /> Non-rim APHE</label>
-            <label className="check-row"><input type="checkbox" checked={form.washout} onChange={(e) => updateField('washout', e.target.checked)} /> Nonperipheral washout</label>
-            <label className="check-row"><input type="checkbox" checked={form.capsule} onChange={(e) => updateField('capsule', e.target.checked)} /> Enhancing capsule</label>
-            <label className="check-row"><input type="checkbox" checked={form.thresholdGrowth} onChange={(e) => updateField('thresholdGrowth', e.target.checked)} /> Threshold growth</label>
+            <label className="check-row">
+              <input type="checkbox" checked={form.aphe} onChange={(e) => updateField('aphe', e.target.checked)} />
+              <span className="term">Non-rim APHE<Definition text="Arterial phase hyperenhancement that is not rim-like and not restricted to the tumor periphery." /></span>
+            </label>
+            <label className="check-row">
+              <input type="checkbox" checked={form.washout} onChange={(e) => updateField('washout', e.target.checked)} />
+              <span className="term">Nonperipheral washout<Definition text="Reduced enhancement relative to liver in the portal venous or delayed phase, located anywhere except the lesion periphery." /></span>
+            </label>
+            <label className="check-row">
+              <input type="checkbox" checked={form.capsule} onChange={(e) => updateField('capsule', e.target.checked)} />
+              <span className="term">Enhancing capsule<Definition text="A smooth, uniformly enhancing rim around the observation, typically most conspicuous on portal venous or delayed phase images and thicker than any rim seen precontrast or in arterial phase." /></span>
+            </label>
+            <label className="check-row">
+              <input type="checkbox" checked={form.thresholdGrowth} onChange={(e) => updateField('thresholdGrowth', e.target.checked)} />
+              <span className="term">Threshold growth<Definition text="An increase in the size of a mass by 50% or more over 6 months or less." /></span>
+            </label>
             <label>
-              <span>Tumor in vein</span>
+              <span className="term">Tumor in vein<Definition text="Tumor tissue extending into or filling a vein (typically portal or hepatic), the defining feature of LR-TIV." /></span>
               <select value={form.tumorInVein} onChange={(e) => updateField('tumorInVein', e.target.value as LiradsForm['tumorInVein'])}>
                 <option value="no">No</option>
                 <option value="yes">Yes</option>
               </select>
             </label>
             <label>
-              <span>Malignant but not HCC-specific</span>
+              <span className="term">Malignant but not HCC-specific<Definition text="Imaging features favor malignancy but are not specific for hepatocellular carcinoma — the LR-M category." /></span>
               <select value={form.malignantNonHcc} onChange={(e) => updateField('malignantNonHcc', e.target.value as LiradsForm['malignantNonHcc'])}>
                 <option value="no">No</option>
                 <option value="yes">Yes</option>
@@ -104,8 +117,8 @@ export function LiradsPage() {
             </div>
           </div>
           <p className="result-summary">{result.categoryReason}</p>
-          <CopyBlock label="LI-RADS impression" text={result.impression} />
           <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No major features selected.'} />
+          <CopyBlock label="LI-RADS impression" text={result.impression} />
           <p className="copy-status">{result.recommendation}</p>
         </article>
       </section>

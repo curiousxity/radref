@@ -93,7 +93,15 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 .focus-group legend { margin-bottom: 0.5rem; font-weight: 700; font-family: var(--font-serif); }
 .check-row { grid-template-columns: auto 1fr; align-items: center; gap: 0.65rem; padding: 0.85rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface-2); cursor: pointer; }
 .check-row input[type='checkbox'] { width: 1.2rem; height: 1.2rem; flex-shrink: 0; accent-color: var(--color-primary); }
+.term { display: inline-flex; align-items: center; flex-wrap: wrap; column-gap: 0.3rem; }
+.definition { display: inline-flex; align-items: center; }
+.definition-trigger { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 1px solid var(--color-text-muted); background: var(--color-surface); color: var(--color-text-muted); font-family: var(--font-serif); font-style: italic; font-size: 0.66rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; flex-shrink: 0; }
+.definition-trigger:hover, .definition-trigger:focus-visible { color: var(--color-primary); border-color: var(--color-primary); }
+.definition-trigger[aria-expanded='true'] { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-surface); }
+.definition-text { flex-basis: 100%; margin-top: 0.4rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); line-height: 1.45; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.55rem 0.65rem; cursor: default; }
 .source-note { margin: 0.6rem 0 0; font-size: 0.78rem; color: var(--color-text-muted); font-style: italic; }
+.source-note a { color: var(--color-primary); font-style: normal; text-decoration: underline; text-underline-offset: 2px; }
+.source-note a:hover { color: var(--color-primary-dark); }
 .result-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; }
 .result-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 1.25rem; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
 .result-panel > div { padding: 0.85rem 0; }
