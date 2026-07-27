@@ -11,6 +11,8 @@ import { MeldPage } from './pages/MeldPage'
 import { VascularDiameterPage } from './pages/VascularDiameterPage'
 import { AdrenalWashoutPage } from './pages/AdrenalWashoutPage'
 import { PERadsPage } from './pages/PERadsPage'
+import { AastOrganInjuryPage } from './pages/AastOrganInjuryPage'
+import { EarlyPregnancyLossPage } from './pages/EarlyPregnancyLossPage'
 
 const calculators = [
   { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.' },
@@ -24,6 +26,8 @@ const calculators = [
   { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Quick-reference adult vessel caliber, ectasia, and aneurysm thresholds.' },
   { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW/RPW washout calculator with adenoma thresholds and copyable impression text.' },
   { path: '/pe-rads', name: 'PE-RADS', description: 'PE-RADS v2026 structured reporting helper for acute pulmonary embolism with clot-location hierarchy, modifiers, and copyable impression text.' },
+  { path: '/aast-organ-injury', name: 'AAST grading', description: 'Quick-reference AAST Organ Injury Scale (2018) grades for spleen, liver, and kidney trauma.' },
+  { path: '/early-pregnancy-loss', name: 'Early pregnancy loss', description: 'SRU consensus criteria for diagnostic vs. suspicious first-trimester ultrasound findings, with copyable impression text.' },
 ]
 
 export default function App() {
@@ -63,6 +67,8 @@ export default function App() {
           <Route path="/vascular-diameters" element={<VascularDiameterPage />} />
           <Route path="/adrenal-washout" element={<AdrenalWashoutPage />} />
           <Route path="/pe-rads" element={<PERadsPage />} />
+          <Route path="/aast-organ-injury" element={<AastOrganInjuryPage />} />
+          <Route path="/early-pregnancy-loss" element={<EarlyPregnancyLossPage />} />
         </Routes>
       </main>
     </div>
