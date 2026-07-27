@@ -49,9 +49,19 @@ button, input, select { font: inherit; }
 .brand-logo { display: block; flex-shrink: 0; }
 .brand-title { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: 1.08rem; }
 .brand-subtitle { margin: 0.1rem 0 0; color: var(--color-text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.top-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.top-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .nav-link { padding: 0.4rem 0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); border-bottom: 2px solid transparent; }
 .nav-link.active, .nav-link:hover { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+.nav-dropdown { position: relative; }
+.nav-dropdown > summary { cursor: pointer; list-style: none; padding: 0.4rem 0.6rem; border-radius: var(--radius-sm); }
+.nav-dropdown > summary::-webkit-details-marker { display: none; }
+.nav-dropdown > summary::after { content: '\25be'; margin-left: 0.35em; font-size: 0.7em; }
+.nav-dropdown > summary:hover { background: var(--color-surface-2); }
+.nav-dropdown[open] > summary { background: var(--color-primary-soft); color: var(--color-primary); }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 0.4rem); left: 0; min-width: 200px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.4rem; display: grid; gap: 0.15rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); z-index: 20; }
+.nav-dropdown-link { display: block; padding: 0.6rem 0.7rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--color-text); white-space: nowrap; }
+.nav-dropdown-link:hover { background: var(--color-surface-2); }
+.nav-dropdown-link.active { background: var(--color-primary-soft); color: var(--color-primary); font-weight: 600; }
 .main-content { padding: 2rem 0 4rem; }
 .page { display: grid; gap: 1.5rem; }
 .hero-card, .info-card, .tool-card, .section-block, .result-card, .form-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); }
@@ -142,8 +152,10 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 @media (max-width: 640px) {
   .container { width: min(100% - 1rem, 1100px); }
   .header-inner { align-items: flex-start; flex-direction: column; padding: 0.75rem 0; }
-  .top-nav { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.25rem; -webkit-overflow-scrolling: touch; }
+  .top-nav { width: 100%; position: relative; }
   .nav-link { white-space: nowrap; }
+  .nav-dropdown { position: static; }
+  .nav-dropdown-menu { left: 0; right: 0; width: auto; min-width: 0; }
   .main-content { padding-top: 1rem; }
   .section-block, .info-card, .form-card, .result-card, .tool-card { padding: 1rem; }
   .calculator-header { flex-direction: column; }

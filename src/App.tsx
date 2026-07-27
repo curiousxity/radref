@@ -1,4 +1,6 @@
-import { Link, NavLink, Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
+import { CategoryNav } from './components/CategoryNav'
+import { categories } from './data/calculators'
 import { HomePage } from './pages/HomePage'
 import { TiradsPage } from './pages/TiradsPage'
 import { LiradsPage } from './pages/LiradsPage'
@@ -13,22 +15,7 @@ import { AdrenalWashoutPage } from './pages/AdrenalWashoutPage'
 import { PERadsPage } from './pages/PERadsPage'
 import { AastOrganInjuryPage } from './pages/AastOrganInjuryPage'
 import { EarlyPregnancyLossPage } from './pages/EarlyPregnancyLossPage'
-
-const calculators = [
-  { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.' },
-  { path: '/lirads', name: 'LI-RADS', description: 'CT/MRI liver lesion categorization with copyable impression text.' },
-  { path: '/orads', name: 'O-RADS', description: 'US and MRI adnexal lesion stratification with modality-aware inputs.' },
-  { path: '/incidental', name: 'Incidental', description: 'ACR-style helpers for adrenal incidentalomas, pancreatic cysts, and renal masses.' },
-  { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule categorization with management and impression text.' },
-  { path: '/bosniak', name: 'Bosniak 2019', description: 'Cystic renal mass classification with management and impression text.' },
-  { path: '/pancreatic-cyst', name: 'Pancreatic cyst', description: 'Dedicated incidental pancreatic cyst surveillance and escalation logic.' },
-  { path: '/meld', name: 'MELD', description: 'MELD 3.0 by default with optional MELD-Na comparison and copyable impression text.' },
-  { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Quick-reference adult vessel caliber, ectasia, and aneurysm thresholds.' },
-  { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW/RPW washout calculator with adenoma thresholds and copyable impression text.' },
-  { path: '/pe-rads', name: 'PE-RADS', description: 'PE-RADS v2026 structured reporting helper for acute pulmonary embolism with clot-location hierarchy, modifiers, and copyable impression text.' },
-  { path: '/aast-organ-injury', name: 'AAST grading', description: 'Quick-reference AAST Organ Injury Scale (2018) grades for spleen, liver, and kidney trauma.' },
-  { path: '/early-pregnancy-loss', name: 'Early pregnancy loss', description: 'SRU consensus criteria for diagnostic vs. suspicious first-trimester ultrasound findings, with copyable impression text.' },
-]
+import { PiRadsPage } from './pages/PiRadsPage'
 
 export default function App() {
   return (
@@ -43,19 +30,13 @@ export default function App() {
               <p className="brand-subtitle">Mobile-friendly radiology tools</p>
             </div>
           </Link>
-          <nav className="top-nav" aria-label="Primary">
-            {calculators.map((item) => (
-              <NavLink key={item.path} to={item.path} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                {item.name}
-              </NavLink>
-            ))}
-          </nav>
+          <CategoryNav categories={categories} />
         </div>
       </header>
 
       <main id="main-content" className="container main-content">
         <Routes>
-          <Route path="/" element={<HomePage calculators={calculators} />} />
+          <Route path="/" element={<HomePage categories={categories} />} />
           <Route path="/tirads" element={<TiradsPage />} />
           <Route path="/lirads" element={<LiradsPage />} />
           <Route path="/orads" element={<OradsPage />} />
@@ -69,6 +50,7 @@ export default function App() {
           <Route path="/pe-rads" element={<PERadsPage />} />
           <Route path="/aast-organ-injury" element={<AastOrganInjuryPage />} />
           <Route path="/early-pregnancy-loss" element={<EarlyPregnancyLossPage />} />
+          <Route path="/pi-rads" element={<PiRadsPage />} />
         </Routes>
       </main>
     </div>

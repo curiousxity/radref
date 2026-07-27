@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom'
+import type { CalculatorCategory } from '../data/calculators'
 
-type CalculatorItem = {
-  path: string
-  name: string
-  description: string
-}
+export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
+  const totalCalculators = categories.reduce((count, category) => count + category.items.length, 0)
 
-export function HomePage({ calculators }: { calculators: CalculatorItem[] }) {
   return (
     <div className="page home-page">
       <section className="hero-card">
@@ -22,7 +19,7 @@ export function HomePage({ calculators }: { calculators: CalculatorItem[] }) {
         </div>
         <div className="hero-panel">
           <div className="hero-stat">
-            <span>{calculators.length}</span>
+            <span>{totalCalculators}</span>
             <p>Core calculators live</p>
           </div>
           <div className="hero-stat">
@@ -36,26 +33,28 @@ export function HomePage({ calculators }: { calculators: CalculatorItem[] }) {
         </div>
       </section>
 
-      <section className="section-block">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Available tools</p>
-            <h2>Calculator library</h2>
+      {categories.map((category) => (
+        <section key={category.name} className="section-block">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">{category.items.length === 1 ? '1 calculator' : `${category.items.length} calculators`}</p>
+              <h2>{category.name}</h2>
+            </div>
           </div>
-        </div>
-        <div className="card-grid">
-          {calculators.map((calculator) => (
-            <Link key={calculator.path} to={calculator.path} className="tool-card">
-              <div>
-                <p className="tool-kicker">Calculator</p>
-                <h3>{calculator.name}</h3>
-                <p>{calculator.description}</p>
-              </div>
-              <span className="tool-arrow">Open</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+          <div className="card-grid">
+            {category.items.map((calculator) => (
+              <Link key={calculator.path} to={calculator.path} className="tool-card">
+                <div>
+                  <p className="tool-kicker">Calculator</p>
+                  <h3>{calculator.name}</h3>
+                  <p>{calculator.description}</p>
+                </div>
+                <span className="tool-arrow">Open</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   )
 }
