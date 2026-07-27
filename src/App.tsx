@@ -16,6 +16,9 @@ import { PERadsPage } from './pages/PERadsPage'
 import { AastOrganInjuryPage } from './pages/AastOrganInjuryPage'
 import { EarlyPregnancyLossPage } from './pages/EarlyPregnancyLossPage'
 import { PiRadsPage } from './pages/PiRadsPage'
+import { ContrastReactionsPage } from './pages/ContrastReactionsPage'
+import { ContrastPremedicationPage } from './pages/ContrastPremedicationPage'
+import { ContrastExtravasationPage } from './pages/ContrastExtravasationPage'
 
 export default function App() {
   return (
@@ -51,6 +54,9 @@ export default function App() {
           <Route path="/aast-organ-injury" element={<AastOrganInjuryPage />} />
           <Route path="/early-pregnancy-loss" element={<EarlyPregnancyLossPage />} />
           <Route path="/pi-rads" element={<PiRadsPage />} />
+          <Route path="/contrast-reactions" element={<ContrastReactionsPage />} />
+          <Route path="/contrast-premedication" element={<ContrastPremedicationPage />} />
+          <Route path="/contrast-extravasation" element={<ContrastExtravasationPage />} />
         </Routes>
       </main>
     </div>

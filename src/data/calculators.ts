@@ -59,6 +59,14 @@ export const categories: CalculatorCategory[] = [
       { path: '/meld', name: 'MELD', description: 'MELD 3.0 by default with optional MELD-Na comparison and copyable impression text.' },
     ],
   },
+  {
+    name: 'Safety',
+    items: [
+      { path: '/contrast-reactions', name: 'Contrast reactions', description: 'Acute contrast reaction severity triage with bedside action guidance and copyable chart/report text.' },
+      { path: '/contrast-premedication', name: 'Contrast premedication', description: 'Elective oral and accelerated IV premedication regimens for prior contrast reactions, with copyable plan text.' },
+      { path: '/contrast-extravasation', name: 'Contrast extravasation', description: 'Exam-based triage for contrast extravasation injuries with urgent surgical consultation flags and copyable documentation text.' },
+    ],
+  },
 ]
 
 export const calculators: CalculatorItem[] = categories.flatMap((category) => category.items)
