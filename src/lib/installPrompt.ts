@@ -49,8 +49,10 @@ window.addEventListener('appinstalled', () => {
   setState({ canPrompt: false, isInstalled: true })
 })
 
-standaloneQuery.addEventListener('change', (event) => {
-  setState({ isInstalled: event.matches })
+standaloneQuery.addEventListener('change', () => {
+  // Re-derive rather than trusting `event.matches` alone: iOS reports installed
+  // apps through `navigator.standalone`, which the media query does not cover.
+  setState({ isInstalled: isStandalone() })
 })
 
 export function subscribe(listener: () => void) {

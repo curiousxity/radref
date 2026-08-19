@@ -25,6 +25,12 @@ export type Agent = {
   /** Management before a high bleeding risk procedure. A record keys off creatinine clearance. */
   highWithhold: string | Record<CrClBand, string>
   highRestart: string
+  /**
+   * Overrides the badge derived from the hold text. Needed where the leading
+   * recommendation is prose and the only number sits in a caveat, which a
+   * regex would otherwise surface as the headline.
+   */
+  badge?: string
   /** Extra guidance shown alongside the result, not part of the hold time itself. */
   note?: string
 }
@@ -206,6 +212,7 @@ export const agents: Agent[] = [
     lowRestart: 'Multidisciplinary, shared decision making recommended',
     highWithhold: 'Defer the procedure until off medication. If the procedure is emergent, withhold 1 hour before.',
     highRestart: 'Multidisciplinary, shared decision making recommended',
+    badge: 'Defer procedure',
     note: 'Patients receiving cangrelor are undergoing PCI or are within the immediate periprocedural period from a cardiac intervention. Discussion with cardiology is suggested.',
   },
   {
@@ -273,16 +280,20 @@ export function isRenallyAdjusted(agent: Agent) {
   return typeof agent.highWithhold !== 'string'
 }
 
-export const labThresholds: Record<BleedingRisk, { screening: string; inr: string; platelets: string }> = {
+export const labThresholds: Record<BleedingRisk, { screening: string; inr: string; platelets: string; inrShort: string; plateletsShort: string }> = {
   low: {
     screening: 'PT/INR not routinely recommended. Platelet count and haemoglobin not routinely recommended.',
     inr: 'Correct to within a range of 2.0 to 3.0 or less',
     platelets: 'Transfuse if below 20 × 10⁹/L',
+    inrShort: '2.0–3.0',
+    plateletsShort: '≥ 20',
   },
   high: {
     screening: 'PT/INR routinely recommended. Platelet count and haemoglobin routinely recommended.',
     inr: 'Correct to within a range of 1.5 to 1.8 or less',
     platelets: 'Transfuse if below 50 × 10⁹/L',
+    inrShort: '1.5–1.8',
+    plateletsShort: '≥ 50',
   },
 }
 

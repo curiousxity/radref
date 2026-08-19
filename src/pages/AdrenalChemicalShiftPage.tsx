@@ -23,6 +23,9 @@ const siiThreshold = 16.5
 const asrThreshold = 0.71
 
 function toNum(value: string) {
+  // Number('') is 0, which would make an untouched field read as a real
+  // measurement of zero, so blank is rejected before parsing.
+  if (value.trim() === '') return NaN
   const n = Number(value)
   return Number.isFinite(n) ? n : NaN
 }
@@ -62,13 +65,19 @@ function calc(form: Form): Result | null {
     : ''
 
   if (supportsAdenoma) {
+    // Either criterion alone is enough, but the impression must not claim signal
+    // loss on an SII that is below threshold just because the ratio crossed it.
+    const finding = siiSupports
+      ? `Adrenal nodule loses signal on opposed-phase imaging, with a signal intensity index of ${siiText}%.${asrSentence}`
+      : `Adrenal nodule demonstrates a signal intensity index of ${siiText}%, below the ${siiThreshold}% threshold, but an adrenal-to-spleen chemical shift ratio of ${asrText}, at or below the ${asrThreshold} threshold.`
+
     return {
-      category: 'Signal loss favours adenoma',
+      category: siiSupports ? 'Signal loss favours adenoma' : 'Ratio favours adenoma',
       tone: 'good',
       sii,
       asr,
       summary: `Signal intensity index of ${siiText}% ${siiSupports ? 'meets' : 'does not meet'} the ${siiThreshold}% threshold${asrText !== null ? `, and the adrenal-to-spleen ratio of ${asrText} ${asrSupports ? 'meets' : 'does not meet'} the ${asrThreshold} threshold` : ''}. Microscopic lipid on opposed-phase imaging supports a lipid-rich adenoma in the appropriate clinical setting.`,
-      impression: `Adrenal nodule loses signal on opposed-phase imaging, with a signal intensity index of ${siiText}%.${asrSentence} Findings are compatible with a lipid-rich adenoma in the appropriate clinical setting.`,
+      impression: `${finding} Findings are compatible with a lipid-rich adenoma in the appropriate clinical setting.`,
     }
   }
 

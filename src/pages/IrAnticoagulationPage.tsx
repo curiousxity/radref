@@ -62,8 +62,14 @@ function sentence(text: string) {
 function badgeFor(withhold: string) {
   if (withhold.startsWith('Do not withhold')) return 'Do not withhold'
   if (withhold.startsWith('No recommendation')) return 'No recommendation'
-  const match = withhold.match(/(\d+(?: to \d+)?)\s(days?|hours?|doses?)/)
-  return match ? `Withhold ${match[1]} ${match[2]}` : 'See guidance'
+  // Only the leading sentence carries the primary recommendation. Later sentences
+  // hold exceptions (emergent dosing, lab checks) whose numbers must never reach
+  // the badge. An agent whose prose still defies this can set `badge` explicitly.
+  const lead = withhold.split('. ')[0]
+  const match = lead.match(/(\d+(?: to \d+)?)\s(days?|hours?|doses?)/)
+  if (match) return `Withhold ${match[1]} ${match[2]}`
+  if (lead.startsWith('Defer')) return 'Defer until off drug'
+  return 'See guidance'
 }
 
 type Result = {
@@ -81,7 +87,7 @@ function calc(form: Form): Result | null {
 
   const withhold = withholdFor(agent, form.risk, form.crcl)
   const restart = restartFor(agent, form.risk)
-  const badge = badgeFor(withhold)
+  const badge = agent.badge ?? badgeFor(withhold)
   const labs = labThresholds[form.risk]
   const renal = isRenallyAdjusted(agent) && form.risk === 'high'
   const crclLabel = crclBands.find((band) => band.key === form.crcl)?.label ?? ''
@@ -200,11 +206,11 @@ export function IrAnticoagulationPage() {
               <div className="result-panel">
                 <div>
                   <p className="metric-label">INR target</p>
-                  <p className="metric-value">{form.risk === 'low' ? '2.0–3.0' : '1.5–1.8'}</p>
+                  <p className="metric-value">{labs.inrShort}</p>
                 </div>
                 <div>
                   <p className="metric-label">Platelets ×10⁹/L</p>
-                  <p className="metric-value">{form.risk === 'low' ? '≥ 20' : '≥ 50'}</p>
+                  <p className="metric-value">{labs.plateletsShort}</p>
                 </div>
               </div>
               <p className="result-summary"><strong>Before the procedure.</strong> {result.withhold}</p>

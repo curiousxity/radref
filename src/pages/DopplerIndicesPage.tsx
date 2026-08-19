@@ -15,6 +15,9 @@ const initialForm: Form = {
 }
 
 function toNum(value: string) {
+  // Number('') is 0, which would make an untouched field read as a real
+  // measurement of zero, so blank is rejected before parsing.
+  if (value.trim() === '') return NaN
   const n = Number(value)
   return Number.isFinite(n) ? n : NaN
 }

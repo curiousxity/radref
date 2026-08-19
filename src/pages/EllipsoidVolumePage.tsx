@@ -50,7 +50,15 @@ const factors: { key: FactorKey; value: number; name: string; short: string; use
 // PSA density at or above this is widely used to flag a gland for closer scrutiny.
 const psaDensityThreshold = 0.15
 
+/** Sub-millilitre lesions need more precision than a single decimal place. */
+function formatVolume(volume: number) {
+  return volume < 1 ? volume.toFixed(2) : volume.toFixed(1)
+}
+
 function toNum(value: string) {
+  // Number('') is 0, which would make an untouched field read as a real
+  // measurement of zero, so blank is rejected before parsing.
+  if (value.trim() === '') return NaN
   const n = Number(value)
   return Number.isFinite(n) ? n : NaN
 }
@@ -74,10 +82,10 @@ function calc(form: Form): Result | null {
   const volume = a * b * c * factor.value
 
   const psa = toNum(form.psa)
-  const psaDensity = Number.isFinite(psa) && psa > 0 ? psa / volume : null
+  const psaDensity = form.factor === 'ellipsoid' && Number.isFinite(psa) && psa > 0 ? psa / volume : null
 
   const dims = `${a.toFixed(1)} x ${b.toFixed(1)} x ${c.toFixed(1)} cm`
-  const volumeText = volume.toFixed(1)
+  const volumeText = formatVolume(volume)
   const category = `${volumeText} mL`
 
   if (form.factor === 'abc2') {
@@ -186,7 +194,7 @@ export function EllipsoidVolumePage() {
                 ))}
               </select>
             </label>
-            {form.factor !== 'abc2' ? (
+            {form.factor === 'ellipsoid' ? (
               <label>
                 <span>Serum PSA (ng/mL, optional)</span>
                 <input type="number" step="0.1" min="0" inputMode="decimal" value={form.psa} onChange={(e) => update('psa', e.target.value)} placeholder="e.g. 6.0" />
@@ -207,7 +215,7 @@ export function EllipsoidVolumePage() {
               <div className="result-panel">
                 <div>
                   <p className="metric-label">Volume</p>
-                  <p className="metric-value">{result.volume.toFixed(1)} mL</p>
+                  <p className="metric-value">{formatVolume(result.volume)} mL</p>
                 </div>
                 <div>
                   <p className="metric-label">PSA density</p>

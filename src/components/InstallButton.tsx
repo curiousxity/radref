@@ -19,8 +19,15 @@ export function InstallButton() {
 
   async function handleClick() {
     if (canPrompt) {
-      // Fall back to written steps if the deferred prompt expired between renders.
-      if ((await promptInstall()) === 'unavailable') setShowSteps(true)
+      // Fall back to written steps if the deferred prompt expired between renders,
+      // or if the browser rejects it outright (a stale or already-consumed event
+      // makes `prompt()` throw, which would otherwise be an unhandled rejection
+      // and leave the button doing nothing at all).
+      try {
+        if ((await promptInstall()) === 'unavailable') setShowSteps(true)
+      } catch {
+        setShowSteps(true)
+      }
       return
     }
     setShowSteps((current) => !current)

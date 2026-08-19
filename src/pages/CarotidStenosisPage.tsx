@@ -15,6 +15,9 @@ const initialForm: Form = {
 }
 
 function toNum(value: string) {
+  // Number('') is 0, which would make an untouched field read as a real
+  // measurement of zero, so blank is rejected before parsing.
+  if (value.trim() === '') return NaN
   const n = Number(value)
   return Number.isFinite(n) ? n : NaN
 }
@@ -23,9 +26,16 @@ type Result = {
   category: string
   tone: 'good' | 'warn' | 'accent'
   nascet: number | null
+  nascetDisplay: string | null
   ecst: number | null
+  ecstDisplay: string | null
   summary: string
   impression: string
+}
+
+/** Rounds a percentage for display without ever reaching 100%, which means occlusion. */
+function patentPercent(value: number) {
+  return String(Math.min(99, Math.round(value)))
 }
 
 function grade(nascet: number) {
@@ -47,7 +57,9 @@ function calc(form: Form): Result | null {
       category: 'Occlusion',
       tone: 'warn',
       nascet: 100,
+      nascetDisplay: '100',
       ecst: 100,
+      ecstDisplay: '100',
       summary: 'No residual lumen means occlusion rather than a gradable stenosis. Near-occlusion with a collapsed distal internal carotid artery should also not be graded by the NASCET ratio, because the shrunken distal vessel makes the calculated percentage falsely low.',
       impression: 'No residual lumen is identified within the internal carotid artery, compatible with occlusion. Percentage stenosis is not applicable.',
     }
@@ -58,30 +70,42 @@ function calc(form: Form): Result | null {
       category: 'Check measurements',
       tone: 'warn',
       nascet: null,
+      nascetDisplay: null,
       ecst: null,
+      ecstDisplay: null,
       summary: 'The residual lumen at the stenosis should not exceed the distal normal internal carotid artery diameter. Re-check which vessel each measurement was taken from, and confirm the distal measurement is at a point where the walls are parallel.',
       impression: `Measured residual lumen of ${form.residual} mm exceeds the distal internal carotid diameter of ${form.distal} mm. Re-check measurements before grading stenosis.`,
     }
   }
 
   const nascet = (1 - residual / distal) * 100
-  const ecst = Number.isFinite(original) && original > 0 && original >= residual
+  // The original lumen at the stenosis cannot be narrower than the distal normal
+  // vessel; a smaller value would yield an ECST below NASCET, which is impossible.
+  const ecst = Number.isFinite(original) && original >= distal
     ? (1 - residual / original) * 100
     : null
 
-  const nascetText = nascet.toFixed(0)
+  // A patent lumen is never 100% stenosed, however tight. Reserve 100% for occlusion,
+  // so neither readout is allowed to round up into it.
+  const nascetText = patentPercent(nascet)
+  const ecstText = ecst !== null ? patentPercent(ecst) : null
   const { label, word } = grade(nascet)
   const tone = nascet >= 70 ? 'warn' : nascet >= 50 ? 'accent' : 'good'
 
+  const originalEntered = Number.isFinite(original) && original > 0
   const ecstSentence = ecst !== null
-    ? ` Measured against an estimated original lumen of ${form.original} mm at the stenosis, the ECST equivalent is ${ecst.toFixed(0)}%.`
-    : ''
+    ? ` Measured against an estimated original lumen of ${form.original} mm at the stenosis, the ECST equivalent is ${ecstText}%.`
+    : originalEntered
+      ? ' The estimated original lumen entered is smaller than the distal internal carotid diameter, so an ECST equivalent was not calculated.'
+      : ''
 
   return {
     category: label,
     tone,
     nascet,
+    nascetDisplay: nascetText,
     ecst,
+    ecstDisplay: ecstText,
     summary: 'NASCET grades stenosis against the distal internal carotid artery, where the walls are parallel. ECST grades against the estimated original lumen at the stenosis itself and therefore always yields a higher number for the same lesion.',
     impression: `The internal carotid artery demonstrates a minimal residual lumen of ${form.residual} mm with a distal normal luminal diameter of ${form.distal} mm, corresponding to ${nascetText}% ${word} stenosis by NASCET criteria.${ecstSentence}`,
   }
@@ -175,11 +199,11 @@ export function CarotidStenosisPage() {
               <div className="result-panel">
                 <div>
                   <p className="metric-label">NASCET</p>
-                  <p className="metric-value">{result.nascet !== null ? `${result.nascet.toFixed(0)}%` : '—'}</p>
+                  <p className="metric-value">{result.nascetDisplay !== null ? `${result.nascetDisplay}%` : '—'}</p>
                 </div>
                 <div>
                   <p className="metric-label">ECST</p>
-                  <p className="metric-value">{result.ecst !== null ? `${result.ecst.toFixed(0)}%` : '—'}</p>
+                  <p className="metric-value">{result.ecstDisplay !== null ? `${result.ecstDisplay}%` : '—'}</p>
                 </div>
               </div>
               <p className="result-summary">{result.summary}</p>
