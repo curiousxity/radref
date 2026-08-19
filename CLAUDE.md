@@ -109,6 +109,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Carotid stenosis (NASCET, with ECST equivalent)
 - Adrenal chemical shift (signal intensity index, adrenal-to-spleen ratio)
 - Doppler indices (RI, PI, S/D ratio)
+- Periprocedural anticoagulation for IR (SIR 2019 consensus, hold/restart by bleeding risk)
 
 ## Next development priorities
 

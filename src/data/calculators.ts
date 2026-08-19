@@ -74,6 +74,7 @@ export const categories: CalculatorCategory[] = [
       { path: '/contrast-reactions', name: 'Contrast reactions', description: 'Reaction severity triage with bedside actions and chart text.' },
       { path: '/contrast-premedication', name: 'Contrast premedication', description: 'Oral and accelerated IV regimens for a prior contrast reaction.' },
       { path: '/contrast-extravasation', name: 'Contrast extravasation', description: 'Extravasation triage with surgical consult flags and documentation text.' },
+      { path: '/ir-anticoagulation', name: 'Periprocedural anticoagulation', description: 'SIR 2019 hold and restart times by procedure bleeding risk and agent.' },
     ],
   },
 ]

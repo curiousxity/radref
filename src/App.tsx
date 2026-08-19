@@ -24,6 +24,7 @@ import { EllipsoidVolumePage } from './pages/EllipsoidVolumePage'
 import { CarotidStenosisPage } from './pages/CarotidStenosisPage'
 import { AdrenalChemicalShiftPage } from './pages/AdrenalChemicalShiftPage'
 import { DopplerIndicesPage } from './pages/DopplerIndicesPage'
+import { IrAnticoagulationPage } from './pages/IrAnticoagulationPage'
 
 export default function App() {
   return (
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/carotid-stenosis" element={<CarotidStenosisPage />} />
           <Route path="/adrenal-chemical-shift" element={<AdrenalChemicalShiftPage />} />
           <Route path="/doppler-indices" element={<DopplerIndicesPage />} />
+          <Route path="/ir-anticoagulation" element={<IrAnticoagulationPage />} />
         </Routes>
       </main>
     </div>
