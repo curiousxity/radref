@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { InstallButton } from '../components/InstallButton'
 import type { CalculatorCategory } from '../data/calculators'
 
 export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
@@ -8,10 +9,10 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
     <div className="page home-page">
       <section className="hero-card">
         <div>
-          <p className="eyebrow">Radiology reference workspace</p>
-          <h1>Fast, phone-friendly calculator access for daily reads.</h1>
+          <p className="eyebrow">Radiology reference</p>
+          <h1>Radiology calculators, ready at the scanner.</h1>
           <p className="hero-copy">
-            Open a calculator, enter features, and copy a report-ready impression without digging through PDFs or scattered notes.
+            Enter the findings, get the category, copy a report-ready impression. No PDFs, no logins.
           </p>
           <div className="hero-actions">
             <Link to="/tirads" className="primary-button">Open calculators</Link>
@@ -20,15 +21,12 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
         <div className="hero-panel">
           <div className="hero-stat">
             <span>{totalCalculators}</span>
-            <p>Core calculators live</p>
+            <p>Calculators and quick references</p>
           </div>
-          <div className="hero-stat">
-            <span>Offline</span>
-            <p>Installs to your phone and works with no signal</p>
-          </div>
+          <InstallButton />
           <div className="hero-stat">
             <span>Mobile</span>
-            <p>Optimized for quick use on a phone</p>
+            <p>Large touch targets, results stay in view</p>
           </div>
         </div>
       </section>
@@ -45,7 +43,6 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
             {category.items.map((calculator) => (
               <Link key={calculator.path} to={calculator.path} className="tool-card">
                 <div>
-                  <p className="tool-kicker">Calculator</p>
                   <h3>{calculator.name}</h3>
                   <p>{calculator.description}</p>
                 </div>

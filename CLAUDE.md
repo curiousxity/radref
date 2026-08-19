@@ -105,6 +105,10 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Vascular diameter reference (quick-reference table, not a calculator)
 - Adrenal washout (APW/RPW calculator)
 - PE-RADS v2026 (published July 2026 — revisit as the framework matures)
+- Ellipsoid volume (shape-factor selectable, optional PSA density)
+- Carotid stenosis (NASCET, with ECST equivalent)
+- Adrenal chemical shift (signal intensity index, adrenal-to-spleen ratio)
+- Doppler indices (RI, PI, S/D ratio)
 
 ## Next development priorities
 

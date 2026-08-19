@@ -13,26 +13,26 @@ export const categories: CalculatorCategory[] = [
   {
     name: 'Chest',
     items: [
-      { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule categorization with management and impression text.' },
-      { path: '/pe-rads', name: 'PE-RADS', description: 'PE-RADS v2026 structured reporting helper for acute pulmonary embolism with clot-location hierarchy, modifiers, and copyable impression text.' },
+      { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule category, management, and impression text.' },
+      { path: '/pe-rads', name: 'PE-RADS', description: 'Acute PE reporting with clot-location hierarchy, modifiers, and impression text.' },
     ],
   },
   {
     name: 'Abdomen',
     items: [
-      { path: '/lirads', name: 'LI-RADS', description: 'CT/MRI liver lesion categorization with copyable impression text.' },
-      { path: '/bosniak', name: 'Bosniak 2019', description: 'Cystic renal mass classification with management and impression text.' },
-      { path: '/pancreatic-cyst', name: 'Pancreatic cyst', description: 'Dedicated incidental pancreatic cyst surveillance and escalation logic.' },
-      { path: '/incidental', name: 'Incidental', description: 'ACR-style helpers for adrenal incidentalomas, pancreatic cysts, and renal masses.' },
-      { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW/RPW washout calculator with adenoma thresholds and copyable impression text.' },
+      { path: '/lirads', name: 'LI-RADS', description: 'CT and MRI liver lesion category with impression text.' },
+      { path: '/bosniak', name: 'Bosniak 2019', description: 'Cystic renal mass class, management, and impression text.' },
+      { path: '/pancreatic-cyst', name: 'Pancreatic cyst', description: 'Incidental pancreatic cyst surveillance and escalation thresholds.' },
+      { path: '/incidental', name: 'Incidental', description: 'ACR-style workup for adrenal, pancreatic, and renal incidentalomas.' },
+      { path: '/adrenal-washout', name: 'Adrenal washout', description: 'APW and RPW with adenoma thresholds and impression text.' },
     ],
   },
   {
     name: 'Pelvis / OB-GYN',
     items: [
-      { path: '/orads', name: 'O-RADS', description: 'US and MRI adnexal lesion stratification with modality-aware inputs.' },
-      { path: '/pi-rads', name: 'PI-RADS', description: 'PI-RADS v2.1 zonal assessment category calculator for prostate MRI with copyable impression text.' },
-      { path: '/early-pregnancy-loss', name: 'Early pregnancy loss', description: 'SRU consensus criteria for diagnostic vs. suspicious first-trimester ultrasound findings, with copyable impression text.' },
+      { path: '/orads', name: 'O-RADS', description: 'Adnexal lesion risk on ultrasound or MRI, with modality-aware inputs.' },
+      { path: '/pi-rads', name: 'PI-RADS', description: 'Prostate MRI zonal assessment, v2.1, with impression text.' },
+      { path: '/early-pregnancy-loss', name: 'Early pregnancy loss', description: 'SRU criteria for diagnostic versus suspicious first-trimester findings.' },
     ],
   },
   {
@@ -44,27 +44,36 @@ export const categories: CalculatorCategory[] = [
   {
     name: 'Trauma',
     items: [
-      { path: '/aast-organ-injury', name: 'AAST grading', description: 'Quick-reference AAST Organ Injury Scale (2018) grades for spleen, liver, and kidney trauma.' },
+      { path: '/aast-organ-injury', name: 'AAST grading', description: 'AAST 2018 injury grades for spleen, liver, and kidney.' },
     ],
   },
   {
     name: 'Vascular',
     items: [
-      { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Quick-reference adult vessel caliber, ectasia, and aneurysm thresholds.' },
+      { path: '/vascular-diameters', name: 'Vessel diameters', description: 'Adult vessel caliber, ectasia, and aneurysm thresholds.' },
     ],
   },
   {
     name: 'Labs & scores',
     items: [
-      { path: '/meld', name: 'MELD', description: 'MELD 3.0 by default with optional MELD-Na comparison and copyable impression text.' },
+      { path: '/meld', name: 'MELD', description: 'MELD 3.0 with optional MELD-Na comparison and impression text.' },
+    ],
+  },
+  {
+    name: 'Formulas',
+    items: [
+      { path: '/ellipsoid-volume', name: 'Ellipsoid volume', description: 'Organ or lesion volume from three axes, with optional PSA density.' },
+      { path: '/carotid-stenosis', name: 'Carotid stenosis', description: 'NASCET percentage stenosis with the ECST equivalent and impression text.' },
+      { path: '/adrenal-chemical-shift', name: 'Adrenal chemical shift', description: 'Opposed-phase signal intensity index and adrenal-to-spleen ratio.' },
+      { path: '/doppler-indices', name: 'Doppler indices', description: 'Resistive index, pulsatility index, and systolic/diastolic ratio.' },
     ],
   },
   {
     name: 'Safety',
     items: [
-      { path: '/contrast-reactions', name: 'Contrast reactions', description: 'Acute contrast reaction severity triage with bedside action guidance and copyable chart/report text.' },
-      { path: '/contrast-premedication', name: 'Contrast premedication', description: 'Elective oral and accelerated IV premedication regimens for prior contrast reactions, with copyable plan text.' },
-      { path: '/contrast-extravasation', name: 'Contrast extravasation', description: 'Exam-based triage for contrast extravasation injuries with urgent surgical consultation flags and copyable documentation text.' },
+      { path: '/contrast-reactions', name: 'Contrast reactions', description: 'Reaction severity triage with bedside actions and chart text.' },
+      { path: '/contrast-premedication', name: 'Contrast premedication', description: 'Oral and accelerated IV regimens for a prior contrast reaction.' },
+      { path: '/contrast-extravasation', name: 'Contrast extravasation', description: 'Extravasation triage with surgical consult flags and documentation text.' },
     ],
   },
 ]

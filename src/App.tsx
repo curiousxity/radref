@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
+import { ScrollToTop } from './components/ScrollToTop'
 import { categories } from './data/calculators'
 import { HomePage } from './pages/HomePage'
 import { TiradsPage } from './pages/TiradsPage'
@@ -19,10 +20,15 @@ import { PiRadsPage } from './pages/PiRadsPage'
 import { ContrastReactionsPage } from './pages/ContrastReactionsPage'
 import { ContrastPremedicationPage } from './pages/ContrastPremedicationPage'
 import { ContrastExtravasationPage } from './pages/ContrastExtravasationPage'
+import { EllipsoidVolumePage } from './pages/EllipsoidVolumePage'
+import { CarotidStenosisPage } from './pages/CarotidStenosisPage'
+import { AdrenalChemicalShiftPage } from './pages/AdrenalChemicalShiftPage'
+import { DopplerIndicesPage } from './pages/DopplerIndicesPage'
 
 export default function App() {
   return (
     <div className="app-shell">
+      <ScrollToTop />
       <a href="#main-content" className="skip-link">Skip to content</a>
       <header className="site-header">
         <div className="container header-inner">
@@ -57,6 +63,10 @@ export default function App() {
           <Route path="/contrast-reactions" element={<ContrastReactionsPage />} />
           <Route path="/contrast-premedication" element={<ContrastPremedicationPage />} />
           <Route path="/contrast-extravasation" element={<ContrastExtravasationPage />} />
+          <Route path="/ellipsoid-volume" element={<EllipsoidVolumePage />} />
+          <Route path="/carotid-stenosis" element={<CarotidStenosisPage />} />
+          <Route path="/adrenal-chemical-shift" element={<AdrenalChemicalShiftPage />} />
+          <Route path="/doppler-indices" element={<DopplerIndicesPage />} />
         </Routes>
       </main>
     </div>
