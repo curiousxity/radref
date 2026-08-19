@@ -45,12 +45,22 @@ Do **not** keep a `public/_redirects` file with:
 
 In a Wrangler static-assets deployment, that rule can be rejected as an infinite loop, while `assets.not_found_handling = "single-page-application"` already provides the SPA fallback behavior needed for React routes.[cite:221]
 
-### Preferred deployment behavior
+### How it actually deploys
 
-- Build command: `npm run build`[cite:211]
-- Output directory: `dist`[cite:211]
-- GitHub-connected deploys are supported by Cloudflare Pages and Cloudflare Git integration.[cite:178][cite:182][cite:188]
-- Custom domains are configured in the Cloudflare project dashboard under **Custom domains**.[cite:170]
+Live at <https://radref.hash.immo>. Pushing to `main` triggers
+`.github/workflows/deploy.yml`, which lints, runs `npm run build`, and
+publishes with Wrangler. `npx wrangler deploy` does the same by hand.
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- The custom domain is declared as a `[[routes]]` block in `wrangler.toml`, not
+  set in the dashboard, so it is version-controlled and any deploy recreates
+  it.
+- `workers.dev` and preview URLs are off, so the custom domain is the only way
+  in.
+
+See `PUSH_CHECKLIST.md` for the required repository secrets and post-deploy
+checks.
 
 ## Git workflow
 
