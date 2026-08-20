@@ -155,6 +155,18 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 .plain-list { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.55rem; }
 .sticky-card { align-self: start; position: sticky; top: 6.25rem; }
 
+.search-panel { display: grid; gap: 0.5rem; }
+.search-field { display: grid; gap: 0.4rem; }
+.search-field input { background: var(--color-surface); }
+.search-field input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+.search-status { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-muted); }
+.tool-category { margin: 0 0 0.35rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.64rem; color: var(--color-primary); }
+.empty-state { display: grid; gap: 0.9rem; justify-items: start; padding: 1.25rem; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); }
+.empty-state p { margin: 0; color: var(--color-text-muted); }
+.link-list a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.link-list a:hover { color: var(--color-primary-dark); }
+.not-found-path { font-family: var(--font-mono); font-size: 0.9em; background: var(--color-surface-2); padding: 0.1rem 0.35rem; border-radius: var(--radius-sm); word-break: break-all; }
+
 @media (max-width: 900px) {
   .hero-card, .setup-grid, .calculator-grid, .form-grid { grid-template-columns: 1fr; }
   .hero-card h1 { max-width: 100%; }

@@ -3,6 +3,7 @@ import { CategoryNav } from './components/CategoryNav'
 import { ScrollToTop } from './components/ScrollToTop'
 import { categories } from './data/calculators'
 import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { TiradsPage } from './pages/TiradsPage'
 import { LiradsPage } from './pages/LiradsPage'
 import { OradsPage } from './pages/OradsPage'
@@ -71,6 +72,7 @@ export default function App() {
           <Route path="/adrenal-chemical-shift" element={<AdrenalChemicalShiftPage />} />
           <Route path="/doppler-indices" element={<DopplerIndicesPage />} />
           <Route path="/ir-anticoagulation" element={<IrAnticoagulationPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
