@@ -8,6 +8,7 @@ import { LiradsPage } from './pages/LiradsPage'
 import { OradsPage } from './pages/OradsPage'
 import { IncidentalPage } from './pages/IncidentalPage'
 import { LungRadsPage } from './pages/LungRadsPage'
+import { FleischnerPage } from './pages/FleischnerPage'
 import { BosniakPage } from './pages/BosniakPage'
 import { PancreaticCystPage } from './pages/PancreaticCystPage'
 import { MeldPage } from './pages/MeldPage'
@@ -52,6 +53,7 @@ export default function App() {
           <Route path="/orads" element={<OradsPage />} />
           <Route path="/incidental" element={<IncidentalPage />} />
           <Route path="/lungrads" element={<LungRadsPage />} />
+          <Route path="/fleischner" element={<FleischnerPage />} />
           <Route path="/bosniak" element={<BosniakPage />} />
           <Route path="/pancreatic-cyst" element={<PancreaticCystPage />} />
           <Route path="/meld" element={<MeldPage />} />

@@ -109,6 +109,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - O-RADS
 - Incidental findings (adrenal, pancreatic cyst, renal mass)
 - Lung-RADS
+- Fleischner 2017 (incidental pulmonary nodule follow-up; Lung-RADS covers screening LDCT)
 - Bosniak 2019
 - Pancreatic cyst surveillance
 - MELD (MELD 3.0 default, MELD-Na option)

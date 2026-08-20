@@ -14,6 +14,7 @@ export const categories: CalculatorCategory[] = [
     name: 'Chest',
     items: [
       { path: '/lungrads', name: 'Lung-RADS', description: 'Screening LDCT nodule category, management, and impression text.' },
+      { path: '/fleischner', name: 'Fleischner 2017', description: 'Incidental pulmonary nodule follow-up on CT, by nodule type, size, and risk.' },
       { path: '/pe-rads', name: 'PE-RADS', description: 'Acute PE reporting with clot-location hierarchy, modifiers, and impression text.' },
     ],
   },
