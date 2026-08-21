@@ -23,6 +23,17 @@ npm run build
 
 Do not start the dev server or a browser to visually test/verify every change. Rely on `npm run build` (type-check) and code review instead. Only launch the dev server and check in a browser when explicitly asked to.
 
+## Typography
+
+The display face is Source Serif 4 (variable, weights 200-900), self-hosted at
+`public/fonts/source-serif-4-latin-wght-normal.woff2` with its licence alongside
+it. It is vendored rather than pulled from Google Fonts so the PWA keeps working
+with no network; `woff2` is in the Workbox `globPatterns` so the file is
+precached. Only the latin subset ships (~50 KB) - add another subset file and a
+matching `@font-face` in `src/styles.css` if non-latin text is ever needed.
+Body and UI text stay on the system sans stack, labels and data on the system
+mono stack.
+
 ## Offline / PWA
 
 The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it can be installed to a phone home screen and used with no network connection after the first visit.

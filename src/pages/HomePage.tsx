@@ -25,41 +25,29 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
           <p className="hero-copy">
             Enter the findings, get the category, copy a report-ready impression. No PDFs, no logins.
           </p>
-          <div className="hero-actions">
-            <Link to="/tirads" className="primary-button">Open calculators</Link>
-          </div>
+          <search className="search-panel hero-search">
+            <label className="search-field">
+              <span className="metric-label">Find a calculator</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Try thyroid, nodule, adrenal, contrast, MELD"
+                autoComplete="off"
+                aria-describedby="search-count"
+              />
+            </label>
+            <p className="search-status" id="search-count" aria-live="polite">
+              {isSearching
+                ? `${results.length} of ${totalCalculators} ${results.length === 1 ? 'match' : 'matches'}`
+                : `Search all ${totalCalculators} by name, organ, or criteria`}
+            </p>
+          </search>
         </div>
         <div className="hero-panel">
-          <div className="hero-stat">
-            <span>{totalCalculators}</span>
-            <p>Calculators and quick references</p>
-          </div>
           <InstallButton />
-          <div className="hero-stat">
-            <span>Mobile</span>
-            <p>Large touch targets, results stay in view</p>
-          </div>
         </div>
       </section>
-
-      <search className="search-panel">
-        <label className="search-field">
-          <span className="metric-label">Find a calculator</span>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Try thyroid, nodule, adrenal, contrast, MELD"
-            autoComplete="off"
-            aria-describedby="search-count"
-          />
-        </label>
-        <p className="search-status" id="search-count" aria-live="polite">
-          {isSearching
-            ? `${results.length} of ${totalCalculators} ${results.length === 1 ? 'match' : 'matches'}`
-            : `Search all ${totalCalculators} by name, organ, or criteria`}
-        </p>
-      </search>
 
       {isSearching ? (
         <section className="section-block">

@@ -94,6 +94,11 @@ function getRecommendation(category: TiradsResult['category'], sizeCm: number) {
   if (category === 'TR1' || category === 'TR2') {
     return { recommendation: 'No FNA or follow-up recommended.', followUp: false, fna: false }
   }
+  // TR3 and above are size-banded, so withhold a recommendation until a size is entered
+  // rather than reporting the below-threshold branch by default.
+  if (sizeCm <= 0) {
+    return { recommendation: 'Enter the maximum size to apply the FNA and follow-up thresholds.', followUp: false, fna: false }
+  }
   if (category === 'TR3') {
     if (sizeCm >= 2.5) return { recommendation: 'FNA is recommended. Ultrasound follow-up may also be considered.', followUp: true, fna: true }
     if (sizeCm >= 1.5) return { recommendation: 'Follow-up ultrasound is recommended at 1, 3, and 5 years. FNA threshold is 2.5 cm.', followUp: true, fna: false }
@@ -121,9 +126,13 @@ export function calculateTirads(form: TiradsForm): TiradsResult {
   const category = getCategory(points)
   const location = [form.laterality, form.pole].filter(Boolean).join(' ')
   const focusText = form.echogenicFoci.length ? form.echogenicFoci.map((item) => focusLabels[item]).join(', ') : 'no suspicious echogenic foci'
-  const description = `${location ? `${location} ` : ''}thyroid nodule measuring ${sizeCm ? sizeCm.toFixed(1) : '0.0'} cm, ${compositionLabels[form.composition]}, ${echogenicityLabels[form.echogenicity]}, ${shapeLabels[form.shape]}, with ${marginLabels[form.margin]} and ${focusText}.`
+  const sizeMissing = sizeCm <= 0
+  const sizeText = sizeMissing ? 'of unstated size' : `measuring ${sizeCm.toFixed(1)} cm`
+  const description = `${location ? `${location} ` : ''}thyroid nodule ${sizeText}, ${compositionLabels[form.composition]}, ${echogenicityLabels[form.echogenicity]}, ${shapeLabels[form.shape]}, with ${marginLabels[form.margin]} and ${focusText}.`
   const management = getRecommendation(category, sizeCm)
-  const impression = `${location ? `${location} ` : ''}thyroid nodule is classified as ACR TI-RADS ${category} (${points} points). ${management.recommendation}`
+  // The management sentence is a prompt to the user until a size is entered, so it is
+  // kept out of the report text and shown only in the result summary.
+  const impression = `${location ? `${location} ` : ''}thyroid nodule is classified as ACR TI-RADS ${category} (${points} points).${sizeMissing ? '' : ` ${management.recommendation}`}`
 
-  return { category, points, recommendation: management.recommendation, description, impression, followUp: management.followUp, fna: management.fna }
+  return { category, points, recommendation: management.recommendation, sizeMissing, description, impression, followUp: management.followUp, fna: management.fna }
 }

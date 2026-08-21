@@ -1,4 +1,5 @@
-import { Link, Route, Routes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
 import { ScrollToTop } from './components/ScrollToTop'
 import { categories } from './data/calculators'
@@ -29,6 +30,13 @@ import { DopplerIndicesPage } from './pages/DopplerIndicesPage'
 import { IrAnticoagulationPage } from './pages/IrAnticoagulationPage'
 
 export default function App() {
+  const location = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
+
   return (
     <div className="app-shell">
       <ScrollToTop />
@@ -42,7 +50,16 @@ export default function App() {
               <p className="brand-subtitle">Mobile-friendly radiology tools</p>
             </div>
           </Link>
-          <CategoryNav categories={categories} />
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="primary-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? 'Close' : 'Menu'}
+          </button>
+          <CategoryNav categories={categories} isOpen={menuOpen} onNavigate={() => setMenuOpen(false)} />
         </div>
       </header>
 

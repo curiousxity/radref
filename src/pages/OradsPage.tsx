@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { CopyBlock } from '../components/CopyBlock'
-import { Badge } from '../components/Badge'
 import { Definition } from '../components/Definition'
 import { calculateOrads } from '../logic/orads'
 import type { OradsForm } from '../types/orads'
@@ -112,8 +111,8 @@ export function OradsPage() {
           </div>
         </article>
         <article className="info-card result-card sticky-card">
-          <div className="result-head"><h3>Result</h3><Badge label={result.category} tone={result.category.includes('5') || result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'} /></div>
-          <div className="result-panel"><div><p className="metric-label">Category</p><p className="metric-value">{result.category}</p></div><div><p className="metric-label">Features</p><p className="metric-value">{result.features.length}</p></div></div>
+          <div className="result-head"><h3>Result</h3></div>
+          <div className="result-panel"><div><p className="metric-label">Category</p><p className={`metric-value tone-${result.category.includes('5') || result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'}`}>{result.category}</p></div><div><p className="metric-label">Features</p><p className="metric-value">{result.features.length}</p></div></div>
           <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No suspicious features selected.'} />
           <CopyBlock label="O-RADS impression" text={result.impression} />

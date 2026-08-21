@@ -21,6 +21,8 @@ export type TiradsResult = {
   points: number
   category: 'TR1' | 'TR2' | 'TR3' | 'TR4' | 'TR5'
   recommendation: string
+  /** True when no maximum size was entered, so the report text is not yet complete. */
+  sizeMissing: boolean
   followUp: boolean
   fna: boolean
   description: string

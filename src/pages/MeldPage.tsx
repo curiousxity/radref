@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type MeldMode = 'meld3' | 'meldna'
@@ -227,7 +226,6 @@ export function MeldPage() {
         <article className="info-card result-card sticky-card">
           <div className="result-head">
             <h3>Result</h3>
-            <Badge label={result ? result.modeLabel : 'Awaiting input'} tone={result ? toneForScore(result.score) : 'accent'} />
           </div>
 
           {result ? (
@@ -239,7 +237,7 @@ export function MeldPage() {
                 </div>
                 <div>
                   <p className="metric-label">Score</p>
-                  <p className="metric-value">{result.score}</p>
+                  <p className={`metric-value tone-${toneForScore(result.score)}`}>{result.score}</p>
                 </div>
               </div>
               <p className="result-summary">{result.summary}</p>
