@@ -56,17 +56,17 @@ type SizeRow = {
   sizeBand: string
   report: string
   impression: string
-  /** Verbatim table text, shown in the reference table below. */
+  /** Verbatim source-table wording, shown in the reference table below. */
+  tableRecommendation: string
+  /**
+   * Dictatable wording, copied by the Recommendation block. Identical to
+   * tableRecommendation except in the bands whose source text is a discussion of when
+   * follow-up may be omitted rather than something a radiologist would dictate.
+   */
   recommendation: string
   consensus: string
   category: string
   tone: Tone
-  /**
-   * Report-ready wording for the bands whose table recommendation is a discussion of
-   * when follow-up may be omitted rather than text a radiologist would dictate.
-   * Where set, this is what the Recommendation block copies.
-   */
-  reportRecommendation?: string
   /** Bands where the SRU allows follow-up to be omitted on imager confidence. */
   allowsOptOut?: boolean
 }
@@ -89,6 +89,7 @@ const postmenopausalSizeRows: SizeRow[] = [
     sizeBand: '1 cm or smaller (largest cyst diameter)',
     report: 'Description not needed',
     impression: 'Normal ovaries/adnexa',
+    tableRecommendation: 'Normal, no follow-up',
     recommendation: 'Normal, no follow-up',
     category: 'Normal',
     tone: 'good',
@@ -101,6 +102,7 @@ const postmenopausalSizeRows: SizeRow[] = [
     sizeBand: '>1 cm to 3 cm',
     report: 'Describe in report, giving largest simple cyst diameter.',
     impression: 'Benign inconsequential finding',
+    tableRecommendation: 'Clinically inconsequential finding. No follow-up needed.',
     recommendation: 'Clinically inconsequential finding. No follow-up needed.',
     category: 'No follow-up needed',
     tone: 'good',
@@ -113,8 +115,8 @@ const postmenopausalSizeRows: SizeRow[] = [
     sizeBand: '>3 to 5 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter and quality of visualization and documentation.',
     impression: 'Benign simple cyst. Clinically inconsequential finding',
-    recommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, no follow-up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
-    reportRecommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
+    tableRecommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, no follow-up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
+    recommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
     category: 'Follow-up recommended',
     tone: 'accent',
     allowsOptOut: true,
@@ -127,6 +129,7 @@ const postmenopausalSizeRows: SizeRow[] = [
     sizeBand: '>5 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter.',
     impression: 'Benign simple cyst',
+    tableRecommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
     recommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
     category: 'Follow-up recommended',
     tone: 'accent',
@@ -142,6 +145,7 @@ const premenopausalSizeRows: SizeRow[] = [
     sizeBand: '3 cm or smaller (largest cyst diameter)',
     report: 'Description not needed. If described, consider use of word follicle rather than cyst.',
     impression: 'Normal ovaries/adnexa',
+    tableRecommendation: 'Normal, no follow-up',
     recommendation: 'Normal, no follow-up',
     category: 'Normal',
     tone: 'good',
@@ -154,6 +158,7 @@ const premenopausalSizeRows: SizeRow[] = [
     sizeBand: '>3 cm to 5 cm',
     report: 'Indicate presence of simple cyst(s), and largest cyst diameter.',
     impression: 'Benign finding in the physiologic size range',
+    tableRecommendation: 'No follow-up needed',
     recommendation: 'No follow-up needed',
     category: 'No follow-up needed',
     tone: 'good',
@@ -166,8 +171,8 @@ const premenopausalSizeRows: SizeRow[] = [
     sizeBand: '>5 to 7 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter and quality of visualization and documentation.',
     impression: 'Benign simple cyst. Clinically inconsequential finding',
-    recommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, then no follow up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
-    reportRecommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
+    tableRecommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, then no follow up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
+    recommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
     category: 'Follow-up recommended',
     tone: 'accent',
     allowsOptOut: true,
@@ -180,6 +185,7 @@ const premenopausalSizeRows: SizeRow[] = [
     sizeBand: '>7 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter.',
     impression: 'Benign simple cyst',
+    tableRecommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
     recommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
     category: 'Follow-up recommended',
     tone: 'accent',
@@ -470,7 +476,7 @@ function classify(form: Form): Result {
     summary: lead,
     report: row.report,
     impression: row.impression,
-    recommendation: row.reportRecommendation ?? row.recommendation,
+    recommendation: row.recommendation,
     consensus: row.consensus,
     optOutKey,
     applicabilityNote: note,
@@ -518,7 +524,7 @@ function SizeTable({ title, rows }: { title: string; rows: SizeRow[] }) {
                 <td className="vessel-name">{row.sizeBand}</td>
                 <td>{row.report}</td>
                 <td>{row.impression}</td>
-                <td>{row.recommendation}</td>
+                <td>{row.tableRecommendation}</td>
                 <td>{row.consensus}</td>
               </tr>
             ))}
