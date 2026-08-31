@@ -77,6 +77,8 @@ button, input, select { font: inherit; }
 .nav-dropdown-link:hover { background: var(--color-surface-2); }
 .nav-dropdown-link.active { background: var(--color-primary-soft); color: var(--color-primary); font-weight: 600; }
 .main-content { padding: 2rem 0 4rem; }
+/* Shown only while a lazily loaded calculator chunk is in flight. */
+.route-loading { margin: 0; padding: 2rem 0; font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); }
 .page { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); }
 .hero-card, .info-card, .tool-card, .section-block, .result-card, .form-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); }
 .hero-card { padding: clamp(1.5rem, 4vw, 3rem); display: grid; gap: 1.5rem; grid-template-columns: 2fr 1fr; }

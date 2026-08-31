@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -41,13 +41,15 @@ export default function App() {
       </header>
 
       <main id="main-content" className="container main-content">
-        <Routes>
-          <Route path="/" element={<HomePage categories={categories} />} />
-          {calculators.map((item) => (
-            <Route key={item.path} path={item.path} element={<item.component />} />
-          ))}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense fallback={<p className="route-loading">Loading…</p>}>
+          <Routes>
+            <Route path="/" element={<HomePage categories={categories} />} />
+            {calculators.map((item) => (
+              <Route key={item.path} path={item.path} element={<item.component />} />
+            ))}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </main>
     </div>
   )
