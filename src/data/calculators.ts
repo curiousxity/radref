@@ -36,6 +36,7 @@ export const categories: CalculatorCategory[] = [
       { path: '/orads', name: 'O-RADS', description: 'Adnexal lesion risk on ultrasound or MRI, with modality-aware inputs.', keywords: ['ovary', 'ovarian', 'adnexal', 'gynecologic'] },
       { path: '/pi-rads', name: 'PI-RADS', description: 'Prostate MRI zonal assessment, v2.1, with impression text.', keywords: ['prostate', 'prostatic', 'mri', 'peripheral zone', 'transition zone'] },
       { path: '/early-pregnancy-loss', name: 'Early pregnancy loss', description: 'SRU criteria for diagnostic versus suspicious first-trimester findings.', keywords: ['miscarriage', 'gestational sac', 'first trimester', 'obstetric', 'sru', 'crown rump'] },
+      { path: '/adnexal-cyst', name: 'Adnexal cyst follow-up', description: 'SRU 2019 follow-up intervals and report wording for simple adnexal cysts.', keywords: ['ovary', 'ovarian', 'adnexal', 'simple cyst', 'follicle', 'paraovarian', 'paratubal', 'sru', 'follow-up', 'surveillance', 'cyst'] },
     ],
   },
   {

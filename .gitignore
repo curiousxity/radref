@@ -26,3 +26,6 @@ coverage/
 
 # TypeScript
 *.tsbuildinfo
+
+# Playwright MCP session logs
+.playwright-mcp/

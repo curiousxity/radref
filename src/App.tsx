@@ -28,6 +28,7 @@ import { CarotidStenosisPage } from './pages/CarotidStenosisPage'
 import { AdrenalChemicalShiftPage } from './pages/AdrenalChemicalShiftPage'
 import { DopplerIndicesPage } from './pages/DopplerIndicesPage'
 import { IrAnticoagulationPage } from './pages/IrAnticoagulationPage'
+import { AdnexalCystPage } from './pages/AdnexalCystPage'
 
 export default function App() {
   const location = useLocation()
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="/adrenal-chemical-shift" element={<AdrenalChemicalShiftPage />} />
           <Route path="/doppler-indices" element={<DopplerIndicesPage />} />
           <Route path="/ir-anticoagulation" element={<IrAnticoagulationPage />} />
+          <Route path="/adnexal-cyst" element={<AdnexalCystPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

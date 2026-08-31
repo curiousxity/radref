@@ -132,6 +132,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Adrenal chemical shift (signal intensity index, adrenal-to-spleen ratio)
 - Doppler indices (RI, PI, S/D ratio)
 - Periprocedural anticoagulation for IR (SIR 2019 consensus, hold/restart by bleeding risk)
+- Simple adnexal cyst follow-up (SRU 2019 consensus, size bands and report wording)
 
 ## Next development priorities
 
