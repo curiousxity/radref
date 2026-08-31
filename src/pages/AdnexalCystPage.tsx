@@ -17,7 +17,7 @@ type Form = {
   sizeCm: string
   isFollowUp: boolean
   change: Change
-  highConfidence: boolean
+  highConfidenceFor: string | null
   symptomsAttributable: boolean
   elevatedRisk: boolean
 }
@@ -29,7 +29,7 @@ const initialForm: Form = {
   sizeCm: '',
   isFollowUp: false,
   change: 'similar',
-  highConfidence: false,
+  highConfidenceFor: null,
   symptomsAttributable: false,
   elevatedRisk: false,
 }
@@ -42,7 +42,8 @@ type Result = {
   impression: string | null
   recommendation: string | null
   consensus: string | null
-  conditionalBand: boolean
+  /** Key of the size band offering the high-confidence opt-out, else null. */
+  optOutKey: string | null
   outsideScope: boolean
   applicabilityNote: string | null
 }
@@ -50,17 +51,24 @@ type Result = {
 type SizeRow = {
   key: string
   status: MenopausalStatus
+  /** Inclusive upper bound of the band in cm; the last row of each table is Infinity. */
+  maxCm: number
   sizeBand: string
   report: string
   impression: string
+  /** Verbatim table text, shown in the reference table below. */
   recommendation: string
   consensus: string
+  category: string
+  tone: Tone
   /**
-   * Report-ready wording for the bands where the table's own recommendation is a
-   * discussion of when follow-up may be omitted rather than text a radiologist
-   * would dictate. The full table text still shows in the reference table below.
+   * Report-ready wording for the bands whose table recommendation is a discussion of
+   * when follow-up may be omitted rather than text a radiologist would dictate.
+   * Where set, this is what the Recommendation block copies.
    */
-  conditionalFollowUp?: string
+  reportRecommendation?: string
+  /** Bands where the SRU allows follow-up to be omitted on imager confidence. */
+  allowsOptOut?: boolean
 }
 
 type ScenarioRow = {
@@ -77,38 +85,51 @@ const postmenopausalSizeRows: SizeRow[] = [
   {
     key: 'post-le1',
     status: 'post',
+    maxCm: 1,
     sizeBand: '1 cm or smaller (largest cyst diameter)',
     report: 'Description not needed',
     impression: 'Normal ovaries/adnexa',
     recommendation: 'Normal, no follow-up',
+    category: 'Normal',
+    tone: 'good',
     consensus: 'Strong consensus (evidence A; clinical-experience support A)',
   },
   {
     key: 'post-1to3',
     status: 'post',
+    maxCm: 3,
     sizeBand: '>1 cm to 3 cm',
     report: 'Describe in report, giving largest simple cyst diameter.',
     impression: 'Benign inconsequential finding',
     recommendation: 'Clinically inconsequential finding. No follow-up needed.',
+    category: 'No follow-up needed',
+    tone: 'good',
     consensus: 'Strong consensus (evidence A; clinical-experience support A)',
   },
   {
     key: 'post-3to5',
     status: 'post',
+    maxCm: 5,
     sizeBand: '>3 to 5 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter and quality of visualization and documentation.',
     impression: 'Benign simple cyst. Clinically inconsequential finding',
     recommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, no follow-up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
-    conditionalFollowUp: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
+    reportRecommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
+    category: 'Follow-up recommended',
+    tone: 'accent',
+    allowsOptOut: true,
     consensus: 'Majority opinion (evidence A if no follow-up, C if follow-up; clinical-experience support C - disagreement was whether a tiered system was beneficial or whether a single threshold of 3 cm should be used)',
   },
   {
     key: 'post-gt5',
     status: 'post',
+    maxCm: Infinity,
     sizeBand: '>5 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter.',
     impression: 'Benign simple cyst',
     recommendation: 'Follow up in 3-6 months for characterization or 6-12 months for growth assessment.',
+    category: 'Follow-up recommended',
+    tone: 'accent',
     consensus: 'Strong consensus (evidence C; clinical-experience support B)',
   },
 ]
@@ -117,38 +138,51 @@ const premenopausalSizeRows: SizeRow[] = [
   {
     key: 'pre-le3',
     status: 'pre',
+    maxCm: 3,
     sizeBand: '3 cm or smaller (largest cyst diameter)',
     report: 'Description not needed. If described, consider use of word follicle rather than cyst.',
     impression: 'Normal ovaries/adnexa',
     recommendation: 'Normal, no follow-up',
+    category: 'Normal',
+    tone: 'good',
     consensus: 'Strong consensus (evidence A for malignant outcomes; A for other clinical outcomes)',
   },
   {
     key: 'pre-3to5',
     status: 'pre',
+    maxCm: 5,
     sizeBand: '>3 cm to 5 cm',
     report: 'Indicate presence of simple cyst(s), and largest cyst diameter.',
     impression: 'Benign finding in the physiologic size range',
     recommendation: 'No follow-up needed',
+    category: 'No follow-up needed',
+    tone: 'good',
     consensus: 'Strong (evidence A; clinical-experience support A)',
   },
   {
     key: 'pre-5to7',
     status: 'pre',
+    maxCm: 7,
     sizeBand: '>5 to 7 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter and quality of visualization and documentation.',
     impression: 'Benign simple cyst. Clinically inconsequential finding',
     recommendation: 'Generally will require follow-up examination. However, if exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner, then no follow up imaging is needed. If any concern, or if imager is less confident in diagnosis, then follow-up is recommended. Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
-    conditionalFollowUp: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
+    reportRecommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
+    category: 'Follow-up recommended',
+    tone: 'accent',
+    allowsOptOut: true,
     consensus: 'Majority opinion (evidence A if no follow-up, C if follow-up; clinical-experience support C - disagreement was whether a tiered system was beneficial or whether a single threshold of 5 cm should be used)',
   },
   {
     key: 'pre-gt7',
     status: 'pre',
+    maxCm: Infinity,
     sizeBand: '>7 cm',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter.',
     impression: 'Benign simple cyst',
     recommendation: 'Follow up in 2-6 months for resolution/characterization or 6-12 months for growth rate assessment.',
+    category: 'Follow-up recommended',
+    tone: 'accent',
     consensus: 'Strong consensus (evidence C; clinical-experience support A)',
   },
 ]
@@ -291,54 +325,60 @@ function applicability(form: Form) {
   return null
 }
 
-function findScenario(rows: ScenarioRow[], key: string, status: MenopausalStatus): ScenarioRow | undefined {
-  return rows.find((row) => row.key === key && row.status === status)
+const emptyResult: Result = {
+  category: 'Awaiting input',
+  tone: 'neutral',
+  summary: '',
+  report: null,
+  impression: null,
+  recommendation: null,
+  consensus: null,
+  optOutKey: null,
+  outsideScope: false,
+  applicabilityNote: null,
+}
+
+function makeResult(over: Partial<Result>): Result {
+  return { ...emptyResult, ...over }
 }
 
 function pending(summary: string, note: string | null): Result {
-  return {
-    category: 'Awaiting input',
-    tone: 'neutral',
-    summary,
-    report: null,
-    impression: null,
-    recommendation: null,
-    consensus: null,
-    conditionalBand: false,
-    outsideScope: false,
-    applicabilityNote: note,
-  }
+  return makeResult({ summary, applicabilityNote: note })
 }
 
-function fromScenario(row: ScenarioRow | undefined, category: string, tone: Tone, summary: string, note: string | null): Result {
+/** Looks up one scenario row and renders it as a result, or falls back if no row matches. */
+function fromScenario(
+  rows: ScenarioRow[],
+  key: string,
+  status: MenopausalStatus,
+  over: { category: string; tone: Tone; summary: string; note: string | null },
+): Result {
+  const row = rows.find((candidate) => candidate.key === key && candidate.status === status)
   if (!row) {
-    return pending('No SRU row matches this combination of inputs. Adjust the selections above.', note)
+    return pending('No SRU row matches this combination of inputs. Adjust the selections above.', over.note)
   }
-  return {
-    category,
-    tone,
-    summary,
+  return makeResult({
+    category: over.category,
+    tone: over.tone,
+    summary: over.summary,
     report: row.report,
     impression: row.impression,
     recommendation: row.recommendation,
     consensus: row.consensus,
-    conditionalBand: false,
-    outsideScope: false,
-    applicabilityNote: note,
-  }
+    applicabilityNote: over.note,
+  })
 }
 
-function sizeRowFor(status: MenopausalStatus, size: number) {
-  if (status === 'post') {
-    if (size <= 1) return postmenopausalSizeRows[0]
-    if (size <= 3) return postmenopausalSizeRows[1]
-    if (size <= 5) return postmenopausalSizeRows[2]
-    return postmenopausalSizeRows[3]
-  }
-  if (size <= 3) return premenopausalSizeRows[0]
-  if (size <= 5) return premenopausalSizeRows[1]
-  if (size <= 7) return premenopausalSizeRows[2]
-  return premenopausalSizeRows[3]
+const changePhrase: Record<Change, string> = {
+  decreased: 'has decreased in size',
+  similar: 'is similar in size',
+  increased: 'has increased in size',
+  newSolidElements: 'has developed new solid elements',
+}
+
+function sizeRowFor(status: MenopausalStatus, size: number): SizeRow {
+  const rows = status === 'post' ? postmenopausalSizeRows : premenopausalSizeRows
+  return rows.find((row) => size <= row.maxCm) ?? rows[rows.length - 1]
 }
 
 function classify(form: Form): Result {
@@ -347,62 +387,53 @@ function classify(form: Form): Result {
   const statusWord = status === 'post' ? 'Postmenopausal' : 'Premenopausal'
 
   if (form.morphology === 'notSimple') {
-    return {
+    return makeResult({
       category: 'Not a simple cyst',
       tone: 'warn',
       summary: 'Solid elements, papillary projections, irregular septations, or internal flow place this lesion outside the SRU simple-cyst guideline.',
-      report: null,
-      impression: null,
-      recommendation: null,
-      consensus: null,
-      conditionalBand: false,
       outsideScope: true,
       applicabilityNote: note,
-    }
+    })
   }
 
   if (form.isFollowUp && form.change === 'newSolidElements') {
-    return fromScenario(
-      findScenario(specialRows, 'newSolidElements', status),
-      'Increased concern for malignancy',
-      'warn',
-      `${statusWord} patient: a previously simple cyst has developed wall papillary projections, solid elements, or irregular septation(s).`,
+    return fromScenario(specialRows, 'newSolidElements', status, {
+      category: 'Increased concern for malignancy',
+      tone: 'warn',
+      summary: `${statusWord} patient: a previously simple cyst has developed wall papillary projections, solid elements, or irregular septation(s).`,
       note,
-    )
+    })
   }
 
   if (form.morphology === 'indeterminate') {
     const changeNote = form.isFollowUp
-      ? ` The cyst ${form.change === 'decreased' ? 'has decreased' : form.change === 'similar' ? 'is similar' : 'has increased'} in size since the prior study, but characterization takes precedence over the size-change rows until the cyst is confirmed simple.`
+      ? ` The cyst ${changePhrase[form.change]} since the prior study, but characterization takes precedence over the size-change rows until the cyst is confirmed simple.`
       : ''
-    return fromScenario(
-      findScenario(specialRows, 'indeterminate', status),
-      'Follow-up recommended',
-      'accent',
-      `${statusWord} patient: adnexal cyst likely simple but not satisfactorily characterized at US.${changeNote}`,
+    return fromScenario(specialRows, 'indeterminate', status, {
+      category: 'Follow-up recommended',
+      tone: 'accent',
+      summary: `${statusWord} patient: adnexal cyst likely simple but not satisfactorily characterized at US.${changeNote}`,
       note,
-    )
+    })
   }
 
   if (form.origin === 'paraovarian') {
-    return fromScenario(
-      findScenario(specialRows, 'paraovarian', status),
-      'No follow-up needed',
-      'good',
-      `${statusWord} patient: simple paraovarian or paratubal cyst, which needs no follow-up regardless of size.`,
+    return fromScenario(specialRows, 'paraovarian', status, {
+      category: 'No follow-up needed',
+      tone: 'good',
+      summary: `${statusWord} patient: simple paraovarian or paratubal cyst, which needs no follow-up regardless of size.`,
       note,
-    )
+    })
   }
 
   if (form.isFollowUp) {
-    const row = findScenario(followUpRows, form.change, status)
-    const changeWord = form.change === 'decreased' ? 'decreased' : form.change === 'similar' ? 'similar' : 'increased'
     const scopeNote = status === 'pre' ? ' These premenopausal rows apply to a simple cyst that measured more than 5 cm on the initial study; a premenopausal cyst of 5 cm or smaller needs no follow-up.' : ''
-    const followUpSummary = `${statusWord} patient: simple cyst ${changeWord} in size on follow-up.${scopeNote}`
-    if (form.change === 'decreased') {
-      return fromScenario(row, 'No follow-up needed', 'good', followUpSummary, note)
-    }
-    return fromScenario(row, 'Follow-up recommended', 'accent', followUpSummary, note)
+    return fromScenario(followUpRows, form.change, status, {
+      category: form.change === 'decreased' ? 'No follow-up needed' : 'Follow-up recommended',
+      tone: form.change === 'decreased' ? 'good' : 'accent',
+      summary: `${statusWord} patient: simple cyst ${form.change} in size on follow-up.${scopeNote}`,
+      note,
+    })
   }
 
   const size = parseSize(form.sizeCm)
@@ -414,11 +445,13 @@ function classify(form: Form): Result {
   }
 
   const row = sizeRowFor(status, size)
-  const conditionalBand = row.key === 'post-3to5' || row.key === 'pre-5to7'
+  const optOutKey = row.allowsOptOut ? row.key : null
   const lead = `${statusWord} patient: simple ovarian cyst measuring ${fmt(size)} cm (${row.sizeBand}).`
 
-  if (conditionalBand && form.highConfidence) {
-    return {
+  // The opt-out is honoured only for the band it was asserted about, so it goes stale by
+  // itself once another input moves the cyst into a different band.
+  if (optOutKey && form.highConfidenceFor === optOutKey) {
+    return makeResult({
       category: 'No follow-up needed',
       tone: 'good',
       summary: `${lead} Exceptionally well visualized and characterized, so no follow-up imaging is needed.`,
@@ -426,37 +459,22 @@ function classify(form: Form): Result {
       impression: row.impression,
       recommendation: 'Exceptionally well-visualized and characterized, with excellent documentation, and imager confidence by an experienced US practitioner. No follow-up imaging is needed.',
       consensus: row.consensus,
-      conditionalBand,
-      outsideScope: false,
+      optOutKey,
       applicabilityNote: note,
-    }
+    })
   }
 
-  let category: string
-  let tone: Tone
-  if (row.key === 'post-le1' || row.key === 'pre-le3') {
-    category = 'Normal'
-    tone = 'good'
-  } else if (row.key === 'post-1to3' || row.key === 'pre-3to5') {
-    category = 'No follow-up needed'
-    tone = 'good'
-  } else {
-    category = 'Follow-up recommended'
-    tone = 'accent'
-  }
-
-  return {
-    category,
-    tone,
+  return makeResult({
+    category: row.category,
+    tone: row.tone,
     summary: lead,
     report: row.report,
     impression: row.impression,
-    recommendation: conditionalBand ? row.conditionalFollowUp ?? row.recommendation : row.recommendation,
+    recommendation: row.reportRecommendation ?? row.recommendation,
     consensus: row.consensus,
-    conditionalBand,
-    outsideScope: false,
+    optOutKey,
     applicabilityNote: note,
-  }
+  })
 }
 
 const applicabilityNotes = [
@@ -467,6 +485,11 @@ const applicabilityNotes = [
   'The guidelines address simple cysts only. Recommendations for other benign cysts, probably benign cysts, and malignant cysts are in the original 2010 SRU consensus document.',
 ]
 
+const simpleCystDefinition =
+  'A simple cyst is a round or oval anechoic fluid collection with smooth thin walls, no solid component or septation, and no internal flow by using color Doppler imaging.'
+
+const scenarioRows = [...followUpRows, ...specialRows]
+
 const references: { label: string; href?: string }[] = [
   {
     label: 'Levine D, Patel MD, Suh-Burgmann EJ, Andreotti RF, Benacerraf BR, Benson CB, Brewster WR, Coleman BG, Doubilet PM, Goldstein SR, Hamper UM, Hecht JL, Horrow MM, Hur HC, Marnach ML, Pavlik E, Platt LD, Puscheck E, Smith-Bindman R, Brown DL. Simple Adnexal Cysts: SRU Consensus Conference Update on Follow-up and Reporting. Radiology 2019;293(2):359-371.',
@@ -474,21 +497,45 @@ const references: { label: string; href?: string }[] = [
   },
 ]
 
+function SizeTable({ title, rows }: { title: string; rows: SizeRow[] }) {
+  return (
+    <section className="info-card">
+      <h3>{title}</h3>
+      <div className="table-wrap">
+        <table className="ref-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Report</th>
+              <th>Impression</th>
+              <th>Recommendation</th>
+              <th>Consensus</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.key}>
+                <td className="vessel-name">{row.sizeBand}</td>
+                <td>{row.report}</td>
+                <td>{row.impression}</td>
+                <td>{row.recommendation}</td>
+                <td>{row.consensus}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
 export function AdnexalCystPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
   const showSize = form.morphology === 'simple' && form.origin === 'ovarian' && !form.isFollowUp
 
-  // The high-confidence opt-out is asserted about one specific cyst in one specific
-  // band, so any edit that can move the band must clear it rather than carry it over.
-  const bandFields: (keyof Form)[] = ['menopausalStatus', 'origin', 'morphology', 'sizeCm', 'isFollowUp']
-
   function update<K extends keyof Form>(field: K, value: Form[K]) {
-    setForm((current) => ({
-      ...current,
-      [field]: value,
-      ...(bandFields.includes(field) ? { highConfidence: false } : {}),
-    }))
+    setForm((current) => ({ ...current, [field]: value }))
   }
 
   function handleReset() {
@@ -529,7 +576,7 @@ export function AdnexalCystPage() {
             <label>
               <span className="term">
                 Morphology
-                <Definition text="A simple cyst is a round or oval anechoic fluid collection with smooth thin walls, no solid component or septation, and no internal flow by using color Doppler imaging." />
+                <Definition text={simpleCystDefinition} />
               </span>
               <select value={form.morphology} onChange={(e) => update('morphology', e.target.value as Morphology)}>
                 <option value="simple">Simple cyst</option>
@@ -576,9 +623,13 @@ export function AdnexalCystPage() {
               </label>
             )}
 
-            {result.conditionalBand && (
+            {result.optOutKey && (
               <label className="check-row">
-                <input type="checkbox" checked={form.highConfidence} onChange={(e) => update('highConfidence', e.target.checked)} />
+                <input
+                  type="checkbox"
+                  checked={form.highConfidenceFor === result.optOutKey}
+                  onChange={(e) => update('highConfidenceFor', e.target.checked ? result.optOutKey : null)}
+                />
                 Exceptionally well visualized and characterized, with excellent documentation and high imager confidence
               </label>
             )}
@@ -620,61 +671,9 @@ export function AdnexalCystPage() {
         </article>
       </section>
 
-      <section className="info-card">
-        <h3>Postmenopausal simple ovarian cysts</h3>
-        <div className="table-wrap">
-          <table className="ref-table">
-            <thead>
-              <tr>
-                <th>Size</th>
-                <th>Report</th>
-                <th>Impression</th>
-                <th>Recommendation</th>
-                <th>Consensus</th>
-              </tr>
-            </thead>
-            <tbody>
-              {postmenopausalSizeRows.map((row) => (
-                <tr key={row.key}>
-                  <td className="vessel-name">{row.sizeBand}</td>
-                  <td>{row.report}</td>
-                  <td>{row.impression}</td>
-                  <td>{row.recommendation}</td>
-                  <td>{row.consensus}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <SizeTable title="Postmenopausal simple ovarian cysts" rows={postmenopausalSizeRows} />
 
-      <section className="info-card">
-        <h3>Premenopausal simple ovarian cysts</h3>
-        <div className="table-wrap">
-          <table className="ref-table">
-            <thead>
-              <tr>
-                <th>Size</th>
-                <th>Report</th>
-                <th>Impression</th>
-                <th>Recommendation</th>
-                <th>Consensus</th>
-              </tr>
-            </thead>
-            <tbody>
-              {premenopausalSizeRows.map((row) => (
-                <tr key={row.key}>
-                  <td className="vessel-name">{row.sizeBand}</td>
-                  <td>{row.report}</td>
-                  <td>{row.impression}</td>
-                  <td>{row.recommendation}</td>
-                  <td>{row.consensus}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <SizeTable title="Premenopausal simple ovarian cysts" rows={premenopausalSizeRows} />
 
       <section className="info-card">
         <h3>Follow-up and special scenarios</h3>
@@ -691,7 +690,7 @@ export function AdnexalCystPage() {
               </tr>
             </thead>
             <tbody>
-              {[...followUpRows, ...specialRows].map((row) => (
+              {scenarioRows.map((row) => (
                 <tr key={`${row.key} ${row.status}`}>
                   <td className="vessel-name">{row.scenario}</td>
                   <td>{row.status === 'post' ? 'Postmenopausal' : 'Premenopausal'}</td>
@@ -713,7 +712,7 @@ export function AdnexalCystPage() {
       <section className="info-card">
         <h3>Simple cyst definition</h3>
         <ul className="plain-list">
-          <li>A simple cyst is a round or oval anechoic fluid collection with smooth thin walls, no solid component or septation, and no internal flow by using color Doppler imaging.</li>
+          <li>{simpleCystDefinition}</li>
           <li>The tables' own shorthand: well-visualized, thin-walled, anechoic, no solid elements, no internal vascular flow.</li>
         </ul>
       </section>
