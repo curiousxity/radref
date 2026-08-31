@@ -48,37 +48,35 @@ type Result = {
   applicabilityNote: string | null
 }
 
-type SizeRow = {
+/** Fields every SRU table row carries, whether it is keyed by size or by scenario. */
+type GuidelineRow = {
   key: string
   status: MenopausalStatus
+  report: string
+  impression: string
+  /** Dictatable wording, copied by the Recommendation block. */
+  recommendation: string
+  consensus: string
+}
+
+type SizeRow = GuidelineRow & {
   /** Inclusive upper bound of the band in cm; the last row of each table is Infinity. */
   maxCm: number
   sizeBand: string
-  report: string
-  impression: string
-  /** Verbatim source-table wording, shown in the reference table below. */
-  tableRecommendation: string
   /**
-   * Dictatable wording, copied by the Recommendation block. Identical to
-   * tableRecommendation except in the bands whose source text is a discussion of when
+   * Verbatim source-table wording, shown in the reference table below. Identical to
+   * recommendation except in the bands whose source text is a discussion of when
    * follow-up may be omitted rather than something a radiologist would dictate.
    */
-  recommendation: string
-  consensus: string
+  tableRecommendation: string
   category: string
   tone: Tone
   /** Bands where the SRU allows follow-up to be omitted on imager confidence. */
   allowsOptOut?: boolean
 }
 
-type ScenarioRow = {
-  key: string
-  status: MenopausalStatus
+type ScenarioRow = GuidelineRow & {
   scenario: string
-  report: string
-  impression: string
-  recommendation: string
-  consensus: string
 }
 
 const postmenopausalSizeRows: SizeRow[] = [
