@@ -23,6 +23,8 @@ export type CalculatorItem = {
 export type CalculatorCategory = {
   name: string
   items: CalculatorItem[]
+  /** What one item in this category is called on the home page. Defaults to 'calculator'. */
+  itemLabel?: string
 }
 
 export const categories: CalculatorCategory[] = [
@@ -57,6 +59,14 @@ export const categories: CalculatorCategory[] = [
     name: 'Neck',
     items: [
       { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.', keywords: ['thyroid', 'nodule', 'neck', 'acr'], component: lazyPage(() => import('../pages/TiradsPage'), 'TiradsPage') },
+    ],
+  },
+  {
+    name: 'Anatomy',
+    itemLabel: 'reference',
+    items: [
+      { path: '/otic-capsule', name: 'Otic capsule', description: 'Rotatable temporal bone: cochlea, vestibule, semicircular canals, and the facial nerve canal.', keywords: ['temporal bone', 'ear', 'inner ear', 'labyrinth', 'cochlea', 'vestibule', 'semicircular canal', 'facial nerve', 'petrous', 'otic capsule', 'otosclerosis', 'anatomy', '3d'], component: lazyPage(() => import('../pages/OticCapsulePage'), 'OticCapsulePage') },
+      { path: '/ossicular-chain', name: 'Ossicular chain', description: 'Malleus, incus, and stapes in the tympanic cavity, with a reconstructed slice through the model.', keywords: ['temporal bone', 'ear', 'middle ear', 'ossicles', 'ossicular', 'malleus', 'incus', 'stapes', 'eardrum', 'tympanic', 'stapedius', 'tensor tympani', 'cholesteatoma', 'conductive hearing loss', 'anatomy', '3d'], component: lazyPage(() => import('../pages/OssicularChainPage'), 'OssicularChainPage') },
     ],
   },
   {

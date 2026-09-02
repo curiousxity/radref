@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Otic Capsule — an interactive labyrinth</title>
+<style>
+  @font-face {
+    /* The same file the app shell already precaches, so this costs no extra bytes. */
+    font-family:'Source Serif 4 Variable';
+    font-style:normal;
+    font-weight:200 900;
+    font-display:swap;
+    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+  }
+  :root{
+    --bg:#0B141B;
+    --panel:#101C25;
+    --panel-2:#16242F;
+    --line:#23394A;
+    --line-soft:#1A2C39;
+    --ink:#E4EDF2;
+    --ink-2:#93A9B8;
+    --ink-3:#617887;
+    --cyan:#45C8D8;
+    --cyan-deep:#1E5F6B;
+    --bone:#EADFC8;
+    --flag:#E8894A;
+    --flag-2:#D9534F;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size:15px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+
+  /* ---------- shell ---------- */
+  .shell{display:flex; flex-direction:column; height:100vh; height:100dvh;}
+
+  header.bar{
+    display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
+    padding:12px 20px 11px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0E1922,#0B141B);
+    flex:0 0 auto;
+  }
+  header.bar h1{
+    font-family:'Source Serif 4 Variable', Georgia, serif;
+    font-weight:500; font-size:20px; letter-spacing:.2px;
+    margin:0; color:var(--ink);
+  }
+  header.bar .side{
+    font-size:12.5px; color:var(--ink-3); font-weight:400;
+    border-left:1px solid var(--line); padding-left:16px;
+  }
+  header.bar .spacer{flex:1 1 auto;}
+
+  .toggles{display:flex; gap:6px; align-items:center; flex-wrap:wrap;}
+  .toggles button[aria-pressed="true"]{
+    color:var(--cyan); background:transparent;
+    border-color:var(--cyan-deep); font-weight:500;
+  }
+  .toggles button[aria-pressed="true"]:hover{border-color:var(--cyan);}
+
+  button{
+    font-family:inherit; font-size:12.5px; color:var(--ink-2);
+    background:transparent; border:1px solid var(--line);
+    padding:5px 11px; border-radius:2px; cursor:pointer;
+    transition:color .12s ease, border-color .12s ease, background .12s ease;
+  }
+  button:hover{color:var(--ink); border-color:var(--cyan-deep);}
+  button:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+  button[aria-pressed="true"], button.on{
+    color:#04171C; background:var(--cyan); border-color:var(--cyan); font-weight:500;
+  }
+
+  /* ---------- main split ---------- */
+  .main{display:flex; flex:1 1 auto; min-height:0;}
+
+  .stage{
+    position:relative; flex:1 1 auto; min-width:0;
+    background:
+      radial-gradient(ellipse at 42% 40%, #17303C 0%, #0B141B 62%);
+  }
+  canvas{display:block; width:100%; height:100%; touch-action:none;}
+
+  /* plane selector, floating top-left of stage */
+  .planes{
+    position:absolute; top:14px; left:14px; z-index:5;
+    display:flex; flex-direction:column; gap:0;
+    border:1px solid var(--line); border-radius:2px;
+    background:rgba(11,20,27,.82); backdrop-filter:blur(6px);
+    overflow:hidden;
+  }
+  .planes button{
+    border:0; border-bottom:1px solid var(--line-soft); border-radius:0;
+    text-align:left; padding:7px 13px 7px 11px; min-width:186px;
+  }
+  .planes button:last-child{border-bottom:0;}
+  .planes button span{display:block; font-size:10.5px; color:var(--ink-3); margin-top:1px;}
+  .planes button[aria-pressed="true"] span{color:#0A3A42;}
+
+  /* findings tray, bottom of stage */
+  .tray{
+    position:absolute; left:14px; right:14px; bottom:14px; z-index:5;
+    display:flex; gap:7px; flex-wrap:wrap; align-items:center;
+  }
+  .tray .lede{
+    font-family:'Source Serif 4 Variable', Georgia, serif; font-style:italic;
+    font-size:13px; color:var(--ink-3); margin-right:4px;
+  }
+  .tray button{
+    background:rgba(11,20,27,.82); backdrop-filter:blur(6px);
+  }
+  .tray button.on{
+    color:#1B0B03; background:var(--flag); border-color:var(--flag); font-weight:500;
+  }
+
+  /* floating anatomical labels */
+  .labels{position:absolute; inset:0; pointer-events:none; z-index:4;}
+  .lab{
+    position:absolute; transform:translate(-50%,-50%);
+    pointer-events:auto; cursor:pointer;
+    font-size:11.5px; letter-spacing:.1px; white-space:nowrap;
+    color:var(--ink-2);
+    display:flex; align-items:center; gap:6px;
+    padding:1px 3px;
+    transition:color .12s ease;
+  }
+  .lab:hover{color:var(--ink);}
+  .lab i{
+    width:5px; height:5px; border-radius:50%;
+    background:var(--ink-3); flex:0 0 auto; display:block;
+    box-shadow:0 0 0 3px rgba(11,20,27,.55);
+  }
+  .lab.sel{color:var(--cyan); font-weight:500;}
+  .lab.sel i{background:var(--cyan); box-shadow:0 0 0 3px rgba(69,200,216,.16);}
+  .lab.flip{transform:translate(-100%,-50%); flex-direction:row-reverse;}
+
+  .hint{
+    position:absolute; top:14px; right:14px; z-index:5;
+    font-family:'Source Serif 4 Variable', Georgia, serif; font-style:italic;
+    font-size:12.5px; color:var(--ink-3);
+    background:rgba(11,20,27,.7); padding:4px 9px; border-radius:2px;
+    transition:opacity .4s ease;
+  }
+
+  /* ---------- reading panel ---------- */
+  .panel{
+    flex:0 0 372px; min-width:0;
+    border-left:1px solid var(--line);
+    background:var(--panel);
+    overflow-y:auto; overscroll-behavior:contain;
+    padding:22px 24px 40px;
+  }
+  .panel::-webkit-scrollbar{width:9px;}
+  .panel::-webkit-scrollbar-thumb{background:var(--line); border-radius:0;}
+
+  .panel h2{
+    font-family:'Source Serif 4 Variable', Georgia, serif; font-weight:500;
+    font-size:25px; line-height:1.15; margin:0 0 2px;
+  }
+  .panel .kicker{
+    font-size:12.5px; color:var(--cyan); margin:0 0 18px;
+  }
+  .panel .kicker.warn{color:var(--flag);}
+
+  .block{margin:0 0 20px; padding:0 0 20px; border-bottom:1px solid var(--line-soft);}
+  .block:last-child{border-bottom:0;}
+  .block h3{
+    font-size:12.5px; font-weight:600; color:var(--ink-2);
+    margin:0 0 6px; letter-spacing:.15px;
+  }
+  .block p{
+    font-family:'Source Serif 4 Variable', Georgia, serif;
+    font-size:15.5px; line-height:1.62; color:var(--ink);
+    margin:0 0 9px; max-width:62ch;
+  }
+  .block p:last-child{margin-bottom:0;}
+  .block p em{color:var(--cyan); font-style:italic;}
+  .block p strong{font-weight:500; color:#FFF3DE;}
+
+  .num{
+    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:13px;
+    color:var(--flag); font-variant-numeric:tabular-nums;
+  }
+
+  .intro-list{list-style:none; margin:0; padding:0;}
+  .intro-list li{
+    font-family:'Source Serif 4 Variable', Georgia, serif; font-size:15px; line-height:1.55;
+    padding:8px 0 8px 0; border-bottom:1px solid var(--line-soft); color:var(--ink);
+  }
+  .intro-list li:last-child{border-bottom:0;}
+  .intro-list b{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:12.5px; font-weight:600; color:var(--ink-2); display:block;}
+
+  .refs{list-style:none; margin:0; padding:0;}
+  .refs li{margin:0 0 13px;}
+  .refs li:last-child{margin-bottom:0;}
+  .refs a{
+    font-family:'Source Serif 4 Variable', Georgia, serif; font-size:15px; line-height:1.42;
+    color:var(--ink); text-decoration:none;
+    border-bottom:1px solid var(--line); transition:color .12s ease, border-color .12s ease;
+  }
+  .refs a:hover, .refs a:focus-visible{color:var(--cyan); border-color:var(--cyan-deep);}
+  .refs .src{
+    display:block; margin-top:3px; max-width:56ch;
+    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:11.5px; line-height:1.45; color:var(--ink-3);
+  }
+  .refs .free{color:var(--cyan);}
+
+  .foot{margin-top:26px; font-size:11.5px; color:var(--ink-3); line-height:1.5; max-width:52ch;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    body{overflow:auto;}
+    .shell{height:auto; min-height:100dvh;}
+    .main{flex-direction:column;}
+    .stage{flex:0 0 auto; height:58vh; min-height:340px;}
+    .panel{flex:1 1 auto; border-left:0; border-top:1px solid var(--line); overflow:visible; padding:20px 18px 48px;}
+    .planes{top:10px; left:10px; flex-direction:row; flex-wrap:wrap;}
+    .planes button{min-width:0; border-bottom:0; border-right:1px solid var(--line-soft); padding:6px 9px;}
+    .planes button span{display:none;}
+    .tray{left:10px; right:10px; bottom:10px; flex-wrap:nowrap; overflow-x:auto;
+          -webkit-overflow-scrolling:touch; padding-bottom:2px;}
+    .tray button{flex:0 0 auto;}
+    .tray::-webkit-scrollbar{display:none;}
+    .tray .lede{display:none;}
+    .hint{display:none;}
+    header.bar{padding:10px 16px;}
+    header.bar .side{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="bar">
+    <h1>The temporal bone, turned over in the hand</h1>
+    <div class="side">Right ear &middot; labyrinth, middle ear and facial nerve &middot; drag to rotate, scroll to zoom</div>
+    <div class="spacer"></div>
+    <div class="toggles">
+      <button id="btnMid" type="button" aria-pressed="true">Middle ear</button>
+      <button id="btnFn" type="button" aria-pressed="true">Facial nerve</button>
+      <button id="btnMode" type="button" aria-pressed="false" title="Switch between a bone-window look and a fluid-bright T2 look">Bone look</button>
+      <button id="btnLabels" type="button" aria-pressed="true">Labels</button>
+      <button id="btnReset" type="button">Reset</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="stage" id="stage">
+      <canvas id="cv"></canvas>
+      <div class="labels" id="labels"></div>
+
+      <div class="planes" id="planes"></div>
+      <div class="hint" id="hint">Click any structure</div>
+
+      <div class="tray" id="tray">
+        <span class="lede">Show me&hellip;</span>
+      </div>
+    </div>
+
+    <aside class="panel" id="panel"></aside>
+  </div>
+</div>
+
+<script src="./vendor/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+var V3 = THREE.Vector3;
+var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ==========================================================
+   1.  GEOMETRY HELPERS
+   ========================================================== */
+
+function basisFromNormal(nIn){
+  var n = nIn.clone().normalize();
+  var up = Math.abs(n.y) > 0.9 ? new V3(0,0,1) : new V3(0,1,0);
+  var u = new V3().crossVectors(up, n).normalize();
+  var v = new V3().crossVectors(n, u).normalize();
+  return {u:u, v:v, n:n};
+}
+
+/* A tube whose radius can change along its length. */
+function taperedTube(points, radiusFn, tubularSegments, radialSegments){
+  var curve = new THREE.CatmullRomCurve3(points);
+  var frames = curve.computeFrenetFrames(tubularSegments, false);
+  var pos = [], nor = [], uv = [], idx = [];
+  var i, j;
+  for(i=0; i<=tubularSegments; i++){
+    var t = i / tubularSegments;
+    var P = curve.getPointAt(t);
+    var N = frames.normals[i], B = frames.binormals[i];
+    var r = radiusFn(t);
+    for(j=0; j<=radialSegments; j++){
+      var th = j / radialSegments * Math.PI * 2;
+      var s = Math.sin(th), c = -Math.cos(th);
+      var nx = N.x*c + B.x*s, ny = N.y*c + B.y*s, nz = N.z*c + B.z*s;
+      nor.push(nx, ny, nz);
+      pos.push(P.x + r*nx, P.y + r*ny, P.z + r*nz);
+      uv.push(t, j/radialSegments);
+    }
+  }
+  for(i=1; i<=tubularSegments; i++){
+    for(j=1; j<=radialSegments; j++){
+      var a = (radialSegments+1)*(i-1) + (j-1);
+      var b = (radialSegments+1)*i + (j-1);
+      var c2 = (radialSegments+1)*i + j;
+      var d = (radialSegments+1)*(i-1) + j;
+      idx.push(a,b,d, b,c2,d);
+    }
+  }
+  var g = new THREE.BufferGeometry();
+  g.setIndex(idx);
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(nor,3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv,2));
+  g.computeBoundingSphere();
+  return g;
+}
+
+/* An open arc lying in a plane, with its gap facing a target point
+   (so the two open ends tuck into the vestibule). */
+function canalArc(center, normal, radius, target, gapHalf, segs){
+  var b = basisFromNormal(normal);
+  var toT = new V3().subVectors(target, center);
+  var au = toT.dot(b.u), av = toT.dot(b.v);
+  var a0 = Math.atan2(av, au);
+  var start = a0 + gapHalf;
+  var end   = a0 + Math.PI*2 - gapHalf;
+  var pts = [];
+  for(var i=0; i<=segs; i++){
+    var a = start + (end-start)*i/segs;
+    pts.push(new V3().copy(center)
+      .addScaledVector(b.u, radius*Math.cos(a))
+      .addScaledVector(b.v, radius*Math.sin(a)));
+  }
+  return pts;
+}
+
+function segmentOf(pts, t0, t1){
+  var n = pts.length - 1;
+  var i0 = Math.max(0, Math.round(t0*n));
+  var i1 = Math.min(n, Math.round(t1*n));
+  return pts.slice(i0, i1+1);
+}
+
+/* ==========================================================
+   2.  SCENE
+   ========================================================== */
+
+var stage  = document.getElementById('stage');
+var canvas = document.getElementById('cv');
+
+var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+var scene  = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 400);
+
+var root = new THREE.Group();
+scene.add(root);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.30));
+var hemi = new THREE.HemisphereLight(0xBFE6F2, 0x0B141B, 0.55);
+scene.add(hemi);
+var key = new THREE.DirectionalLight(0xFFF6E4, 0.95); key.position.set(6, 9, 8); scene.add(key);
+var fill = new THREE.DirectionalLight(0x9FD8E8, 0.42); fill.position.set(-8, -3, -6); scene.add(fill);
+var rim = new THREE.DirectionalLight(0x7FE3F0, 0.35); rim.position.set(-4, 6, -9); scene.add(rim);
+
+/* ---- materials -------------------------------------------------- */
+function std(o){ return new THREE.MeshStandardMaterial(o); }
+
+var MAT = {
+  ct: {
+    fluid: std({color:0xEADFC8, roughness:0.60, metalness:0.02}),
+    bone:  std({color:0xC3B79C, roughness:0.72, metalness:0.02}),
+    ossicle: std({color:0xF4EBD8, roughness:0.48, metalness:0.04}),
+    fn:    std({color:0xD9B25F, roughness:0.44, emissive:0x3C2A08, emissiveIntensity:0.35}),
+    shell: new THREE.MeshStandardMaterial({color:0x8FB6C6, roughness:0.5, transparent:true,
+             opacity:0.15, depthWrite:false, side:THREE.DoubleSide}),
+    nerve: std({color:0x8FA3B0, roughness:0.5, transparent:true, opacity:0.22, depthWrite:false})
+  },
+  mri: {
+    fluid: std({color:0xA9ECF7, roughness:0.30, metalness:0.0, emissive:0x1B6C7E, emissiveIntensity:0.85}),
+    bone:  std({color:0x24333C, roughness:0.85, metalness:0.0}),
+    ossicle: std({color:0x1E2C34, roughness:0.85, metalness:0.0}),
+    fn:    std({color:0xE0BE73, roughness:0.44, emissive:0x4A3410, emissiveIntensity:0.45}),
+    shell: new THREE.MeshStandardMaterial({color:0x4E7E90, roughness:0.5, transparent:true,
+             opacity:0.11, depthWrite:false, side:THREE.DoubleSide}),
+    nerve: std({color:0x6FD8EC, roughness:0.4, transparent:true, opacity:0.24, depthWrite:false})
+  }
+};
+var MAT_SEL   = std({color:0x9FF2FF, roughness:0.32, emissive:0x2FA8BC, emissiveIntensity:0.95});
+var MAT_HOVER = std({color:0xF6EEDC, roughness:0.45, emissive:0x1B5966, emissiveIntensity:0.5});
+var MAT_FLAG  = std({color:0xF0A063, roughness:0.45, emissive:0x8A3A10, emissiveIntensity:0.75});
+var MAT_SCLER = std({color:0xDDE4E8, roughness:0.85, metalness:0.0});
+
+var mode = 'ct';
+var pickables = [];
+
+function addMesh(geo, kind, id, parent){
+  var m = new THREE.Mesh(geo, MAT[mode][kind]);
+  m.userData.kind = kind;
+  m.userData.id = id || null;
+  (parent || root).add(m);
+  if(id) pickables.push(m);
+  return m;
+}
+
+/* ==========================================================
+   3.  THE LABYRINTH
+   ========================================================== */
+
+var VEST_C = new V3(0, 0.05, -0.15);
+
+/* ---- vestibule --------------------------------------------------- */
+var vestGeo = new THREE.SphereGeometry(1, 48, 36);
+vestGeo.scale(1.70, 1.35, 1.85);
+var vestibule = addMesh(vestGeo, 'fluid', 'vestibule');
+vestibule.position.copy(VEST_C);
+
+/* ---- cochlea ----------------------------------------------------- */
+var COCH_TURNS = 2.6;
+var cochAxis   = new V3(0.679, -0.280, 0.679).normalize();
+var cochBasis  = basisFromNormal(cochAxis);
+var cochCenter = new V3(-0.55, 0.35, 2.35);
+var COCH_A0    = -0.303;   /* aims the start of the basal turn at the vestibule */
+
+function cochPoint(t){
+  var ang = COCH_A0 - 2*Math.PI*COCH_TURNS*t;
+  var r   = 3.05 * (1 - 0.66*t);
+  var h   = 3.50 * Math.pow(t, 0.95);
+  return new V3().copy(cochCenter)
+    .addScaledVector(cochBasis.u, r*Math.cos(ang))
+    .addScaledVector(cochBasis.v, r*Math.sin(ang))
+    .addScaledVector(cochAxis, h);
+}
+function cochRadius(t){ return 0.60 - 0.30*t; }
+
+var COCH_N = 240;
+var cochPts = [];
+for(var ci=0; ci<=COCH_N; ci++) cochPts.push(cochPoint(ci/COCH_N));
+
+function cochSeg(t0, t1, id){
+  var pts = segmentOf(cochPts, t0, t1);
+  var geo = taperedTube(pts, function(u){ return cochRadius(t0 + (t1-t0)*u); }, 120, 20);
+  return addMesh(geo, 'fluid', id);
+}
+var cochBasal = cochSeg(0.00, 0.40, 'cochlea-basal');
+var cochMid   = cochSeg(0.385, 0.72, 'cochlea-mid');
+var cochApex  = cochSeg(0.705, 1.00, 'cochlea-apex');
+
+/* cap the apex so the tube isn't hollow */
+var apexCap = new THREE.Mesh(new THREE.SphereGeometry(cochRadius(1)*0.99, 20, 16), MAT[mode].fluid);
+apexCap.position.copy(cochPoint(1));
+apexCap.userData.kind = 'fluid';
+root.add(apexCap);
+
+/* modiolus — the bony core of the spiral */
+var modPts = [];
+for(var mi=0; mi<=6; mi++){
+  modPts.push(new V3().copy(cochCenter).addScaledVector(cochAxis, 3.55*(mi/6) - 0.15));
+}
+var modiolus = addMesh(
+  taperedTube(modPts, function(t){ return 2.05 - 1.50*t; }, 40, 20),
+  'bone', 'modiolus'
+);
+
+/* ---- semicircular canals ---------------------------------------- */
+function buildCanal(center, normal, radius, gapHalf, id, tubeR){
+  var pts = canalArc(center, normal, radius, VEST_C, gapHalf, 200);
+  var geo = taperedTube(pts, function(t){
+    var e = Math.min(t, 1-t);
+    return tubeR * (1 + 0.55*Math.max(0, 1 - e/0.10));   /* gently flare into the vestibule */
+  }, 190, 18);
+  var mesh = addMesh(geo, 'fluid', id);
+  return {mesh:mesh, pts:pts};
+}
+
+/* Superior canal plane: perpendicular to the long axis of the petrous bone — this
+   is the P\u00F6schl plane. Posterior canal plane: parallel to it — Stenvers.
+   The two are at right angles to each other, and both meet at the crus commune. */
+var latC  = new V3(0.937, 0.639, -1.690);
+var latN  = new V3(0.20, 0.94, 0.28);
+var supC  = new V3(-0.354, 2.05, -0.504);
+var supN  = new V3(0.707, 0.0, -0.707);
+var postC = new V3(0.247, -0.25, -1.529);
+var postN = new V3(0.707, 0.0, 0.707);
+
+var lat  = buildCanal(latC,  latN,  2.25, 0.40, 'scc-lat',  0.30);
+var post = buildCanal(postC, postN, 2.25, 0.44, 'scc-post', 0.30);
+
+/* superior canal is built in two pieces so its roof can be removed */
+var supPts = canalArc(supC, supN, 2.30, VEST_C, 0.44, 240);
+function supRadius(t){
+  var e = Math.min(t, 1-t);
+  return 0.30 * (1 + 0.55*Math.max(0, 1 - e/0.10));
+}
+var supBody = addMesh(
+  taperedTube(segmentOf(supPts, 0.00, 0.485), function(t){ return supRadius(t*0.485); }, 120, 18),
+  'fluid', 'scc-sup'
+);
+var supBody2 = addMesh(
+  taperedTube(segmentOf(supPts, 0.615, 1.00), function(t){ return supRadius(0.615 + t*0.385); }, 120, 18),
+  'fluid', 'scc-sup'
+);
+var supRoof = addMesh(
+  taperedTube(segmentOf(supPts, 0.475, 0.625), function(){ return 0.30; }, 60, 18),
+  'fluid', 'scc-sup'
+);
+
+/* dehiscence marker: a flag ring where the roof should be */
+var dehisc = new THREE.Mesh(
+  taperedTube(segmentOf(supPts, 0.465, 0.635), function(){ return 0.37; }, 60, 18),
+  MAT_FLAG
+);
+dehisc.visible = false; root.add(dehisc);
+
+/* ---- crus commune ------------------------------------------------ */
+function limbAt(pts, f, pick){
+  var a = pts[Math.round(pts.length*f)];
+  var b = pts[Math.round(pts.length*(1-f)) - 1];
+  return pick(a,b) ? a : b;
+}
+/* non-ampullated limbs: superior = the posteromedial one, posterior = the superior one */
+var supLimb  = limbAt(supPts,    0.14, function(a,b){ return a.z < b.z; });
+var postLimb = limbAt(post.pts,  0.14, function(a,b){ return a.y > b.y; });
+var crusJ    = new V3(-0.75, 1.95, -1.60);
+var crusFoot = new V3(-0.30, 0.60, -0.85);
+
+var crus = addMesh(
+  taperedTube([supLimb.clone(), new V3().lerpVectors(supLimb, crusJ, 0.55), crusJ.clone(),
+               new V3().lerpVectors(crusJ, crusFoot, 0.50), crusFoot.clone()],
+    function(t){ return 0.30 + 0.20*t; }, 70, 18),
+  'fluid', 'crus'
+);
+var crus2 = addMesh(
+  taperedTube([postLimb.clone(), new V3().lerpVectors(postLimb, crusJ, 0.55), crusJ.clone()],
+    function(){ return 0.30; }, 40, 18),
+  'fluid', 'crus'
+);
+
+/* ---- ampullae ---------------------------------------------------- */
+var ampLat  = limbAt(lat.pts,  0.14, function(a,b){ return a.z > b.z; });  /* anterolateral */
+var ampSup  = limbAt(supPts,   0.14, function(a,b){ return a.z > b.z; });  /* anterolateral */
+var ampPost = limbAt(post.pts, 0.14, function(a,b){ return a.y < b.y; });  /* inferior */
+
+var ampGroupMeshes = [];
+[ampLat, ampSup, ampPost].forEach(function(p, i){
+  var g = new THREE.SphereGeometry(1, 26, 20);
+  g.scale(0.55, 0.50, 0.55);
+  var m = addMesh(g, 'fluid', 'ampullae');
+  m.position.copy(p);
+  ampGroupMeshes.push(m);
+});
+
+/* ---- oval and round windows -------------------------------------- */
+function disc(radius, thick){ return new THREE.CylinderGeometry(radius, radius, thick, 32); }
+function orient(mesh, pos, normal){
+  mesh.position.copy(pos);
+  mesh.quaternion.setFromUnitVectors(new V3(0,1,0), normal.clone().normalize());
+}
+
+var ovalN = new V3(1, 0.10, 0.10);
+var ovalWin = addMesh(disc(0.66, 0.16), 'bone', 'oval');
+orient(ovalWin, new V3(1.60, 0.18, -0.15), ovalN);
+
+var rwN = new V3(0.62, -0.58, 0.53);
+var rwPos = cochPoint(0.0).clone().addScaledVector(rwN, 0.40);
+var roundWin = addMesh(disc(0.46, 0.14), 'bone', 'round');
+orient(roundWin, rwPos, rwN);
+
+/* fissula ante fenestram — where otosclerosis starts */
+var fisGeo = new THREE.SphereGeometry(1, 22, 18); fisGeo.scale(0.18, 0.40, 0.36);
+var fissula = new THREE.Mesh(fisGeo, MAT_FLAG);
+fissula.position.set(1.64, 0.14, 0.55);
+fissula.visible = false; root.add(fissula);
+
+/* pericochlear halo — retrofenestral otosclerosis */
+var haloPts = segmentOf(cochPts, 0.02, 0.62);
+var halo = new THREE.Mesh(
+  taperedTube(haloPts, function(t){ return cochRadius(0.02 + 0.60*t) + 0.42; }, 130, 20),
+  new THREE.MeshStandardMaterial({color:0xE8894A, transparent:true, opacity:0.30, roughness:0.6, depthWrite:false})
+);
+halo.visible = false; root.add(halo);
+
+/* ---- vestibular aqueduct ----------------------------------------- */
+var vaPts = [ new V3(-1.10, 0.45, -1.25), new V3(-2.00, 0.95, -2.55),
+              new V3(-2.90, 1.30, -3.65), new V3(-3.65, 1.50, -4.65) ];
+var vaNormal = addMesh(taperedTube(vaPts, function(t){ return 0.12 + 0.15*t*t; }, 60, 14), 'fluid', 'va');
+var vaBig = addMesh(taperedTube(vaPts, function(t){ return 0.30 + 0.44*t*t; }, 60, 14), 'fluid', 'va');
+vaBig.visible = false;
+
+/* ---- cochlear aqueduct ------------------------------------------- */
+var caPts = [ new V3(0.75, -1.30, 0.55), new V3(-0.60, -1.45, -0.10),
+              new V3(-1.90, -1.55, -0.70), new V3(-3.00, -1.60, -1.30) ];
+var cochAq = addMesh(taperedTube(caPts, function(t){ return 0.10 + 0.10*t; }, 50, 14), 'fluid', 'ca');
+
+/* ---- internal auditory canal ------------------------------------- */
+var iacPts = [ new V3(-1.50, 0.12, 0.45), new V3(-2.90, 0.14, 0.00),
+               new V3(-4.20, 0.15, -0.45), new V3(-5.30, 0.16, -0.85) ];
+var iac = addMesh(taperedTube(iacPts, function(t){ return 0.80 + 0.30*t; }, 50, 20), 'nerve', 'iac');
+
+/* schwannoma */
+var schGeo = new THREE.SphereGeometry(1, 30, 24); schGeo.scale(1.25, 0.95, 0.95);
+var schwannoma = new THREE.Mesh(schGeo, MAT_FLAG);
+schwannoma.position.set(-4.75, 0.16, -0.75);
+schwannoma.visible = false; root.add(schwannoma);
+
+/* lateral canal fistula patch */
+var latFar = lat.pts.reduce(function(a,b){ return b.x > a.x ? b : a; }, lat.pts[0]);
+var fistGeo = new THREE.SphereGeometry(0.55, 22, 18);
+var fistula = new THREE.Mesh(fistGeo, MAT_FLAG);
+fistula.position.copy(latFar);
+fistula.visible = false; root.add(fistula);
+
+/* ==========================================================
+   3b. MIDDLE EAR AND FACIAL NERVE
+   ========================================================== */
+
+var midEar = new THREE.Group(); root.add(midEar);
+var facial = new THREE.Group(); root.add(facial);
+
+/* ---- tympanic membrane ------------------------------------------- */
+var tmC = new V3(5.10, -0.20, 0.30);
+var tmN = new V3(0.92, 0.18, 0.34).normalize();
+var umbo = tmC.clone().addScaledVector(tmN, -1.05);
+var tmUp = new V3(0,1,0).addScaledVector(tmN, -tmN.y).normalize();
+
+var tm = addMesh(new THREE.ConeGeometry(2.60, 1.05, 44, 1, true), 'shell', 'tm', midEar);
+tm.quaternion.setFromUnitVectors(new V3(0,1,0), tmN.clone().negate());
+tm.position.copy(tmC.clone().addScaledVector(tmN, -0.525));
+
+/* ---- scutum ------------------------------------------------------ */
+var scutumBase = tmC.clone().addScaledVector(tmUp, 2.85);
+var scutumTip  = new V3(4.25, 1.78, 0.16);
+var scutum = addMesh(new THREE.ConeGeometry(0.40, 1.10, 22), 'bone', 'scutum', midEar);
+orient(scutum, new V3().lerpVectors(scutumBase, scutumTip, 0.5),
+       new V3().subVectors(scutumTip, scutumBase));
+
+/* ---- tegmen tympani (the roof) ----------------------------------- */
+var tegmen = addMesh(new THREE.BoxGeometry(3.40, 0.16, 5.20), 'shell', 'tegmen', midEar);
+tegmen.position.set(4.05, 4.15, 0.00);
+
+/* ---- aditus and mastoid antrum ----------------------------------- */
+var antGeo = new THREE.SphereGeometry(1, 28, 22); antGeo.scale(1.15, 1.30, 1.45);
+var antrum = addMesh(antGeo, 'shell', 'antrum', midEar);
+antrum.position.set(3.30, 1.90, -3.20);
+var aditus = addMesh(
+  taperedTube([new V3(4.05,2.70,-1.30), new V3(3.75,2.35,-2.10), new V3(3.40,2.05,-2.85)],
+    function(){ return 0.52; }, 30, 16), 'shell', 'antrum', midEar);
+
+/* ---- eustachian tube --------------------------------------------- */
+var etPts = [ new V3(3.85,-0.95,1.85), new V3(3.20,-2.00,3.35),
+              new V3(2.30,-3.00,4.85), new V3(1.45,-3.75,6.15) ];
+var et = addMesh(taperedTube(etPts, function(t){ return 0.44 + 0.30*t; }, 50, 16), 'shell', 'et', midEar);
+
+/* ---- ossicles ---------------------------------------------------- */
+var ossicles = new THREE.Group(); midEar.add(ossicles);
+var incusGrp = new THREE.Group(); ossicles.add(incusGrp);
+
+/* stapes: footplate in the oval window, two crura up to the head */
+var stHead = new V3(3.35, 0.52, -0.05);
+var stapesFP = addMesh(disc(0.58, 0.16), 'ossicle', 'stapes', ossicles);
+orient(stapesFP, new V3(1.74, 0.18, -0.15), ovalN);
+addMesh(taperedTube([new V3(1.88,0.20,0.40), new V3(2.65,0.42,0.28), stHead.clone()],
+  function(){ return 0.105; }, 30, 12), 'ossicle', 'stapes', ossicles);
+addMesh(taperedTube([new V3(1.88,0.20,-0.68), new V3(2.65,0.42,-0.44), stHead.clone()],
+  function(){ return 0.105; }, 30, 12), 'ossicle', 'stapes', ossicles);
+var stCap = addMesh(new THREE.SphereGeometry(0.23, 20, 16), 'ossicle', 'stapes', ossicles);
+stCap.position.copy(stHead);
+
+/* incus: body in the attic, short process back, long process down */
+var incusBodyPos = new V3(4.05, 3.30, -0.75);
+var lentPos = new V3(3.46, 0.66, -0.04);
+var ibGeo = new THREE.SphereGeometry(1, 26, 20); ibGeo.scale(0.60, 0.58, 0.70);
+var incusBody = addMesh(ibGeo, 'ossicle', 'incus', incusGrp);
+incusBody.position.copy(incusBodyPos);
+addMesh(taperedTube([incusBodyPos.clone(), new V3(4.12,3.18,-1.45), new V3(4.18,3.04,-2.05)],
+  function(t){ return 0.26 - 0.10*t; }, 30, 14), 'ossicle', 'incus', incusGrp);
+var incusLong = addMesh(
+  taperedTube([new V3(4.02,2.88,-0.72), new V3(3.86,2.00,-0.54), new V3(3.63,1.28,-0.26), lentPos.clone()],
+    function(t){ return 0.24 - 0.09*t; }, 40, 14), 'ossicle', 'incus', incusGrp);
+var lent = addMesh(new THREE.SphereGeometry(0.20, 18, 14), 'ossicle', 'incus', incusGrp);
+lent.position.copy(lentPos);
+
+/* malleus: head in the attic, handle running down inside the drum */
+var malHead = addMesh(new THREE.SphereGeometry(0.50, 26, 20), 'ossicle', 'malleus', ossicles);
+malHead.position.set(4.05, 3.30, 0.35);
+addMesh(taperedTube([new V3(4.05,3.20,0.35), new V3(4.24,2.55,0.30), new V3(4.32,1.65,0.24),
+                     new V3(4.27,0.60,0.10), umbo.clone()],
+  function(t){ return 0.30 - 0.15*t; }, 50, 16), 'ossicle', 'malleus', ossicles);
+var latProc = addMesh(new THREE.SphereGeometry(0.20, 16, 12), 'ossicle', 'malleus', ossicles);
+latProc.position.set(4.48, 1.55, 0.22);
+
+/* ---- facial nerve canal ------------------------------------------ */
+var genPos = new V3(0.80, 2.05, 1.95);
+
+var fnLab = addMesh(
+  taperedTube([new V3(-1.45,0.35,0.45), new V3(-0.75,0.85,0.85), new V3(0.05,1.50,1.40), genPos.clone()],
+    function(){ return 0.19; }, 44, 14), 'fn', 'fn-lab', facial);
+
+var genG = addMesh(new THREE.SphereGeometry(0.35, 22, 18), 'fn', 'fn-gen', facial);
+genG.position.copy(genPos);
+addMesh(taperedTube([genPos.clone(), new V3(0.10,2.10,2.20), new V3(-0.70,2.15,2.55)],
+  function(){ return 0.12; }, 24, 12), 'fn', 'fn-gen', facial);
+
+var fnTym = addMesh(
+  taperedTube([genPos.clone(), new V3(1.65,1.70,1.20), new V3(2.20,1.38,0.25),
+               new V3(2.48,1.10,-0.85), new V3(2.58,0.86,-1.72)],
+    function(){ return 0.25; }, 52, 16), 'fn', 'fn-tym', facial);
+
+var fnMast = addMesh(
+  taperedTube([new V3(2.58,0.86,-1.72), new V3(2.72,-0.35,-1.95),
+               new V3(2.86,-1.80,-1.98), new V3(2.96,-3.35,-1.82)],
+    function(t){ return 0.25 + 0.07*t; }, 52, 16), 'fn', 'fn-mast', facial);
+var smf = addMesh(new THREE.SphereGeometry(0.33, 20, 16), 'fn', 'fn-mast', facial);
+smf.position.set(2.98, -3.44, -1.80);
+
+/* ---- middle ear finding markers (hidden until called for) --------- */
+function flagBall(r, x, y, z, parent){
+  var m = new THREE.Mesh(new THREE.SphereGeometry(r, 22, 18), MAT_FLAG);
+  m.position.set(x, y, z); m.visible = false; (parent || root).add(m);
+  return m;
+}
+var prussak    = flagBall(0.56, 4.46, 1.92, 0.18, midEar);
+var scutumGap  = flagBall(0.34, 4.48, 2.30, 0.15, midEar);
+var incusGap   = flagBall(0.32, 3.76, 1.72, -0.38, midEar);
+var jointGap   = flagBall(0.30, 3.42, 0.62, -0.02, midEar);
+
+/* Centre on the labyrinth proper — the aqueducts and the internal auditory canal
+   trail off to one side and would otherwise drag the whole model off-frame. */
+var BOX = new THREE.Box3();
+[vestibule, cochBasal, cochMid, cochApex, lat.mesh, post.mesh,
+ supBody, supBody2, supRoof, crus].forEach(function(m){ BOX.expandByObject(m); });
+var CENTRE = BOX.getCenter(new V3());
+root.position.sub(CENTRE);
+
+/* ==========================================================
+   4.  CONTENT
+   ========================================================== */
+
+/* ---- papers with imaging examples -------------------------------- */
+
+var PAPERS = {
+
+tbone1: {t:'Imaging Review of the Temporal Bone, Part I: Anatomy and Inflammatory and Neoplastic Processes',
+  j:'Radiology, 2013', u:'https://pubs.rsna.org/doi/10.1148/radiol.13120733',
+  n:'Labelled coronal CT of the three floors of the middle ear, plus the facial nerve running below the lateral canal and above the oval window.'},
+
+tbone2: {t:'Imaging Review of the Temporal Bone, Part II: Traumatic, Postoperative and Non-inflammatory Conditions',
+  j:'Radiology, 2015', u:'https://pubs.rsna.org/doi/full/10.1148/radiol.2015140800',
+  n:'The companion piece — trauma, otosclerosis and post-implant appearances.'},
+
+sscdCT: {t:'Superior Semicircular Canal Dehiscence: Oblique Reformatted CT Images for Diagnosis',
+  j:'Radiology, 2006', u:'https://pubs.rsna.org/doi/abs/10.1148/radiol.2382042098',
+  n:'The study that asked whether P\u00F6schl and Stenvers reformats change your read compared with coronals alone.'},
+
+sscdPrev: {t:'Prevalence of Superior Semicircular Canal Dehiscence on High-Resolution CT in Patients without Symptoms',
+  j:'AJNR, 2019', free:true, u:'https://www.ajnr.org/content/40/4/709',
+  n:'500 asymptomatic patients read blind by two head and neck radiologists. The best antidote to overcalling.'},
+
+sscdPlanes: {t:'Prevalence of Asymptomatic Superior Semicircular Canal Dehiscence in an Omani Population',
+  j:'Sultan Qaboos University Medical Journal', free:true, u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12716349/',
+  n:'Figure 1 draws the P\u00F6schl and Stenvers planes onto an axial image, then shows a normal roof and a dehiscence side by side in both.'},
+
+evaCin: {t:'Enlarged Vestibular Aqueduct in Pediatric Sensorineural Hearing Loss',
+  j:'Otolaryngology\u2013Head and Neck Surgery, 2009', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2846828/',
+  n:'The Cincinnati criteria paper, with a case that is enlarged by those criteria but normal by Valvassori, measurements marked.'},
+
+evaMRI: {t:'The Diagnostic Efficacy of MRI in the Evaluation of the Enlarged Vestibular Aqueduct in Children',
+  j:'Turkish Archives of Otorhinolaryngology, 2020', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7846300/',
+  n:'123 children scanned with both CT and MRI \u2014 useful when deciding whether the child needs the CT at all.'},
+
+otoPict: {t:'Imaging in Otosclerosis: A Pictorial Review',
+  j:'Insights into Imaging, 2014', free:true, u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3999364/',
+  n:'Figure 5 shows a lucent plaque at the fissula ante fenestram. Also has a preoperative checklist and post-stapedectomy appearances.'},
+
+loMRI: {t:'Labyrinthitis Ossificans after Meningitis: Superiority of MRI over HRCT in Showing Disease Extent',
+  j:'Journal of Neurosciences in Rural Practice, 2016', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC4821957/',
+  n:'Their patient had lost the T2 signal in the vestibule and canals while CT still showed no bone \u2014 the fibrous phase, caught early.'},
+
+loCase: {t:'Labyrinthitis and Labyrinthitis Ossificans: A Case Report and Review',
+  j:'Journal of Radiology Case Reports, 2020', free:true, u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7536013/',
+  n:'Paired CT and MRI, with one ear actively inflamed and the other already ossified.'},
+
+cholPict: {t:'HRCT Imaging of Acquired Cholesteatoma: A Pictorial Review',
+  j:'Insights into Imaging, 2019', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC6775179/',
+  n:'Normal and eroded scutum side by side on coronal, and a widened aditus forming a common cavity. Includes a reporting template.'},
+
+cholOp: {t:'Comparison of Preoperative Temporal Bone CT with Intraoperative Findings in Cholesteatoma',
+  j:'Iranian Journal of Radiology, 2014', free:true, u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3915063/',
+  n:'Worth reading for humility: CT matched surgery well for scutum and aditus, only moderately for canal fistula, poorly for facial nerve dehiscence and incus or stapes erosion.'},
+
+traumaRG: {t:'Temporal Bone Trauma: Typical CT and MRI Appearances and Important Points for Evaluation',
+  j:'RadioGraphics, 2020', u:'https://pubs.rsna.org/doi/10.1148/rg.2020190023',
+  n:'Has the ice cream cone figure and the matching dislocation case where the scoop has fallen off the cone.'},
+
+traumaECR: {t:'Temporal Bone Fractures and Complications: A Pictorial Review',
+  j:'ECR 2021 poster', free:true, u:'https://epos.myesr.org/poster/esr/ecr2021/C-12222/findings%20and%20procedure%20details',
+  n:'Walks all five patterns of ossicular dislocation with images.'},
+
+fnReview: {t:'Imaging the Facial Nerve: A Contemporary Review',
+  j:'Radiology Research and Practice, 2013', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC3676972/',
+  n:'Figure 6 shows tympanic segment dehiscence at the oval window on coronal CT. Puts the frequency at 41\u201375% of people \u2014 the number to hold in mind before calling it abnormal.'},
+
+fnEJR: {t:'Imaging the Facial Nerve: A Contemporary Review of Anatomy and Pathology',
+  j:'European Journal of Radiology, 2020', u:'https://www.ejradiology.com/article/S0720-048X(20)30109-1/abstract',
+  n:'Includes facial palsy from cholesteatoma eroding the tympanic canal, with fused non-EPI diffusion MRI showing the relationship.'},
+
+vsMgmt: {t:'The Management and Imaging of Vestibular Schwannomas',
+  j:'AJNR, 2017', free:true, u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC5690865/',
+  n:'Pre- and post-treatment appearances, expected findings after surgery and radiosurgery, and the differential for a mass in the canal.'}
+
+};
+
+/* which papers belong with which structure or finding */
+var REFS = {
+  _intro:          ['tbone1','tbone2'],
+
+  'cochlea-basal': ['loMRI'],
+  'scc-lat':       ['cholPict'],
+  'scc-sup':       ['sscdPlanes','sscdCT'],
+  'oval':          ['otoPict'],
+  'stapes':        ['otoPict','traumaRG'],
+  'va':            ['evaCin','evaMRI'],
+  'iac':           ['vsMgmt'],
+  'tm':            ['tbone1','cholPict'],
+  'scutum':        ['cholPict'],
+  'malleus':       ['traumaRG'],
+  'incus':         ['traumaRG','cholOp'],
+  'tegmen':        ['cholPict','tbone1'],
+  'antrum':        ['cholPict'],
+  'fn-lab':        ['fnReview'],
+  'fn-gen':        ['fnReview','fnEJR'],
+  'fn-tym':        ['fnReview','fnEJR'],
+  'fn-mast':       ['fnReview','fnEJR'],
+
+  sscd:            ['sscdPlanes','sscdCT','sscdPrev'],
+  eva:             ['evaCin','evaMRI'],
+  otoscl:          ['otoPict'],
+  ossif:           ['loMRI','loCase'],
+  cholesteatoma:   ['cholPict','cholOp','fnEJR'],
+  ossicular:       ['traumaRG','traumaECR','tbone2'],
+  'fn-dehisc':     ['fnReview','fnEJR'],
+  schwannoma:      ['vsMgmt']
+};
+
+var INFO = {
+
+'cochlea-basal': {
+  name:'Cochlea, basal turn', kicker:'The high-pitch end',
+  is:'The first and widest coil of the snail. It sits right beside the two windows, so it is the first part of the cochlea that sound reaches.',
+  does:'The cochlea is laid out like a piano keyboard rolled up. <strong>Base handles high pitches, apex handles low ones.</strong> A wave runs through the fluid from base to apex, and each point along the way vibrates best at one particular frequency.',
+  img:'On thin-slice CT the turn should be a smooth open channel with dense bone all round it. On heavily T2-weighted MRI (CISS, FIESTA, SPACE) it should be uniformly bright — the brightness <em>is</em> the fluid. This is also the road in for a cochlear implant electrode, entering through the round window.',
+  bad:'The first place damaged by loud noise, gentamicin, cisplatin and simple ageing — which is why hearing loss nearly always starts at the top of the range. It is also the first part to fill in with new bone after meningitis, and the part implant surgeons ask about by name.'
+},
+
+'cochlea-mid': {
+  name:'Cochlea, middle turn', kicker:'The middle of the range',
+  is:'The second coil. In a normal ear there are two and a half turns in total, and you should be able to count them.',
+  does:'Handles mid-range frequencies — most of the speech range sits between here and the basal turn.',
+  img:'Counting turns is the quickest malformation check you can do. Two and a half separate turns with a clear bony wall between them is normal.',
+  bad:'If the middle and apical turns run together into one blob instead of staying separate, you are looking at incomplete partition — the classic <strong>Mondini</strong> appearance of 1.5 turns. It almost always travels with an enlarged vestibular aqueduct, so look there next.'
+},
+
+'cochlea-apex': {
+  name:'Cochlea, apical turn', kicker:'The low-pitch end',
+  is:'The narrow tip of the spiral, pointing forwards and outwards.',
+  does:'Responds to low frequencies. The travelling wave has to cross the whole cochlea to get here, so it arrives last.',
+  img:'Should be a defined, separate coil. A bulbous cystic tip instead of a neat coil is abnormal.',
+  bad:'A cystic apex fused with the middle turn is incomplete partition type II. Low-frequency hearing loss points here — which is also why Ménière\u2019s disease, an endolymph pressure problem felt most at the apex, starts as a low-frequency loss.'
+},
+
+'modiolus': {
+  name:'Modiolus', kicker:'The central pillar',
+  is:'The cone of bone in the middle of the spiral. Nerve fibres from every turn funnel into it.',
+  does:'Two jobs: it holds the coil up, and it acts as the cable duct carrying the cochlear nerve out towards the internal auditory canal.',
+  img:'Look for a dense centre to the spiral on axial CT, and a dark centre on T2. It should be there, and it should be complete.',
+  bad:'A missing modiolus means the cochlea sits directly against the internal auditory canal — <strong>incomplete partition type III</strong>, an X-linked cause of deafness. Drill into that at implantation and you get a spinal-fluid gusher, so this is a finding the surgeon must know before the operation, not after.'
+},
+
+'vestibule': {
+  name:'Vestibule', kicker:'The central chamber',
+  is:'The hub in the middle of everything. The three canals open into it at one end and the cochlea sits in front of it. Inside are the utricle and saccule — two patches of hair cells with tiny calcium crystals sitting on top.',
+  does:'This is the gravity sensor. The crystals are heavier than the fluid, so when you tip your head or accelerate in a straight line they drag and bend the hair cells underneath. Utricle covers side-to-side and front-back, saccule covers up-and-down. VEMP testing separates the two: cVEMP tests the saccule, oVEMP the utricle.',
+  img:'A smooth oval, clearly distinct from the lateral canal behind it, with the oval window on its outer wall.',
+  bad:'If the vestibule and lateral canal merge into one wide sac, that is a dysplasia. Crystals that shake loose and drift into a canal cause <strong>BPPV</strong>. Swelling of the endolymph space here and in the cochlea is Ménière\u2019s disease, which can now actually be seen on delayed post-contrast 3D FLAIR.'
+},
+
+'scc-lat': {
+  name:'Lateral semicircular canal', kicker:'Also called the horizontal canal',
+  is:'The near-horizontal loop, tilted about 30 degrees nose-up. The canal you see most reliably on an axial slice.',
+  does:'Detects the head turning left and right, and drives the reflex that keeps your eyes locked on target while your head moves.',
+  img:'Your everyday landmark. Check the island of bone in the middle of the loop is solid, and that the canal itself is a normal narrow channel. The 30-degree tilt is why patients are propped 30 degrees up for caloric testing — it makes this canal vertical.',
+  bad:'Cholesteatoma in the middle ear erodes it from outside, opening a fistula: the patient gets dizzy when you press on the ear. Separately, a short stubby lateral canal fused to the vestibule is the <strong>commonest inner ear malformation</strong> you will report.'
+},
+
+'scc-sup': {
+  name:'Superior semicircular canal', kicker:'Also called the anterior canal',
+  is:'The vertical loop arching up under the roof of the petrous bone, raising the bump called the arcuate eminence.',
+  does:'Detects nodding-type head movement in its own plane. It is paired with the posterior canal of the opposite ear.',
+  img:'The only thing that really matters is whether the bone over the top is intact. Judge that on <em>Pöschl</em> (cut parallel to the canal, so it appears as a complete ring) and <em>Stenvers</em> reformats. Axial images alone overcall dehiscence, and anything thicker than about 0.6 mm makes normal thin bone look absent.',
+  bad:'<strong>Superior canal dehiscence.</strong> Missing bone creates a third window into the labyrinth. Loud noise makes the patient dizzy (Tullio), they hear their own voice, footsteps and even their eyes moving, and audiometry shows an air-bone gap that looks conductive — but the ear drum is normal and the acoustic reflexes are intact, which no true conductive loss does.'
+},
+
+'scc-post': {
+  name:'Posterior semicircular canal', kicker:'The back loop',
+  is:'The vertical loop running backwards and downwards, roughly parallel to the back surface of the petrous bone.',
+  does:'Detects tilting in its own plane. Its ampulla sits at the bottom end.',
+  img:'Best profiled on Stenvers. Check the bone between it and the jugular bulb, and between it and the posterior fossa. It is also the reference width when you are deciding whether a vestibular aqueduct is too big.',
+  bad:'The usual home of <strong>BPPV</strong> — loose crystals settle here because it is the lowest canal when you lie down. Dix-Hallpike provokes it, Epley clears it. It can also be dehiscent where a high-riding jugular bulb pushes against it, giving the same third-window symptoms as a dehiscent superior canal.'
+},
+
+'crus': {
+  name:'Crus commune', kicker:'Shared limb',
+  is:'Where the superior and posterior canals merge into one channel before entering the vestibule.',
+  does:'No sensor in it — purely a shared drainage path for endolymph.',
+  img:'Normal and expected. Recognise it so you do not call it a fracture line or a defect.',
+  bad:'It should be there. An absent crus commune is a marker of a dysplastic labyrinth and should send you looking for other malformations.'
+},
+
+'ampullae': {
+  name:'Ampullae', kicker:'Where the sensors live',
+  is:'The bulge at one end of each canal. Inside each sits a ridge of hair cells (the crista) with a jelly flap (the cupula) sitting over it like a swing door.',
+  does:'Turn your head and the fluid lags behind, pushing the jelly flap and bending the hair cells. One ear\u2019s canal speeds up while the matching canal on the other side slows down, and the brain reads the difference. That push-pull pairing is why one-sided damage causes such violent spinning.',
+  img:'Seen as focal widening at the end of each canal. The superior and lateral ampullae sit next to each other at the front, near the facial nerve.',
+  bad:'Blunted or widened in dysplasia. In BPPV, crystals stuck onto the cupula itself (cupulolithiasis) cause longer-lasting symptoms than crystals floating free in the canal, and respond less well to repositioning.'
+},
+
+'oval': {
+  name:'Oval window', kicker:'Sound gets in here',
+  is:'The window on the outer wall of the vestibule, plugged by the footplate of the stapes.',
+  does:'The entry point. The stapes acts as a piston here and starts the fluid wave running through the cochlea.',
+  img:'Look hard at the bone just in front of the window — the fissula ante fenestram. That tiny spot is where otosclerosis begins, and it is easy to skim past. Also confirm the window is present and normal width.',
+  bad:'<strong>Otosclerosis</strong>: spongy new bone fixes the footplate so it cannot piston, giving conductive hearing loss behind a completely normal ear drum. Congenital atresia of the window also causes conductive loss, and usually comes with a facial nerve running abnormally across it — worth flagging before surgery.'
+},
+
+'round': {
+  name:'Round window', kicker:'Pressure gets out here',
+  is:'The second window, at the very start of the basal turn, covered by a thin membrane.',
+  does:'Fluid does not compress. Unless something can bulge outwards, the wave cannot travel at all — so this window is what lets the cochlea work.',
+  img:'Check the niche is open and not filled with soft tissue or new bone. This is the surgical route for a cochlear implant electrode.',
+  bad:'Blocked by new bone after meningitis or by otosclerosis. A tear here (perilymph fistula) causes sudden hearing loss and dizziness after straining, diving or a blast.'
+},
+
+'va': {
+  name:'Vestibular aqueduct', kicker:'The drain, and the one to measure',
+  is:'A narrow bony channel running backwards and inwards from the vestibule to the back of the petrous bone. It carries the endolymphatic duct out to the endolymphatic sac.',
+  does:'Handles endolymph housekeeping — the sac at the far end reabsorbs fluid and keeps the pressure inside the labyrinth steady.',
+  img:'Measure it halfway between the vestibule and its opening. Quick rule: it should be no wider than the neighbouring posterior canal. Numbers if you want them — <span class="num">&gt;1.5 mm</span> at the midpoint on axial, or the stricter Cincinnati criteria of <span class="num">&gt;0.9 mm</span> midpoint and <span class="num">&gt;1.9 mm</span> at the opening.',
+  bad:'<strong>Enlarged vestibular aqueduct is the commonest imaging finding in a child with sensorineural hearing loss.</strong> It often comes as part of Pendred syndrome, with a goitre, and usually sits alongside a Mondini cochlea. Hearing tends to drop in steps, often after a minor head knock, so these children are told to avoid contact sports. A mass arising at the sac points to von Hippel-Lindau.'
+},
+
+'ca': {
+  name:'Cochlear aqueduct', kicker:'The link to spinal fluid',
+  is:'A fine channel from the base of the cochlea down to the space beneath the brain, carrying perilymph.',
+  does:'Connects inner ear fluid to spinal fluid so pressure can equalise between the two.',
+  img:'Normally a hair-thin line. Worth a sentence if it looks unusually wide.',
+  bad:'A potential route for infection to travel from the meninges into the labyrinth, and an occasional cause of spinal fluid leaking into the ear.'
+},
+
+'iac': {
+  name:'Internal auditory canal', kicker:'Everything leaves through here',
+  is:'The tunnel carrying the hearing nerve, the two balance nerves and the facial nerve from the brainstem to the inner ear.',
+  does:'Not part of the labyrinth itself, but every signal the labyrinth generates travels out along it.',
+  img:'On a thin T2 sequence cut across the far end you should be able to count four nerves. Before anyone implants an ear, the cochlear nerve must be shown to be present and of normal calibre.',
+  bad:'<strong>Vestibular schwannoma</strong> is the classic mass — asymmetric hearing loss and tinnitus, and bilateral tumours mean NF2. Enhancement of the nerves and labyrinth suggests labyrinthitis. A thin or absent cochlear nerve changes the whole surgical plan.'
+},
+
+'tm': {
+  name:'Tympanic membrane', kicker:'The outer wall of the middle ear',
+  is:'The ear drum. The handle of the malleus is embedded in it and pulls its centre inwards to a point called the umbo. The small slack area above the handle is the pars flaccida; the taut part below is the pars tensa.',
+  does:'Collects sound over a wide area and funnels it onto the tiny stapes footplate. That area difference, plus the lever action of the ossicles, is what lets airborne sound get into fluid without being lost.',
+  img:'You rarely assess the drum itself — you assess the space behind it. Split the middle ear into three floors and say which one the disease is on: the <strong>attic</strong> above the level of the ear canal roof, the <strong>mesotympanum</strong> directly behind the drum, and the <strong>hypotympanum</strong> below. Naming the floor is most of the report.',
+  bad:'A retraction pocket of the pars flaccida is where the commonest cholesteatoma begins. A drum that will not heal, or a middle ear full of soft tissue, sends you to check the ossicles, the scutum, the roof and the facial nerve canal.'
+},
+
+'scutum': {
+  name:'Scutum', kicker:'The sharpest thing to check on a coronal',
+  is:'The spur of bone at the top of the ear canal where the slack part of the drum attaches. It forms the outer wall of Prussak\u2019s space, the small pocket just inside it.',
+  does:'Purely structural. It is the bony corner the pars flaccida hangs from.',
+  img:'It should come to a sharp point on coronal images. <strong>Blunting or loss of that point is the earliest sign of a pars flaccida cholesteatoma</strong>, often visible before there is much soft tissue to see.',
+  bad:'Blunted scutum plus soft tissue in Prussak\u2019s space is the classic pairing. Once you see it, trace where the disease has spread — incus, lateral canal, tegmen, facial nerve canal — because those findings are what change the operation.'
+},
+
+'malleus': {
+  name:'Malleus', kicker:'The hammer',
+  is:'The outermost ossicle. Its head sits in the attic, its handle runs down inside the ear drum to the umbo, and a small lateral process bumps outward on the drum surface.',
+  does:'Vibrates with the drum and hands the movement to the incus. The lever action of the malleus and incus, combined with the drum-to-footplate area ratio, multiplies pressure roughly twentyfold.',
+  img:'On an axial slice through the attic, the malleus head and incus body together look like an <strong>ice cream cone</strong> — the head is the scoop and the incus short process is the cone pointing backwards. A deformed cone, or a scoop that has separated from it, means dislocation.',
+  bad:'It can become fixed to the attic wall, giving a conductive loss. In trauma it usually survives better than the incus, because it is anchored in the drum.'
+},
+
+'incus': {
+  name:'Incus', kicker:'The anvil, and the fragile one',
+  is:'The middle ossicle. The body sits beside the malleus head in the attic, a short process points backwards into a small bony pocket, and a long process descends to meet the stapes.',
+  does:'The lever arm of the chain — it turns the drum\u2019s wide gentle movement into a smaller, more forceful push on the stapes.',
+  img:'Follow the long process down on coronal and axial images. It is thin and has a poor blood supply, which is exactly why it is the piece you most often find missing.',
+  bad:'<strong>The ossicle most commonly eroded by cholesteatoma</strong>, and its joint with the stapes is the one most often torn in temporal bone trauma. Both give a conductive loss that surgery can fix, so say precisely which part has gone.'
+},
+
+'stapes': {
+  name:'Stapes', kicker:'The piston',
+  is:'The smallest bone in the body. Two thin legs run from a small head down to a flat footplate that plugs the oval window.',
+  does:'Everything the drum and the other two ossicles do ends up as movement of this footplate, and that movement is what actually shifts the inner ear fluid.',
+  img:'The legs sit at the edge of what CT can resolve. What you can reliably judge is the footplate and the space around it — and the facial nerve running immediately above it, which is why the two are always assessed together.',
+  bad:'Fixed by otosclerosis at the front edge of the window, eroded by cholesteatoma, or malformed in congenital conductive loss. When it has been replaced by a prosthesis, your job on follow-up is to check the prosthesis still reaches the window and has not slipped into the vestibule.'
+},
+
+'tegmen': {
+  name:'Tegmen tympani', kicker:'The roof, and how thin it is',
+  is:'The paper-thin plate of bone forming the roof of the middle ear, separating it from the temporal lobe above.',
+  does:'Nothing mechanical. It is simply the barrier between ear and brain.',
+  img:'Judge it on coronal images. It can be naturally thin, or focally absent, in people with no symptoms at all — so what matters is whether anything is coming through the gap.',
+  bad:'Erosion by cholesteatoma or chronic infection opens a route to meningitis and brain abscess. Brain or meninges herniating down through a defect is an encephalocele or meningocele, and spinal fluid leaking into the ear shows up as clear fluid from the nose or an effusion that never clears.'
+},
+
+'antrum': {
+  name:'Aditus and mastoid antrum', kicker:'The road into the mastoid',
+  is:'The air chamber behind the attic, reached through a short passage called the aditus. It is the doorway from the middle ear into the mastoid air cells.',
+  does:'Acts as an air reservoir and the drainage route for the mastoid.',
+  img:'This is the road disease travels. Note whether the mastoid is well aerated or sclerotic — a sclerotic mastoid tells you the problem is long-standing rather than new.',
+  bad:'Coalescent mastoiditis dissolves the walls between air cells and can spread to the sigmoid sinus, the brain, or out through the cortex. <em>The lateral semicircular canal bulges into the inner wall right here</em>, which is exactly why it is the canal that cholesteatoma erodes.'
+},
+
+'et': {
+  name:'Eustachian tube', kicker:'The pressure valve',
+  is:'The tube running forwards, inwards and downwards from the front of the middle ear to the back of the nose. Bony at the ear end, cartilage at the nose end.',
+  does:'Opens when you swallow or yawn to equalise pressure and let the middle ear drain. If it stays shut the middle ear absorbs its own air, the pressure goes negative, and the drum is pulled inwards.',
+  img:'Usually judged indirectly. A middle ear full of fluid behind an intact drum means the tube is not doing its job.',
+  bad:'Dysfunction causes effusion and retraction, which is how retraction pockets and cholesteatoma start. <strong>An adult with a one-sided middle ear effusion needs the nasopharynx examined</strong>, because a tumour there can block the tube.'
+},
+
+'fn-lab': {
+  name:'Facial nerve, labyrinthine segment', kicker:'The tightest stretch',
+  is:'The first part of the facial nerve inside the temporal bone, running forwards from the far end of the internal auditory canal to the geniculate ganglion, squeezed between the cochlea in front and the superior canal behind.',
+  does:'Carries the nerve towards the face. Because the bony channel is narrowest here, this is where a swollen nerve has the least room to escape.',
+  img:'Trace it on thin axial images. A little enhancement right at the far end of the internal auditory canal can be normal, but frank enhancement of this segment is not — compare with the other side before you commit.',
+  bad:'The strangulation point. Bell\u2019s palsy and herpes zoster typically enhance here and at the geniculate, and this is the segment surgeons decompress when they decompress anything.'
+},
+
+'fn-gen': {
+  name:'Geniculate ganglion', kicker:'The first bend',
+  is:'The sharp turn where the facial nerve doubles back on itself, containing a knot of nerve cell bodies. A branch, the greater superficial petrosal nerve, leaves forwards and inwards from here.',
+  does:'The turning point of the nerve, and the junction where the fibres for tears and salivation head off on their own.',
+  img:'Sits just above and in front of the cochlea, close under the floor of the middle cranial fossa, and is often naturally uncovered by bone. Mild enhancement here is common, so always judge it against the opposite side.',
+  bad:'<strong>The commonest site of facial nerve injury in a temporal bone fracture.</strong> Also the classic home of a facial nerve haemangioma — a small enhancing lesion that causes weakness out of all proportion to its size, sometimes with fine spicules of bone in it. Facial nerve schwannoma favours this spot too.'
+},
+
+'fn-tym': {
+  name:'Facial nerve, tympanic segment', kicker:'The one sentence the surgeon reads',
+  is:'The horizontal run along the inner wall of the middle ear, passing just above the oval window and just below the lateral semicircular canal.',
+  does:'Simply crossing the middle ear on its way backwards — but crossing it in the most exposed place it could possibly choose.',
+  img:'The single most useful thing you can say about this segment is whether its bony cover above the oval window is intact. <strong>This is the commonest site of dehiscence</strong>, found in a large minority of perfectly normal ears, and the surgeon needs to know before opening the ear rather than during.',
+  bad:'An exposed nerve here can be injured in any middle ear operation, and neighbouring infection or cholesteatoma can reach it directly. A nerve sitting abnormally low can also overhang the oval window and block surgical access, which tends to go with congenital conductive loss.'
+},
+
+'fn-mast': {
+  name:'Facial nerve, mastoid segment', kicker:'The way out',
+  is:'The vertical run down through the mastoid to the stylomastoid foramen, where the nerve finally leaves the skull. The chorda tympani branch peels off here and loops forward across the middle ear.',
+  does:'Delivers the nerve to the face. Below the foramen it fans out through the parotid gland.',
+  img:'Follow it down on coronal and axial images and note where it sits relative to the ear canal, since surgeons work right beside it. Mild smooth enhancement of this segment is normal — it has a plexus of small veins around it.',
+  bad:'Reached by cholesteatoma, by malignant otitis externa spreading in a diabetic or immunosuppressed patient, and by tumour tracking up from the parotid. <em>Nodular</em> thickening rather than smooth enhancement is the pattern that should worry you.'
+}
+
+};
+
+var FINDINGS = {
+
+'sscd': {
+  label:'Superior canal dehiscence',
+  name:'Superior semicircular canal dehiscence', kicker:'A hole where bone should be',
+  view:'poschl',
+  is:'The thin bone covering the top of the superior canal is missing, so the canal is open to the floor of the middle cranial fossa.',
+  does:'The labyrinth is normally a sealed box with two windows. This adds a <strong>third window</strong>. Energy that should drive the cochlea leaks out through it instead, and pressure changes that should do nothing now push fluid through the balance canal.',
+  img:'Confirm on <em>Pöschl</em> and <em>Stenvers</em> reformats, not on axials alone — and never on slices thicker than about 0.6 mm, which routinely fake a defect where normal bone exists. Look at both ears; the other side is often thin too.',
+  bad:'Dizziness triggered by loud noise (Tullio), hearing your own voice, footsteps or eye movements far too loudly, and a low-frequency air-bone gap. The give-away is that this gap sits behind a normal drum with intact acoustic reflexes, and VEMP thresholds are abnormally low rather than absent.'
+},
+
+'eva': {
+  label:'Enlarged vestibular aqueduct',
+  name:'Enlarged vestibular aqueduct', kicker:'The one you must measure in a child',
+  view:'axial',
+  is:'The drainage channel behind the vestibule is dilated, sometimes to several times its normal width.',
+  does:'The endolymphatic sac can no longer regulate pressure and fluid balance reliably, and the fragile hearing organ is exposed to sudden pressure swings.',
+  img:'Compare it with the adjacent posterior canal — that is faster than reaching for calipers. If you do measure: over <span class="num">1.5 mm</span> at the midpoint, or the Cincinnati thresholds of <span class="num">0.9 mm</span> midpoint and <span class="num">1.9 mm</span> at the opening. Then check the cochlea, because a Mondini-type incomplete partition is usually sitting right there with it.',
+  bad:'The commonest imaging abnormality in paediatric sensorineural hearing loss. Frequently Pendred syndrome, so ask about the thyroid. Hearing typically deteriorates in sudden steps rather than smoothly, classically after a bang on the head — which is why these children are steered away from contact sports.'
+},
+
+'otoscl': {
+  label:'Otosclerosis',
+  name:'Otosclerosis', kicker:'Soft bone in the hardest bone in the body',
+  view:'lateral',
+  is:'Normal dense otic capsule is replaced by spongy, poorly formed bone. It starts in front of the oval window at a spot called the fissula ante fenestram, and can spread around the cochlea.',
+  does:'Around the oval window it glues the stapes footplate down so it cannot piston — sound stops getting in. Around the cochlea it interferes with the hearing organ itself, so a purely conductive loss slowly turns mixed.',
+  img:'Two patterns, and you should name which one you see. <strong>Fenestral</strong>: a small lucent patch just in front of the oval window. <strong>Retrofenestral (cochlear)</strong>: a lucent halo tracking around the cochlea, sometimes described as a fourth turn or a double ring. Remember the otic capsule is the one bone in the body that never remodels, so <em>any</em> lucency in it is abnormal.',
+  bad:'Conductive hearing loss with a normal ear drum in a young or middle-aged adult, often with a family history, often worse in pregnancy. Audiometry shows the Carhart notch. Surgery replaces the fixed stapes; the cochlear form is the one that limits how good the result can be.'
+},
+
+'ossif': {
+  label:'Labyrinthitis ossificans',
+  name:'Labyrinthitis ossificans', kicker:'The clock is running',
+  view:'free',
+  is:'New bone grows inside the labyrinth after it has been inflamed — most often weeks to months after bacterial meningitis, sometimes after severe infection, surgery or trauma.',
+  does:'The fluid spaces fill in and solidify. Once the basal turn is bone, there is nowhere to put an implant electrode.',
+  img:'<strong>MRI beats CT here, and beats it early.</strong> Loss of the normal bright fluid signal in the cochlear turns on T2 shows up long before CT sees any new bone. If a child has had meningitis, scan promptly and say clearly whether the basal turn is still patent.',
+  bad:'Profound deafness that is potentially treatable — but only inside a narrow window. This is one of the few inner ear reports where the timing of your phone call genuinely changes the outcome, because cochlear implantation has to happen before the cochlea closes.'
+},
+
+'cholesteatoma': {
+  label:'Cholesteatoma',
+  name:'Acquired cholesteatoma', kicker:'Skin in the wrong place, quietly eating bone',
+  view:'coronal',
+  is:'Skin from the ear canal gets trapped inside the middle ear, usually in a retraction pocket of the slack upper part of the drum, and grows into a ball of shed keratin that dissolves whatever bone it touches.',
+  does:'It is not a tumour and it does not hurt. It causes trouble purely by pressing on and eroding bone, so the symptoms depend entirely on what it has reached.',
+  img:'Report it as a checklist, because every item changes the operation: soft tissue in Prussak\u2019s space, a blunted scutum, erosion of the incus long process, the lateral semicircular canal, the tegmen, and the facial nerve canal. When CT cannot separate recurrent disease from scar or granulation after surgery, non-echo-planar diffusion MRI can.',
+  bad:'A smelly discharging ear with conductive hearing loss. Add vertigo and assume a canal fistula. Add facial weakness and the nerve is exposed. It only ever gets bigger, so it is always a surgical problem.'
+},
+
+'ossicular': {
+  label:'Ossicular disruption',
+  name:'Ossicular chain disruption', kicker:'The joint that gives way',
+  view:'axial',
+  is:'The link between the incus and the stapes has come apart, usually after a temporal bone fracture or a heavy blow to the head.',
+  does:'The chain can no longer carry movement to the footplate, so sound reaches the inner ear only weakly, through bone.',
+  img:'Start with the ice cream cone on axial images — the malleus head and incus body should touch and line up. Then follow the incus long process down to the stapes. <strong>Incudostapedial separation is the commonest</strong>, incudomalleolar next.',
+  bad:'A conductive loss after trauma that fails to settle once blood in the middle ear has cleared. Unlike inner ear injury this is repairable, which is why it is worth hunting for on the scan.'
+},
+
+'fn-dehisc': {
+  label:'Facial nerve dehiscence',
+  name:'Dehiscent tympanic facial nerve', kicker:'Bare nerve in the operative field',
+  view:'coronal',
+  is:'The thin bony cover over the horizontal segment of the facial nerve, just above the oval window, is missing — so the nerve lies exposed in the middle ear.',
+  does:'Nothing at all on its own. Most people who have it have completely normal facial movement. It matters because of what can happen to an unprotected nerve.',
+  img:'Coronal images through the oval window are the ones to look at. Check both ears, and be honest about slice thickness, because thick slices manufacture this finding. Note too if the nerve sits abnormally low and overhangs the window.',
+  bad:'This is a surgical hazard rather than a disease: a nerve that can be cut or bruised during middle ear surgery, and one that inflammation or cholesteatoma can reach directly. Putting it in the report is the entire point of noticing it.'
+},
+
+'schwannoma': {
+  label:'Vestibular schwannoma',
+  name:'Vestibular schwannoma', kicker:'The mass in the canal',
+  view:'axial',
+  is:'A benign tumour growing from the sheath of one of the balance nerves, in the internal auditory canal and often spilling out into the angle between the brainstem and cerebellum.',
+  does:'It presses on the neighbouring hearing nerve and disturbs its blood supply, so hearing goes on one side even though the labyrinth itself is normal.',
+  img:'Thin T2 through the canal is the screening study, and a mass replaces the normal bright fluid. On contrast imaging it enhances briskly, and when it grows out of the canal it takes the familiar ice-cream-cone shape. Measure it, note whether it reaches the far end of the canal, and compare against any prior study.',
+  bad:'One-sided hearing loss and tinnitus, sometimes unsteadiness. Any asymmetric sensorineural loss deserves this question asked. Two of them means neurofibromatosis type 2 until proven otherwise.'
+}
+
+};
+
+/* ==========================================================
+   5.  LABELS
+   ========================================================== */
+
+var LABELS = [
+  {id:'cochlea-apex', text:'Cochlea — apical turn', at: cochPoint(0.96)},
+  {id:'cochlea-mid',  text:'Middle turn',           at: cochPoint(0.55)},
+  {id:'cochlea-basal',text:'Basal turn',            at: cochPoint(0.14)},
+  {id:'modiolus',     text:'Modiolus',              at: new V3().copy(cochCenter).addScaledVector(cochAxis, 1.9)},
+  {id:'vestibule',    text:'Vestibule',             at: new V3(0, -0.75, -0.30)},
+  {id:'scc-lat',      text:'Lateral canal',         at: latFar.clone()},
+  {id:'scc-sup',      text:'Superior canal',        at: supPts.reduce(function(a,b){return b.y>a.y?b:a;}, supPts[0]).clone()},
+  {id:'scc-post',     text:'Posterior canal',       at: post.pts.reduce(function(a,b){return b.z<a.z?b:a;}, post.pts[0]).clone()},
+  {id:'crus',         text:'Crus commune',          at: crusJ.clone()},
+  {id:'ampullae',     text:'Ampullae',              at: ampLat.clone()},
+  {id:'oval',         text:'Oval window',           at: new V3(1.95, 0.18, -0.15)},
+  {id:'round',        text:'Round window',          at: rwPos.clone()},
+  {id:'va',           text:'Vestibular aqueduct',   at: vaPts[2].clone()},
+  {id:'ca',           text:'Cochlear aqueduct',     at: caPts[2].clone()},
+  {id:'iac',          text:'Internal auditory canal',at: iacPts[2].clone()},
+
+  {id:'tm',      grp:'mid', text:'Tympanic membrane', at: tmC.clone().addScaledVector(tmUp, -1.95)},
+  {id:'scutum',  grp:'mid', text:'Scutum',            at: new V3(4.62, 2.62, 0.12)},
+  {id:'malleus', grp:'mid', text:'Malleus',           at: new V3(4.30, 1.65, 0.24)},
+  {id:'incus',   grp:'mid', text:'Incus',             at: new V3(4.18, 3.04, -2.05)},
+  {id:'stapes',  grp:'mid', text:'Stapes',            at: new V3(2.70, 0.40, -0.10)},
+  {id:'tegmen',  grp:'mid', text:'Tegmen tympani',    at: new V3(4.05, 4.25, 0.60)},
+  {id:'antrum',  grp:'mid', text:'Antrum',            at: new V3(3.30, 1.90, -3.35)},
+  {id:'et',      grp:'mid', text:'Eustachian tube',   at: new V3(2.30, -3.00, 4.85)},
+
+  {id:'fn-lab',  grp:'fn',  text:'Facial n. — labyrinthine', at: new V3(-0.55, 1.10, 1.05)},
+  {id:'fn-gen',  grp:'fn',  text:'Geniculate ganglion',      at: new V3(0.80, 2.20, 1.95)},
+  {id:'fn-tym',  grp:'fn',  text:'Facial n. — tympanic',     at: new V3(2.30, 1.30, 0.10)},
+  {id:'fn-mast', grp:'fn',  text:'Facial n. — mastoid',      at: new V3(2.90, -2.30, -1.95)}
+];
+
+var labelLayer = document.getElementById('labels');
+LABELS.forEach(function(L){
+  var el = document.createElement('div');
+  el.className = 'lab';
+  el.innerHTML = '<i></i><span>' + L.text + '</span>';
+  el.addEventListener('click', function(e){ e.stopPropagation(); select(L.id); });
+  labelLayer.appendChild(el);
+  L.el = el;
+  L.world = L.at.clone().sub(CENTRE);
+});
+
+var showLabels = window.innerWidth > 900;
+
+/* ==========================================================
+   6.  CAMERA + CONTROLS
+   ========================================================== */
+
+var VIEWS = {
+  free:     {theta:0.92, phi:1.12, r:22.0, name:'Free rotation',  sub:'oblique, from the front and side'},
+  axial:    {theta:0.02, phi:0.10, r:21.5, name:'Axial',          sub:'from above — canals, vestibule, ossicles'},
+  coronal:  {theta:0.00, phi:1.5708, r:21.5, name:'Coronal',      sub:'from the front — scutum, ossicles, facial nerve'},
+  lateral:  {theta:1.5708, phi:1.5708, r:21.5, name:'Sagittal',   sub:'from the side — drum and windows in profile'},
+  poschl:   {theta:2.3562, phi:1.5708, r:20.0, name:'P\u00F6schl', sub:'along the superior canal — it becomes a ring'},
+  stenvers: {theta:0.7854, phi:1.5708, r:20.0, name:'Stenvers',   sub:'along the posterior canal'}
+};
+var viewOrder = ['free','axial','coronal','lateral','poschl','stenvers'];
+
+var cam = {theta:VIEWS.free.theta, phi:VIEWS.free.phi, r:VIEWS.free.r};
+var camTarget = {theta:cam.theta, phi:cam.phi, r:cam.r};
+var target = new V3(0,0,0);
+var autoSpin = !REDUCED;
+var currentView = 'free';
+
+function applyCamera(){
+  camera.position.set(
+    target.x + cam.r * Math.sin(cam.phi) * Math.sin(cam.theta),
+    target.y + cam.r * Math.cos(cam.phi),
+    target.z + cam.r * Math.sin(cam.phi) * Math.cos(cam.theta)
+  );
+  camera.lookAt(target);
+}
+
+function goToView(k){
+  var v = VIEWS[k];
+  if(!v) return;
+  currentView = k;
+  camTarget.theta = v.theta; camTarget.phi = v.phi; camTarget.r = v.r;
+  if(REDUCED){ cam.theta = v.theta; cam.phi = v.phi; cam.r = v.r; }
+  autoSpin = false;
+  syncPlaneButtons();
+}
+
+/* plane buttons */
+var planesEl = document.getElementById('planes');
+viewOrder.forEach(function(k){
+  var v = VIEWS[k];
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.innerHTML = v.name + '<span>' + v.sub + '</span>';
+  b.setAttribute('aria-pressed', k === 'free' ? 'true' : 'false');
+  b.dataset.view = k;
+  b.addEventListener('click', function(){ goToView(k); });
+  planesEl.appendChild(b);
+});
+function syncPlaneButtons(){
+  Array.prototype.forEach.call(planesEl.children, function(b){
+    b.setAttribute('aria-pressed', b.dataset.view === currentView ? 'true' : 'false');
+  });
+}
+
+/* drag / zoom */
+var dragging = false, lastX = 0, lastY = 0, moved = 0;
+
+function onDown(x, y){ dragging = true; lastX = x; lastY = y; moved = 0; autoSpin = false; hideHint(); }
+function onMove(x, y){
+  if(!dragging) return;
+  var dx = x - lastX, dy = y - lastY;
+  lastX = x; lastY = y;
+  moved += Math.abs(dx) + Math.abs(dy);
+  camTarget.theta -= dx * 0.0075;
+  camTarget.phi = Math.max(0.06, Math.min(Math.PI - 0.06, camTarget.phi - dy * 0.0075));
+  currentView = '';
+  syncPlaneButtons();
+}
+function onUp(){ dragging = false; }
+
+canvas.addEventListener('pointerdown', function(e){ canvas.setPointerCapture(e.pointerId); onDown(e.clientX, e.clientY); });
+canvas.addEventListener('pointermove', function(e){ onMove(e.clientX, e.clientY); trackHover(e); });
+canvas.addEventListener('pointerup', function(e){ onUp(); if(moved < 5) pick(e); });
+canvas.addEventListener('pointerleave', function(){ onUp(); clearHover(); });
+canvas.addEventListener('wheel', function(e){
+  e.preventDefault();
+  camTarget.r = Math.max(9, Math.min(46, camTarget.r + e.deltaY * 0.016));
+}, {passive:false});
+
+/* pinch */
+var pinchStart = null;
+canvas.addEventListener('touchstart', function(e){
+  if(e.touches.length === 2){
+    pinchStart = {d: touchDist(e), r: camTarget.r};
+  }
+}, {passive:true});
+canvas.addEventListener('touchmove', function(e){
+  if(e.touches.length === 2 && pinchStart){
+    e.preventDefault();
+    var d = touchDist(e);
+    camTarget.r = Math.max(9, Math.min(46, pinchStart.r * pinchStart.d / Math.max(1, d)));
+  }
+}, {passive:false});
+canvas.addEventListener('touchend', function(){ pinchStart = null; }, {passive:true});
+function touchDist(e){
+  var a = e.touches[0], b = e.touches[1];
+  return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+}
+
+/* ==========================================================
+   7.  PICKING
+   ========================================================== */
+
+var ray = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+var selected = null, hovered = null;
+
+function toNDC(e){
+  var r = canvas.getBoundingClientRect();
+  mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+}
+function isShown(o){
+  while(o){ if(o.visible === false) return false; o = o.parent; }
+  return true;
+}
+function hitId(e){
+  toNDC(e);
+  ray.setFromCamera(mouse, camera);
+  var hits = ray.intersectObjects(pickables, false);
+  for(var i=0; i<hits.length; i++){
+    if(isShown(hits[i].object)) return hits[i].object.userData.id;
+  }
+  return null;
+}
+function pick(e){
+  var id = hitId(e);
+  if(id) select(id); else select(null);
+}
+function trackHover(e){
+  if(dragging) return;
+  var id = hitId(e);
+  if(id !== hovered){ hovered = id; refreshMaterials(); canvas.style.cursor = id ? 'pointer' : 'default'; }
+}
+function clearHover(){ if(hovered){ hovered = null; refreshMaterials(); } }
+
+/* ==========================================================
+   8.  MATERIAL STATE
+   ========================================================== */
+
+var activeFinding = null;
+
+function refreshMaterials(){
+  root.traverse(function(o){
+    if(!o.isMesh) return;
+    var k = o.userData.kind;
+    if(!k) return;
+    var id = o.userData.id;
+    if(id && id === selected)      o.material = MAT_SEL;
+    else if(id && id === hovered)  o.material = MAT_HOVER;
+    else if(o.userData.flagged)    o.material = MAT_FLAG;
+    else if(o.userData.sclerotic)  o.material = MAT_SCLER;
+    else                            o.material = MAT[mode][k];
+  });
+}
+
+function clearFindingVisuals(){
+  dehisc.visible = false;
+  supRoof.visible = true;
+  fissula.visible = false;
+  halo.visible = false;
+  schwannoma.visible = false;
+  fistula.visible = false;
+  vaBig.visible = false;
+  vaNormal.visible = true;
+  prussak.visible = false;
+  scutumGap.visible = false;
+  incusGap.visible = false;
+  jointGap.visible = false;
+  scutum.visible = true;
+  incusLong.visible = true;
+  lent.visible = true;
+  incusGrp.position.set(0, 0, 0);
+  root.traverse(function(o){ if(o.isMesh){ o.userData.flagged = false; o.userData.sclerotic = false; } });
+}
+
+function applyFinding(k){
+  clearFindingVisuals();
+  if(k === 'sscd'){ supRoof.visible = false; dehisc.visible = true; }
+  if(k === 'eva'){ vaNormal.visible = false; vaBig.visible = true; vaBig.userData.flagged = true; }
+  if(k === 'otoscl'){ fissula.visible = true; halo.visible = true; stapesFP.userData.flagged = true; }
+  if(k === 'ossif'){ cochBasal.userData.sclerotic = true; cochMid.userData.sclerotic = true; cochApex.userData.sclerotic = true; apexCap.userData.sclerotic = true; }
+  if(k === 'cholesteatoma'){
+    prussak.visible = true;
+    scutum.visible = false; scutumGap.visible = true;
+    incusLong.visible = false; lent.visible = false; incusGap.visible = true;
+    fistula.visible = true;
+  }
+  if(k === 'ossicular'){ incusGrp.position.set(0.38, -0.30, 0.55); jointGap.visible = true; }
+  if(k === 'fn-dehisc'){ fnTym.userData.flagged = true; }
+  if(k === 'schwannoma'){ schwannoma.visible = true; }
+  refreshMaterials();
+}
+
+/* ==========================================================
+   9.  PANEL
+   ========================================================== */
+
+var panel = document.getElementById('panel');
+
+function esc(s){ return s; }
+
+function renderStructure(id, d){
+  panel.scrollTop = 0;
+  panel.innerHTML =
+    '<h2>' + d.name + '</h2>' +
+    '<p class="kicker">' + d.kicker + '</p>' +
+    block('What it is', d.is) +
+    block('What it does', d.does) +
+    block('What you look for', d.img) +
+    block('When it goes wrong', d.bad) +
+    refsBlock(id);
+}
+function renderFinding(id, d){
+  panel.scrollTop = 0;
+  panel.innerHTML =
+    '<h2>' + d.name + '</h2>' +
+    '<p class="kicker warn">' + d.kicker + '</p>' +
+    block('What has happened', d.is) +
+    block('Why it causes symptoms', d.does) +
+    block('What you look for', d.img) +
+    block('What the patient has', d.bad) +
+    refsBlock(id);
+}
+function block(h, p){ return '<div class="block"><h3>' + h + '</h3><p>' + p + '</p></div>'; }
+
+function refsBlock(id){
+  var list = REFS[id];
+  if(!list || !list.length) return '';
+  var out = '<div class="block"><h3>Papers with pictures of it</h3><ul class="refs">';
+  for(var i=0; i<list.length; i++){
+    var p = PAPERS[list[i]];
+    if(!p) continue;
+    out += '<li><a href="' + p.u + '" target="_blank" rel="noopener noreferrer">' + p.t + '</a>' +
+           '<span class="src">' + p.j +
+           (p.free ? ' &middot; <span class="free">free full text</span>' : '') +
+           (p.n ? '<br>' + p.n : '') +
+           '</span></li>';
+  }
+  return out + '</ul></div>';
+}
+
+function renderIntro(){
+  panel.scrollTop = 0;
+  panel.innerHTML =
+    '<h2>Start anywhere</h2>' +
+    '<p class="kicker">Click a structure on the model, or pick a finding underneath it</p>' +
+
+    '<div class="block"><h3>The whole thing in six lines</h3>' +
+    '<ul class="intro-list">' +
+      '<li><b>Sound in</b>The drum collects sound and the three ossicles carry it inwards, ending with the stapes pistoning at the oval window.</li>' +
+      '<li><b>Sound sorted</b>The cochlea is a keyboard rolled up: high notes at the base, low notes at the tip.</li>' +
+      '<li><b>Pressure out</b>The round window bulges to let the wave move. Block it and hearing suffers.</li>' +
+      '<li><b>Balance</b>Three canals read head turning, the vestibule reads gravity and straight-line movement.</li>' +
+      '<li><b>Passing through</b>The facial nerve crosses the middle ear just above the oval window, with very little bone protecting it.</li>' +
+      '<li><b>Signals out</b>Everything leaves through the internal auditory canal.</li>' +
+    '</ul></div>' +
+
+    '<div class="block"><h3>Why the bone matters</h3>' +
+    '<p>The shell around all of this — the otic capsule — is the densest bone in the body, and it is the only bone that never remodels after childhood. That single fact does a lot of work: <strong>any lucency inside it is abnormal</strong>, which is what makes otosclerosis visible; and any hole in it becomes a third window, which is what makes superior canal dehiscence audible.</p></div>' +
+
+    '<div class="block"><h3>Two fluids, kept apart</h3>' +
+    '<p>Perilymph sits outside the membranous labyrinth and is much like spinal fluid — it even connects to it through the cochlear aqueduct. Endolymph sits inside, is potassium-rich, and is what the hair cells actually sit in. It drains through the vestibular aqueduct to the endolymphatic sac. Mixing them, or letting the endolymph space swell, is roughly what happens in a perilymph fistula and in M\u00E9ni\u00E8re\u2019s disease.</p></div>' +
+
+    '<div class="block"><h3>Three things share one wall</h3>' +
+    '<p>The inner wall of the middle ear is also the outer wall of the labyrinth, and three important things are crowded onto it: the oval window, the lateral semicircular canal just above and behind it, and the facial nerve running horizontally between them. That single square centimetre explains most middle ear surgery — and most of its complications.</p></div>' +
+
+    '<div class="block"><h3>The two views worth asking for</h3>' +
+    '<p><em>P\u00F6schl</em> is cut along the superior canal, so the canal appears as a complete ring and any gap in its roof is obvious. <em>Stenvers</em> is cut across it, profiling the posterior canal instead. Use the buttons on the model to swing into either one.</p></div>' +
+
+    refsBlock('_intro') +
+
+    '<div class="foot">A teaching model, drawn to be readable rather than to scale. It shows a right ear. Proportions and positions are simplified \u2014 use it to fix the relationships in your head, not to measure anything. Each structure and each finding carries links to papers with real images of it; those marked free open in full.</div>';
+}
+
+function select(id){
+  selected = id;
+  if(id && INFO[id]){
+    if(activeFinding){ activeFinding = null; applyFinding(null); syncTrayButtons(); }
+    renderStructure(id, INFO[id]);
+  } else if(!id){
+    if(activeFinding) renderFinding(activeFinding, FINDINGS[activeFinding]);
+    else renderIntro();
+  }
+  LABELS.forEach(function(L){ L.el.classList.toggle('sel', L.id === id); });
+  refreshMaterials();
+  hideHint();
+}
+
+/* findings tray */
+var tray = document.getElementById('tray');
+Object.keys(FINDINGS).forEach(function(k){
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.textContent = FINDINGS[k].label;
+  b.dataset.find = k;
+  b.addEventListener('click', function(){
+    if(activeFinding === k){
+      activeFinding = null; applyFinding(null); renderIntro();
+    } else {
+      activeFinding = k;
+      selected = null;
+      LABELS.forEach(function(L){ L.el.classList.remove('sel'); });
+      applyFinding(k);
+      renderFinding(k, FINDINGS[k]);
+      if(FINDINGS[k].view) goToView(FINDINGS[k].view);
+    }
+    syncTrayButtons();
+    hideHint();
+  });
+  tray.appendChild(b);
+});
+function syncTrayButtons(){
+  Array.prototype.forEach.call(tray.querySelectorAll('button'), function(b){
+    b.classList.toggle('on', b.dataset.find === activeFinding);
+  });
+}
+
+/* ==========================================================
+   10. TOP BAR
+   ========================================================== */
+
+var btnMode = document.getElementById('btnMode');
+btnMode.addEventListener('click', function(){
+  mode = (mode === 'ct') ? 'mri' : 'ct';
+  btnMode.textContent = (mode === 'ct') ? 'Bone look' : 'Fluid (T2) look';
+  btnMode.setAttribute('aria-pressed', mode === 'mri' ? 'true' : 'false');
+  hemi.intensity = (mode === 'ct') ? 0.55 : 0.35;
+  refreshMaterials();
+});
+
+function groupToggle(id, grp){
+  var b = document.getElementById(id);
+  b.addEventListener('click', function(){
+    grp.visible = !grp.visible;
+    b.setAttribute('aria-pressed', grp.visible ? 'true' : 'false');
+    if(!grp.visible && selected && !isShown(pickedMesh(selected))) select(null);
+  });
+}
+function pickedMesh(id){
+  for(var i=0; i<pickables.length; i++) if(pickables[i].userData.id === id) return pickables[i];
+  return null;
+}
+groupToggle('btnMid', midEar);
+groupToggle('btnFn', facial);
+
+var btnLabels = document.getElementById('btnLabels');
+btnLabels.setAttribute('aria-pressed', showLabels ? 'true' : 'false');
+btnLabels.addEventListener('click', function(){
+  showLabels = !showLabels;
+  btnLabels.setAttribute('aria-pressed', showLabels ? 'true' : 'false');
+});
+
+document.getElementById('btnReset').addEventListener('click', function(){
+  activeFinding = null; applyFinding(null); syncTrayButtons();
+  select(null);
+  goToView('free');
+});
+
+var hintEl = document.getElementById('hint');
+var hintGone = false;
+function hideHint(){
+  if(hintGone) return;
+  hintGone = true;
+  hintEl.style.opacity = '0';
+  setTimeout(function(){ hintEl.style.display = 'none'; }, 450);
+}
+setTimeout(hideHint, 9000);
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    activeFinding = null; applyFinding(null); syncTrayButtons(); select(null);
+  }
+});
+
+/* ==========================================================
+   11. LOOP
+   ========================================================== */
+
+function resize(){
+  var w = stage.clientWidth, h = stage.clientHeight;
+  if(!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+
+var proj = new V3();
+function updateLabels(){
+  var r = canvas.getBoundingClientRect();
+  var camDir = new V3().subVectors(camera.position, target).normalize();
+  for(var i=0; i<LABELS.length; i++){
+    var L = LABELS[i];
+    if(!showLabels || (L.grp === 'mid' && !midEar.visible) || (L.grp === 'fn' && !facial.visible)){
+      L.el.style.display = 'none'; continue;
+    }
+    proj.copy(L.world).project(camera);
+    if(proj.z > 1){ L.el.style.display = 'none'; continue; }
+    var x = (proj.x * 0.5 + 0.5) * r.width;
+    var y = (-proj.y * 0.5 + 0.5) * r.height;
+    var facing = L.world.clone().normalize().dot(camDir);
+    L.el.style.display = 'flex';
+    L.el.style.left = x + 'px';
+    L.el.style.top  = y + 'px';
+    L.el.style.opacity = String(0.42 + 0.58 * Math.max(0, Math.min(1, (facing + 0.6) / 1.2)));
+    L.el.classList.toggle('flip', x > r.width * 0.62);
+  }
+}
+
+var lerp = REDUCED ? 1 : 0.12;
+function tick(){
+  requestAnimationFrame(tick);
+  if(autoSpin) camTarget.theta += 0.0016;
+  cam.theta += (camTarget.theta - cam.theta) * lerp;
+  cam.phi   += (camTarget.phi   - cam.phi)   * lerp;
+  cam.r     += (camTarget.r     - cam.r)     * lerp;
+  applyCamera();
+  updateLabels();
+  renderer.render(scene, camera);
+}
+
+resize();
+setTimeout(resize, 60);
+refreshMaterials();
+renderIntro();
+applyCamera();
+tick();
+
+})();
+</script>
+</body>
+</html>

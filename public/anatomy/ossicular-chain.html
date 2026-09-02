@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The ossicular chain in its temporal bone</title>
+<style>
+@font-face{
+  /* The same file the app shell already precaches, so this costs no extra bytes. */
+  font-family:'Source Serif 4 Variable';
+  font-style:normal;
+  font-weight:200 900;
+  font-display:swap;
+  src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+}
+:root{
+  --bg:#16181A; --panel:#1D2023; --panel2:#232629;
+  --ink:#EAE6DC; --ink2:#9C988D; --ink3:#6E6B64;
+  --rule:rgba(255,255,255,.10); --rule2:rgba(255,255,255,.18); --cut:#9FC3D4;
+  --serif:"Source Serif 4 Variable",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 64px}
+header{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:22px}
+h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.15;margin:0 0 6px}
+header p{margin:0;color:var(--ink2);max-width:68ch}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 306px;gap:16px;align-items:start}
+.stage{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+#oc{display:block;width:100%;height:min(66vh,600px);min-height:400px;touch-action:none;cursor:grab}
+#oc:active{cursor:grabbing}
+.hint{position:absolute;left:14px;bottom:11px;font-size:12px;color:var(--ink3);pointer-events:none}
+.legend{position:absolute;right:14px;top:12px;font-size:12px;color:var(--ink2);text-align:right;pointer-events:none;line-height:1.9}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-left:7px}
+aside{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:14px}
+aside h3{font-family:var(--serif);font-weight:400;font-size:17px;margin:0 0 10px}
+#ct{display:block;width:100%;background:#000;border-radius:5px}
+.ctrow{display:flex;gap:6px;margin:12px 0 0}
+.slidewrap{margin:12px 0 4px}
+input[type=range]{width:100%;accent-color:var(--cut)}
+.lvl{font-size:12px;color:var(--ink2);display:flex;justify-content:space-between;margin-top:2px}
+.presets{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.presets button{text-align:left}
+.ctnote{font-size:12px;color:var(--ink3);margin:14px 0 0;line-height:1.55}
+.rail{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--rule)}
+.grp{display:flex;flex-direction:column;gap:8px}
+.grp>span{font-size:12px;color:var(--ink3);font-family:var(--serif);font-style:italic}
+.btns{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+button{font:inherit;font-size:13px;color:var(--ink);background:transparent;border:1px solid var(--rule2);
+  border-radius:6px;padding:6px 12px;cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{background:var(--panel2)}
+button:focus-visible{outline:2px solid var(--cut);outline-offset:2px}
+button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+label.chk{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2);cursor:pointer}
+label.chk input{accent-color:var(--cut);width:15px;height:15px}
+.notes{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;margin-top:34px;padding-top:26px;border-top:1px solid var(--rule)}
+h2{font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 12px}
+dl{margin:0}
+dt{font-family:var(--serif);font-size:16px;margin-top:12px}
+dd{margin:2px 0 0;color:var(--ink2);font-size:14px;max-width:56ch}
+.clin{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;align-self:start}
+.clin p{margin:0 0 12px;font-size:14px;color:var(--ink2)}
+.clin p:last-child{margin-bottom:0}
+.clin b{color:var(--ink);font-weight:500}
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink3);max-width:80ch}
+.refs{margin-top:34px;padding-top:26px;border-top:1px solid var(--rule)}
+.refs h2{margin-bottom:16px}
+.refgrp{margin:0 0 22px}
+.refgrp>span{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink3);display:block;margin-bottom:8px}
+.refs ul{list-style:none;margin:0;padding:0}
+.refs li{padding:10px 0;border-top:1px solid var(--rule);max-width:78ch}
+.refs a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule2);font-family:var(--serif);font-size:16px}
+.refs a:hover{border-bottom-color:var(--ink)}
+.refs a:focus-visible{outline:2px solid var(--cut);outline-offset:3px}
+.refs .src{font-size:12px;color:var(--ink3);margin-left:8px}
+.refs p{margin:3px 0 0;font-size:14px;color:var(--ink2)}
+.tag{font-size:11px;color:var(--ink3);border:1px solid var(--rule2);border-radius:4px;padding:1px 6px;margin-left:8px;white-space:nowrap}
+@media(max-width:900px){.row{grid-template-columns:1fr}.notes{grid-template-columns:1fr;gap:24px}h1{font-size:27px}.legend{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>The ossicular chain in its temporal bone</h1>
+  <p>The three bones, their muscles, and the walls and landmarks around them — with a slice reconstructed through the same model, so the shape and its projection sit side by side. Drag to rotate, scroll to zoom, double-click to reset.</p>
+</header>
+
+<div class="row">
+  <div class="stage">
+    <canvas id="oc" aria-label="Rotatable 3D model of the middle ear: malleus, incus, stapes, eardrum, muscles, tympanic cavity walls, cochlea, vestibule, lateral semicircular canal and facial nerve canal"></canvas>
+    <div class="legend">
+      Malleus <i style="background:#C4813C"></i><br>
+      Incus <i style="background:#3F8F76"></i><br>
+      Stapes <i style="background:#6E66CE"></i><br>
+      Muscle <i style="background:#A6524E"></i><br>
+      Labyrinth <i style="background:#6FA3B8"></i><br>
+      Facial nerve <i style="background:#C97A7A"></i>
+    </div>
+    <div class="hint">Drag to rotate · scroll to zoom</div>
+  </div>
+
+  <aside>
+    <h3>Slice through the model</h3>
+    <canvas id="ct" width="280" height="280" aria-label="Reconstructed one millimetre slab through the temporal bone"></canvas>
+    <div class="ctrow" id="planeBtns">
+      <button class="on" data-plane="axial">Axial</button>
+      <button data-plane="coronal">Coronal</button>
+    </div>
+    <div class="slidewrap">
+      <input type="range" id="lvl" min="-3.2" max="3.2" step="0.05" value="2.6" aria-label="Slice level">
+      <div class="lvl"><span id="lvlTxt"></span><span>1.0 mm slab</span></div>
+    </div>
+    <div class="presets" id="presets">
+      <button data-p="cone">Ice cream cone level</button>
+      <button data-p="lsc">Lateral canal and facial nerve</button>
+      <button data-p="stapes">Stapes and oval window</button>
+      <button data-p="ow">Coronal through the stapes</button>
+    </div>
+    <p class="ctnote">Rebuilt live from the geometry on the left, not a patient scan. Dense bone is white, air and fluid spaces are dark. The blue rectangle in the 3D view is where this cut sits.</p>
+  </aside>
+</div>
+
+<div class="rail">
+  <div class="grp">
+    <span>View</span>
+    <div class="btns" id="viewBtns">
+      <button class="on" data-sel="all">Whole chain</button>
+      <button data-sel="landmarks">Landmarks</button>
+      <button data-sel="malleus">Malleus</button>
+      <button data-sel="incus">Incus</button>
+      <button data-sel="stapes">Stapes</button>
+    </div>
+  </div>
+  <div class="grp">
+    <span>State</span>
+    <div class="btns" id="modeBtns">
+      <button class="on" data-mode="normal">Normal</button>
+      <button data-mode="erosion">Long process eroded</button>
+      <button data-mode="oto">Footplate fixed</button>
+    </div>
+  </div>
+  <div class="grp">
+    <span>Show</span>
+    <div class="btns">
+      <button id="play">Play sound wave</button>
+      <label class="chk"><input type="checkbox" id="bone" checked> Temporal bone</label>
+      <label class="chk"><input type="checkbox" id="mus" checked> Muscles</label>
+      <label class="chk"><input type="checkbox" id="lbl" checked> Labels</label>
+      <label class="chk"><input type="checkbox" id="pln" checked> Cut plane</label>
+    </div>
+  </div>
+</div>
+
+<div class="notes">
+  <div>
+    <h2 id="pTitle"></h2>
+    <dl id="parts"></dl>
+  </div>
+  <div class="clin">
+    <h2 id="cTitle"></h2>
+    <div id="clin"></div>
+  </div>
+</div>
+
+<section class="refs">
+  <h2>Cases and reviews</h2>
+
+  <div class="refgrp">
+    <span>Erosion of the long process</span>
+    <ul>
+      <li>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6775179/" target="_blank" rel="noopener">HRCT imaging of acquired cholesteatoma: a pictorial review</a>
+        <span class="src">Insights into Imaging, 2019</span>
+        <p>Figures 7 and 8 put a normal ice cream cone beside a lost one. A later axial case shows the long process and stapes missing from their expected positions, with a line diagram marking where they should be.</p>
+      </li>
+      <li>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9925837/" target="_blank" rel="noopener">Autoincudotomy as an uncommon cause of conductive hearing loss</a>
+        <span class="src">Radiology Case Reports, 2023</span>
+        <p>A single clean case with surgical confirmation. Useful because the eroded long process is the only finding, without the soft tissue that usually clutters a cholesteatoma case.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="refgrp">
+    <span>Fixation of the footplate</span>
+    <ul>
+      <li>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3999364/" target="_blank" rel="noopener">Imaging in otosclerosis: a pictorial review</a>
+        <span class="src">Insights into Imaging, 2014</span>
+        <p>The standard reference. Figure 1 is the hypodense plaque at the fissula ante fenestram in axial and coronal, figure 3 shows heaped-up plaque narrowing the oval window, and there is a preoperative checklist and post-stapedectomy examples.</p>
+      </li>
+      <li>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11818637/" target="_blank" rel="noopener">A white spot around the fissula ante fenestram: a new diagnostic indicator</a>
+        <span class="src">2025</span>
+        <p>Recent, and it lays out the Veillon grading from isolated footplate thickening through to pericochlear involvement. Worth reading if you want a framework rather than pattern recognition alone.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="refgrp">
+    <span>Normal anatomy and landmarks</span>
+    <ul>
+      <li>
+        <a href="https://epos.myesr.org/poster/esr/ecr2022/C-14642/findings%20and%20procedure%20details" target="_blank" rel="noopener">The ossicular chain in CT: from normal to pathologic</a>
+        <span class="src">ECR 2022 poster</span>
+        <p>A landmark-by-landmark walk down the axial stack: ice cream cone, then three dots in a row, then two parallel lines. The closest match to the slice panel above, with coronal oblique reformats showing each joint separately.</p>
+      </li>
+      <li>
+        <a href="https://insightsimaging.springeropen.com/articles/10.1007/s13244-016-0490-9" target="_blank" rel="noopener">Post-traumatic deafness: a pictorial review of CT and MRI findings</a>
+        <span class="src">Insights into Imaging, 2016</span>
+        <p>Both joints shown in 2D and 3D CT, then incudomalleolar and incudostapedial dislocation, which is the other way this same anatomy fails.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="refgrp">
+    <span>Behind a paywall, but worth knowing about</span>
+    <ul>
+      <li>
+        <a href="https://pubs.rsna.org/doi/10.1148/radiographics.17.6.9397457" target="_blank" rel="noopener">CT appearances of ossicular injuries</a>
+        <span class="src">RadioGraphics</span>
+        <p>The reference paper for traumatic dislocation patterns.</p>
+      </li>
+      <li>
+        <a href="https://epos.myesr.org/poster/esr/ranzcr2013/R-0079" target="_blank" rel="noopener">Ossicular fixation: a pictorial review of CT temporal bone findings</a>
+        <span class="src">RANZCR 2013 poster</span>
+        <p>Covers tympanosclerosis and malleus head fixation alongside otosclerosis, so it gives you the whole fixation differential rather than one disease.</p>
+      </li>
+    </ul>
+  </div>
+
+  <p style="font-size:13px;color:var(--ink3);max-width:78ch;margin:0">One caveat these papers raise together: agreement between CT and surgical findings is good for the malleus and the incus body and short process, but noticeably worse for the long process and the stapes. An absent-looking long process is not proof, and a present-looking one does not rule out erosion.</p>
+</section>
+
+<footer>Movement in the animation is exaggerated many thousandfold; real footplate travel at conversational loudness is a fraction of a micrometre. Proportions are simplified for teaching, not for measurement. The mastoid air cells, superior and posterior canals, internal auditory canal, carotid canal and jugular bulb are left out to keep the middle ear readable.</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var C=document.getElementById('oc'), X=C.getContext('2d');
+var CT=document.getElementById('ct'), XT=CT.getContext('2d');
+
+function sub(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]];}
+function crs(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
+function nrm(a){var l=Math.hypot(a[0],a[1],a[2])||1;return [a[0]/l,a[1]/l,a[2]/l];}
+function hex(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+
+var PRIM=0;
+function Obj(g,col){return {g:g,col:col,V:[],W:[],F:[],P:[]};}
+function sph(o,c,rx,ry,rz,su,sv,w){
+  w=w||0; var b=o.V.length,i,j,id=++PRIM;
+  for(i=0;i<=sv;i++){var ph=Math.PI*i/sv;
+    for(j=0;j<su;j++){var th=2*Math.PI*j/su;
+      o.V.push([c[0]+rx*Math.sin(ph)*Math.cos(th),c[1]+ry*Math.cos(ph),c[2]+rz*Math.sin(ph)*Math.sin(th)]);
+      o.W.push(w);}}
+  for(i=0;i<sv;i++)for(j=0;j<su;j++){var a=b+i*su+j,d=b+i*su+(j+1)%su;o.F.push([a,d,d+su,a+su]);o.P.push(id);}
+}
+function tub(o,p0,p1,r0,r1,su,w0,w1){
+  w0=w0||0; w1=(w1===undefined?w0:w1);
+  var d=nrm(sub(p1,p0)), up=Math.abs(d[1])>0.9?[1,0,0]:[0,1,0];
+  var u=nrm(crs(d,up)), v=crs(d,u), b=o.V.length, j,t,c,s,id=++PRIM;
+  for(j=0;j<su;j++){t=2*Math.PI*j/su;c=Math.cos(t);s=Math.sin(t);
+    o.V.push([p0[0]+r0*(u[0]*c+v[0]*s),p0[1]+r0*(u[1]*c+v[1]*s),p0[2]+r0*(u[2]*c+v[2]*s)]);o.W.push(w0);}
+  for(j=0;j<su;j++){t=2*Math.PI*j/su;c=Math.cos(t);s=Math.sin(t);
+    o.V.push([p1[0]+r1*(u[0]*c+v[0]*s),p1[1]+r1*(u[1]*c+v[1]*s),p1[2]+r1*(u[2]*c+v[2]*s)]);o.W.push(w1);}
+  for(j=0;j<su;j++){var a=b+j,e=b+(j+1)%su;o.F.push([a,e,e+su,a+su]);o.P.push(id);}
+  o.V.push(p0.slice());o.W.push(w0);o.V.push(p1.slice());o.W.push(w1);
+  var c0=o.V.length-2,c1=o.V.length-1;
+  for(j=0;j<su;j++){o.F.push([c0,b+j,b+(j+1)%su]);o.P.push(id);o.F.push([c1,b+su+j,b+su+(j+1)%su]);o.P.push(id);}
+}
+function spindle(o,p0,p1,r,su){
+  var m=[(p0[0]+p1[0])/2,(p0[1]+p1[1])/2,(p0[2]+p1[2])/2];
+  tub(o,p0,m,r*0.35,r,su); tub(o,m,p1,r,r*0.4,su);
+}
+/* extrude a convex 2-D outline given in axes a1,a2 along axis A from s0 to s1 */
+function prism(o,pts,a1,a2,A,s0,s1){
+  var b=o.V.length,id=++PRIM,n=pts.length,i,p;
+  for(i=0;i<n;i++){p=[0,0,0];p[a1]=pts[i][0];p[a2]=pts[i][1];p[A]=s0;o.V.push(p);o.W.push(0);}
+  for(i=0;i<n;i++){p=[0,0,0];p[a1]=pts[i][0];p[a2]=pts[i][1];p[A]=s1;o.V.push(p);o.W.push(0);}
+  for(i=0;i<n;i++){var j=(i+1)%n;o.F.push([b+i,b+j,b+n+j,b+n+i]);o.P.push(id);}
+  for(i=1;i<n-1;i++){o.F.push([b,b+i,b+i+1]);o.P.push(id);o.F.push([b+n,b+n+i,b+n+i+1]);o.P.push(id);}
+}
+
+/* +x lateral, +y superior, +z anterior. 1 unit is about 1.55 mm */
+var P={
+  mHead:[1.15,2.60,0.00], mNeck:[0.95,1.25,-0.05], mLat:[1.85,0.95,-0.05], mAnt:[1.05,1.60,1.65],
+  mMid:[0.75,-0.60,-0.15], umbo:[0.55,-2.55,-0.30],
+  iBody:[-1.00,2.60,-0.30], iShort:[-1.15,2.45,-2.40], iTop:[-0.95,1.90,-0.55],
+  iMid:[-1.15,0.30,-0.58], iEnd:[-1.35,-1.35,-0.60], lent:[-2.05,-1.65,-0.60],
+  sHead:[-2.42,-1.75,-0.60], sNeck:[-2.80,-1.85,-0.60],
+  cA:[-4.10,-2.10,0.20], cP:[-4.10,-2.10,-1.40], fp:[-4.35,-2.10,-0.60],
+  ttPull:[-1.32,1.28,2.00], ttEnd:[0.72,1.28,0.05],
+  pyrApex:[-3.35,-2.42,-2.45], stEnd:[-2.88,-1.95,-1.00]
+};
+
+var TM=Obj('tm','#C7B08A');
+(function(){
+  var rn=nrm([1,0.32,0.12]), rc=[2.35,-0.55,-0.25];
+  var u=nrm(crs(rn,[0,1,0])), v=crs(rn,u), K=4,i,j,id=++PRIM;
+  TM.V.push(P.umbo.slice()); TM.W.push(1);
+  for(i=1;i<=K;i++)for(j=0;j<28;j++){
+    var t=2*Math.PI*j/28, s=i/K;
+    var R=[rc[0]+3.05*(u[0]*Math.cos(t)+v[0]*Math.sin(t)),
+           rc[1]+3.05*(u[1]*Math.cos(t)+v[1]*Math.sin(t)),
+           rc[2]+3.05*(u[2]*Math.cos(t)+v[2]*Math.sin(t))];
+    TM.V.push([P.umbo[0]+s*(R[0]-P.umbo[0]),P.umbo[1]+s*(R[1]-P.umbo[1]),P.umbo[2]+s*(R[2]-P.umbo[2])]);
+    TM.W.push(1-s);
+  }
+  for(j=0;j<28;j++){TM.F.push([0,1+j,1+(j+1)%28]);TM.P.push(id);}
+  for(i=0;i<K-1;i++)for(j=0;j<28;j++){var a=1+i*28+j,d=1+i*28+(j+1)%28;TM.F.push([a,d,d+28,a+28]);TM.P.push(id);}
+})();
+
+var WIN=Obj('win','#8E8A80');
+(function(){var j,id=++PRIM;
+  for(j=0;j<28;j++){var t=2*Math.PI*j/28;WIN.V.push([-4.54,-2.10+1.20*Math.cos(t),-0.60+1.85*Math.sin(t)]);WIN.W.push(0);}
+  for(j=0;j<28;j++){var t=2*Math.PI*j/28;WIN.V.push([-4.54,-2.10+0.60*Math.cos(t),-0.60+1.12*Math.sin(t)]);WIN.W.push(0);}
+  for(j=0;j<28;j++){var a=j,d=(j+1)%28;WIN.F.push([a,d,d+28,a+28]);WIN.P.push(id);}
+})();
+
+var MAL=Obj('malleus','#C4813C');
+sph(MAL,P.mHead,1.05,1.15,1.05,16,11);
+tub(MAL,P.mHead,P.mNeck,0.55,0.40,12);
+tub(MAL,P.mNeck,P.mMid,0.40,0.30,12);
+tub(MAL,P.mMid,P.umbo,0.30,0.16,12);
+tub(MAL,[1.05,1.05,-0.05],P.mLat,0.30,0.10,9);
+tub(MAL,P.mNeck,P.mAnt,0.22,0.06,9);
+
+var INC=Obj('incus','#3F8F76');
+sph(INC,P.iBody,1.10,1.16,1.05,16,11);
+tub(INC,P.iBody,P.iShort,0.50,0.14,12);
+tub(INC,P.iTop,P.iMid,0.45,0.28,12);
+
+var IND=Obj('incusD','#3F8F76');
+tub(IND,P.iMid,P.iEnd,0.28,0.22,12);
+tub(IND,P.iEnd,P.lent,0.22,0.16,9);
+sph(IND,P.lent,0.30,0.30,0.30,11,9);
+
+var STA=Obj('stapes','#6E66CE');
+sph(STA,P.sHead,0.36,0.36,0.36,11,9);
+tub(STA,P.sHead,P.sNeck,0.30,0.24,9);
+tub(STA,P.sNeck,P.cA,0.22,0.16,9);
+tub(STA,P.sNeck,P.cP,0.22,0.16,9);
+tub(STA,P.cA,[P.fp[0],P.fp[1],0.50],0.16,0.14,9);
+tub(STA,P.cP,[P.fp[0],P.fp[1],-1.70],0.16,0.14,9);
+sph(STA,[-4.38,-2.10,-0.60],0.14,0.44,0.98,14,9);
+
+var TTM=Obj('ttm','#A6524E'); spindle(TTM,[-1.55,1.45,4.90],[-1.36,1.32,2.20],0.46,10);
+var TTT=Obj('ttt','#C9BFA8');
+tub(TTT,[-1.36,1.32,2.15],P.ttPull,0.14,0.13,8,0,0);
+tub(TTT,P.ttPull,P.ttEnd,0.13,0.11,8,0,1);
+var CFP=Obj('bone','#8E8A80'); tub(CFP,[-1.55,0.95,2.15],[-1.30,1.42,2.05],0.42,0.22,9);
+
+var STM=Obj('stm','#A6524E'); spindle(STM,[-3.78,-3.05,-4.85],[-3.48,-2.55,-2.95],0.40,10);
+var PYR=Obj('bone','#8E8A80'); tub(PYR,[-3.60,-2.80,-3.30],P.pyrApex,0.58,0.26,10);
+var STT=Obj('stt','#C9BFA8'); tub(STT,P.pyrApex,P.stEnd,0.11,0.10,8,0,1);
+
+var OTO=Obj('oto','#D9CDB0');
+sph(OTO,[-4.50,-1.72,0.55],0.42,0.34,0.46,11,9);
+sph(OTO,[-4.52,-2.05,0.85],0.34,0.30,0.38,11,9);
+
+/* ---------- temporal bone walls ---------- */
+var TB=Obj('tbone','#8E8A80');
+prism(TB,[[-4.60,3.95],[3.05,3.95],[3.05,4.45],[-4.60,4.45]],0,1,2,-4.40,4.20);      /* tegmen tympani */
+prism(TB,[[1.95,2.30],[2.95,3.10],[2.95,3.95],[2.15,3.95]],0,1,2,-2.60,2.60);        /* lateral attic wall, scutum tip */
+prism(TB,[[2.00,2.35],[5.90,2.95],[5.90,3.70],[2.10,3.05]],0,1,2,-2.90,2.90);        /* ear canal roof */
+prism(TB,[[3.15,-3.60],[5.90,-4.00],[5.90,-3.25],[3.25,-2.90]],0,1,2,-2.90,2.90);    /* ear canal floor */
+prism(TB,[[-4.40,-4.00],[3.20,-4.00],[3.20,-3.45],[-4.40,-3.45]],0,1,2,-3.40,3.40);  /* hypotympanic floor */
+
+var CAP=Obj('capsule','#A8A196');
+sph(CAP,[-6.05,-0.60,-0.40],1.95,2.55,3.20,15,10);                                   /* otic capsule */
+sph(CAP,[-4.85,-1.95,0.55],0.95,1.15,1.30,12,9);                                     /* promontory */
+
+var LUM=Obj('lumen','#6FA3B8');
+(function(){                                                                          /* cochlear spiral */
+  var ax=nrm([0.80,-0.05,0.60]), u=nrm(crs(ax,[0,1,0])), v=crs(ax,u);
+  var c=[-5.55,-1.80,0.70], N=20, turns=2.3, prev=null, pr=0;
+  for(var i=0;i<=N;i++){
+    var t=i/N, a=2*Math.PI*turns*t, R=1.05-0.72*t, L=1.55*t, tr=0.38-0.15*t;
+    var p=[c[0]+u[0]*R*Math.cos(a)+v[0]*R*Math.sin(a)+ax[0]*L,
+           c[1]+u[1]*R*Math.cos(a)+v[1]*R*Math.sin(a)+ax[1]*L,
+           c[2]+u[2]*R*Math.cos(a)+v[2]*R*Math.sin(a)+ax[2]*L];
+    if(prev)tub(LUM,prev,p,pr,tr,6);
+    prev=p;pr=tr;
+  }
+})();
+sph(LUM,[-5.55,-1.20,-1.10],0.78,0.82,0.88,12,9);                                     /* vestibule */
+(function(){                                                                          /* lateral semicircular canal */
+  var c=[-5.90,0.75,-1.60], R=1.25, prev=null;
+  for(var i=0;i<=13;i++){
+    var a=(75+320*i/13)*Math.PI/180;
+    var p=[c[0]+R*Math.cos(a), c[1]+0.10*Math.cos(a), c[2]+R*Math.sin(a)];
+    if(prev)tub(LUM,prev,p,0.40,0.40,6);
+    prev=p;
+  }
+})();
+sph(LUM,[-5.10,-2.55,-0.95],0.48,0.48,0.58,10,8);                                     /* round window niche */
+
+var FN=Obj('fn','#C97A7A');
+tub(FN,[-4.75,-0.85,1.55],[-4.62,-0.95,-1.90],0.40,0.40,7);                           /* tympanic segment */
+tub(FN,[-4.62,-0.95,-1.90],[-4.45,-1.50,-2.75],0.40,0.40,7);                          /* second genu */
+tub(FN,[-4.45,-1.50,-2.75],[-4.25,-4.60,-3.05],0.40,0.36,7);                          /* mastoid segment */
+
+var objs=[TB,CAP,TM,WIN,CFP,PYR,TTM,STM,MAL,INC,IND,STA,TTT,STT,OTO,LUM,FN];
+
+var LAB={
+  all:[[[1.30,3.50,0.10],'Malleus','malleus'],[[-1.50,3.50,-0.30],'Incus','incus'],
+       [[-3.50,-2.75,-0.60],'Stapes','stapes'],[[2.50,1.70,-0.20],'Eardrum','tm'],
+       [[-4.65,-2.10,1.35],'Oval window','win']],
+  landmarks:[[[-0.40,4.45,0.60],'Tegmen tympani','tbone'],[[1.95,2.30,0.40],'Scutum','tbone'],
+       [[4.90,3.30,0.40],'External canal','tbone'],[[1.45,1.85,0.20],"Prussak's space",'tbone'],
+       [[-4.20,-2.00,0.60],'Promontory','capsule'],[[-5.70,-2.10,1.30],'Cochlea','lumen'],
+       [[-5.55,-1.20,-1.10],'Vestibule','lumen'],[[-6.30,0.95,-2.75],'Lateral canal','lumen'],
+       [[-4.62,-0.95,-0.40],'Facial nerve canal','fn'],[[-5.10,-2.70,-0.95],'Round window','lumen'],
+       [[-4.65,-2.10,1.35],'Oval window','win'],[[-3.45,-2.55,-2.60],'Pyramidal eminence','bone']],
+  malleus:[[[1.30,3.50,0.10],'Head'],[[1.05,1.35,-0.05],'Neck'],[[1.95,0.95,-0.05],'Lateral process'],
+       [[1.05,1.60,1.80],'Anterior process'],[[0.80,-0.50,-0.20],'Manubrium (handle)'],
+       [[0.55,-2.70,-0.30],'Umbo'],[[2.50,1.70,-0.20],'Eardrum','tm']],
+  incus:[[[-1.50,3.50,-0.30],'Body'],[[-1.15,2.45,-2.60],'Short process'],[[-1.15,0.30,-0.60],'Long process'],
+       [[-2.20,-1.80,-0.60],'Lenticular process','incusD'],[[1.30,3.40,0.10],'Malleus head','malleus']],
+  stapes:[[[-2.42,-1.48,-0.60],'Head'],[[-2.88,-2.08,-0.60],'Neck'],[[-3.55,-2.00,-0.02],'Anterior crus'],
+       [[-3.55,-2.00,-1.22],'Posterior crus'],[[-4.45,-2.10,-0.60],'Footplate'],
+       [[-4.65,-2.10,1.35],'Oval window','win'],[[-2.20,-1.75,-0.60],'Lenticular process','incusD']]
+};
+var MUSLAB={
+  all:[[[-1.45,1.40,3.60],'Tensor tympani','ttm'],[[-3.62,-2.80,-3.90],'Stapedius','stm']],
+  landmarks:[],
+  malleus:[[[-1.32,1.30,1.10],'Tensor tympani tendon','ttt']],
+  incus:[],
+  stapes:[[[-3.10,-2.20,-1.75],'Stapedius tendon','stt']]
+};
+var VIEW={all:{c:[-1.40,0.20,-0.30],z:1},landmarks:{c:[-1.60,0.10,-0.30],z:0.68},
+          malleus:{c:[1.00,0.30,0.10],z:1.35},incus:{c:[-1.20,0.80,-0.80],z:1.40},
+          stapes:{c:[-3.40,-1.95,-0.60],z:2.20}};
+
+var yaw=-0.62, pit=0.22, zoom=1, sel='all', mode='normal';
+var anim=false, t0=0, ang=0, showMus=true, showLab=true, showPlane=true, showBone=true;
+var drag=false, px=0, py=0;
+var piv=[0.05,2.55,0], LIGHT=nrm([-0.34,0.52,0.78]);
+var plane='axial', level=2.60, SLAB=0.32;
+var PB={axial:{cu:-1.50,cv:0.30,half:5.60},coronal:{cu:-1.20,cv:-0.20,half:5.30}};
+
+function rock(p){
+  var c=Math.cos(ang), s=Math.sin(ang), x=p[0]-piv[0], y=p[1]-piv[1];
+  return [piv[0]+x*c-y*s, piv[1]+x*s+y*c, p[2]];
+}
+function gain(){return mode==='normal'?1:(mode==='oto'?0.07:0);}
+function xf(g,p,w){
+  if(g==='malleus'||g==='incus'||g==='incusD')return rock(p);
+  if(g==='stapes'||g==='oto')return [p[0]+ang*4.3*gain(),p[1],p[2]];
+  if(g==='tm')return [p[0]+(w||0)*ang*5.2,p[1],p[2]];
+  if(g==='ttt'){var d=sub(rock(P.ttEnd),P.ttEnd);return [p[0]+w*d[0],p[1]+w*d[1],p[2]+w*d[2]];}
+  if(g==='stt')return [p[0]+w*ang*4.3*gain(),p[1],p[2]];
+  return p;
+}
+function isMuscle(g){return g==='ttm'||g==='stm'||g==='ttt'||g==='stt'||g==='bone';}
+function isEnv(g){return g==='tbone'||g==='capsule'||g==='lumen'||g==='fn';}
+function visible(o){
+  if(o.g==='oto')return mode==='oto';
+  if(isEnv(o.g))return showBone;
+  if(isMuscle(o.g))return showMus;
+  return true;
+}
+function faded(o){
+  if(o===IND&&mode==='erosion')return true;
+  if(isEnv(o.g))return sel!=='all'&&sel!=='landmarks';
+  if(sel==='all'||sel==='landmarks')return false;
+  if(o.g==='tm')return sel!=='malleus';
+  if(o.g==='win')return sel!=='stapes';
+  if(o.g==='ttm'||o.g==='ttt'||o.g==='bone')return sel!=='malleus';
+  if(o.g==='stm'||o.g==='stt')return sel!=='stapes';
+  if(o.g==='incusD')return sel!=='incus';
+  return o.g!==sel&&!(sel==='stapes'&&o.g==='oto');
+}
+function alphaOf(o,fd){
+  var a=1;
+  if(o.g==='tm')a=0.24;
+  else if(o.g==='win')a=0.42;
+  else if(o.g==='tbone')a=0.30;
+  else if(o.g==='capsule')a=0.18;
+  else if(o.g==='lumen'||o.g==='fn')a=0.80;
+  else if(o===IND&&mode==='erosion')a=0.10;
+  if(fd)a=Math.min(a,0.12);
+  return a;
+}
+function planeCorners(){
+  var b=PB[plane],h=b.half;
+  if(plane==='axial')return [[b.cu-h,level,b.cv-h],[b.cu+h,level,b.cv-h],[b.cu+h,level,b.cv+h],[b.cu-h,level,b.cv+h]];
+  return [[b.cu-h,b.cv-h,level],[b.cu+h,b.cv-h,level],[b.cu+h,b.cv+h,level],[b.cu-h,b.cv+h,level]];
+}
+
+function draw(){
+  var dpr=Math.min(window.devicePixelRatio||1,2), Wd=C.clientWidth, Hd=C.clientHeight;
+  if(C.width!==Math.round(Wd*dpr)){C.width=Math.round(Wd*dpr);C.height=Math.round(Hd*dpr);}
+  X.setTransform(dpr,0,0,dpr,0,0);
+  X.clearRect(0,0,Wd,Hd);
+  var vw=VIEW[sel], cy=Math.cos(yaw), sy=Math.sin(yaw), cp=Math.cos(pit), sp=Math.sin(pit);
+  var f=Math.min(Wd,Hd)*1.30*vw.z*zoom, D=17, cx=Wd/2, cyy=Hd/2+6, faces=[], i,k,oi;
+
+  function toCam(w){
+    var qx=w[0]-vw.c[0], qy=w[1]-vw.c[1], qz=w[2]-vw.c[2];
+    var x1=qx*cy+qz*sy, z1=-qx*sy+qz*cy;
+    return [x1, qy*cp-z1*sp, qy*sp+z1*cp];
+  }
+  function proj(cm){var s=f/(D-cm[2]);return [cx+cm[0]*s, cyy-cm[1]*s];}
+
+  var pc=null;
+  if(showPlane){
+    pc=planeCorners().map(function(p){return proj(toCam(p));});
+    X.beginPath();X.moveTo(pc[0][0],pc[0][1]);
+    for(i=1;i<4;i++)X.lineTo(pc[i][0],pc[i][1]);
+    X.closePath();X.fillStyle='rgba(159,195,212,.07)';X.fill();
+  }
+
+  for(oi=0;oi<objs.length;oi++){
+    var o=objs[oi]; if(!visible(o))continue;
+    var cam=[],pr=[];
+    for(i=0;i<o.V.length;i++){var cm=toCam(xf(o.g,o.V[i],o.W[i]));cam.push(cm);pr.push(proj(cm));}
+    o._pr=pr;
+    var fd=faded(o), base=fd?[142,140,132]:hex(o.col), al=alphaOf(o,fd);
+    for(k=0;k<o.F.length;k++){
+      var F=o.F[k], a=cam[F[0]], b=cam[F[1]], c=cam[F[2]];
+      var n=nrm(crs(sub(b,a),sub(c,a)));
+      if(n[2]<0)n=[-n[0],-n[1],-n[2]];
+      var sh=0.30+0.72*Math.max(0,n[0]*LIGHT[0]+n[1]*LIGHT[1]+n[2]*LIGHT[2]);
+      var z=0;for(i=0;i<F.length;i++)z+=cam[F[i]][2];z/=F.length;
+      faces.push({o:o,F:F,z:z,c:'rgba('+Math.round(Math.min(255,base[0]*sh))+','+
+        Math.round(Math.min(255,base[1]*sh))+','+Math.round(Math.min(255,base[2]*sh))+','+al+')'});
+    }
+  }
+  faces.sort(function(a,b){return a.z-b.z;});
+  for(k=0;k<faces.length;k++){
+    var fc=faces[k], pr2=fc.o._pr;
+    X.beginPath();X.moveTo(pr2[fc.F[0]][0],pr2[fc.F[0]][1]);
+    for(i=1;i<fc.F.length;i++)X.lineTo(pr2[fc.F[i]][0],pr2[fc.F[i]][1]);
+    X.closePath();X.fillStyle=fc.c;X.fill();X.strokeStyle=fc.c;X.lineWidth=0.4;X.stroke();
+  }
+  if(showPlane&&pc){
+    X.beginPath();X.moveTo(pc[0][0],pc[0][1]);
+    for(i=1;i<4;i++)X.lineTo(pc[i][0],pc[i][1]);
+    X.closePath();X.strokeStyle='rgba(159,195,212,.6)';X.lineWidth=1;X.setLineDash([5,4]);X.stroke();X.setLineDash([]);
+  }
+
+  if(showLab){
+    var list=LAB[sel].slice();
+    if(showMus)list=list.concat(MUSLAB[sel]);
+    if(!showBone&&sel==='landmarks')list=[];
+    if(mode==='oto'&&(sel==='all'||sel==='stapes'))list.push([[-4.60,-1.60,0.95],'Otosclerotic focus','oto']);
+    if(mode==='erosion'&&(sel==='all'||sel==='incus'))list.push([[-1.80,-1.60,-0.60],'Eroded segment','incusD']);
+    var L=[],R=[];
+    X.font='15px "Source Serif 4 Variable",Georgia,serif';
+    for(i=0;i<list.length;i++){
+      var it=list[i], g=it[2]||sel, s2=proj(toCam(xf(g,it[0],1)));
+      var e={x:s2[0],y:s2[1],t:it[1],w:X.measureText(it[1]).width,dim:!!it[2]};
+      (s2[0]<cx?L:R).push(e);
+    }
+    lay(L);lay(R);
+    for(i=0;i<L.length;i++)lab(L[i],true);
+    for(i=0;i<R.length;i++)lab(R[i],false);
+  }
+  function lay(arr){
+    arr.sort(function(a,b){return a.y-b.y;});
+    var y=18;
+    for(var n=0;n<arr.length;n++){arr[n].ly=Math.max(y,Math.min(Hd-12,arr[n].y));y=arr[n].ly+21;}
+    var over=arr.length?arr[arr.length-1].ly-(Hd-12):0;
+    if(over>0)for(var m=arr.length-1;m>=0;m--)arr[m].ly-=over;
+  }
+  function lab(e,left){
+    var tx=left?12:Wd-12, ex=left?12+e.w+6:Wd-12-e.w-6;
+    X.strokeStyle='rgba(234,230,218,.34)';X.lineWidth=0.8;X.setLineDash([3,3]);
+    X.beginPath();X.moveTo(ex,e.ly-5);X.lineTo(e.x,e.y);X.stroke();X.setLineDash([]);
+    X.fillStyle='rgba(234,230,218,.55)';X.beginPath();X.arc(e.x,e.y,2,0,6.283);X.fill();
+    X.fillStyle=e.dim?'#9C988D':'#EAE6DC';X.textAlign=left?'left':'right';X.fillText(e.t,tx,e.ly);
+  }
+}
+
+/* ---------- reconstructed slab: negative densities carve air and fluid out of bone ---------- */
+var DENS={malleus:1,incus:1,incusD:1,stapes:1,bone:0.95,oto:0.86,tbone:1,capsule:1,
+          lumen:-1,fn:-1,tm:0.16,ttm:0.15,stm:0.15,ttt:0.16,stt:0.16,win:0};
+function gatherTris(){
+  var T=[],i,k;
+  for(i=0;i<objs.length;i++){
+    var o=objs[i], d=DENS[o.g];
+    if(!d)continue;
+    if(o===IND&&mode==='erosion')continue;
+    if(o.g==='oto'&&mode!=='oto')continue;
+    if(isEnv(o.g)&&!showBone)continue;
+    if((o.g==='ttm'||o.g==='stm'||o.g==='ttt'||o.g==='stt')&&!showMus)continue;
+    for(k=0;k<o.F.length;k++){
+      var F=o.F[k],p=o.P[k];
+      T.push([o.V[F[0]],o.V[F[1]],o.V[F[2]],d,p]);
+      if(F.length===4)T.push([o.V[F[0]],o.V[F[2]],o.V[F[3]],d,p]);
+    }
+  }
+  return T;
+}
+var ctPending=false;
+function queueCT(){if(ctPending)return;ctPending=true;requestAnimationFrame(function(){ctPending=false;renderCT();});}
+
+function renderCT(){
+  var N=CT.width, A,a1,a2,b=PB[plane];
+  if(plane==='axial'){A=1;a1=0;a2=2;}else{A=2;a1=0;a2=1;}
+  var lo=level-SLAB, hi=level+SLAB, half=b.half, span=2*half;
+  var umin=b.cu-half, vmin=b.cv-half;
+  var tris=gatherTris(), G=52, cell=span/G, grid=new Array(G*G), t,i,j,k;
+  for(i=0;i<grid.length;i++)grid[i]=[];
+  for(t=0;t<tris.length;t++){
+    var T=tris[t],p0=T[0],p1=T[1],p2=T[2];
+    var u0=Math.min(p0[a1],p1[a1],p2[a1]),u1=Math.max(p0[a1],p1[a1],p2[a1]);
+    var v0=Math.min(p0[a2],p1[a2],p2[a2]),v1=Math.max(p0[a2],p1[a2],p2[a2]);
+    var ci0=Math.max(0,Math.floor((u0-umin)/cell)),ci1=Math.min(G-1,Math.floor((u1-umin)/cell));
+    var cj0=Math.max(0,Math.floor((v0-vmin)/cell)),cj1=Math.min(G-1,Math.floor((v1-vmin)/cell));
+    if(ci1<0||cj1<0||ci0>G-1||cj0>G-1)continue;
+    for(i=ci0;i<=ci1;i++)for(j=cj0;j<=cj1;j++)grid[j*G+i].push(T);
+  }
+  var img=XT.createImageData(N,N), buf=new Float32Array(N*N), hits=[], ivs=[], bd=[], kk, qq;
+  function numSort(a,b){return a-b;}
+  for(var py2=0;py2<N;py2++){
+    var V=vmin+span*(1-(py2+0.5)/N)+0.0011;
+    var cj=Math.max(0,Math.min(G-1,Math.floor((V-vmin)/cell)));
+    for(var px2=0;px2<N;px2++){
+      var U=umin+span*(px2+0.5)/N+0.0007;
+      var ci=Math.max(0,Math.min(G-1,Math.floor((U-umin)/cell)));
+      var cellT=grid[cj*G+ci];
+      if(!cellT.length)continue;
+      hits.length=0;
+      for(k=0;k<cellT.length;k++){
+        var Tr=cellT[k],q0=Tr[0],q1=Tr[1],q2=Tr[2];
+        var e0u=q1[a1]-q0[a1],e0v=q1[a2]-q0[a2],e1u=q2[a1]-q0[a1],e1v=q2[a2]-q0[a2];
+        var den=e0u*e1v-e1u*e0v; if(den<1e-9&&den>-1e-9)continue;
+        var pu=U-q0[a1],pv=V-q0[a2];
+        var w1=(pu*e1v-e1u*pv)/den; if(w1<0||w1>1)continue;
+        var w2=(e0u*pv-pu*e0v)/den; if(w2<0||w1+w2>1)continue;
+        hits.push([Tr[4],q0[A]+w1*(q1[A]-q0[A])+w2*(q2[A]-q0[A]),Tr[3]]);
+      }
+      if(hits.length<2)continue;
+      hits.sort(function(a,b){return a[0]-b[0]||a[1]-b[1];});
+      ivs.length=0;
+      var n=0;
+      while(n<hits.length){
+        var m=n; while(m<hits.length&&hits[m][0]===hits[n][0])m++;
+        var cnt=m-n; if(cnt%2)cnt--;
+        for(var s=0;s<cnt;s+=2){
+          var t0=Math.max(lo,hits[n+s][1]), t1=Math.min(hi,hits[n+s+1][1]);
+          if(t1>t0){ivs.push(t0,t1,hits[n+s][2]);}
+        }
+        n=m;
+      }
+      var ni=ivs.length/3; if(!ni)continue;
+      bd.length=0;
+      for(kk=0;kk<ni;kk++){bd.push(ivs[kk*3],ivs[kk*3+1]);}
+      bd.sort(numSort);
+      var acc=0;
+      for(kk=0;kk<bd.length-1;kk++){
+        var s0=bd[kk], s1=bd[kk+1];
+        if(s1-s0<1e-6)continue;
+        var mid=(s0+s1)*0.5, pmax=0, neg=false;
+        for(qq=0;qq<ni;qq++){
+          if(ivs[qq*3]<=mid&&ivs[qq*3+1]>=mid){
+            var dd=ivs[qq*3+2];
+            if(dd<0)neg=true; else if(dd>pmax)pmax=dd;
+          }
+        }
+        if(!neg)acc+=(s1-s0)*pmax;
+      }
+      buf[py2*N+px2]=acc;
+    }
+  }
+  var out=new Float32Array(N*N);
+  for(j=0;j<N;j++)for(i=0;i<N;i++){
+    var s2=0,c2=0;
+    for(var dj=-1;dj<=1;dj++)for(var di=-1;di<=1;di++){
+      var jj=j+dj,ii=i+di; if(jj<0||jj>=N||ii<0||ii>=N)continue;
+      s2+=buf[jj*N+ii];c2++;
+    }
+    out[j*N+i]=s2/c2;
+  }
+  var d2=img.data;
+  for(i=0;i<N*N;i++){
+    var g=Math.pow(Math.min(1,out[i]/(2*SLAB*0.85)),0.85)*250;
+    g+=(Math.random()-0.5)*7+7;
+    g=Math.max(0,Math.min(255,g));
+    d2[i*4]=g;d2[i*4+1]=g;d2[i*4+2]=g*0.985;d2[i*4+3]=255;
+  }
+  XT.putImageData(img,0,0);
+  XT.font='11px system-ui,sans-serif';XT.fillStyle='rgba(230,230,230,.62)';
+  XT.textAlign='center';
+  if(plane==='axial'){XT.fillText('anterior',N/2,14);XT.fillText('posterior',N/2,N-7);}
+  else{XT.fillText('superior',N/2,14);XT.fillText('inferior',N/2,N-7);}
+  XT.textAlign='right';XT.fillText('lateral',N-8,N/2);
+  XT.textAlign='left';XT.fillText('medial',8,N/2);
+  var mm,txt;
+  if(plane==='axial'){mm=(level-P.fp[1])*1.55;txt=mm>=0?mm.toFixed(1)+' mm above the footplate':(-mm).toFixed(1)+' mm below the footplate';}
+  else{mm=(level-P.fp[2])*1.55;txt=mm>=0?mm.toFixed(1)+' mm in front of the footplate':(-mm).toFixed(1)+' mm behind the footplate';}
+  document.getElementById('lvlTxt').textContent=txt;
+}
+
+function loop(ts){
+  if(anim){if(!t0)t0=ts;ang=0.055*Math.sin((ts-t0)/470);}
+  draw();requestAnimationFrame(loop);
+}
+
+C.addEventListener('pointerdown',function(e){drag=true;px=e.clientX;py=e.clientY;C.setPointerCapture(e.pointerId);});
+C.addEventListener('pointermove',function(e){
+  if(!drag)return;
+  yaw+=(e.clientX-px)*0.010;
+  pit=Math.max(-1.25,Math.min(1.25,pit+(e.clientY-py)*0.008));
+  px=e.clientX;py=e.clientY;
+});
+C.addEventListener('pointerup',function(){drag=false;});
+C.addEventListener('pointercancel',function(){drag=false;});
+C.addEventListener('wheel',function(e){e.preventDefault();zoom=Math.max(0.55,Math.min(4,zoom*(e.deltaY<0?1.09:0.92)));},{passive:false});
+C.addEventListener('dblclick',function(){yaw=-0.62;pit=0.22;zoom=1;});
+
+var PARTS={
+  all:['The chain, end to end',[
+    ['Eardrum','A shallow cone, about 55 square millimetres. The malleus handle is embedded in it, so membrane and bone move as one.'],
+    ['Malleus and incus','Locked at a saddle-shaped joint. They behave as one rigid piece rocking on an axis that runs front to back.'],
+    ['Incus to stapes','A true ball-and-socket joint, letting the stapes rock a little as it is pushed in and out.'],
+    ['Stapes footplate','About 3 square millimetres, sealed into the oval window by a ring of ligament, driving the inner ear fluid like a piston.'],
+    ['Why three bones','A big eardrum funnelled onto a small footplate raises pressure about 17 times. The lever between malleus handle and incus arm adds about 1.3 times. Together roughly 25 decibels, which is what it costs to move fluid with airborne sound.']
+  ]],
+  landmarks:['The walls around the chain',[
+    ['Tegmen tympani','The thin plate of bone roofing the cavity, separating it from the middle cranial fossa. A defect here lets infection or a meningocele through.'],
+    ['Scutum','The sharp spur of the lateral attic wall, just above the eardrum. Blunting of this spur is the earliest sign of attic cholesteatoma.'],
+    ["Prussak's space","The pocket between the scutum and the malleus neck. Where pars flaccida cholesteatoma starts, which is why it takes the malleus neck and incus first."],
+    ['Promontory','The lateral bulge of the cochlear basal turn, forming most of the medial wall. The oval window sits behind and above it, the round window behind and below.'],
+    ['Cochlea and vestibule','Fluid spaces inside the dense otic capsule. On the slice they read as dark against near-white bone.'],
+    ['Lateral semicircular canal','The reference for the standard axial plane and the landmark surgeons work from. Erosion of its bony wall is the classic labyrinthine fistula.'],
+    ['Facial nerve canal','Runs horizontally just above the oval window, turns at the second genu behind the stapes, then descends. Dehiscence over the oval window is common and matters before any stapes surgery.']
+  ]],
+  malleus:['Malleus, part by part',[
+    ['Head','The round ball in the attic, above the eardrum. Its back surface is the joint with the incus.'],
+    ['Neck','The waist below the head. Tensor tympani inserts here, and the chorda tympani passes just behind it.'],
+    ['Lateral process','A small bump tenting the eardrum outwards. The short process you see on otoscopy.'],
+    ['Anterior process','A thin spicule pointing forwards, tethered by ligament. Part of the rocking axis.'],
+    ['Manubrium (handle)','Buried in the eardrum along its whole length, so no part of the membrane moves independently of it.'],
+    ['Umbo','The tip of the handle and the deepest point of the cone. The light reflex points away from it.'],
+    ['Tensor tympani','Runs forwards in its own canal, hooks a right angle round the cochleariform process, then pulls the handle inwards and stiffens the drum.']
+  ]],
+  incus:['Incus, part by part',[
+    ['Body','The bulky part gripping the malleus head. On axial slices the body and the malleus head make the ice cream cone.'],
+    ['Short process','Points backwards into a small socket, held by ligament. With the malleus anterior process it fixes the rocking axis.'],
+    ['Long process','Hangs downwards, medial and parallel to the malleus handle. The most fragile link in the chain.'],
+    ['Lenticular process','A knob turning inwards at nearly a right angle to reach the stapes head. Often too thin to resolve on CT.'],
+    ['Blood supply','One mucosal vessel, no collateral. That is why it dies first when the middle ear is inflamed.']
+  ]],
+  stapes:['Stapes, part by part',[
+    ['Head','The socket that receives the lenticular process.'],
+    ['Neck','A short segment behind the head. The stapedius tendon inserts here and on the posterior crus.'],
+    ['Crura','Two legs, anterior and posterior. The posterior is thicker and more curved. The gap between them is the obturator foramen.'],
+    ['Footplate','An oval plate roughly 3 by 1.4 millimetres, held in the oval window by the annular ligament.'],
+    ['Stapedius','The smallest skeletal muscle in the body. It leaves the pyramidal eminence behind the stapes and pulls it backwards, damping loud sound.']
+  ]]
+};
+var CLIN={
+  normal:['What to look for',
+    '<p><b>Ice cream cone.</b> Set the slice to the cone preset and rotate the model until you are looking down the blue plane. Malleus head as the scoop, incus body and short process as the cone pointing backwards. Losing that shape means the joint is disrupted.</p>'+
+    '<p><b>Work down the stack.</b> The lateral canal preset gives you the standard axial plane, with the facial nerve running forwards just medial to the ossicles. Drop to the stapes preset and the crura, footplate and long process tip come into one slab.</p>'+
+    '<p><b>Scutum first.</b> On coronal images the scutum is the sharp spur above the eardrum. Blunting there, with soft tissue in the pocket medial to it, is attic cholesteatoma until proven otherwise.</p>'],
+  erosion:['Long process erosion',
+    '<p><b>The picture.</b> The distal long process and lenticular process are resorbed, so the chain ends in mid air above the stapes. The stapes itself is usually intact and mobile.</p>'+
+    '<p><b>On the slice.</b> With this state selected the eroded segment drops out of the reconstruction too. Compare the coronal cut against the normal state: the dot between handle and stapes head is simply gone.</p>'+
+    '<p><b>The audiogram.</b> A large conductive gap, often 40 to 60 decibels, with normal bone conduction. Press play and watch the malleus and incus rock while the stapes sits still.</p>'],
+  oto:['Footplate fixation',
+    '<p><b>The picture.</b> A focus of demineralised then sclerotic bone at the anterior margin of the oval window, the fissula ante fenestram. Look for the lucent plaque before it remodels into dense bone.</p>'+
+    '<p><b>On the slice.</b> The focus is included in the reconstruction. Take the axial cut down to footplate level and it appears just in front of the plate, at the edge of the otic capsule.</p>'+
+    '<p><b>The audiogram.</b> Conductive loss starting low frequency with the classic dip at 2 kilohertz. The chain is intact so the rock is transmitted, but the footplate barely moves.</p>']
+};
+function renderPanels(){
+  var p=PARTS[sel];
+  document.getElementById('pTitle').textContent=p[0];
+  var h='';
+  for(var i=0;i<p[1].length;i++)h+='<dt>'+p[1][i][0]+'</dt><dd>'+p[1][i][1]+'</dd>';
+  document.getElementById('parts').innerHTML=h;
+  document.getElementById('cTitle').textContent=CLIN[mode][0];
+  document.getElementById('clin').innerHTML=CLIN[mode][1];
+}
+function pick(box,attr,fn){
+  var bs=box.querySelectorAll('button');
+  Array.prototype.forEach.call(bs,function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(bs,function(x){x.classList.remove('on');});
+      b.classList.add('on');fn(b.getAttribute(attr));
+    });
+  });
+}
+var slider=document.getElementById('lvl');
+function setPlane(p){
+  plane=p;
+  if(p==='axial'){slider.min=-3.6;slider.max=4.4;if(level>4.4||level<-3.6)level=2.6;}
+  else{slider.min=-4.6;slider.max=4.6;if(level>4.6||level<-4.6)level=-0.6;}
+  slider.value=level;queueCT();
+}
+pick(document.getElementById('viewBtns'),'data-sel',function(v){
+  sel=v;zoom=1;
+  if(v==='landmarks'&&!showBone){showBone=true;document.getElementById('bone').checked=true;queueCT();}
+  renderPanels();
+});
+pick(document.getElementById('modeBtns'),'data-mode',function(v){mode=v;renderPanels();queueCT();});
+pick(document.getElementById('planeBtns'),'data-plane',function(v){setPlane(v);});
+document.getElementById('presets').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  var p=b.getAttribute('data-p');
+  if(p==='cone'){level=2.60;setPlane('axial');}
+  if(p==='lsc'){level=0.75;setPlane('axial');}
+  if(p==='stapes'){level=-2.05;setPlane('axial');}
+  if(p==='ow'){level=-0.60;setPlane('coronal');}
+  var bt=document.getElementById('planeBtns').querySelectorAll('button');
+  bt[0].classList.toggle('on',plane==='axial');
+  bt[1].classList.toggle('on',plane==='coronal');
+});
+slider.addEventListener('input',function(){level=parseFloat(this.value);queueCT();});
+document.getElementById('bone').addEventListener('change',function(){showBone=this.checked;queueCT();});
+document.getElementById('mus').addEventListener('change',function(){showMus=this.checked;queueCT();});
+document.getElementById('lbl').addEventListener('change',function(){showLab=this.checked;});
+document.getElementById('pln').addEventListener('change',function(){showPlane=this.checked;});
+document.getElementById('play').addEventListener('click',function(){
+  anim=!anim;t0=0;if(!anim)ang=0;
+  this.textContent=anim?'Pause':'Play sound wave';
+  this.classList.toggle('on',anim);
+});
+renderPanels();renderCT();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

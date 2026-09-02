@@ -4,6 +4,12 @@ import { InstallButton } from '../components/InstallButton'
 import { calculators, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
 
+/** "3 calculators", or "2 references" for a category that names its items differently. */
+function countLabel(category: CalculatorCategory) {
+  const noun = category.itemLabel ?? 'calculator'
+  return `${category.items.length} ${noun}${category.items.length === 1 ? '' : 's'}`
+}
+
 export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
   const [query, setQuery] = useState('')
   const trimmedQuery = query.trim()
@@ -84,7 +90,7 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
           <section key={category.name} className="section-block">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">{category.items.length === 1 ? '1 calculator' : `${category.items.length} calculators`}</p>
+                <p className="eyebrow">{countLabel(category)}</p>
                 <h2>{category.name}</h2>
               </div>
             </div>

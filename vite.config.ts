@@ -26,6 +26,10 @@ export default defineConfig({
       },
       workbox: {
         navigateFallback: '/index.html',
+        // The anatomy viewers are standalone HTML pages, and an iframe load counts as a
+        // navigation, so without this the service worker would serve the React shell
+        // inside the frame instead of the viewer.
+        navigateFallbackDenylist: [/^\/anatomy\//],
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
       },
     }),

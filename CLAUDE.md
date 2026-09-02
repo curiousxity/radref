@@ -42,6 +42,10 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
 - Each calculator page is a separate chunk, loaded on first navigation to its route (`lazyPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every chunk is precached and offline navigation still works.
 - Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, the in-header raster). Regenerate all of them together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
 - No backend calls exist anywhere in the app, so full offline precaching is safe with no stale-data concerns.
+- `navigateFallbackDenylist: [/^\/anatomy\//]` is required in the Workbox config. An
+  iframe load counts as a navigation, so without it the service worker answers the
+  anatomy frame's request with the React shell and the viewer renders the whole app
+  inside itself. Any future standalone HTML page needs the same treatment.
 
 ## Deployment notes
 
@@ -134,6 +138,27 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Doppler indices (RI, PI, S/D ratio)
 - Periprocedural anticoagulation for IR (SIR 2019 consensus, hold/restart by bleeding risk)
 - Simple adnexal cyst follow-up (SRU 2019 consensus, size bands and report wording)
+
+## Anatomy section
+
+The Anatomy category holds interactive 3D references rather than calculators:
+
+- Otic capsule (temporal bone labyrinth, middle ear, facial nerve canal)
+- Ossicular chain (malleus/incus/stapes, with a slice reconstructed through the model)
+
+Both are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
+ported to React: they carry their own dark palette and their own renderer (the otic
+capsule uses three.js, the ossicular chain a hand-written software renderer on a 2D
+canvas). The React pages under `src/pages/` are thin wrappers that frame them via
+`AnatomyViewer`, which embeds the file in an iframe and offers a full-screen link.
+
+All their dependencies are vendored so the PWA still works offline: three.js r128 sits
+in `public/anatomy/vendor/` with its MIT licence, and the Google Fonts link was replaced
+by an `@font-face` pointing at the site's already-precached Source Serif 4. Keep it that
+way - no CDN or webfont URLs belong in these files.
+
+Categories may set `itemLabel` (Anatomy uses `'reference'`) so the home-page count reads
+"2 references" rather than "2 calculators".
 
 ## Next development priorities
 
