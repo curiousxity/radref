@@ -145,20 +145,33 @@ The Anatomy category holds interactive 3D references rather than calculators:
 
 - Otic capsule (temporal bone labyrinth, middle ear, facial nerve canal)
 - Ossicular chain (malleus/incus/stapes, with a slice reconstructed through the model)
+- Shoulder (rotator cuff, labrum, glenohumeral ligaments, instability lesion sites)
+- Knee (cruciates, collaterals, menisci, posterolateral corner)
+- Wrist (carpus, TFCC, intrinsic ligaments, extensor compartments, carpal tunnel)
+- Ankle (mortise and hindfoot, lateral/deltoid/syndesmotic ligaments, tendons)
 
-Both are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
-ported to React: they carry their own dark palette and their own renderer (the otic
-capsule uses three.js, the ossicular chain a hand-written software renderer on a 2D
+All are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
+ported to React: they carry their own palette and their own renderer (all but the
+ossicular chain use three.js; that one has a hand-written software renderer on a 2D
 canvas). The React pages under `src/pages/` are thin wrappers that frame them via
 `AnatomyViewer`, which embeds the file in an iframe and offers a full-screen link.
+The four musculoskeletal viewers are long scrolling documents, so their wrappers pass
+`emphasiseFullScreen`.
 
 All their dependencies are vendored so the PWA still works offline: three.js r128 sits
-in `public/anatomy/vendor/` with its MIT licence, and the Google Fonts link was replaced
-by an `@font-face` pointing at the site's already-precached Source Serif 4. Keep it that
-way - no CDN or webfont URLs belong in these files.
+in `public/anatomy/vendor/` with its MIT licence, and every Google Fonts link was
+replaced by an `@font-face` pointing at the site's already-precached Source Serif 4,
+with the system sans stack underneath it. Keep it that way - no CDN or webfont URLs
+belong in these files. Geometry is inlined in each document; none of them fetch
+anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
+Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
+
+The four musculoskeletal files add roughly 2.2 MB to the precache (the ankle alone is
+~1 MB, still under Workbox's 2 MiB per-file default). Watch that ceiling if more are
+added.
 
 Categories may set `itemLabel` (Anatomy uses `'reference'`) so the home-page count reads
-"2 references" rather than "2 calculators".
+"6 references" rather than "6 calculators".
 
 ## Next development priorities
 
