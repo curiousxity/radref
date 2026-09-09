@@ -147,7 +147,7 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--rule);font-si
     <div class="btns">
       <button id="play">Play sound wave</button>
       <label class="chk"><input type="checkbox" id="bone" checked> Temporal bone</label>
-      <label class="chk"><input type="checkbox" id="mus" checked> Muscles</label>
+      <label class="chk"><input type="checkbox" id="mus" checked> Muscles &amp; ligaments</label>
       <label class="chk"><input type="checkbox" id="lbl" checked> Labels</label>
       <label class="chk"><input type="checkbox" id="pln" checked> Cut plane</label>
     </div>
@@ -288,10 +288,11 @@ function prism(o,pts,a1,a2,A,s0,s1){
 
 /* +x lateral, +y superior, +z anterior. 1 unit is about 1.55 mm */
 var P={
-  mHead:[1.15,2.60,0.00], mNeck:[0.95,1.25,-0.05], mLat:[1.85,0.95,-0.05], mAnt:[1.05,1.60,1.65],
+  mHead:[1.02,2.60,0.00], mNeck:[0.95,1.25,-0.05], mLat:[1.85,0.95,-0.05], mAnt:[1.05,1.60,1.65],
   mMid:[0.75,-0.60,-0.15], umbo:[0.55,-2.55,-0.30],
-  iBody:[-1.00,2.60,-0.30], iShort:[-1.15,2.45,-2.40], iTop:[-0.95,1.90,-0.55],
+  iBody:[-1.00,2.60,-0.30], iShort:[-1.15,2.45,-3.50], iTop:[-0.95,1.90,-0.55],
   iMid:[-1.15,0.30,-0.58], iEnd:[-1.35,-1.35,-0.60], lent:[-2.05,-1.65,-0.60],
+  lentP:[-2.16,-1.67,-0.60], jIM:[0.14,2.60,-0.18], jIS:[-2.26,-1.71,-0.60],
   sHead:[-2.42,-1.75,-0.60], sNeck:[-2.80,-1.85,-0.60],
   cA:[-4.10,-2.10,0.20], cP:[-4.10,-2.10,-1.40], fp:[-4.35,-2.10,-0.60],
   ttPull:[-1.32,1.28,2.00], ttEnd:[0.72,1.28,0.05],
@@ -323,7 +324,7 @@ var WIN=Obj('win','#8E8A80');
 })();
 
 var MAL=Obj('malleus','#C4813C');
-sph(MAL,P.mHead,1.05,1.15,1.05,16,11);
+sph(MAL,P.mHead,0.85,0.92,0.85,16,11);   /* head ~2.6 mm across; whole malleus stays ~8 mm */
 tub(MAL,P.mHead,P.mNeck,0.55,0.40,12);
 tub(MAL,P.mNeck,P.mMid,0.40,0.30,12);
 tub(MAL,P.mMid,P.umbo,0.30,0.16,12);
@@ -331,14 +332,15 @@ tub(MAL,[1.05,1.05,-0.05],P.mLat,0.30,0.10,9);
 tub(MAL,P.mNeck,P.mAnt,0.22,0.06,9);
 
 var INC=Obj('incus','#3F8F76');
-sph(INC,P.iBody,1.10,1.16,1.05,16,11);
-tub(INC,P.iBody,P.iShort,0.50,0.14,12);
+sph(INC,P.iBody,1.10,1.25,1.05,16,11);   /* body taller than wide, stopping short of the tegmen */
+tub(INC,P.iBody,P.iShort,0.50,0.14,12);  /* short process ~5 mm into the fossa incudis */
 tub(INC,P.iTop,P.iMid,0.45,0.28,12);
 
 var IND=Obj('incusD','#3F8F76');
 tub(IND,P.iMid,P.iEnd,0.28,0.22,12);
 tub(IND,P.iEnd,P.lent,0.22,0.16,9);
-sph(IND,P.lent,0.30,0.30,0.30,11,9);
+tub(IND,P.lent,P.lentP,0.11,0.11,8);     /* lenticular process: a plate on a narrow pedicle, */
+sph(IND,P.lentP,0.11,0.34,0.34,12,9);    /* turned medially to face the stapes head */
 
 var STA=Obj('stapes','#6E66CE');
 sph(STA,P.sHead,0.36,0.36,0.36,11,9);
@@ -362,6 +364,49 @@ var STT=Obj('stt','#C9BFA8'); tub(STT,P.pyrApex,P.stEnd,0.11,0.10,8,0,1);
 var OTO=Obj('oto','#D9CDB0');
 sph(OTO,[-4.50,-1.72,0.55],0.42,0.34,0.46,11,9);
 sph(OTO,[-4.52,-2.05,0.85],0.34,0.30,0.38,11,9);
+
+/* ---------- articulations ---------- */
+/* The incudomallear joint is a saddle, so the two bones move as one rigid mass; the
+   incudostapedial joint is a true ball and socket and lets the stapes rock as it pistons. */
+var JIM=Obj('jim','#E4D9B8'); sph(JIM,P.jIM,0.09,0.60,0.56,12,9);
+var JIS=Obj('jis','#E4D9B8'); sph(JIS,P.jIS,0.13,0.24,0.24,11,9);
+
+/* ---------- chorda tympani ---------- */
+/* Leaves the mastoid facial nerve, enters posteriorly, then crosses the cavity lateral to
+   the long process of the incus and medial to the neck of the malleus before leaving
+   anteriorly through the petrotympanic fissure. That sandwich is why it is at risk in
+   any dissection between the two bones. */
+var CHO=Obj('chorda','#D9B44A');
+(function(){
+  var path=[[-4.20,-3.60,-2.95],[-3.16,-3.55,-2.56],[-2.40,-2.20,-2.30],[-1.55,-1.10,-1.95],
+            [-0.85,-0.20,-1.50],[-0.45,0.45,-1.00],[0.25,0.90,-0.20],[0.72,1.06,0.80],
+            [0.92,1.10,1.85],[1.02,1.12,2.72]];
+  for(var i=0;i<path.length-1;i++)tub(CHO,path[i],path[i+1],0.16,0.16,7);
+})();
+
+/* ---------- suspensory ligaments ---------- */
+/* Weighted 0 at the wall and 1 at the bone, so they stretch with the chain rather than
+   floating free while it rocks. */
+var LIG=Obj('lig','#B9AE93');
+tub(LIG,[1.06,3.90,0.02],P.mHead,0.09,0.13,8,0,1);        /* superior malleal */
+tub(LIG,[2.08,2.30,-0.04],[1.00,1.42,-0.05],0.09,0.12,8,0,1); /* lateral malleal */
+tub(LIG,[1.32,1.82,2.62],P.mAnt,0.08,0.10,8,0,1);          /* anterior malleal */
+var LGI=Obj('ligi','#B9AE93');
+tub(LGI,[-1.22,2.42,-4.15],P.iShort,0.09,0.13,8,0,1);      /* posterior incudal */
+
+/* ---------- pars flaccida and Prussak's space ---------- */
+/* The drum above the lateral process is lax and has no radial fibre layer, so it is drawn
+   separately from the pars tensa and is deliberately left out of the vibration. The pocket
+   behind it is where attic cholesteatoma begins. */
+var PFL=Obj('pf','#B9A98C');
+(function(){
+  var id=++PRIM,b=PFL.V.length;
+  var q=[[1.88,0.98,-0.05],[2.16,2.28,-0.04],[1.02,1.98,-0.06],[0.98,1.20,-0.05]];
+  for(var i=0;i<q.length;i++){PFL.V.push(q[i].slice());PFL.W.push(0);}
+  PFL.F.push([b,b+1,b+2,b+3]);PFL.P.push(id);
+})();
+var PRU=Obj('prussak','#7FA8B4');
+sph(PRU,[1.48,1.62,-0.05],0.44,0.42,0.30,12,9);
 
 /* ---------- temporal bone walls ---------- */
 var TB=Obj('tbone','#8E8A80');
@@ -405,26 +450,31 @@ tub(FN,[-4.75,-0.85,1.55],[-4.62,-0.95,-1.90],0.40,0.40,7);                     
 tub(FN,[-4.62,-0.95,-1.90],[-4.45,-1.50,-2.75],0.40,0.40,7);                          /* second genu */
 tub(FN,[-4.45,-1.50,-2.75],[-4.25,-4.60,-3.05],0.40,0.36,7);                          /* mastoid segment */
 
-var objs=[TB,CAP,TM,WIN,CFP,PYR,TTM,STM,MAL,INC,IND,STA,TTT,STT,OTO,LUM,FN];
+var objs=[TB,CAP,PRU,TM,PFL,WIN,CFP,PYR,TTM,STM,LIG,LGI,MAL,INC,IND,JIM,JIS,STA,TTT,STT,CHO,OTO,LUM,FN];
 
 var LAB={
   all:[[[1.30,3.50,0.10],'Malleus','malleus'],[[-1.50,3.50,-0.30],'Incus','incus'],
        [[-3.50,-2.75,-0.60],'Stapes','stapes'],[[2.50,1.70,-0.20],'Eardrum','tm'],
        [[-4.65,-2.10,1.35],'Oval window','win']],
   landmarks:[[[-0.40,4.45,0.60],'Tegmen tympani','tbone'],[[1.95,2.30,0.40],'Scutum','tbone'],
-       [[4.90,3.30,0.40],'External canal','tbone'],[[1.45,1.85,0.20],"Prussak's space",'tbone'],
+       [[4.90,3.30,0.40],'External canal','tbone'],[[1.48,1.62,-0.05],"Prussak's space",'prussak'],
+       [[1.60,1.75,-0.06],'Pars flaccida','pf'],[[-0.72,0.42,-1.15],'Chorda tympani','chorda'],
        [[-4.20,-2.00,0.60],'Promontory','capsule'],[[-5.70,-2.10,1.30],'Cochlea','lumen'],
        [[-5.55,-1.20,-1.10],'Vestibule','lumen'],[[-6.30,0.95,-2.75],'Lateral canal','lumen'],
        [[-4.62,-0.95,-0.40],'Facial nerve canal','fn'],[[-5.10,-2.70,-0.95],'Round window','lumen'],
        [[-4.65,-2.10,1.35],'Oval window','win'],[[-3.45,-2.55,-2.60],'Pyramidal eminence','bone']],
-  malleus:[[[1.30,3.50,0.10],'Head'],[[1.05,1.35,-0.05],'Neck'],[[1.95,0.95,-0.05],'Lateral process'],
+  malleus:[[[1.18,3.50,0.10],'Head'],[[1.05,1.35,-0.05],'Neck'],[[1.95,0.95,-0.05],'Lateral process'],
+       [[1.60,1.78,-0.06],'Pars flaccida','pf'],[[1.06,3.90,0.35],'Malleal ligaments','lig'],
+       [[-0.72,0.42,-1.15],'Chorda tympani','chorda'],
        [[1.05,1.60,1.80],'Anterior process'],[[0.80,-0.50,-0.20],'Manubrium (handle)'],
        [[0.55,-2.70,-0.30],'Umbo'],[[2.50,1.70,-0.20],'Eardrum','tm']],
-  incus:[[[-1.50,3.50,-0.30],'Body'],[[-1.15,2.45,-2.60],'Short process'],[[-1.15,0.30,-0.60],'Long process'],
-       [[-2.20,-1.80,-0.60],'Lenticular process','incusD'],[[1.30,3.40,0.10],'Malleus head','malleus']],
+  incus:[[[-1.50,3.50,-0.30],'Body'],[[-1.15,2.45,-3.70],'Short process'],[[-1.15,0.30,-0.60],'Long process'],
+       [[-2.24,-1.98,-0.60],'Lenticular process','incusD'],[[1.18,3.40,0.10],'Malleus head','malleus'],
+       [[0.14,2.60,0.55],'Incudomallear joint','jim'],[[-1.22,2.42,-4.35],'Posterior incudal lig.','ligi']],
   stapes:[[[-2.42,-1.48,-0.60],'Head'],[[-2.88,-2.08,-0.60],'Neck'],[[-3.55,-2.00,-0.02],'Anterior crus'],
        [[-3.55,-2.00,-1.22],'Posterior crus'],[[-4.45,-2.10,-0.60],'Footplate'],
-       [[-4.65,-2.10,1.35],'Oval window','win'],[[-2.20,-1.75,-0.60],'Lenticular process','incusD']]
+       [[-4.65,-2.10,1.35],'Oval window','win'],[[-2.24,-1.98,-0.60],'Lenticular process','incusD'],
+       [[-2.26,-1.40,-0.60],'Incudostapedial joint','jis']]
 };
 var MUSLAB={
   all:[[[-1.45,1.40,3.60],'Tensor tympani','ttm'],[[-3.62,-2.80,-3.90],'Stapedius','stm']],
@@ -450,15 +500,17 @@ function rock(p){
 }
 function gain(){return mode==='normal'?1:(mode==='oto'?0.07:0);}
 function xf(g,p,w){
-  if(g==='malleus'||g==='incus'||g==='incusD')return rock(p);
+  if(g==='malleus'||g==='incus'||g==='incusD'||g==='jim'||g==='jis')return rock(p);
+  /* ligaments are anchored to the wall at w=0 and to the bone at w=1 */
+  if(g==='lig'||g==='ligi'){var r=sub(rock(p),p);return [p[0]+w*r[0],p[1]+w*r[1],p[2]+w*r[2]];}
   if(g==='stapes'||g==='oto')return [p[0]+ang*4.3*gain(),p[1],p[2]];
   if(g==='tm')return [p[0]+(w||0)*ang*5.2,p[1],p[2]];
   if(g==='ttt'){var d=sub(rock(P.ttEnd),P.ttEnd);return [p[0]+w*d[0],p[1]+w*d[1],p[2]+w*d[2]];}
   if(g==='stt')return [p[0]+w*ang*4.3*gain(),p[1],p[2]];
   return p;
 }
-function isMuscle(g){return g==='ttm'||g==='stm'||g==='ttt'||g==='stt'||g==='bone';}
-function isEnv(g){return g==='tbone'||g==='capsule'||g==='lumen'||g==='fn';}
+function isMuscle(g){return g==='ttm'||g==='stm'||g==='ttt'||g==='stt'||g==='bone'||g==='lig'||g==='ligi';}
+function isEnv(g){return g==='tbone'||g==='capsule'||g==='lumen'||g==='fn'||g==='chorda'||g==='prussak';}
 function visible(o){
   if(o.g==='oto')return mode==='oto';
   if(isEnv(o.g))return showBone;
@@ -467,18 +519,28 @@ function visible(o){
 }
 function faded(o){
   if(o===IND&&mode==='erosion')return true;
+  /* the chorda is a relationship of the malleus and incus, not just scenery, so it stays up
+     while either of them is selected */
+  if(o.g==='chorda')return sel==='stapes';
   if(isEnv(o.g))return sel!=='all'&&sel!=='landmarks';
   if(sel==='all'||sel==='landmarks')return false;
-  if(o.g==='tm')return sel!=='malleus';
+  if(o.g==='tm'||o.g==='pf')return sel!=='malleus';
   if(o.g==='win')return sel!=='stapes';
-  if(o.g==='ttm'||o.g==='ttt'||o.g==='bone')return sel!=='malleus';
+  if(o.g==='ttm'||o.g==='ttt'||o.g==='bone'||o.g==='lig')return sel!=='malleus';
   if(o.g==='stm'||o.g==='stt')return sel!=='stapes';
+  if(o.g==='ligi')return sel!=='incus';
+  if(o.g==='jim')return sel!=='malleus'&&sel!=='incus';
+  if(o.g==='jis')return sel!=='incus'&&sel!=='stapes';
   if(o.g==='incusD')return sel!=='incus';
   return o.g!==sel&&!(sel==='stapes'&&o.g==='oto');
 }
 function alphaOf(o,fd){
   var a=1;
   if(o.g==='tm')a=0.24;
+  else if(o.g==='pf')a=0.38;        /* thicker and slacker than the pars tensa, so less see-through */
+  else if(o.g==='prussak')a=0.15;   /* an air pocket, drawn only so the label has something to point at */
+  else if(o.g==='lig'||o.g==='ligi')a=0.72;
+  else if(o.g==='chorda')a=0.88;
   else if(o.g==='win')a=0.42;
   else if(o.g==='tbone')a=0.30;
   else if(o.g==='capsule')a=0.18;
@@ -579,8 +641,11 @@ function draw(){
 }
 
 /* ---------- reconstructed slab: negative densities carve air and fluid out of bone ---------- */
+/* Groups left out here are skipped on the slice. That is deliberate for the chorda, the
+   ligaments and the joint spaces: at temporal bone CT resolution none of them are resolved,
+   and drawing them would promise detail the modality does not have. */
 var DENS={malleus:1,incus:1,incusD:1,stapes:1,bone:0.95,oto:0.86,tbone:1,capsule:1,
-          lumen:-1,fn:-1,tm:0.16,ttm:0.15,stm:0.15,ttt:0.16,stt:0.16,win:0};
+          lumen:-1,fn:-1,tm:0.16,pf:0.16,ttm:0.15,stm:0.15,ttt:0.16,stt:0.16,win:0};
 function gatherTris(){
   var T=[],i,k;
   for(i=0;i<objs.length;i++){
@@ -727,7 +792,9 @@ var PARTS={
   landmarks:['The walls around the chain',[
     ['Tegmen tympani','The thin plate of bone roofing the cavity, separating it from the middle cranial fossa. A defect here lets infection or a meningocele through.'],
     ['Scutum','The sharp spur of the lateral attic wall, just above the eardrum. Blunting of this spur is the earliest sign of attic cholesteatoma.'],
-    ["Prussak's space","The pocket between the scutum and the malleus neck. Where pars flaccida cholesteatoma starts, which is why it takes the malleus neck and incus first."],
+    ["Prussak's space","The pocket between the scutum and the malleus neck, roofed by the lateral malleal fold and floored by the lateral process. Where pars flaccida cholesteatoma starts, which is why it takes the malleus neck and incus first."],
+    ['Pars flaccida','The small slack part of the drum above the lateral process, with no radial fibre layer. It does not carry sound, and it is the part that retracts into the attic.'],
+    ['Chorda tympani','Leaves the mastoid facial nerve, crosses the cavity lateral to the incus long process and medial to the malleus neck, then leaves through the petrotympanic fissure. It is unroofed, so it is the structure most easily lost working between the two bones.'],
     ['Promontory','The lateral bulge of the cochlear basal turn, forming most of the medial wall. The oval window sits behind and above it, the round window behind and below.'],
     ['Cochlea and vestibule','Fluid spaces inside the dense otic capsule. On the slice they read as dark against near-white bone.'],
     ['Lateral semicircular canal','The reference for the standard axial plane and the landmark surgeons work from. Erosion of its bony wall is the classic labyrinthine fistula.'],
@@ -738,6 +805,7 @@ var PARTS={
     ['Neck','The waist below the head. Tensor tympani inserts here, and the chorda tympani passes just behind it.'],
     ['Lateral process','A small bump tenting the eardrum outwards. The short process you see on otoscopy.'],
     ['Anterior process','A thin spicule pointing forwards, tethered by ligament. Part of the rocking axis.'],
+    ['Malleal ligaments','Superior to the tegmen, lateral to the attic wall, anterior to the petrotympanic fissure. They suspend the head and neck; the lateral fold also roofs Prussak&rsquo;s space.'],
     ['Manubrium (handle)','Buried in the eardrum along its whole length, so no part of the membrane moves independently of it.'],
     ['Umbo','The tip of the handle and the deepest point of the cone. The light reflex points away from it.'],
     ['Tensor tympani','Runs forwards in its own canal, hooks a right angle round the cochleariform process, then pulls the handle inwards and stiffens the drum.']
@@ -746,11 +814,14 @@ var PARTS={
     ['Body','The bulky part gripping the malleus head. On axial slices the body and the malleus head make the ice cream cone.'],
     ['Short process','Points backwards into a small socket, held by ligament. With the malleus anterior process it fixes the rocking axis.'],
     ['Long process','Hangs downwards, medial and parallel to the malleus handle. The most fragile link in the chain.'],
-    ['Lenticular process','A knob turning inwards at nearly a right angle to reach the stapes head. Often too thin to resolve on CT.'],
+    ['Lenticular process','A small plate on a pedicle so thin it is usually below CT resolution, turned inwards at nearly a right angle to meet the stapes head. Absent-looking is not the same as eroded.'],
+    ['Incudomallear joint','A saddle joint, tightly bound. The malleus and incus therefore rock as one mass rather than articulating usefully, which is why they are treated as a single lever.'],
+    ['Posterior incudal ligament','Anchors the short process in the fossa incudis. With the anterior malleal ligament it defines the axis the pair rotate about.'],
     ['Blood supply','One mucosal vessel, no collateral. That is why it dies first when the middle ear is inflamed.']
   ]],
   stapes:['Stapes, part by part',[
     ['Head','The socket that receives the lenticular process.'],
+    ['Incudostapedial joint','A true ball and socket, and the one mobile link in the chain. It lets the stapes tilt as it pistons, and it is the joint that separates in traumatic dislocation.'],
     ['Neck','A short segment behind the head. The stapedius tendon inserts here and on the posterior crus.'],
     ['Crura','Two legs, anterior and posterior. The posterior is thicker and more curved. The gap between them is the obturator foramen.'],
     ['Footplate','An oval plate roughly 3 by 1.4 millimetres, held in the oval window by the annular ligament.'],
