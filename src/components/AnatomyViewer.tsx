@@ -6,6 +6,9 @@
  * in `vite.config.ts` keeps the service worker from answering the frame's
  * navigation request with the app shell.
  */
+/** Stated once here rather than in every scrolling viewer's own hint. */
+const SCROLLS_IN_FRAME_HINT = 'The page scrolls inside the frame, so on a phone it reads better full screen.'
+
 export function AnatomyViewer({
   file,
   title,
@@ -34,7 +37,7 @@ export function AnatomyViewer({
         >
           Open full screen
         </a>
-        <p className="source-note">{hint}</p>
+        <p className="source-note">{emphasiseFullScreen ? `${hint} ${SCROLLS_IN_FRAME_HINT}` : hint}</p>
       </div>
       <div className="anatomy-frame">
         <iframe src={src} title={title} loading="lazy" />

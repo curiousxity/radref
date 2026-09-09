@@ -153,10 +153,13 @@ The Anatomy category holds interactive 3D references rather than calculators:
 All are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
 ported to React: they carry their own palette and their own renderer (all but the
 ossicular chain use three.js; that one has a hand-written software renderer on a 2D
-canvas). The React pages under `src/pages/` are thin wrappers that frame them via
-`AnatomyViewer`, which embeds the file in an iframe and offers a full-screen link.
-The four musculoskeletal viewers are long scrolling documents, so their wrappers pass
-`emphasiseFullScreen`.
+canvas). The React pages under `src/pages/` are thin wrappers that declare their
+content to `AnatomyReferencePage`, which lays out the shared header/viewer/notes
+shell and frames the document via `AnatomyViewer` - an iframe plus a full-screen
+link. A new reference is a content declaration, not new markup.
+`scrollsInFrame` is required on every one: all but the otic capsule are long
+scrolling documents, where the embed is the worse phone experience, so
+`AnatomyViewer` promotes the full-screen link and appends the sentence saying so.
 
 All their dependencies are vendored so the PWA still works offline: three.js r128 sits
 in `public/anatomy/vendor/` with its MIT licence, and every Google Fonts link was

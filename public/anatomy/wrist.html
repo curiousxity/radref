@@ -791,8 +791,7 @@ function updateEmissive(){
       if(dim && !isPulse && soft){ mat.transparent=true; mat.opacity=0.14; mat.depthWrite=false; }
       else { mat.transparent=b.transparent; mat.opacity=b.opacity; mat.depthWrite=b.depthWrite; }
       if(isPulse){ mat.emissive.set(0xff3b1f); mat.color.set(0xd8452e); } else mat.color.set(b.color);
-      if(false){}
-      else if(isSel){ mat.emissive.set(0xffffff); mat.emissiveIntensity=0.28; }
+      if(isSel){ mat.emissive.set(0xffffff); mat.emissiveIntensity=0.28; }
       else if(isHov){ mat.emissive.set(0xffffff); mat.emissiveIntensity=0.16; }
       else { mat.emissive.set(0x000000); mat.emissiveIntensity=0; }
     }); }

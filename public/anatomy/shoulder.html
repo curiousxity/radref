@@ -648,7 +648,8 @@ function hideHint(){document.getElementById('hint').classList.add('gone');}
    ------------------------------------------------------------------ */
 const ray=new THREE.Raycaster();const ndc=new THREE.Vector2();const hoverEl=document.getElementById('hover');
 let hovered=null,selected=null;
-function castAt(e){const r=canvas.getBoundingClientRect();ndc.x=((e.clientX-r.left)/r.width)*2-1;ndc.y=-((e.clientY-r.top)/r.height)*2+1;ray.setFromCamera(ndc,cam);
+let lastCastRect=null;
+function castAt(e){const r=canvas.getBoundingClientRect();lastCastRect=r;ndc.x=((e.clientX-r.left)/r.width)*2-1;ndc.y=-((e.clientY-r.top)/r.height)*2+1;ray.setFromCamera(ndc,cam);
   let hits=ray.intersectObjects(pick.filter(m=>m.visible&&isShown(m)),false);
   const clip=renderer.clippingPlanes[0];                       // ignore anything the cut has removed
   if(clip)hits=hits.filter(h=>PLANES[h.object.userData.id]||clip.distanceToPoint(h.point)>=-0.02);
@@ -658,7 +659,7 @@ function castAt(e){const r=canvas.getBoundingClientRect();ndc.x=((e.clientX-r.le
 function isShown(m){let o=m;while(o){if(o.visible===false)return false;o=o.parent;}return true;}
 function labelOf(id){return (S[id]||PLANES[id]||{name:id}).name;}
 function hover(e){const h=castAt(e);hovered=h;canvas.classList.toggle('hovering',!!h);
-  if(h){const r=canvas.getBoundingClientRect();hoverEl.style.display='block';hoverEl.style.left=(e.clientX-r.left)+'px';hoverEl.style.top=(e.clientY-r.top)+'px';hoverEl.textContent=labelOf(idAt(h.object,h.point));}
+  if(h){const r=lastCastRect;hoverEl.style.display='block';hoverEl.style.left=(e.clientX-r.left)+'px';hoverEl.style.top=(e.clientY-r.top)+'px';hoverEl.textContent=labelOf(idAt(h.object,h.point));}
   else hoverEl.style.display='none';}
 function select(e){const h=castAt(e);if(!h)return;showStructure(idAt(h.object,h.point));}
 document.querySelectorAll('#layers input').forEach(cb=>cb.addEventListener('change',()=>{groups[cb.dataset.layer].visible=cb.checked;}));
@@ -939,7 +940,6 @@ function showPlane(id){
    ------------------------------------------------------------------ */
 const o={hum:humGroup,clav:clavGroup};
 function frame(now){
-  resize();
   if(autoRotate)sph.theta+=0.0025;
   if(activeMech){const s=(now-mechStart)/1000;const t=0.5-0.5*Math.cos(s*Math.PI/1.6);   // eases 0→1→0 every ~3.2 s
     humGroup.position.set(0,0,0);humGroup.rotation.set(0,0,0);clavGroup.position.set(0,0,0);
@@ -949,6 +949,7 @@ function frame(now){
     pick.forEach(m=>{if(m.userData.injured){m.material.emissive.setHex(C.injury);m.material.emissiveIntensity=pulse*0.6;}});}
   placeCam();renderer.render(scene,cam);requestAnimationFrame(frame);
 }
+window.addEventListener('resize',resize);resize();
 showOverview();requestAnimationFrame(frame);
 </script>
 </body>

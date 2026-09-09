@@ -94,7 +94,6 @@
     #panel{max-height:none}
     header h1{font-size:22px}
   }
-  @media (prefers-reduced-motion:reduce){ .lbl,.modes button{transition:none} }
 </style>
 </head>
 <body>
@@ -668,8 +667,9 @@ labelAt('ta','leg',[-0.8,3.5,2.6]);
 labelAt('ehl','foot',[-0.4,-3.2,8.5]);
 labelAt('edl','foot',[2.4,-3.4,8.5]);
 
+const softScratch = { a: new THREE.Vector3(), b: new THREE.Vector3(), dir: new THREE.Vector3() };
 function updateSoft(){
-  const a = new THREE.Vector3(), b = new THREE.Vector3(), dir = new THREE.Vector3();
+  const { a, b, dir } = softScratch;
   BANDS.forEach(bd=>{
     a.copy(worldOf(bd.a[0], bd.a[1])); b.copy(worldOf(bd.b[0], bd.b[1]));
     dir.subVectors(b,a); const len = dir.length(); dir.normalize();
@@ -726,6 +726,7 @@ function goView(name){
 let autoRotate = !reduceMotion;
 const dom = renderer.domElement;
 const pointers = new Map(); let dragDist=0, lastPinch=0, downPos=null;
+const panRight = new THREE.Vector3();
 dom.addEventListener('pointerdown', e=>{ dom.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY}); dragDist=0; downPos=[e.clientX,e.clientY]; autoRotate=false; camTween=null; });
 dom.addEventListener('pointermove', e=>{
   if(!pointers.has(e.pointerId)) return;
@@ -734,9 +735,8 @@ dom.addEventListener('pointermove', e=>{
   if(pointers.size===1){
     dragDist += Math.abs(dx)+Math.abs(dy);
     if(e.shiftKey || e.buttons===2){ // pan
-      const right = new THREE.Vector3(); camera.getWorldDirection(right); right.cross(UP).normalize();
-      const up = new THREE.Vector3(0,1,0);
-      ctl.target.addScaledVector(right, -dx*0.02*ctl.r/24).addScaledVector(up, dy*0.02*ctl.r/24);
+      camera.getWorldDirection(panRight); panRight.cross(UP).normalize();
+      ctl.target.addScaledVector(panRight, -dx*0.02*ctl.r/24).addScaledVector(UP, dy*0.02*ctl.r/24);
     } else {
       ctl.theta -= dx*0.006; ctl.phi = Math.min(Math.PI-0.15, Math.max(0.15, ctl.phi - dy*0.006));
     }
@@ -804,8 +804,9 @@ function shortName(id){
   return map[id]||id;
 }
 let showLabels = true;
+const labelScratch = new THREE.Vector3();
 function updateLabels(){
-  const rect = dom.getBoundingClientRect(); const v = new THREE.Vector3();
+  const rect = dom.getBoundingClientRect(); const v = labelScratch;
   Object.keys(labelDivs).forEach(id=>{
     const d = labelDivs[id];
     if(!showLabels || !layerOn(id) || (tendonFocus && STRUCT[id].group==='tendon' && !tendonFocus.has(id)) || (curMech && !highlights[id] && STRUCT[id].group!=='bone')){ d.style.display='none'; return; }

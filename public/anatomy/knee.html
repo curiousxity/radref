@@ -648,7 +648,7 @@ function hitAt(cx,cy){ toNDC(cx,cy); ray.setFromCamera(ndc,camera);
   return hits.length ? hits[0].object.userData.sid : null; }
 function hoverAt(cx,cy){ const sid = hitAt(cx,cy); canvas.style.cursor = sid ? 'pointer' : 'grab'; if(sid!==hovered){ hovered=sid; refreshLabelClasses(); } }
 function pickAt(cx,cy){ const sid = hitAt(cx,cy); if(sid) select(sid); }
-function select(sid){ selected = sid; updateHighlights(); showStructure(sid); refreshLabelClasses(); }
+function select(sid){ selected = sid; camDirty = true; updateHighlights(); showStructure(sid); refreshLabelClasses(); }
 
 /* highlight state: selected (soft), stressed (glowing), torn (red) */
 let stressSet = new Set(), tearSet = new Set();
@@ -699,8 +699,8 @@ const LABEL_SETS = {
 };
 let labelSet = 'smart';
 const lblSel = document.getElementById('lblSet');
-lblSel.addEventListener('change', ()=>{ labelSet = lblSel.value; camDirty = true; updateLabels(true); });
-function setLabelSet(v){ labelSet = v; lblSel.value = v; camDirty = true; updateLabels(true); }
+lblSel.addEventListener('change', ()=>{ labelSet = lblSel.value; camDirty = true; });
+function setLabelSet(v){ labelSet = v; lblSel.value = v; camDirty = true; }
 function activeLabelIds(){
   if(labelSet==='none') return selected ? new Set([selected]) : new Set();
   let ids;
@@ -710,12 +710,10 @@ function activeLabelIds(){
   } else ids = LABEL_SETS[labelSet] || [];
   const s = new Set(ids); if(selected) s.add(selected); return s;
 }
-let occlTick = 0;
-function updateLabels(force){
+function updateLabels(){
   const r = canvas.getBoundingClientRect(), W=r.width, H=r.height;
   const active = activeLabelIds();
-  const doOccl = camDirty || force || (occlTick++ % 30 === 0);
-  const occluders = doOccl ? pickables.filter(m=>m.visible && m.material.opacity>0.5) : null;
+  const occluders = pickables.filter(m=>m.visible && m.material.opacity>0.5);
   const placed = [];
   for(const sid in ANCHORS){
     const el = labelEls[sid], ln = leaderEls[sid];
@@ -738,13 +736,11 @@ function updateLabels(force){
     q.el.style.display=''; q.ln.style.display='';
     q.el.style.left = q.lx+'px'; q.el.style.top = q.ly+'px';
     q.ln.setAttribute('x1',q.sx); q.ln.setAttribute('y1',q.sy); q.ln.setAttribute('x2',q.lx); q.ln.setAttribute('y2',q.ly);
-    if(doOccl){
-      ray.set(camera.position, q.wp.clone().sub(camera.position).normalize());
-      const d = camera.position.distanceTo(q.wp);
-      const hits = ray.intersectObjects(occluders, false);
-      const blocked = hits.length && hits[0].distance < d-0.35 && hits[0].object.userData.sid!==q.sid;
-      q.el.classList.toggle('dim', !!blocked);
-    }
+    ray.set(camera.position, q.wp.clone().sub(camera.position).normalize());
+    const d = camera.position.distanceTo(q.wp);
+    const hits = ray.intersectObjects(occluders, false);
+    const blocked = hits.length && hits[0].distance < d-0.35 && hits[0].object.userData.sid!==q.sid;
+    q.el.classList.toggle('dim', !!blocked);
   }
   for(const s of bruiseSpheres){
     const b = s.userData.badge; if(!b) continue;
@@ -784,7 +780,7 @@ function runMech(id){
   document.querySelectorAll('[data-mech]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.mech===id));
 }
 function resetMech(){
-  mech=null; tearSet=new Set(); stressSet=new Set(); updateHighlights(); clearBruises(); poseDirty=true;
+  mech=null; tearSet=new Set(); stressSet=new Set(); clearBruises(); poseDirty=true;
   document.querySelectorAll('[data-mech]').forEach(b=>b.setAttribute('aria-pressed','false'));
   for(const sid in meshes) for(const m of meshes[sid]){ const mt=m.material; if(mt!==cartMat){ mt.emissiveIntensity=1; } }
   updateHighlights();
@@ -816,7 +812,7 @@ function bindPanel(){
   panel.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.go)));
   panel.querySelectorAll('[data-lset]').forEach(b=>b.addEventListener('click',()=>setLabelSet(b.dataset.lset)));
   panel.querySelectorAll('[data-gomech]').forEach(b=>b.addEventListener('click',()=>runMech(b.dataset.gomech)));
-  panel.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>{ selected=null; updateHighlights(); refreshLabelClasses(); showHome(); }));
+  panel.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',()=>{ selected=null; camDirty=true; updateHighlights(); refreshLabelClasses(); showHome(); }));
   panel.scrollTop = 0;
 }
 function showHome(){
@@ -874,7 +870,7 @@ function frame(now){
   if(mech || poseDirty){ applyPose(now); poseDirty=false; camDirty=true; }
   if(mech || stressSet.size) pulseStress(now/1000);
   renderer.render(scene, camera);
-  updateLabels(); camDirty=false;
+  if(camDirty){ updateLabels(); camDirty=false; }
   requestAnimationFrame(frame);
 }
 resize(); applyCamera(); showHome(); canvas.style.cursor='grab';
