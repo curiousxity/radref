@@ -914,6 +914,7 @@ window.addEventListener('keydown', e=>{
 ------------------------------------------------------------------ */
 function resize(){
   const w = stage.clientWidth, h = stage.clientHeight;
+  if(!w || !h) return;                       // a zero measurement would put NaN in the projection matrix
   renderer.setSize(w,h,false); camera.aspect = w/h; camera.updateProjectionMatrix();
 }
 window.addEventListener('resize', resize); resize();

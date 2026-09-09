@@ -757,7 +757,7 @@ function applyCamera(){
   camera.position.set(target.x+orbit.r*sp*Math.sin(orbit.theta),target.y+orbit.r*Math.cos(orbit.phi),target.z+orbit.r*sp*Math.cos(orbit.theta));
   camera.lookAt(target);
 }
-function resize(){ const w=wrap.clientWidth,h=wrap.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+function resize(){ const w=wrap.clientWidth,h=wrap.clientHeight; if(!w||!h)return; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
 window.addEventListener('resize',resize); resize();
 
 /* pointer handling: drag = rotate, wheel/pinch = zoom, tap = pick */

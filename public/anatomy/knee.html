@@ -609,6 +609,12 @@ for(const sid in KNEE.anchors){ const a=KNEE.anchors[sid]; ANCHORS[sid]={p:V3(a.
    ========================================================= */
 const sph = {theta:0.0, phi:1.30, r:34};
 const target = V3(0,0.6,0);
+/* the render loop only calls updateLabels() on a dirty frame, and nothing
+   recomputes labels periodically any more, so a missed flag freezes the labels
+   for good rather than fixing itself a moment later. anything that moves a
+   label, changes which labels are shown, or changes what occludes them (camera,
+   pose, layer visibility, opacity, selection, label set, resize) must set
+   camDirty = true. */
 let camDirty = true;
 function applyCamera(){
   sph.phi = Math.max(0.12, Math.min(Math.PI-0.12, sph.phi));
@@ -861,6 +867,7 @@ function showMechanism(id){
    ========================================================= */
 function resize(){
   const r = viewport.getBoundingClientRect();
+  if(!r.width || !r.height) return;          // a zero measurement would put NaN in the projection matrix
   renderer.setSize(r.width, r.height, false); camera.aspect = r.width/r.height; camera.updateProjectionMatrix();
   leaders.setAttribute('width', r.width); leaders.setAttribute('height', r.height); camDirty=true;
 }
