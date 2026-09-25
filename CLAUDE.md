@@ -176,6 +176,31 @@ added.
 Categories may set `itemLabel` (Anatomy uses `'reference'`) so the home-page count reads
 "6 references" rather than "6 calculators".
 
+## Lessons section
+
+The Lessons category holds step-by-step reading-and-reporting notes with the papers
+behind each rule (`itemLabel: 'lesson'`, plus a `blurb` shown on the home page):
+
+- Rectal MRI (staging a new rectal cancer)
+- Prostate MRI (PI-RADS v2.1)
+- Renal mass CT and MRI
+- Adnexal mass MRI (O-RADS MRI)
+- Pancreatic mass CT
+- Pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto 2024)
+- CT colonography (C-RADS 2023)
+- Epilepsy MRI (HARNESS-MRI)
+- Sinus CT before FESS
+- Temporal bone CT
+
+Routes live under `/lessons/<slug>`; cross-lesson links use `<Link>`, not `.html`
+paths.
+
+Unlike the anatomy references, lessons are ported to React rather than kept as
+standalone HTML, so they get the site's theme, nav and search. Each page declares its
+body and reference list to `LessonPage` (`src/components/LessonPage.tsx`), which adds
+the header, the numbered DOI reference list, and the "personal teaching notes" caveat.
+Cite inline with `<Cite doi="...">`, and put report templates in a `CopyBlock`.
+
 ## Next development priorities
 
 - tighten edge-case rule completeness

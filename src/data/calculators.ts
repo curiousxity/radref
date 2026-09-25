@@ -25,6 +25,8 @@ export type CalculatorCategory = {
   items: CalculatorItem[]
   /** What one item in this category is called on the home page. Defaults to 'calculator'. */
   itemLabel?: string
+  /** One line under the category heading on the home page. */
+  blurb?: string
 }
 
 export const categories: CalculatorCategory[] = [
@@ -107,6 +109,23 @@ export const categories: CalculatorCategory[] = [
       { path: '/contrast-premedication', name: 'Contrast premedication', description: 'Oral and accelerated IV regimens for a prior contrast reaction.', keywords: ['steroid', 'prednisone', 'methylprednisolone', 'allergy', 'premed'], component: lazyPage(() => import('../pages/ContrastPremedicationPage'), 'ContrastPremedicationPage') },
       { path: '/contrast-extravasation', name: 'Contrast extravasation', description: 'Extravasation triage with surgical consult flags and documentation text.', keywords: ['infiltration', 'iv', 'swelling', 'compartment syndrome'], component: lazyPage(() => import('../pages/ContrastExtravasationPage'), 'ContrastExtravasationPage') },
       { path: '/ir-anticoagulation', name: 'Periprocedural anticoagulation', description: 'SIR 2019 hold and restart times by procedure bleeding risk and agent.', keywords: ['warfarin', 'heparin', 'doac', 'apixaban', 'rivaroxaban', 'clopidogrel', 'aspirin', 'procedure', 'sir', 'hold'], component: lazyPage(() => import('../pages/IrAnticoagulationPage'), 'IrAnticoagulationPage') },
+    ],
+  },
+  {
+    name: 'Lessons',
+    itemLabel: 'lesson',
+    blurb: 'How to read and report each study, step by step, with the papers behind each rule. Personal teaching notes compiled from the cited literature. Check the current guideline before applying to a patient.',
+    items: [
+      { path: '/lessons/rectal-mri', name: 'Rectal MRI', description: 'Staging a new rectal cancer: MRF, T stage, EMVI, nodes, low tumors, and a structured report.', keywords: ['rectum', 'rectal cancer', 'colorectal', 'mri', 'staging', 'mesorectal fascia', 'mrf', 'crm', 'emvi', 'tumor deposit', 'lateral lymph node', 'esgar', 'mercury', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/RectalMriLessonPage'), 'RectalMriLessonPage') },
+      { path: '/lessons/prostate-mri', name: 'Prostate MRI', description: 'Zonal anatomy, what each sequence answers, PZ and TZ scoring, EPE grading, mimics.', keywords: ['prostate', 'pi-rads', 'pirads', 'mri', 'peripheral zone', 'transition zone', 'extraprostatic extension', 'epe', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/ProstateMriLessonPage'), 'ProstateMriLessonPage') },
+      { path: '/lessons/renal-mass', name: 'Renal mass CT and MRI', description: 'The enhancement rule, Bosniak v2019, clear cell likelihood score, staging, surgical anatomy.', keywords: ['kidney', 'renal', 'renal cell carcinoma', 'rcc', 'bosniak', 'cystic', 'clear cell likelihood', 'ccls', 'nephrectomy', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/RenalMassLessonPage'), 'RenalMassLessonPage') },
+      { path: '/lessons/adnexal-mri', name: 'Adnexal mass MRI', description: 'The O-RADS MRI algorithm step by step, the score table, pathologies by score, and the misclassified cases.', keywords: ['ovary', 'ovarian', 'adnexal', 'o-rads', 'orads', 'mri', 'gynecologic', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/AdnexalMriLessonPage'), 'AdnexalMriLessonPage') },
+      { path: '/lessons/pancreatic-mass-ct', name: 'Pancreatic mass CT', description: 'Finding the isoattenuating tumor, the differential, NCCN vessel staging, the SAR/APA template.', keywords: ['pancreas', 'pancreatic cancer', 'adenocarcinoma', 'pdac', 'resectability', 'nccn', 'sar', 'apa', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/PancreaticMassCtLessonPage'), 'PancreaticMassCtLessonPage') },
+      { path: '/lessons/pancreatic-cysts', name: 'Pancreatic cysts', description: 'ACR 2017, Fukuoka 2017 and Kyoto 2024: worrisome features, growth, follow-up schedules.', keywords: ['pancreas', 'ipmn', 'mucinous', 'cyst', 'fukuoka', 'kyoto', 'worrisome features', 'high-risk stigmata', 'surveillance', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/PancreaticCystsLessonPage'), 'PancreaticCystsLessonPage') },
+      { path: '/lessons/ct-colonography', name: 'CT colonography', description: 'Technique checks, 2D and 3D reading, polyp interrogation and measurement, the C-RADS 2023 categories.', keywords: ['colon', 'colonography', 'ctc', 'virtual colonoscopy', 'c-rads', 'polyp', 'colorectal', 'screening', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/CtColonographyLessonPage'), 'CtColonographyLessonPage') },
+      { path: '/lessons/epilepsy-mri', name: 'Epilepsy MRI', description: 'HARNESS-MRI, the hippocampus-first search pattern, FCD hunting, LEATs, pitfalls, and the report.', keywords: ['brain', 'epilepsy', 'seizure', 'harness', 'hippocampal sclerosis', 'mesial temporal sclerosis', 'focal cortical dysplasia', 'fcd', 'leat', 'neuro', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/EpilepsyMriLessonPage'), 'EpilepsyMriLessonPage') },
+      { path: '/lessons/sinus-ct', name: 'Sinus CT before FESS', description: 'Lund-Mackay, the three drainage pathways, and the CLOSE danger-zone checklist.', keywords: ['sinus', 'paranasal', 'fess', 'endoscopic sinus surgery', 'lund-mackay', 'ostiomeatal', 'keros', 'close', 'head and neck', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/SinusCtLessonPage'), 'SinusCtLessonPage') },
+      { path: '/lessons/temporal-bone-ct', name: 'Temporal bone CT', description: 'Outside-in reading order, the FLOATS danger-zone checklist, the main pathologies, the template.', keywords: ['temporal bone', 'ear', 'middle ear', 'inner ear', 'cholesteatoma', 'otosclerosis', 'ossicles', 'floats', 'dehiscence', 'head and neck', 'lesson', 'teaching'], component: lazyPage(() => import('../pages/TemporalBoneCtLessonPage'), 'TemporalBoneCtLessonPage') },
     ],
   },
 ]

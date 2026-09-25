@@ -164,6 +164,21 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
 .copy-button:hover:not(:disabled) { background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
 .copy-button:disabled { background: transparent; border-color: var(--color-border); color: var(--color-text-muted); cursor: not-allowed; }
 .plain-list { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.55rem; }
+.section-blurb { margin: 0; max-width: 48rem; color: var(--color-text-muted); line-height: 1.55; }
+.lesson-body p { margin: 0 0 0.85rem; line-height: 1.6; max-width: 72ch; }
+.lesson-body > :last-child, .lesson-step > :last-child { margin-bottom: 0; }
+.lesson-body a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.lesson-body a:hover { color: var(--color-primary-dark); }
+.lesson-body .plain-list { margin-bottom: 0.85rem; line-height: 1.55; max-width: 72ch; }
+.lesson-body .copy-block { margin-bottom: 0.85rem; }
+.lesson-key { margin: 0 0 0.85rem; padding: 0.85rem 0.95rem; border-left: 2px solid var(--color-accent); background: var(--color-primary-soft); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.lesson-key > :last-child { margin-bottom: 0; }
+.lesson-body .table-wrap { margin-bottom: 0.85rem; }
+.lesson-body .ref-table { min-width: 520px; }
+.lesson-body h4 { font-family: var(--font-serif); }
+.lesson-step { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+.lesson-step h4 { margin: 0 0 0.6rem; font-family: var(--font-serif); font-size: 1.05rem; }
+.lesson-caveat { margin: 0; text-align: center; }
 .sticky-card { align-self: start; position: sticky; top: 6.25rem; }
 
 .search-panel { display: grid; gap: 0.5rem; }

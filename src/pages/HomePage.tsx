@@ -92,6 +92,7 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
               <div>
                 <p className="eyebrow">{countLabel(category)}</p>
                 <h2>{category.name}</h2>
+                {category.blurb && <p className="section-blurb">{category.blurb}</p>}
               </div>
             </div>
             <div className="card-grid">
