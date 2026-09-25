@@ -150,6 +150,12 @@ The Anatomy category holds interactive 3D references rather than calculators:
 - Wrist (carpus, TFCC, intrinsic ligaments, extensor compartments, carpal tunnel)
 - Ankle (mortise and hindfoot, lateral/deltoid/syndesmotic ligaments, tendons)
 
+Online-only (in `public/anatomy/online/`, see below):
+
+- TMJ, skull base foramina and cranial nerves, suprahyoid neck spaces, larynx
+- Cervical spine trauma, brachial plexus, lumbar spine, pelvis and SI joints
+- Elbow, foot
+
 All are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
 ported to React: they carry their own palette and their own renderer (all but the
 ossicular chain use three.js; that one has a hand-written software renderer on a 2D
@@ -172,6 +178,17 @@ Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
 The four musculoskeletal files add roughly 2.2 MB to the precache (the ankle alone is
 ~1 MB, still under Workbox's 2 MiB per-file default). Watch that ceiling if more are
 added.
+
+### Online-only anatomy
+
+`public/anatomy/online/` holds viewers that are deliberately left out of the offline
+precache (`globIgnores: ['anatomy/online/**']` in `vite.config.ts`): together they are
+~8 MB, too much to push to every install. They still use the vendored three.js
+(`../vendor/three.min.js`) and follow the same rules otherwise. `AnatomyViewer`
+detects the `online/` prefix on `file` and adds a "needs an internet connection"
+sentence to the hint. To make one available offline again, move it up a directory
+and drop the prefix from its page's `file`. They still fall under
+`navigateFallbackDenylist`, since the pattern covers all of `/anatomy/`.
 
 Categories may set `itemLabel` (Anatomy uses `'reference'`) so the home-page count reads
 "6 references" rather than "6 calculators".

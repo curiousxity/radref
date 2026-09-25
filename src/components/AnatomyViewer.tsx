@@ -8,6 +8,7 @@
  */
 /** Stated once here rather than in every scrolling viewer's own hint. */
 const SCROLLS_IN_FRAME_HINT = 'The page scrolls inside the frame, so on a phone it reads better full screen.'
+const NEEDS_NETWORK_HINT = 'This model is not stored for offline use, so it needs an internet connection.'
 
 export function AnatomyViewer({
   file,
@@ -25,6 +26,8 @@ export function AnatomyViewer({
   emphasiseFullScreen?: boolean
 }) {
   const src = `/anatomy/${file}`
+  // `anatomy/online/` is left out of the Workbox precache (vite.config.ts `globIgnores`).
+  const needsNetwork = file.startsWith('online/')
 
   return (
     <section className="info-card anatomy-card">
@@ -37,7 +40,10 @@ export function AnatomyViewer({
         >
           Open full screen
         </a>
-        <p className="source-note">{emphasiseFullScreen ? `${hint} ${SCROLLS_IN_FRAME_HINT}` : hint}</p>
+        <p className="source-note">
+          {emphasiseFullScreen ? `${hint} ${SCROLLS_IN_FRAME_HINT}` : hint}
+          {needsNetwork && ` ${NEEDS_NETWORK_HINT}`}
+        </p>
       </div>
       <div className="anatomy-frame">
         <iframe src={src} title={title} loading="lazy" />
