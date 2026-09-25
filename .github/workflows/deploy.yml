@@ -14,7 +14,8 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    # Pinned so an image change is a reviewed commit, not a surprise on some later push.
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
