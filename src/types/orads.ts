@@ -1,7 +1,8 @@
 export type OradsModality = 'us' | 'mri'
 export type OradsMenopausal = 'premenopausal' | 'postmenopausal'
 export type OradsCystType = 'simple' | 'nonsimple' | 'solid' | 'classicBenign' | 'multilocular' | 'indeterminate'
-export type OradsColorScore = '0' | '1' | '2' | '3' | '4'
+/** O-RADS US colour score: 1 is no flow, 4 is very strong flow. */
+export type OradsColorScore = '1' | '2' | '3' | '4'
 export type OradsEnhancement = 'none' | 'minimal' | 'moderate' | 'marked'
 export type OradsForm = {
   modality: OradsModality

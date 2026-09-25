@@ -73,17 +73,20 @@ export function classify(form: BosniakForm): BosniakResult {
     }
   }
 
+  // v2019 class I allows a thin smooth wall "that may enhance", or no visible wall.
+  const thinOrNoWall = form.wallThickness === 'thin' || form.wallThickness === 'none'
+
   if (
     (form.septaCount === 'few' && (form.enhancingPresent || form.calcificationOnly)) ||
     (form.septaCount === 'none' && form.calcificationOnly) ||
-    (!form.enhancingPresent && !form.t1HyperintenseUnenhanced) ||
-    // v2019 class I: a thin smooth wall "that may enhance", with no septa.
-    (form.septaCount === 'none' && (form.wallThickness === 'thin' || form.wallThickness === 'none') && !form.wallIrregularity)
+    // T1-hyperintense cysts have already returned IIF above.
+    !form.enhancingPresent ||
+    (form.septaCount === 'none' && thinOrNoWall && !form.wallIrregularity)
   ) {
-    if (form.septaCount === 'none' && !form.calcificationOnly && (form.wallThickness === 'thin' || form.wallThickness === 'none')) {
+    if (form.septaCount === 'none' && !form.calcificationOnly && thinOrNoWall) {
       return {
         category: 'Bosniak I',
-        reason: 'Simple cyst with thin smooth wall and no septa or suspicious features.',
+        reason: 'Simple cyst with no wall or a thin smooth wall, and no septa or suspicious features.',
         management: 'No routine follow-up is required.',
         impression: 'Simple cystic renal lesion compatible with Bosniak I.',
       }

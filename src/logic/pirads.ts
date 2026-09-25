@@ -18,8 +18,24 @@ export function classify(form: PiradsForm) {
   const reasons: string[] = []
   let category: Score
 
+  // v2.1 upgrades the driving sequence's score, not the category: a 4 that is >= 1.5 cm or
+  // shows definite EPE is scored 5 (DWI in the PZ, T2 in the TZ). A category that reaches 4
+  // through DCE or a TZ DWI upgrade is therefore never lifted to 5 by size.
+  const big = !Number.isNaN(size) && size >= 1.5
+  const drivingRaw = form.zone === 'peripheral' ? form.dwiScore : form.t2Score
+  const upgraded = drivingRaw === 4 && (big || form.epeOrInvasive)
+  if (upgraded) {
+    const sequence = form.zone === 'peripheral' ? 'DWI' : 'T2'
+    const why = big && form.epeOrInvasive
+      ? 'measures 1.5 cm or greater and shows definite extraprostatic extension/invasive behavior'
+      : big ? 'measures 1.5 cm or greater' : 'shows definite extraprostatic extension/invasive behavior'
+    reasons.push(`Lesion ${why}, so the ${sequence} score of 4 becomes 5.`)
+  }
+  const dwi: Score = form.zone === 'peripheral' && upgraded ? 5 : form.dwiScore
+  const t2: Score = form.zone === 'transition' && upgraded ? 5 : form.t2Score
+
   if (form.zone === 'peripheral') {
-    if (form.dwiScore === 3) {
+    if (dwi === 3) {
       if (form.dcePositive) {
         category = 4
         reasons.push('DWI score 3 with positive DCE upgrades the lesion to PI-RADS 4.')
@@ -28,20 +44,20 @@ export function classify(form: PiradsForm) {
         reasons.push('DWI score 3 with negative DCE remains PI-RADS 3.')
       }
     } else {
-      category = form.dwiScore
-      reasons.push(`DWI score ${form.dwiScore} corresponds to overall PI-RADS ${form.dwiScore}.`)
+      category = dwi
+      reasons.push(`DWI score ${dwi} corresponds to overall PI-RADS ${dwi}.`)
     }
   } else {
-    if (form.t2Score === 2) {
-      if (form.dwiScore >= 4) {
+    if (t2 === 2) {
+      if (dwi >= 4) {
         category = 3
         reasons.push('T2 score 2 with DWI 4 or 5 is upgraded to PI-RADS 3 in version 2.1.')
       } else {
         category = 2
         reasons.push('T2 score 2 corresponds to PI-RADS 2.')
       }
-    } else if (form.t2Score === 3) {
-      if (form.dwiScore === 5) {
+    } else if (t2 === 3) {
+      if (dwi === 5) {
         category = 4
         reasons.push('T2 score 3 with DWI 5 is upgraded to PI-RADS 4.')
       } else {
@@ -49,23 +65,8 @@ export function classify(form: PiradsForm) {
         reasons.push('T2 score 3 corresponds to PI-RADS 3.')
       }
     } else {
-      category = form.t2Score
-      reasons.push(`T2 score ${form.t2Score} corresponds to overall PI-RADS ${form.t2Score}.`)
-    }
-  }
-
-  // v2.1 defines a sequence score of 5 as a 4 that is >= 1.5 cm or shows definite EPE, so the
-  // upgrade applies only when the driving sequence (DWI in the PZ, T2 in the TZ) scored 4 itself.
-  // A category that reached 4 by an upgrade (PZ DWI 3 + DCE, TZ T2 3 + DWI 5) stays 4.
-  const drivingScore = form.zone === 'peripheral' ? form.dwiScore : form.t2Score
-  if (category === 4 && drivingScore === 4 && ((!Number.isNaN(size) && size >= 1.5) || form.epeOrInvasive)) {
-    category = 5
-    if (!Number.isNaN(size) && size >= 1.5 && form.epeOrInvasive) {
-      reasons.push('Lesion measures 1.5 cm or greater and shows definite extraprostatic extension/invasive behavior, upgrading to PI-RADS 5.')
-    } else if (!Number.isNaN(size) && size >= 1.5) {
-      reasons.push('Lesion measures 1.5 cm or greater, upgrading to PI-RADS 5.')
-    } else {
-      reasons.push('Lesion shows definite extraprostatic extension/invasive behavior, upgrading to PI-RADS 5.')
+      category = t2
+      reasons.push(`T2 score ${t2} corresponds to overall PI-RADS ${t2}.`)
     }
   }
 

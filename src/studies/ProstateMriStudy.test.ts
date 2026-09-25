@@ -348,10 +348,10 @@ describe('prostate MRI: required items', () => {
 
 describe('prostate MRI: contradictions', () => {
   it('EPE on a lesion scoring under 4', () => {
-    expect(report(study, pz('3', { l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but scores PI-RADS 3: EPE makes a 4 into a 5, so check the DWI score.')
+    expect(report(study, pz('3', { l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but its DWI score is 3: EPE makes a DWI score of 4 into 5, so check the DWI score.')
   })
   it('EPE on a PZ 3 that DCE lifted to 4 (not a DWI 4, so it stays 4)', () => {
-    expect(report(study, pz('3', { l1dce: 'pos', l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but scores PI-RADS 4: EPE makes a 4 into a 5, so check the DWI score.')
+    expect(report(study, pz('3', { l1dce: 'pos', l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but its DWI score is 3: EPE makes a DWI score of 4 into 5, so check the DWI score.')
   })
   // "5: same as 4 but ≥ 1.5 cm, OR definite extraprostatic extension."
   it('DWI 5 under 1.5 cm without EPE', () => {

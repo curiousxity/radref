@@ -19,57 +19,63 @@ function getFeatures(form: OradsForm) {
   return features
 }
 
+type UsCategory = 1 | 2 | 3 | 4 | 5
+
+/** The wording each O-RADS US category carries, so every branch that reaches it reads the same. */
+const US_TEXT: Record<UsCategory, { risk: string; recommendation: string }> = {
+  1: { risk: 'normal premenopausal ovary (follicle).', recommendation: 'No further management.' },
+  2: { risk: 'almost certainly benign.', recommendation: 'Management depends on size and menopausal status.' },
+  3: { risk: 'low risk of malignancy.', recommendation: 'Follow-up imaging may be appropriate.' },
+  4: { risk: 'intermediate risk of malignancy.', recommendation: 'Specialist evaluation and MRI may be appropriate.' },
+  5: { risk: 'high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.' },
+}
+
 export function calculateOrads(form: OradsForm): OradsResult {
   const size = parseSize(form.sizeCm)
   const features = getFeatures(form)
 
   if (form.modality === 'us') {
-    if (form.peritonealDisease || form.ascites) {
-      return { category: 'O-RADS 5', reason: 'Ascites or peritoneal disease confers high risk.', impression: 'O-RADS US 5: high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.', features }
+    // O-RADS US v2022 (Strachowski et al., Radiology 2023).
+    const result = (category: UsCategory, reason: string, recommendation = US_TEXT[category].recommendation): OradsResult => ({
+      category: `O-RADS ${category}`,
+      reason,
+      impression: `O-RADS US ${category}: ${US_TEXT[category].risk}`,
+      recommendation,
+      features,
+    })
+    const cs = Number(form.colorScore)
+    const noSolid = !form.solidComponent && form.papillaryProjections === 0
+
+    if (form.peritonealDisease || form.ascites) return result(5, 'Ascites or peritoneal disease confers high risk.')
+    if (form.cystType === 'simple' && form.menopausal === 'premenopausal' && size <= 3 && noSolid) {
+      return result(1, 'Simple cyst of 3 cm or less in a premenopausal patient is a follicle (normal ovary).')
     }
-    // O-RADS US v2022 (Strachowski et al., Radiology 2023). Colour score runs 1 (no flow) to 4;
-    // a 0 from older forms is read as 1.
-    const cs = form.colorScore === '0' ? 1 : Number(form.colorScore)
-    const unilocular = form.cystType === 'simple' || form.cystType === 'nonsimple'
-    if (form.cystType === 'simple' && form.menopausal === 'premenopausal' && size <= 3 && !form.solidComponent && form.papillaryProjections === 0) {
-      return { category: 'O-RADS 1', reason: 'Simple cyst of 3 cm or less in a premenopausal patient is a follicle (normal ovary).', impression: 'O-RADS US 1: normal premenopausal ovary (follicle).', recommendation: 'No further management.', features }
-    }
-    if (form.cystType === 'simple' && size < 10 && !form.solidComponent && form.papillaryProjections === 0) {
-      return { category: 'O-RADS 2', reason: 'Simple cyst smaller than 10 cm without suspicious features.', impression: 'O-RADS US 2: almost certainly benign.', recommendation: 'Management depends on size and menopausal status.', features }
-    }
-    if (form.cystType === 'nonsimple' && size < 10 && !form.solidComponent && form.papillaryProjections === 0) {
-      return { category: 'O-RADS 2', reason: 'Nonsimple unilocular cyst smaller than 10 cm without suspicious features.', impression: 'O-RADS US 2: almost certainly benign.', recommendation: 'Management depends on size and menopausal status.', features }
-    }
+    if (form.cystType === 'simple' && size < 10 && noSolid) return result(2, 'Simple cyst smaller than 10 cm without suspicious features.')
+    if (form.cystType === 'nonsimple' && size < 10 && noSolid) return result(2, 'Nonsimple unilocular cyst smaller than 10 cm without suspicious features.')
     if (form.cystType === 'classicBenign') {
-      if (size >= 10) return { category: 'O-RADS 3', reason: 'Classic benign lesion of 10 cm or more is low risk.', impression: 'O-RADS US 3: low risk of malignancy.', recommendation: 'Follow-up imaging may be appropriate.', features }
-      return { category: 'O-RADS 2', reason: 'Classic benign lesion smaller than 10 cm.', impression: 'O-RADS US 2: almost certainly benign.', recommendation: 'Manage according to symptoms and size.', features }
+      if (size >= 10) return result(3, 'Classic benign lesion of 10 cm or more is low risk.')
+      return result(2, 'Classic benign lesion smaller than 10 cm.', 'Manage according to symptoms and size.')
     }
     if (form.cystType === 'solid') {
-      if (!form.smoothContour) return { category: 'O-RADS 5', reason: 'Solid lesion with an irregular outer contour is high risk at any color score.', impression: 'O-RADS US 5: high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.', features }
-      if (cs === 4) return { category: 'O-RADS 5', reason: 'Smooth solid lesion with color score 4 is high risk.', impression: 'O-RADS US 5: high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.', features }
-      if (cs >= 2) return { category: 'O-RADS 4', reason: 'Smooth solid lesion with color score 2 or 3 is intermediate risk.', impression: 'O-RADS US 4: intermediate risk of malignancy.', recommendation: 'Specialist evaluation and MRI may be appropriate.', features }
-      return { category: 'O-RADS 3', reason: 'Smooth solid lesion with color score 1 is low risk.', impression: 'O-RADS US 3: low risk of malignancy.', recommendation: 'Follow-up imaging may be appropriate.', features }
+      if (!form.smoothContour) return result(5, 'Solid lesion with an irregular outer contour is high risk at any color score.')
+      if (cs === 4) return result(5, 'Smooth solid lesion with color score 4 is high risk.')
+      if (cs >= 2) return result(4, 'Smooth solid lesion with color score 2 or 3 is intermediate risk.')
+      return result(3, 'Smooth solid lesion with color score 1 is low risk.')
     }
-    if (form.papillaryProjections >= 4) {
-      return { category: 'O-RADS 5', reason: 'Four or more papillary projections indicate high risk.', impression: 'O-RADS US 5: high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.', features }
-    }
-    if (form.papillaryProjections >= 1 && form.papillaryProjections <= 3) {
-      return { category: 'O-RADS 4', reason: 'One to three papillary projections confer intermediate risk.', impression: 'O-RADS US 4: intermediate risk of malignancy.', recommendation: 'Specialist evaluation and MRI may be appropriate.', features }
-    }
+    if (form.papillaryProjections >= 4) return result(5, 'Four or more papillary projections indicate high risk.')
+    if (form.papillaryProjections >= 1) return result(4, 'One to three papillary projections confer intermediate risk.')
     if (form.cystType === 'multilocular') {
       if (form.solidComponent) {
-        if (cs >= 3) return { category: 'O-RADS 5', reason: 'Multilocular cyst with a solid component and color score 3 or 4 is high risk.', impression: 'O-RADS US 5: high risk of malignancy.', recommendation: 'Gynecologic oncology referral is recommended.', features }
-        return { category: 'O-RADS 4', reason: 'Multilocular cyst with a solid component and color score 1 or 2 is intermediate risk.', impression: 'O-RADS US 4: intermediate risk of malignancy.', recommendation: 'Specialist evaluation and MRI may be appropriate.', features }
+        if (cs >= 3) return result(5, 'Multilocular cyst with a solid component and color score 3 or 4 is high risk.')
+        return result(4, 'Multilocular cyst with a solid component and color score 1 or 2 is intermediate risk.')
       }
-      if (size < 10 && cs <= 3) {
-        return { category: 'O-RADS 3', reason: 'Multilocular cyst smaller than 10 cm with color score 1 to 3 is low risk.', impression: 'O-RADS US 3: low risk of malignancy.', recommendation: 'Follow-up imaging may be appropriate.', features }
-      }
-      return { category: 'O-RADS 4', reason: 'Multilocular cyst of 10 cm or more, or with color score 4, is intermediate risk.', impression: 'O-RADS US 4: intermediate risk of malignancy.', recommendation: 'Specialist evaluation is appropriate.', features }
+      if (size < 10 && cs <= 3) return result(3, 'Multilocular cyst smaller than 10 cm with color score 1 to 3 is low risk.')
+      return result(4, 'Multilocular cyst of 10 cm or more, or with color score 4, is intermediate risk.')
     }
-    if (unilocular && form.solidComponent) {
-      return { category: 'O-RADS 4', reason: 'Unilocular cyst with a solid component is intermediate risk at any size and color score.', impression: 'O-RADS US 4: intermediate risk of malignancy.', recommendation: 'Specialist evaluation and MRI may be appropriate.', features }
+    if ((form.cystType === 'simple' || form.cystType === 'nonsimple') && form.solidComponent) {
+      return result(4, 'Unilocular cyst with a solid component is intermediate risk at any size and color score.')
     }
-    return { category: 'O-RADS 3', reason: 'Low-risk morphology without high-risk features.', impression: 'O-RADS US 3: low risk of malignancy.', recommendation: 'Short-interval follow-up may be appropriate.', features }
+    return result(3, 'Low-risk morphology without high-risk features.', 'Short-interval follow-up may be appropriate.')
   }
 
   if (form.modality === 'mri') {

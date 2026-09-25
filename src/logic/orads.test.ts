@@ -161,8 +161,6 @@ describe('O-RADS US v2022: branches added with the v2022 corrections', () => {
     ['multilocular with solid component, CS 3', { cystType: 'multilocular' as const, locules: 3, solidComponent: true, colorScore: '3' as const }, 'O-RADS 5'],
     // Solid irregular is O-RADS 5 at any color score.
     ['irregular solid lesion, CS 4', { cystType: 'solid' as const, colorScore: '4' as const, smoothContour: false }, 'O-RADS 5'],
-    // A legacy color score of 0 is read as 1 (no flow).
-    ['smooth solid lesion, legacy CS 0', { cystType: 'solid' as const, colorScore: '0' as const }, 'O-RADS 3'],
   ])('%s is %s', (_label, over, expected) => {
     expect(cat(over)).toBe(expected)
   })

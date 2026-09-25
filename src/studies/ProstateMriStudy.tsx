@@ -984,7 +984,8 @@ function build(v: Values) {
     const driving = zone === 'tz' ? str(v, key(r.n, 't2')) : str(v, key(r.n, 'dwi'))
     const size = num(v, key(r.n, 'size'))
     const epe = str(v, key(r.n, 'epe'))
-    if (epe === 'yes' && r.category < 5) warnings.push(`Lesion ${r.n} is marked with definite EPE but scores PI-RADS ${r.category}: EPE makes a 4 into a 5, so check the ${zone === 'tz' ? 'T2' : 'DWI'} score.`)
+    // Definite EPE only turns a driving score of 4 into 5, so it cannot lift a lower score.
+    if (epe === 'yes' && r.category < 5) warnings.push(`Lesion ${r.n} is marked with definite EPE but its ${zone === 'tz' ? 'T2' : 'DWI'} score is ${driving}: EPE makes a ${zone === 'tz' ? 'T2' : 'DWI'} score of 4 into 5, so check the ${zone === 'tz' ? 'T2' : 'DWI'} score.`)
     if (driving === '5' && size !== undefined && size < 15 && epe === 'no') warnings.push(`Lesion ${r.n}: ${zone === 'tz' ? 'T2' : 'DWI'} score 5 needs ≥ 1.5 cm or definite EPE, but it is ${size} mm without EPE.`)
   }
 
