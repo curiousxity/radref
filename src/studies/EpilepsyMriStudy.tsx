@@ -21,6 +21,8 @@ const references: LessonReference[] = [
   { citation: 'Najm I et al. The ILAE consensus classification of focal cortical dysplasia: an update proposed by an ad hoc task force of the ILAE diagnostic methods commission. Epilepsia 2022.', doi: '10.1111/epi.17301' },
   { citation: 'Jackson GD et al. Hippocampal sclerosis can be reliably detected by magnetic resonance imaging. Neurology 1990.', doi: '10.1212/wnl.40.12.1869' },
   { citation: 'Téllez-Zenteno JF et al. Surgical outcomes in lesional and non-lesional epilepsy: a systematic review and meta-analysis. Epilepsy Res 2010.', doi: '10.1016/j.eplepsyres.2010.02.007' },
+  { citation: 'Wang I et al. MRI essentials in epileptology: a review from the ILAE Imaging Taskforce. Epileptic Disord 2020. Common epileptogenic pathologies, including cavernomas, hemorrhage and neurocysticercosis stages.', doi: '10.1684/epd.2020.1174' },
+  { citation: 'Nash TE et al. Neurocysticercosis: a natural human model of epileptogenesis. Epilepsia 2015. Calcified granulomas as seizure foci.', doi: '10.1111/epi.12849' },
   { citation: 'Urbach H, ed. MRI in Epilepsy. Springer, 2013. If you want one book, this is it, case-based.' },
 ]
 
@@ -186,7 +188,7 @@ const learn: LearnSection[] = [
           <h4>Step 7. SWI / GRE sweep</h4>
           <ul className="plain-list">
             <li><strong>Cavernoma</strong>: "popcorn" T2 lesion with a black hemosiderin rim; blooms on SWI. Multiple cavernomas = familial (CCM genes).</li>
-            <li>Old <strong>hemorrhage, calcification</strong> (TSC tubers, Sturge-Weber gyriform calcification, old infection).</li>
+            <li>Old <strong>hemorrhage, calcification</strong> (TSC tubers, Sturge-Weber gyriform calcification, old infection). These count as potentially epileptogenic lesions: hemorrhagic stroke and subdural hematoma are among the vascular lesions "associated with refractory seizures" (<Cite doi="10.1684/epd.2020.1174">Wang et al., Epileptic Disord 2020</Cite>), and calcified lesions "can be foci of seizure activation" (<Cite doi="10.1111/epi.12849">Nash et al., Epilepsia 2015</Cite>).</li>
           </ul>
         </div>
 
@@ -590,6 +592,14 @@ function otherLesions(values: Values): string[] {
     const at = where ? `, ${where}` : ''
     if (found.includes('multicav')) out.push(`Multiple cavernomas${at}, a pattern that suggests the familial form (CCM genes).`)
     else if (found.includes('cav')) out.push(`Cavernoma${at}.`)
+    else {
+      // Hemosiderin and calcification are lesions, not a negative study: old blood
+      // is an epileptogenic substrate and calcified granulomas can be seizure foci.
+      const what = found.includes('hem') && found.includes('calc')
+        ? 'Hemosiderin and calcification'
+        : found.includes('hem') ? 'Hemosiderin (old hemorrhage)' : found.includes('calc') ? 'Calcification' : 'Susceptibility abnormality'
+      out.push(`${what} on SWI${at}: a potentially epileptogenic lesion; correlate with semiology and EEG.`)
+    }
   }
   if (str(values, 'injury') === 'present') {
     const types = list(values, 'injuryTypes')
@@ -811,11 +821,12 @@ const steps: StudyDefinition['report']['steps'] = [
       <ul className="plain-list">
         <li><strong>Cavernoma</strong>: "popcorn" T2 lesion with a black hemosiderin rim; blooms on SWI. Multiple cavernomas = familial (CCM genes). Most common vascular cause of epilepsy.</li>
         <li>Old <strong>hemorrhage, calcification</strong> (TSC tubers, Sturge-Weber gyriform calcification, old infection).</li>
+        <li><strong>These are lesions, not a negative study.</strong> Hemorrhagic stroke and subdural hematoma are among the vascular lesions "associated with refractory seizures" (<Cite doi="10.1684/epd.2020.1174">Wang et al., ILAE Imaging Taskforce, Epileptic Disord 2020</Cite>), and in patients with seizures "calcified lesions can be foci of seizure activation" (<Cite doi="10.1111/epi.12849">Nash et al., Epilepsia 2015</Cite>). A calcified cysticercus usually does not enhance, "but if found, this could suggest ongoing seizures" (<Cite doi="10.1684/epd.2020.1174">Wang et al., 2020</Cite>). Calcified granulomas are also common in people without epilepsy, so the lesion is potentially, not proven, epileptogenic. So the impression names the finding as a potentially epileptogenic lesion and asks for correlation with semiology and EEG; it never says "no epileptogenic lesion."</li>
       </ul>
     ),
     fields: [
       { id: 'swi', kind: 'choice', label: 'SWI / GRE', options: SWI, required: true },
-      { id: 'swiFindings', kind: 'multi', label: 'Findings', options: SWI_FINDINGS, showIf: (v) => str(v, 'swi') === 'abnormal' },
+      { id: 'swiFindings', kind: 'multi', label: 'Findings', options: SWI_FINDINGS, showIf: (v) => str(v, 'swi') === 'abnormal', help: 'Hemosiderin or calcification alone is still a potentially epileptogenic lesion, not a negative study' },
       { id: 'swiLoc', kind: 'text', label: 'Location', placeholder: 'e.g. right superior temporal gyrus', showIf: (v) => str(v, 'swi') === 'abnormal' },
     ],
     derive: (v) => {

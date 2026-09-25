@@ -14,12 +14,14 @@ const references: LessonReference[] = [
   { citation: 'Hoang JK et al. Multiplanar sinus CT: a systematic approach to imaging before functional endoscopic sinus surgery. AJR 2010;194:W527–536. (Good multiplanar teaching cases.)', doi: '10.2214/AJR.09.3584' },
   { citation: 'Almhanedi H et al. Surgeon versus radiologist: an inter-rater reliability analysis of the CLOSE checklist for preoperative CT sinus assessment. Eur Arch Otorhinolaryngol 2025;282:837–842.', doi: '10.1007/s00405-024-09083-0' },
   { citation: 'Lee TY et al. Improving CT sinus reporting for endoscopic sinus surgery using the CLOSE criteria: a quality improvement project. Cureus 2025;17:e96762.', doi: '10.7759/cureus.96762' },
+  { citation: 'Hawkins CM et al. Creation and implementation of department-wide structured reports: an analysis of the impact on error rate in radiology reports. J Digit Imaging 2014;27:581–587. (Commission errors: retained template statements that contradict the findings.)', doi: '10.1007/s10278-014-9699-7' },
 ]
 
 const OBRIEN = '10.1148/radiol.2016152230'
 const VAID = '10.1016/j.crad.2010.11.010'
 const WORMALD = '10.1002/alr.21738'
 const LEE = '10.7759/cureus.96762'
+const HAWKINS = '10.1007/s10278-014-9699-7'
 
 const reportTemplate = `CT SINUS WITHOUT CONTRAST — PRE-FESS
 
@@ -719,18 +721,10 @@ const study: StudyDefinition = {
   references,
   referencesNote: 'Citations checked against PubMed in September 2026. The Lund-Mackay and Keros papers have no DOI.',
   report: {
+    // The CLOSE items start unanswered on purpose: a pre-filled "none" would print as a
+    // checked pertinent negative even if nobody looked (O'Brien 2016; Hawkins 2014).
     initial: {
       technique: TECHNIQUE,
-      olf_asym: 'no',
-      fovea_low: 'none',
-      sb_dehisc: 'no',
-      lamina: 'intact',
-      onodi: 'absent',
-      sph_ica: 'none',
-      sph_optic: 'none',
-      sph_septum: 'none',
-      aea_r: 'in',
-      aea_l: 'in',
     },
     steps: [
       {
@@ -835,7 +829,8 @@ const study: StudyDefinition = {
         learn: 'step-by-step',
         teach: (
           <>
-            <p>CLOSE is the mnemonic from <Cite doi={OBRIEN}>O'Brien et al. (Radiology 2016)</Cite>. State <strong>"none"</strong> explicitly for each CLOSE item rather than staying silent (the surgeon can't tell silence from oversight).</p>
+            <p>CLOSE is the mnemonic from <Cite doi={OBRIEN}>O'Brien et al. (Radiology 2016)</Cite>. State <strong>"none"</strong> explicitly for each CLOSE item rather than staying silent: surgeons "cannot assume that omission of a finding from a report constitutes absence of the finding" (<Cite doi={OBRIEN}>O'Brien et al.</Cite>).</p>
+            <p>So every CLOSE item here starts blank and is listed under "check before signing" until you answer it, "none" included. A pre-filled normal answer would print a negative nobody checked; template statements left in a report that contradict its findings are a recognised report error (<Cite doi={HAWKINS}>Hawkins et al., J Digit Imaging 2014</Cite>).</p>
             <ul className="plain-list">
               <li><strong>C.</strong> Measure the olfactory fossa depth on coronal, from the fovea ethmoidalis down to the cribriform plate. Keros type I is ≤3 mm, type II is 4–7 mm, and type III is {'>'}7 mm. Deeper fossa = higher CSF-leak risk. Also report asymmetry, a low-lying or medially sloping fovea, and any dehiscence.</li>
               <li><strong>L.</strong> Trace the medial orbital wall on every coronal slice. A dehiscent lamina is where the surgeon enters the orbit.</li>
@@ -849,7 +844,7 @@ const study: StudyDefinition = {
         fields: [
           { id: 'olf_r', label: 'Olfactory fossa depth, right', kind: 'number', unit: 'mm', min: 0, step: 0.5, required: true, help: 'Keros I ≤3 mm, II 4–7 mm, III >7 mm' },
           { id: 'olf_l', label: 'Olfactory fossa depth, left', kind: 'number', unit: 'mm', min: 0, step: 0.5, required: true },
-          { id: 'olf_asym', label: 'Asymmetry between sides', kind: 'choice', options: PRESENT, required: true },
+          { id: 'olf_asym', label: 'Asymmetry between sides', kind: 'choice', options: PRESENT, required: true, help: 'Every CLOSE item starts blank: answer each one, "none" included' },
           { id: 'fovea_low', label: 'Low-lying or medially sloping fovea', kind: 'choice', options: SIDED, required: true },
           { id: 'sb_dehisc', label: 'Skull-base dehiscence', kind: 'choice', options: PRESENT, required: true },
           { id: 'sb_dehisc_where', label: 'Skull-base dehiscence, location', kind: 'text', showIf: (v) => str(v, 'sb_dehisc') === 'yes' },

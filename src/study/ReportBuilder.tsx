@@ -1,15 +1,12 @@
 import { useMemo, useState } from 'react'
 import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
+import { computeReport, visibleValues } from './report'
 import type { Field, StudyDefinition, Value, Values } from './types'
 
 /** Short option sets read better as a row of buttons than as a select. */
 function rendersAsButtons(field: Extract<Field, { kind: 'choice' }>) {
   return field.options.length <= 4 && field.options.every((option) => option.label.length <= 24)
-}
-
-function isEmpty(value: Value) {
-  return value === undefined || (Array.isArray(value) ? value.length === 0 : value.trim() === '')
 }
 
 function FieldInput({ field, value, onChange }: { field: Field; value: Value; onChange: (next: Value) => void }) {
@@ -114,23 +111,6 @@ function FieldInput({ field, value, onChange }: { field: Field; value: Value; on
 }
 
 /**
- * The values with every hidden field's answer removed. Without this, an answer typed and
- * then hidden (by changing the choice that revealed it) would still reach the report.
- * Hiding one field can hide another that depended on it, so it repeats until stable.
- */
-function visibleValues(study: StudyDefinition, values: Values): Values {
-  const fields = study.report.steps.flatMap((step) => step.fields)
-  let current = values
-  for (let pass = 0; pass < fields.length; pass += 1) {
-    const hidden = fields.filter((field) => field.showIf && !field.showIf(current) && current[field.id] !== undefined)
-    if (hidden.length === 0) break
-    current = { ...current }
-    for (const field of hidden) delete current[field.id]
-  }
-  return current
-}
-
-/**
  * The Report tab. Values live only in component state: nothing typed here is stored or
  * sent anywhere, so no patient detail outlives the page.
  */
@@ -144,16 +124,7 @@ export function ReportBuilder({ study, onOpenLearn }: { study: StudyDefinition; 
 
   // Rules and the report only ever see answers to fields that are currently shown.
   const shown = useMemo(() => visibleValues(study, values), [study, values])
-
-  const output = useMemo(() => {
-    const built = study.report.build(shown)
-    const missing = study.report.steps.flatMap((step) =>
-      step.fields
-        .filter((field) => field.required && (field.showIf?.(shown) ?? true) && isEmpty(shown[field.id]))
-        .map((field) => `${field.label} not stated`),
-    )
-    return { text: built.text, warnings: [...missing, ...built.warnings] }
-  }, [study, shown])
+  const output = useMemo(() => computeReport(study, values), [study, values])
 
   return (
     <section className="calculator-grid study-report">

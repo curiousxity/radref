@@ -233,7 +233,8 @@ function vesselFields(vessel: Vessel): Field[] {
 }
 
 function lowerFirst(text: string) {
-  return /^[A-Z][a-z]/.test(text) ? text.charAt(0).toLowerCase() + text.slice(1) : text
+  // Skips a leading quote, so the '"Teardrop" shape' label reads '"teardrop" shape' mid-sentence.
+  return text.replace(/^("?)([A-Z])(?=[a-z])/, (_match, quote: string, first: string) => quote + first.toLowerCase())
 }
 
 function listLabels(options: Option[], chosen: string[]) {

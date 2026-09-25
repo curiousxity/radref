@@ -116,7 +116,9 @@ function getRecommendation(category: TiradsResult['category'], sizeCm: number) {
 
 export function calculateTirads(form: TiradsForm): TiradsResult {
   const sizeCm = parseSize(form.sizeCm)
-  const points =
+  // Spongiform: "Do not add further points for other categories" (Tessler et al., JACR 2017,
+  // Fig. 1), so a spongiform nodule scores 0 whatever else is selected.
+  const points = form.composition === 'spongiform' ? 0 :
     compositionPoints[form.composition] +
     echogenicityPoints[form.echogenicity] +
     shapePoints[form.shape] +

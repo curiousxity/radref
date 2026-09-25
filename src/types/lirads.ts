@@ -17,7 +17,7 @@ export type LiradsForm = {
   malignantNonHcc: MalignantNonHcc
 }
 
-export type LiradsCategory = 'LR-1' | 'LR-2' | 'LR-3' | 'LR-4' | 'LR-5' | 'LR-M' | 'LR-TIV' | 'LR-NC'
+export type LiradsCategory = 'N/A' | 'LR-1' | 'LR-2' | 'LR-3' | 'LR-4' | 'LR-5' | 'LR-M' | 'LR-TIV' | 'LR-NC'
 
 export type LiradsResult = {
   category: LiradsCategory

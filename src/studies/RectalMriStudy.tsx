@@ -186,8 +186,11 @@ function mrfByDistance(values: Values): 'involved' | 'clear' | undefined {
 }
 
 /**
- * Step 5 (ESGAR): short axis 9 mm or more suspicious; 5–8 mm needs two of round, irregular
- * border, mixed signal; under 5 mm needs all three. Undefined when no size is entered.
+ * Step 5 (ESGAR): short axis 9 mm or more suspicious; 5 to under 9 mm needs two of round,
+ * irregular border, mixed signal; under 5 mm needs all three. The 2018 table's "5–8 mm" band is
+ * restated as "size 5-9 mm AND ≥ 2 morphologic criteria" beneath "size (short axis) ≥ 9 mm" in the
+ * 2026 update's reporting template (Fig. 2), so 8.5 mm falls in the middle band.
+ * Undefined when no size is entered.
  */
 function nodeSuspicious(values: Values): boolean | undefined {
   const size = num(values, 'node-size')
@@ -238,7 +241,7 @@ const fields = {
   mrfCause: { id: 'mrf-cause', kind: 'choice', label: 'Closest structure', ...mrfCauseField, help: 'A smooth node touching the fascia does not count.' },
   mrf: { id: 'mrf', kind: 'choice', label: 'MRF', ...mrfStatusField, required: true },
   emvi: { id: 'emvi', kind: 'choice', label: 'EMVI', ...emviField, required: true },
-  nodeSize: { id: 'node-size', kind: 'number', label: 'Most suspicious mesorectal node, short axis', unit: 'mm', min: 0 },
+  nodeSize: { id: 'node-size', kind: 'number', label: 'Most suspicious mesorectal node, short axis', unit: 'mm', min: 0, help: '9 mm or more is suspicious; 5 to under 9 mm needs two bad features; under 5 mm needs all three.' },
   nodeFeatures: { id: 'node-features', kind: 'multi', label: 'Its features', ...nodeFeatureField, showIf: (v) => num(v, 'node-size') !== undefined },
   nodeText: { id: 'node-text', kind: 'text', label: 'Mesorectal nodes (describe)', placeholder: 'e.g. three nodes, largest 6 mm, left lateral', multiline: true },
   nConfidence: { id: 'n-conf', kind: 'choice', label: 'Node call', ...nConfidenceField, required: true },
@@ -549,7 +552,7 @@ const learn = [
           <p>Size alone is weak. The ESGAR rules are:</p>
           <ul className="plain-list">
             <li>Short axis 9 mm or more: suspicious.</li>
-            <li>5–8 mm: needs two bad features (round, irregular border, mixed signal).</li>
+            <li>5 mm to under 9 mm (so 8.5 mm counts here): needs two bad features (round, irregular border, mixed signal) (<Cite doi="10.1007/s00330-025-12274-w">ESGAR consensus update, Eur Radiol 2026</Cite>).</li>
             <li>Under 5 mm: needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>).</li>
           </ul>
           <p>These rules have only about 54% sensitivity (<Cite doi="10.1007/s00330-025-11361-2">Rutegård et al., Eur Radiol 2025</Cite>). So the 2026 update tells you to give a confidence level: cN0, possibly cN+, or cN+.</p>
@@ -669,7 +672,7 @@ const study: StudyDefinition = {
         learn: 'search-pattern',
         teach: (
           <>
-            <p>Size alone is weak. The ESGAR rules: short axis 9 mm or more is suspicious; 5–8 mm needs two bad features (round, irregular border, mixed signal); under 5 mm needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>).</p>
+            <p>Size alone is weak. The ESGAR rules: short axis 9 mm or more is suspicious; 5 mm to under 9 mm (so 8.5 mm too) needs two bad features (round, irregular border, mixed signal); under 5 mm needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>). The 2026 update keeps these criteria and its report template writes the middle band as "5-9 mm", directly under "≥ 9 mm", so a node of 8 to under 9 mm is in the middle band (<Cite doi="10.1007/s00330-025-12274-w">ESGAR consensus update, Eur Radiol 2026</Cite>).</p>
             <p>These rules have only about 54% sensitivity (<Cite doi="10.1007/s00330-025-11361-2">Rutegård et al., Eur Radiol 2025</Cite>), so give a confidence level: cN0, possibly cN+, or cN+.</p>
             <p>Lateral nodes (obturator, internal iliac): 7 mm or more short axis is suspicious (<Cite doi="10.1200/JCO.18.00032">Ogura et al., J Clin Oncol 2019</Cite>). Common and external iliac nodes and inguinal nodes (unless the tumor reaches the anal canal) count as M1, not N. Irregular nodules along a vein with no node shape are tumor deposits; describe them separately.</p>
           </>
@@ -735,9 +738,9 @@ const study: StudyDefinition = {
     {
       id: 'node-6',
       question: 'A 6 mm (short axis) mesorectal node is round with an irregular border but uniform signal. By the ESGAR rules it is:',
-      options: ['Not suspicious: under 9 mm', 'Not suspicious: needs all three features', 'Suspicious: 5–8 mm with two bad features', 'Suspicious: any node over 5 mm'],
+      options: ['Not suspicious: under 9 mm', 'Not suspicious: needs all three features', 'Suspicious: 5 to under 9 mm with two bad features', 'Suspicious: any node over 5 mm'],
       answer: 2,
-      explanation: <p>Short axis 9 mm or more is suspicious; 5–8 mm needs two bad features (round, irregular border, mixed signal); under 5 mm needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>). Because these rules have only about 54% sensitivity, give a confidence level: cN0, possibly cN+, or cN+.</p>,
+      explanation: <p>Short axis 9 mm or more is suspicious; 5 to under 9 mm needs two bad features (round, irregular border, mixed signal); under 5 mm needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>). Because these rules have only about 54% sensitivity, give a confidence level: cN0, possibly cN+, or cN+.</p>,
     },
     {
       id: 'lateral-7',

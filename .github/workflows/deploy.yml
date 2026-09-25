@@ -26,6 +26,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # The study and calculator rules are pinned by tests; a changed threshold fails here.
+      - run: npm test
       # `npm run build` is `tsc -b && vite build`, so a type error fails here
       # rather than shipping.
       - run: npm run build

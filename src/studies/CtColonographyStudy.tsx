@@ -7,6 +7,7 @@ import type { Derived, Field, LearnSection, Option, QuizQuestion, ReportStep, St
 
 const CRADS = '10.1148/radiol.232007'
 const LIPS = '10.1148/radiol.14132829'
+const ZALIS = '10.1148/radiol.2361041926'
 
 const references: LessonReference[] = [
   { citation: 'Yee J, Dachman A, Kim DH, et al. C-RADS: version 2023 update. Radiology 2024;310(1):e232007. (free access; the main source above)', doi: '10.1148/radiol.232007' },
@@ -501,6 +502,19 @@ function inadequateReasons(v: Values): string[] {
   return reasons
 }
 
+/**
+ * C-RADS names no precedence between C0 and a lesion category found elsewhere, so when both
+ * apply the lesion keeps the overall category and the C0 limitation is stated beside it, in
+ * the wording of the C0 row of the C-RADS 2023 table (Yee et al., Radiology 2024).
+ */
+function c0Limitation(v: Values): string {
+  const technical = inadequateReasons(v).filter((r) => r !== 'a prior study is needed and unavailable')
+  const parts: string[] = []
+  if (technical.length > 0) parts.push(`${technical.join('; ')}: lesions of 10 mm or more cannot be excluded in the inadequately evaluated colon.`)
+  if (str(v, 'prior') === 'unavailable') parts.push('Awaiting prior comparison: amend when prior studies are available.')
+  return parts.length > 0 ? `C0 criteria also met: ${parts.join(' ')}` : ''
+}
+
 type CResult = {
   /** e.g. 'C3', 'C2a and C2b' */
   code: string
@@ -677,11 +691,19 @@ const steps: ReportStep[] = [
       <>
         <p>Scroll the whole axial dataset on both positions in a wide window. Look for gross abnormalities (mass, obstruction, perforation, free air) and get a feel for the prep quality. Decide right now whether the study is adequate.</p>
         <p><strong>C0</strong>: inadequate study. Collapsed segment, poor prep, or a prior study is needed and unavailable.</p>
+        <p>The C-RADS 2023 table defines C0 as prep that "cannot exclude lesions ≥10 mm" or "one or more colonic segments collapsed on both views", managed by "Repeat CTC or consider an alternative screening test if inadequate", and "Amend when prior studies are available" when awaiting a prior (<Cite doi={CRADS}>C-RADS 2023</Cite>). Neither it nor the <Cite doi={ZALIS}>2005 original</Cite> says which category wins when part of the colon is C0 and a polyp or mass is found elsewhere. The report here gives the lesion's category and states the C0 limitation beside it, so neither is lost.</p>
       </>
     ),
     fields: [
       grossField,
-      { id: 'adequate', label: 'Study adequate?', kind: 'choice', required: true, options: yesNo },
+      {
+        id: 'adequate',
+        label: 'Study adequate?',
+        kind: 'choice',
+        required: true,
+        options: yesNo,
+        help: 'If part of the colon is inadequate but a polyp or mass is found, the lesion keeps its C category and the C0 limitation is stated alongside it.',
+      },
       {
         id: 'prior',
         label: 'Prior study',
@@ -884,6 +906,7 @@ const steps: ReportStep[] = [
           <li><strong>C4</strong>: mass ≥30 mm or malignant-appearing. Surgical/oncologic referral.</li>
         </ul>
         <p>The report gets one overall C and one overall E category, based on the most significant finding in each (<Cite doi={CRADS}>C-RADS 2023</Cite>).</p>
+        <p>C-RADS gives no rule for a partly inadequate study with a lesion found elsewhere, so the lesion's category is given and the C0 limitation is stated after it.</p>
       </>
     ),
     fields: [],
@@ -980,7 +1003,7 @@ function build(v: Values) {
   if (massType === 'mass') {
     const feats = list(v, 'massFeatures').map((f) => optionLabel(massFeatureField, f).toLowerCase())
     const parts = [massWhere, massLength !== undefined && `length ${massLength} mm`, ...feats].filter(Boolean)
-    massLine = `  Mass: ${parts.join(', ')}.${str(v, 'massNodes') ? ` Nodes: ${sentence(str(v, 'massNodes'))}` : ''}`
+    massLine = `  Mass${parts.length ? `: ${parts.join(', ')}` : ''}.${str(v, 'massNodes') ? ` Nodes: ${sentence(str(v, 'massNodes'))}` : ''}`
   }
   if (massType === 'div') {
     const feats = list(v, 'divFeatures').map((f) => optionLabel(divFeatureField, f).toLowerCase())
@@ -995,15 +1018,17 @@ function build(v: Values) {
 
   const c = cCategory(v)
   const e = eLine(v)
+  const limitation = c.code !== 'C0' && c.code !== 'Not assigned' ? c0Limitation(v) : ''
   const impression = [
     ...c.lines.map((line, i) => (i === 0 ? `1) ${line}` : `   ${line}`)),
+    limitation && `   ${limitation}`,
     e && `2) ${e}`,
   ].filter(Boolean)
 
   /* Warnings the rules can see. */
   const reasons = inadequateReasons(v)
   if (str(v, 'adequate') === 'yes' && reasons.length > 0) warnings.push(`Study marked adequate, but C0 criteria are met: ${reasons.join('; ')}.`)
-  if (reasons.length > 0 && c.code !== 'C0' && c.code !== 'Not assigned') warnings.push(`C0 criteria are met (${reasons.join('; ')}) but a ${c.code} finding is reported; choose the overall C category.`)
+  if (reasons.length > 0 && c.code !== 'C0' && c.code !== 'Not assigned') warnings.push(`C0 criteria are met (${reasons.join('; ')}) and a ${c.code} finding is reported. C-RADS does not say which category wins, so the report gives ${c.code} and states the C0 limitation; confirm that is the category you want and that the recommendation covers the unevaluated colon.`)
   if (c.code === 'C2a and C2b') warnings.push('Both C2a and C2b findings: the report gets one overall C category, based on the most significant finding.')
   if (positions.length === 1) warnings.push('Only one position recorded: supine and prone are standard, and every segment needs to be distended in at least one position.')
   for (const l of lesions(v)) {

@@ -17,7 +17,25 @@ Rad Refcalculators is a mobile-friendly React + TypeScript reference site for ra
 npm install
 npm run dev
 npm run build
+npm test
 ```
+
+## Tests
+
+`npm test` runs vitest (`vitest.config.ts`, kept apart from `vite.config.ts` so the PWA
+plugin is not loaded). Tests live next to what they test as `*.test.ts` and pin the
+clinical rules: each study's thresholds at their boundaries and each calculator's
+categories, with a comment quoting the lesson or guideline sentence each case comes
+from. The deploy workflow runs `npm test` before building, so a changed threshold fails
+the deploy rather than reaching the site.
+
+- Study tests go through `src/study/testing.ts`: `studyOf(Page)` gets the definition,
+  `report(study, values)` gives exactly what the Report tab shows (hidden-field answers
+  dropped, "not stated" warnings added, via `computeReport` in `src/study/report.ts`),
+  and `chips(study, stepId, values)` gives a step's rule chips. `RectalMriStudy.test.ts`
+  is the model to copy.
+- A change to a rule should change a test in the same commit. If a test has to change,
+  say in the commit why the old expectation was wrong.
 
 ## Development workflow
 
@@ -75,7 +93,7 @@ In a Wrangler static-assets deployment, that rule can be rejected as an infinite
 ### How it actually deploys
 
 Live at <https://radref.hash.immo>. Pushing to `main` triggers
-`.github/workflows/deploy.yml`, which lints, runs `npm run build`, and
+`.github/workflows/deploy.yml`, which lints, runs `npm test` and `npm run build`, and
 publishes with Wrangler. `npx wrangler deploy` does the same by hand.
 
 - Build command: `npm run build`
@@ -149,6 +167,15 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Doppler indices (RI, PI, S/D ratio)
 - Periprocedural anticoagulation for IR (SIR 2019 consensus, hold/restart by bleeding risk)
 - Simple adnexal cyst follow-up (SRU 2019 consensus, size bands and report wording)
+- PI-RADS v2.1 (zonal assessment, single lesion; logic shared in `src/logic/pirads.ts`)
+- AAST 2018 organ injury grading (spleen, liver, kidney)
+- Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
+- Contrast reactions (severity triage, bedside actions, chart text)
+- Contrast premedication (oral and accelerated IV regimens)
+- Contrast extravasation (triage, surgical consult flags, documentation text)
+
+The registry in `src/data/calculators.ts` is the source of truth; keep this list in step
+with it when adding a calculator.
 
 ## Anatomy section
 
@@ -241,7 +268,10 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT.
+FESS, temporal bone CT. Drafted from the guidelines rather than from the site author's
+notes, and labelled as unreviewed drafts in their source note until the author signs
+them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
+screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017).
 
 How it is built:
 
