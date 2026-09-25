@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'Rad Refcalculators',
         short_name: 'RadCalc',
-        description: 'Mobile-friendly radiology reference: calculators with report-ready impressions (TI-RADS, LI-RADS, O-RADS, Lung-RADS, Bosniak and more), step-by-step reading lessons, and interactive 3D anatomy.',
+        description: 'Mobile-friendly radiology reference: calculators with report-ready impressions (TI-RADS, LI-RADS, O-RADS, Lung-RADS, Bosniak and more), study pages that build the report step by step and teach the method behind it, and interactive 3D anatomy.',
         start_url: '/',
         scope: '/',
         display: 'standalone',

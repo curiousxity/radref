@@ -207,12 +207,12 @@ and drop the prefix from its page's `file`. They still fall under
 `src/data/calculators.ts` is the single registry for routes, the menu, search and the
 home page.
 
-- Categories may set `itemLabel` (Anatomy uses `'reference'`, Lessons `'lesson'`), so the
+- Categories may set `itemLabel` (Anatomy uses `'reference'`, Studies `'study'`), so the
   home-page count reads "16 references" rather than "16 calculators". They may also set a
   `blurb`, shown under the category heading.
 - Items may set `group`, which becomes a subheading on the home page and a label in the
   menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
-  pelvis and limbs), and Lessons by body area. `groupItems` groups consecutive items, so
+  pelvis and limbs), and Studies by body area. `groupItems` groups consecutive items, so
   keep each group's items together in the list.
 - Items may set `related`, a list of paths. `RelatedLinks` shows those items as cards
   under the page, in both directions, so declare each link on one side only (usually on
@@ -223,36 +223,48 @@ The site copy (header subtitle, home headline, search labels, manifest and meta
 descriptions) presents it as calculators, lessons and 3D anatomy. Keep it that way
 when adding a new kind of content.
 
-## Lessons section
+## Studies section
 
-The Lessons category holds step-by-step reading-and-reporting notes with the papers
-behind each rule (`itemLabel: 'lesson'`, plus a `blurb` shown on the home page):
+The Studies category (first on the home page and in the menu) has one page per exam
+type, each with three tabs:
 
-- Rectal MRI (staging a new rectal cancer)
-- Prostate MRI (PI-RADS v2.1)
-- Renal mass CT and MRI
-- Adnexal mass MRI (O-RADS MRI)
-- Pancreatic mass CT
-- Pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto 2024)
-- CT colonography (C-RADS 2023)
-- Epilepsy MRI (HARNESS-MRI)
-- Sinus CT before FESS
-- Temporal bone CT
+- **Report**: a form that walks the lesson's own search pattern step by step. Each step
+  has a collapsible "Why and how" panel quoting the lesson and its papers, rule chips
+  that apply the lesson's thresholds (e.g. extramural depth to T3a-d), and the report
+  text builds itself in the lesson's template format, with a "check before signing"
+  list for missing required items and contradictions.
+- **Learn**: the lesson itself, verbatim, section by section, with its reference list.
+- **Quiz**: self-check questions from the lesson. The best score is kept in
+  `localStorage` (guarded, per-viewer only). Nothing typed into the Report form is
+  stored anywhere, so no patient detail outlives the page.
 
-Routes live under `/lessons/<slug>`; cross-lesson links use `<Link>`, not `.html`
-paths.
+Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
+MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
+2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
+FESS, temporal bone CT.
 
-Unlike the anatomy references, lessons are ported to React rather than kept as
-standalone HTML, so they get the site's theme, nav and search. Each page declares its
-body and reference list to `LessonPage` (`src/components/LessonPage.tsx`), which adds
-the header, the numbered DOI reference list, and the "personal teaching notes" caveat.
+How it is built:
 
-In September 2026 every citation in the lessons was checked against PubMed. DOIs were
-added or corrected, citation text was fixed to match the real papers, and plain-text
-citations were linked where the paper could be matched with confidence. The prose was
-left alone. A new lesson should get the same check before it ships, and any claim
-that doesn't match its paper should go to the author rather than be quietly reworded.
-Cite inline with `<Cite doi="...">`, and put report templates in a `CopyBlock`.
+- Each study is data: `src/studies/<Name>Study.tsx` declares a `StudyDefinition`
+  (`src/study/types.ts`) and renders it with `StudyPage`. The framework in `src/study/`
+  (`StudyPage`, `ReportBuilder`, `QuizPanel`) owns all layout and behaviour, so a new
+  study is a content declaration, not new markup. Read the doc comments in `types.ts`
+  before writing one.
+- Rules in `derive`/`build` must come from the lesson text or from a shared calculator
+  in `src/logic/`, with the lesson's thresholds. Never add thresholds or management
+  advice the lesson does not state. When a study and a calculator apply the same rules
+  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`: `pirads.ts` and `bosniak.ts` are shared by the calculators and the prostate and renal studies, so a fix there changes both.
+- Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
+  `/lessons/<slug>` redirects there; the pages were briefly called lessons.
+- Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds
+  the shared reference list and caveat).
+
+In September 2026 every citation was checked against PubMed. DOIs were added or
+corrected, citation text was fixed to match the real papers, and plain-text citations
+were linked where the paper could be matched with confidence. Claims that did not match
+their papers were corrected with the author's approval. A new study should get the
+same check before it ships, and any claim that doesn't match its paper should go to the
+author rather than be quietly reworded.
 
 ## Next development priorities
 

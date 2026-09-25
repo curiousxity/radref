@@ -7,7 +7,8 @@ import type { CalculatorCategory } from '../data/calculators'
 /** "3 calculators", or "2 references" for a category that names its items differently. */
 function countLabel(category: CalculatorCategory) {
   const noun = category.itemLabel ?? 'calculator'
-  return `${category.items.length} ${noun}${category.items.length === 1 ? '' : 's'}`
+  if (category.items.length === 1) return `1 ${noun}`
+  return `${category.items.length} ${noun.endsWith('y') ? `${noun.slice(0, -1)}ies` : `${noun}s`}`
 }
 
 export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
@@ -29,7 +30,7 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
           <p className="eyebrow">Radiology reference</p>
           <h1>Radiology reference, ready at the scanner.</h1>
           <p className="hero-copy">
-            Calculators that turn findings into a report-ready impression, step-by-step reading lessons, and 3D anatomy you can turn in the hand. No PDFs, no logins.
+            Study pages that build the report as you read the exam and teach the method behind each step, calculators that turn findings into an impression, and 3D anatomy you can turn in the hand. No PDFs, no logins.
           </p>
           <search className="search-panel hero-search">
             <label className="search-field">

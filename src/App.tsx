@@ -1,11 +1,17 @@
 import { Suspense, useEffect, useState } from 'react'
-import { Link, Route, Routes, useLocation } from 'react-router-dom'
+import { Link, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
 import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
 import { calculators, categories } from './data/calculators'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
+
+/** The studies were briefly published as lessons under /lessons/; keep those links working. */
+function LessonRedirect() {
+  const { slug } = useParams()
+  return <Navigate to={`/studies/${slug}`} replace />
+}
 
 export default function App() {
   const location = useLocation()
@@ -25,7 +31,7 @@ export default function App() {
             <img src="/logo-mark-header.png" alt="" className="brand-logo" width="42" height="40" />
             <div>
               <p className="brand-title">Rad Refcalculators</p>
-              <p className="brand-subtitle">Calculators, lessons and 3D anatomy</p>
+              <p className="brand-subtitle">Studies, calculators and 3D anatomy</p>
             </div>
           </Link>
           <button
@@ -57,6 +63,7 @@ export default function App() {
                 }
               />
             ))}
+            <Route path="/lessons/:slug" element={<LessonRedirect />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
