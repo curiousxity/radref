@@ -283,7 +283,7 @@ How it is built:
 - Rules in `derive`/`build` must come from the lesson text or from a shared calculator
   in `src/logic/`, with the lesson's thresholds. Never add thresholds or management
   advice the lesson does not state. When a study and a calculator apply the same rules
-  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`: `pirads.ts` and `bosniak.ts` are shared by the calculators and the prostate and renal studies, so a fix there changes both.
+  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`. `pirads.ts`, `bosniak.ts`, `tirads.ts`, `lirads.ts`, `lungrads.ts` and `fleischner.ts` are each shared by a calculator and a study, so a fix there changes both, and `src/logic/*.test.ts` pins them against their guidelines. (`orads.ts` backs the O-RADS calculator only; the adnexal MRI study implements the lesson's O-RADS MRI algorithm itself.)
 - Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
   `/lessons/<slug>` redirects there; the pages were briefly called lessons.
 - Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds

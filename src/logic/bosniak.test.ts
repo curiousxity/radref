@@ -30,7 +30,7 @@ describe('Bosniak 2019: class I', () => {
    * nonenhancing simple cyst with no visible wall and no septa or calcification is class I.
    * The logic requires wallThickness 'thin' for class I and returns Bosniak II.
    */
-  it.fails('a nonenhancing cyst with no visible wall and no septa is Bosniak I', () => {
+  it('a nonenhancing cyst with no visible wall and no septa is Bosniak I', () => {
     expect(cat({ wallThickness: 'none' })).toBe('Bosniak I')
   })
 })
@@ -69,7 +69,7 @@ describe('Bosniak 2019: class IIF', () => {
    * and a class I or II wall "may enhance", so an enhancing thin wall does not cancel it. The
    * logic only counts the T1 feature when enhancement is absent and returns Bosniak I.
    */
-  it.fails('heterogeneous T1 hyperintensity with an enhancing thin wall is Bosniak IIF', () => {
+  it('heterogeneous T1 hyperintensity with an enhancing thin wall is Bosniak IIF', () => {
     expect(cat({ ...enh, t1HyperintenseUnenhanced: true })).toBe('Bosniak IIF')
   })
 })

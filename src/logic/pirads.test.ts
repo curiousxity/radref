@@ -97,10 +97,10 @@ describe('PI-RADS v2.1: 4 versus 5 by size and extraprostatic extension', () => 
    * The v2.1 tables give those combinations overall 4 at any size. The logic upgrades any
    * category 4 of 1.5 cm or more to 5.
    */
-  it.fails('PZ DWI 3 with positive DCE stays PI-RADS 4 at 1.5 cm', () => {
+  it('PZ DWI 3 with positive DCE stays PI-RADS 4 at 1.5 cm', () => {
     expect(pz(3, true, { sizeCm: '1.5' })).toBe(4)
   })
-  it.fails('TZ T2 3 with DWI 5 stays PI-RADS 4 at 1.5 cm', () => {
+  it('TZ T2 3 with DWI 5 stays PI-RADS 4 at 1.5 cm', () => {
     expect(tz(3, 5, { sizeCm: '1.5' })).toBe(4)
   })
 })

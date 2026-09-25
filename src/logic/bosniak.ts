@@ -62,7 +62,8 @@ export function classify(form: BosniakForm): BosniakResult {
     (form.enhancingPresent && form.wallThickness === 'minimallyThick') ||
     (form.enhancingPresent && form.septaThickness === 'minimallyThick') ||
     (form.enhancingPresent && form.septaCount === 'many') ||
-    (!form.enhancingPresent && form.t1HyperintenseUnenhanced)
+    // An MRI IIF feature in its own right, whether or not a thin wall enhances.
+    form.t1HyperintenseUnenhanced
   ) {
     return {
       category: 'Bosniak IIF',
@@ -77,9 +78,9 @@ export function classify(form: BosniakForm): BosniakResult {
     (form.septaCount === 'none' && form.calcificationOnly) ||
     (!form.enhancingPresent && !form.t1HyperintenseUnenhanced) ||
     // v2019 class I: a thin smooth wall "that may enhance", with no septa.
-    (form.septaCount === 'none' && form.wallThickness === 'thin' && !form.wallIrregularity)
+    (form.septaCount === 'none' && (form.wallThickness === 'thin' || form.wallThickness === 'none') && !form.wallIrregularity)
   ) {
-    if (form.septaCount === 'none' && !form.calcificationOnly && form.wallThickness === 'thin') {
+    if (form.septaCount === 'none' && !form.calcificationOnly && (form.wallThickness === 'thin' || form.wallThickness === 'none')) {
       return {
         category: 'Bosniak I',
         reason: 'Simple cyst with thin smooth wall and no septa or suspicious features.',

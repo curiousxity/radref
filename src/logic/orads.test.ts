@@ -44,12 +44,12 @@ describe('O-RADS US v2022: almost certainly benign (2) and low risk (3)', () => 
    * GUIDELINE CONTRADICTION: O-RADS 1 is the normal premenopausal ovary, including a follicle
    * (simple cyst <= 3 cm). The logic never returns O-RADS 1 and ignores menopausal status.
    */
-  it.fails('a 3 cm simple cyst in a premenopausal patient is O-RADS 1', () => {
+  it('a 3 cm simple cyst in a premenopausal patient is O-RADS 1', () => {
     expect(cat({ menopausal: 'premenopausal', sizeCm: '3' })).toBe('O-RADS 1')
   })
 
   /* GUIDELINE CONTRADICTION: classic benign lesions >= 10 cm are O-RADS 3; the logic gives 2 at any size. */
-  it.fails('a 10 cm classic benign lesion is O-RADS 3', () => {
+  it('a 10 cm classic benign lesion is O-RADS 3', () => {
     expect(cat({ cystType: 'classicBenign', sizeCm: '10' })).toBe('O-RADS 3')
   })
 })
@@ -81,10 +81,10 @@ describe('O-RADS US v2022: cysts with papillary projections or solid component',
    * and a multilocular cyst with a solid component is O-RADS 4 at CS 1-2. The logic ignores the
    * solid component outside papillary projections and returns O-RADS 3 for both.
    */
-  it.fails('unilocular cyst with a solid component is O-RADS 4', () => {
+  it('unilocular cyst with a solid component is O-RADS 4', () => {
     expect(cat({ cystType: 'nonsimple', solidComponent: true })).toBe('O-RADS 4')
   })
-  it.fails('multilocular cyst < 10 cm with a solid component, CS 1, is O-RADS 4', () => {
+  it('multilocular cyst < 10 cm with a solid component, CS 1, is O-RADS 4', () => {
     expect(cat({ cystType: 'multilocular', locules: 3, solidComponent: true, colorScore: '1' })).toBe('O-RADS 4')
   })
 })
@@ -103,13 +103,13 @@ describe('O-RADS US v2022: solid lesions', () => {
    * CS 3-4 -> 5) and ignores the contour, so a smooth solid lesion at CS 1 or CS 3, and an
    * irregular one at low color score, are miscategorized.
    */
-  it.fails('smooth solid lesion, CS 1 is O-RADS 3', () => {
+  it('smooth solid lesion, CS 1 is O-RADS 3', () => {
     expect(cat({ cystType: 'solid', colorScore: '1' })).toBe('O-RADS 3')
   })
-  it.fails('smooth solid lesion, CS 3 is O-RADS 4', () => {
+  it('smooth solid lesion, CS 3 is O-RADS 4', () => {
     expect(cat({ cystType: 'solid', colorScore: '3' })).toBe('O-RADS 4')
   })
-  it.fails('irregular solid lesion, CS 1 is O-RADS 5', () => {
+  it('irregular solid lesion, CS 1 is O-RADS 5', () => {
     expect(cat({ cystType: 'solid', colorScore: '1', smoothContour: false })).toBe('O-RADS 5')
   })
 })
@@ -145,7 +145,25 @@ describe('O-RADS MRI', () => {
    * by its enhancement curve; DWI only lowers the score (dark T2 and dark DWI solid tissue is 2).
    * The logic raises low-risk (minimal) enhancement with diffusion restriction to O-RADS 4.
    */
-  it.fails('solid tissue with low-risk enhancement stays O-RADS 3 with diffusion restriction', () => {
+  it('solid tissue with low-risk enhancement stays O-RADS 3 with diffusion restriction', () => {
     expect(mri({ enhancingSolidTissue: true, enhancement: 'minimal', diffusionRestriction: true })).toBe('O-RADS 3')
+  })
+})
+
+describe('O-RADS US v2022: branches added with the v2022 corrections', () => {
+  // O-RADS 1 is only the premenopausal follicle (simple cyst <= 3 cm).
+  it.each([
+    ['premenopausal simple cyst 3.1 cm', { menopausal: 'premenopausal' as const, sizeCm: '3.1' }, 'O-RADS 2'],
+    ['postmenopausal simple cyst 3 cm', { sizeCm: '3' }, 'O-RADS 2'],
+    ['classic benign lesion 9.9 cm', { cystType: 'classicBenign' as const, sizeCm: '9.9' }, 'O-RADS 2'],
+    // Multilocular with a solid component: CS 1-2 O-RADS 4, CS 3-4 O-RADS 5.
+    ['multilocular with solid component, CS 2', { cystType: 'multilocular' as const, locules: 3, solidComponent: true, colorScore: '2' as const }, 'O-RADS 4'],
+    ['multilocular with solid component, CS 3', { cystType: 'multilocular' as const, locules: 3, solidComponent: true, colorScore: '3' as const }, 'O-RADS 5'],
+    // Solid irregular is O-RADS 5 at any color score.
+    ['irregular solid lesion, CS 4', { cystType: 'solid' as const, colorScore: '4' as const, smoothContour: false }, 'O-RADS 5'],
+    // A legacy color score of 0 is read as 1 (no flow).
+    ['smooth solid lesion, legacy CS 0', { cystType: 'solid' as const, colorScore: '0' as const }, 'O-RADS 3'],
+  ])('%s is %s', (_label, over, expected) => {
+    expect(cat(over)).toBe(expected)
   })
 })

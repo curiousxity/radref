@@ -54,7 +54,11 @@ export function classify(form: PiradsForm) {
     }
   }
 
-  if (category === 4 && ((!Number.isNaN(size) && size >= 1.5) || form.epeOrInvasive)) {
+  // v2.1 defines a sequence score of 5 as a 4 that is >= 1.5 cm or shows definite EPE, so the
+  // upgrade applies only when the driving sequence (DWI in the PZ, T2 in the TZ) scored 4 itself.
+  // A category that reached 4 by an upgrade (PZ DWI 3 + DCE, TZ T2 3 + DWI 5) stays 4.
+  const drivingScore = form.zone === 'peripheral' ? form.dwiScore : form.t2Score
+  if (category === 4 && drivingScore === 4 && ((!Number.isNaN(size) && size >= 1.5) || form.epeOrInvasive)) {
     category = 5
     if (!Number.isNaN(size) && size >= 1.5 && form.epeOrInvasive) {
       reasons.push('Lesion measures 1.5 cm or greater and shows definite extraprostatic extension/invasive behavior, upgrading to PI-RADS 5.')

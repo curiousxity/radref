@@ -55,7 +55,7 @@ export function OradsPage() {
             {isUs && (
               <label>
                 <span className="term">Color score<Definition text="Color Doppler score reflecting the amount of blood flow within solid or papillary components; higher scores indicate more vascularity." /></span>
-                <select value={form.colorScore} onChange={(e) => updateField('colorScore', e.target.value as OradsForm['colorScore'])}><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+                <select value={form.colorScore} onChange={(e) => updateField('colorScore', e.target.value as OradsForm['colorScore'])}><option value="1">1 (no flow)</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
               </label>
             )}
             {isUs && (
@@ -68,6 +68,12 @@ export function OradsPage() {
               <label>
                 <span className="term">Locules<Definition text="The number of fluid-filled compartments within a cystic lesion, separated by septations." /></span>
                 <input type="number" min="1" step="1" value={form.locules} onChange={(e) => updateField('locules', Number(e.target.value))} />
+              </label>
+            )}
+            {isUs && form.cystType === 'solid' && (
+              <label className="check-row">
+                <input type="checkbox" checked={!form.smoothContour} onChange={(e) => updateField('smoothContour', !e.target.checked)} />
+                <span className="term">Irregular outer contour<Definition text="An irregular outer margin of a solid lesion is high risk (O-RADS 5) at any color score." /></span>
               </label>
             )}
             {isUs && (

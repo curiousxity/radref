@@ -119,8 +119,11 @@ describe('prostate MRI: the 1.5 cm line between 4 and 5', () => {
     expect(score(tz('4', '3', { l1size: '14.9' }))).toBe('PI-RADS 4')
     expect(score(tz('4', '3', { l1size: '15' }))).toBe('PI-RADS 5')
   })
-  it('a PZ 3 upgraded to 4 by DCE becomes 5 at 15 mm', () => {
-    expect(score(pz('3', { l1dce: 'pos', l1size: '15' }))).toBe('PI-RADS 5')
+  // v2.1: a score of 5 is 'same as 4 but >= 1.5 cm', a property of the driving sequence score.
+  // A PZ 3 upgraded to 4 by DCE is not a DWI 4, so size does not make it 5. (This case used to
+  // expect 5, pinning a calculator bug that applied the size rule to any category 4.)
+  it('a PZ 3 upgraded to 4 by DCE stays 4 at 15 mm', () => {
+    expect(score(pz('3', { l1dce: 'pos', l1size: '15' }))).toBe('PI-RADS 4')
   })
 })
 
@@ -346,6 +349,9 @@ describe('prostate MRI: required items', () => {
 describe('prostate MRI: contradictions', () => {
   it('EPE on a lesion scoring under 4', () => {
     expect(report(study, pz('3', { l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but scores PI-RADS 3: EPE makes a 4 into a 5, so check the DWI score.')
+  })
+  it('EPE on a PZ 3 that DCE lifted to 4 (not a DWI 4, so it stays 4)', () => {
+    expect(report(study, pz('3', { l1dce: 'pos', l1epe: 'yes' })).warnings).toContain('Lesion 1 is marked with definite EPE but scores PI-RADS 4: EPE makes a 4 into a 5, so check the DWI score.')
   })
   // "5: same as 4 but ≥ 1.5 cm, OR definite extraprostatic extension."
   it('DWI 5 under 1.5 cm without EPE', () => {
