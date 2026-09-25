@@ -1,21 +1,23 @@
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonPage } from '../components/LessonPage'
+import { Cite, LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
-  { citation: 'Von Oertzen J et al. Standard magnetic resonance imaging is inadequate for patients with refractory focal epilepsy. J Neurol Neurosurg Psychiatry 2002. The paper that shows how bad routine reads are; the discussion lists the specific lesions missed (mostly HS and FCD).' },
-  { citation: 'Blümcke I et al. Histopathological findings in brain tissue obtained during epilepsy surgery. NEJM 2017. The frequency table.' },
-  { citation: 'Bernasconi A et al. Recommendations for the use of structural MRI in the care of patients with epilepsy: HARNESS-MRI. Epilepsia 2019. Free PDF on ilae.org; figures 1–3 show the standard sequences and reformats.' },
-  { citation: 'Colombo N et al. Focal cortical dysplasias: MR imaging, histopathologic, and clinical correlations. AJNR 2003. The best MRI-pathology picture atlas of FCD type II, including the transmantle sign.' },
-  { citation: 'Barkovich AJ et al. Focal transmantle dysplasia. Ann Neurol 1997. Original description.' },
-  { citation: 'Harvey AS et al. Bottom-of-sulcus dysplasia. Neurology 2015. How tiny these can be and how good the surgical outcome is.' },
-  { citation: 'Saavalainen T et al. Temporal anteroinferior encephalocele: an underrecognized etiology of temporal lobe epilepsy? Neurology 2015.' },
-  { citation: 'Wellmer J et al. Proposal for a magnetic resonance imaging protocol for the detection of epileptogenic lesions at early outpatient stages ("essential 6"). Epilepsia 2013.' },
-  { citation: 'Cianfoni A et al. Seizure-induced brain lesions: a wide spectrum of variably reversible MRI abnormalities. Eur J Radiol 2013. Peri-ictal MRI changes, the main mimic.' },
-  { citation: 'Bien CG et al. Pathogenesis, diagnosis and treatment of Rasmussen encephalitis: a European consensus statement. Brain 2005.' },
-  { citation: 'Blümcke I et al. ILAE classification of hippocampal sclerosis, Epilepsia 2013; ILAE classification of FCD, Epilepsia 2011; Najm I et al. FCD classification update, Epilepsia 2022.' },
-  { citation: 'Jackson GD et al. Hippocampal sclerosis can be reliably detected by MRI. Neurology 1990.' },
-  { citation: 'Téllez-Zenteno JF et al. Surgical outcomes in lesional and non-lesional epilepsy: a systematic review and meta-analysis. Epilepsy Res 2010.' },
+  { citation: 'Von Oertzen J et al. Standard magnetic resonance imaging is inadequate for patients with refractory focal epilepsy. J Neurol Neurosurg Psychiatry 2002. The paper that shows how bad routine reads are; the discussion lists the specific lesions missed (mostly HS and FCD).', doi: '10.1136/jnnp.73.6.643' },
+  { citation: 'Blümcke I et al. Histopathological findings in brain tissue obtained during epilepsy surgery. NEJM 2017. The frequency table.', doi: '10.1056/NEJMoa1703784' },
+  { citation: 'Bernasconi A et al. Recommendations for the use of structural magnetic resonance imaging in the care of patients with epilepsy: a consensus report from the ILAE Neuroimaging Task Force (HARNESS-MRI). Epilepsia 2019. Free PDF on ilae.org; figures 1–3 show the standard sequences and reformats.', doi: '10.1111/epi.15612' },
+  { citation: 'Colombo N et al. Focal cortical dysplasias: MR imaging, histopathologic, and clinical correlations in surgically treated patients with epilepsy. AJNR 2003. The best MRI-pathology picture atlas of FCD type II, including the transmantle sign.' },
+  { citation: 'Barkovich AJ et al. Focal transmantle dysplasia: a specific malformation of cortical development. Neurology 1997. Original description.', doi: '10.1212/wnl.49.4.1148' },
+  { citation: 'Harvey AS et al. The surgically remediable syndrome of epilepsy associated with bottom-of-sulcus dysplasia. Neurology 2015. How tiny these can be and how good the surgical outcome is.', doi: '10.1212/WNL.0000000000001591' },
+  { citation: 'Saavalainen T et al. Temporal anteroinferior encephalocele: an underrecognized etiology of temporal lobe epilepsy? Neurology 2015.', doi: '10.1212/WNL.0000000000002062' },
+  { citation: 'Wellmer J et al. Proposal for a magnetic resonance imaging protocol for the detection of epileptogenic lesions at early outpatient stages ("essential 6"). Epilepsia 2013.', doi: '10.1111/epi.12375' },
+  { citation: 'Cianfoni A et al. Seizure-induced brain lesions: a wide spectrum of variably reversible MRI abnormalities. Eur J Radiol 2013. Peri-ictal MRI changes, the main mimic.', doi: '10.1016/j.ejrad.2013.05.020' },
+  { citation: 'Bien CG et al. Pathogenesis, diagnosis and treatment of Rasmussen encephalitis: a European consensus statement. Brain 2005.', doi: '10.1093/brain/awh415' },
+  { citation: 'Blümcke I et al. International consensus classification of hippocampal sclerosis in temporal lobe epilepsy: a Task Force report from the ILAE Commission on Diagnostic Methods. Epilepsia 2013.', doi: '10.1111/epi.12220' },
+  { citation: 'Blümcke I et al. The clinicopathologic spectrum of focal cortical dysplasias: a consensus classification proposed by an ad hoc Task Force of the ILAE Diagnostic Methods Commission. Epilepsia 2011.', doi: '10.1111/j.1528-1167.2010.02777.x' },
+  { citation: 'Najm I et al. The ILAE consensus classification of focal cortical dysplasia: an update proposed by an ad hoc task force of the ILAE diagnostic methods commission. Epilepsia 2022.', doi: '10.1111/epi.17301' },
+  { citation: 'Jackson GD et al. Hippocampal sclerosis can be reliably detected by magnetic resonance imaging. Neurology 1990.', doi: '10.1212/wnl.40.12.1869' },
+  { citation: 'Téllez-Zenteno JF et al. Surgical outcomes in lesional and non-lesional epilepsy: a systematic review and meta-analysis. Epilepsy Res 2010.', doi: '10.1016/j.eplepsyres.2010.02.007' },
   { citation: 'Urbach H, ed. MRI in Epilepsy. Springer, 2013. If you want one book, this is it, case-based.' },
 ]
 
@@ -61,7 +63,7 @@ export function EpilepsyMriLessonPage() {
     <LessonPage
       name="Epilepsy-protocol brain MRI"
       lede="Why it differs from a routine brain MRI, the HARNESS-MRI protocol, a fixed search pattern, the pathologies, the pitfalls, and the report."
-      sourceNote="HARNESS-MRI details were checked against the ILAE source. Other citations were from memory at the time of writing; verify specific numbers before quoting them in a talk."
+      sourceNote="HARNESS-MRI details were checked against the ILAE source. Citations checked against PubMed in September 2026; the Urbach textbook has no PubMed record and was not checked."
       references={references}
     >
       <section className="info-card lesson-body">
@@ -69,9 +71,9 @@ export function EpilepsyMriLessonPage() {
         <p>The whole point of an epilepsy MRI is to find a <strong>small, subtle, surgically removable lesion</strong>. Two facts drive everything else:</p>
         <ol className="plain-list">
           <li><strong>Routine MRI misses these lesions.</strong> In the classic study by Von Oertzen et al. (J Neurol Neurosurg Psychiatry 2002), non-expert reports of standard brain MRI found a lesion in only 39% of surgical candidates; expert reading of a dedicated epilepsy protocol found one in 91%. Half the "non-lesional" patients actually had a lesion.</li>
-          <li><strong>Finding the lesion changes the outcome.</strong> In the meta-analysis by Téllez-Zenteno et al. (Epilepsy Research 2010), patients with a lesion on MRI were roughly 2.5 times more likely to be seizure-free after surgery than those without.</li>
+          <li><strong>Finding the lesion changes the outcome.</strong> In the meta-analysis by <Cite doi="10.1016/j.eplepsyres.2010.02.007">Téllez-Zenteno et al. (Epilepsy Research 2010)</Cite>, patients with a lesion on MRI were roughly 2.5 times more likely to be seizure-free after surgery than those without.</li>
         </ol>
-        <p>What you are looking for, by frequency, comes from the largest surgical pathology series ever published (Blümcke et al., NEJM 2017, 9,523 patients):</p>
+        <p>What you are looking for, by frequency, comes from the largest surgical pathology series ever published (<Cite doi="10.1056/NEJMoa1703784">Blümcke et al., NEJM 2017</Cite>, 9,523 patients):</p>
         <div className="table-wrap">
           <table className="ref-table">
             <thead><tr><th>Pathology</th><th>Adults</th><th>Children</th></tr></thead>
@@ -91,7 +93,7 @@ export function EpilepsyMriLessonPage() {
 
       <section className="info-card lesson-body">
         <h3>Part 2. The protocol (so you know whether the study is adequate)</h3>
-        <p>The standard is the ILAE <strong>HARNESS-MRI</strong> protocol (Bernasconi et al., Epilepsia 2019): isotropic, millimetric 3D T1 and FLAIR images, plus high-resolution 2D submillimetric T2 images. It can be obtained on 1.5T and 3T, applies to adults and children, and provides full brain coverage. The three core sequences:</p>
+        <p>The standard is the ILAE <strong>HARNESS-MRI</strong> protocol (<Cite doi="10.1111/epi.15612">Bernasconi et al., Epilepsia 2019</Cite>): isotropic, millimetric 3D T1 and FLAIR images, plus high-resolution 2D submillimetric T2 images. It can be obtained on 1.5T and 3T, applies to adults and children, and provides full brain coverage. The three core sequences:</p>
         <ol className="plain-list">
           <li><strong>3D T1 (MPRAGE or equivalent), 1 mm isotropic, no contrast</strong>: your gray/white matter anatomy sequence. This is where you see cortical thickness and gray-white blurring.</li>
           <li><strong>3D FLAIR, 1 mm isotropic</strong>: your "where is the signal wrong" sequence. FCD and hippocampal sclerosis are both bright here.</li>
@@ -132,7 +134,7 @@ export function EpilepsyMriLessonPage() {
             <li><strong>Loss of internal architecture</strong>: the normal hippocampus has a layered, "jelly-roll" look on high-res T2. In sclerosis it becomes a featureless blob.</li>
             <li><strong>Shape change</strong>: the hippocampal head loses its normal "digitations" (bumps) and looks smooth.</li>
           </ol>
-          <p>Jackson et al. (Neurology 1990) showed that the combination of atrophy plus T2 signal increase is highly reliable for hippocampal sclerosis. Either sign alone is less specific.</p>
+          <p><Cite doi="10.1212/wnl.40.12.1869">Jackson et al. (Neurology 1990)</Cite> showed that the combination of atrophy plus T2 signal increase is highly reliable for hippocampal sclerosis. Either sign alone is less specific.</p>
         </div>
 
         <div className="lesson-step">
@@ -155,8 +157,8 @@ export function EpilepsyMriLessonPage() {
           <ul className="plain-list">
             <li>Is the cortex <strong>thicker</strong> than its neighbors?</li>
             <li>Is the gray-white junction <strong>blurred</strong> (fuzzy instead of a crisp line)?</li>
-            <li>Is there <strong>bright FLAIR signal in the subcortical white matter</strong>, especially a tapering line running from the cortex toward the ventricle (the <strong>"transmantle sign"</strong>, Barkovich et al., Ann Neurol 1997)?</li>
-            <li>Does the <strong>depth of a sulcus</strong> look thick or bright? The sulcus bottom is where small FCDs hide (<strong>bottom-of-sulcus dysplasia</strong>, Harvey et al., Neurology 2015).</li>
+            <li>Is there <strong>bright FLAIR signal in the subcortical white matter</strong>, especially a tapering line running from the cortex toward the ventricle (the <strong>"transmantle sign"</strong>, <Cite doi="10.1212/wnl.49.4.1148">Barkovich et al., Neurology 1997</Cite>)?</li>
+            <li>Does the <strong>depth of a sulcus</strong> look thick or bright? The sulcus bottom is where small FCDs hide (<strong>bottom-of-sulcus dysplasia</strong>, <Cite doi="10.1212/WNL.0000000000001591">Harvey et al., Neurology 2015</Cite>).</li>
             <li>Is the gyral pattern abnormal: too many small gyri (polymicrogyria), a cleft (schizencephaly), or a smooth surface (lissencephaly)?</li>
           </ul>
           <p>Practical tricks: use a <strong>narrow window</strong> on the 3D T1 so gray and white are strongly contrasted; curved or "surface" reformats of the 3D T1 are ideal if your workstation offers them; compare the same region on the other side. Symmetry is your friend, but bilateral disease exists (e.g., bilateral perisylvian polymicrogyria).</p>
@@ -183,7 +185,7 @@ export function EpilepsyMriLessonPage() {
           <h4>Step 8. Old injury and inflammatory patterns</h4>
           <ul className="plain-list">
             <li><strong>Encephalomalacia / gliosis</strong> from prior trauma, stroke, infection. These are "lesions" too.</li>
-            <li><strong>Rasmussen encephalitis</strong>: progressive unilateral hemispheric atrophy with T2/FLAIR signal, often starting in the perisylvian region and caudate head (Bien et al., Brain 2005 consensus criteria).</li>
+            <li><strong>Rasmussen encephalitis</strong>: progressive unilateral hemispheric atrophy with T2/FLAIR signal, often starting in the perisylvian region and caudate head (<Cite doi="10.1093/brain/awh415">Bien et al., Brain 2005</Cite> consensus criteria).</li>
             <li><strong>Sturge-Weber</strong>: leptomeningeal enhancement, enlarged choroid plexus, cortical calcification, hemiatrophy.</li>
           </ul>
         </div>
@@ -191,7 +193,7 @@ export function EpilepsyMriLessonPage() {
         <div className="lesson-step">
           <h4>Step 9. Pitfalls: things that will fool you</h4>
           <ul className="plain-list">
-            <li><strong>Peri-ictal changes.</strong> A recent seizure can cause cortical T2/FLAIR swelling, restricted diffusion, and even hippocampal swelling with enhancement. It goes away in days to weeks (Cianfoni et al., Eur J Radiol 2013). If the MRI was done shortly after a seizure or status, say so, and recommend repeat imaging before calling a mass or HS.</li>
+            <li><strong>Peri-ictal changes.</strong> A recent seizure can cause cortical T2/FLAIR swelling, restricted diffusion, and even hippocampal swelling with enhancement. It goes away in days to weeks (<Cite doi="10.1016/j.ejrad.2013.05.020">Cianfoni et al., Eur J Radiol 2013</Cite>). If the MRI was done shortly after a seizure or status, say so, and recommend repeat imaging before calling a mass or HS.</li>
             <li><strong>Incomplete hippocampal inversion (hippocampal malrotation).</strong> A round, vertically oriented hippocampus with a deep collateral sulcus, usually on the left. A normal variant; do not call it sclerosis. Signal and internal architecture are normal.</li>
             <li><strong>Choroidal fissure cysts and hippocampal sulcal remnant cysts</strong>: CSF signal, no mass effect. Normal.</li>
             <li><strong>Asymmetric temporal horns from head tilt</strong>: check the angulation before calling volume loss.</li>
@@ -206,11 +208,11 @@ export function EpilepsyMriLessonPage() {
         <h4>Hippocampal sclerosis (mesial temporal sclerosis)</h4>
         <ul className="plain-list">
           <li><strong>MRI:</strong> small, bright (T2/FLAIR), lost internal structure. Plus the secondary signs above.</li>
-          <li><strong>Pathology</strong> (Blümcke et al., ILAE classification, Epilepsia 2013): type 1 = CA1 and CA4 loss (classic, best surgical outcome); type 2 = CA1 only; type 3 = CA4 only. You cannot reliably tell these apart on MRI, but it's useful to know they exist.</li>
+          <li><strong>Pathology</strong> (<Cite doi="10.1111/epi.12220">Blümcke et al., ILAE classification, Epilepsia 2013</Cite>): type 1 = CA1 and CA4 loss (classic, best surgical outcome); type 2 = CA1 only; type 3 = CA4 only. You cannot reliably tell these apart on MRI, but it's useful to know they exist.</li>
           <li><strong>Bilateral HS:</strong> about 10%. Check both sides against each other <em>and</em> against your mental picture of normal.</li>
         </ul>
         <h4>Focal cortical dysplasia (FCD)</h4>
-        <p>Classification: ILAE 2011 (Blümcke et al., Epilepsia 2011), updated 2022 (Najm et al., Epilepsia 2022).</p>
+        <p>Classification: ILAE 2011 (<Cite doi="10.1111/j.1528-1167.2010.02777.x">Blümcke et al., Epilepsia 2011</Cite>), updated 2022 (<Cite doi="10.1111/epi.17301">Najm et al., Epilepsia 2022</Cite>).</p>
         <ul className="plain-list">
           <li><strong>FCD type I</strong>: abnormal cortical layering only. <strong>Often MRI-invisible</strong> or shows only subtle white matter FLAIR brightness / lobar volume loss. Commonly temporal.</li>
           <li><strong>FCD type II</strong>: dysmorphic neurons (IIa), plus balloon cells (IIb). This is the one you can find: <strong>thick cortex, blurred gray-white junction, bright subcortical FLAIR, transmantle sign</strong> (IIb especially). Loves the frontal lobe and the bottom of a sulcus. Colombo et al. (AJNR 2003) correlated these MRI features with histology and showed the transmantle sign and cortical thickening are hallmarks of type IIb.</li>
@@ -240,7 +242,7 @@ export function EpilepsyMriLessonPage() {
           <li><strong>Sturge-Weber</strong>: see step 8.</li>
         </ul>
         <h4>Temporal encephalocele</h4>
-        <p>Brain herniation through the floor of the middle cranial fossa, often anteroinferior temporal. Under-recognized because you have to look for it. Saavalainen et al. (Neurology 2015) found it in about 2% of a surgical TLE cohort and showed patients did well when it was resected.</p>
+        <p>Brain herniation through the floor of the middle cranial fossa, often anteroinferior temporal. Under-recognized because you have to look for it. <Cite doi="10.1212/WNL.0000000000002062">Saavalainen et al. (Neurology 2015)</Cite> found it in about 2% of a surgical TLE cohort and showed patients did well when it was resected.</p>
         <h4>Hypothalamic hamartoma</h4>
         <p>Gelastic seizures, early puberty in children. Non-enhancing gray-matter-signal mass at the tuber cinereum.</p>
         <h4>Rasmussen encephalitis</h4>

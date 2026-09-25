@@ -3,14 +3,14 @@ import { LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
-  { citation: "O'Brien WT et al. The preoperative sinus CT: avoiding a \"CLOSE\" call with surgical complications. Radiology 2016;281:10–21. (The core paper; excellent figures for each CLOSE item.)" },
-  { citation: 'Vaid S et al. An imaging checklist for pre-FESS CT: framing a surgically relevant report. Clin Radiol 2011;66:459–470. (Structured report; case figures for Onodi/optic nerve, carotid septa, low fovea.)' },
+  { citation: "O'Brien WT et al. The preoperative sinus CT: avoiding a \"CLOSE\" call with surgical complications. Radiology 2016;281:10–21. (The core paper; excellent figures for each CLOSE item.)", doi: '10.1148/radiol.2016152230' },
+  { citation: 'Vaid S et al. An imaging checklist for pre-FESS CT: framing a surgically relevant report. Clin Radiol 2011;66:459–470. (Structured report; case figures for Onodi/optic nerve, carotid septa, low fovea.)', doi: '10.1016/j.crad.2010.11.010' },
   { citation: 'Lund VJ, Mackay IS. Staging in rhinosinusitis. Rhinology 1993;31:183–184.' },
-  { citation: 'Keros P. On the practical value of differences in the level of the lamina cribrosa of the ethmoid. Z Laryngol Rhinol Otol 1962. (Original Keros classification.)' },
-  { citation: 'Wormald PJ et al. The International Frontal Sinus Anatomy Classification (IFAC). Int Forum Allergy Rhinol 2016. (Frontal recess cell naming.)' },
-  { citation: 'Hoang JK et al. Multiplanar sinus CT: a systematic approach to imaging before functional endoscopic sinus surgery. AJR 2010;194:W527–536. (Good multiplanar teaching cases.)' },
-  { citation: 'Tewfik MA et al. Surgeon versus radiologist: an inter-rater reliability analysis of the CLOSE checklist. Eur Arch Otorhinolaryngol 2025.' },
-  { citation: 'Ahmed et al. Improving CT sinus reporting for ESS using the CLOSE criteria: a QI project. 2025, PMC12702529.' },
+  { citation: 'Keros P. On the practical value of differences in the level of the lamina cribrosa of the ethmoid. Z Laryngol Rhinol Otol 1962;41:809–813. (Original Keros classification.)' },
+  { citation: 'Wormald PJ et al. The International Frontal Sinus Anatomy Classification (IFAC) and Classification of the Extent of Endoscopic Frontal Sinus Surgery (EFSS). Int Forum Allergy Rhinol 2016;6:677–696. (Frontal recess cell naming.)', doi: '10.1002/alr.21738' },
+  { citation: 'Hoang JK et al. Multiplanar sinus CT: a systematic approach to imaging before functional endoscopic sinus surgery. AJR 2010;194:W527–536. (Good multiplanar teaching cases.)', doi: '10.2214/AJR.09.3584' },
+  { citation: 'Almhanedi H et al. Surgeon versus radiologist: an inter-rater reliability analysis of the CLOSE checklist for preoperative CT sinus assessment. Eur Arch Otorhinolaryngol 2025;282:837–842.', doi: '10.1007/s00405-024-09083-0' },
+  { citation: 'Lee TY et al. Improving CT sinus reporting for endoscopic sinus surgery using the CLOSE criteria: a quality improvement project. Cureus 2025;17:e96762.', doi: '10.7759/cureus.96762' },
 ]
 
 const reportTemplate = `CT SINUS WITHOUT CONTRAST — PRE-FESS
@@ -57,7 +57,7 @@ export function SinusCtLessonPage() {
       lede="Disease burden, blocked drainage pathways, and the CLOSE danger-zone checklist the surgeon needs before endoscopic sinus surgery."
       sourceNote="Built around O'Brien et al. (Radiology 2016) and the Vaid et al. pre-FESS checklist (Clin Radiol 2011)."
       references={references}
-      referencesNote="The Lund-Mackay, Keros, IFAC and Hoang citations were not verified against a database at the time of writing; double-check page numbers if citing formally."
+      referencesNote="Citations checked against PubMed in September 2026. The Lund-Mackay and Keros papers have no DOI."
     >
       <section className="info-card lesson-body">
         <p>This is one of the most protocol-friendly reads in radiology, because the surgeon wants a fixed set of answers every time.</p>

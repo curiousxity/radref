@@ -3,20 +3,20 @@ import { Cite, LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
-  { citation: 'MERCURY Study Group. Extramural depth of tumor invasion at thin-section MR in patients with rectal cancer. Radiology 2007.', doi: '10.1148/radiol.2431051825' },
+  { citation: 'MERCURY Study Group. Extramural depth of tumor invasion at thin-section MR in patients with rectal cancer: results of the MERCURY study. Radiology 2007.', doi: '10.1148/radiol.2431051825' },
   { citation: 'Taylor FG et al. Preoperative MRI assessment of circumferential resection margin predicts disease-free survival and local recurrence (MERCURY). J Clin Oncol 2014.', doi: '10.1200/JCO.2012.45.3258' },
-  { citation: 'ESGAR consensus on MRI of rectal cancer, 2026 update. Eur Radiol.', doi: '10.1007/s00330-025-12274-w' },
+  { citation: 'ESGAR. MRI to guide clinical management of rectal cancer: updated consensus recommendations from ESGAR, part I primary staging. Eur Radiol 2026.', doi: '10.1007/s00330-025-12274-w' },
   { citation: 'Nougaret S et al. The use of MR imaging in treatment planning for patients with rectal carcinoma: DISTANCE. Radiology 2013.', doi: '10.1148/radiol.13121361' },
   { citation: 'Smith NJ et al. MRI for detection of extramural vascular invasion in rectal cancer. AJR 2008.', doi: '10.2214/AJR.08.1298' },
-  { citation: 'Lord AC et al. MRI-diagnosed tumour deposits and EMVI status as prognostic markers in rectal cancer. Lancet Oncol 2022.', doi: '10.1016/S1470-2045(22)00214-5' },
+  { citation: 'Lord AC et al. Assessment of the 2020 NICE criteria for preoperative radiotherapy in patients with rectal cancer treated by surgery alone in comparison with proven MRI prognostic factors. Lancet Oncol 2022.', doi: '10.1016/S1470-2045(22)00214-5' },
   { citation: 'Beets-Tan RGH et al. MRI for clinical management of rectal cancer: ESGAR consensus 2016. Eur Radiol 2018.', doi: '10.1007/s00330-017-5026-2' },
-  { citation: 'Nodal staging accuracy of ESGAR criteria. Eur Radiol 2025.', doi: '10.1007/s00330-025-11361-2' },
-  { citation: 'Ogura A et al. Neoadjuvant chemoradiotherapy with and without lateral lymph node dissection in low rectal cancer. J Clin Oncol 2019.', doi: '10.1200/JCO.18.00032' },
+  { citation: 'Rutegård MK et al. Evaluation of MRI characterisation of histopathologically matched lymph nodes and other mesorectal nodal structures in rectal cancer. Eur Radiol 2025.', doi: '10.1007/s00330-025-11361-2' },
+  { citation: 'Ogura A et al. Neoadjuvant (chemo)radiotherapy with total mesorectal excision only is not sufficient to prevent lateral local recurrence in enlarged nodes (Lateral Node Study). J Clin Oncol 2019.', doi: '10.1200/JCO.18.00032' },
   { citation: 'Lambregts DMJ et al. Current controversies in TNM for the radiological staging of rectal cancer. Eur Radiol 2022.', doi: '10.1007/s00330-022-08591-z' },
-  { citation: 'Society of Abdominal Radiology rectal cancer lexicon, 2019. Abdom Radiol.', doi: '10.1007/s00261-019-02170-5' },
-  { citation: 'Society of Abdominal Radiology rectal cancer lexicon, 2023 update. Abdom Radiol.', doi: '10.1007/s00261-023-03893-2' },
+  { citation: 'Hope TA et al. Rectal cancer lexicon: consensus statement from the Society of Abdominal Radiology rectal and anal cancer disease-focused panel. Abdom Radiol 2019.', doi: '10.1007/s00261-019-02170-5' },
+  { citation: 'Lee S et al. Rectal cancer lexicon 2023 revised and updated consensus statement from the Society of Abdominal Radiology. Abdom Radiol 2023.', doi: '10.1007/s00261-023-03893-2' },
   { citation: 'Horvat N et al. MRI of rectal cancer: tumor staging, imaging techniques, and management. RadioGraphics 2019.', doi: '10.1148/rg.2019180114' },
-  { citation: 'Fraum TJ et al. Rectal MRI image quality. Abdom Radiol 2023.', doi: '10.1007/s00261-023-03850-z' },
+  { citation: 'Fraum TJ et al. The optimized rectal cancer MRI protocol: choosing the right sequences, sequence parameters, and preparatory strategies. Abdom Radiol 2023.', doi: '10.1007/s00261-023-03850-z' },
 ]
 
 const reportTemplate = `Location: __ cm from [anal verge/anorectal junction]; length __ cm;
@@ -102,7 +102,7 @@ export function RectalMriLessonPage() {
             <li>5–8 mm: needs two bad features (round, irregular border, mixed signal).</li>
             <li>Under 5 mm: needs all three (<Cite doi="10.1007/s00330-017-5026-2">Beets-Tan et al., Eur Radiol 2018</Cite>).</li>
           </ul>
-          <p>These rules have only about 54% sensitivity (<Cite doi="10.1007/s00330-025-11361-2">Eur Radiol 2025</Cite>). So the 2026 update tells you to give a confidence level: cN0, possibly cN+, or cN+.</p>
+          <p>These rules have only about 54% sensitivity (<Cite doi="10.1007/s00330-025-11361-2">Rutegård et al., Eur Radiol 2025</Cite>). So the 2026 update tells you to give a confidence level: cN0, possibly cN+, or cN+.</p>
           <p><strong>Lateral nodes</strong> (obturator, internal iliac): a short axis of 7 mm or more is suspicious. In 1,216 patients, these nodes carried a 19.5% lateral recurrence rate without node dissection, versus 5.7% with it (<Cite doi="10.1200/JCO.18.00032">Ogura et al., J Clin Oncol 2019</Cite>). Common and external iliac nodes and inguinal nodes (unless the tumor reaches the anal canal) count as M1, not N.</p>
           <p>Irregular nodules sitting along a vein with no node shape are <strong>tumor deposits</strong>. Describe them separately.</p>
         </div>

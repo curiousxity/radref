@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { calculators, matchesQuery } from '../data/calculators'
+import { calculators, groupItems, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
 
 function closeAllDropdowns() {
@@ -44,12 +44,12 @@ export function CategoryNav({
     <nav id="primary-nav" className={isOpen ? 'top-nav is-open' : 'top-nav'} aria-label="Primary">
       <div className="nav-search">
         <label className="search-field">
-          <span className="metric-label">Find a calculator</span>
+          <span className="metric-label">Search</span>
           <input
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Try thyroid, adrenal, MELD"
+            placeholder="Try thyroid, rectal MRI, knee"
             autoComplete="off"
           />
         </label>
@@ -74,15 +74,20 @@ export function CategoryNav({
             <details key={category.name} className="nav-dropdown" name="primary-nav">
               <summary className={isActiveCategory ? 'nav-link active' : 'nav-link'}>{category.name}</summary>
               <div className="nav-dropdown-menu">
-                {category.items.map((item) => (
-                  <NavLink
-                    key={item.path}
-                    to={item.path}
-                    className={({ isActive }) => (isActive ? 'nav-dropdown-link active' : 'nav-dropdown-link')}
-                    onClick={onNavigate}
-                  >
-                    {item.name}
-                  </NavLink>
+                {groupItems(category.items).map((group) => (
+                  <Fragment key={group.name ?? ''}>
+                    {group.name && <p className="nav-group-label">{group.name}</p>}
+                    {group.items.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        className={({ isActive }) => (isActive ? 'nav-dropdown-link active' : 'nav-dropdown-link')}
+                        onClick={onNavigate}
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))}
+                  </Fragment>
                 ))}
               </div>
             </details>

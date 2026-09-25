@@ -14,10 +14,10 @@
   --color-border: #c9cdce;
   --color-text: #14181a;
   --color-text-muted: #5b6367;
-  --color-primary: #8a5a00;
-  --color-primary-dark: #5e3d00;
-  --color-primary-soft: #fbeed7;
-  --color-accent: #ffb000;
+  --color-primary: #0e6b63;
+  --color-primary-dark: #084943;
+  --color-primary-soft: #dcefec;
+  --color-accent: #13887a;
   --color-good: #2f7a52;
   --color-good-soft: rgba(47, 122, 82, 0.12);
   --color-warn: #b23a2e;
@@ -72,7 +72,7 @@ button, input, select { font: inherit; }
 .nav-dropdown > summary::after { content: '\25be'; margin-left: 0.35em; font-size: 0.7em; }
 .nav-dropdown > summary:hover { background: var(--color-surface-2); }
 .nav-dropdown[open] > summary { background: var(--color-primary-soft); color: var(--color-primary); }
-.nav-dropdown-menu { position: absolute; top: calc(100% + 0.4rem); left: 0; min-width: 200px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.4rem; display: grid; gap: 0.15rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); z-index: 20; }
+.nav-dropdown-menu { position: absolute; top: calc(100% + 0.4rem); left: 0; min-width: 200px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.4rem; display: grid; gap: 0.15rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); z-index: 20; max-height: calc(100vh - var(--header-h) - 1.5rem); overflow-y: auto; }
 .nav-dropdown-link { display: flex; align-items: center; min-height: 44px; padding: 0.6rem 0.7rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--color-text); white-space: nowrap; }
 .nav-dropdown-link:hover { background: var(--color-surface-2); }
 .nav-dropdown-link.active { background: var(--color-primary-soft); color: var(--color-primary); font-weight: 600; }
@@ -253,7 +253,7 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
   .nav-link { white-space: nowrap; }
   .nav-dropdown { position: static; width: 100%; }
   .nav-dropdown > summary { display: flex; align-items: center; min-height: 44px; font-size: 0.8rem; }
-  .nav-dropdown-menu { position: static; width: auto; min-width: 0; border: 0; padding: 0 0 0.35rem 0.6rem; box-shadow: none; }
+  .nav-dropdown-menu { position: static; width: auto; min-width: 0; border: 0; padding: 0 0 0.35rem 0.6rem; box-shadow: none; max-height: none; overflow: visible; }
 
   .main-content { padding-top: 1rem; }
   .section-block, .info-card, .form-card, .result-card, .tool-card { padding: 1rem; }
@@ -284,3 +284,15 @@ input, select { width: 100%; min-height: 44px; padding: 0.8rem 0.85rem; border-r
   /* Nested scrolling is awkward on a phone, so the embed shrinks and the full-screen link leads. */
   .anatomy-frame iframe { height: min(60vh, 460px); }
 }
+
+/* Grouped items: subheadings within a home-page category and inside a menu dropdown. */
+.item-group + .item-group { margin-top: 1.25rem; }
+.group-heading { margin: 0 0 0.6rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.7rem; font-weight: 600; color: var(--color-text-muted); }
+.nav-group-label { margin: 0.5rem 0.7rem 0.15rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; color: var(--color-text-muted); }
+.nav-group-label:first-child { margin-top: 0.15rem; }
+
+.related-links .eyebrow { margin-bottom: 0.75rem; }
+
+/* Stands in for an online-only viewer's frame while the device is offline. */
+.anatomy-offline { display: grid; place-items: center; min-height: min(40vh, 320px); padding: 1.5rem; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface-2); text-align: center; }
+.anatomy-offline p { margin: 0; max-width: 36ch; color: var(--color-text-muted); }

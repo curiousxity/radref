@@ -1,23 +1,23 @@
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonPage } from '../components/LessonPage'
+import { Cite, LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
-  { citation: 'Turkbey B et al. PI-RADS v2.1: 2019 update. Eur Urol 2019;76:340–351. (The rulebook. Free on the ACR site as the PI-RADS v2.1 PDF.)' },
-  { citation: 'Weinreb JC et al. PI-RADS v2. Eur Urol 2016;69:16–40.' },
-  { citation: 'Purysko AS et al. PI-RADS version 2: a pictorial update. RadioGraphics 2016;36:1354–1372. (Best image-by-image walk-through of each score.)' },
-  { citation: 'Barrett T et al. PI-RADS v2.1: one small step for prostate MRI. Clin Radiol 2019;74:841–852. (What changed and why, with examples.)' },
-  { citation: 'Padhani AR et al. The PI-RADS mpMRI and MRI-directed biopsy pathway. Radiology 2019;292:464–474.' },
-  { citation: 'Ahmed HU et al. PROMIS. Lancet 2017;389:815–822.' },
-  { citation: 'Kasivisvanathan V et al. PRECISION. NEJM 2018;378:1767–1777.' },
-  { citation: 'Mehralivand S et al. EPE grading system. Radiology 2019;290:709–719. Validation: Reisæter LAR et al. Radiol Imaging Cancer 2020;2:e190071 (free full text).' },
-  { citation: 'Kitzing YX et al. Benign conditions that mimic prostate carcinoma. RadioGraphics 2016;36:162–175. (Case series with pathology; your main mimic atlas.)' },
-  { citation: 'Rosenkrantz AB, Taneja SS. Ten pitfalls that confound interpretation of mpMRI. AJR 2014;202:109–120.' },
-  { citation: 'Panebianco V et al. An update of pitfalls in prostate mpMRI. Insights Imaging 2018;9:87–101 (open access, figure-rich).' },
-  { citation: 'Barrett T et al. Hemorrhage exclusion sign. Radiology 2012;263:751–757.' },
-  { citation: 'Giganti F et al. PI-QUAL. Eur Urol Oncol 2020;3:615–619.' },
-  { citation: 'Oerther B et al. Cancer detection rates by PI-RADS v2.1 category, meta-analysis. Prostate Cancer Prostatic Dis 2022;25:256–263.' },
-  { citation: 'Rosenkrantz AB et al. Interobserver reproducibility of PI-RADS v2. Radiology 2016;280:793–804. (Reality check on which features are least reproducible: DCE and TZ T2.)' },
+  { citation: 'Turkbey B et al. PI-RADS v2.1: 2019 update. Eur Urol 2019;76:340–351. (The rulebook. Free on the ACR site as the PI-RADS v2.1 PDF.)', doi: '10.1016/j.eururo.2019.02.033' },
+  { citation: 'Weinreb JC et al. PI-RADS v2. Eur Urol 2016;69:16–40.', doi: '10.1016/j.eururo.2015.08.052' },
+  { citation: 'Purysko AS et al. PI-RADS version 2: a pictorial update. RadioGraphics 2016;36:1354–1372. (Best image-by-image walk-through of each score.)', doi: '10.1148/rg.2016150234' },
+  { citation: 'Barrett T et al. PI-RADS v2.1: one small step for prostate MRI. Clin Radiol 2019;74:841–852. (What changed and why, with examples.)', doi: '10.1016/j.crad.2019.05.019' },
+  { citation: 'Padhani AR et al. The PI-RADS mpMRI and MRI-directed biopsy pathway. Radiology 2019;292:464–474.', doi: '10.1148/radiol.2019182946' },
+  { citation: 'Ahmed HU et al. PROMIS. Lancet 2017;389:815–822.', doi: '10.1016/S0140-6736(16)32401-1' },
+  { citation: 'Kasivisvanathan V et al. PRECISION. NEJM 2018;378:1767–1777.', doi: '10.1056/NEJMoa1801993' },
+  { citation: 'Mehralivand S et al. EPE grading system. Radiology 2019;290:709–719. Validation: Reisæter LAR et al. Radiol Imaging Cancer 2020;2:e190071 (free full text).', doi: '10.1148/radiol.2018181278' },
+  { citation: 'Kitzing YX et al. Benign conditions that mimic prostate carcinoma. RadioGraphics 2016;36:162–175. (Case series with pathology; your main mimic atlas.)', doi: '10.1148/rg.2016150030' },
+  { citation: 'Rosenkrantz AB, Taneja SS. Ten pitfalls that confound interpretation of mpMRI. AJR 2014;202:109–120.', doi: '10.2214/AJR.13.10699' },
+  { citation: 'Panebianco V et al. An update of pitfalls in prostate mpMRI. Insights Imaging 2018;9:87–101 (open access, figure-rich).', doi: '10.1007/s13244-017-0578-x' },
+  { citation: 'Barrett T et al. Hemorrhage exclusion sign. Radiology 2012;263:751–757.', doi: '10.1148/radiol.12112100' },
+  { citation: 'Giganti F et al. PI-QUAL. Eur Urol Oncol 2020;3:615–619.', doi: '10.1016/j.euo.2020.06.007' },
+  { citation: 'Oerther B et al. Cancer detection rates by PI-RADS v2.1 category, meta-analysis. Prostate Cancer Prostatic Dis 2022;25:256–263.', doi: '10.1038/s41391-021-00417-1' },
+  { citation: 'Rosenkrantz AB et al. Interobserver reproducibility of PI-RADS v2. Radiology 2016;280:793–804. (Reality check on which features are least reproducible: DCE and TZ T2.)', doi: '10.1148/radiol.2016152542' },
 ]
 
 const reportTemplate = `Clinical: PSA (date), PSA density, biopsy history, treatment history, indication.
@@ -50,10 +50,10 @@ export function ProstateMriLessonPage() {
         <h3>1. What the study is for</h3>
         <p>Prostate MRI has one main job: find <em>clinically significant</em> cancer (Gleason ≥3+4, Grade Group ≥2) so the urologist can target a biopsy at it, and avoid biopsying men who don't need it. Two trials made it standard of care:</p>
         <ul className="plain-list">
-          <li><strong>PROMIS</strong> (Ahmed et al., Lancet 2017;389:815): MRI was more sensitive than systematic biopsy and could safely let about a quarter of men skip biopsy.</li>
-          <li><strong>PRECISION</strong> (Kasivisvanathan et al., NEJM 2018;378:1767): MRI-first with targeted biopsy found more significant cancer and less insignificant cancer than standard 12-core biopsy.</li>
+          <li><strong>PROMIS</strong> (<Cite doi="10.1016/S0140-6736(16)32401-1">Ahmed et al., Lancet 2017;389:815</Cite>): MRI was more sensitive than systematic biopsy and could safely let about a quarter of men skip biopsy.</li>
+          <li><strong>PRECISION</strong> (<Cite doi="10.1056/NEJMoa1801993">Kasivisvanathan et al., NEJM 2018;378:1767</Cite>): MRI-first with targeted biopsy found more significant cancer and less insignificant cancer than standard 12-core biopsy.</li>
         </ul>
-        <p>The scoring system is PI-RADS. Version 2.1 is the current international standard for acquisition and interpretation (Turkbey et al., Eur Urol 2019;76:340). The forthcoming PI-RADS Pathway 2026 moves toward risk-based pathways that integrate MRI findings with PSA density and clinical parameters, so v2.1 is what you report with today, but expect PSA density to matter more and more.</p>
+        <p>The scoring system is PI-RADS. Version 2.1 is the current international standard for acquisition and interpretation (<Cite doi="10.1016/j.eururo.2019.02.033">Turkbey et al., Eur Urol 2019;76:340</Cite>). The forthcoming PI-RADS Pathway 2026 moves toward risk-based pathways that integrate MRI findings with PSA density and clinical parameters, so v2.1 is what you report with today, but expect PSA density to matter more and more.</p>
       </section>
 
       <section className="info-card lesson-body">
@@ -66,7 +66,7 @@ export function ProstateMriLessonPage() {
           <li><strong>Prior treatment?</strong> Radiation, prostatectomy, focal therapy, hormones, 5-alpha reductase inhibitors (finasteride shrinks the gland and lowers PSA by ~50%).</li>
           <li><strong>Why the scan?</strong> Never biopsied (detection), prior negative biopsy, active surveillance follow-up, or staging a known cancer. Same images, different questions.</li>
         </ul>
-        <p>Then judge <strong>image quality</strong> before you score anything. The PI-QUAL score (Giganti et al., Eur Urol Oncol 2020;3:615; PI-QUAL v2 2024) exists for this. Practical version: is T2 sharp, is DWI free of rectal-gas distortion, does the high-b image actually show the gland? If DWI is wrecked by gas, say so in the report; it limits the peripheral zone read.</p>
+        <p>Then judge <strong>image quality</strong> before you score anything. The PI-QUAL score (<Cite doi="10.1016/j.euo.2020.06.007">Giganti et al., Eur Urol Oncol 2020;3:615</Cite>; PI-QUAL v2 2024) exists for this. Practical version: is T2 sharp, is DWI free of rectal-gas distortion, does the high-b image actually show the gland? If DWI is wrecked by gas, say so in the report; it limits the peripheral zone read.</p>
       </section>
 
       <section className="info-card lesson-body">
@@ -90,14 +90,14 @@ export function ProstateMriLessonPage() {
           <li><strong>DCE (dynamic contrast)</strong>: cancer enhances early. In v2.1 it has one job only: upgrading a PZ score 3 to 4. It never changes a TZ score.</li>
           <li><strong>T1 axial</strong>: one job: find blood (bright).</li>
         </ul>
-        <p>A note on trends: "biparametric" MRI (T2 + DWI, no contrast) is increasingly accepted for detection in untreated men; the PRIME trial (Lancet 2025) supported non-inferiority. Your local protocol decides; the reading logic below is the same.</p>
+        <p>A note on trends: "biparametric" MRI (T2 + DWI, no contrast) is increasingly accepted for detection in untreated men; the PRIME trial (<Cite doi="10.1001/jama.2025.13722">JAMA 2025</Cite>) supported non-inferiority. Your local protocol decides; the reading logic below is the same.</p>
       </section>
 
       <section className="info-card lesson-body">
         <h3>5. The step-by-step reading routine</h3>
         <div className="lesson-step">
           <h4>Step 1. T1: look for blood</h4>
-          <p>Bright T1 in the gland = post-biopsy hemorrhage. Subacute hemorrhage has high T1 signal and no diffusion restriction, while cancer has low T1 signal and restricts diffusion. Bonus trick, the <em>hemorrhage exclusion sign</em> (Barrett et al., Radiology 2012;263:751): cancer often shows as a dark T1 "hole" inside a background of bright blood, because tumor doesn't bleed the way normal gland does.</p>
+          <p>Bright T1 in the gland = post-biopsy hemorrhage. Subacute hemorrhage has high T1 signal and no diffusion restriction, while cancer has low T1 signal and restricts diffusion. Bonus trick, the <em>hemorrhage exclusion sign</em> (<Cite doi="10.1148/radiol.12112100">Barrett et al., Radiology 2012;263:751</Cite>): cancer often shows as a dark T1 "hole" inside a background of bright blood, because tumor doesn't bleed the way normal gland does.</p>
         </div>
         <div className="lesson-step">
           <h4>Step 2. T2: measure the gland and survey</h4>
@@ -150,13 +150,13 @@ export function ProstateMriLessonPage() {
           <li><strong>4</strong>: lens-shaped or ill-defined, homogeneously moderately dark ("erased charcoal"), <strong>&lt; 1.5 cm</strong>.</li>
           <li><strong>5</strong>: same but <strong>≥ 1.5 cm</strong>, or definite EPE.</li>
         </ul>
-        <p>What the numbers mean for the urologist (pooled meta-analysis figures, approximate): PI-RADS 3 lesions harbor significant cancer in roughly 1 in 6, PI-RADS 4 in about half or more, PI-RADS 5 in the large majority (Oerther et al., Prostate Cancer Prostatic Dis 2022;25:256). Lesions scored 4 or 5 go to targeted biopsy; PI-RADS 3 remains equivocal and gets further risk stratification, with PSA density cutoffs of 0.15–0.20 ng/mL/cc helping refine the biopsy decision.</p>
+        <p>What the numbers mean for the urologist (pooled meta-analysis figures, approximate): PI-RADS 3 lesions harbor significant cancer in roughly 1 in 6, PI-RADS 4 in about half or more, PI-RADS 5 in the large majority (<Cite doi="10.1038/s41391-021-00417-1">Oerther et al., Prostate Cancer Prostatic Dis 2022;25:256</Cite>). Lesions scored 4 or 5 go to targeted biopsy; PI-RADS 3 remains equivocal and gets further risk stratification, with PSA density cutoffs of 0.15–0.20 ng/mL/cc helping refine the biopsy decision.</p>
         <p><strong>Housekeeping rules:</strong> report up to <strong>4</strong> lesions, name the <strong>index lesion</strong> (highest score; if tied, the one with EPE, then the largest), measure each on the sequence that drives its score (ADC for PZ, T2 for TZ), and give the largest dimension.</p>
       </section>
 
       <section className="info-card lesson-body">
         <h3>7. Local staging: EPE and seminal vesicle invasion</h3>
-        <p>You stage on T2. The standardized system by Mehralivand et al. (Radiology 2019;290:709) was built because MRI is often falsely positive for extraprostatic extension. It draws on curvilinear contact length, capsular bulge and irregularity, obliteration of the rectoprostatic angle, asymmetry of neurovascular bundles, frank breach of the capsule, and seminal vesicle invasion.</p>
+        <p>You stage on T2. The standardized system by Mehralivand et al. (<Cite doi="10.1148/radiol.2018181278">Radiology 2019;290:709</Cite>) was built because MRI is often falsely positive for extraprostatic extension. It draws on curvilinear contact length, capsular bulge and irregularity, obliteration of the rectoprostatic angle, asymmetry of neurovascular bundles, frank breach of the capsule, and seminal vesicle invasion.</p>
         <p>The EPE grade you can put in a report:</p>
         <ul className="plain-list">
           <li><strong>Grade 1</strong>: tumor touching the capsule for ≥ 1.5 cm, <em>or</em> capsular bulge/irregularity.</li>
@@ -170,7 +170,7 @@ export function ProstateMriLessonPage() {
 
       <section className="info-card lesson-body">
         <h3>8. The pathologies and mimics you must know</h3>
-        <p>The key reference is Kitzing et al., RadioGraphics 2016;36:162, "Benign conditions that mimic prostate carcinoma," a case-by-case pictorial with histology covering the anterior fibromuscular stroma, surgical capsule, central zone, periprostatic vein, periprostatic lymph nodes, BPH, atrophy, necrosis, calcification, hemorrhage, and prostatitis. Also Rosenkrantz &amp; Taneja, AJR 2014;202:109 ("ten pitfalls") and Panebianco et al., Insights Imaging 2018;9:87 (pitfalls through the PI-RADS v2 lens, with worked figures).</p>
+        <p>The key reference is <Cite doi="10.1148/rg.2016150030">Kitzing et al., RadioGraphics 2016;36:162</Cite>, "Benign conditions that mimic prostate carcinoma," a case-by-case pictorial with histology covering the anterior fibromuscular stroma, surgical capsule, central zone, periprostatic vein, periprostatic lymph nodes, BPH, atrophy, necrosis, calcification, hemorrhage, and prostatitis. Also <Cite doi="10.2214/AJR.13.10699">Rosenkrantz &amp; Taneja, AJR 2014;202:109</Cite> ("ten pitfalls") and <Cite doi="10.1007/s13244-017-0578-x">Panebianco et al., Insights Imaging 2018;9:87</Cite> (pitfalls through the PI-RADS v2 lens, with worked figures).</p>
         <p>The ones that bite most:</p>
         <ul className="plain-list">
           <li><strong>Central zone.</strong> Dark T2, dark ADC, at the base, but <em>symmetric</em>, wedge-shaped, and hugs the ejaculatory ducts. Asymmetry or a bulge is the clue to real cancer.</li>

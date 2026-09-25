@@ -34,6 +34,17 @@ matching `@font-face` in `src/styles.css` if non-latin text is ever needed.
 Body and UI text stay on the system sans stack, labels and data on the system
 mono stack.
 
+## Colour
+
+The palette follows the "RR" logo's teal. The tokens are on `:root` in
+`src/styles.css`: `--color-primary` #0e6b63 (the logo's teal), `--color-primary-dark`,
+`--color-primary-soft`, and `--color-accent` #13887a (focus rings and callout rules;
+it keeps 3:1 against the page background). The site is light-only. The manifest's
+`theme_color` and `background_color` and the `theme-color` meta in `index.html` are
+set to `--color-bg` (#eef0f1), so the phone status bar and splash screen blend with the
+sticky header. If the palette changes, change all of these together, and redraw the
+icons if the logo changes.
+
 ## Offline / PWA
 
 The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it can be installed to a phone home screen and used with no network connection after the first visit.
@@ -175,9 +186,9 @@ belong in these files. Geometry is inlined in each document; none of them fetch
 anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
 Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
 
-The four musculoskeletal files add roughly 2.2 MB to the precache (the ankle alone is
-~1 MB, still under Workbox's 2 MiB per-file default). Watch that ceiling if more are
-added.
+The precached anatomy files come to roughly 2.4 MB (the ankle alone is ~1 MB, still
+under Workbox's 2 MiB per-file default). Put new large viewers in `online/` (below)
+rather than growing the precache.
 
 ### Online-only anatomy
 
@@ -185,13 +196,32 @@ added.
 precache (`globIgnores: ['anatomy/online/**']` in `vite.config.ts`): together they are
 ~8 MB, too much to push to every install. They still use the vendored three.js
 (`../vendor/three.min.js`) and follow the same rules otherwise. `AnatomyViewer`
-detects the `online/` prefix on `file` and adds a "needs an internet connection"
-sentence to the hint. To make one available offline again, move it up a directory
+detects the `online/` prefix on `file`: it adds a "needs an internet connection"
+sentence to the hint, and while `navigator.onLine` is false it shows an offline notice in
+place of the iframe, which would otherwise show the browser's own error page. To make one available offline again, move it up a directory
 and drop the prefix from its page's `file`. They still fall under
 `navigateFallbackDenylist`, since the pattern covers all of `/anatomy/`.
 
-Categories may set `itemLabel` (Anatomy uses `'reference'`) so the home-page count reads
-"6 references" rather than "6 calculators".
+## Registry: groups and related links
+
+`src/data/calculators.ts` is the single registry for routes, the menu, search and the
+home page.
+
+- Categories may set `itemLabel` (Anatomy uses `'reference'`, Lessons `'lesson'`), so the
+  home-page count reads "16 references" rather than "16 calculators". They may also set a
+  `blurb`, shown under the category heading.
+- Items may set `group`, which becomes a subheading on the home page and a label in the
+  menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
+  pelvis and limbs), and Lessons by body area. `groupItems` groups consecutive items, so
+  keep each group's items together in the list.
+- Items may set `related`, a list of paths. `RelatedLinks` shows those items as cards
+  under the page, in both directions, so declare each link on one side only (usually on
+  the lesson, e.g. the prostate lesson lists `/pi-rads`). `App.tsx` renders it after every
+  routed page, so pages never import it themselves.
+
+The site copy (header subtitle, home headline, search labels, manifest and meta
+descriptions) presents it as calculators, lessons and 3D anatomy. Keep it that way
+when adding a new kind of content.
 
 ## Lessons section
 
@@ -216,6 +246,12 @@ Unlike the anatomy references, lessons are ported to React rather than kept as
 standalone HTML, so they get the site's theme, nav and search. Each page declares its
 body and reference list to `LessonPage` (`src/components/LessonPage.tsx`), which adds
 the header, the numbered DOI reference list, and the "personal teaching notes" caveat.
+
+In September 2026 every citation in the lessons was checked against PubMed. DOIs were
+added or corrected, citation text was fixed to match the real papers, and plain-text
+citations were linked where the paper could be matched with confidence. The prose was
+left alone. A new lesson should get the same check before it ships, and any claim
+that doesn't match its paper should go to the author rather than be quietly reworded.
 Cite inline with `<Cite doi="...">`, and put report templates in a `CopyBlock`.
 
 ## Next development priorities

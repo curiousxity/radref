@@ -12,12 +12,13 @@ export default defineConfig({
       manifest: {
         name: 'Rad Refcalculators',
         short_name: 'RadCalc',
-        description: 'Mobile-friendly radiology reference calculators: TI-RADS, LI-RADS, O-RADS, incidental findings, Lung-RADS, and Bosniak 2019.',
+        description: 'Mobile-friendly radiology reference: calculators with report-ready impressions (TI-RADS, LI-RADS, O-RADS, Lung-RADS, Bosniak and more), step-by-step reading lessons, and interactive 3D anatomy.',
         start_url: '/',
         scope: '/',
         display: 'standalone',
-        theme_color: '#0e6b63',
-        background_color: '#f3f4f0',
+        // Match the site header (--color-bg) so the status bar reads as part of it.
+        theme_color: '#eef0f1',
+        background_color: '#eef0f1',
         icons: [
           { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },

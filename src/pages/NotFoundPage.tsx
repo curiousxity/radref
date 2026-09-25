@@ -12,10 +12,10 @@ export function NotFoundPage() {
           <h2>That page does not exist</h2>
           <p>
             Nothing is published at <code className="not-found-path">{location.pathname}</code>. The link may be out of
-            date, or a calculator may have moved to a different address.
+            date, or a page may have moved to a different address.
           </p>
           <div className="hero-actions">
-            <Link to="/" className="primary-button">Browse all calculators</Link>
+            <Link to="/" className="primary-button">Browse everything</Link>
           </div>
         </div>
       </section>

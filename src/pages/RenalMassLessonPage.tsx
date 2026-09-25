@@ -4,13 +4,13 @@ import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
   { citation: 'Silverman SG et al. Bosniak classification of cystic renal masses, version 2019: an update proposal and needs assessment. Radiology 2019.', doi: '10.1148/radiol.2019182646' },
-  { citation: 'McGrath TA et al. Malignancy rates of Bosniak v2019 cystic renal masses: a systematic review and meta-analysis. AJR 2025.', doi: '10.2214/AJR.24.32342' },
-  { citation: 'McGrath TA et al. Evidence for the new Bosniak class II homogeneous lesions: a systematic review. Abdom Radiol 2021.', doi: '10.1007/s00261-021-03180-y' },
+  { citation: 'McGrath TA et al. Bosniak classification of cystic renal masses version 2019: proportion of malignancy by class and subclass - systematic review and meta-analysis. AJR 2025.', doi: '10.2214/AJR.24.32342' },
+  { citation: 'McGrath TA et al. Evaluation of class II cystic renal masses proposed in Bosniak classification version 2019: a systematic review of supporting evidence. Abdom Radiol 2021.', doi: '10.1007/s00261-021-03180-y' },
   { citation: 'Pedrosa I, Cadeddu JA. How we do it: managing the indeterminate renal mass with the MRI clear cell likelihood score. Radiology 2022.', doi: '10.1148/radiol.210034' },
-  { citation: 'Shetty AS et al. Clear cell likelihood score: a case-based user\'s guide. RadioGraphics 2023.', doi: '10.1148/rg.220209' },
-  { citation: 'Schieda N et al. Multicenter evaluation of the clear cell likelihood score for solid small renal masses on MRI. Radiology 2022.', doi: '10.1148/radiol.211680' },
-  { citation: 'Davenport MS et al. Radiologist and urologist expectations for renal mass reporting: a national survey. Abdom Radiol 2017.', doi: '10.1007/s00261-016-0962-x' },
-  { citation: 'Davenport MS et al. Standardized report template for renal masses: SAR Disease-Focused Panel consensus. Abdom Radiol 2019.', doi: '10.1007/s00261-018-1851-2' },
+  { citation: 'Shetty AS et al. Renal mass imaging with MRI clear cell likelihood score: a user\'s guide. RadioGraphics 2023.', doi: '10.1148/rg.220209' },
+  { citation: 'Schieda N et al. Multicenter evaluation of multiparametric MRI clear cell likelihood scores in solid indeterminate small renal masses. Radiology 2022.', doi: '10.1148/radiol.211680' },
+  { citation: 'Davenport MS et al. Reporting standards for the imaging-based diagnosis of renal masses on CT and MRI: a national survey of academic abdominal radiologists and urologists. Abdom Radiol 2017.', doi: '10.1007/s00261-016-0962-x' },
+  { citation: 'Davenport MS et al. Standardized report template for indeterminate renal masses at CT and MRI: a collaborative product of the SAR Disease-Focused Panel on Renal Cell Carcinoma. Abdom Radiol 2019.', doi: '10.1007/s00261-018-1851-2' },
   { citation: 'Herts BR et al. Management of the incidental renal mass on CT: a white paper of the ACR Incidental Findings Committee. J Am Coll Radiol 2018.', doi: '10.1016/j.jacr.2017.04.028' },
 ]
 

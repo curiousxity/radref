@@ -1,6 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
+import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
 import { calculators, categories } from './data/calculators'
 import { HomePage } from './pages/HomePage'
@@ -24,7 +25,7 @@ export default function App() {
             <img src="/logo-mark-header.png" alt="" className="brand-logo" width="42" height="40" />
             <div>
               <p className="brand-title">Rad Refcalculators</p>
-              <p className="brand-subtitle">Mobile-friendly radiology tools</p>
+              <p className="brand-subtitle">Calculators, lessons and 3D anatomy</p>
             </div>
           </Link>
           <button
@@ -45,7 +46,16 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage categories={categories} />} />
             {calculators.map((item) => (
-              <Route key={item.path} path={item.path} element={<item.component />} />
+              <Route
+                key={item.path}
+                path={item.path}
+                element={
+                  <>
+                    <item.component />
+                    <RelatedLinks path={item.path} />
+                  </>
+                }
+              />
             ))}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

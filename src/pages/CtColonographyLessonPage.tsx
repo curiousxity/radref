@@ -1,18 +1,18 @@
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonPage } from '../components/LessonPage'
+import { Cite, LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
   { citation: 'Yee J, Dachman A, Kim DH, et al. C-RADS: version 2023 update. Radiology 2024;310(1):e232007. (free access; the main source above)', doi: '10.1148/radiol.232007' },
-  { citation: 'Zalis ME et al. CT colonography reporting and data system: a consensus proposal. Radiology 2005;236:3–9. (Original C-RADS.)' },
-  { citation: 'Johnson CD et al. Accuracy of CT colonography for detection of large adenomas and cancers. NEJM 2008;359:1207–17. (ACRIN 6664.)' },
-  { citation: 'Kim DH et al. CT colonography versus colonoscopy for the detection of advanced neoplasia. NEJM 2007;357:1403–12.' },
-  { citation: 'Kim DH, Moreno CC, Pickhardt PJ. CT colonography: pearls and pitfalls. Radiol Clin North Am 2018;56:719–35.' },
-  { citation: 'Pickhardt PJ et al. CT colonography: improving interpretive skill by avoiding pitfalls. RadioGraphics 2020;40(1). (Case-rich pitfalls atlas.)' },
-  { citation: 'Lips LM et al. Sigmoid cancer versus chronic diverticular disease: differentiating features at CTC. Radiology 2015;275:127–35.' },
-  { citation: 'Kim DH et al. Serrated polyps at CTC. Radiology 2016;280:455–63.' },
-  { citation: 'Pickhardt PJ et al. Carpet lesions detected at CTC. Radiology 2014;270:435–43.' },
-  { citation: 'Pooler BD et al. C-RADS benchmark values from a clinical screening program. AJR 2014;202:1232–7.' },
+  { citation: 'Zalis ME et al. CT colonography reporting and data system: a consensus proposal. Radiology 2005;236:3–9. (Original C-RADS.)', doi: '10.1148/radiol.2361041926' },
+  { citation: 'Johnson CD et al. Accuracy of CT colonography for detection of large adenomas and cancers. NEJM 2008;359:1207–17. (ACRIN 6664.)', doi: '10.1056/NEJMoa0800996' },
+  { citation: 'Kim DH et al. CT colonography versus colonoscopy for the detection of advanced neoplasia. NEJM 2007;357:1403–12.', doi: '10.1056/NEJMoa070543' },
+  { citation: 'Kim DH, Moreno CC, Pickhardt PJ. CT colonography: pearls and pitfalls. Radiol Clin North Am 2018;56:719–35.', doi: '10.1016/j.rcl.2018.05.004' },
+  { citation: 'Ricci ZJ et al. CT colonography: improving interpretive skill by avoiding pitfalls. RadioGraphics 2020;40:98–119. (Case-rich pitfalls atlas.)', doi: '10.1148/rg.2020190078' },
+  { citation: 'Lips LM et al. Sigmoid cancer versus chronic diverticular disease: differentiating features at CTC. Radiology 2015;275:127–35.', doi: '10.1148/radiol.14132829' },
+  { citation: 'Kim DH et al. Serrated polyps at CT colonography: prevalence and characteristics of the serrated polyp spectrum. Radiology 2016;280:455–63.', doi: '10.1148/radiol.2016151608' },
+  { citation: 'Pickhardt PJ et al. Carpet lesions detected at CT colonography: clinical, imaging, and pathologic features. Radiology 2014;270:435–43.', doi: '10.1148/radiol.13130812' },
+  { citation: 'Pooler BD et al. CT Colonography Reporting and Data System (C-RADS): benchmark values from a clinical screening program. AJR 2014;202:1232–7.', doi: '10.2214/AJR.13.11272' },
   { citation: 'ACR–SAR–SCBT-MR Practice Parameter for the Performance of CT Colonography in Adults (acr.org).' },
 ]
 
@@ -164,13 +164,13 @@ export function CtColonographyLessonPage() {
 
       <section className="info-card lesson-body">
         <h3>7. Cases from the literature to study</h3>
-        <p>Figures 1–5 are in the C-RADS 2023 paper (open access, doi 10.1148/radiol.232007); 6 and 7 are from the Pickhardt RadioGraphics 2020 pitfalls atlas.</p>
+        <p>Figures 1–5 are in the C-RADS 2023 paper (open access, doi 10.1148/radiol.232007); 6 and 7 are from the <Cite doi="10.1148/rg.2020190078">Ricci RadioGraphics 2020</Cite> pitfalls atlas.</p>
         <ol className="plain-list">
           <li><strong>Sessile polyp after incomplete colonoscopy.</strong> A 77-year-old man after an incomplete colonoscopy for an obstructing sigmoid mass. An 8 mm sessile polyp in the proximal sigmoid on 3D and both axial positions; tubular adenoma. Teaching point: the value of CTC is clearing the colon proximal to an obstructing tumor before surgery.</li>
           <li><strong>Pedunculated polyp.</strong> A 52-year-old man at screening with a polyp head on a long stalk in the sigmoid; tubulovillous adenoma at polypectomy. Teaching point: measure the head only.</li>
           <li><strong>Flat lesion with contrast coat.</strong> A 70-year-old man imaged for anemia, with a flat lesion coated with iodinated contrast along a haustral fold in the ascending colon; tubular adenoma. Teaching point: bright coating on a fold in the right colon is a lesion until proven otherwise.</li>
           <li><strong>Carpet lesion.</strong> A 69-year-old woman at screening with a 3.7 cm carpet lesion in the ascending colon, seen on 3D and both decubitus views; tubulovillous adenoma. Teaching point: big, flat, subtle on 2D, needs the decubitus positions.</li>
-          <li><strong>C2b sigmoid myochosis (two cases).</strong> An 81-year-old woman with circumferential sigmoid wall thickening on the supine view, but with better distention on prone the haustral architecture was preserved without focal mucosal irregularity. And a 72-year-old man on warfarin: under-distention and wall thickening in a region of sigmoid diverticulosis, more severe prone but improved supine and on right lateral decubitus; colonoscopy 5 years later showed only diverticula. Teaching point: changing wall thickness between positions means muscle, not tumor. The discriminating features are formally studied in Lips et al., Radiology 2015.</li>
+          <li><strong>C2b sigmoid myochosis (two cases).</strong> An 81-year-old woman with circumferential sigmoid wall thickening on the supine view, but with better distention on prone the haustral architecture was preserved without focal mucosal irregularity. And a 72-year-old man on warfarin: under-distention and wall thickening in a region of sigmoid diverticulosis, more severe prone but improved supine and on right lateral decubitus; colonoscopy 5 years later showed only diverticula. Teaching point: changing wall thickness between positions means muscle, not tumor. The discriminating features are formally studied in <Cite doi="10.1148/radiol.14132829">Lips et al., Radiology 2015</Cite>.</li>
           <li><strong>Ileocecal valve mimic.</strong> Endoluminal 3D shows a polypoid lesion with an irregular surface in the cecum, but the axial 2D soft-tissue window shows lipomatous hypertrophy of the ileocecal valve, with the terminal ileum inserting on it. Teaching point: every cecal "polyp" gets a 2D check for fat and the terminal ileum.</li>
           <li><strong>Fluid-filled segment mimicking a stricture.</strong> The endoluminal 3D image has a blank appearance; axial 2D in the supine position shows the segment completely filled with tagged fluid. Teaching point: an "obstruction" on 3D that is just tagged fluid on 2D; look at the other position.</li>
         </ol>

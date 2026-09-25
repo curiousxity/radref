@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { InstallButton } from '../components/InstallButton'
-import { calculators, matchesQuery } from '../data/calculators'
+import { calculators, groupItems, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
 
 /** "3 calculators", or "2 references" for a category that names its items differently. */
@@ -27,18 +27,18 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
       <section className="hero-card">
         <div>
           <p className="eyebrow">Radiology reference</p>
-          <h1>Radiology calculators, ready at the scanner.</h1>
+          <h1>Radiology reference, ready at the scanner.</h1>
           <p className="hero-copy">
-            Enter the findings, get the category, copy a report-ready impression. No PDFs, no logins.
+            Calculators that turn findings into a report-ready impression, step-by-step reading lessons, and 3D anatomy you can turn in the hand. No PDFs, no logins.
           </p>
           <search className="search-panel hero-search">
             <label className="search-field">
-              <span className="metric-label">Find a calculator</span>
+              <span className="metric-label">Search</span>
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Try thyroid, nodule, adrenal, contrast, MELD"
+                placeholder="Try thyroid, adrenal, rectal MRI, knee"
                 autoComplete="off"
                 aria-describedby="search-count"
               />
@@ -95,17 +95,22 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
                 {category.blurb && <p className="section-blurb">{category.blurb}</p>}
               </div>
             </div>
-            <div className="card-grid">
-              {category.items.map((calculator) => (
-                <Link key={calculator.path} to={calculator.path} className="tool-card">
-                  <div>
-                    <h3>{calculator.name}</h3>
-                    <p>{calculator.description}</p>
-                  </div>
-                  <span className="tool-arrow">Open</span>
-                </Link>
-              ))}
-            </div>
+            {groupItems(category.items).map((group) => (
+              <div key={group.name ?? ''} className="item-group">
+                {group.name && <h3 className="group-heading">{group.name}</h3>}
+                <div className="card-grid">
+                  {group.items.map((calculator) => (
+                    <Link key={calculator.path} to={calculator.path} className="tool-card">
+                      <div>
+                        <h3>{calculator.name}</h3>
+                        <p>{calculator.description}</p>
+                      </div>
+                      <span className="tool-arrow">Open</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
           </section>
         ))
       )}

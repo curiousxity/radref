@@ -9,7 +9,7 @@ const references: LessonReference[] = [
   { citation: 'Baráth K et al. Neuroradiology of cholesteatomas. AJNR 2011;32:221–229.', doi: '10.3174/ajnr.A2052' },
   { citation: 'Lingam RK, Bassett P. A meta-analysis on the diagnostic performance of non-echoplanar DWI in detecting middle ear cholesteatoma: 10 years on. Otol Neurotol 2017;38:521–528.', doi: '10.1097/MAO.0000000000001353' },
   { citation: 'Lee TC et al. CT grading of otosclerosis. AJNR 2009;30:1435–1439.', doi: '10.3174/ajnr.A1558' },
-  { citation: 'Belden CJ et al. CT evaluation of bone dehiscence of the superior semicircular canal. Radiology 2003;226:337–343.', doi: '10.1148/radiol.2262010897' },
+  { citation: 'Belden CJ et al. CT evaluation of bone dehiscence of the superior semicircular canal as a cause of sound- and/or pressure-induced vertigo. Radiology 2003;226:337–343.', doi: '10.1148/radiol.2262010897' },
   { citation: 'Vijayasekaran S et al. When is the vestibular aqueduct enlarged? AJNR 2007;28:1133–1138.', doi: '10.3174/ajnr.A0495' },
   { citation: 'Sennaroglu L, Saatci I. A new classification for cochleovestibular malformations. Laryngoscope 2002;112:2230–2241.', doi: '10.1097/00005537-200212000-00019' },
   { citation: 'Sennaroğlu L, Bajin MD. Classification and current management of inner ear malformations. Balkan Med J 2017;34:397–411. Open access.', doi: '10.4274/balkanmedj.2017.0367' },

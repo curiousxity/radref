@@ -1,18 +1,18 @@
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonPage } from '../components/LessonPage'
+import { Cite, LessonPage } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
   { citation: 'ACR O-RADS MRI documents (free PDFs): the Risk Score table and the Governing Concepts, May 2024 revision.' },
-  { citation: 'Sadowski EA et al. Radiology 2022;303:35–47. The committee\'s illustrated guide. Read this first.' },
-  { citation: 'Reinhold C et al. J Am Coll Radiol 2021;18:713–729. The lexicon. Read once, then keep for definitions.' },
-  { citation: 'Thomassin-Naggara I et al. JAMA Netw Open 2020;3(1):e1919896. The validation study (EURAD).' },
-  { citation: 'Thomassin-Naggara I et al. Eur Radiol 2021;31:9588–9599. The misclassified cases.' },
-  { citation: 'Wengert GJ et al. Radiology 2022;303:566–575. Why you should draw the curve.' },
-  { citation: 'Tong A et al. RadioGraphics 2026;47(9):e250197. Protocol.' },
-  { citation: 'Kılıçkap G. Diagn Interv Radiol 2025;31:171–179. Meta-analysis.' },
-  { citation: 'Corwin MT et al. Radiology 2014. The T2 dark spot sign for endometrioma.' },
-  { citation: 'Sebastià C et al. Radiología 2022;64:542–551. From theory to practice, case-based.' },
+  { citation: 'Sadowski EA et al. Radiology 2022;303:35–47. The committee\'s illustrated guide. Read this first.', doi: '10.1148/radiol.204371' },
+  { citation: 'Reinhold C et al. J Am Coll Radiol 2021;18:713–729. The lexicon. Read once, then keep for definitions.', doi: '10.1016/j.jacr.2020.12.022' },
+  { citation: 'Thomassin-Naggara I et al. JAMA Netw Open 2020;3(1):e1919896. The validation study (EURAD).', doi: '10.1001/jamanetworkopen.2019.19896' },
+  { citation: 'Thomassin-Naggara I et al. Eur Radiol 2021;31:9588–9599. The misclassified cases.', doi: '10.1007/s00330-021-08054-x' },
+  { citation: 'Wengert GJ et al. Radiology 2022;303:566–575. Why you should draw the curve.', doi: '10.1148/radiol.210342' },
+  { citation: 'Tong A et al. RadioGraphics 2026;46(9):e250197. Protocol.', doi: '10.1148/rg.250197' },
+  { citation: 'Kılıçkap G. Diagn Interv Radiol 2025;31:171–179. Meta-analysis.', doi: '10.4274/dir.2024.242784' },
+  { citation: 'Corwin MT et al. Radiology 2014;271:126–132. The T2 dark spot sign for endometrioma.', doi: '10.1148/radiol.13131394' },
+  { citation: 'Sebastià C et al. Radiología 2022;64:542–551. From theory to practice, case-based.', doi: '10.1016/j.rxeng.2022.07.003' },
 ]
 
 const reportTemplate = `Clinical: age, menopausal status (state it explicitly; the score depends on it),
@@ -54,7 +54,7 @@ export function AdnexalMriLessonPage() {
         <h3>1. Where O-RADS MRI fits</h3>
         <p>O-RADS MRI is a problem-solving tool. Its job is to take a mass that ultrasound couldn't sort out and put it into one of five risk buckets so the gynecologist knows who should operate (if anyone).</p>
         <p>The system assumes an average-risk patient with no acute symptoms, and clinical management directed by the treating physician supersedes imaging-based recommendations. So it is <em>not</em> for: torsion, tubo-ovarian abscess, ruptured ectopic, or a patient already known to have ovarian cancer (that's staging, a different job).</p>
-        <p>The score grew out of the French "AdnexMR" score of 2012 (Thomassin-Naggara, Radiology 2013). The validating paper is the EURAD study: Thomassin-Naggara et al., JAMA Network Open 2020;3(1):e1919896, a prospective multicenter study of roughly 1,300 women across 15 European centers. That paper is the reason the risk numbers in the table below exist.</p>
+        <p>The score grew out of the French "AdnexMR" score of 2012 (<Cite doi="10.1148/radiol.13121161">Thomassin-Naggara, Radiology 2013</Cite>). The validating paper is the EURAD study: <Cite doi="10.1001/jamanetworkopen.2019.19896">Thomassin-Naggara et al., JAMA Network Open 2020;3(1):e1919896</Cite>, a prospective multicenter study of roughly 1,300 women across 15 European centers. That paper is the reason the risk numbers in the table below exist.</p>
       </section>
 
       <section className="info-card lesson-body">
@@ -68,7 +68,7 @@ export function AdnexalMriLessonPage() {
           <li><strong>DCE (dynamic contrast)</strong>: a 3D fat-sat T1 repeated every few seconds for about 4 minutes after injection, with the uterus in the field of view. You need the myometrium as your reference tissue. If you can't do DCE, a single post-contrast series at 30–40 seconds is the fallback, but the score changes slightly (explained below).</li>
           <li>Field of view large enough to cover the whole lesion and the lower peritoneum.</li>
         </ul>
-        <p>A 2026 RadioGraphics article walks through the protocol in detail: Tong A, Kim N, Patel-Lippman K, Nougaret S, et al. Optimizing the MRI pelvis protocol for O-RADS MRI. RadioGraphics 2026;47(9):e250197. Worth reading once with your MR technologist.</p>
+        <p>A 2026 RadioGraphics article walks through the protocol in detail: <Cite doi="10.1148/rg.250197">Tong A, Kim N, Patel-Lippmann K, Nougaret S, et al. Optimizing the MRI pelvis protocol for O-RADS MRI. RadioGraphics 2026;46(9):e250197</Cite>. Worth reading once with your MR technologist.</p>
       </section>
 
       <section className="info-card lesson-body">
@@ -115,7 +115,7 @@ export function AdnexalMriLessonPage() {
 
         <div className="lesson-step">
           <h4>Step 4. Is there enhancing solid tissue? (The single most important question.)</h4>
-          <p>"Solid tissue" has a specific meaning in the lexicon (Reinhold et al., J Am Coll Radiol 2021;18:713–729). It means an <em>enhancing</em> component that is one of: a papillary projection (a branching frond growing from a wall or septum), a mural nodule, an irregular septation or irregular wall thickening, or a larger solid component.</p>
+          <p>"Solid tissue" has a specific meaning in the lexicon (<Cite doi="10.1016/j.jacr.2020.12.022">Reinhold et al., J Am Coll Radiol 2021;18:713–729</Cite>). It means an <em>enhancing</em> component that is one of: a papillary projection (a branching frond growing from a wall or septum), a mural nodule, an irregular septation or irregular wall thickening, or a larger solid component.</p>
           <p>It does <strong>not</strong> mean: smooth, thin wall or smooth septa (even if they enhance); clot or debris (bright on T1, does not enhance; use subtraction images to prove it); fat or a Rokitansky nodule in a dermoid. The 2024 revision is explicit: characteristic mature teratomas may contain septations or minimal enhancement of Rokitansky nodules, and these do not upgrade the lesion to O-RADS 4.</p>
           <p>If there is <strong>no</strong> enhancing solid tissue, you score by fluid and wall (see the score table): most of these land in 2 or 3.</p>
         </div>
@@ -134,7 +134,7 @@ export function AdnexalMriLessonPage() {
             <li><strong>Type 3 (high risk)</strong>: rises as fast as or faster than the myometrium, then plateaus or washes out → <strong>O-RADS 5</strong></li>
           </ul>
           <p>If you only have a single post-contrast series at 30–40 s (no DCE): solid tissue enhancing ≤ myometrium is O-RADS 4; enhancing more than the myometrium is O-RADS 5. Without DCE you lose the ability to call a curve "low risk" (score 3), which is why DCE matters.</p>
-          <p>A practical point from the EURAD group: drawing the curve is more accurate than eyeballing it (Wengert et al., Radiology 2022;303:566–575). Take the extra minute.</p>
+          <p>A practical point from the EURAD group: drawing the curve is more accurate than eyeballing it (<Cite doi="10.1148/radiol.210342">Wengert et al., Radiology 2022;303:566–575</Cite>). Take the extra minute.</p>
         </div>
 
         <div className="lesson-step">
@@ -163,7 +163,7 @@ export function AdnexalMriLessonPage() {
             </tbody>
           </table>
         </div>
-        <p>The primary source for this table is the ACR document (O-RADS MRI Risk Stratification and Management System) and the committee guide: Sadowski EA, Thomassin-Naggara I, Rockall A, et al. Radiology 2022;303(1):35–47. A 2025 meta-analysis (Kılıçkap G, Diagn Interv Radiol 2025;31(3):171–179) pooled the published studies and confirmed the score performs well outside the original French/European cohort.</p>
+        <p>The primary source for this table is the ACR document (O-RADS MRI Risk Stratification and Management System) and the committee guide: <Cite doi="10.1148/radiol.204371">Sadowski EA, Thomassin-Naggara I, Rockall A, et al. Radiology 2022;303(1):35–47</Cite>. A 2025 meta-analysis (<Cite doi="10.4274/dir.2024.242784">Kılıçkap G, Diagn Interv Radiol 2025;31(3):171–179</Cite>) pooled the published studies and confirmed the score performs well outside the original French/European cohort.</p>
       </section>
 
       <section className="info-card lesson-body">
@@ -175,7 +175,7 @@ export function AdnexalMriLessonPage() {
           <li><em>Follicle / simple cyst.</em> Water signal, thin wall, no enhancement of anything inside. Trap: size. Above 3 cm in a premenopausal woman it becomes a score 2 lesion, not score 1; same look, different label.</li>
           <li><em>Corpus luteum.</em> Thick, crenulated, strongly enhancing wall, often T1-bright inside. Trap: it looks worrying on a single post-contrast image. The crenulated wall pattern and a premenopausal patient give it away.</li>
           <li><em>Hemorrhagic cyst.</em> T1 bright, stays bright on fat-sat, no enhancing solid. Trap: retracting clot mimics a mural nodule. Subtraction images settle it; clot does not enhance.</li>
-          <li><em>Endometrioma.</em> Very bright T1, dark or "shaded" T2, often multiple, often kissing ovaries stuck behind the uterus. The "T2 dark spot" sign (tiny black foci of old clot within the cyst) is very specific for endometrioma over hemorrhagic cyst (Corwin et al., Radiology 2014). Trap 1: in pregnancy, decidualized endometriomas grow T2-bright, vascular mural nodules that enhance; they look like score 4 but the nodules match the endometrium's signal and the patient is pregnant. Trap 2: any <em>true</em> enhancing solid tissue in an endometrioma, especially in a woman over 40, has to be scored honestly; endometriosis-associated clear cell and endometrioid carcinomas arise here.</li>
+          <li><em>Endometrioma.</em> Very bright T1, dark or "shaded" T2, often multiple, often kissing ovaries stuck behind the uterus. The "T2 dark spot" sign (tiny black foci of old clot within the cyst) is very specific for endometrioma over hemorrhagic cyst (<Cite doi="10.1148/radiol.13131394">Corwin et al., Radiology 2014</Cite>). Trap 1: in pregnancy, decidualized endometriomas grow T2-bright, vascular mural nodules that enhance; they look like score 4 but the nodules match the endometrium's signal and the patient is pregnant. Trap 2: any <em>true</em> enhancing solid tissue in an endometrioma, especially in a woman over 40, has to be scored honestly; endometriosis-associated clear cell and endometrioid carcinomas arise here.</li>
           <li><em>Mature teratoma (dermoid).</em> Fat that drops out on fat-sat, chemical-shift artifact, hair/sebum levels, a Rokitansky nodule (usually with tooth or fat). Score 2. Trap: fatty lesions with a large amount of enhancing soft tissue are score 4 because of the risk of immature teratoma or other malignancy. Also struma ovarii, a multilocular cyst with very T2-dark, T1-bright, strongly enhancing locules (colloid), is a look you should recognize.</li>
           <li><em>Fibroma / fibrothecoma / cystadenofibroma / Brenner.</em> The T2-dark, DWI-dark solid rule. Fibromas can produce ascites and even pleural effusion (Meigs syndrome); don't let the fluid push you to score 5 unless there are actual peritoneal nodules. Trap: telling a fibroma from a pedunculated subserosal fibroid. Look for the bridging-vessel sign to the uterus (fibroid) versus ovarian tissue draped around the mass (fibroma).</li>
           <li><em>Hydrosalpinx.</em> Tubular, serpentine, "cogwheel" folds on cross-section, separate ovary. Score 2 if simple.</li>
@@ -201,7 +201,7 @@ export function AdnexalMriLessonPage() {
         </ul>
 
         <h4>Where the score gets it wrong: cases from the literature</h4>
-        <p>The most useful paper is the EURAD group's analysis of its own misses: Thomassin-Naggara I, Belghitti M, Milon A, et al. O-RADS MRI score: analysis of misclassified cases in a prospective multicentric European cohort. Eur Radiol 2021;31(12):9588–9599. They went back through every lesion the score got wrong. The recurring themes: (1) missed or misjudged solid tissue (calling clot solid, or missing a small papillary projection); (2) curves drawn on the wrong tissue; (3) mucinous lesions with heterogeneous locules being under- or over-called; and (4) lesions of non-ovarian origin. Reading the illustrated cases in that paper does more for your eye than any table.</p>
+        <p>The most useful paper is the EURAD group's analysis of its own misses: <Cite doi="10.1007/s00330-021-08054-x">Thomassin-Naggara I, Belghitti M, Milon A, et al. O-RADS MRI score: analysis of misclassified cases in a prospective multicentric European cohort. Eur Radiol 2021;31(12):9588–9599</Cite>. They went back through every lesion the score got wrong. The recurring themes: (1) missed or misjudged solid tissue (calling clot solid, or missing a small papillary projection); (2) curves drawn on the wrong tissue; (3) mucinous lesions with heterogeneous locules being under- or over-called; and (4) lesions of non-ovarian origin. Reading the illustrated cases in that paper does more for your eye than any table.</p>
         <p>The Barcelona group's practical review (Sebastià C, Cabedo L, Fusté P, Muntmany M, Nicolau C. The O-RADS MRI score for the characterization of indeterminate ovarian masses: from theory to practice. Radiología 2022;64:542–551) is a good second case-based read, and the Canadian Association of Radiologists hosts an English PDF of it.</p>
       </section>
 
