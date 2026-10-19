@@ -207,6 +207,8 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 
 /* ChoiceGroup (src/components/ChoiceGroup.tsx): a radio group drawn as buttons. */
 .choice-field { margin-top: 1.25rem; }
+/* Inside a two-column .form-grid a choice group takes a full row, spaced by the grid gap. */
+.form-grid > .choice-field { grid-column: 1 / -1; margin-top: 0; }
 .choice-label { margin-bottom: 0.5rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; font-weight: 600; color: var(--color-text-muted); }
 .choice-group { display: grid; gap: 0.4rem; }
 .choice-group--stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }

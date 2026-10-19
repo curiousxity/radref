@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
 import { calculateOrads } from '../logic/orads'
@@ -23,6 +24,16 @@ const initialForm: OradsForm = {
   enhancement: 'none',
 }
 
+const modalityOptions: { value: OradsForm['modality']; label: string }[] = [
+  { value: 'us', label: 'Ultrasound' },
+  { value: 'mri', label: 'MRI' },
+]
+
+const menopausalOptions: { value: OradsForm['menopausal']; label: string }[] = [
+  { value: 'premenopausal', label: 'Premenopausal' },
+  { value: 'postmenopausal', label: 'Postmenopausal' },
+]
+
 export function OradsPage() {
   const [form, setForm] = useState<OradsForm>(initialForm)
   const result = useMemo(() => calculateOrads(form), [form])
@@ -31,22 +42,22 @@ export function OradsPage() {
   const isUs = form.modality === 'us'
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">O-RADS US / MRI</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>O-RADS calculator</h2>
-          <p>Branch-aware O-RADS form with separate ultrasound and MRI logic paths.</p>
-          <p className="source-note">
-            Source: <a href={isUs ? 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/Ultrasound' : 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/MRI'} target="_blank" rel="noopener noreferrer">ACR O-RADS {isUs ? 'Ultrasound' : 'MRI'} risk stratification and management guidance</a>.
-          </p>
+          <span className="calc-tag">O-RADS US / MRI</span>
         </div>
+        <p>Branch-aware O-RADS form with separate ultrasound and MRI logic paths.</p>
+        <p className="source-note">
+          Source: <a href={isUs ? 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/Ultrasound' : 'https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/O-RADS/MRI'} target="_blank" rel="noopener noreferrer">ACR O-RADS {isUs ? 'Ultrasound' : 'MRI'} risk stratification and management guidance</a>.
+        </p>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Features</h3>
           <div className="form-grid">
-            <label><span>Modality</span><select value={form.modality} onChange={(e) => updateField('modality', e.target.value as OradsForm['modality'])}><option value="us">Ultrasound</option><option value="mri">MRI</option></select></label>
-            <label><span>Menopausal status</span><select value={form.menopausal} onChange={(e) => updateField('menopausal', e.target.value as OradsForm['menopausal'])}><option value="premenopausal">Premenopausal</option><option value="postmenopausal">Postmenopausal</option></select></label>
+            <ChoiceGroup label="Modality" layout="row" value={form.modality} options={modalityOptions} onChange={(value) => updateField('modality', value)} />
+            <ChoiceGroup label="Menopausal status" layout="row" value={form.menopausal} options={menopausalOptions} onChange={(value) => updateField('menopausal', value)} />
             <label><span>Size (cm)</span><input type="number" min="0" step="0.1" inputMode="decimal" value={form.sizeCm} onChange={(e) => updateField('sizeCm', e.target.value)} placeholder="e.g. 3.2" /></label>
             <label>
               <span className="term">Morphology<Definition text="The lesion's overall ultrasound/MRI structure — for example a simple cyst, a unilocular cyst with a solid or papillary component, a multilocular cyst, or a solid mass — which drives the O-RADS risk category." /></span>
@@ -117,9 +128,14 @@ export function OradsPage() {
           </div>
         </article>
         <article className="info-card result-card sticky-card">
-          <div className="result-head"><h3>Result</h3></div>
-          <div className="result-panel"><div><p className="metric-label">Category</p><p className={`metric-value tone-${result.category.includes('5') || result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'}`}>{result.category}</p></div><div><p className="metric-label">Features</p><p className="metric-value">{result.features.length}</p></div></div>
-          <p className="result-summary">{result.reason}</p>
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${result.category.includes('5') || result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'}`}><span className="sr-only">Category </span>{result.category}</p>
+              <p className="result-strip-meta"><span className="metric-label">Features</span> <span className="result-strip-points">{result.features.length}</span></p>
+            </div>
+            <p className="result-strip-summary">{result.reason}</p>
+          </div>
           <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No suspicious features selected.'} />
           <CopyBlock label="O-RADS impression" text={result.impression} />
           <p className="copy-status">{result.recommendation}</p>

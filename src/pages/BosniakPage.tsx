@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { classify, initialBosniakForm } from '../logic/bosniak'
 import type { BosniakForm } from '../logic/bosniak'
@@ -7,9 +7,40 @@ import type { BosniakForm } from '../logic/bosniak'
 type Form = BosniakForm
 const initialForm: Form = initialBosniakForm
 
+const wallThicknessOptions: { value: Form['wallThickness']; label: string }[] = [
+  { value: 'none', label: 'No visible wall' },
+  { value: 'thin', label: 'Thin (≤2 mm)' },
+  { value: 'minimallyThick', label: 'Minimally thickened (3 mm)' },
+  { value: 'thick', label: 'Thick (≥4 mm)' },
+]
+
+const septaCountOptions: { value: Form['septaCount']; label: string }[] = [
+  { value: 'none', label: 'None' },
+  { value: 'few', label: 'Few (1-3)' },
+  { value: 'many', label: 'Many (≥4)' },
+]
+
+const septaThicknessOptions: { value: Form['septaThickness']; label: string }[] = [
+  { value: 'thin', label: 'Thin (≤2 mm)' },
+  { value: 'minimallyThick', label: 'Minimally thickened (3 mm)' },
+  { value: 'thick', label: 'Thick (≥4 mm)' },
+]
+
+const enhancingNoduleOptions: { value: Form['enhancingNodule']; label: string }[] = [
+  { value: 'none', label: 'None' },
+  { value: 'irregularity', label: 'Irregularity only (obtuse convex protrusion ≤3 mm)' },
+  { value: 'nodule', label: 'Enhancing nodule' },
+]
+
 export function BosniakPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
+  const tone =
+    result.category.includes('I ') || result.category === 'Bosniak I' || result.category === 'Bosniak II'
+      ? 'good'
+      : result.category === 'Bosniak III' || result.category === 'Bosniak IV'
+        ? 'warn'
+        : 'accent'
 
   function update<K extends keyof Form>(field: K, value: Form[K]) {
     setForm((current) => ({ ...current, [field]: value }))
@@ -21,13 +52,13 @@ export function BosniakPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Bosniak 2019</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Bosniak 2019 calculator</h2>
-          <p>Cystic renal mass helper with category assignment, management text, and copyable impression output.</p>
-          <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/full/10.1148/radiol.2019182646" target="_blank" rel="noopener noreferrer">Silverman et al., "Bosniak Classification of Cystic Renal Masses, Version 2019," Radiology 2019</a>.</p>
+          <span className="calc-tag">Bosniak 2019</span>
         </div>
+        <p>Cystic renal mass helper with category assignment, management text, and copyable impression output.</p>
+        <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/full/10.1148/radiol.2019182646" target="_blank" rel="noopener noreferrer">Silverman et al., "Bosniak Classification of Cystic Renal Masses, Version 2019," Radiology 2019</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -44,52 +75,23 @@ export function BosniakPage() {
               Enhancement is present
             </label>
 
-            <label>
-              <span>Wall thickness</span>
-              <select value={form.wallThickness} onChange={(e) => update('wallThickness', e.target.value as Form['wallThickness'])}>
-                <option value="none">No visible wall</option>
-                <option value="thin">Thin (≤2 mm)</option>
-                <option value="minimallyThick">Minimally thickened (3 mm)</option>
-                <option value="thick">Thick (≥4 mm)</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Wall thickness" layout="stack" value={form.wallThickness} options={wallThicknessOptions} onChange={(value) => update('wallThickness', value)} />
 
             <label className="check-row">
               <input type="checkbox" checked={form.wallIrregularity} onChange={(e) => update('wallIrregularity', e.target.checked)} />
               Enhancing wall or septal irregularity is present
             </label>
 
-            <label>
-              <span>Septa count</span>
-              <select value={form.septaCount} onChange={(e) => update('septaCount', e.target.value as Form['septaCount'])}>
-                <option value="none">None</option>
-                <option value="few">Few (1-3)</option>
-                <option value="many">Many (≥4)</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Septa count" layout="stack" value={form.septaCount} options={septaCountOptions} onChange={(value) => update('septaCount', value)} />
 
-            <label>
-              <span>Septa thickness</span>
-              <select value={form.septaThickness} onChange={(e) => update('septaThickness', e.target.value as Form['septaThickness'])}>
-                <option value="thin">Thin (≤2 mm)</option>
-                <option value="minimallyThick">Minimally thickened (3 mm)</option>
-                <option value="thick">Thick (≥4 mm)</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Septa thickness" layout="stack" value={form.septaThickness} options={septaThicknessOptions} onChange={(value) => update('septaThickness', value)} />
 
             <label className="check-row">
               <input type="checkbox" checked={form.calcificationOnly} onChange={(e) => update('calcificationOnly', e.target.checked)} />
               Calcification without other suspicious enhancing features
             </label>
 
-            <label>
-              <span>Enhancing convex protrusion</span>
-              <select value={form.enhancingNodule} onChange={(e) => update('enhancingNodule', e.target.value as Form['enhancingNodule'])}>
-                <option value="none">None</option>
-                <option value="irregularity">Irregularity only (obtuse convex protrusion ≤3 mm)</option>
-                <option value="nodule">Enhancing nodule</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Enhancing convex protrusion" layout="stack" value={form.enhancingNodule} options={enhancingNoduleOptions} onChange={(value) => update('enhancingNodule', value)} />
 
             <label className="check-row">
               <input type="checkbox" checked={form.t1HyperintenseUnenhanced} onChange={(e) => update('t1HyperintenseUnenhanced', e.target.checked)} />
@@ -99,20 +101,13 @@ export function BosniakPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge
-              label={result.category}
-              tone={
-                result.category.includes('I ') || result.category === 'Bosniak I' || result.category === 'Bosniak II'
-                  ? 'good'
-                  : result.category === 'Bosniak III' || result.category === 'Bosniak IV'
-                    ? 'warn'
-                    : 'accent'
-              }
-            />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${tone}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { classify } from '../logic/pirads'
 import type { PiradsForm as Form, Score, Zone } from '../logic/pirads'
@@ -15,6 +15,28 @@ const initialForm: Form = {
   epeOrInvasive: false,
 }
 
+const zoneOptions: { value: Zone; label: string }[] = [
+  { value: 'peripheral', label: 'Peripheral zone' },
+  { value: 'transition', label: 'Transition zone' },
+]
+
+const lateralityOptions: { value: Form['laterality']; label: string }[] = [
+  { value: 'left', label: 'Left' },
+  { value: 'right', label: 'Right' },
+  { value: 'bilateral', label: 'Bilateral' },
+  { value: 'midline', label: 'Midline' },
+]
+
+// Scores are numbers in the form. The buttons carry the same strings the <select> options
+// submitted ("1" to "5"), turned back into numbers with Number() as before.
+const scoreOptions: { value: string; label: string }[] = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+]
+
 export function PiRadsPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
@@ -29,38 +51,24 @@ export function PiRadsPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Prostate</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>PI-RADS v2.1</h2>
-          <p>Zonal PI-RADS v2.1 assessment category calculator for a single suspicious lesion on treatment-naive multiparametric prostate MRI, with copyable impression text.</p>
-          <p className="source-note">
-            Source: <a href="https://pubmed.ncbi.nlm.nih.gov/30898406/" target="_blank" rel="noopener noreferrer">Turkbey et al., "Prostate Imaging Reporting and Data System Version 2.1: 2019 Update of Prostate Imaging Reporting and Data System Version 2," Eur Urol 2019</a>.
-          </p>
+          <span className="calc-tag">Prostate</span>
         </div>
+        <p>Zonal PI-RADS v2.1 assessment category calculator for a single suspicious lesion on treatment-naive multiparametric prostate MRI, with copyable impression text.</p>
+        <p className="source-note">
+          Source: <a href="https://pubmed.ncbi.nlm.nih.gov/30898406/" target="_blank" rel="noopener noreferrer">Turkbey et al., "Prostate Imaging Reporting and Data System Version 2.1: 2019 Update of Prostate Imaging Reporting and Data System Version 2," Eur Urol 2019</a>.
+        </p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Inputs</h3>
           <div className="form-grid">
-            <label>
-              <span>Zone</span>
-              <select value={form.zone} onChange={(e) => update('zone', e.target.value as Zone)}>
-                <option value="peripheral">Peripheral zone</option>
-                <option value="transition">Transition zone</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Zone" layout="row" value={form.zone} options={zoneOptions} onChange={(value) => update('zone', value)} />
 
-            <label>
-              <span>Laterality</span>
-              <select value={form.laterality} onChange={(e) => update('laterality', e.target.value as Form['laterality'])}>
-                <option value="left">Left</option>
-                <option value="right">Right</option>
-                <option value="bilateral">Bilateral</option>
-                <option value="midline">Midline</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Laterality" layout="row" value={form.laterality} options={lateralityOptions} onChange={(value) => update('laterality', value)} />
 
             <label>
               <span>Location description</span>
@@ -73,28 +81,10 @@ export function PiRadsPage() {
             </label>
 
             {form.zone === 'transition' && (
-              <label>
-                <span>T2-weighted score</span>
-                <select value={form.t2Score} onChange={(e) => update('t2Score', Number(e.target.value) as Score)}>
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                </select>
-              </label>
+              <ChoiceGroup label="T2-weighted score" layout="row" value={String(form.t2Score)} options={scoreOptions} onChange={(value) => update('t2Score', Number(value) as Score)} />
             )}
 
-            <label>
-              <span>DWI score</span>
-              <select value={form.dwiScore} onChange={(e) => update('dwiScore', Number(e.target.value) as Score)}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-              </select>
-            </label>
+            <ChoiceGroup label="DWI score" layout="row" value={String(form.dwiScore)} options={scoreOptions} onChange={(value) => update('dwiScore', Number(value) as Score)} />
 
             {form.zone === 'peripheral' && form.dwiScore === 3 && (
               <label className="check-row">
@@ -111,11 +101,13 @@ export function PiRadsPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={`PI-RADS ${result.category}`} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${result.tone}`}>{`PI-RADS ${result.category}`}</p>
+            </div>
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-          <p className="result-summary">{result.summary}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
