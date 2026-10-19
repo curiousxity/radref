@@ -50,6 +50,8 @@ const MIGRATED: readonly File[] = [
   'online/suprahyoid-spaces.html',
   'online/larynx.html',
   'online/cervical-spine.html',
+  'online/brachial-plexus.html',
+  'online/lumbar-spine.html',
 ]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
@@ -136,8 +138,27 @@ const CHROME: Record<File, string[]> = {
     '--dimmer',
     '--acc',
   ],
-  'online/brachial-plexus.html': [],
-  'online/lumbar-spine.html': [],
+  // Full keys, not bare names: the body.light block redeclares the same names, and its values
+  // stay pinned (the light-background button keeps them, though nothing reads them now).
+  'online/brachial-plexus.html': [
+    ':root|--bg',
+    ':root|--panel',
+    ':root|--line',
+    ':root|--ink',
+    ':root|--dim',
+    ':root|--acc',
+    ':root|--acc2',
+  ],
+  'online/lumbar-spine.html': [
+    '--bg',
+    '--panel',
+    '--panel2',
+    '--line',
+    '--ink',
+    '--dim',
+    '--accent',
+    '--accent2',
+  ],
   'online/pelvis-si.html': [],
   'online/elbow.html': [],
   'online/foot.html': [],
@@ -258,6 +279,10 @@ describe('anatomy viewers', () => {
     expect(skullBase[':root|--cyan-scene']).toBe('#5fc6d0')
     expect(cssColours(read('online/larynx.html'))[':root|--accent-scene']).toBe('#e7c46a')
     expect(cssColours(read('online/cervical-spine.html'))[':root|--acc-scene']).toBe('#4fb3d9')
+    const brachialPlexus = cssColours(read('online/brachial-plexus.html'))
+    expect(brachialPlexus[':root|--acc-scene']).toBe('#f0b83a')
+    expect(brachialPlexus[':root|--acc2-scene']).toBe('#5fc3d6')
+    expect(cssColours(read('online/lumbar-spine.html'))[':root|--accent-scene']).toBe('#4aa3df')
   })
 
   test('scene colours in scripts unchanged', () => {

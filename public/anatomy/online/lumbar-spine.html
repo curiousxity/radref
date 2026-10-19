@@ -4,16 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lumbar Spine — Disc, Canal, Foramen, Pars, Endplate</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --accent was the UI accent and also the imaging plane's colour (0x4aa3df in the script):
+   the UI use is now --rr-accent, and the plane's colour stays #4aa3df as --accent-scene.
+   --accent2 (orange) was a second UI accent (readout grade, site tag); it is --rr-accent too. */
 :root{
-  --bg:#0d1117; --panel:#151b23; --panel2:#1b222c; --line:#2a333f;
-  --ink:#e6edf3; --dim:#9aa7b4; --accent:#4aa3df; --accent2:#f0a35e;
+  --bg:var(--rr-bg); --panel:var(--rr-surface); --panel2:var(--rr-bg); --line:var(--rr-hairline);
+  --ink:var(--rr-text); --dim:var(--rr-muted); --accent:var(--rr-accent); --accent-scene:#4aa3df; --accent2:var(--rr-accent);
   --bone:#e8e0d0; --disc:#6fa8c9; --sac:#3f7fb5; --root:#e8d24a;
   --flav:#c85f6a; --modic:#7ecb8f;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
-  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font:14px/1.5 var(--rr-font-sans);
   -webkit-text-size-adjust:100%}
 #app{display:flex;flex-direction:column;height:100%}
 
@@ -22,16 +54,27 @@ header{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(
   border-bottom:1px solid var(--line);flex-wrap:wrap;flex:0 0 auto}
 header h1{font-size:15px;font-weight:600;margin:0 8px 0 0;white-space:nowrap}
 header h1 span{color:var(--dim);font-weight:400}
-select,button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+select,button{background:var(--panel2);color:var(--ink);border:1px solid var(--rr-border);
   border-radius:6px;padding:6px 10px;font-size:13px;font-family:inherit}
 select:focus,button:focus{outline:2px solid var(--accent);outline-offset:1px}
 button{cursor:pointer}
-button:hover{background:#242d39}
+button:hover{background:var(--rr-hairline)}
 #reset{margin-left:auto}
 
 /* ---------- main ---------- */
 #main{flex:1 1 auto;display:flex;min-height:0}
 #stage{flex:1 1 auto;position:relative;min-width:0}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#stage{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --panel:var(--rr-view-surface); --panel2:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --dim:var(--rr-view-muted); --accent:var(--rr-view-accent); --accent2:var(--rr-view-accent);
+}
 #gl{display:block;width:100%;height:100%}
 #drawerBtn{position:absolute;left:12px;bottom:12px;z-index:5;
   background:rgba(21,27,35,.94);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
@@ -41,9 +84,9 @@ button:hover{background:#242d39}
 #drawer h4{margin:12px 0 6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
 #drawer h4:first-child{margin-top:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:4px 10px;
-  font-size:12px;cursor:pointer;user-select:none}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#07131d;font-weight:600}
+.chip{background:var(--panel2);border:1px solid var(--rr-border);border-radius:14px;padding:4px 10px;
+  font-size:12px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;min-height:44px}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--rr-bg);font-weight:600}
 .rowlab{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;color:var(--dim)}
 .rowlab input[type=range]{flex:1}
 
@@ -61,14 +104,14 @@ button:hover{background:#242d39}
 #ctrl label{font-size:12px;color:var(--dim);min-width:52px}
 #ctrl select{flex:1;padding:4px 8px}
 #sev{width:100%}
-#readout{background:#0b1016;border:1px solid var(--line);border-radius:6px;padding:8px 10px;
+#readout{background:var(--rr-bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;
   margin-top:8px;font-size:13px}
 #readout b{color:var(--accent2)}
 #readout .sub{color:var(--dim);font-size:12px;margin-top:3px}
 ul{margin:0;padding-left:18px}
 li{margin:4px 0}
 .fold{border-top:1px solid var(--line);margin-top:14px}
-.fold>summary{cursor:pointer;padding:10px 0 4px;font-size:11px;letter-spacing:.09em;
+.fold>summary{cursor:pointer;padding:14px 0;font-size:11px;letter-spacing:.09em;
   text-transform:uppercase;color:var(--dim);list-style:none}
 .fold>summary::-webkit-details-marker{display:none}
 .fold>summary::before{content:"▸ ";color:var(--accent)}
@@ -78,7 +121,7 @@ li{margin:4px 0}
 .ref a:hover{text-decoration:underline}
 .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:9px;margin-left:5px;
   border:1px solid var(--line);color:var(--dim);vertical-align:1px}
-.tag.oa{color:#7ecb8f;border-color:#2f6b43}
+.tag.oa{color:var(--rr-good);border-color:#2f6b43}
 .tag.site{color:var(--accent2);border-color:#6b4d2f}
 footer{font-size:11px;color:var(--dim);padding:10px 14px;border-top:1px solid var(--line);
   background:var(--panel);flex:0 0 auto}

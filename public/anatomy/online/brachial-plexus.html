@@ -2,6 +2,34 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Brachial plexus atlas — roots to terminal nerves</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <!--
  Brachial plexus 3D reading-room reference.
  Bones, muscles and subclavian vessels: BodyParts3D, (c) The Database Center for Life Science,
@@ -12,36 +40,59 @@
  Only external script: three.js r128.
 -->
 <style>
-:root{--bg:#0d1216;--panel:#141b21;--line:#25313a;--ink:#dfe7ea;--dim:#8fa0a8;--acc:#f0b83a;--acc2:#5fc3d6;--warn:#ff7a66;--ok:#7fd39a;
- --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --bg/--panel/--line/--ink/--dim are the page, panel, divider, text and muted text.
+   --acc (amber) and --acc2 (cyan) were the UI accents (headings, pressed buttons, focus ring,
+   links, the slice level) and also the coronal and axial plane colours (0xf0b83a, 0x5fc3d6 in
+   the script). The UI uses are now --rr-accent; the plane colours stay as --acc-scene and
+   --acc2-scene, which no CSS reads (the script draws the planes from its own literals).
+   --warn and --ok keep their values; their text use in #readout moved to --rr-warn/--rr-good. */
+:root{--bg:var(--rr-bg);--panel:var(--rr-surface);--line:var(--rr-hairline);--ink:var(--rr-text);--dim:var(--rr-muted);--acc:var(--rr-accent);--acc2:var(--rr-accent);--acc-scene:#f0b83a;--acc2-scene:#5fc3d6;--warn:#ff7a66;--ok:#7fd39a;
+ --mono:var(--rr-font-mono);--sans:var(--rr-font-sans)}
+/* The "Light background" button (#bgBtn) toggles body.light and sets the scene background from
+   the script. It used to restyle the chrome too; now it changes only the scene. These values
+   are kept as they were (the colour snapshot pins them), and the rule after it hands every
+   element inside body the theme tokens again, so nothing reads them. */
 body.light{--bg:#eef1f2;--panel:#fff;--line:#d5dcdf;--ink:#18232a;--dim:#5b6b73;--acc:#a86b00;--acc2:#0b7d92}
+body.light > *{--bg:var(--rr-bg);--panel:var(--rr-surface);--line:var(--rr-hairline);--ink:var(--rr-text);--dim:var(--rr-muted);--acc:var(--rr-accent);--acc2:var(--rr-accent)}
 *{box-sizing:border-box}html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--sans);display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+body{background:var(--rr-bg);color:var(--rr-text);font:14px/1.45 var(--sans);display:grid;grid-template-rows:auto 1fr;overflow:hidden}
 header{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
 header h1{font-size:14px;margin:0 8px 0 0;font-weight:600;letter-spacing:.02em}
 header h1 small{display:block;font-weight:400;color:var(--dim);font-size:11px;font-family:var(--mono)}
 select,button,input[type=range]{font:inherit;color:inherit}
 header select{flex:1 1 230px;min-width:0;max-width:420px}
-select,button{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 10px;min-height:36px}
+select,button{background:var(--bg);border:1px solid var(--rr-border);border-radius:6px;padding:7px 10px;min-height:44px}
 button{cursor:pointer}button:hover,select:hover{border-color:var(--acc)}
 :focus-visible{outline:2px solid var(--acc2);outline-offset:2px}
 main{display:grid;grid-template-columns:minmax(0,1fr) 390px;min-height:0}
 #view{display:flex;flex-direction:column;min-height:0;overflow:hidden}
 #row{display:flex;flex:1;min-height:0}
 #cw{position:relative;flex:1;min-width:0;min-height:0}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#cw{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --panel:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --dim:var(--rr-view-muted); --acc:var(--rr-view-accent); --acc2:var(--rr-view-accent);
+}
 #slicePanel{width:330px;flex:none;border-left:1px solid var(--line);background:var(--panel);padding:10px 12px;overflow:auto}
 #slicePanel[hidden]{display:none}
 #slicePanel .sh{display:flex;justify-content:space-between;gap:8px;font-size:12px;margin-bottom:6px}#sliceLvl{font-family:var(--mono);color:var(--acc2)}
 #slice{width:100%;height:auto;display:block;background:#000;border-radius:4px;filter:blur(.5px) contrast(1.08)}
 #sliceY{width:100%;margin:8px 0 6px}
-#slicePanel .row{display:flex;flex-wrap:wrap;gap:5px}#slicePanel .row button{padding:3px 9px;min-height:30px;font-size:12px}
+#slicePanel .row{display:flex;flex-wrap:wrap;gap:5px}#slicePanel .row button{padding:3px 9px;min-height:44px;font-size:12px}
 #cw canvas{display:block;width:100%;height:100%;touch-action:none;position:absolute;inset:0}
 #drawerBtn{position:absolute;left:12px;bottom:12px;z-index:3;background:var(--panel)}
 #drawer{background:var(--panel);border-top:1px solid var(--line);padding:14px 14px 10px;display:none;max-height:46%;overflow:auto;font-size:13px}
 #drawer.open{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
 #drawer h3{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);font-weight:600}
-#drawer label{display:flex;gap:7px;align-items:center;padding:3px 0}
-#drawer .row{display:flex;flex-wrap:wrap;gap:6px}#drawer .row button{padding:5px 9px;min-height:32px}
+#drawer label{display:flex;gap:7px;align-items:center;padding:3px 0;min-height:44px}
+#drawer .row{display:flex;flex-wrap:wrap;gap:6px}#drawer .row button{padding:5px 9px;min-height:44px}
 button.on{border-color:var(--acc);color:var(--acc)}
 aside{border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:14px 16px 40px;min-height:0}
 aside h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--acc);margin:18px 0 6px;font-weight:600}
@@ -49,12 +100,12 @@ aside h2:first-child{margin-top:0}
 #title{font-size:17px;font-weight:600;margin:0 0 2px}#sub{color:var(--dim);margin:0 0 8px}
 ul{margin:0;padding-left:18px}li{margin:4px 0}
 .box{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:10px 0;background:var(--bg)}
-.box label{display:block;font-size:12px;color:var(--dim);margin-top:8px}.box label:first-child{margin-top:0}
+.box label{display:block;font-size:12px;color:var(--dim);margin-top:8px;min-height:44px}.box label:first-child{margin-top:0}
 .box select,.box input[type=range]{width:100%}
 #readout{font-family:var(--mono);font-size:13px;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);white-space:pre-wrap}
-#readout b{color:var(--acc)}#readout .w{color:var(--warn)}#readout .g{color:var(--ok)}
-details{border-top:1px solid var(--line);padding:8px 0}details summary{cursor:pointer;font-weight:600;color:var(--dim)}
-details[open] summary{color:var(--ink);margin-bottom:6px}
+#readout b{color:var(--acc)}#readout .w{color:var(--rr-warn)}#readout .g{color:var(--rr-good)}
+details{border-top:1px solid var(--line);padding:0}details summary{cursor:pointer;font-weight:600;color:var(--dim);padding:12px 0}
+details[open]{padding-bottom:8px}details[open] summary{color:var(--ink);margin-bottom:6px}
 .ref{margin:8px 0;font-size:13px}.ref a{color:var(--acc2)}.ref .id{font-family:var(--mono);font-size:11px;color:var(--dim)}
 #sel{font-family:var(--mono);font-size:12px;color:var(--dim);min-height:1.4em}
 #mechBox .bar{display:flex;gap:8px;align-items:center}#mechBox input{flex:1}
@@ -106,7 +157,7 @@ details[open] summary{color:var(--ink);margin-bottom:6px}
     <div id="mechCap"></div></div>
   <div id="sel">Click a structure to name it.</div>
   <h2>Look for first</h2><ul id="first"></ul>
-  <h2>Report checklist <button id="copyBtn" style="float:right;min-height:0;padding:2px 8px;font-size:11px">Copy</button></h2><ul id="check"></ul>
+  <h2>Report checklist <button id="copyBtn" style="float:right;padding:2px 8px;font-size:11px">Copy</button></h2><ul id="check"></ul>
   <h2>Pitfalls</h2><ul id="pit"></ul>
   <details><summary>Anatomy</summary><div id="anat"></div></details>
   <details><summary>Differentials</summary><ul id="ddx"></ul></details>
