@@ -46,10 +46,12 @@ Do not start the dev server or a browser to visually test/verify every change. R
 The site uses no webfont: system sans (`--font-sans`) for all text, headings included,
 and system mono (`--font-mono`) for labels and data. Weight and size carry the heading
 hierarchy; small labels (eyebrows, metric labels, group headings, table heads, tabs)
-are mono, uppercase and letter-spaced. Source Serif 4 is retired from the site
-stylesheet. The font file in `public/fonts/` stays only until the anatomy documents stop
-referencing it; `src/styles.test.ts` fails if `src/styles.css` gains a `@font-face` or a
-`Source Serif` reference again.
+are mono, uppercase and letter-spaced. Source Serif 4 is gone: the font file, its licence
+and `public/fonts/` were deleted once nothing referenced them. The anatomy viewers use the
+same two stacks through `--rr-font-sans` / `--rr-font-mono` in their shared stylesheet
+(see Anatomy section). `src/styles.test.ts` fails if `src/styles.css` gains a
+`@font-face` or a `Source Serif` reference again, and `src/anatomy.test.ts` does the same
+for the viewers.
 
 ## Colour
 
@@ -88,6 +90,10 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
 - Each calculator page is a separate chunk, loaded on first navigation to its route (`lazyPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every chunk is precached and offline navigation still works.
 - Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, the in-header raster). Regenerate all of them together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
 - No backend calls exist anywhere in the app, so full offline precaching is safe with no stale-data concerns.
+- The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
+  through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
+  patterns change. `woff2` is still in `globPatterns`, but no font ships any more, so it
+  matches nothing; a self-hosted font added later would be precached without a config change.
 - `navigateFallbackDenylist: [/^\/anatomy\//]` is required in the Workbox config. An
   iframe load counts as a navigation, so without it the service worker answers the
   anatomy frame's request with the React shell and the viewer renders the whole app
@@ -212,9 +218,9 @@ Online-only (in `public/anatomy/online/`, see below):
 - Cervical spine trauma, brachial plexus, lumbar spine, pelvis and SI joints
 - Elbow, foot
 
-All are standalone HTML documents in `public/anatomy/`, kept verbatim rather than
-ported to React: they carry their own palette and their own renderer (all but the
-ossicular chain use three.js; that one has a hand-written software renderer on a 2D
+All are standalone HTML documents in `public/anatomy/`, kept as their own documents rather
+than ported to React: each carries its own structure colours and its own renderer (all but
+the ossicular chain use three.js; that one has a hand-written software renderer on a 2D
 canvas). The React pages under `src/pages/` are thin wrappers that declare their
 content to `AnatomyReferencePage`, which lays out the shared header/viewer/notes
 shell and frames the document via `AnatomyViewer` - an iframe plus a full-screen
@@ -223,11 +229,41 @@ link. A new reference is a content declaration, not new markup.
 scrolling documents, where the embed is the worse phone experience, so
 `AnatomyViewer` promotes the full-screen link and appends the sentence saying so.
 
+### Shared style and theme
+
+Every viewer's chrome (header, panels, controls, notes) comes from one stylesheet,
+`public/anatomy/shared/radref.css`, linked as `shared/radref.css` from the top level and
+`../shared/radref.css` from `online/`. It holds the site palette as `--rr-*` tokens (the
+same values as the `--color-*` tokens in `src/styles.css`; change them together), the
+system sans and mono stacks, and `:where()` base styles that give buttons, selects and
+sliders a 44px hit area.
+
+- **Theme.** Each viewer inlines, unchanged, the pre-paint script quoted at the top of
+  `radref.css`, right after `<title>` and before the stylesheet link. It sets
+  `data-theme` on `<html>` from `radref-theme` in `localStorage` (or
+  `prefers-color-scheme`), so there is no theme flash, and it listens for the `storage`
+  event, so an embedded viewer switches when the main page's toggle is flipped.
+- **Chrome variables.** Each viewer keeps its own variable names, but its chrome ones (page,
+  panel, line, ink, muted, UI accent) point at `--rr-*` tokens, with a comment in `:root`
+  saying which is which. Status text that used a structure colour uses `--rr-warn` /
+  `--rr-good` instead, while swatches and borders keep the structure colour.
+- **The viewport is always dark.** The canvas element's scope (`#stage`, `#viewer`, `#cw`
+  and so on) sets `color-scheme:dark` and `color:var(--rr-view-text)`, and redeclares the
+  theme tokens and the file's own chrome names to the `--rr-view-*` values, so HUDs,
+  drawers and floating labels drawn over the scene stay dark in both themes. Renderer
+  clear colours are untouched. The brachial plexus "Light background" button and the
+  larynx `lightBg` box are opt-in and change only the scene, not the chrome.
+- **Structure and scene colours keep their values.** `src/anatomy.test.ts` checks every
+  viewer against `src/anatomy-colours.json`, a snapshot of each file's CSS colour
+  variables and script colour literals taken before the restyle. Only names in that file's
+  `CHROME` list may change. Where one variable served both UI and scene, the scene half
+  kept the old value under a `-scene` name (e.g. `--accent-scene`), pinned in the same
+  test. A new viewer must be added to `FILES`, `MIGRATED`, `CHROME` and the snapshot.
+
 All their dependencies are vendored so the PWA still works offline: three.js r128 sits
-in `public/anatomy/vendor/` with its MIT licence, and every Google Fonts link was
-replaced by an `@font-face` pointing at the site's already-precached Source Serif 4,
-with the system sans stack underneath it. Keep it that way - no CDN or webfont URLs
-belong in these files. Geometry is inlined in each document; none of them fetch
+in `public/anatomy/vendor/` with its MIT licence, and they use system fonts only (every
+Google Fonts link was removed). Keep it that way - no CDN or webfont URLs belong in
+these files. Geometry is inlined in each document; none of them fetch
 anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
 Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
 
