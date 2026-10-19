@@ -7,7 +7,8 @@
   --color-surface: #ffffff;
   --color-surface-2: #f1f2f2;
   --color-hairline: #e3e5e6;
-  --color-border: #d5d9da;
+  /* Control outlines: kept at 3:1 or more on bg, surface and surface-2 (hairline is for dividers). */
+  --color-border: #838b8f;
   --color-text: #111415;
   --color-text-muted: #5f676b;
   --color-primary: #0e6b63;
@@ -49,7 +50,7 @@
   --color-surface: #141719;
   --color-surface-2: #191d1f;
   --color-hairline: #1d2123;
-  --color-border: #262b2e;
+  --color-border: #626b70;
   --color-text: #e6e8e9;
   --color-text-muted: #8d9599;
   --color-primary: #3fb8a8;
@@ -117,7 +118,7 @@ button, input, select, textarea { font: inherit; }
 .nav-dropdown-link:hover { background: var(--color-surface-2); }
 .nav-dropdown-link.active { color: var(--color-primary); font-weight: 600; box-shadow: inset 2px 0 0 var(--color-primary); }
 /* 44px icon button (sun/moon). */
-.theme-toggle { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent; color: var(--color-text-muted); cursor: pointer; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: transparent; color: var(--color-text-muted); cursor: pointer; }
 .theme-toggle:hover { color: var(--color-text); background: var(--color-surface-2); }
 
 .main-content { padding: 1.5rem 0 4rem; }
@@ -182,7 +183,9 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .check-row input[type='checkbox'] { width: 1.2rem; height: 1.2rem; min-height: 0; flex-shrink: 0; accent-color: var(--color-primary); }
 .term { display: inline-flex; align-items: center; flex-wrap: wrap; column-gap: 0.3rem; }
 .definition { display: inline-flex; align-items: center; }
-.definition-trigger { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 1px solid var(--color-text-muted); background: transparent; color: var(--color-text-muted); font-family: var(--font-sans); font-style: italic; font-weight: 600; font-size: 0.66rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; flex-shrink: 0; }
+.definition-trigger { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 1px solid var(--color-text-muted); background: transparent; color: var(--color-text-muted); font-family: var(--font-sans); font-style: italic; font-weight: 600; font-size: 0.66rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; flex-shrink: 0; position: relative; }
+/* The glyph stays small; an invisible layer gives it a 44px hit area. */
+.definition-trigger::before { content: ''; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
 .definition-trigger:hover, .definition-trigger:focus-visible { color: var(--color-primary); border-color: var(--color-primary); }
 .definition-trigger[aria-expanded='true'] { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
 .definition-text { flex-basis: 100%; margin-top: 0.4rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); line-height: 1.45; background: transparent; border-left: 2px solid var(--color-accent); padding: 0.3rem 0.65rem; cursor: default; }
@@ -204,11 +207,10 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .info-card li a:hover { color: var(--color-primary-dark); }
 .filter-row { margin: 0 0 1rem; grid-template-columns: 1fr; }
 .filter-row label { max-width: 320px; }
-.table-wrap { overflow-x: auto; border-top: 1px solid var(--color-border); }
+.table-wrap { overflow-x: auto; border-top: 1px solid var(--color-hairline); }
 .ref-table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 0.86rem; }
 .ref-table th, .ref-table td { padding: 0.65rem 0.75rem 0.65rem 0; text-align: left; border-bottom: 1px solid var(--color-hairline); vertical-align: top; }
-.ref-table thead th { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.64rem; font-weight: 600; color: var(--color-text-muted); background: transparent; border-bottom-color: var(--color-border); white-space: nowrap; }
-.ref-table tbody tr:last-child td { border-bottom-color: var(--color-border); }
+.ref-table thead th { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.64rem; font-weight: 600; color: var(--color-text-muted); background: transparent; white-space: nowrap; }
 .ref-table tbody tr:hover { background: var(--color-surface-2); }
 .ref-table td.vessel-name { font-weight: 600; color: var(--color-text); white-space: nowrap; }
 .ref-table td { color: var(--color-text-muted); }
@@ -356,7 +358,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
     left: 0; right: 0; top: 100%;
     padding: 0.75rem 1rem;
     background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-hairline);
     box-shadow: 0 12px 24px var(--color-shadow);
     max-height: calc(100dvh - var(--header-h));
     overflow-y: auto;
@@ -409,7 +411,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .related-links .eyebrow { margin-bottom: 0.5rem; }
 
 /* Stands in for an online-only viewer's frame while the device is offline. */
-.anatomy-offline { display: grid; place-items: center; min-height: min(40vh, 320px); padding: 1.5rem; border: 1px dashed var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface-2); text-align: center; }
+.anatomy-offline { display: grid; place-items: center; min-height: min(40vh, 320px); padding: 1.5rem; border: 1px dashed var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-surface-2); text-align: center; }
 .anatomy-offline p { margin: 0; max-width: 36ch; color: var(--color-text-muted); }
 
 /* Study pages: Report / Learn / Quiz tabs. */
@@ -441,7 +443,9 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .study-teach > summary { min-height: 44px; display: flex; align-items: center; padding: 0 0.95rem; cursor: pointer; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-primary); }
 .study-teach > .lesson-body { padding: 0 0.95rem 0.5rem; font-size: 0.92rem; }
 .study-teach .link-button { margin: 0 0.95rem 0.85rem; }
-.link-button { padding: 0; min-height: 32px; border: 0; background: none; color: var(--color-primary); font: inherit; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.link-button { padding: 0; min-height: 32px; border: 0; background: none; color: var(--color-primary); font: inherit; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; position: relative; }
+/* Text-sized link, 44px hit area. */
+.link-button::before { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
 .link-button:hover { color: var(--color-primary-dark); }
 
 .study-warnings { margin-top: 1rem; padding: 0.75rem 0.95rem; border-left: 2px solid var(--color-warn); background: var(--color-warn-soft); }
@@ -464,6 +468,10 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .quiz-option.correct { border-left-color: var(--color-good); background: var(--color-good-soft); font-weight: 600; }
 .quiz-option.wrong { border-left-color: var(--color-warn); background: var(--color-warn-soft); }
 .quiz-option.dim { opacity: 0.6; }
+/* Not colour alone: each marked option also says what it is. */
+.quiz-option.correct::after, .quiz-option.wrong::after { display: inline-block; margin-left: 0.6rem; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.quiz-option.correct::after { content: '\2713  Correct answer'; content: '\2713  Correct answer' / 'Correct answer'; color: var(--color-good); }
+.quiz-option.wrong::after { content: '\2717  Your answer'; content: '\2717  Your answer' / 'Your answer'; color: var(--color-warn); }
 .quiz-explanation { margin-top: 0.9rem; padding: 0.75rem 0.95rem; }
 .quiz-explanation.is-correct { border-left: 2px solid var(--color-good); background: var(--color-good-soft); }
 .quiz-explanation.is-wrong { border-left: 2px solid var(--color-warn); background: var(--color-warn-soft); }

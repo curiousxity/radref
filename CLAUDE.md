@@ -61,13 +61,15 @@ always-dark anatomy viewport (`--color-viewport`) included; `src/styles.test.ts`
 both rules. Page-specific colour needs (the fifth metatarsal figures' `--color-figure-*`)
 get their own tokens rather than literals.
 
-- Light: bg #fbfbfa, surface #ffffff, hairline #e3e5e6, control border #d5d9da, text
+- Light: bg #fbfbfa, surface #ffffff, hairline #e3e5e6, control border #838b8f, text
   #111415, muted #5f676b, primary and accent #0e6b63 (the logo teal).
-- Dark: bg #0b0d0e, surface #141719, hairline #1d2123, control border #262b2e, text
+- Dark: bg #0b0d0e, surface #141719, hairline #1d2123, control border #626b70, text
   #e6e8e9, muted #8d9599, primary and accent #3fb8a8. `--color-primary-dark` is the
   hover state, so in the dark palette it is lighter than primary. Good/warn have dark
   variants (#5ec48a, #f08070) that keep 4.5:1 on the dark background.
 - Text on a primary fill uses `--color-on-primary` (white in light, near-black in dark).
+- `--color-border` outlines controls (inputs, selects, outlined buttons) and is darker than
+  the mockup's #d5d9da / #262b2e so it keeps 3:1; dividers and rules use `--color-hairline`.
 
 `data-theme` on `<html>` is set before first paint by the inline script in `index.html`
 and afterwards by `src/lib/theme.ts` (`radref-theme` in `localStorage`, `light` | `dark`;
