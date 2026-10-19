@@ -44,24 +44,24 @@ const costaPazTable = (
         <tr>
           <th>Type</th>
           <th>Appearance</th>
-          <th>Usually goes with</th>
+          <th>Associated with</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td className="vessel-name">I</td>
           <td>Diffuse or reticular BME, at some distance from the articular cartilage</td>
-          <td>A contrecoup mechanism</td>
+          <td>Usually a contrecoup mechanism</td>
         </tr>
         <tr>
           <td className="vessel-name">II</td>
           <td>Localized or geographic BME, often with a convex margin and contiguous to the articular cartilage or bony outline</td>
-          <td>Trauma to the ligament attachment, articular capsule or retinaculum</td>
+          <td>Usually trauma to the ligament attachment, articular capsule or retinaculum</td>
         </tr>
         <tr>
           <td className="vessel-name">III</td>
           <td>BME, often with slight deformation or disruption of the bony outline</td>
-          <td>A fracture or osteochondral lesion</td>
+          <td>Often a fracture or osteochondral lesion</td>
         </tr>
       </tbody>
     </table>
@@ -97,7 +97,7 @@ const learn: LearnSection[] = [
       <>
         <p>This lesson is for the ankle MRI that arrives with a history of pain and little else, so it walks a fixed search pattern through every compartment. The order is this site's own; none of the papers below prescribes it.</p>
         <p>The protocol should have sequences in all three orthogonal planes, with an axial oblique plane added if the flexor tendons need closer analysis. Fat-suppressed T2- or proton-density-weighted imaging is mandatory, and at least one T1-weighted sequence is needed for the bone marrow (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
-        <p>Start with the marrow as a whole. Bone marrow edema (BME), or bone bruise, is low signal on T1-weighted images and high signal on T2-weighted and fluid-sensitive sequences such as STIR or fat-suppressed images. It is an unspecific but sensitive sign of the primary injury, and where it sits guides a systematic read of the rest of the examination (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
+        <p>Start with the marrow as a whole. Bone marrow edema (BME), or bone bruise, is low signal on T1-weighted images and high signal on T2-weighted and fluid-sensitive sequences such as STIR or fat-suppressed images. It is an unspecific but sensitive sign of the primary pathology, and where it sits guides a systematic read of the rest of the examination (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
         <p>Then look at the joint fluid. One cohort study coded effusion in three levels: no gap between the talus and the adjacent fat pad in the anterior recess (no effusion); fluid making that gap, with fluid expanding the posterior recess (moderate); and fluid also making a gap between the anterior tibia and its fat pad (severe) (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>). That is the study's own coding rather than a validated grade, so use it to describe the effusion, not to score it.</p>
       </>
     ),
@@ -251,7 +251,7 @@ const learn: LearnSection[] = [
       <>
         <p>Look at the anterior tendons: tibialis anterior, extensor hallucis longus and extensor digitorum longus.</p>
         <p>Anterior, anterolateral, anteromedial, posterior, posteromedial, posterolateral and syndesmotic impingement have all been described, though they are usually grouped as anterior or posterior for simplicity. On MRI, look for bone edema, effusion, synovitis, tenosynovitis and chondral injury; in anterior soft-tissue impingement the anterolateral gutter may contain hypertrophic synovium or fibrosis (<Cite doi={LAVERY}>Lavery et al., J Orthop Surg Res 2016</Cite>).</p>
-        <p>After a chronic ATFL tear, granulation or scar tissue in the anterolateral gutter resembles a "meniscus" and can lead to anterolateral impingement; similar findings are seen in anteromedial and posteromedial impingement. Post-contrast fat-suppressed 3D-FSPGR imaging is reported to be superior for anterolateral impingement, showing synovial thickening and granulation tissue better (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
+        <p>After a chronic ATFL tear, granulation or scar tissue in the anterolateral gutter resembles a "meniscus" and can lead to anterolateral impingement; similar findings can be seen in anteromedial and posteromedial impingement. Post-contrast fat-suppressed 3D-FSPGR imaging is reported to be superior for anterolateral impingement, showing synovial thickening and granulation tissue better (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
         <p>Soft-tissue causes of anterior impingement include post-traumatic fibrous bands, a thickened anterior tibiofibular ligament and synovial plica. In bony impingement the tibial and talar spurs, often called "kissing osteophytes", surprisingly often do not actually overlap (<Cite doi={LAVERY}>Lavery et al., J Orthop Surg Res 2016</Cite>).</p>
         <div className="lesson-key">
           <p>MRI is variable for soft-tissue impingement, with reported sensitivities of 42% to 89% and specificities of 75% to 100% (<Cite doi={LAVERY}>Lavery et al., J Orthop Surg Res 2016</Cite>).</p>
@@ -265,7 +265,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <h4>Sinus tarsi</h4>
-        <p>In patients with sinus tarsi syndrome, MRI showed tears of the interosseous talocalcaneal and cervical ligaments, isolated cervical ligament tears, ganglia, and in one patient pigmented villonodular synovitis. In cadavers, MR arthrograms reconstructed along and perpendicular to the ligament axes were potentially useful for assessing the individual structures (<Cite doi={LEKTRAKUL}>Lektrakul et al., Radiology 2001</Cite>).</p>
+        <p>In patients with sinus tarsi syndrome, MRI showed tears of the interosseous talocalcaneal and cervical ligaments, isolated cervical ligament tears, ganglia, and in one patient pigmented villonodular synovitis. In cadavers, initial and reconstructed MR arthrograms along and perpendicular to the ligament axes were potentially useful for assessing the individual structures (<Cite doi={LEKTRAKUL}>Lektrakul et al., Radiology 2001</Cite>).</p>
         <p>The sinus tarsi was abnormal in 72% of patients with advanced tibialis posterior injury and 36% of those with a normal tendon (<Cite doi={BALEN}>Balen and Helms, AJR 2001</Cite>).</p>
 
         <h4>Tarsal tunnel</h4>
@@ -294,7 +294,7 @@ const learn: LearnSection[] = [
         <p>Before writing the impression, read the steps against each other. Ligaments and adjacent tendons work together and are most often injured together, and bone contusion, osteochondral lesion and joint effusion are other common associations (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). A more diffuse BME pattern can come from early avascular necrosis, inflammation or stress fracture, so the history matters (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
         <p>Grading the injury from mild to severe and judging instability combines the MRI features with clinical tests such as the drawer, inversion and eversion tests (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). Sawant and Sanghvi add, as background, that most sprains are stable and treated conservatively, those with osteochondral lesions arthroscopically, and severe sprains with instability by ligament reconstruction (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
         <div className="lesson-key">
-          <p>An osteochondral lesion on MRI is not always the cause of the pain: lesions were found in 42% of 37 asymptomatic professional soccer players, and Walther and colleagues advise that MRI findings alone are no reason to urge patients with minimal or no symptoms toward prophylactic surgery (<Cite doi={WALTHER}>Walther et al., Cartilage 2023</Cite>).</p>
+          <p>An osteochondral lesion on MRI is not always the cause of the pain: in a cohort Walther and colleagues quote, lesions were found in 42% of 37 asymptomatic professional soccer players, and Walther and colleagues advise that MRI findings alone are no reason to urge patients with minimal or no symptoms toward prophylactic surgery (<Cite doi={WALTHER}>Walther et al., Cartilage 2023</Cite>).</p>
         </div>
       </>
     ),
