@@ -86,8 +86,9 @@ change all of these together, and redraw the icons if the logo changes.
 
 Summary of the theme plumbing (details in Colour and Anatomy section):
 
-- Key `radref-theme` in `localStorage`, values `light` | `dark`; absent follows `prefers-color-scheme`. Every access is in try/catch.
+- Key `radref-theme` in `localStorage`, values `light` | `dark`; absent key = follow system (`prefers-color-scheme`). Every access, including the remove, is in try/catch.
 - `index.html` sets `data-theme` and the `theme-color` metas before first paint; `src/lib/theme.ts` owns it afterwards, and `src/components/ThemeToggle.tsx` is the header button.
+- The toggle has three states and cycles System → Light → Dark → System (`nextThemeChoice`). System removes the key (`clearStoredTheme`) and follows `prefers-color-scheme` live; Light and Dark store the key. Its icon shows the current choice (half-filled circle, sun, moon) and its label says the choice and what a tap does ("Theme: system. Switch to light"). It also listens for `storage` events, so another tab or a viewer changing or removing the key is followed.
 - Anatomy viewers are separate documents: each inlines the pre-paint snippet from `public/anatomy/shared/radref.css` and links that stylesheet. The embedded frame follows the site's theme.
 - The 3D viewport (`--color-viewport` and in-canvas overlays) stays dark in both themes.
 

@@ -2,7 +2,54 @@
 // The app tsconfig only loads vite/client types, so this file pulls in Node's for node:fs.
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { THEME_COLORS, parseStoredTheme, readStoredTheme, resolveTheme, writeStoredTheme } from './theme'
+import {
+  THEME_COLORS,
+  THEME_KEY,
+  clearStoredTheme,
+  nextThemeChoice,
+  parseStoredTheme,
+  readStoredTheme,
+  resolveTheme,
+  themeToggleLabel,
+  writeStoredTheme,
+} from './theme'
+
+describe('theme choice', () => {
+  it('cycles system, light, dark, then back to system', () => {
+    expect(nextThemeChoice('system')).toBe('light')
+    expect(nextThemeChoice('light')).toBe('dark')
+    expect(nextThemeChoice('dark')).toBe('system')
+  })
+
+  it('labels the toggle with the current choice and what a tap does', () => {
+    expect(themeToggleLabel('system')).toBe('Theme: system. Switch to light')
+    expect(themeToggleLabel('light')).toBe('Theme: light. Switch to dark')
+    expect(themeToggleLabel('dark')).toBe('Theme: dark. Follow system')
+  })
+
+  it('clearing removes the key, so the system setting is followed', () => {
+    const removed: string[] = []
+    clearStoredTheme({ removeItem: (key) => { removed.push(key) } })
+    expect(removed).toEqual([THEME_KEY])
+  })
+
+  it('clearing survives blocked storage', () => {
+    expect(() => clearStoredTheme({ removeItem: () => { throw new Error('blocked') } })).not.toThrow()
+    const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage')
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      get() {
+        throw new Error('SecurityError')
+      },
+    })
+    try {
+      expect(() => clearStoredTheme()).not.toThrow()
+    } finally {
+      if (original) Object.defineProperty(globalThis, 'localStorage', original)
+      else delete (globalThis as { localStorage?: unknown }).localStorage
+    }
+  })
+})
 
 describe('theme', () => {
   it('parses only the two known values', () => {
