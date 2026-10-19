@@ -117,7 +117,27 @@ describe('ankle MRI report: whole cases', () => {
   test('free-text other findings stop the normal impression', () => {
     const { text } = report(study, { ...normal, other: 'Tarsal coalition.' })
     expect(text).toContain('Other findings: Tarsal coalition.')
-    expect(impressionOf({ ...normal, other: 'Tarsal coalition.' })).toBe('Other findings as above.')
+    expect(impressionOf({ ...normal, other: 'Tarsal coalition.' })).toBe('Findings as above.')
+  })
+
+  // A warn-tone chip with no finding entered is not a normal study: neutral impression, no diagnosis.
+  test('recess fluid over 12 mm with nothing else entered stops the normal impression', () => {
+    expect(impressionOf({ ...normal, recess: '13' })).toBe('Findings as above.')
+    expect(report(study, { ...normal, recess: '13' }).warnings).toEqual([])
+  })
+  test('peroneal sheath fluid over 3 mm with nothing else entered stops the normal impression', () => {
+    expect(impressionOf({ ...normal, 'peroneal-fluid': '4' })).toBe('Findings as above.')
+    expect(report(study, { ...normal, 'peroneal-fluid': '4' }).warnings).toEqual([])
+  })
+  test('fluid at or under the chip thresholds keeps the normal impression', () => {
+    expect(impressionOf({ ...normal, recess: '12', 'peroneal-fluid': '3' })).toBe(NORMAL_IMPRESSION)
+  })
+
+  test('an incomplete protocol qualifies the impression as a limited study', () => {
+    const values = { ...normal, protocol: 'incomplete', 'protocol-missing': ['t1'] }
+    expect(impressionOf(values)).toBe(`Limited study (protocol incomplete).\n${NORMAL_IMPRESSION}`)
+    expect(impressionOf({ ...values, atfl: 'complete' })).toBe('Limited study (protocol incomplete).\nComplete tear of the ATFL.')
+    expect(impressionOf(normal)).not.toContain('Limited study')
   })
 
   test('an abnormal study lists its findings in the impression, in search-pattern order', () => {
@@ -172,7 +192,7 @@ describe('ankle MRI report: contradictions', () => {
   // "The absence of a hypointense line on T1-weighted images excludes a complete fracture"
   test('a complete fracture entered with no hypointense T1 line', () => {
     const values = { ...normal, marrow: 'bme', 't1-line': 'absent', fracture: 'complete' }
-    expect(report(study, values).warnings).toContain('A complete fracture is entered, but so is no hypointense line on T1, which excludes a complete fracture.')
+    expect(report(study, values).warnings).toContain('A complete fracture is entered, but so is no hypointense T1 line at the edema site, which excludes a complete fracture there.')
     expect(report(study, { ...values, 't1-line': 'present' }).warnings).toEqual([])
   })
 
@@ -208,7 +228,7 @@ describe('ankle MRI rules: bones (Szaro 2020; Walther 2023)', () => {
   test.each([
     ['i', 'Type I: usually a contrecoup mechanism'],
     ['ii', 'Type II: usually trauma to the ligament attachment, articular capsule or retinaculum'],
-    ['iii', 'Type III: often a fracture or osteochondral lesion'],
+    ['iii', 'Type III: often associated with a fracture or osteochondral lesion'],
   ])('Costa-Paz pattern %s', (pattern, expected) => {
     expect(chips(study, 'bones', { marrow: 'bme', 'bme-pattern': pattern })['BME (Costa-Paz)']).toBe(expected)
   })
@@ -258,20 +278,23 @@ describe('ankle MRI rules: lateral ligaments (Sawant 2018)', () => {
     expect(c['CFL (Sawant)']).toBeUndefined()
   })
 
-  // L5: "Normal thickness of ATFL is 2 – 3 mm, and CFL is 2 mm."
-  test.each([
-    ['1.9', 'Outside the stated normal (2–3 mm)'],
-    ['2', 'Within the stated normal (2–3 mm)'],
-    ['3', 'Within the stated normal (2–3 mm)'],
-    ['3.1', 'Outside the stated normal (2–3 mm)'],
-  ])('ATFL %s mm', (mm, expected) => {
-    expect(chips(study, 'lateral-ligaments', { 'atfl-thickness': mm })['ATFL thickness']).toBe(expected)
+  // L5: "Normal thickness of ATFL is 2 – 3 mm, and CFL is 2 mm." A normal value, not a cut-off
+  // for abnormal, so it is help text and gives no chip.
+  test.each(['1.9', '2', '3', '3.1'])('ATFL and CFL thickness %s mm give no chip', (mm) => {
+    expect(chips(study, 'lateral-ligaments', { 'atfl-thickness': mm, 'cfl-thickness': mm })).toEqual({})
   })
-  test.each([
-    ['2', 'Matches the stated normal (2 mm)'],
-    ['2.5', 'Differs from the stated normal (2 mm)'],
-  ])('CFL %s mm', (mm, expected) => {
-    expect(chips(study, 'lateral-ligaments', { 'cfl-thickness': mm })['CFL thickness']).toBe(expected)
+  test('the normal thicknesses stay in the help text', () => {
+    const fields = study.report.steps.flatMap((step) => step.fields)
+    expect(fields.find((f) => f.id === 'atfl-thickness')?.help).toBe('Normal 2–3 mm.')
+    expect(fields.find((f) => f.id === 'cfl-thickness')?.help).toBe('Normal 2 mm.')
+  })
+
+  // L1 interstitial: "Hyperintense signal within the ligament on PD and T2W images due to presence
+  // of edema or hemorrhage"
+  test('the interstitial option uses the source wording', () => {
+    const atfl = study.report.steps.flatMap((step) => step.fields).find((f) => f.id === 'atfl')
+    expect(atfl && 'options' in atfl ? atfl.options.find((o) => o.value === 'interstitial')?.label : undefined)
+      .toBe('High signal within the ligament (edema or hemorrhage)')
   })
 })
 
@@ -294,11 +317,11 @@ describe('ankle MRI rules: syndesmosis (Oae 2003; Sawant 2018)', () => {
 
   // S3: "Fluid in Tibiofibular recess normally measures 5–7 mm." and "Fluid in the tibiofibular
   // recess measuring >12 mm is definitely abnormal and suggestive of acute injury to syndesmotic
-  // ligaments". Under 5 mm and 7 to 12 mm are not classified by the source, so no chip.
+  // ligaments". Only the > 12 mm cut-off is a chip; the 5-7 mm normal value is help text.
   test.each([
     ['4.9', undefined],
-    ['5', 'Normal range (5–7 mm)'],
-    ['7', 'Normal range (5–7 mm)'],
+    ['5', undefined],
+    ['7', undefined],
     ['7.1', undefined],
     ['12', undefined],
     ['12.1', 'Definitely abnormal (> 12 mm): suggests acute syndesmotic injury'],
@@ -311,18 +334,16 @@ describe('ankle MRI rules: medial ligament thickness (Sawant 2018)', () => {
   // M2: "Normal thickness of TNL is 1–2 mm, and TSL is 2 mm (1–4mm). The PTTL is thickest
   // ligament and normally measures 6–11 mm."
   // M3: "Normal thickness of SM component is 3 mm (2–5 mm), and IPL component is 4 mm (2–6 mm)."
+  // Normal values, not cut-offs for abnormal: help text only, no chip.
   test.each([
-    ['tnl-thickness', 'Tibionavicular thickness', '0.9', '1', '2', '2.1', '1–2 mm'],
-    ['tsl-thickness', 'Tibiospring thickness', '0.9', '1', '4', '4.1', '1–4 mm'],
-    ['pttl-thickness', 'Posterior tibiotalar thickness', '5.9', '6', '11', '11.1', '6–11 mm'],
-    ['spring-sm-thickness', 'Spring superomedial thickness', '1.9', '2', '5', '5.1', '2–5 mm'],
-    ['spring-ipl-thickness', 'Spring inferoplantar thickness', '1.9', '2', '6', '6.1', '2–6 mm'],
-  ])('%s', (id, label, below, low, high, above, range) => {
-    const at = (mm: string) => chips(study, 'medial-ligaments', { [id]: mm })[label]
-    expect(at(below)).toBe(`Outside the stated normal (${range})`)
-    expect(at(low)).toBe(`Within the stated normal (${range})`)
-    expect(at(high)).toBe(`Within the stated normal (${range})`)
-    expect(at(above)).toBe(`Outside the stated normal (${range})`)
+    ['tnl-thickness', 'Normal 1–2 mm.'],
+    ['tsl-thickness', 'Normal 2 mm (1–4 mm).'],
+    ['pttl-thickness', 'Normal 6–11 mm.'],
+    ['spring-sm-thickness', 'Normal 3 mm (2–5 mm).'],
+    ['spring-ipl-thickness', 'Normal 4 mm (2–6 mm).'],
+  ])('%s gives no chip and keeps its normal in the help', (id, help) => {
+    for (const mm of ['0.5', '3', '12']) expect(chips(study, 'medial-ligaments', { [id]: mm })).toEqual({})
+    expect(study.report.steps.flatMap((step) => step.fields).find((f) => f.id === id)?.help).toBe(help)
   })
 })
 
@@ -408,7 +429,7 @@ describe('ankle MRI rules: posterior (Szaro 2021)', () => {
 describe('ankle MRI rules: descriptive-only items have no chips', () => {
   // Effusion levels (T4), SPR grades (P5), tibialis posterior tear types (MT2), anterior tendons
   // (N8), interosseous membrane (S7) and plantar fascia thickness (PF6) are descriptive only.
-  test.each(['technique', 'medial-tendons', 'anterior', 'spaces', 'plantar', 'impression'])('%s has no derive', (stepId) => {
+  test.each(['technique', 'medial-ligaments', 'medial-tendons', 'anterior', 'spaces', 'plantar', 'impression'])('%s has no derive', (stepId) => {
     const step = study.report.steps.find((s) => s.id === stepId)
     expect(step).toBeDefined()
     expect(step?.derive).toBeUndefined()

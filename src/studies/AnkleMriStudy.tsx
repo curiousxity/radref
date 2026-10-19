@@ -327,7 +327,7 @@ function chosen(values: Values, field: { id: string; options: Option[] }): strin
 /** Sawant's acute grades (interstitial, partial, complete) worded as their definitions, plus chronic injury. */
 const ligamentOptions: Option[] = [
   { value: 'intact', label: 'Intact' },
-  { value: 'interstitial', label: 'High signal within, fibres continuous' },
+  { value: 'interstitial', label: 'High signal within the ligament (edema or hemorrhage)' },
   { value: 'partial', label: 'Partial discontinuity, not full thickness' },
   { value: 'complete', label: 'Full-thickness discontinuity' },
   { value: 'chronic', label: 'Chronic: thin or thick, irregular, no edema' },
@@ -373,7 +373,7 @@ const brandesSmithZone: Record<string, string> = { spr: 'A', ipr: 'B', cuboid: '
 const costaPaz: Record<string, { type: string; chip: string }> = {
   i: { type: 'I', chip: 'Type I: usually a contrecoup mechanism' },
   ii: { type: 'II', chip: 'Type II: usually trauma to the ligament attachment, articular capsule or retinaculum' },
-  iii: { type: 'III', chip: 'Type III: often a fracture or osteochondral lesion' },
+  iii: { type: 'III', chip: 'Type III: often associated with a fracture or osteochondral lesion' },
 }
 const heppleStage: Record<string, string> = { i: 'I', iia: 'IIA', iib: 'IIB', iii: 'III', iv: 'IV', v: 'V' }
 
@@ -591,13 +591,6 @@ const fields = {
 
 /* Rule helpers shared by the chips, the report and the warnings. */
 
-function rangeChip(values: Values, id: string, label: string, low: number, high: number): Derived[] {
-  const n = num(values, id)
-  if (n === undefined) return []
-  const within = n >= low && n <= high
-  return [{ label, value: `${within ? 'Within' : 'Outside'} the stated normal (${low}–${high} mm)`, tone: within ? 'good' : 'warn' }]
-}
-
 function haglund(values: Values): boolean {
   const around = list(values, 'achilles-other')
   return str(values, 'achilles') === 'insertional' && around.includes('bursitis') && around.includes('prominence-bme')
@@ -639,11 +632,6 @@ function deriveLateralLigaments(values: Values): Derived[] {
     const grade = sawantGrade[str(values, id)] as string | undefined
     if (grade) out.push({ label: `${name} (Sawant)`, value: grade, tone: 'warn' })
   }
-  out.push(...rangeChip(values, 'atfl-thickness', 'ATFL thickness', 2, 3))
-  const cfl = num(values, 'cfl-thickness')
-  if (cfl !== undefined) {
-    out.push({ label: 'CFL thickness', value: cfl === 2 ? 'Matches the stated normal (2 mm)' : 'Differs from the stated normal (2 mm)', tone: 'neutral' })
-  }
   return out
 }
 
@@ -654,21 +642,10 @@ function deriveSyndesmosis(values: Values): Derived[] {
     if (criterion) out.push({ label: `${name} (Oae)`, value: criterion, tone: 'warn' })
   }
   const recess = num(values, 'recess')
-  if (recess !== undefined && recess >= 5 && recess <= 7) out.push({ label: 'Tibiofibular recess fluid', value: 'Normal range (5–7 mm)', tone: 'good' })
   if (recess !== undefined && recess > 12) {
     out.push({ label: 'Tibiofibular recess fluid', value: 'Definitely abnormal (> 12 mm): suggests acute syndesmotic injury', tone: 'warn' })
   }
   return out
-}
-
-function deriveMedialLigaments(values: Values): Derived[] {
-  return [
-    ...rangeChip(values, 'tnl-thickness', 'Tibionavicular thickness', 1, 2),
-    ...rangeChip(values, 'tsl-thickness', 'Tibiospring thickness', 1, 4),
-    ...rangeChip(values, 'pttl-thickness', 'Posterior tibiotalar thickness', 6, 11),
-    ...rangeChip(values, 'spring-sm-thickness', 'Spring superomedial thickness', 2, 5),
-    ...rangeChip(values, 'spring-ipl-thickness', 'Spring inferoplantar thickness', 2, 6),
-  ]
 }
 
 function deriveLateralTendons(values: Values): Derived[] {
@@ -964,17 +941,24 @@ function findings(values: Values): string[] {
 
 const NORMAL_IMPRESSION = 'No acute osseous, ligamentous or tendinous abnormality of the ankle.'
 
+/** True when any step's rule chip has fired with a warn tone, e.g. recess fluid over 12 mm. */
+function warnChipFired(values: Values): boolean {
+  return steps.some((step) => (step.derive?.(values) ?? []).some((chip) => chip.tone === 'warn'))
+}
+
 function impression(values: Values): string {
   const found = findings(values)
+  const limited = str(values, 'protocol') === 'incomplete' && 'Limited study (protocol incomplete).'
   if (found.length === 0) {
-    // Free-text other findings are not read by the rules, so never call that study normal.
-    if (str(values, 'other')) return 'Impression: Other findings as above.'
+    // Free-text findings and fired warn chips are not findings the impression can name, so
+    // never call such a study normal: say only that the findings are above.
+    if (str(values, 'other') || warnChipFired(values)) return `Impression: ${lines(limited, 'Findings as above.')}`
     // A normal impression only once every required item is answered.
     const complete = steps.every((step) => step.fields.every((field) => !field.required || str(values, field.id) !== ''))
-    return complete ? `Impression: ${NORMAL_IMPRESSION}` : ''
+    return complete ? `Impression: ${lines(limited, NORMAL_IMPRESSION)}` : ''
   }
   const negatives = list(values, 'impression-negatives').map((value) => `${optionLabel(fields.impressionNegatives, value)}.`)
-  return `Impression: ${lines(...found, ...negatives)}`
+  return `Impression: ${lines(limited, ...found, ...negatives)}`
 }
 
 /* "Check before signing": contradictions between entered findings. */
@@ -1018,7 +1002,7 @@ function warnings(values: Values): string[] {
   }
 
   if (fracture === 'complete' && str(values, 't1-line') === 'absent') {
-    out.push('A complete fracture is entered, but so is no hypointense line on T1, which excludes a complete fracture.')
+    out.push('A complete fracture is entered, but so is no hypointense T1 line at the edema site, which excludes a complete fracture there.')
   }
 
   if (str(values, 'marrow') === 'normal') {
@@ -1140,7 +1124,6 @@ const steps: ReportStep[] = [
       </>
     ),
     fields: [fields.deltoidSuperficial, fields.tnlThickness, fields.tslThickness, fields.deltoidDeep, fields.pttlThickness, fields.spring, fields.springFindings, fields.springSmThickness, fields.springIplThickness],
-    derive: deriveMedialLigaments,
   },
   {
     id: 'medial-tendons',
