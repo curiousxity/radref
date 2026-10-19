@@ -1,0 +1,156 @@
+/* radref.css - the site's chrome for the standalone anatomy viewers.
+
+   Linked from each viewer with a relative path: `shared/radref.css` from public/anatomy/,
+   `../shared/radref.css` from public/anatomy/online/. Precached with the rest of the site
+   (it matches the Workbox `**\/*.css` glob), so it works offline. No remote URLs belong here.
+
+   Two scopes of token:
+   - theme-following chrome (--rr-bg ... --rr-accent): the same values as the site's
+     --color-* tokens in src/styles.css, light on :root and dark on [data-theme="dark"].
+     Change them together.
+   - always-dark viewport (--rr-view-*): the 3D canvas and anything drawn over it (HUD
+     panels, floating labels, mechanism bars). Dark in both themes, like a reading-room
+     monitor. Put `.rr-overlay` on in-canvas chrome; inside it the theme tokens take the
+     dark values, so the base control styles below render dark there too.
+
+   Structure and scene colours (bone, ligament, nerve, highlight glow...) stay in each
+   viewer and keep their values; src/anatomy.test.ts checks them against a snapshot.
+
+   Pre-paint theme script. Inline it, identically, in each viewer's <head> before the
+   <link> to this file, so the page never paints in the wrong theme. It mirrors the
+   site's src/lib/theme.ts: the stored choice in localStorage `radref-theme` ('light' |
+   'dark') wins, otherwise follow prefers-color-scheme. It re-applies when the main page
+   changes the key (the `storage` event fires in same-origin frames and other tabs), and
+   when the system scheme changes while nothing is stored. Every storage access is
+   guarded: a blocked localStorage just means following the system.
+
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+*/
+
+:root {
+  color-scheme: light;
+  --rr-bg: #fbfbfa;
+  --rr-surface: #ffffff;
+  --rr-hairline: #e3e5e6;
+  /* Control outlines: 3:1 or more on bg and surface (hairline is for dividers only). */
+  --rr-border: #838b8f;
+  --rr-text: #111415;
+  --rr-muted: #5f676b;
+  --rr-accent: #0e6b63;
+  --rr-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --rr-font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Always dark, in both themes. */
+  --rr-view-bg: #0b141b;
+  --rr-view-surface: #141719;
+  --rr-view-text: #e6e8e9;
+  --rr-view-muted: #8d9599;
+  --rr-view-border: #626b70;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --rr-bg: #0b0d0e;
+  --rr-surface: #141719;
+  --rr-hairline: #1d2123;
+  --rr-border: #626b70;
+  --rr-text: #e6e8e9;
+  --rr-muted: #8d9599;
+  --rr-accent: #3fb8a8;
+}
+
+/* In-canvas chrome: the theme tokens take their dark values inside, whatever the theme. */
+.rr-overlay {
+  color-scheme: dark;
+  --rr-bg: var(--rr-view-bg);
+  --rr-surface: var(--rr-view-surface);
+  --rr-hairline: #1d2123;
+  --rr-border: var(--rr-view-border);
+  --rr-text: var(--rr-view-text);
+  --rr-muted: var(--rr-view-muted);
+  --rr-accent: #3fb8a8;
+  background: var(--rr-view-surface);
+  color: var(--rr-view-text);
+  border: 1px solid var(--rr-view-border);
+  border-radius: 3px;
+  font-family: var(--rr-font-sans);
+}
+
+/* Base control styles. Wrapped in :where() so they carry no specificity: any rule a viewer
+   already has for its own controls still wins, and a viewer opts in by deleting its own. */
+:where(button) {
+  min-height: 44px;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--rr-border);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--rr-text);
+  font: inherit;
+  font-family: var(--rr-font-sans);
+  cursor: pointer;
+}
+:where(button):hover { background: var(--rr-surface); }
+:where(button[aria-pressed="true"], button.active, button.on) {
+  border-color: var(--rr-accent);
+  color: var(--rr-accent);
+}
+:where(button):disabled { opacity: 0.5; cursor: default; }
+
+:where(select) {
+  min-height: 44px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--rr-border);
+  border-radius: 3px;
+  background: var(--rr-surface);
+  color: var(--rr-text);
+  font: inherit;
+  font-family: var(--rr-font-sans);
+}
+
+/* A 44px-tall hit area around the native track. */
+:where(input[type="range"]) {
+  min-height: 44px;
+  margin: 0;
+  accent-color: var(--rr-accent);
+  background: transparent;
+  cursor: pointer;
+}
+
+:where(input[type="checkbox"]) {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--rr-accent);
+  cursor: pointer;
+}
+
+:where(button, select, input, a, summary):focus-visible {
+  outline: 2px solid var(--rr-accent);
+  outline-offset: 2px;
+}
