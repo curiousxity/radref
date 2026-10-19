@@ -4,18 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pelvis and sacroiliac joints — reading reference</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --hit was the focus-ring colour only (no scene use), so it is --rr-accent. */
 :root{
-  --bg:#0a0d11; --bg2:#10151c; --panel:#121820; --line:#1e2733; --line2:#2a3542;
-  --ink:#d6dee8; --ink2:#93a1b3; --ink3:#66758a;
+  --bg:var(--rr-bg); --bg2:var(--rr-surface); --panel:var(--rr-surface); --line:var(--rr-hairline); --line2:var(--rr-hairline);
+  --ink:var(--rr-text); --ink2:var(--rr-muted); --ink3:var(--rr-muted);
   --bone:#d8cfc0; --frac:#e2584b; --inflam:#f2a33c; --struct:#4fb3a6; --lig:#c98f7a; --joint:#7fa8d8;
-  --hit:#3b78c4;
+  --hit:var(--rr-accent);
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{
   background:var(--bg); color:var(--ink);
-  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font:15px/1.5 var(--rr-font-sans);
   display:flex; flex-direction:column; overflow:hidden;
 }
 button,select{font:inherit;color:inherit}
@@ -26,20 +56,32 @@ header{
 header h1{font-size:15px;font-weight:600;margin:0 8px 0 0;letter-spacing:.1px;white-space:nowrap}
 header h1 span{color:var(--ink3);font-weight:400}
 select,.btn{
-  background:#182029;border:1px solid var(--line2);border-radius:7px;
-  padding:7px 11px;cursor:pointer;min-height:36px;
+  background:var(--rr-bg);border:1px solid var(--rr-border);border-radius:7px;
+  padding:7px 11px;cursor:pointer;min-height:44px;
 }
-select:hover,.btn:hover{border-color:#3c4a5c}
+select:hover,.btn:hover{border-color:var(--rr-accent)}
 select:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--hit);outline-offset:1px}
 .btn.ghost{background:transparent}
 .spacer{flex:1 1 auto}
 main{flex:1 1 auto; display:flex; min-height:0}
 #stage{position:relative; flex:1 1 auto; min-width:0}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#stage{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --bg2:var(--rr-view-surface); --panel:var(--rr-view-surface);
+  --line:var(--rr-view-border); --line2:var(--rr-view-border);
+  --ink:var(--rr-view-text); --ink2:var(--rr-view-muted); --ink3:var(--rr-view-muted); --hit:var(--rr-view-accent);
+}
 #stage canvas{display:block;width:100%;height:100%}
 #drawerBtn{
   position:absolute; left:12px; bottom:12px; z-index:5;
-  background:rgba(18,24,32,.92); border:1px solid var(--line2); border-radius:8px;
-  padding:9px 13px; cursor:pointer; backdrop-filter:blur(6px); min-height:38px;
+  background:rgba(18,24,32,.92); border:1px solid var(--rr-border); border-radius:8px;
+  padding:9px 13px; cursor:pointer; backdrop-filter:blur(6px); min-height:44px;
 }
 #drawer{
   position:absolute; left:12px; bottom:58px; z-index:6; width:290px; max-height:72%;
@@ -51,12 +93,12 @@ main{flex:1 1 auto; display:flex; min-height:0}
 #drawer h3:first-child{margin-top:0}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
 .chip{
-  background:#161d26;border:1px solid var(--line2);border-radius:14px;
+  background:var(--rr-bg);border:1px solid var(--rr-border);border-radius:14px;
   padding:5px 10px;font-size:12.5px;cursor:pointer
 }
-.chip.on{background:#1d3352;border-color:#3f6da8;color:#e6eefa}
-.tog{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:13px;cursor:pointer}
-.tog input{accent-color:#4a86d0;width:15px;height:15px}
+.chip.on{background:var(--rr-hairline);border-color:var(--rr-accent);color:var(--rr-accent)}
+.tog{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:13px;cursor:pointer;min-height:44px}
+.tog input{accent-color:var(--rr-accent);width:15px;height:15px}
 #panel{
   flex:0 0 372px; max-width:45vw; background:var(--panel); border-left:1px solid var(--line);
   overflow:auto; padding:14px 15px 40px;
@@ -70,10 +112,10 @@ main{flex:1 1 auto; display:flex; min-height:0}
 }
 .sect ul{margin:0;padding-left:17px}
 .sect li{margin:0 0 5px}
-.sect li b{font-weight:600;color:#e7eef7}
-details{border:1px solid var(--line);border-radius:8px;margin:0 0 8px;background:#0f141b}
+.sect li b{font-weight:600;color:var(--ink)}
+details{border:1px solid var(--line);border-radius:8px;margin:0 0 8px;background:var(--rr-bg)}
 details>summary{
-  cursor:pointer;padding:9px 11px;font-size:13px;color:var(--ink2);
+  cursor:pointer;padding:9px 11px;min-height:44px;font-size:13px;color:var(--ink2);
   list-style:none;display:flex;justify-content:space-between;align-items:center
 }
 details>summary::-webkit-details-marker{display:none}
@@ -81,27 +123,27 @@ details>summary::after{content:"+";color:var(--ink3)}
 details[open]>summary::after{content:"–"}
 details .body{padding:0 11px 11px}
 .grade{
-  background:#0e141c;border:1px solid var(--line2);border-radius:9px;padding:11px;margin:0 0 14px
+  background:var(--rr-bg);border:1px solid var(--line2);border-radius:9px;padding:11px;margin:0 0 14px
 }
 .grade .row{display:flex;align-items:center;gap:9px}
 .grade input[type=range]{flex:1;accent-color:#c8553f;min-width:0}
 .readout{
-  margin-top:9px;font-size:13.5px;color:#f0e5d8;background:#171009;
-  border:1px solid #3a2a17;border-radius:7px;padding:8px 10px;line-height:1.45
+  margin-top:9px;font-size:13.5px;color:var(--ink);background:var(--rr-surface);
+  border:1px solid var(--line2);border-radius:7px;padding:8px 10px;line-height:1.45
 }
-.readout b{color:#ffd9a3}
+.readout b{color:var(--rr-accent)}
 .sideswap{display:flex;gap:5px;margin-top:9px}
 .sideswap .chip{flex:1;text-align:center}
 .ref{margin:0 0 9px;font-size:12.5px;line-height:1.45}
-.ref a{color:#7fb0e8;text-decoration:none}
+.ref a{color:var(--rr-accent);text-decoration:none}
 .ref a:hover{text-decoration:underline}
 .ref .meta{color:var(--ink3);font-size:11.5px}
 .tag{
   display:inline-block;font-size:10.5px;padding:1px 5px;border-radius:4px;
   border:1px solid var(--line2);color:var(--ink2);margin-left:5px;vertical-align:1px
 }
-.tag.oa{border-color:#2f5c4a;color:#6fc9a8}
-.tag.teach{border-color:#5c4a2f;color:#d5ab6b}
+.tag.oa{border-color:#2f5c4a;color:var(--rr-good)}
+.tag.teach{border-color:#5c4a2f;color:var(--rr-warn)}
 .legend{display:flex;flex-wrap:wrap;gap:9px;font-size:11.5px;color:var(--ink2);margin-top:8px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 footer{
@@ -116,7 +158,7 @@ footer a{color:var(--ink2)}
 }
 #load{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);color:var(--ink2);font-size:13px;z-index:20
+  background:#0a0d11;color:var(--ink2);font-size:13px;z-index:20
 }
 @media (max-width:860px){
   main{flex-direction:column}

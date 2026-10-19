@@ -1,6 +1,6 @@
 /// <reference types="node" />
 // The app tsconfig only loads vite/client types, so this file pulls in Node's for node:fs.
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 import snapshot from './anatomy-colours.json'
 
@@ -52,6 +52,9 @@ const MIGRATED: readonly File[] = [
   'online/cervical-spine.html',
   'online/brachial-plexus.html',
   'online/lumbar-spine.html',
+  'online/pelvis-si.html',
+  'online/elbow.html',
+  'online/foot.html',
 ]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
@@ -159,9 +162,38 @@ const CHROME: Record<File, string[]> = {
     '--accent',
     '--accent2',
   ],
-  'online/pelvis-si.html': [],
-  'online/elbow.html': [],
-  'online/foot.html': [],
+  'online/pelvis-si.html': [
+    '--bg',
+    '--bg2',
+    '--panel',
+    '--line',
+    '--line2',
+    '--ink',
+    '--ink2',
+    '--ink3',
+    '--hit',
+  ],
+  'online/elbow.html': [
+    '--ink',
+    '--ink2',
+    '--panel',
+    '--line',
+    '--line2',
+    '--text',
+    '--muted',
+    '--teal',
+    '--teal2',
+  ],
+  'online/foot.html': [
+    '--ink',
+    '--ink-2',
+    '--line',
+    '--line-2',
+    '--paper',
+    '--paper-dim',
+    '--accent',
+    '--accent-2',
+  ],
 }
 
 const colours = snapshot as Record<File, { css: Record<string, string>; script: string[] }>
@@ -222,6 +254,17 @@ function exempt(file: File, key: string): boolean {
 }
 
 describe('anatomy viewers', () => {
+  test('every viewer is on the shared stylesheet', () => {
+    expect([...MIGRATED].sort()).toEqual([...FILES].sort())
+    // FILES itself must list every viewer on disk (public/anatomy/ and its online/ folder;
+    // shared/ and vendor/ hold no viewers).
+    const onDisk = [
+      ...readdirSync(new URL('../public/anatomy/', import.meta.url)),
+      ...readdirSync(new URL('../public/anatomy/online/', import.meta.url)).map((n) => `online/${n}`),
+    ].filter((n) => n.endsWith('.html'))
+    expect(onDisk.sort()).toEqual([...FILES].sort())
+  })
+
   test('the snapshot and the allowlist cover all 16 files', () => {
     expect(Object.keys(colours).sort()).toEqual([...FILES].sort())
     expect(Object.keys(CHROME).sort()).toEqual([...FILES].sort())
@@ -283,6 +326,8 @@ describe('anatomy viewers', () => {
     expect(brachialPlexus[':root|--acc-scene']).toBe('#f0b83a')
     expect(brachialPlexus[':root|--acc2-scene']).toBe('#5fc3d6')
     expect(cssColours(read('online/lumbar-spine.html'))[':root|--accent-scene']).toBe('#4aa3df')
+    expect(cssColours(read('online/elbow.html'))[':root|--teal-scene']).toBe('#4FB3A9')
+    expect(cssColours(read('online/foot.html'))[':root|--accent-2-scene']).toBe('#7fb6d9')
   })
 
   test('scene colours in scripts unchanged', () => {

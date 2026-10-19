@@ -4,16 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Foot — interactive reference</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   Here --ink and --ink-2 are backgrounds and --paper is the text colour.
+   --accent (amber) was a UI accent only (headings, pressed chips, sliders): now --rr-accent.
+   --accent-2 was the UI accent for links, key phrases and the focus ring, and also the imaging
+   plane's colour (0x7fb6d9 in the script): the UI use is now --rr-accent, and the plane's
+   colour stays #7fb6d9 as --accent-2-scene. */
 :root{
-  --ink:#12161c; --ink-2:#1a2029; --line:#2b333f; --line-2:#3a4553;
-  --paper:#e9edf2; --paper-dim:#9fadbd; --accent:#e0b062; --accent-2:#7fb6d9;
+  --ink:var(--rr-bg); --ink-2:var(--rr-surface); --line:var(--rr-hairline); --line-2:var(--rr-hairline);
+  --paper:var(--rr-text); --paper-dim:var(--rr-muted); --accent:var(--rr-accent); --accent-2:var(--rr-accent); --accent-2-scene:#7fb6d9;
   --bad:#d9604e; --warn:#e2a33c; --ok:#6fbf8b;
   --panel-w:360px; --bar-h:52px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--ink);color:var(--paper);
-  font:15px/1.5 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  font:15px/1.5 var(--rr-font-sans);
   -webkit-text-size-adjust:100%;overscroll-behavior:none}
 button,select,input{font-family:inherit}
 
@@ -25,20 +59,31 @@ button,select,input{font-family:inherit}
   padding-top:env(safe-area-inset-top)}
 #bar h1{font-size:15px;font-weight:600;margin:0 8px 0 0;letter-spacing:.01em;white-space:nowrap}
 #bar h1 span{color:var(--paper-dim);font-weight:400}
-.sel{background:#222a35;color:var(--paper);border:1px solid var(--line-2);
+.sel{background:var(--rr-bg);color:var(--paper);border:1px solid var(--rr-border);
   border-radius:7px;padding:7px 9px;font-size:13px;max-width:210px}
 .sel:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-offset:1px}
-#reset{margin-left:auto;background:#222a35;color:var(--paper);border:1px solid var(--line-2);
+#reset{margin-left:auto;background:var(--rr-bg);color:var(--paper);border:1px solid var(--rr-border);
   border-radius:7px;padding:7px 12px;font-size:13px;cursor:pointer}
-#reset:hover{background:#2b3543}
+#reset:hover{background:var(--rr-hairline)}
 
 /* ---------- stage ---------- */
 #main{flex:1 1 auto;display:flex;min-height:0}
 #stage{flex:1 1 auto;position:relative;min-width:0;background:
   radial-gradient(120% 90% at 50% 8%, #1b222c 0%, #12161c 70%)}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#stage{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --ink:var(--rr-view-bg); --ink-2:var(--rr-view-surface); --line:var(--rr-view-border); --line-2:var(--rr-view-border);
+  --paper:var(--rr-view-text); --paper-dim:var(--rr-view-muted); --accent:var(--rr-view-accent); --accent-2:var(--rr-view-accent);
+}
 #stage canvas{display:block;width:100%;height:100%;touch-action:none}
 #drawerBtn{position:absolute;left:12px;bottom:12px;z-index:5;
-  background:rgba(28,35,45,.92);color:var(--paper);border:1px solid var(--line-2);
+  background:rgba(28,35,45,.92);color:var(--paper);border:1px solid var(--rr-border);
   border-radius:9px;padding:9px 14px;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
 #drawerBtn:hover{background:rgba(40,50,62,.95)}
 #hover{position:absolute;right:12px;bottom:12px;z-index:4;font-size:12.5px;
@@ -53,10 +98,10 @@ button,select,input{font-family:inherit}
 #drawer h3{font-size:12px;margin:14px 0 7px;color:var(--accent);font-weight:600;letter-spacing:.04em}
 #drawer h3:first-child{margin-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{background:#242d38;border:1px solid var(--line-2);color:var(--paper-dim);
+.chip{background:#242d38;border:1px solid var(--rr-border);color:var(--paper-dim);
   border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer}
 .chip:hover{border-color:#55647a;color:var(--paper)}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#20180a;font-weight:600}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--rr-bg);font-weight:600}
 .row{display:flex;align-items:center;gap:9px;margin:8px 0}
 .row label{font-size:12.5px;color:var(--paper-dim);min-width:96px}
 .row input[type=range]{flex:1;accent-color:var(--accent)}
@@ -75,13 +120,13 @@ button,select,input{font-family:inherit}
 .sec li{margin:0 0 7px}
 .sec li b{font-weight:600}
 .k{color:var(--accent-2)}
-.grade{background:#212a35;border:1px solid var(--line-2);border-radius:10px;
+.grade{background:var(--rr-bg);border:1px solid var(--line-2);border-radius:10px;
   padding:12px 13px;margin:0 0 18px}
 .grade .live{font-size:19px;font-weight:600;margin:2px 0 4px;font-variant-numeric:tabular-nums}
 .grade .scale{font-size:12.5px;color:var(--paper-dim)}
 .grade input[type=range]{width:100%;margin:8px 0 2px;accent-color:var(--accent)}
-details{border-top:1px solid var(--line);padding:11px 0 3px}
-details summary{cursor:pointer;font-size:13px;color:var(--paper-dim);list-style:none}
+details{border-top:1px solid var(--line);padding:0 0 3px}
+details summary{cursor:pointer;font-size:13px;color:var(--paper-dim);list-style:none;line-height:20px;padding:12px 0}
 details summary::-webkit-details-marker{display:none}
 details summary:before{content:"+ ";color:var(--accent)}
 details[open] summary:before{content:"– "}
@@ -91,9 +136,9 @@ details[open] summary{color:var(--paper);margin-bottom:9px}
 .ref a:hover{text-decoration:underline}
 .ref .tag{font-size:10.5px;border:1px solid var(--line-2);border-radius:4px;
   padding:1px 5px;margin-left:5px;color:var(--paper-dim)}
-.foot{font-size:11.5px;color:#6d7b8c;border-top:1px solid var(--line);
+.foot{font-size:11.5px;color:var(--paper-dim);border-top:1px solid var(--line);
   margin-top:22px;padding-top:12px}
-.foot a{color:#8896a7}
+.foot a{color:var(--paper-dim)}
 
 @media (max-width:860px){
   :root{--panel-w:100%}
