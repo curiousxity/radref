@@ -169,6 +169,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Simple adnexal cyst follow-up (SRU 2019 consensus, size bands and report wording)
 - PI-RADS v2.1 (zonal assessment, single lesion; logic shared in `src/logic/pirads.ts`)
 - AAST 2018 organ injury grading (spleen, liver, kidney)
+- Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)

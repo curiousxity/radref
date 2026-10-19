@@ -117,6 +117,7 @@ export const categories: CalculatorCategory[] = [
     name: 'Trauma',
     items: [
       { path: '/aast-organ-injury', name: 'AAST grading', description: 'AAST 2018 injury grades for spleen, liver, and kidney.', keywords: ['trauma', 'spleen', 'splenic', 'liver', 'hepatic', 'kidney', 'renal', 'laceration', 'injury grade'], component: lazyPage(() => import('../pages/AastOrganInjuryPage'), 'AastOrganInjuryPage') },
+      { path: '/fifth-metatarsal', name: 'Fifth metatarsal fractures', related: ['/foot', '/ankle'], description: 'Tuberosity avulsion, Jones and stress fractures compared: zones, mechanisms, blood supply and mimics.', keywords: ['metatarsal', 'fifth metatarsal', '5th metatarsal', 'jones fracture', 'pseudo-jones', 'avulsion', 'tuberosity', 'stress fracture', "dancer's fracture", 'lawrence botte', 'torg', 'zone', 'apophysis', 'os peroneum', 'os vesalianum', 'foot', 'ankle sprain', 'inversion', 'fracture', 'musculoskeletal', 'msk'], component: lazyPage(() => import('../pages/FifthMetatarsalPage'), 'FifthMetatarsalPage') },
     ],
   },
   {
