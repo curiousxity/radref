@@ -259,6 +259,9 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 @media (min-width: 900px) {
   .search-hint { display: block; }
   .home-search .search-field input { padding-right: 2.5rem; }
+  /* Out of the way of the native clear button once the field is in use. */
+  .home-search .search-field:focus-within .search-hint,
+  .home-search .search-field:has(input:not(:placeholder-shown)) .search-hint { display: none; }
 }
 .home-index { display: grid; gap: 0; }
 .home-tabs { display: flex; gap: 0.25rem; border-bottom: 1px solid var(--color-hairline); overflow-x: auto; }
@@ -279,7 +282,8 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .index-tag { flex-shrink: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted); text-align: right; }
 .index-row:hover .index-name { color: var(--color-primary); }
 .index-row:focus-visible { outline-offset: -2px; }
-.home-install { max-width: 22rem; padding-top: 1rem; border-top: 1px solid var(--color-hairline); }
+/* InstallButton's .hero-stat brings its own top hairline. */
+.home-install { max-width: 22rem; }
 
 /* Fifth metatarsal page: schematic SVG figures drawn on the site tokens. The figure tokens
    keep the fifth metatarsal lighter than the context bones in both themes. */
