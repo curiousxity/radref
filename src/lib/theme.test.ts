@@ -21,4 +21,21 @@ describe('theme', () => {
       writeStoredTheme('dark', { setItem: () => { throw new Error('blocked') } }),
     ).not.toThrow()
   })
+
+  it('survives a localStorage getter that throws', () => {
+    const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage')
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      get() {
+        throw new Error('SecurityError')
+      },
+    })
+    try {
+      expect(readStoredTheme()).toBeNull()
+      expect(() => writeStoredTheme('dark')).not.toThrow()
+    } finally {
+      if (original) Object.defineProperty(globalThis, 'localStorage', original)
+      else delete (globalThis as { localStorage?: unknown }).localStorage
+    }
+  })
 })

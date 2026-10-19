@@ -2,21 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // Sets data-theme before first paint so there is no flash. Deliberately
-      // dependency-free: it duplicates resolveTheme in src/lib/theme.ts.
-      ;(function () {
-        var theme
-        try {
-          var stored = localStorage.getItem('radref-theme')
-          if (stored === 'light' || stored === 'dark') theme = stored
-        } catch (e) {}
-        if (!theme) {
-          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        }
-        document.documentElement.dataset.theme = theme
-      })()
-    </script>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -26,6 +11,28 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="description" content="Mobile-friendly radiology reference: calculators with report-ready impressions (TI-RADS, LI-RADS, O-RADS, Lung-RADS, Bosniak and more), study pages that build the report step by step and teach the method behind it, and interactive 3D anatomy." />
+    <script>
+      // Sets data-theme (and the theme-color metas, so it sits after them) before first paint so there is no flash. Deliberately
+      // dependency-free: it duplicates resolveTheme in src/lib/theme.ts.
+      ;(function () {
+        var theme
+        try {
+          var stored = localStorage.getItem('radref-theme')
+          if (stored === 'light' || stored === 'dark') {
+            theme = stored
+            // A stored choice may differ from the system, so the metas' media queries are wrong.
+            var metas = document.querySelectorAll('meta[name="theme-color"]')
+            for (var i = 0; i < metas.length; i++) {
+              metas[i].setAttribute('content', theme === 'dark' ? '#0b0d0e' : '#fbfbfa')
+            }
+          }
+        } catch (e) {}
+        if (!theme) {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
     <title>Rad Refcalculators</title>
   </head>
   <body>

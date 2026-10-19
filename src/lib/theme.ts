@@ -15,10 +15,10 @@ export function resolveTheme(stored: Theme | null, prefersDark: boolean): Theme 
 }
 
 export function readStoredTheme(
-  storage: Pick<Storage, 'getItem'> = localStorage,
+  storage?: Pick<Storage, 'getItem'>,
 ): Theme | null {
   try {
-    return parseStoredTheme(storage.getItem(THEME_KEY))
+    return parseStoredTheme((storage ?? localStorage).getItem(THEME_KEY))
   } catch {
     return null
   }
@@ -26,10 +26,10 @@ export function readStoredTheme(
 
 export function writeStoredTheme(
   theme: Theme,
-  storage: Pick<Storage, 'setItem'> = localStorage,
+  storage?: Pick<Storage, 'setItem'>,
 ): void {
   try {
-    storage.setItem(THEME_KEY, theme)
+    (storage ?? localStorage).setItem(THEME_KEY, theme)
   } catch {
     // Storage blocked: the choice just won't persist.
   }
