@@ -90,7 +90,7 @@ export const categories: CalculatorCategory[] = [
   {
     name: 'Neck',
     items: [
-      { path: '/tirads', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.', keywords: ['thyroid', 'nodule', 'neck', 'acr'], component: lazyPage(() => import('../pages/TiradsPage'), 'TiradsPage') },
+      { path: '/tirads', tag: 'ACR 2017', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.', keywords: ['thyroid', 'nodule', 'neck', 'acr'], component: lazyPage(() => import('../pages/TiradsPage'), 'TiradsPage') },
     ],
   },
   {

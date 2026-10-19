@@ -124,3 +124,10 @@ describe('tiradsPoints', () => {
     expect(tiradsPoints.echogenicity.veryHypoechoic).toBe(3)
   })
 })
+
+describe('ACR TI-RADS: points tables are read-only', () => {
+  it('freezes the exported tables and each feature table', () => {
+    expect(Object.isFrozen(tiradsPoints)).toBe(true)
+    for (const table of Object.values(tiradsPoints)) expect(Object.isFrozen(table)).toBe(true)
+  })
+})

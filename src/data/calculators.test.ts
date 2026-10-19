@@ -11,7 +11,13 @@ describe('registry', () => {
   })
 
   test('tags pin the tag rule: only a version the page states', () => {
-    expect(calculators.find((i) => i.path === '/lungrads')?.tag).toBe('v2022')
-    expect(calculators.find((i) => i.path === '/tirads')?.tag).toBeUndefined()
+    const byPath = (path: string) => {
+      const item = calculators.find((i) => i.path === path)
+      expect(item, path).toBeDefined()
+      return item
+    }
+    expect(byPath('/lungrads')?.tag).toBe('v2022')
+    // The TI-RADS page's title row states "ACR 2017", so the home row may carry it.
+    expect(byPath('/tirads')?.tag).toBe('ACR 2017')
   })
 })

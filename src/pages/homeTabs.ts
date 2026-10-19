@@ -49,6 +49,12 @@ export function homePanel(tab: HomeTab, query: string): HomeTab | 'search' {
   return query.trim() !== '' ? 'search' : tab
 }
 
+/** The tab marked selected (aria-selected and the underline): the shown tab, or none while
+ *  search results fill the panel. */
+export function selectedTab(tab: HomeTab, panel: HomeTab | 'search'): HomeTab | null {
+  return panel === 'search' ? null : tab
+}
+
 /** Choosing a tab clears the search, so the tab's own content shows. */
 export function queryAfterTabSelect(): string {
   return ''

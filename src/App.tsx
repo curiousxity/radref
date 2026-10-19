@@ -38,6 +38,7 @@ export default function App() {
             <span className="brand-logo" aria-hidden="true">RR</span>
             <span className="brand-title">Rad Ref</span>
           </Link>
+          <CategoryNav categories={categories} isOpen={menuOpen} onNavigate={() => setMenuOpen(false)} />
           <div className="header-actions">
             <ThemeToggle />
             <button
@@ -53,7 +54,6 @@ export default function App() {
               </svg>
             </button>
           </div>
-          <CategoryNav categories={categories} isOpen={menuOpen} onNavigate={() => setMenuOpen(false)} />
         </div>
       </header>
 

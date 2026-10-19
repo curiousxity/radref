@@ -5,7 +5,7 @@ import { InstallButton } from '../components/InstallButton'
 import { calculators, groupItems, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
 import { readRecent, recentItems } from '../lib/recent'
-import { HOME_TABS, categoriesForTab, homePanel, isSearchShortcut, parseHomeTab, queryAfterTabSelect, tabIndexForKey } from './homeTabs'
+import { HOME_TABS, categoriesForTab, homePanel, isSearchShortcut, parseHomeTab, queryAfterTabSelect, selectedTab, tabIndexForKey } from './homeTabs'
 import type { HomeTab } from './homeTabs'
 
 /** "3 calculators", or "2 references" for a category that names its items differently. */
@@ -86,6 +86,8 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
   const trimmedQuery = query.trim()
   const panel = homePanel(tab, query)
   const isSearching = panel === 'search'
+  // No tab is selected while search results fill the panel; the shown tab keeps the tab stop.
+  const selected = selectedTab(tab, panel)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const results = useMemo(
@@ -108,7 +110,8 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
 
   function selectTab(next: HomeTab) {
     setQuery(queryAfterTabSelect())
-    setParams(next === 'calculators' ? {} : { tab: next })
+    // Replace, so Back leaves the home page rather than stepping back through tabs.
+    setParams(next === 'calculators' ? {} : { tab: next }, { replace: true })
   }
 
   /** Arrows, Home and End move focus and selection along the tab row. */
@@ -155,10 +158,10 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
               type="button"
               role="tab"
               id={`home-tab-${item.id}`}
-              aria-selected={tab === item.id}
+              aria-selected={selected === item.id}
               aria-controls="home-panel"
               tabIndex={tab === item.id ? 0 : -1}
-              className={tab === item.id ? 'home-tab active' : 'home-tab'}
+              className={selected === item.id ? 'home-tab active' : 'home-tab'}
               onClick={() => selectTab(item.id)}
               onKeyDown={(event) => onTabKeyDown(event, index)}
             >

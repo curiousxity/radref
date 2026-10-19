@@ -212,7 +212,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .choice-label { margin-bottom: 0.5rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; font-weight: 600; color: var(--color-text-muted); }
 .choice-group { display: grid; gap: 0.4rem; }
 .choice-group--stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.choice-group--row { display: flex; gap: 0; }
+.choice-group--row { display: flex; flex-wrap: wrap; gap: 0; }
 .choice-option { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 44px; padding: 0.55rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font: inherit; font-size: 0.9rem; line-height: 1.3; text-align: left; cursor: pointer; }
 .choice-option:hover { background: var(--color-surface-2); }
 .choice-option[aria-checked='true'] { border-color: var(--color-primary); background: var(--color-primary-soft); color: var(--color-text); box-shadow: inset 0 0 0 1px var(--color-primary); }
@@ -381,8 +381,8 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .fm-mimics { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .fm-mimics .fm-figure { margin: 0; }
 
-.header-actions { display: flex; align-items: center; gap: 0.4rem; order: 2; }
-.nav-toggle { display: none; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; cursor: pointer; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: transparent; color: var(--color-text); font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.header-actions { display: flex; align-items: center; gap: 0.4rem; }
+.nav-toggle { display: none; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; cursor: pointer; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: transparent; color: var(--color-text); }
 .nav-toggle[aria-expanded='true'] { border-color: var(--color-primary); color: var(--color-primary); }
 .nav-search { display: none; }
 .nav-results { display: grid; }

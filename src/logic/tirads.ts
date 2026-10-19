@@ -8,48 +8,49 @@ import type {
   TiradsResult,
 } from '../types/tirads'
 
-const compositionPoints: Record<Composition, number> = {
+const compositionPoints: Readonly<Record<Composition, number>> = Object.freeze({
   cystic: 0,
   spongiform: 0,
   mixed: 1,
   solid: 2,
-}
+})
 
-const echogenicityPoints: Record<Echogenicity, number> = {
+const echogenicityPoints: Readonly<Record<Echogenicity, number>> = Object.freeze({
   anechoic: 0,
   hyperechoic: 1,
   isoechoic: 1,
   hypoechoic: 2,
   veryHypoechoic: 3,
-}
+})
 
-const shapePoints: Record<Shape, number> = {
+const shapePoints: Readonly<Record<Shape, number>> = Object.freeze({
   widerThanTall: 0,
   tallerThanWide: 3,
-}
+})
 
-const marginPoints: Record<Margin, number> = {
+const marginPoints: Readonly<Record<Margin, number>> = Object.freeze({
   smooth: 0,
   illDefined: 0,
   lobulated: 2,
   extrathyroidal: 3,
-}
+})
 
-const focusPoints: Record<EchogenicFocus, number> = {
+const focusPoints: Readonly<Record<EchogenicFocus, number>> = Object.freeze({
   macrocalcification: 1,
   rimCalcification: 2,
   punctate: 3,
-}
+})
 
 /** The ACR points tables above, exported so the calculator page can show each option's
- *  points beside its label. calculateTirads reads the same objects. */
-export const tiradsPoints = {
+ *  points beside its label. calculateTirads reads the same objects. Frozen, so no caller can
+ *  change a score. */
+export const tiradsPoints = Object.freeze({
   composition: compositionPoints,
   echogenicity: echogenicityPoints,
   shape: shapePoints,
   margin: marginPoints,
   focus: focusPoints,
-} as const
+})
 
 const compositionLabels: Record<Composition, string> = {
   cystic: 'cystic or almost completely cystic',

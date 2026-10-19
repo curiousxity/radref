@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { categories } from '../data/calculators'
-import { categoriesForTab, homePanel, isSearchShortcut, parseHomeTab, queryAfterTabSelect, tabIndexForKey } from './homeTabs'
+import { categoriesForTab, homePanel, isSearchShortcut, parseHomeTab, queryAfterTabSelect, selectedTab, tabIndexForKey } from './homeTabs'
 
 describe('parseHomeTab', () => {
   test('reads a known tab from the query string', () => {
@@ -98,5 +98,15 @@ describe('tabIndexForKey', () => {
     expect(tabIndexForKey('Enter', 1, 4)).toBeNull()
     expect(tabIndexForKey('ArrowDown', 1, 4)).toBeNull()
     expect(tabIndexForKey('/', 1, 4)).toBeNull()
+  })
+})
+
+describe('selectedTab', () => {
+  test('the shown tab is selected', () => {
+    expect(selectedTab('anatomy', homePanel('anatomy', ''))).toBe('anatomy')
+  })
+
+  test('no tab is selected while search results show', () => {
+    expect(selectedTab('anatomy', homePanel('anatomy', 'knee'))).toBeNull()
   })
 })
