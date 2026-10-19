@@ -336,7 +336,8 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT. Drafted from the guidelines rather than from the site author's
+FESS, temporal bone CT. Drafted from the guidelines (ankle MRI from the published
+papers in its reference list) rather than from the site author's
 notes, and labelled as unreviewed drafts in their source note until the author signs
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.

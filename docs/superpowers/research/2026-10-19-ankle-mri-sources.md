@@ -299,7 +299,7 @@ from a source you hold.
 | FDL or FHL tear grading, or a PTT-to-FDL size ratio | none (MT9) | Not stated in any listed paper. |
 | Plantar fascia MRI thickness cut-off (for example > 4 mm) | R13, R15 (PF6) | R13 gives "more than 4-5 mm" for lateral radiographs and "over 4 mm" for ultrasound, neither an MRI threshold. R15 gives group means only (7.40 mm against 3.22 mm sagittal, eight patients). The thickness field has help text saying no MRI cut-off exists in the cited papers. |
 | Spring ligament thickness cut-off for abnormal | R5 (M9) | R5 mentions a thickened superomedial band of "maximum 9 mm" in one figure caption only. No threshold is stated. Spring ligament status is a normal or abnormal choice with descriptive findings (waviness, high signal, discontinuity), no chip. |
-| Superior peroneal retinaculum grades I-IV as MRI chips | R7 (P5) | R7 quotes Eckert and Davis grades I-III and Oden grade IV as a surgical classification and gives no MRI criteria for each. Shown as descriptive options with no grade numbers and no chip. |
+| Superior peroneal retinaculum grades I-IV as MRI chips | R7 (P5) | R7 quotes Eckert and Davis grades I-III and Oden grade IV as a surgical classification and gives no MRI criteria for each. Shown as descriptive options with no grade numbers in the report field and no chip (the lesson lists grades I-IV as descriptions). |
 | Effusion levels (none, moderate, severe) as a graded chip | R8 (T4) | The three levels are one cohort's own coding, not a validated grade. Kept as a descriptive field with help text saying so. |
 | Huuskonen lateral ligament grades 1-3 | R8 (L4) | Grade 2 is truncated in the paper ("grade 2 was assessed as a focal ligament fiber"), presumably focal fibre disruption. Grades 1 and 3 are readable but a three-grade chip cannot be built on a defective middle grade. Lateral ligament chips use Sawant's interstitial, partial and complete (L1) instead. |
 | Deltoid ligament chips for the interstitial, partial and complete grading | R1 (L1) | Sawant's grading is worded for ankle ligaments generally, but the sources table lists the lateral ligaments as the use. The deltoid shares the option set and the report wording, with no chip. |
@@ -312,6 +312,7 @@ from a source you hold.
 | Item | What is there instead |
 |---|---|
 | Anterior tendons (tibialis anterior, extensor hallucis longus, extensor digitorum longus) (N8) | No listed paper discusses them. The lesson only names them, and the report has a normal or abnormal choice with free text. |
+| Varicosities as a tarsal tunnel cause (SP7) | Rodríguez-Merchán 2021, not a listed paper. Left out of the lesson and report because no listed paper states it. |
 | Interosseous membrane (S7) | R1 names it but gives no MRI findings or injury criteria. The lesson has one sentence, "Also look at the interosseous membrane.", and the report has a normal or abnormal choice with free text. |
 | Sawant's protocol table (T5) | Table 1 is an image in the PMC record and could not be read. The technique section uses R2's protocol statement only. |
 | A fixed impression template or management advice (I6) | No paper gives one. The impression format is the study's own structure. The management sentence from R1 (I2) appears in the lesson as attributed background only, never in the report. |

@@ -1244,10 +1244,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'striations',
-      question: 'The PTFL shows heterogeneous signal with fine striations, but no discontinuity and no surrounding edema. What does that mean?',
+      question: 'The PTFL shows heterogeneous signal with fine striations, but no discontinuity. What does that mean?',
       options: ['A partial tear', 'An interstitial tear', 'A chronic injury', 'Not a tear: fat between the fascicles normally gives striations'],
       answer: 3,
-      explanation: <p>The normal PTFL, the deep deltoid and the AITFL show heterogeneous signal and striations because of fat between their fascicles, so do not call striations a tear. Loss of those striations, with blurred margins or edema, is what suggests acute injury (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>,
+      explanation: <p>The normal PTFL, the deep deltoid and the AITFL show heterogeneous signal and striations because of fat between their fascicles, so do not call striations a tear. Acute injury instead shows blurred margins, irregular contours, inhomogeneous signal or loss of the normal low signal within the ligament (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>,
     },
     {
       id: 'sawant-grade',
@@ -1261,7 +1261,7 @@ const study: StudyDefinition = {
       question: 'Fluid in the tibiofibular recess measures more than 12 mm. What does the lesson say that means?',
       options: ['It is normal, since the normal range is 5 to 12 mm', 'It is definitely abnormal and suggests acute injury to the syndesmotic ligaments', 'It proves the PITFL is torn', 'It is indeterminate until the interosseous membrane has been checked'],
       answer: 1,
-      explanation: <p>Fluid in the tibiofibular recess normally measures 5 to 7 mm. Fluid measuring more than 12 mm is definitely abnormal and suggests acute injury to the syndesmotic ligaments (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). The paper does not classify 7 to 12 mm.</p>,
+      explanation: <p>Fluid in the tibiofibular recess normally measures 5 to 7 mm. Fluid measuring more than 12 mm is definitely abnormal and suggests acute injury to the syndesmotic ligaments (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>,
     },
     {
       id: 't1-line',
@@ -1273,8 +1273,8 @@ const study: StudyDefinition = {
     {
       id: 'hepple-iii',
       question: 'An osteochondral lesion of the talus has a detached but undisplaced fragment. Which Hepple MRI stage is it?',
-      options: ['Stage IIB', 'Stage III', 'Stage IV', 'Stage V'],
-      answer: 1,
+      options: ['Stage IIB', 'Stage IV', 'Stage V', 'Stage III'],
+      answer: 3,
       explanation: <p>In the Hepple MRI staging as Walther and colleagues reproduce it, stage III is a detached but undisplaced fragment and stage IV a detached and displaced one. IIB is cartilage damage with underlying fracture but no bony edema, and V is subchondral cyst formation (<Cite doi={WALTHER}>Walther et al., Cartilage 2023</Cite>).</p>,
     },
     {
@@ -1286,7 +1286,7 @@ const study: StudyDefinition = {
     },
     {
       id: 'sheath-fluid',
-      question: 'Circumferential fluid in the common peroneal tendon sheath wider than what is highly specific for peroneal tenosynovitis?',
+      question: 'What is the threshold for circumferential fluid in the common peroneal sheath above which it is highly specific for peroneal tenosynovitis?',
       options: ['1 mm', '2 mm', '3 mm', '5 mm'],
       answer: 2,
       explanation: <p>Circumferential fluid within the common peroneal sheath wider than 3 mm is highly specific for peroneal tenosynovitis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>,
@@ -1301,22 +1301,22 @@ const study: StudyDefinition = {
     {
       id: 'achilles-rupture-site',
       question: 'Where does a total Achilles rupture most commonly occur?',
-      options: ['Within 2 cm of the insertion', 'At the midportion, 5 to 6 cm from the insertion', 'At the myotendinous junction, 10 cm or more above the insertion', 'At the calcaneal insertion itself'],
-      answer: 1,
+      options: ['At the midportion, 5 to 6 cm from the insertion', 'Within 2 cm of the insertion', 'At the myotendinous junction, 10 cm or more above the insertion', 'At the calcaneal insertion itself'],
+      answer: 0,
       explanation: <p>Total rupture is most common at the midportion, 5 to 6 cm from the insertion, with frayed ends and a gap between them. A distal total rupture, within 2 cm of the insertion, is rare (<Cite doi={SZARO_ACHILLES}>Szaro et al., Eur J Radiol Open 2021</Cite>).</p>,
     },
     {
       id: 'ptt-associations',
-      question: 'You find advanced tibialis posterior tendon injury. Which two structures does the lesson say to go back and check, because they are most often abnormal with it?',
-      options: ['The plantar fascia and the Achilles tendon', 'The spring ligament and the sinus tarsi', 'The AITFL and the PITFL', 'The peroneus brevis and the peroneus longus'],
-      answer: 1,
+      question: 'You find advanced tibialis posterior tendon injury. Which two structures does the lesson say to go back and check, because the lesson reports a high association with it?',
+      options: ['The plantar fascia and the Achilles tendon', 'The AITFL and the PITFL', 'The spring ligament and the sinus tarsi', 'The peroneus brevis and the peroneus longus'],
+      answer: 2,
       explanation: <p>Advanced tibialis posterior injury has a high association with spring ligament and sinus tarsi abnormalities: the spring ligament was abnormal in 92% of patients with the injury and 28% of those with a normal tendon, the sinus tarsi in 72% and 36%. The plantar fascia association was low and not significant (<Cite doi={BALEN}>Balen and Helms, AJR 2001</Cite>).</p>,
     },
     {
       id: 'olt-asymptomatic',
       question: 'MRI shows an osteochondral lesion of the talus in a patient with minimal symptoms. What does the lesson advise?',
-      options: ['Treat it as the cause of the pain and recommend prophylactic surgery', 'It is not always the cause of the pain, and MRI findings alone are no reason to urge prophylactic surgery', 'Ignore it, since osteochondral lesions on MRI are never relevant', 'Repeat the MRI in 3 months before reporting it'],
-      answer: 1,
+      options: ['Treat it as the cause of the pain and recommend prophylactic surgery', 'Ignore it, since osteochondral lesions on MRI are never relevant', 'Repeat the MRI in 3 months before reporting it', 'It is not always the cause of the pain, and MRI findings alone are no reason to urge prophylactic surgery'],
+      answer: 3,
       explanation: <p>In a cohort Walther and colleagues quote, osteochondral lesions were found in 42% of 37 asymptomatic professional soccer players. They advise that MRI findings alone are no reason to urge patients with minimal or no symptoms toward prophylactic surgery (<Cite doi={WALTHER}>Walther et al., Cartilage 2023</Cite>).</p>,
     },
   ],
