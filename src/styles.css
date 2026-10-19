@@ -238,6 +238,8 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .result-strip-meta { margin: 0; display: inline-flex; align-items: baseline; gap: 0.5rem; }
 .result-strip-points { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 600; color: var(--color-text); }
 .result-strip-summary { margin: 0.5rem 0 0; line-height: 1.5; color: var(--color-text); }
+/* Two- and three-metric pages keep a metric panel under the strip; the strip's rule is its top edge. */
+.result-strip + .result-panel { border-top: 0; }
 .info-card li a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
 .info-card li a:hover { color: var(--color-primary-dark); }
 .filter-row { margin: 0 0 1rem; grid-template-columns: 1fr; }

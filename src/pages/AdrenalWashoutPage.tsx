@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Form = {
@@ -133,13 +132,13 @@ export function AdrenalWashoutPage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Adrenal imaging</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Adrenal washout calculator</h2>
-          <p>Characterize an indeterminate adrenal lesion from unenhanced, portal venous, and delayed CT attenuation, with copyable reporting language.</p>
-          <p className="source-note">Source: <a href="https://radiopaedia.org/articles/adrenal-washout" target="_blank" rel="noopener noreferrer">Adrenal washout, Radiopaedia</a>.</p>
+          <span className="calc-tag">Adrenal imaging</span>
         </div>
+        <p>Characterize an indeterminate adrenal lesion from unenhanced, portal venous, and delayed CT attenuation, with copyable reporting language.</p>
+        <p className="source-note">Source: <a href="https://radiopaedia.org/articles/adrenal-washout" target="_blank" rel="noopener noreferrer">Adrenal washout, Radiopaedia</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -162,13 +161,15 @@ export function AdrenalWashoutPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result ? result.category : 'Awaiting input'} tone={result ? result.tone : 'accent'} />
-          </div>
-
+          <h3 className="sr-only">Result</h3>
           {result ? (
             <>
+              <div className="result-strip">
+                <div className="result-strip-head">
+                  <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+                </div>
+                <p className="result-strip-summary">{result.summary}</p>
+              </div>
               <div className="result-panel">
                 <div>
                   <p className="metric-label">APW</p>
@@ -179,11 +180,15 @@ export function AdrenalWashoutPage() {
                   <p className="metric-value">{result.rpw !== null ? fmtPct(result.rpw) : '—'}</p>
                 </div>
               </div>
-              <p className="result-summary">{result.summary}</p>
               <CopyBlock label="Impression" text={result.impression} />
             </>
           ) : (
-            <p className="result-summary">Enter unenhanced HU (and portal + delayed HU if unenhanced is above 10) to calculate washout.</p>
+            <div className="result-strip">
+              <div className="result-strip-head">
+                <p className="result-strip-value result-strip-value--phrase tone-neutral">Awaiting input</p>
+              </div>
+              <p className="result-strip-summary">Enter unenhanced HU (and portal + delayed HU if unenhanced is above 10) to calculate washout.</p>
+            </div>
           )}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>

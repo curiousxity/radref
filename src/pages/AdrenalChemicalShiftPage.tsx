@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Form = {
@@ -128,13 +127,13 @@ export function AdrenalChemicalShiftPage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Formulas</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Adrenal chemical shift</h2>
-          <p>Quantify opposed-phase signal loss in an adrenal nodule, with the optional adrenal-to-spleen ratio and copyable reporting language.</p>
-          <p className="source-note">Source: <a href="https://radiopaedia.org/articles/adrenal-adenoma" target="_blank" rel="noopener noreferrer">Adrenal adenoma, Radiopaedia</a>.</p>
+          <span className="calc-tag">Formulas</span>
         </div>
+        <p>Quantify opposed-phase signal loss in an adrenal nodule, with the optional adrenal-to-spleen ratio and copyable reporting language.</p>
+        <p className="source-note">Source: <a href="https://radiopaedia.org/articles/adrenal-adenoma" target="_blank" rel="noopener noreferrer">Adrenal adenoma, Radiopaedia</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -162,13 +161,15 @@ export function AdrenalChemicalShiftPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result ? result.category : 'Awaiting input'} tone={result ? result.tone : 'accent'} />
-          </div>
-
+          <h3 className="sr-only">Result</h3>
           {result ? (
             <>
+              <div className="result-strip">
+                <div className="result-strip-head">
+                  <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+                </div>
+                <p className="result-strip-summary">{result.summary}</p>
+              </div>
               <div className="result-panel">
                 <div>
                   <p className="metric-label">SII</p>
@@ -179,11 +180,15 @@ export function AdrenalChemicalShiftPage() {
                   <p className="metric-value">{result.asr !== null ? result.asr.toFixed(2) : '—'}</p>
                 </div>
               </div>
-              <p className="result-summary">{result.summary}</p>
               <CopyBlock label="Impression" text={result.impression} />
             </>
           ) : (
-            <p className="result-summary">Enter in-phase and opposed-phase signal intensity for the nodule to calculate the signal intensity index.</p>
+            <div className="result-strip">
+              <div className="result-strip-head">
+                <p className="result-strip-value result-strip-value--phrase tone-neutral">Awaiting input</p>
+              </div>
+              <p className="result-strip-summary">Enter in-phase and opposed-phase signal intensity for the nodule to calculate the signal intensity index.</p>
+            </div>
           )}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>

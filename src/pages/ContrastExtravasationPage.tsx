@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Finding = { id: string; label: string }
@@ -66,15 +65,15 @@ export function ContrastExtravasationPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Contrast safety</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Contrast extravasation management</h2>
-          <p>Exam-based triage for contrast media extravasation injuries, with urgent surgical consultation flags and copyable documentation text.</p>
-          <p className="source-note">
-            Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology. Management is driven by clinical assessment, not extravasated volume alone.
-          </p>
+          <span className="calc-tag">Contrast safety</span>
         </div>
+        <p>Exam-based triage for contrast media extravasation injuries, with urgent surgical consultation flags and copyable documentation text.</p>
+        <p className="source-note">
+          Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology. Management is driven by clinical assessment, not extravasated volume alone.
+        </p>
       </section>
 
       <section className="info-card">
@@ -111,11 +110,13 @@ export function ContrastExtravasationPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.badgeLabel} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.badgeLabel}</p>
+            </div>
+            <p className="result-strip-summary">{result.management}</p>
           </div>
-          <p className="result-summary">{result.management}</p>
           <CopyBlock label="Documentation / report text" text={result.impression} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Tier = 'mild' | 'moderate' | 'severe'
@@ -100,15 +99,15 @@ export function ContrastReactionsPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Contrast safety</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Contrast reactions reference</h2>
-          <p>Acute contrast reaction severity triage with bedside action guidance and copyable chart/report text.</p>
-          <p className="source-note">
-            Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology.
-          </p>
+          <span className="calc-tag">Contrast safety</span>
         </div>
+        <p>Acute contrast reaction severity triage with bedside action guidance and copyable chart/report text.</p>
+        <p className="source-note">
+          Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology.
+        </p>
       </section>
 
       <section className="info-card">
@@ -145,11 +144,13 @@ export function ContrastReactionsPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.badgeLabel} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.badgeLabel}</p>
+            </div>
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-          <p className="result-summary">{result.summary}</p>
 
           {result.buckets.length > 0 && (
             <ul className="plain-list">

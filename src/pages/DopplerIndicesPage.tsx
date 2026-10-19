@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Form = {
@@ -141,13 +140,13 @@ export function DopplerIndicesPage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Formulas</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Doppler indices</h2>
-          <p>Calculate resistive index, pulsatility index, and systolic/diastolic ratio from a spectral Doppler waveform.</p>
-          <p className="source-note">Source: <a href="https://radiopaedia.org/articles/resistive-index" target="_blank" rel="noopener noreferrer">Resistive index, Radiopaedia</a>.</p>
+          <span className="calc-tag">Formulas</span>
         </div>
+        <p>Calculate resistive index, pulsatility index, and systolic/diastolic ratio from a spectral Doppler waveform.</p>
+        <p className="source-note">Source: <a href="https://radiopaedia.org/articles/resistive-index" target="_blank" rel="noopener noreferrer">Resistive index, Radiopaedia</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -171,13 +170,15 @@ export function DopplerIndicesPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result ? result.category : 'Awaiting input'} tone={result ? result.tone : 'accent'} />
-          </div>
-
+          <h3 className="sr-only">Result</h3>
           {result ? (
             <>
+              <div className="result-strip">
+                <div className="result-strip-head">
+                  <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+                </div>
+                <p className="result-strip-summary">{result.summary}</p>
+              </div>
               <div className="result-panel">
                 <div>
                   <p className="metric-label">RI</p>
@@ -192,11 +193,15 @@ export function DopplerIndicesPage() {
                   <p className="metric-value">{result.sd !== null ? result.sd.toFixed(2) : '—'}</p>
                 </div>
               </div>
-              <p className="result-summary">{result.summary}</p>
               <CopyBlock label="Impression" text={result.impression} />
             </>
           ) : (
-            <p className="result-summary">Enter peak systolic and end-diastolic velocity to calculate the indices.</p>
+            <div className="result-strip">
+              <div className="result-strip-head">
+                <p className="result-strip-value result-strip-value--phrase tone-neutral">Awaiting input</p>
+              </div>
+              <p className="result-strip-summary">Enter peak systolic and end-diastolic velocity to calculate the indices.</p>
+            </div>
           )}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>

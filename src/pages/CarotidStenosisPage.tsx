@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Form = {
@@ -159,13 +158,13 @@ export function CarotidStenosisPage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Formulas</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Carotid stenosis (NASCET)</h2>
-          <p>Grade internal carotid artery stenosis from luminal diameters, with the ECST equivalent and copyable reporting language.</p>
-          <p className="source-note">Source: <a href="https://radiopaedia.org/articles/nascet" target="_blank" rel="noopener noreferrer">NASCET, Radiopaedia</a>.</p>
+          <span className="calc-tag">Formulas</span>
         </div>
+        <p>Grade internal carotid artery stenosis from luminal diameters, with the ECST equivalent and copyable reporting language.</p>
+        <p className="source-note">Source: <a href="https://radiopaedia.org/articles/nascet" target="_blank" rel="noopener noreferrer">NASCET, Radiopaedia</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -189,13 +188,15 @@ export function CarotidStenosisPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result ? result.category : 'Awaiting input'} tone={result ? result.tone : 'accent'} />
-          </div>
-
+          <h3 className="sr-only">Result</h3>
           {result ? (
             <>
+              <div className="result-strip">
+                <div className="result-strip-head">
+                  <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+                </div>
+                <p className="result-strip-summary">{result.summary}</p>
+              </div>
               <div className="result-panel">
                 <div>
                   <p className="metric-label">NASCET</p>
@@ -206,11 +207,15 @@ export function CarotidStenosisPage() {
                   <p className="metric-value">{result.ecstDisplay !== null ? `${result.ecstDisplay}%` : '—'}</p>
                 </div>
               </div>
-              <p className="result-summary">{result.summary}</p>
               <CopyBlock label="Impression" text={result.impression} />
             </>
           ) : (
-            <p className="result-summary">Enter the residual lumen and the distal normal internal carotid diameter to grade stenosis.</p>
+            <div className="result-strip">
+              <div className="result-strip-head">
+                <p className="result-strip-value result-strip-value--phrase tone-neutral">Awaiting input</p>
+              </div>
+              <p className="result-strip-summary">Enter the residual lumen and the distal normal internal carotid diameter to grade stenosis.</p>
+            </div>
           )}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
