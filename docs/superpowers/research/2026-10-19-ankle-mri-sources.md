@@ -279,3 +279,59 @@ Descriptive only (verified wording may describe a finding in the lesson or a rep
 rule chip): effusion levels (T4, one study's coding) and SPR grades I-IV (P5, a surgical
 classification with no MRI criteria). Anterior tendons (N8) and interosseous membrane (S7) are
 descriptive fields with no claims behind them.
+
+## Omitted claims for the author
+
+Everything below was left out of the ankle MRI study as a chip, a rule or a lesson claim
+because no listed paper states it, or because the paper's wording does not support the rule.
+Each item gives the claim, the paper, and what the paper says or why it was left out. Where a
+descriptive field or help text remains, that is noted. Please say whether any should be added
+from a source you hold.
+
+### Rules the papers do not support
+
+| Claim | Paper | What the paper says, or why it was left out |
+|---|---|---|
+| Normal-thickness chips for ATFL (2-3 mm), CFL (2 mm), tibionavicular (1-2 mm), tibiospring (2 mm, 1-4), posterior tibiotalar (6-11 mm), spring superomedial (3 mm, 2-5) and inferoplantar (4 mm, 2-6) | R1 (L5, M2, M3) | R1 states these as normal dimensions, not as abnormal thresholds. A chip saying "within range" or "outside range" would turn a description into a diagnostic rule. They are kept as field help text. The CFL value is a single figure (2 mm), not a range. |
+| Normal 5-7 mm tibiofibular recess chip, and any call for 7-12 mm | R1 (S3) | R1 gives 5-7 mm as normal and more than 12 mm as definitely abnormal. It says nothing about 7-12 mm, so there is no chip below 5 mm or between 7 and 12 mm. 5-7 mm stays in help text. |
+| Warning when recess > 12 mm or peroneal sheath fluid > 3 mm is entered with normal ligaments or tendons | R1 (S3), R7 (P1) | Deliberately no contradiction warning. R1 says > 12 mm "suggests" acute injury and R7 says > 3 mm is "highly specific" for tenosynovitis, so both are probabilistic. A warning would be clinical inference, not an internal inconsistency. The report instead prints "Findings as above." rather than the normal impression when one of these chips fires. |
+| Tibialis posterior tear types (Rosenberg types 1-3) | R6 (MT2) | The abstract names type 1, 2 and 3 ruptures but does not define them, and the full text is paywalled and could not be read. The tear-type field is generic (partial, longitudinal split, complete) with no chip. The lesson gives only the 95% sensitivity and 100% specificity. |
+| FDL or FHL tear grading, or a PTT-to-FDL size ratio | none (MT9) | Not stated in any listed paper. |
+| Plantar fascia MRI thickness cut-off (for example > 4 mm) | R13, R15 (PF6) | R13 gives "more than 4-5 mm" for lateral radiographs and "over 4 mm" for ultrasound, neither an MRI threshold. R15 gives group means only (7.40 mm against 3.22 mm sagittal, eight patients). The thickness field has help text saying no MRI cut-off exists in the cited papers. |
+| Spring ligament thickness cut-off for abnormal | R5 (M9) | R5 mentions a thickened superomedial band of "maximum 9 mm" in one figure caption only. No threshold is stated. Spring ligament status is a normal or abnormal choice with descriptive findings (waviness, high signal, discontinuity), no chip. |
+| Superior peroneal retinaculum grades I-IV as MRI chips | R7 (P5) | R7 quotes Eckert and Davis grades I-III and Oden grade IV as a surgical classification and gives no MRI criteria for each. Shown as descriptive options with no grade numbers and no chip. |
+| Effusion levels (none, moderate, severe) as a graded chip | R8 (T4) | The three levels are one cohort's own coding, not a validated grade. Kept as a descriptive field with help text saying so. |
+| Huuskonen lateral ligament grades 1-3 | R8 (L4) | Grade 2 is truncated in the paper ("grade 2 was assessed as a focal ligament fiber"), presumably focal fibre disruption. Grades 1 and 3 are readable but a three-grade chip cannot be built on a defective middle grade. Lateral ligament chips use Sawant's interstitial, partial and complete (L1) instead. |
+| Deltoid ligament chips for the interstitial, partial and complete grading | R1 (L1) | Sawant's grading is worded for ankle ligaments generally, but the sources table lists the lateral ligaments as the use. The deltoid shares the option set and the report wording, with no chip. |
+| Spring ligament or sinus tarsi "abnormality" definition | R14, R11 (SP6) | R14's abstract does not define sinus tarsi abnormality, and R11 does not state fat replacement or fibrosis as a sign. Both are normal or abnormal choices with descriptive findings only. |
+| MRI morphology of a peroneus brevis split (C-shaped, boomerang, bisected) | none (P16) | No listed paper describes it. R8 defines its split group clinically and surgically, and says MRI alone is reportedly not yet sufficient for split tears, which the lesson states. |
+| Achilles thickness threshold, partial-tear percentage grade, or a number for a "significant" gap | R9 (A5, A14) | R9 says significant diastasis "may be an indication for surgery" and gives no number. The lesson and the gap field's help text say so. The only Achilles number used is distal rupture within 2 cm (A6). |
+
+### Structures with no source
+
+| Item | What is there instead |
+|---|---|
+| Anterior tendons (tibialis anterior, extensor hallucis longus, extensor digitorum longus) (N8) | No listed paper discusses them. The lesson only names them, and the report has a normal or abnormal choice with free text. |
+| Interosseous membrane (S7) | R1 names it but gives no MRI findings or injury criteria. The lesson has one sentence, "Also look at the interosseous membrane.", and the report has a normal or abnormal choice with free text. |
+| Sawant's protocol table (T5) | Table 1 is an image in the PMC record and could not be read. The technique section uses R2's protocol statement only. |
+| A fixed impression template or management advice (I6) | No paper gives one. The impression format is the study's own structure. The management sentence from R1 (I2) appears in the lesson as attributed background only, never in the report. |
+
+### Wording choices for the author to check
+
+- The low-lying peroneus brevis has two definitions (Davda, R7; Huuskonen, R8). Both are kept
+  as separate chips, and neither is called the standard. The prominent peroneal tubercle
+  likewise keeps the > 5 mm height (R7) and Huuskonen's length-against-width definition
+  (R8) apart.
+- Hepple (R3 Table 5) is reproduced as written, but R3's own recommended classifications
+  are Berndt and Harty (Loomer), Giannini, ICRS and Outerbridge. The lesson says so. Hepple's
+  1999 paper is not in the reference list because its abstract does not list the stages.
+- Several figures are second-hand (the paper quotes another study): 96.2% of lesions on the
+  talar dome, the 91% and 55% Outerbridge figures, and the 42% asymptomatic soccer players
+  (R3); the 6.6-21.7% quartus prevalence and the 5 mm tubercle (R7); and the BME 3-month and
+  6-week resolution times (R2). The lesson words them as quoted.
+- Small paraphrases flagged in review: the contrast 3D-FSPGR is "reported to be superior"
+  (R1 says "superior and accurate"); the Rosenberg 95% and 100% are given "for tibialis
+  posterior rupture" (the abstract gives them for the normal and type 1-3 classification
+  against surgery).
+- Costa-Paz types (R2) carry the source's own frequency words: type I and II "usually", type
+  III "often".

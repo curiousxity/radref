@@ -459,3 +459,16 @@ describe('ankle MRI report: output text', () => {
     }
   })
 })
+
+describe('ankle MRI quiz', () => {
+  test('quiz has 8-12 questions, every answer index in range', () => {
+    expect(study.quiz.length).toBeGreaterThanOrEqual(8)
+    expect(study.quiz.length).toBeLessThanOrEqual(12)
+    for (const q of study.quiz) {
+      expect(Number.isInteger(q.answer), q.id).toBe(true)
+      expect(q.answer, q.id).toBeGreaterThanOrEqual(0)
+      expect(q.answer, q.id).toBeLessThan(q.options.length)
+    }
+    expect(new Set(study.quiz.map((q) => q.id)).size).toBe(study.quiz.length)
+  })
+})

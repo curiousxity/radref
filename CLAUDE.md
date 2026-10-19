@@ -339,7 +339,7 @@ MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, 
 FESS, temporal bone CT. Drafted from the guidelines rather than from the site author's
 notes, and labelled as unreviewed drafts in their source note until the author signs
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
-screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017).
+screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
 
 How it is built:
 
