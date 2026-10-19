@@ -43,6 +43,8 @@ const MIGRATED: readonly File[] = [
   'ossicular-chain.html',
   'shoulder.html',
   'knee.html',
+  'wrist.html',
+  'ankle.html',
 ]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
@@ -76,8 +78,8 @@ const CHROME: Record<File, string[]> = {
   ],
   'shoulder.html': ['--bg', '--panel', '--panel-2', '--line', '--ink', '--ink-soft'],
   'knee.html': ['--ink', '--slate', '--slate-2', '--line', '--paper', '--paper-dim', '--muted'],
-  'wrist.html': [],
-  'ankle.html': [],
+  'wrist.html': ['--ink', '--ink-2', '--paper', '--line', '--link'],
+  'ankle.html': ['--bg', '--paper', '--ink', '--ink-2', '--line', '--link', '--accent'],
   'online/tmj.html': [],
   'online/skull-base.html': [],
   'online/suprahyoid-spaces.html': [],

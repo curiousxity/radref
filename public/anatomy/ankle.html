@@ -4,24 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Ankle in 3D — real anatomy (BodyParts3D), injury mechanisms and imaging</title>
-<style>
-  @font-face {
-    /* The same file the app shell already precaches, so this costs no extra bytes. */
-    font-family:'Source Serif 4 Variable';
-    font-style:normal;
-    font-weight:200 900;
-    font-display:swap;
-    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
   }
-</style>
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
 <style>
+  /* Chrome follows the site theme (shared/radref.css); structure colours keep their values.
+     --accent was both the UI accent and the selected structure's glow (emissive 0xE0A100):
+     the UI use is now --rr-accent, and the scene keeps #E0A100 as --accent-scene. */
   :root{
-    --bg:#E9EDF1; --paper:#FFFFFF; --ink:#1C2430; --ink-2:#4B5563; --line:#D4DAE1;
-    --room:#1E2A38; --link:#146C7A; --accent:#E0A100;
+    --bg:var(--rr-bg); --paper:var(--rr-surface); --ink:var(--rr-text); --ink-2:var(--rr-muted); --line:var(--rr-hairline);
+    --room:#1E2A38; --link:var(--rr-accent); --accent:var(--rr-accent);
+    --accent-scene:#E0A100;
     --bone:#E8E0CC; --lig:#3B9BC9; --ten:#D9806B; --fascia:#D8C27A;
     --strain:#FFC857; --tear:#FF6B35; --rupture:#E63946;
-    --serif: 'Source Serif 4 Variable',"Iowan Old Style",Georgia,serif;
-    --sans: -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --serif: var(--rr-font-sans);
+    --sans: var(--rr-font-sans);
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
@@ -30,16 +52,27 @@
   header{padding:18px 22px 12px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
   header h1{font-family:var(--serif);font-weight:500;font-size:28px;margin:0;letter-spacing:-0.01em}
   header p{margin:4px 0 0;color:var(--ink-2);max-width:60ch}
-  .modes{display:flex;gap:6px;background:#DDE3E9;padding:4px;border-radius:999px}
+  .modes{display:flex;gap:6px;background:var(--rr-hairline);padding:4px;border-radius:999px}
   .modes button{border:0;background:transparent;padding:7px 16px;border-radius:999px;color:var(--ink-2)}
   .modes button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,0.9fr);gap:14px;padding:0 22px 22px;min-height:calc(100vh - 100px)}
   #stage{position:relative;background:var(--room);border-radius:14px;overflow:hidden;min-height:520px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+  /* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+     names for them, take the always-dark --rr-view-* values. */
+  #stage{
+    color-scheme:dark;
+    color:var(--rr-view-text);
+    --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+    --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+    --rr-accent:var(--rr-view-accent);
+    --bg:var(--rr-view-bg); --paper:var(--rr-view-surface); --ink:var(--rr-view-text); --ink-2:var(--rr-view-muted);
+    --line:var(--rr-view-border); --link:var(--rr-view-accent); --accent:var(--rr-view-accent);
+  }
   #stage canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
   #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-  .lbl{position:absolute;transform:translate(-50%,-140%);font-size:11px;letter-spacing:.01em;color:#EAF0F5;background:rgba(20,30,42,.72);padding:2px 6px;border-radius:4px;white-space:nowrap;pointer-events:auto;cursor:pointer;border:1px solid rgba(255,255,255,.08)}
+  .lbl{position:absolute;transform:translate(-50%,-140%);font-size:11px;letter-spacing:.01em;color:#EAF0F5;background:rgba(20,30,42,.72);padding:2px 6px;border-radius:4px;white-space:nowrap;pointer-events:auto;cursor:pointer;border:1px solid rgba(255,255,255,.08);min-height:0}
   .lbl::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:9px;background:rgba(234,240,245,.6)}
-  .lbl.sel{background:var(--accent);color:#1C2430;border-color:transparent;font-weight:600}
+  .lbl.sel{background:var(--accent-scene);color:#1C2430;border-color:transparent;font-weight:600}
   .lbl.hot{background:var(--rupture);color:#fff;border-color:transparent}
   .hud{position:absolute;left:12px;right:12px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none}
   .hud.top{top:12px}.hud.bottom{bottom:12px;justify-content:space-between;align-items:flex-end}
@@ -63,25 +96,25 @@
   .kicker{color:var(--ink-2);font-size:13px;margin-bottom:12px}
   .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);margin-right:6px}
   .list{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
-  .list button{border:1px solid var(--line);background:#F6F8FA;border-radius:8px;padding:5px 10px;font-size:13px;color:var(--ink);text-align:left}
+  .list button{border:1px solid var(--line);background:var(--rr-bg);border-radius:8px;padding:5px 10px;font-size:13px;color:var(--ink);text-align:left}
   .list button:hover{border-color:var(--link);color:var(--link)}
   .list button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
   .mech{display:grid;gap:8px;margin:10px 0 16px}
-  .mech button{border:1px solid var(--line);background:#F6F8FA;border-radius:10px;padding:10px 12px;text-align:left;color:var(--ink)}
+  .mech button{border:1px solid var(--line);background:var(--rr-bg);border-radius:10px;padding:10px 12px;text-align:left;color:var(--ink)}
   .mech button:hover{border-color:var(--link)}
   .mech button b{display:block;font-weight:600}
   .mech button span{color:var(--ink-2);font-size:13px}
   .steps{display:flex;gap:6px;align-items:center;margin:10px 0 14px;flex-wrap:wrap}
-  .steps .dot{width:10px;height:10px;border-radius:50%;background:var(--line);border:0;padding:0}
+  .steps .dot{width:10px;height:10px;min-height:0;border-radius:50%;background:var(--rr-border);border:0;padding:0}
   .steps .dot[aria-current="step"]{background:var(--accent);transform:scale(1.25)}
   .nav{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
-  .nav button{border:1px solid var(--line);background:#F6F8FA;border-radius:8px;padding:7px 14px}
-  .nav button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .nav button{border:1px solid var(--line);background:var(--rr-bg);border-radius:8px;padding:7px 14px}
+  .nav button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .nav button:disabled{opacity:.4;cursor:default}
-  .see{background:#F3F6F9;border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 8px 8px 0;margin:8px 0 12px;max-width:62ch}
+  .see{background:var(--rr-bg);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 8px 8px 0;margin:8px 0 12px;max-width:62ch}
   .see b{display:block;margin-bottom:3px}
   .papers li{margin-bottom:8px}
-  .papers a{text-decoration:none;border-bottom:1px solid #BFD9DE}
+  .papers a{text-decoration:none;border-bottom:1px solid var(--rr-border)}
   .papers a:hover{border-bottom-color:var(--link)}
   .papers small{display:block;color:var(--ink-2)}
   .back{border:0;background:transparent;color:var(--link);padding:0;margin-bottom:8px;font-size:13px}

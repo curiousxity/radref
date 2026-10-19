@@ -4,45 +4,76 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Wrist in 3D — anatomy, mechanics and injury for radiologists</title>
-<style>
-  @font-face {
-    /* The same file the app shell already precaches, so this costs no extra bytes. */
-    font-family:'Source Serif 4 Variable';
-    font-style:normal;
-    font-weight:200 900;
-    font-display:swap;
-    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
   }
-</style>
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
 <style>
+  /* Chrome follows the site theme (shared/radref.css); structure colours keep their values.
+     Here --ink is the text and --paper the page background. */
   :root{
-    --ink:#1e2a38; --ink-2:#4a5866; --paper:#eef1f4; --paper-2:#e2e7ec; --line:#cfd6dd;
-    --link:#1f6f8b; --injury:#c0392b; --ok:#2a7f62;
+    --ink:var(--rr-text); --ink-2:var(--rr-muted); --paper:var(--rr-bg); --paper-2:#e2e7ec; --line:var(--rr-hairline);
+    --link:var(--rr-accent); --injury:#c0392b; --ok:#2a7f62;
     --bone:#e4d6ba; --lig:#2a9d8f; --tendon:#e9a23b; --nerve:#f4e04d; --vessel:#c8383b; --ret:#8fc1bb; --tfcc:#9db8d6;
     --view-bg:#23282e;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;color:var(--ink);background:var(--paper)}
+  html,body{margin:0;height:100%;font-family:var(--rr-font-sans);color:var(--ink);background:var(--paper)}
   body{display:flex;flex-direction:column;overflow:hidden}
-  header{display:flex;align-items:center;gap:18px;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  header h1{font-family:'Source Serif 4 Variable', Georgia, serif;font-weight:600;font-size:19px;margin:0;letter-spacing:-.01em}
-  header h1 small{display:block;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;font-weight:400;font-size:12px;color:var(--ink-2);margin-top:2px}
+  header{display:flex;align-items:center;gap:18px;padding:10px 18px;background:var(--rr-surface);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  header h1{font-family:var(--rr-font-sans);font-weight:600;font-size:19px;margin:0;letter-spacing:-.01em}
+  header h1 small{display:block;font-family:var(--rr-font-sans);font-weight:400;font-size:12px;color:var(--ink-2);margin-top:2px}
   .spacer{flex:1}
-  .seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .seg button{border:0;background:#fff;padding:7px 12px;font:inherit;font-size:13px;color:var(--ink);cursor:pointer}
+  .seg{display:flex;border:1px solid var(--rr-border);border-radius:8px;overflow:hidden}
+  .seg button{border:0;background:var(--rr-surface);padding:7px 12px;font:inherit;font-size:13px;color:var(--ink);cursor:pointer}
   .seg button+button{border-left:1px solid var(--line)}
-  .seg button.on{background:var(--ink);color:#fff}
+  .seg button.on{background:var(--ink);color:var(--paper)}
   .seg button:focus-visible{outline:2px solid var(--link);outline-offset:-2px}
   main{flex:1;display:flex;min-height:0}
   #viewwrap{flex:1;position:relative;background:var(--view-bg);min-width:0}
+  /* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+     names for them, take the always-dark --rr-view-* values. */
+  #viewwrap{
+    color-scheme:dark;
+    color:var(--rr-view-text);
+    --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+    --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+    --rr-accent:var(--rr-view-accent);
+    --ink:var(--rr-view-text); --ink-2:var(--rr-view-muted); --paper:var(--rr-view-bg); --line:var(--rr-view-border);
+    --link:var(--rr-view-accent);
+  }
   #view{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
   #view.dragging{cursor:grabbing}
   #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
   .lbl{position:absolute;transform:translate(-50%,-140%);font-size:11.5px;line-height:1;padding:3px 6px;border-radius:4px;background:rgba(20,24,28,.72);color:#f2f2f2;white-space:nowrap;pointer-events:none;letter-spacing:.01em}
-  .lbl.hover{background:#fff;color:var(--ink);font-weight:600;font-size:12.5px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+  .lbl.hover{background:#fff;color:#1e2a38;font-weight:600;font-size:12.5px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
   .lbl.sel{background:#fff;color:var(--injury);font-weight:600}
   #overlay{position:absolute;left:12px;bottom:12px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;max-width:calc(100% - 24px)}
-  .card{background:rgba(255,255,255,.93);border-radius:8px;padding:8px 10px;font-size:12.5px;color:var(--ink);backdrop-filter:blur(3px)}
+  .card{background:rgba(20,23,25,.92);border:1px solid var(--rr-hairline);border-radius:8px;padding:8px 10px;font-size:12.5px;color:var(--ink);backdrop-filter:blur(3px)}
   .card .row{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
   .card label{display:inline-flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
   .sw{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.2)}
@@ -51,37 +82,37 @@
   #loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#cfd6dd;font-size:14px;background:var(--view-bg)}
   aside{width:430px;max-width:46%;background:var(--paper);border-left:1px solid var(--line);overflow-y:auto;overscroll-behavior:contain}
   #panel{padding:18px 20px 40px}
-  #panel h2{font-family:'Source Serif 4 Variable', Georgia, serif;font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+  #panel h2{font-family:var(--rr-font-sans);font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
   #panel h3{font-size:13.5px;font-weight:600;margin:18px 0 6px;color:var(--ink)}
   #panel p{font-size:14px;line-height:1.55;margin:0 0 8px}
   #panel ul{padding-left:18px;margin:4px 0 8px;font-size:14px;line-height:1.5}
   #panel li{margin-bottom:4px}
-  .tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:99px;margin:0 0 10px;color:#fff;background:var(--ink-2)}
+  .tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:99px;margin:0 0 10px;color:#fff;background:#4a5866}
   .tag.bone{background:#8a7a5c}.tag.lig{background:var(--lig)}.tag.tendon{background:#c47f1a}.tag.nerve{background:#a89a12}.tag.vessel{background:var(--vessel)}.tag.ret{background:#4f8e87}.tag.tfcc{background:#4b6e93}
-  .plain{background:#fff;border-left:3px solid var(--link);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:6px}
-  .injury{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .plain{background:var(--rr-surface);border-left:3px solid var(--link);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:6px}
+  .injury{background:var(--rr-surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px}
   .injury b{display:block;color:var(--injury);font-size:14px;margin-bottom:4px}
   .injury p{margin:0 0 5px}
   .injury .img{color:var(--ink-2)}
   .injury .img::before{content:"On imaging: ";color:var(--ink);font-weight:600}
-  .pearl{background:#fff7e6;border:1px solid #f0d9a8;border-radius:8px;padding:9px 12px;font-size:13.5px;line-height:1.5}
+  .pearl{background:rgba(233,162,59,.12);border:1px solid rgba(233,162,59,.45);border-radius:8px;padding:9px 12px;font-size:13.5px;line-height:1.5}
   a{color:var(--link)}
-  .papers a{display:block;font-size:13.5px;line-height:1.4;margin-bottom:6px;text-decoration:none;padding:7px 10px;background:#fff;border:1px solid var(--line);border-radius:6px}
+  .papers a{display:block;font-size:13.5px;line-height:1.4;margin-bottom:6px;text-decoration:none;padding:7px 10px;background:var(--rr-surface);border:1px solid var(--line);border-radius:6px}
   .papers a:hover{border-color:var(--link)}
   .papers a span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:2px}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
-  .chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink)}
+  .chip{border:1px solid var(--line);background:var(--rr-surface);border-radius:99px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink)}
   .chip:hover{border-color:var(--ink)}
-  .chip.mech{border-color:#e8b4ad;background:#fdf1ef;color:var(--injury)}
-  .mechcard{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer;color:var(--ink)}
+  .chip.mech{border-color:rgba(192,57,43,.45);background:rgba(192,57,43,.08);color:var(--injury)}
+  .mechcard{display:block;width:100%;text-align:left;background:var(--rr-surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer;color:var(--ink)}
   .mechcard:hover{border-color:var(--injury)}
   .mechcard b{display:block;font-size:14.5px;margin-bottom:3px}
   .mechcard span{font-size:13px;color:var(--ink-2);line-height:1.4}
   .stepnav{display:flex;align-items:center;gap:8px;margin:10px 0 14px}
-  .stepnav button{font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .stepnav button{font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--rr-surface);color:inherit;cursor:pointer}
   .stepnav button:disabled{opacity:.4;cursor:default}
   .stepnav .dots{display:flex;gap:5px;flex:1;justify-content:center}
-  .stepnav .dot{width:9px;height:9px;border-radius:99px;background:var(--line);border:0;padding:0;cursor:pointer}
+  .stepnav .dot{width:9px;height:9px;min-height:0;border-radius:99px;background:var(--rr-border);border:0;padding:0;cursor:pointer}
   .stepnav .dot.on{background:var(--injury)}
   .steptitle{font-size:16px;font-weight:600;margin:0 0 6px}
   .back{background:none;border:0;color:var(--link);font:inherit;font-size:13px;cursor:pointer;padding:0;margin-bottom:10px}
@@ -91,17 +122,17 @@
   details{margin:8px 0}
   summary{cursor:pointer;font-weight:600;font-size:14px}
   .note{font-size:12.5px;color:var(--ink-2);line-height:1.45}
-  .qopt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:6px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .qopt{display:block;width:100%;text-align:left;background:var(--rr-surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:6px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
   .qopt:hover{border-color:var(--ink)}
-  .qopt.right{border-color:var(--ok);background:#eaf5ef;font-weight:600}
-  .qopt.wrong{border-color:var(--injury);background:#fbeeec}
+  .qopt.right{border-color:var(--ok);background:rgba(42,127,98,.12);font-weight:600}
+  .qopt.wrong{border-color:var(--injury);background:rgba(192,57,43,.1)}
   .qopt:disabled{cursor:default}
   .qscore{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-2);margin:6px 0 12px}
   .qbar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:12px}
   .qbar i{display:block;height:100%;background:var(--link)}
   .verdict{font-weight:600;margin:10px 0 4px}
   .verdict.ok{color:var(--ok)}.verdict.no{color:var(--injury)}
-  .findbox{background:#fff;border:2px dashed var(--link);border-radius:8px;padding:14px;text-align:center;font-size:15px;margin:8px 0}
+  .findbox{background:var(--rr-surface);border:2px dashed var(--link);border-radius:8px;padding:14px;text-align:center;font-size:15px;margin:8px 0}
   @media (max-width:860px){
     main{flex-direction:column}
     #viewwrap{height:52vh;flex:none}
