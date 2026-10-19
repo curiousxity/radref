@@ -91,3 +91,52 @@ describe('site stylesheet', () => {
     expect(colourTokens(blocks(DARK_BLOCK)).get('--color-bg')).toBe(THEME_COLORS.dark)
   })
 })
+
+// public/anatomy/shared/radref.css repeats the site palette as --rr-* tokens for the anatomy
+// viewers (its header comment says to change them together). Light is on :root, dark on
+// [data-theme="dark"], as here.
+describe('anatomy stylesheet tokens', () => {
+  const rr = readFileSync(new URL('../public/anatomy/shared/radref.css', import.meta.url), 'utf8')
+  const RR_ROOT = /:root\s*\{[^}]*\}/
+  const RR_DARK = /\[data-theme="dark"\]\s*\{[^}]*\}/
+
+  function rrTokens(block: string): Map<string, string> {
+    const tokens = new Map<string, string>()
+    for (const [, name, value] of block.matchAll(/(--rr-[\w-]+)\s*:\s*([^;]+);/g)) tokens.set(name, value.trim())
+    return tokens
+  }
+
+  const RR_TO_SITE: Record<string, string> = {
+    '--rr-bg': '--color-bg',
+    '--rr-surface': '--color-surface',
+    '--rr-hairline': '--color-hairline',
+    '--rr-border': '--color-border',
+    '--rr-text': '--color-text',
+    '--rr-muted': '--color-text-muted',
+    '--rr-accent': '--color-accent',
+    '--rr-warn': '--color-warn',
+    '--rr-good': '--color-good',
+  }
+
+  const rrLight = rrTokens(rr.match(RR_ROOT)?.[0] ?? '')
+  const rrDark = rrTokens(rr.match(RR_DARK)?.[0] ?? '')
+  const siteLight = colourTokens(blocks(ROOT_BLOCK))
+  const siteDark = colourTokens(blocks(DARK_BLOCK))
+
+  test('theme tokens equal the site tokens in both themes', () => {
+    for (const [rrName, siteName] of Object.entries(RR_TO_SITE)) {
+      expect(rrLight.get(rrName), `light ${rrName}`).toBeDefined()
+      expect(rrLight.get(rrName), `light ${rrName}`).toBe(siteLight.get(siteName))
+      expect(rrDark.get(rrName), `dark ${rrName}`).toBeDefined()
+      expect(rrDark.get(rrName), `dark ${rrName}`).toBe(siteDark.get(siteName))
+    }
+  })
+
+  test('the always-dark viewport matches --color-viewport', () => {
+    // --rr-view-bg is declared once, on :root, and holds in both themes.
+    expect(rrLight.get('--rr-view-bg')).toBeDefined()
+    expect(rrDark.has('--rr-view-bg')).toBe(false)
+    expect(rrLight.get('--rr-view-bg')).toBe(siteLight.get('--color-viewport'))
+    expect(rrLight.get('--rr-view-bg')).toBe(siteDark.get('--color-viewport'))
+  })
+})

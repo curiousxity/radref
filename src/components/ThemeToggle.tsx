@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { applyTheme, readStoredTheme, writeStoredTheme, type Theme } from '../lib/theme'
+import { THEME_KEY, applyTheme, readStoredTheme, resolveTheme, writeStoredTheme, type Theme } from '../lib/theme'
 
 export function ThemeToggle() {
   // The pre-paint script in index.html has already set data-theme.
@@ -16,8 +16,19 @@ export function ThemeToggle() {
       applyTheme(next)
       setTheme(next)
     }
+    // Another tab (or an anatomy viewer) changed the stored choice, or cleared storage.
+    function onStorage(event: StorageEvent) {
+      if (event.key !== THEME_KEY && event.key !== null) return
+      const next = resolveTheme(readStoredTheme(), query.matches)
+      applyTheme(next)
+      setTheme(next)
+    }
     query.addEventListener('change', onChange)
-    return () => query.removeEventListener('change', onChange)
+    window.addEventListener('storage', onStorage)
+    return () => {
+      query.removeEventListener('change', onChange)
+      window.removeEventListener('storage', onStorage)
+    }
   }, [])
 
   function handleToggle() {

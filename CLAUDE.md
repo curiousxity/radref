@@ -55,7 +55,7 @@ for the viewers.
 
 ## Colour
 
-The look is "reading room": dark-first, hairline rules instead of bordered cards, teal
+The look is "reading room": follows the system theme, with a toggle; hairline rules instead of bordered cards, teal
 as the only accent. Every colour is a token in `src/styles.css`: the light palette on
 `:root`, the dark palette in a `[data-theme="dark"]` block that redefines every
 `--color-*` token. No colour literal belongs anywhere else in the file, shadows and the
@@ -278,7 +278,11 @@ sliders a 44px hit area.
   variables and script colour literals taken before the restyle. Only names in that file's
   `CHROME` list may change. Where one variable served both UI and scene, the scene half
   kept the old value under a `-scene` name (e.g. `--accent-scene`), pinned in the same
-  test. A new viewer must be added to `FILES`, `MIGRATED`, `CHROME` and the snapshot.
+  test. A new viewer must be added to `FILES` and `CHROME` in `src/anatomy.test.ts`, and to
+  the snapshot with `npm run snapshot:anatomy -- <path under public/anatomy/>`
+  (`scripts/snapshot-anatomy-colours.mjs`), run before the viewer is restyled. The script
+  only adds new files; it refuses to regenerate an existing entry, since those are the
+  pre-restyle baseline.
 
 ### Online-only anatomy
 
@@ -309,7 +313,7 @@ home page.
   the lesson, e.g. the prostate lesson lists `/pi-rads`). `App.tsx` renders it after every
   routed page, so pages never import it themselves.
 
-The site copy (header subtitle, home headline, search labels, manifest and meta
+The site copy (home headline, search labels, manifest and meta
 descriptions) presents it as calculators, lessons and 3D anatomy. Keep it that way
 when adding a new kind of content.
 

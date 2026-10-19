@@ -4,7 +4,8 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 import snapshot from './anatomy-colours.json'
 
-// Guards the 16 standalone anatomy viewers in public/anatomy/ (see CLAUDE.md, Anatomy).
+// Guards the 16 standalone anatomy viewers in public/anatomy/ (see CLAUDE.md, Anatomy). Every
+// one is on public/anatomy/shared/radref.css; FILES must list every viewer on disk.
 // anatomy-colours.json is a snapshot, taken before any viewer was restyled, of each file's
 // colours in two parts:
 // - `css`: every custom property in a <style> rule block whose value is a hex or
@@ -35,27 +36,6 @@ const FILES = [
 ] as const
 
 type File = (typeof FILES)[number]
-
-// Viewers already moved onto public/anatomy/shared/radref.css. The link, theme and
-// no-remote-fonts tests run over these; the colour guards below run over all of FILES.
-const MIGRATED: readonly File[] = [
-  'otic-capsule.html',
-  'ossicular-chain.html',
-  'shoulder.html',
-  'knee.html',
-  'wrist.html',
-  'ankle.html',
-  'online/tmj.html',
-  'online/skull-base.html',
-  'online/suprahyoid-spaces.html',
-  'online/larynx.html',
-  'online/cervical-spine.html',
-  'online/brachial-plexus.html',
-  'online/lumbar-spine.html',
-  'online/pelvis-si.html',
-  'online/elbow.html',
-  'online/foot.html',
-]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
 // shared radref.css tokens. An entry is either a full `selector|--name` key from the
@@ -254,10 +234,8 @@ function exempt(file: File, key: string): boolean {
 }
 
 describe('anatomy viewers', () => {
-  test('every viewer is on the shared stylesheet', () => {
-    expect([...MIGRATED].sort()).toEqual([...FILES].sort())
-    // FILES itself must list every viewer on disk (public/anatomy/ and its online/ folder;
-    // shared/ and vendor/ hold no viewers).
+  test('FILES lists every viewer on disk', () => {
+    // public/anatomy/ and its online/ folder; shared/ and vendor/ hold no viewers.
     const onDisk = [
       ...readdirSync(new URL('../public/anatomy/', import.meta.url)),
       ...readdirSync(new URL('../public/anatomy/online/', import.meta.url)).map((n) => `online/${n}`),
@@ -271,14 +249,14 @@ describe('anatomy viewers', () => {
   })
 
   test('links the shared stylesheet', () => {
-    for (const file of MIGRATED) {
+    for (const file of FILES) {
       const href = file.startsWith('online/') ? '../shared/radref.css' : 'shared/radref.css'
       expect(read(file), file).toContain(`href="${href}"`)
     }
   })
 
   test('follows the site theme', () => {
-    for (const file of MIGRATED) {
+    for (const file of FILES) {
       const html = read(file)
       expect(html, file).toContain('radref-theme')
       expect(html, file).toContain("addEventListener('storage'")
@@ -286,7 +264,7 @@ describe('anatomy viewers', () => {
   })
 
   test('no remote fonts or CDNs', () => {
-    for (const file of MIGRATED) {
+    for (const file of FILES) {
       const html = read(file)
       const links = html.match(/<link\b[^>]*>/g) ?? []
       const scripts = html.match(/<script\b[^>]*\bsrc=[^>]*>/g) ?? []
@@ -295,6 +273,16 @@ describe('anatomy viewers', () => {
       expect(html, file).not.toContain('Source Serif')
       expect(html, file).not.toContain('@font-face')
     }
+  })
+
+  // radref.css's header comment holds the pre-paint theme script each viewer inlines in its
+  // <head>; a copy that drifts would theme that viewer differently from the rest.
+  test('inlined pre-paint snippet is identical to the one in radref.css', () => {
+    const snippet = /<script>\n\(function \(\) \{\n {2}var KEY = 'radref-theme'[\s\S]*?<\/script>/
+    const css = readFileSync(new URL('../public/anatomy/shared/radref.css', import.meta.url), 'utf8')
+    const reference = css.match(snippet)?.[0]
+    expect(reference).toBeDefined()
+    for (const file of FILES) expect(read(file).match(snippet)?.[0], file).toBe(reference)
   })
 
   test('structure colours unchanged', () => {

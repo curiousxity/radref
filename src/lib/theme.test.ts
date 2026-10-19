@@ -1,5 +1,8 @@
+/// <reference types="node" />
+// The app tsconfig only loads vite/client types, so this file pulls in Node's for node:fs.
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { parseStoredTheme, readStoredTheme, resolveTheme, writeStoredTheme } from './theme'
+import { THEME_COLORS, parseStoredTheme, readStoredTheme, resolveTheme, writeStoredTheme } from './theme'
 
 describe('theme', () => {
   it('parses only the two known values', () => {
@@ -37,5 +40,28 @@ describe('theme', () => {
       if (original) Object.defineProperty(globalThis, 'localStorage', original)
       else delete (globalThis as { localStorage?: unknown }).localStorage
     }
+  })
+})
+
+// index.html cannot import THEME_COLORS: its pre-paint script and theme-color metas repeat
+// the two backgrounds as literals.
+describe('index.html theme colours', () => {
+  const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8')
+
+  it('theme-color metas use THEME_COLORS', () => {
+    const light = html.match(/<meta name="theme-color" media="\(prefers-color-scheme: light\)" content="([^"]+)"/)
+    const dark = html.match(/<meta name="theme-color" media="\(prefers-color-scheme: dark\)" content="([^"]+)"/)
+    expect(light?.[1]).toBe(THEME_COLORS.light)
+    expect(dark?.[1]).toBe(THEME_COLORS.dark)
+  })
+
+  it('the pre-paint script uses THEME_COLORS', () => {
+    const script = html.match(/<script>([\s\S]*?)<\/script>/)?.[1] ?? ''
+    expect(script).toContain('radref-theme')
+    const pick = script.match(/theme === 'dark' \? '(#[0-9a-fA-F]{6})' : '(#[0-9a-fA-F]{6})'/)
+    expect(pick?.[1]).toBe(THEME_COLORS.dark)
+    expect(pick?.[2]).toBe(THEME_COLORS.light)
+    // No other colour literal hides in the script.
+    expect(script.match(/#[0-9a-fA-F]{3,8}\b/g)?.sort()).toEqual([THEME_COLORS.dark, THEME_COLORS.light].sort())
   })
 })
