@@ -5,6 +5,7 @@ import { ThemeToggle } from './components/ThemeToggle'
 import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
 import { calculators, categories } from './data/calculators'
+import { pushRecent, readRecent, writeRecent } from './lib/recent'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
@@ -20,6 +21,11 @@ export default function App() {
 
   useEffect(() => {
     setMenuOpen(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    const path = location.pathname
+    if (calculators.some((item) => item.path === path)) writeRecent(pushRecent(readRecent(), path))
   }, [location.pathname])
 
   return (
