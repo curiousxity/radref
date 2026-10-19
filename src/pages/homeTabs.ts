@@ -40,3 +40,30 @@ export function isSearchShortcut(event: KeyLike): boolean {
   const tag = typeof target.tagName === 'string' ? target.tagName.toUpperCase() : ''
   return tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT'
 }
+
+/**
+ * What the panel under the (always visible) tab row shows: search results while the query
+ * has any text, otherwise the selected tab's content.
+ */
+export function homePanel(tab: HomeTab, query: string): HomeTab | 'search' {
+  return query.trim() !== '' ? 'search' : tab
+}
+
+/** Choosing a tab clears the search, so the tab's own content shows. */
+export function queryAfterTabSelect(): string {
+  return ''
+}
+
+/**
+ * The tab a key moves to in a row of `count` tabs (ARIA tabs pattern): arrows step and wrap,
+ * Home and End jump to the ends. Null for any other key.
+ */
+export function tabIndexForKey(key: string, current: number, count: number): number | null {
+  switch (key) {
+    case 'ArrowRight': return (current + 1) % count
+    case 'ArrowLeft': return (current - 1 + count) % count
+    case 'Home': return 0
+    case 'End': return count - 1
+    default: return null
+  }
+}
