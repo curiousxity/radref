@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { calculators } from './calculators'
+import { calculators, relatedTo } from './calculators'
 
 describe('registry', () => {
   test('tags are short', () => {
@@ -19,5 +19,11 @@ describe('registry', () => {
     expect(byPath('/lungrads')?.tag).toBe('v2022')
     // The TI-RADS page's title row states "ACR 2017", so the home row may carry it.
     expect(byPath('/tirads')?.tag).toBe('ACR 2017')
+  })
+
+  test('the ankle MRI study links to the 3D ankle, both ways', () => {
+    // The study declares related: ['/ankle']; relatedTo makes it show on the ankle page too.
+    expect(relatedTo('/ankle').map((item) => item.path)).toContain('/studies/ankle-mri')
+    expect(relatedTo('/studies/ankle-mri').map((item) => item.path)).toContain('/ankle')
   })
 })
