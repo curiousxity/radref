@@ -1,8 +1,35 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { initialLungRadsForm as initialForm, lungRads as calc } from '../logic/lungrads'
 import type { LungRadsForm as Form, NoduleType, PriorCategory, Timepoint } from '../logic/lungrads'
+
+const noduleTypeOptions: { value: NoduleType; label: string }[] = [
+  { value: 'solid', label: 'Solid' },
+  { value: 'partSolid', label: 'Part-solid' },
+  { value: 'groundGlass', label: 'Ground-glass / nonsolid' },
+  { value: 'airway', label: 'Airway nodule' },
+  { value: 'infectious', label: 'Potentially infectious / inflammatory' },
+]
+
+const timepointOptions: { value: Timepoint; label: string }[] = [
+  { value: 'baseline', label: 'Baseline' },
+  { value: 'new', label: 'New' },
+  { value: 'growing', label: 'Growing' },
+  { value: 'stable', label: 'Stable / decreased' },
+]
+
+const priorCategoryOptions: { value: PriorCategory; label: string }[] = [
+  { value: 'none', label: 'Not on short-interval follow-up' },
+  { value: '3', label: 'Category 3 (6-month LDCT)' },
+  { value: '4A', label: 'Category 4A (3-month LDCT)' },
+  { value: '4B', label: 'Category 4B (workup)' },
+]
+
+const airwaySegmentOptions: { value: Form['airwaySegment']; label: string }[] = [
+  { value: 'subsegmental', label: 'Subsegmental' },
+  { value: 'segmentalOrMoreProximal', label: 'Segmental or more proximal' },
+]
 
 export function LungRadsPage() {
   const [form, setForm] = useState<Form>(initialForm)
@@ -21,38 +48,21 @@ export function LungRadsPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Lung-RADS v2022</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Lung-RADS calculator</h2>
-          <p>Screening LDCT helper for dominant pulmonary nodules with category assignment, management text, and copyable impression output.</p>
-          <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/Lung-RADS" target="_blank" rel="noopener noreferrer">ACR Lung-RADS v2022 update and companion assessment category summaries</a>.</p>
+          <span className="calc-tag">Lung-RADS v2022</span>
         </div>
+        <p>Screening LDCT helper for dominant pulmonary nodules with category assignment, management text, and copyable impression output.</p>
+        <p className="source-note">Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Reporting-and-Data-Systems/Lung-RADS" target="_blank" rel="noopener noreferrer">ACR Lung-RADS v2022 update and companion assessment category summaries</a>.</p>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Dominant finding</h3>
           <div className="form-grid">
-            <label>
-              <span>Nodule type</span>
-              <select value={form.noduleType} onChange={(e) => update('noduleType', e.target.value as NoduleType)}>
-                <option value="solid">Solid</option>
-                <option value="partSolid">Part-solid</option>
-                <option value="groundGlass">Ground-glass / nonsolid</option>
-                <option value="airway">Airway nodule</option>
-                <option value="infectious">Potentially infectious / inflammatory</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Nodule type" layout="stack" value={form.noduleType} options={noduleTypeOptions} onChange={(value) => update('noduleType', value)} />
 
-            <label>
-              <span>Comparison status</span>
-              <select value={form.timepoint} onChange={(e) => update('timepoint', e.target.value as Timepoint)}>
-                <option value="baseline">Baseline</option>
-                <option value="new">New</option>
-                <option value="growing">Growing</option>
-                <option value="stable">Stable / decreased</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Comparison status" layout="stack" value={form.timepoint} options={timepointOptions} onChange={(value) => update('timepoint', value)} />
 
             <label>
               <span>Mean diameter (mm)</span>
@@ -68,15 +78,7 @@ export function LungRadsPage() {
             </label>
 
             {showStepped && (
-              <label>
-                <span>Followed as</span>
-                <select value={form.priorCategory} onChange={(e) => update('priorCategory', e.target.value as PriorCategory)}>
-                  <option value="none">Not on short-interval follow-up</option>
-                  <option value="3">Category 3 (6-month LDCT)</option>
-                  <option value="4A">Category 4A (3-month LDCT)</option>
-                  <option value="4B">Category 4B (workup)</option>
-                </select>
-              </label>
+              <ChoiceGroup label="Followed as" layout="stack" value={form.priorCategory} options={priorCategoryOptions} onChange={(value) => update('priorCategory', value)} />
             )}
 
             {showSolid && (
@@ -95,13 +97,7 @@ export function LungRadsPage() {
             )}
 
             {showAirway && (
-              <label>
-                <span>Airway level</span>
-                <select value={form.airwaySegment} onChange={(e) => update('airwaySegment', e.target.value as Form['airwaySegment'])}>
-                  <option value="subsegmental">Subsegmental</option>
-                  <option value="segmentalOrMoreProximal">Segmental or more proximal</option>
-                </select>
-              </label>
+              <ChoiceGroup label="Airway level" layout="stack" value={form.airwaySegment} options={airwaySegmentOptions} onChange={(value) => update('airwaySegment', value)} />
             )}
 
             {showAirway && form.airwaySegment === 'segmentalOrMoreProximal' && (
@@ -124,14 +120,13 @@ export function LungRadsPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge
-              label={result.category}
-              tone={result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'}
-            />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${result.category.includes('4') ? 'warn' : result.category.includes('2') || result.category.includes('1') ? 'good' : 'accent'}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

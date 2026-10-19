@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type MeldMode = 'meld3' | 'meldna'
@@ -104,6 +105,16 @@ const sourceLinks: Record<MeldMode, { href: string; label: string }> = {
   },
 }
 
+const modeOptions: { value: MeldMode; label: string }[] = [
+  { value: 'meld3', label: 'MELD 3.0 (default)' },
+  { value: 'meldna', label: 'MELD-Na' },
+]
+
+const sexOptions: { value: Sex; label: string }[] = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+]
+
 export function MeldPage() {
   const [form, setForm] = useState<Form>(initialForm)
 
@@ -154,26 +165,20 @@ export function MeldPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Hepatology</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>MELD calculator</h2>
-          <p>MELD 3.0 is the default, with a built-in MELD-Na option for allocation-oriented comparison.</p>
-          <p className="source-note">Source: <a href={sourceLinks[form.mode].href} target="_blank" rel="noopener noreferrer">{sourceLinks[form.mode].label}</a>.</p>
+          <span className="calc-tag">Hepatology</span>
         </div>
+        <p>MELD 3.0 is the default, with a built-in MELD-Na option for allocation-oriented comparison.</p>
+        <p className="source-note">Source: <a href={sourceLinks[form.mode].href} target="_blank" rel="noopener noreferrer">{sourceLinks[form.mode].label}</a>.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Inputs</h3>
           <div className="form-grid">
-            <label>
-              <span>Score type</span>
-              <select value={form.mode} onChange={(e) => update('mode', e.target.value as MeldMode)}>
-                <option value="meld3">MELD 3.0 (default)</option>
-                <option value="meldna">MELD-Na</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Score type" layout="stack" value={form.mode} options={modeOptions} onChange={(value) => update('mode', value)} />
 
             <label>
               <span>Total bilirubin (mg/dL)</span>
@@ -202,13 +207,7 @@ export function MeldPage() {
                   <input type="number" step="0.1" min="0" inputMode="decimal" value={form.albumin} onChange={(e) => update('albumin', e.target.value)} />
                 </label>
 
-                <label>
-                  <span>Sex</span>
-                  <select value={form.sex} onChange={(e) => update('sex', e.target.value as Sex)}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </label>
+                <ChoiceGroup label="Sex" layout="row" value={form.sex} options={sexOptions} onChange={(value) => update('sex', value)} />
               </>
             )}
 
@@ -224,23 +223,17 @@ export function MeldPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-          </div>
+          <h3 className="sr-only">Result</h3>
 
           {result ? (
             <>
-              <div className="result-panel">
-                <div>
-                  <p className="metric-label">Score type</p>
-                  <p className="metric-value">{result.modeLabel}</p>
+              <div className="result-strip">
+                <div className="result-strip-head">
+                  <p className={`result-strip-value tone-${toneForScore(result.score)}`}><span className="sr-only">Score </span>{result.score}</p>
+                  <p className="result-strip-meta"><span className="metric-label">Score type</span> <span className="result-strip-points">{result.modeLabel}</span></p>
                 </div>
-                <div>
-                  <p className="metric-label">Score</p>
-                  <p className={`metric-value tone-${toneForScore(result.score)}`}>{result.score}</p>
-                </div>
+                <p className="result-strip-summary">{result.summary}</p>
               </div>
-              <p className="result-summary">{result.summary}</p>
               <CopyBlock label="Impression" text={result.impression} />
               <p className="copy-status">{result.disclaimer}</p>
             </>

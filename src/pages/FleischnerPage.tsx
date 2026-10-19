@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
 import { assessFleischner, initialFleischnerForm } from '../logic/fleischner'
@@ -100,6 +100,17 @@ const references: { label: string; href?: string }[] = [
   },
 ]
 
+const noduleTypeOptions: { value: NoduleType; label: string }[] = [
+  { value: 'solid', label: 'Solid' },
+  { value: 'groundGlass', label: 'Pure ground-glass' },
+  { value: 'partSolid', label: 'Part-solid' },
+]
+
+const countOptions: { value: Count; label: string }[] = [
+  { value: 'single', label: 'Single' },
+  { value: 'multiple', label: 'Multiple' },
+]
+
 export function FleischnerPage() {
   const [form, setForm] = useState<FleischnerForm>(initialFleischnerForm)
   const result = useMemo(() => assessFleischner(form), [form])
@@ -115,35 +126,22 @@ export function FleischnerPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Fleischner Society 2017</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Incidental pulmonary nodule</h2>
-          <p>Follow-up recommendations for incidentally detected pulmonary nodules on CT in patients 35 years and older, with report-ready impression text.</p>
-          <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.2017161659" target="_blank" rel="noopener noreferrer">MacMahon et al., "Guidelines for Management of Incidental Pulmonary Nodules Detected on CT Images: From the Fleischner Society 2017," Radiology 2017</a>. For screening LDCT, use <Link to="/lungrads">Lung-RADS</Link> instead.</p>
+          <span className="calc-tag">Fleischner Society 2017</span>
         </div>
+        <p>Follow-up recommendations for incidentally detected pulmonary nodules on CT in patients 35 years and older, with report-ready impression text.</p>
+        <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.2017161659" target="_blank" rel="noopener noreferrer">MacMahon et al., "Guidelines for Management of Incidental Pulmonary Nodules Detected on CT Images: From the Fleischner Society 2017," Radiology 2017</a>. For screening LDCT, use <Link to="/lungrads">Lung-RADS</Link> instead.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Nodule</h3>
           <div className="form-grid">
-            <label>
-              <span>Nodule type</span>
-              <select value={form.noduleType} onChange={(e) => update('noduleType', e.target.value as NoduleType)}>
-                <option value="solid">Solid</option>
-                <option value="groundGlass">Pure ground-glass</option>
-                <option value="partSolid">Part-solid</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Nodule type" layout="row" value={form.noduleType} options={noduleTypeOptions} onChange={(value) => update('noduleType', value)} />
 
-            <label>
-              <span>Number of nodules</span>
-              <select value={form.count} onChange={(e) => update('count', e.target.value as Count)}>
-                <option value="single">Single</option>
-                <option value="multiple">Multiple</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Number of nodules" layout="row" value={form.count} options={countOptions} onChange={(value) => update('count', value)} />
 
             <label>
               <span className="term">
@@ -223,11 +221,13 @@ export function FleischnerPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.category} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${result.tone}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-          <p className="result-summary">{result.summary}</p>
           {result.impression && (
             <>
               <CopyBlock label="Impression" text={result.impression} />

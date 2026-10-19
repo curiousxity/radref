@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type AgeBand = '<65' | '65-79' | '80+'
@@ -134,9 +134,34 @@ function classify(form: Form) {
   }
 }
 
+const ageBandOptions: { value: AgeBand; label: string }[] = [
+  { value: '<65', label: '<65' },
+  { value: '65-79', label: '65-79' },
+  { value: '80+', label: '80+' },
+]
+
+const ductCommunicationOptions: { value: DuctCommunication; label: string }[] = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' },
+  { value: 'indeterminate', label: 'Indeterminate' },
+]
+
+const alternativeDiagnosisOptions: { value: AlternativeDiagnosis; label: string }[] = [
+  { value: 'none', label: 'None / presumed mucinous' },
+  { value: 'serous', label: 'Serous cystadenoma' },
+  { value: 'pseudocyst', label: 'Pseudocyst' },
+  { value: 'otherBenign', label: 'Other benign diagnosis' },
+]
+
 export function PancreaticCystPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
+  const tone =
+    result.category.includes('High risk')
+      ? 'warn'
+      : result.category.includes('Worrisome') || result.category.includes('Large')
+        ? 'accent'
+        : 'good'
 
   function update<K extends keyof Form>(field: K, value: Form[K]) {
     setForm((current) => ({ ...current, [field]: value }))
@@ -148,13 +173,13 @@ export function PancreaticCystPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">ACR incidental pancreatic cysts</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Pancreatic cyst management</h2>
-          <p>Dedicated incidental pancreatic cyst helper with surveillance logic, EUS/FNA escalation, and copyable impression text.</p>
-          <p className="source-note">Source: <a href="https://pubmed.ncbi.nlm.nih.gov/28533111/" target="_blank" rel="noopener noreferrer">Megibow et al., "Management of Incidental Pancreatic Cysts: A White Paper of the ACR Incidental Findings Committee," JACR 2017</a>.</p>
+          <span className="calc-tag">ACR incidental pancreatic cysts</span>
         </div>
+        <p>Dedicated incidental pancreatic cyst helper with surveillance logic, EUS/FNA escalation, and copyable impression text.</p>
+        <p className="source-note">Source: <a href="https://pubmed.ncbi.nlm.nih.gov/28533111/" target="_blank" rel="noopener noreferrer">Megibow et al., "Management of Incidental Pancreatic Cysts: A White Paper of the ACR Incidental Findings Committee," JACR 2017</a>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -166,33 +191,11 @@ export function PancreaticCystPage() {
               <input type="number" step="0.1" min="0" inputMode="decimal" value={form.sizeCm} onChange={(e) => update('sizeCm', e.target.value)} placeholder="e.g. 1.8" />
             </label>
 
-            <label>
-              <span>Age band</span>
-              <select value={form.ageBand} onChange={(e) => update('ageBand', e.target.value as AgeBand)}>
-                <option value="<65">&lt;65</option>
-                <option value="65-79">65-79</option>
-                <option value="80+">80+</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Age band" layout="row" value={form.ageBand} options={ageBandOptions} onChange={(value) => update('ageBand', value)} />
 
-            <label>
-              <span>Main pancreatic duct communication</span>
-              <select value={form.ductCommunication} onChange={(e) => update('ductCommunication', e.target.value as DuctCommunication)}>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-                <option value="indeterminate">Indeterminate</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Main pancreatic duct communication" layout="row" value={form.ductCommunication} options={ductCommunicationOptions} onChange={(value) => update('ductCommunication', value)} />
 
-            <label>
-              <span>Alternative diagnosis</span>
-              <select value={form.alternativeDiagnosis} onChange={(e) => update('alternativeDiagnosis', e.target.value as AlternativeDiagnosis)}>
-                <option value="none">None / presumed mucinous</option>
-                <option value="serous">Serous cystadenoma</option>
-                <option value="pseudocyst">Pseudocyst</option>
-                <option value="otherBenign">Other benign diagnosis</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Alternative diagnosis" layout="stack" value={form.alternativeDiagnosis} options={alternativeDiagnosisOptions} onChange={(value) => update('alternativeDiagnosis', value)} />
 
             <label className="check-row">
               <input type="checkbox" checked={form.growth} onChange={(e) => update('growth', e.target.checked)} />
@@ -217,20 +220,13 @@ export function PancreaticCystPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge
-              label={result.category}
-              tone={
-                result.category.includes('High risk')
-                  ? 'warn'
-                  : result.category.includes('Worrisome') || result.category.includes('Large')
-                    ? 'accent'
-                    : 'good'
-              }
-            />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${tone}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
