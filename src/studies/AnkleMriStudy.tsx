@@ -967,6 +967,8 @@ const NORMAL_IMPRESSION = 'No acute osseous, ligamentous or tendinous abnormalit
 function impression(values: Values): string {
   const found = findings(values)
   if (found.length === 0) {
+    // Free-text other findings are not read by the rules, so never call that study normal.
+    if (str(values, 'other')) return 'Impression: Other findings as above.'
     // A normal impression only once every required item is answered.
     const complete = steps.every((step) => step.fields.every((field) => !field.required || str(values, field.id) !== ''))
     return complete ? `Impression: ${NORMAL_IMPRESSION}` : ''

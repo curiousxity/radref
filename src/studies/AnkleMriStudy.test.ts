@@ -114,6 +114,12 @@ describe('ankle MRI report: whole cases', () => {
     expect(report(study, { atfl: 'intact' }).text).not.toContain('Impression')
   })
 
+  test('free-text other findings stop the normal impression', () => {
+    const { text } = report(study, { ...normal, other: 'Tarsal coalition.' })
+    expect(text).toContain('Other findings: Tarsal coalition.')
+    expect(impressionOf({ ...normal, other: 'Tarsal coalition.' })).toBe('Other findings as above.')
+  })
+
   test('an abnormal study lists its findings in the impression, in search-pattern order', () => {
     const values = { ...normal, effusion: 'moderate', atfl: 'complete', cfl: 'partial', ptt: 'tear', 'ptt-tear-type': 'split' }
     expect(impressionOf(values)).toBe('Moderate joint effusion.\nComplete tear of the ATFL.\nPartial tear of the CFL.\nTibialis posterior: longitudinal split tear.')
