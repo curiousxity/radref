@@ -229,6 +229,17 @@ link. A new reference is a content declaration, not new markup.
 scrolling documents, where the embed is the worse phone experience, so
 `AnatomyViewer` promotes the full-screen link and appends the sentence saying so.
 
+All their dependencies are vendored so the PWA still works offline: three.js r128 sits
+in `public/anatomy/vendor/` with its MIT licence, and they use system fonts only (every
+Google Fonts link was removed). Keep it that way - no CDN or webfont URLs belong in
+these files. Geometry is inlined in each document; none of them fetch
+anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
+Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
+
+The precached anatomy files come to roughly 2.4 MB (the ankle alone is ~1 MB, still
+under Workbox's 2 MiB per-file default). Put new large viewers in `online/` (below)
+rather than growing the precache.
+
 ### Shared style and theme
 
 Every viewer's chrome (header, panels, controls, notes) comes from one stylesheet,
@@ -259,17 +270,6 @@ sliders a 44px hit area.
   `CHROME` list may change. Where one variable served both UI and scene, the scene half
   kept the old value under a `-scene` name (e.g. `--accent-scene`), pinned in the same
   test. A new viewer must be added to `FILES`, `MIGRATED`, `CHROME` and the snapshot.
-
-All their dependencies are vendored so the PWA still works offline: three.js r128 sits
-in `public/anatomy/vendor/` with its MIT licence, and they use system fonts only (every
-Google Fonts link was removed). Keep it that way - no CDN or webfont URLs belong in
-these files. Geometry is inlined in each document; none of them fetch
-anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
-Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
-
-The precached anatomy files come to roughly 2.4 MB (the ankle alone is ~1 MB, still
-under Workbox's 2 MiB per-file default). Put new large viewers in `online/` (below)
-rather than growing the precache.
 
 ### Online-only anatomy
 

@@ -293,6 +293,7 @@ describe('anatomy viewers', () => {
       for (const tag of [...links, ...scripts]) expect(tag, file).not.toMatch(/https?:\/\//)
       expect(html, file).not.toContain('fonts.googleapis')
       expect(html, file).not.toContain('Source Serif')
+      expect(html, file).not.toContain('@font-face')
     }
   })
 
