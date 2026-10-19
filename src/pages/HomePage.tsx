@@ -1,8 +1,11 @@
-import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { InstallButton } from '../components/InstallButton'
 import { calculators, groupItems, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
+import { readRecent, recentItems } from '../lib/recent'
+import { HOME_TABS, categoriesForTab, isSearchShortcut, parseHomeTab } from './homeTabs'
+import type { HomeTab } from './homeTabs'
 
 /** "3 calculators", or "2 references" for a category that names its items differently. */
 function countLabel(category: CalculatorCategory) {
@@ -11,8 +14,74 @@ function countLabel(category: CalculatorCategory) {
   return `${category.items.length} ${noun.endsWith('y') ? `${noun.slice(0, -1)}ies` : `${noun}s`}`
 }
 
+type Row = { path: string; name: string; tag?: string }
+
+/** Hairline index rows: name on the left, a short mono tag on the right. */
+function IndexRows({ rows }: { rows: Row[] }) {
+  return (
+    <ul className="index-rows">
+      {rows.map((row) => (
+        <li key={row.path}>
+          <Link to={row.path} className="index-row">
+            <span className="index-name">{row.name}</span>
+            {row.tag && <span className="index-tag">{row.tag}</span>}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+/**
+ * Calculators lists each category under its name; Studies and Anatomy are one category
+ * each, so their items sit under the category's own `group` subheadings instead.
+ */
+function CategoryList({ category, byGroup }: { category: CalculatorCategory; byGroup: boolean }) {
+  const headingId = `home-${category.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`
+  return (
+    <section className="index-section" aria-labelledby={headingId}>
+      <div className="index-label-row">
+        <h2 className="index-label" id={headingId}>{category.name}</h2>
+        <span className="index-count">{countLabel(category)}</span>
+      </div>
+      {category.blurb && <p className="section-blurb">{category.blurb}</p>}
+      {byGroup ? (
+        groupItems(category.items).map((group) => (
+          <div key={group.name ?? ''} className="index-group">
+            {group.name && <h3 className="index-label">{group.name}</h3>}
+            <IndexRows rows={group.items} />
+          </div>
+        ))
+      ) : (
+        <IndexRows rows={category.items} />
+      )}
+    </section>
+  )
+}
+
+/** The last few pages this viewer opened, newest first; read from storage only while shown. */
+function RecentList() {
+  const items = recentItems(readRecent())
+  if (items.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>Pages you open appear here.</p>
+      </div>
+    )
+  }
+  return (
+    <section className="index-section" aria-labelledby="home-recent">
+      <h2 className="index-label" id="home-recent">Recently opened</h2>
+      <IndexRows rows={items.map((item) => ({ path: item.path, name: item.name, tag: item.category }))} />
+    </section>
+  )
+}
+
 export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
+  const [params, setParams] = useSearchParams()
+  const tab = parseHomeTab(params.get('tab'))
   const [query, setQuery] = useState('')
+  const searchRef = useRef<HTMLInputElement>(null)
   const trimmedQuery = query.trim()
   const isSearching = trimmedQuery !== ''
 
@@ -23,60 +92,52 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
 
   const totalCalculators = categories.reduce((count, category) => count + category.items.length, 0)
 
+  // `/` jumps to the search field, unless the viewer is already typing somewhere.
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (!isSearchShortcut(event)) return
+      event.preventDefault()
+      searchRef.current?.focus()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+
+  function selectTab(next: HomeTab) {
+    setParams(next === 'calculators' ? {} : { tab: next })
+  }
+
   return (
     <div className="page home-page">
-      <section className="hero-card">
-        <div>
-          <p className="eyebrow">Radiology reference</p>
-          <h1>Radiology reference, ready at the scanner.</h1>
-          <p className="hero-copy">
-            Study pages that build the report as you read the exam and teach the method behind each step, calculators that turn findings into an impression, and 3D anatomy you can turn in the hand. No PDFs, no logins.
-          </p>
-          <search className="search-panel hero-search">
-            <label className="search-field">
-              <span className="metric-label">Search</span>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Try thyroid, adrenal, rectal MRI, knee"
-                autoComplete="off"
-                aria-describedby="search-count"
-              />
-            </label>
-            <p className="search-status" id="search-count" aria-live="polite">
-              {isSearching
-                ? `${results.length} of ${totalCalculators} ${results.length === 1 ? 'match' : 'matches'}`
-                : `Search all ${totalCalculators} by name, organ, or criteria`}
-            </p>
-          </search>
-        </div>
-        <div className="hero-panel">
-          <InstallButton />
-        </div>
-      </section>
+      <h1 className="sr-only">Radiology calculators, studies and 3D anatomy</h1>
+
+      <search className="home-search">
+        <label className="search-field">
+          <span className="sr-only">Search</span>
+          <input
+            ref={searchRef}
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Try thyroid, adrenal, rectal MRI, knee"
+            autoComplete="off"
+            aria-describedby="search-count"
+            aria-keyshortcuts="/"
+          />
+          <kbd className="search-hint" aria-hidden="true">/</kbd>
+        </label>
+        <p className="search-status" id="search-count" aria-live="polite">
+          {isSearching
+            ? `${results.length} of ${totalCalculators} ${results.length === 1 ? 'match' : 'matches'}`
+            : `Search all ${totalCalculators} by name, organ, or criteria`}
+        </p>
+      </search>
 
       {isSearching ? (
-        <section className="section-block">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Search</p>
-              <h2>Results for "{trimmedQuery}"</h2>
-            </div>
-          </div>
+        <section className="index-section" aria-labelledby="home-results">
+          <h2 className="index-label" id="home-results">Results for "{trimmedQuery}"</h2>
           {results.length > 0 ? (
-            <div className="card-grid">
-              {results.map((calculator) => (
-                <Link key={calculator.path} to={calculator.path} className="tool-card">
-                  <div>
-                    <p className="tool-category">{calculator.category}</p>
-                    <h3>{calculator.name}</h3>
-                    <p>{calculator.description}</p>
-                  </div>
-                  <span className="tool-arrow">Open</span>
-                </Link>
-              ))}
-            </div>
+            <IndexRows rows={results.map((item) => ({ path: item.path, name: item.name, tag: item.category }))} />
           ) : (
             <div className="empty-state">
               <p>Nothing matches that search yet.</p>
@@ -87,34 +148,39 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
           )}
         </section>
       ) : (
-        categories.map((category) => (
-          <section key={category.name} className="section-block">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">{countLabel(category)}</p>
-                <h2>{category.name}</h2>
-                {category.blurb && <p className="section-blurb">{category.blurb}</p>}
-              </div>
-            </div>
-            {groupItems(category.items).map((group) => (
-              <div key={group.name ?? ''} className="item-group">
-                {group.name && <h3 className="group-heading">{group.name}</h3>}
-                <div className="card-grid">
-                  {group.items.map((calculator) => (
-                    <Link key={calculator.path} to={calculator.path} className="tool-card">
-                      <div>
-                        <h3>{calculator.name}</h3>
-                        <p>{calculator.description}</p>
-                      </div>
-                      <span className="tool-arrow">Open</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+        <div className="home-index">
+          <div className="home-tabs" role="tablist" aria-label="Home sections">
+            {HOME_TABS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                id={`home-tab-${item.id}`}
+                aria-selected={tab === item.id}
+                aria-controls={`home-panel-${item.id}`}
+                className={tab === item.id ? 'home-tab active' : 'home-tab'}
+                onClick={() => selectTab(item.id)}
+              >
+                {item.label}
+              </button>
             ))}
-          </section>
-        ))
+          </div>
+
+          <div role="tabpanel" id={`home-panel-${tab}`} aria-labelledby={`home-tab-${tab}`} className="home-panel">
+            {tab === 'recent' ? (
+              <RecentList />
+            ) : (
+              categoriesForTab(tab, categories).map((category) => (
+                <CategoryList key={category.name} category={category} byGroup={tab !== 'calculators'} />
+              ))
+            )}
+          </div>
+        </div>
       )}
+
+      <section className="home-install" aria-label="Install">
+        <InstallButton />
+      </section>
     </div>
   )
 }
