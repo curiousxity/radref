@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 
 type GradeRow = {
   grade: string
@@ -166,19 +167,21 @@ const references: { label: string; href?: string }[] = [
   },
 ]
 
+const organOptions: { value: string; label: string }[] = organs.map((o) => ({ value: o.key, label: o.name }))
+
 export function AastOrganInjuryPage() {
   const [activeOrgan, setActiveOrgan] = useState(organs[0].key)
   const organ = organs.find((o) => o.key === activeOrgan) ?? organs[0]
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Quick reference</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>AAST organ injury grades</h2>
-          <p>Organ-specific AAST Organ Injury Scale (2018 update) grading criteria for blunt and penetrating solid organ trauma on CT.</p>
-          <p className="source-note">Intended as a radiology quick-reference guide, not a substitute for the full AAST criteria or multidisciplinary trauma management protocols.</p>
+          <span className="calc-tag">Quick reference</span>
         </div>
+        <p>Organ-specific AAST Organ Injury Scale (2018 update) grading criteria for blunt and penetrating solid organ trauma on CT.</p>
+        <p className="source-note">Intended as a radiology quick-reference guide, not a substitute for the full AAST criteria or multidisciplinary trauma management protocols.</p>
       </section>
 
       <section className="info-card">
@@ -193,14 +196,7 @@ export function AastOrganInjuryPage() {
       <section className="info-card">
         <h3>Organ</h3>
         <div className="form-grid filter-row">
-          <label>
-            <span>Select organ</span>
-            <select value={activeOrgan} onChange={(e) => setActiveOrgan(e.target.value)}>
-              {organs.map((o) => (
-                <option key={o.key} value={o.key}>{o.name}</option>
-              ))}
-            </select>
-          </label>
+          <ChoiceGroup label="Select organ" layout="row" value={activeOrgan} options={organOptions} onChange={(value) => setActiveOrgan(value)} />
         </div>
 
         <div className="table-wrap">

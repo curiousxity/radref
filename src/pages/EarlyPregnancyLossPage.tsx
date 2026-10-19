@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type InitialFinding = 'noYolkSac' | 'yolkSacPresent' | 'msdUnder12' | 'msdOver12'
@@ -134,6 +134,13 @@ function classify(form: Form) {
   return { category, tone, summary, reportLine, management, impression }
 }
 
+const initialFindingOptions: { value: InitialFinding; label: string }[] = [
+  { value: 'noYolkSac', label: 'Gestational sac without a yolk sac' },
+  { value: 'yolkSacPresent', label: 'Gestational sac with a yolk sac' },
+  { value: 'msdUnder12', label: 'Mean sac diameter <12 mm' },
+  { value: 'msdOver12', label: 'Mean sac diameter ≥12 mm' },
+]
+
 export function EarlyPregnancyLossPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
@@ -148,15 +155,15 @@ export function EarlyPregnancyLossPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Early pregnancy</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Early pregnancy loss criteria</h2>
-          <p>SRU consensus helper for transvaginal ultrasound findings diagnostic of, or suspicious for, first-trimester pregnancy loss.</p>
-          <p className="source-note">
-            Source: <a href="https://pubmed.ncbi.nlm.nih.gov/24106937/" target="_blank" rel="noopener noreferrer">Doubilet et al., "Diagnostic Criteria for Nonviable Pregnancy Early in the First Trimester," N Engl J Med 2013</a>. Stringent, consensus-based thresholds intended to avoid harm to a potentially viable pregnancy.
-          </p>
+          <span className="calc-tag">Early pregnancy</span>
         </div>
+        <p>SRU consensus helper for transvaginal ultrasound findings diagnostic of, or suspicious for, first-trimester pregnancy loss.</p>
+        <p className="source-note">
+          Source: <a href="https://pubmed.ncbi.nlm.nih.gov/24106937/" target="_blank" rel="noopener noreferrer">Doubilet et al., "Diagnostic Criteria for Nonviable Pregnancy Early in the First Trimester," N Engl J Med 2013</a>. Stringent, consensus-based thresholds intended to avoid harm to a potentially viable pregnancy.
+        </p>
       </section>
 
       <section className="calculator-grid">
@@ -235,15 +242,7 @@ export function EarlyPregnancyLossPage() {
                   </label>
 
                   {!form.embryoVisible && form.gestSacVisible && (
-                    <label>
-                      <span>Initial scan finding</span>
-                      <select value={form.initialFinding} onChange={(e) => update('initialFinding', e.target.value as InitialFinding)}>
-                        <option value="noYolkSac">Gestational sac without a yolk sac</option>
-                        <option value="yolkSacPresent">Gestational sac with a yolk sac</option>
-                        <option value="msdUnder12">Mean sac diameter &lt;12 mm</option>
-                        <option value="msdOver12">Mean sac diameter ≥12 mm</option>
-                      </select>
-                    </label>
+                    <ChoiceGroup label="Initial scan finding" layout="stack" value={form.initialFinding} options={initialFindingOptions} onChange={(value) => update('initialFinding', value)} />
                   )}
 
                   {!form.embryoVisible && form.gestSacVisible && form.initialFinding === 'msdUnder12' && (
@@ -283,11 +282,13 @@ export function EarlyPregnancyLossPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.category} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-          <p className="result-summary">{result.summary}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

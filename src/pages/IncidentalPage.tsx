@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Tool = 'adrenal' | 'pancreas' | 'renal'
@@ -213,6 +213,12 @@ const sourceLinks: Record<Tool, { href: string; label: string }> = {
   },
 }
 
+const toolOptions: { value: Tool; label: string }[] = [
+  { value: 'adrenal', label: 'Adrenal incidentaloma' },
+  { value: 'pancreas', label: 'Pancreatic cyst' },
+  { value: 'renal', label: 'Renal mass' },
+]
+
 export function IncidentalPage() {
   const [tool, setTool] = useState<Tool>('adrenal')
   const [adrenal, setAdrenal] = useState(initialAdrenal)
@@ -233,26 +239,19 @@ export function IncidentalPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">ACR incidental findings</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Incidental findings tools</h2>
-          <p>Quick management helpers for adrenal lesions, pancreatic cysts, and incidental renal masses.</p>
-          <p className="source-note">Source: <a href={sourceLinks[tool].href} target="_blank" rel="noopener noreferrer">{sourceLinks[tool].label}</a>.</p>
+          <span className="calc-tag">ACR incidental findings</span>
         </div>
+        <p>Quick management helpers for adrenal lesions, pancreatic cysts, and incidental renal masses.</p>
+        <p className="source-note">Source: <a href={sourceLinks[tool].href} target="_blank" rel="noopener noreferrer">{sourceLinks[tool].label}</a>.</p>
       </section>
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Choose tool</h3>
           <div className="form-grid">
-            <label>
-              <span>Tool</span>
-              <select value={tool} onChange={(e) => setTool(e.target.value as Tool)}>
-                <option value="adrenal">Adrenal incidentaloma</option>
-                <option value="pancreas">Pancreatic cyst</option>
-                <option value="renal">Renal mass</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Tool" layout="stack" value={tool} options={toolOptions} onChange={(value) => setTool(value)} />
 
             {tool === 'adrenal' && (
               <>
@@ -328,11 +327,13 @@ export function IncidentalPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.category} tone={toneForCategory(result.category)} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${toneForCategory(result.category)}`}>{result.category}</p>
+            </div>
+            <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <p className="result-summary">{result.reason}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Recommendation" text={result.rec} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

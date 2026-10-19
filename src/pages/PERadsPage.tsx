@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 
 type ProximalLocation = 'none' | 'subsegmental' | 'segmental' | 'lobar' | 'central' | 'nondiagnostic'
@@ -162,13 +161,13 @@ export function PERadsPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Pulmonary embolism</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>PE-RADS v2026</h2>
-          <p>Structured reporting helper for acute pulmonary embolism using a 0-4 hierarchical scale based on most proximal clot location, plus right-heart and study-quality modifiers.</p>
-          <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.252721" target="_blank" rel="noopener noreferrer">Koweek et al., "Pulmonary Embolism Reporting and Data System (PE-RADS) v2026 for the Diagnosis of Acute Pulmonary Embolism on CT and MR Angiography," Radiology 2026</a>. PE-RADS was published in July 2026 — this page will be revisited as the framework sees wider adoption.</p>
+          <span className="calc-tag">Pulmonary embolism</span>
         </div>
+        <p>Structured reporting helper for acute pulmonary embolism using a 0-4 hierarchical scale based on most proximal clot location, plus right-heart and study-quality modifiers.</p>
+        <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.252721" target="_blank" rel="noopener noreferrer">Koweek et al., "Pulmonary Embolism Reporting and Data System (PE-RADS) v2026 for the Diagnosis of Acute Pulmonary Embolism on CT and MR Angiography," Radiology 2026</a>. PE-RADS was published in July 2026 — this page will be revisited as the framework sees wider adoption.</p>
       </section>
 
       <section className="calculator-grid">
@@ -230,12 +229,13 @@ export function PERadsPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.peRads} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value tone-${result.tone}`}>{result.peRads}</p>
+            </div>
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-
-          <p className="result-summary">{result.summary}</p>
           <CopyBlock label="Impression" text={result.impression} />
           <CopyBlock label="Management considerations" text={result.management} />
           {result.modifiers.length > 0 && <p className="copy-status">Applied modifiers: {result.modifiers.join(', ')}</p>}
