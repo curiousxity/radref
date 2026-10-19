@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type RegimenKey = 'elective-prednisone' | 'elective-methylprednisolone' | 'accelerated-methylprednisolone' | 'accelerated-hydrocortisone'
@@ -85,6 +85,13 @@ function buildPlan(form: Form) {
   return { plan, badgeLabel: insufficient ? 'Time may be insufficient' : regimen.name, tone: (insufficient ? 'warn' : 'accent') as 'warn' | 'accent' }
 }
 
+const regimenOptions: { value: RegimenKey; label: string }[] = [
+  { value: 'elective-prednisone', label: 'Elective oral: prednisone' },
+  { value: 'elective-methylprednisolone', label: 'Elective oral: methylprednisolone' },
+  { value: 'accelerated-methylprednisolone', label: 'Accelerated IV: methylprednisolone' },
+  { value: 'accelerated-hydrocortisone', label: 'Accelerated IV: hydrocortisone' },
+]
+
 export function ContrastPremedicationPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => buildPlan(form), [form])
@@ -100,30 +107,22 @@ export function ContrastPremedicationPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Contrast safety</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Contrast premedication protocols</h2>
-          <p>Elective oral and accelerated IV corticosteroid/antihistamine premedication regimens for patients at increased risk of recurrent contrast reactions, with copyable plan text.</p>
-          <p className="source-note">
-            Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology. Premedication lowers but does not eliminate breakthrough reaction risk.
-          </p>
+          <span className="calc-tag">Contrast safety</span>
         </div>
+        <p>Elective oral and accelerated IV corticosteroid/antihistamine premedication regimens for patients at increased risk of recurrent contrast reactions, with copyable plan text.</p>
+        <p className="source-note">
+          Source: <a href="https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/Contrast-Manual" target="_blank" rel="noopener noreferrer">ACR Manual on Contrast Media</a>, American College of Radiology. Premedication lowers but does not eliminate breakthrough reaction risk.
+        </p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Regimen</h3>
           <div className="form-grid">
-            <label>
-              <span>Regimen</span>
-              <select value={form.regimen} onChange={(e) => update('regimen', e.target.value as RegimenKey)}>
-                <option value="elective-prednisone">Elective oral: prednisone</option>
-                <option value="elective-methylprednisolone">Elective oral: methylprednisolone</option>
-                <option value="accelerated-methylprednisolone">Accelerated IV: methylprednisolone</option>
-                <option value="accelerated-hydrocortisone">Accelerated IV: hydrocortisone</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Regimen" layout="stack" value={form.regimen} options={regimenOptions} onChange={(value) => update('regimen', value)} />
 
             {regimen.kind === 'elective' ? (
               <>
@@ -146,9 +145,11 @@ export function ContrastPremedicationPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.badgeLabel} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.badgeLabel}</p>
+            </div>
           </div>
           <CopyBlock label="Premedication plan" text={result.plan} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

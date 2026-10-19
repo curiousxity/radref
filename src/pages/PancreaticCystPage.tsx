@@ -223,7 +223,7 @@ export function PancreaticCystPage() {
           <h3 className="sr-only">Result</h3>
           <div className="result-strip">
             <div className="result-strip-head">
-              <p className={`result-strip-value tone-${tone}`}>{result.category}</p>
+              <p className={`result-strip-value result-strip-value--phrase tone-${tone}`}>{result.category}</p>
             </div>
             <p className="result-strip-summary">{result.reason}</p>
           </div>

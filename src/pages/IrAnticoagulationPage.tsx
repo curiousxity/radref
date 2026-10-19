@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import {
   agents,
@@ -130,6 +131,13 @@ const references: { label: string; href?: string }[] = [
   },
 ]
 
+const riskOptions: { value: BleedingRisk; label: string }[] = [
+  { value: 'low', label: 'Low bleeding risk' },
+  { value: 'high', label: 'High bleeding risk' },
+]
+
+const crclOptions: { value: CrClBand; label: string }[] = crclBands.map((band) => ({ value: band.key, label: band.label }))
+
 export function IrAnticoagulationPage() {
   const [form, setForm] = useState<Form>(initialForm)
 
@@ -148,26 +156,20 @@ export function IrAnticoagulationPage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Safety</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Periprocedural anticoagulation</h2>
-          <p>Hold and restart guidance for anticoagulant and antiplatelet agents before image-guided procedures, by procedure bleeding risk.</p>
-          <p className="source-note">Source: <a href="https://pubmed.ncbi.nlm.nih.gov/31229333/" target="_blank" rel="noopener noreferrer">SIR Consensus Guidelines, Part II: Recommendations, JVIR 2019</a>. Guideline-based reference only; institutional protocol governs management.</p>
+          <span className="calc-tag">Safety</span>
         </div>
+        <p>Hold and restart guidance for anticoagulant and antiplatelet agents before image-guided procedures, by procedure bleeding risk.</p>
+        <p className="source-note">Source: <a href="https://pubmed.ncbi.nlm.nih.gov/31229333/" target="_blank" rel="noopener noreferrer">SIR Consensus Guidelines, Part II: Recommendations, JVIR 2019</a>. Guideline-based reference only; institutional protocol governs management.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Procedure and agent</h3>
           <div className="form-grid">
-            <label>
-              <span>Procedure bleeding risk</span>
-              <select value={form.risk} onChange={(e) => update('risk', e.target.value as BleedingRisk)}>
-                <option value="low">Low bleeding risk</option>
-                <option value="high">High bleeding risk</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Procedure bleeding risk" layout="stack" value={form.risk} options={riskOptions} onChange={(value) => update('risk', value)} />
             <label>
               <span>Agent</span>
               <select value={form.agentKey} onChange={(e) => update('agentKey', e.target.value)}>
@@ -182,14 +184,7 @@ export function IrAnticoagulationPage() {
               </select>
             </label>
             {showCrcl ? (
-              <label>
-                <span>Creatinine clearance</span>
-                <select value={form.crcl} onChange={(e) => update('crcl', e.target.value as CrClBand)}>
-                  {crclBands.map((band) => (
-                    <option key={band.key} value={band.key}>{band.label}</option>
-                  ))}
-                </select>
-              </label>
+              <ChoiceGroup label="Creatinine clearance" layout="stack" value={form.crcl} options={crclOptions} onChange={(value) => update('crcl', value)} />
             ) : null}
           </div>
           <p className="source-note">Unsure how to classify the procedure? The full category lists are below.</p>

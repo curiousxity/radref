@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
 
@@ -533,6 +533,23 @@ function SizeTable({ title, rows }: { title: string; rows: SizeRow[] }) {
   )
 }
 
+const menopausalStatusOptions: { value: MenopausalStatus; label: string }[] = [
+  { value: 'post', label: 'Postmenopausal' },
+  { value: 'pre', label: 'Premenopausal' },
+]
+
+const originOptions: { value: Origin; label: string }[] = [
+  { value: 'ovarian', label: 'Ovarian' },
+  { value: 'paraovarian', label: 'Paraovarian or paratubal' },
+]
+
+const changeOptions: { value: Change; label: string }[] = [
+  { value: 'decreased', label: 'Decreased in size' },
+  { value: 'similar', label: 'Similar in size' },
+  { value: 'increased', label: 'Increased in size' },
+  { value: 'newSolidElements', label: 'New wall papillary projections, solid elements, or irregular septation(s)' },
+]
+
 export function AdnexalCystPage() {
   const [form, setForm] = useState<Form>(initialForm)
   const result = useMemo(() => classify(form), [form])
@@ -548,34 +565,22 @@ export function AdnexalCystPage() {
 
   return (
     <div className="page page-calculator">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">SRU 2019 consensus</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Simple adnexal cyst follow-up</h2>
-          <p>Follow-up intervals and report-ready wording for simple adnexal cysts in asymptomatic, average-risk patients.</p>
-          <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.2019191354" target="_blank" rel="noopener noreferrer">Levine et al., "Simple Adnexal Cysts: SRU Consensus Conference Update on Follow-up and Reporting," Radiology 2019</a>. For a cyst with solid elements, papillary projections, irregular septations, or internal flow, use <Link to="/orads">O-RADS</Link> instead.</p>
+          <span className="calc-tag">SRU 2019 consensus</span>
         </div>
+        <p>Follow-up intervals and report-ready wording for simple adnexal cysts in asymptomatic, average-risk patients.</p>
+        <p className="source-note">Source: <a href="https://pubs.rsna.org/doi/10.1148/radiol.2019191354" target="_blank" rel="noopener noreferrer">Levine et al., "Simple Adnexal Cysts: SRU Consensus Conference Update on Follow-up and Reporting," Radiology 2019</a>. For a cyst with solid elements, papillary projections, irregular septations, or internal flow, use <Link to="/orads">O-RADS</Link> instead.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Cyst</h3>
           <div className="form-grid">
-            <label>
-              <span>Menopausal status</span>
-              <select value={form.menopausalStatus} onChange={(e) => update('menopausalStatus', e.target.value as MenopausalStatus)}>
-                <option value="post">Postmenopausal</option>
-                <option value="pre">Premenopausal</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Menopausal status" layout="row" value={form.menopausalStatus} options={menopausalStatusOptions} onChange={(value) => update('menopausalStatus', value)} />
 
-            <label>
-              <span>Origin</span>
-              <select value={form.origin} onChange={(e) => update('origin', e.target.value as Origin)}>
-                <option value="ovarian">Ovarian</option>
-                <option value="paraovarian">Paraovarian or paratubal</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Origin" layout="stack" value={form.origin} options={originOptions} onChange={(value) => update('origin', value)} />
 
             <label>
               <span className="term">
@@ -616,15 +621,7 @@ export function AdnexalCystPage() {
             </label>
 
             {form.isFollowUp && (
-              <label>
-                <span>Change since the initial study</span>
-                <select value={form.change} onChange={(e) => update('change', e.target.value as Change)}>
-                  <option value="decreased">Decreased in size</option>
-                  <option value="similar">Similar in size</option>
-                  <option value="increased">Increased in size</option>
-                  <option value="newSolidElements">New wall papillary projections, solid elements, or irregular septation(s)</option>
-                </select>
-              </label>
+              <ChoiceGroup label="Change since the initial study" layout="stack" value={form.change} options={changeOptions} onChange={(value) => update('change', value)} />
             )}
 
             {result.optOutKey && (
@@ -654,12 +651,14 @@ export function AdnexalCystPage() {
         </article>
 
         <article className="info-card result-card sticky-card">
-          <div className="result-head">
-            <h3>Result</h3>
-            <Badge label={result.category} tone={result.tone} />
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
+            </div>
+            {result.applicabilityNote && <p className="result-strip-summary"><strong>{result.applicabilityNote}</strong></p>}
+            <p className="result-strip-summary">{result.summary}</p>
           </div>
-          {result.applicabilityNote && <p className="result-summary"><strong>{result.applicabilityNote}</strong></p>}
-          <p className="result-summary">{result.summary}</p>
           {result.outsideScope && (
             <p className="result-summary">This guideline covers simple cysts only. Assess this lesion with <Link to="/orads">O-RADS</Link> instead.</p>
           )}

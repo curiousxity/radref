@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Badge } from '../components/Badge'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 
 type Unit = 'cm' | 'mm'
@@ -138,6 +139,13 @@ const references: { label: string; href?: string }[] = [
   { label: 'Brunn J et al. Volumetric analysis of thyroid lobes by real-time ultrasound. Dtsch Med Wochenschr, 1981' },
 ]
 
+const unitOptions: { value: Unit; label: string }[] = [
+  { value: 'cm', label: 'cm' },
+  { value: 'mm', label: 'mm' },
+]
+
+const factorOptions: { value: FactorKey; label: string }[] = factors.map((entry) => ({ value: entry.key, label: entry.name }))
+
 export function EllipsoidVolumePage() {
   const [form, setForm] = useState<Form>(initialForm)
 
@@ -154,26 +162,20 @@ export function EllipsoidVolumePage() {
 
   return (
     <div className="page">
-      <section className="section-block calculator-header">
-        <div>
-          <p className="eyebrow">Formulas</p>
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
           <h2>Ellipsoid volume</h2>
-          <p>Estimate the volume of an organ or lesion from three orthogonal measurements, with optional PSA density for prostate MRI.</p>
-          <p className="source-note">Source: <a href="https://radiopaedia.org/articles/prostate-volume" target="_blank" rel="noopener noreferrer">Prostate volume, Radiopaedia</a>.</p>
+          <span className="calc-tag">Formulas</span>
         </div>
+        <p>Estimate the volume of an organ or lesion from three orthogonal measurements, with optional PSA density for prostate MRI.</p>
+        <p className="source-note">Source: <a href="https://radiopaedia.org/articles/prostate-volume" target="_blank" rel="noopener noreferrer">Prostate volume, Radiopaedia</a>.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Measurements</h3>
           <div className="form-grid">
-            <label>
-              <span>Units</span>
-              <select value={form.unit} onChange={(e) => update('unit', e.target.value as Unit)}>
-                <option value="cm">cm</option>
-                <option value="mm">mm</option>
-              </select>
-            </label>
+            <ChoiceGroup label="Units" layout="row" value={form.unit} options={unitOptions} onChange={(value) => update('unit', value)} />
             <label>
               <span>Dimension A ({form.unit})</span>
               <input type="number" step="0.1" min="0" inputMode="decimal" value={form.a} onChange={(e) => update('a', e.target.value)} placeholder="e.g. 4.5" />
@@ -186,14 +188,7 @@ export function EllipsoidVolumePage() {
               <span>Dimension C ({form.unit})</span>
               <input type="number" step="0.1" min="0" inputMode="decimal" value={form.c} onChange={(e) => update('c', e.target.value)} placeholder="e.g. 3.2" />
             </label>
-            <label>
-              <span>Shape factor</span>
-              <select value={form.factor} onChange={(e) => update('factor', e.target.value as FactorKey)}>
-                {factors.map((entry) => (
-                  <option key={entry.key} value={entry.key}>{entry.name}</option>
-                ))}
-              </select>
-            </label>
+            <ChoiceGroup label="Shape factor" layout="stack" value={form.factor} options={factorOptions} onChange={(value) => update('factor', value)} />
             {form.factor === 'ellipsoid' ? (
               <label>
                 <span>Serum PSA (ng/mL, optional)</span>
