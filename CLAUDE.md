@@ -97,7 +97,7 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
 
 - Service worker precaches all built assets (`registerType: 'autoUpdate'`) and falls back to `index.html` for client-side routes when offline.
 - Each calculator page is a separate chunk, loaded on first navigation to its route (`lazyPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every chunk is precached and offline navigation still works.
-- Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, the in-header raster). Regenerate all of them together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
+- Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, kept but no longer rendered: the header now draws a CSS "RR" mark). Regenerate all of them, the PNG included, together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
 - No backend calls exist anywhere in the app, so full offline precaching is safe with no stale-data concerns.
 - The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
   through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
