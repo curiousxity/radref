@@ -120,13 +120,13 @@ describe('ankle MRI report: whole cases', () => {
     expect(impressionOf({ ...normal, other: 'Tarsal coalition.' })).toBe('Findings as above.')
   })
 
-  // A warn-tone chip with no finding entered is not a normal study: neutral impression, no diagnosis.
+  // A threshold chip with nothing else entered is not a normal study: its own sentence, no warning.
   test('recess fluid over 12 mm with nothing else entered stops the normal impression', () => {
-    expect(impressionOf({ ...normal, recess: '13' })).toBe('Findings as above.')
+    expect(impressionOf({ ...normal, recess: '13' })).toBe('Tibiofibular recess fluid 13 mm (> 12 mm, definitely abnormal).')
     expect(report(study, { ...normal, recess: '13' }).warnings).toEqual([])
   })
   test('peroneal sheath fluid over 3 mm with nothing else entered stops the normal impression', () => {
-    expect(impressionOf({ ...normal, 'peroneal-fluid': '4' })).toBe('Findings as above.')
+    expect(impressionOf({ ...normal, 'peroneal-fluid': '4' })).toBe('Circumferential peroneal sheath fluid 4 mm (> 3 mm, highly specific for tenosynovitis).')
     expect(report(study, { ...normal, 'peroneal-fluid': '4' }).warnings).toEqual([])
   })
   test('fluid at or under the chip thresholds keeps the normal impression', () => {
@@ -200,7 +200,7 @@ describe('ankle MRI report: contradictions', () => {
     expect(report(study, { ...normal, olt: 'present', 'olt-appearance': 'iia' }).warnings)
       .toContain('Bone marrow edema is marked absent, but this is entered: Hepple IIA osteochondral lesion (surrounding bony edema).')
     expect(report(study, { ...normal, marrow: 'bme', olt: 'present', 'olt-appearance': 'iia' }).warnings).toEqual([])
-    expect(report(study, { ...normal, ossicles: ['trigonum'], 'ossicle-bme': 'yes' }).warnings)
+    expect(report(study, { ...normal, ossicles: ['trigonum'], 'ossicle-bme': ['trigonum'] }).warnings)
       .toContain('Bone marrow edema is marked absent, but this is entered: bone marrow edema in an accessory ossicle.')
   })
 
@@ -359,10 +359,10 @@ describe('ankle MRI rules: lateral tendons (Davda 2017; Huuskonen 2023)', () => 
   // switching their relative positions ... (type B), the peroneus longus tendon subluxates through
   // a longitudinal split tear within the peroneus brevis tendon"
   test.each([['a', 'Type A'], ['b', 'Type B']])('intrasheath subluxation %s is %s', (value, expected) => {
-    expect(chips(study, 'lateral-tendons', { intrasheath: value })['Intrasheath subluxation (Raikin)']).toBe(expected)
+    expect(chips(study, 'lateral-tendons', { intrasheath: value })['Intrasheath subluxation (Davda, after Raikin)']).toBe(expected)
   })
   test('no intrasheath subluxation gives no chip', () => {
-    expect(chips(study, 'lateral-tendons', { intrasheath: 'none' })['Intrasheath subluxation (Raikin)']).toBeUndefined()
+    expect(chips(study, 'lateral-tendons', { intrasheath: 'none' })['Intrasheath subluxation (Davda, after Raikin)']).toBeUndefined()
   })
 
   // P7: "tears occurring under the superior retinaculum" (A); "the region of the inferior peroneal
@@ -440,13 +440,89 @@ describe('ankle MRI rules: descriptive-only items have no chips', () => {
   })
 })
 
+describe('ankle MRI report: exact builder output', () => {
+  const textLines = (values: Values) => report(study, values).text.split('\n')
+
+  test('ATFL and CFL thickness reach the report', () => {
+    const out = textLines({ ...normal, 'atfl-thickness': '2.5', cfl: 'partial', 'cfl-thickness': '3' })
+    expect(out).toContain('ATFL: intact; thickness 2.5 mm')
+    expect(out).toContain('CFL: partial tear; thickness 3 mm')
+  })
+
+  // Each threshold chip's conclusion stays in the impression next to a named finding.
+  test('recess fluid over 12 mm alongside a ligament tear', () => {
+    expect(impressionOf({ ...normal, atfl: 'complete', recess: '13' }))
+      .toBe('Complete tear of the ATFL.\nTibiofibular recess fluid 13 mm (> 12 mm, definitely abnormal).')
+    expect(impressionOf({ ...normal, atfl: 'complete', recess: '12' })).toBe('Complete tear of the ATFL.')
+  })
+  test('peroneal sheath fluid over 3 mm alongside peroneus brevis tendinosis', () => {
+    expect(impressionOf({ ...normal, pb: 'tendinosis', 'peroneal-fluid': '4' }))
+      .toBe('Peroneus brevis: tendinosis.\nCircumferential peroneal sheath fluid 4 mm (> 3 mm, highly specific for tenosynovitis).')
+    expect(impressionOf({ ...normal, pb: 'tendinosis', 'peroneal-fluid': '3' })).toBe('Peroneus brevis: tendinosis.')
+  })
+  test('tubercle height over 5 mm alongside a peroneus longus tear', () => {
+    expect(impressionOf({ ...normal, pl: 'tear', 'pl-tear-type': 'partial', 'tubercle-height': '6' }))
+      .toBe('Peroneus longus: partial tear.\nPeroneal tubercle 6 mm high (> 5 mm, reported to relate to peroneus longus impingement and stenosing tenosynovitis).')
+    expect(impressionOf({ ...normal, pl: 'tear', 'pl-tear-type': 'partial', 'tubercle-height': '5' })).toBe('Peroneus longus: partial tear.')
+  })
+  test('a Huuskonen-prominent tubercle alongside a ligament tear', () => {
+    expect(impressionOf({ ...normal, atfl: 'complete', 'tubercle-length': '5', 'peroneal-width': '4' }))
+      .toBe('Complete tear of the ATFL.\nPeroneal tubercle prominent by the Huuskonen definition (length 5 mm, wider peroneal tendon 4 mm).')
+    expect(impressionOf({ ...normal, atfl: 'complete', 'tubercle-length': '4', 'peroneal-width': '4' })).toBe('Complete tear of the ATFL.')
+  })
+
+  test('free-text other findings are pointed to when other findings exist', () => {
+    expect(impressionOf({ ...normal, atfl: 'complete', other: 'Os subfibulare.' })).toBe('Complete tear of the ATFL.\nOther findings as above.')
+    expect(impressionOf({ ...normal, atfl: 'complete', other: 'Os subfibulare.', 'impression-negatives': ['no-fracture'] }))
+      .toBe('Complete tear of the ATFL.\nOther findings as above.\nNo fracture.')
+  })
+
+  test('pertinent negatives are kept under "Findings as above"', () => {
+    expect(impressionOf({ ...normal, other: 'Tarsal coalition.', 'impression-negatives': ['no-fracture', 'no-tendon-tear'] }))
+      .toBe('Findings as above.\nNo fracture.\nNo tendon tear.')
+  })
+
+  test.each(['none', ' None ', 'nil', 'N/A', 'n/a.'])('other findings "%s" do not block the normal impression', (other) => {
+    expect(impressionOf({ ...normal, other })).toBe(NORMAL_IMPRESSION)
+  })
+
+  test("Haglund's syndrome replaces the separate Achilles, bursitis and prominence sentences", () => {
+    const values = { ...normal, marrow: 'bme', achilles: 'insertional', 'achilles-other': ['bursitis', 'prominence-bme'] }
+    expect(impressionOf(values)).toBe("Bone marrow edema.\nHaglund's syndrome: bone marrow edema in the posterosuperior calcaneal prominence, retrocalcaneal bursitis and insertional tendinopathy.")
+    expect(impressionOf({ ...values, 'achilles-other': ['bursitis'] }))
+      .toBe('Bone marrow edema.\nAchilles tendon: insertional tendinopathy.\nRetrocalcaneal bursitis.')
+  })
+
+  test('switching marrow edema to none hides its site, pattern and T1-line answers', () => {
+    const edema = { ...normal, marrow: 'bme', 'bme-site': 'medial talus', 'bme-pattern': 'ii', 't1-line': 'absent' }
+    expect(textLines(edema)).toContain('Bone marrow: edema in medial talus; localized or geographic, contiguous to the cartilage or bony outline (Costa-Paz type II); no hypointense line on T1')
+    const switched = { ...edema, marrow: 'normal' }
+    const { text, warnings } = report(study, switched)
+    expect(text.split('\n')).toContain('Bone marrow: no edema')
+    expect(text).not.toMatch(/medial talus|Costa-Paz|hypointense/)
+    expect(chips(study, 'bones', switched)).toEqual({})
+    expect(impressionOf(switched)).toBe(NORMAL_IMPRESSION)
+    expect(warnings).toEqual([])
+  })
+
+  test('ossicle edema names the ossicle it is in', () => {
+    const values = { ...normal, marrow: 'bme', ossicles: ['trigonum', 'peroneum'], 'ossicle-bme': ['trigonum'] }
+    expect(textLines(values)).toContain('Accessory ossicles: os trigonum, os peroneum; bone marrow edema in os trigonum')
+    expect(impressionOf(values)).toBe('Bone marrow edema.\nBone marrow edema in an accessory ossicle: os trigonum.')
+  })
+
+  test('the Achilles partial option is labelled "Partial tear"', () => {
+    expect(textLines({ ...normal, achilles: 'partial' })).toContain('Achilles tendon: partial tear')
+  })
+})
+
 describe('ankle MRI report: output text', () => {
   const cases: Values[] = [
     {},
     normal,
     { atfl: 'complete' },
     { ...normal, marrow: 'bme', 'bme-site': 'medial talus', 'bme-pattern': 'i', 't1-line': 'absent', fracture: 'stress', 'fracture-site': 'distal tibia' },
-    { ...normal, protocol: 'incomplete', 'protocol-missing': ['t1'], ossicles: ['trigonum', 'peroneum'], 'ossicle-bme': 'no' },
+    { ...normal, protocol: 'incomplete', 'protocol-missing': ['t1'], ossicles: ['trigonum', 'peroneum'], 'ossicle-bme': [] },
     { ...normal, pb: 'tear', 'pb-tear-type': 'split', 'pb-tear-site': 'spr', 'peroneal-fluid': '4', intrasheath: 'b', spr: 'avulsed', 'peroneal-position': 'subluxed', 'pb-belly': ['below-spr', 'ptfl-level'], quartus: 'present', 'tubercle-height': '6', 'tubercle-length': '5', 'peroneal-width': '4' },
     { ...normal, achilles: 'complete', 'achilles-distance': '5', 'achilles-gap': '2', 'posterior-impingement': 'present', 'posterior-impingement-findings': ['kager', 'stieda'] },
     { ...normal, aitfl: 'wavy', pitfl: 'not-seen', recess: '13', iom: 'abnormal', 'iom-text': 'edema', spring: 'abnormal', 'spring-findings': ['signal'], 'sinus-tarsi': 'abnormal', 'sinus-tarsi-findings': ['ganglion'], 'tarsal-tunnel': 'abnormal', 'plantar-fascia': 'fasciitis', 'plantar-thickness': '7', 'anterior-tendons': 'abnormal', 'anterior-impingement': 'present', other: 'Small ganglion dorsal midfoot.' },

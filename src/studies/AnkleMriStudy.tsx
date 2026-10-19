@@ -217,7 +217,7 @@ const learn: LearnSection[] = [
           <li><strong>III:</strong> a thin cortical fragment of bone is avulsed from the fibula.</li>
           <li><strong>IV:</strong> the SPR is torn from its posterior attachment to the calcaneus and the deep fascia of the Achilles tendon, and the tendon lies superficial to the retinaculum.</li>
         </ul>
-        <p>Intrasheath subluxation has two types: in type A the peroneus brevis and longus switch positions without a tear in the tendons or disruption of the SPR; in type B the peroneus longus subluxes through a longitudinal split in the peroneus brevis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
+        <p>Intrasheath subluxation has two types, which Davda and colleagues quote from Raikin and colleagues: in type A the peroneus brevis and longus switch positions without a tear in the tendons or disruption of the SPR; in type B the peroneus longus subluxes through a longitudinal split in the peroneus brevis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
 
         <h4>Variants that crowd the groove</h4>
         <p>A low-lying peroneus brevis has two working definitions. Davda and colleagues call it low-lying when the muscle belly extends below the superior margin of the SPR, seen in up to 33% of people, while noting that foot position changes the level of the musculotendinous junction (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). Huuskonen and colleagues called it low-lying when the belly was seen at least at the level of the lateral malleolus where the PTFL attaches (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>). Say which definition you used.</p>
@@ -451,9 +451,10 @@ const fields = {
     { value: 'peroneum', label: 'Os peroneum' },
     { value: 'naviculare', label: 'Os naviculare accessorium' },
   ] },
-  ossicleBme: { id: 'ossicle-bme', kind: 'choice', label: 'Bone marrow edema in the ossicle', showIf: (v) => list(v, 'ossicles').length > 0, options: [
-    { value: 'no', label: 'No' },
-    { value: 'yes', label: 'Yes' },
+  ossicleBme: { id: 'ossicle-bme', kind: 'multi', label: 'Bone marrow edema in', showIf: (v) => list(v, 'ossicles').length > 0, options: [
+    { value: 'trigonum', label: 'Os trigonum' },
+    { value: 'peroneum', label: 'Os peroneum' },
+    { value: 'naviculare', label: 'Os naviculare accessorium' },
   ] },
 
   atfl: { id: 'atfl', kind: 'choice', label: 'ATFL', required: true, options: ligamentOptions, help: 'Best seen on axial images.' },
@@ -524,7 +525,7 @@ const fields = {
     { value: 'normal', label: 'Normal' },
     { value: 'tendinosis', label: 'Midportion tendinosis' },
     { value: 'insertional', label: 'Insertional tendinopathy' },
-    { value: 'partial', label: 'Partial or intrasubstance tear' },
+    { value: 'partial', label: 'Partial tear' },
     { value: 'complete', label: 'Complete rupture' },
   ] },
   achillesDistance: { id: 'achilles-distance', kind: 'number', label: 'Rupture distance from the insertion', unit: 'cm', min: 0, step: 0.1, showIf: (v) => str(v, 'achilles') === 'complete', help: 'Within 2 cm is a distal rupture, which is rare.' },
@@ -591,6 +592,20 @@ const fields = {
 
 /* Rule helpers shared by the chips, the report and the warnings. */
 
+/** The ossicles marked as having edema, limited to those marked present, for mid-sentence use. */
+function edematousOssicles(values: Values): string[] {
+  const present = list(values, 'ossicles')
+  return list(values, 'ossicle-bme')
+    .filter((value) => present.includes(value))
+    .map((value) => lowerFirst(optionLabel(fields.ossicleBme, value)))
+}
+
+/** The other-findings text, or '' when it only says there is nothing ("none", "nil", "n/a"). */
+function otherFindings(values: Values): string {
+  const text = str(values, 'other')
+  return ['none', 'nil', 'n/a'].includes(text.toLowerCase().replace(/\.$/, '')) ? '' : text
+}
+
 function haglund(values: Values): boolean {
   const around = list(values, 'achilles-other')
   return str(values, 'achilles') === 'insertional' && around.includes('bursitis') && around.includes('prominence-bme')
@@ -654,7 +669,7 @@ function deriveLateralTendons(values: Values): Derived[] {
   if (fluid !== undefined && fluid > 3) out.push({ label: 'Peroneal sheath fluid', value: 'Highly specific for tenosynovitis (> 3 mm)', tone: 'warn' })
   const intrasheath = str(values, 'intrasheath')
   if (intrasheath === 'a' || intrasheath === 'b') {
-    out.push({ label: 'Intrasheath subluxation (Raikin)', value: `Type ${intrasheath.toUpperCase()}`, tone: 'warn' })
+    out.push({ label: 'Intrasheath subluxation (Davda, after Raikin)', value: `Type ${intrasheath.toUpperCase()}`, tone: 'warn' })
   }
   for (const [id, name] of peronealTendons) {
     const zone = brandesSmithZone[str(values, `${id}-tear-site`)] as string | undefined
@@ -731,7 +746,7 @@ function boneLines(values: Values): (string | false)[] {
   const olt = str(values, 'olt')
   const stage = heppleStage[str(values, 'olt-appearance')] as string | undefined
   const ossicles = chosen(values, fields.ossicles)
-  const ossicleBme = str(values, 'ossicle-bme')
+  const ossicleBme = edematousOssicles(values)
   return [
     marrow === 'normal' && 'Bone marrow: no edema',
     marrow === 'bme' && `Bone marrow: ${join([
@@ -749,8 +764,7 @@ function boneLines(values: Values): (string | false)[] {
     ]) || 'present'}`,
     ossicles.length > 0 && `Accessory ossicles: ${join([
       ossicles.join(', '),
-      ossicleBme === 'yes' && 'with bone marrow edema',
-      ossicleBme === 'no' && 'no bone marrow edema',
+      ossicleBme.length > 0 && `bone marrow edema in ${ossicleBme.join(', ')}`,
     ])}`,
   ]
 }
@@ -881,7 +895,8 @@ function findings(values: Values): string[] {
     const detail = join([picked(values, fields.oltSite), stage && `Hepple ${stage}`], ', ')
     out.push(`Osteochondral lesion of the talus${detail ? `, ${detail}` : ''}.`)
   }
-  if (str(values, 'ossicle-bme') === 'yes') out.push(`Bone marrow edema in an accessory ossicle (${chosen(values, fields.ossicles).join(', ')}).`)
+  const ossicleBme = edematousOssicles(values)
+  if (ossicleBme.length > 0) out.push(`Bone marrow edema in an accessory ossicle: ${ossicleBme.join(', ')}.`)
 
   for (const [id, name] of [...lateralLigaments, ...deltoid]) {
     const status = str(values, id)
@@ -892,6 +907,8 @@ function findings(values: Values): string[] {
     const status = str(values, id)
     if (status && status !== 'intact') out.push(`${name} disruption (${picked(values, { id, options: syndesmosisOptions })}).`)
   }
+  const recess = num(values, 'recess')
+  if (recess !== undefined && recess > 12) out.push(`Tibiofibular recess fluid ${recess} mm (> 12 mm, definitely abnormal).`)
   if (str(values, 'iom') === 'abnormal') out.push(`Interosseous membrane: ${str(values, 'iom-text') || 'abnormal'}.`)
   if (str(values, 'spring') === 'abnormal') {
     const springFindings = chosen(values, fields.springFindings)
@@ -908,6 +925,17 @@ function findings(values: Values): string[] {
   if (intrasheath === 'a' || intrasheath === 'b') out.push(`Intrasheath peroneal subluxation, type ${intrasheath.toUpperCase()}.`)
   const spr = str(values, 'spr')
   if (spr && spr !== 'intact') out.push(`Superior peroneal retinaculum ${picked(values, fields.spr)}.`)
+  const fluid = num(values, 'peroneal-fluid')
+  if (fluid !== undefined && fluid > 3) out.push(`Circumferential peroneal sheath fluid ${fluid} mm (> 3 mm, highly specific for tenosynovitis).`)
+  const height = num(values, 'tubercle-height')
+  if (height !== undefined && height > 5) {
+    out.push(`Peroneal tubercle ${height} mm high (> 5 mm, reported to relate to peroneus longus impingement and stenosing tenosynovitis).`)
+  }
+  const length = num(values, 'tubercle-length')
+  const width = num(values, 'peroneal-width')
+  if (length !== undefined && width !== undefined && length > width) {
+    out.push(`Peroneal tubercle prominent by the Huuskonen definition (length ${length} mm, wider peroneal tendon ${width} mm).`)
+  }
 
   const around = list(values, 'achilles-other')
   if (haglund(values)) {
@@ -949,16 +977,17 @@ function warnChipFired(values: Values): boolean {
 function impression(values: Values): string {
   const found = findings(values)
   const limited = str(values, 'protocol') === 'incomplete' && 'Limited study (protocol incomplete).'
+  const other = otherFindings(values)
+  const negatives = list(values, 'impression-negatives').map((value) => `${optionLabel(fields.impressionNegatives, value)}.`)
   if (found.length === 0) {
-    // Free-text findings and fired warn chips are not findings the impression can name, so
-    // never call such a study normal: say only that the findings are above.
-    if (str(values, 'other') || warnChipFired(values)) return `Impression: ${lines(limited, 'Findings as above.')}`
+    // Free text, and any warn chip without a sentence of its own, are not findings the
+    // impression can name, so never call such a study normal: say only that they are above.
+    if (other || warnChipFired(values)) return `Impression: ${lines(limited, 'Findings as above.', ...negatives)}`
     // A normal impression only once every required item is answered.
     const complete = steps.every((step) => step.fields.every((field) => !field.required || str(values, field.id) !== ''))
     return complete ? `Impression: ${lines(limited, NORMAL_IMPRESSION)}` : ''
   }
-  const negatives = list(values, 'impression-negatives').map((value) => `${optionLabel(fields.impressionNegatives, value)}.`)
-  return `Impression: ${lines(limited, ...found, ...negatives)}`
+  return `Impression: ${lines(limited, ...found, other && 'Other findings as above.', ...negatives)}`
 }
 
 /* "Check before signing": contradictions between entered findings. */
@@ -1008,7 +1037,7 @@ function warnings(values: Values): string[] {
   if (str(values, 'marrow') === 'normal') {
     const edema = [
       str(values, 'olt-appearance') === 'iia' && 'Hepple IIA osteochondral lesion (surrounding bony edema)',
-      str(values, 'ossicle-bme') === 'yes' && 'bone marrow edema in an accessory ossicle',
+      edematousOssicles(values).length > 0 && 'bone marrow edema in an accessory ossicle',
       list(values, 'achilles-other').includes('prominence-bme') && 'bone marrow edema in a posterosuperior calcaneal prominence',
       list(values, 'posterior-impingement-findings').includes('process-bme') && 'bone marrow edema in the posterior talar process or os trigonum',
     ].filter((item): item is string => Boolean(item))
@@ -1031,7 +1060,10 @@ function build(values: Values) {
   const text = lines(
     ...techniqueLines(values),
     ...boneLines(values),
-    ...lateralLigaments.map(([id, name]) => ligamentLine(values, id, name)),
+    ...lateralLigaments.map(([id, name]) => {
+      const thickness = num(values, `${id}-thickness`)
+      return ligamentLine(values, id, name, thickness !== undefined ? `thickness ${thickness} mm` : undefined)
+    }),
     ...syndesmosisLines(values),
     ...medialLigamentLines(values),
     ...flexorTendons.map(([id, name]) => tendonLine(values, id, name)),
@@ -1145,7 +1177,7 @@ const steps: ReportStep[] = [
       <>
         <p>Tendinosis and tenosynovitis are best seen on T2-weighted or axial PD-weighted images, as increased signal in the tendon and fluid around it. Circumferential fluid in the common peroneal sheath wider than 3 mm is highly specific for peroneal tenosynovitis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
         <p>Beware the magic angle: as the tendons curve round the lateral malleolus their fibres lie at 55° to the magnetic field, giving artefactual signal. Consider it before excluding a tear; T2-weighted images (or any long echo time sequence) and plantar flexion of the foot reduce it (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
-        <p>The Brandes-Smith zones locate a tear: zone A under the superior retinaculum, zone B at the inferior peroneal retinaculum, and zone C at the cuboid notch, where longus pathology occurs most often. Intrasheath subluxation has two types: in type A the peroneus brevis and longus switch positions without a tear in the tendons or disruption of the SPR; in type B the peroneus longus subluxes through a longitudinal split in the peroneus brevis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
+        <p>The Brandes-Smith zones locate a tear: zone A under the superior retinaculum, zone B at the inferior peroneal retinaculum, and zone C at the cuboid notch, where longus pathology occurs most often. Intrasheath subluxation has two types, which Davda and colleagues quote from Raikin and colleagues: in type A the peroneus brevis and longus switch positions without a tear in the tendons or disruption of the SPR; in type B the peroneus longus subluxes through a longitudinal split in the peroneus brevis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
         <p>Davda and colleagues quote the surgical grading of superior peroneal retinaculum (SPR) injury (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). They give no MRI criteria for each grade, so use these as descriptions only.</p>
         <p>A low-lying peroneus brevis has two working definitions. Davda and colleagues call it low-lying when the muscle belly extends below the superior margin of the SPR (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). Huuskonen and colleagues called it low-lying when the belly was seen at least at the level of the lateral malleolus where the PTFL attaches (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>). Say which definition you used.</p>
         <p>A peroneal tubercle more than 5 mm high is reported to be related to peroneus longus impingement and stenosing tenosynovitis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). Huuskonen and colleagues called the tubercle prominent when its length, measured from the lateral margin of the calcaneus, exceeded the width of each peroneal tendon (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>).</p>
