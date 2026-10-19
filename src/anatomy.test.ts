@@ -5,10 +5,15 @@ import { describe, expect, test } from 'vitest'
 import snapshot from './anatomy-colours.json'
 
 // Guards the 16 standalone anatomy viewers in public/anatomy/ (see CLAUDE.md, Anatomy).
-// anatomy-colours.json is a snapshot, taken before any viewer was restyled, of every custom
-// property in each file whose value is a hex or rgb()/rgba() colour. Where a file declares
-// the same property twice (brachial plexus's `body.light` overrides), only the first,
-// `:root`, value was recorded.
+// anatomy-colours.json is a snapshot, taken before any viewer was restyled, of each file's
+// colours in two parts:
+// - `css`: every custom property in a <style> rule block whose value is a hex or
+//   rgb()/rgba() colour, keyed `<selector>|<--name>`. The selector is the block's own,
+//   whitespace collapsed, prefixed by any enclosing at-rules joined with ` > `
+//   (e.g. `@media (max-width: 760px) > :root|--panel`). A repeat of the same key in a file
+//   gets `#2`, `#3`... appended.
+// - `script`: every `0xRRGGBB` and quoted '#rrggbb' / '#rgb' literal in the <script> blocks,
+//   in document order (the scene clear colours, materials and highlight glows).
 
 const FILES = [
   'otic-capsule.html',
@@ -32,8 +37,11 @@ const FILES = [
 type File = (typeof FILES)[number]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
-// shared radref.css tokens. Only names listed here may change value or disappear; every
-// other snapshotted colour is a structure or scene colour and must keep its value.
+// shared radref.css tokens. An entry is either a full `selector|--name` key from the
+// snapshot, exempting that one declaration, or a bare `--name`, exempting the name in every
+// selector. Only exempt keys may change value or disappear; every other snapshotted colour
+// is a structure or scene colour and must keep its exact value. Script literals are never
+// exempt.
 const CHROME: Record<File, string[]> = {
   'otic-capsule.html': [],
   'ossicular-chain.html': [],
@@ -53,25 +61,61 @@ const CHROME: Record<File, string[]> = {
   'online/foot.html': [],
 }
 
-const colours = snapshot as Record<File, Record<string, string>>
+const colours = snapshot as Record<File, { css: Record<string, string>; script: string[] }>
 
 function read(file: File): string {
   return readFileSync(new URL(`../public/anatomy/${file}`, import.meta.url), 'utf8')
 }
 
-/** Every value each custom property is given in the document's <style> blocks. */
-function declarations(html: string): Map<string, string[]> {
-  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n')
-  const found = new Map<string, string[]>()
-  for (const [, name, value] of css.matchAll(/(--[\w-]+)\s*:\s*([^;}]+)/g)) {
-    found.set(name, [...(found.get(name) ?? []), normalise(value)])
+const COLOUR = /^(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))$/
+const SCRIPT_COLOUR = /0x[0-9a-fA-F]{6}|(['"])#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})\1/g
+
+function squash(text: string): string {
+  return text.replace(/\s+/g, ' ').trim()
+}
+
+/** Colour custom properties by rule block, keyed as in the snapshot (see the top of the file). */
+function cssColours(html: string): Record<string, string> {
+  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)]
+    .map((m) => m[1])
+    .join('\n')
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+  const found: Record<string, string> = {}
+  const stack: string[] = []
+  let buf = ''
+  for (const ch of css) {
+    if (ch === '{') {
+      stack.push(squash(buf))
+      buf = ''
+    } else if (ch === '}') {
+      if (stack.length) {
+        const selector = stack.join(' > ')
+        for (const [, name, raw] of buf.matchAll(/(--[\w-]+)\s*:\s*([^;]+)/g)) {
+          const value = raw.trim()
+          if (!COLOUR.test(value)) continue
+          let key = `${selector}|${name}`
+          for (let n = 2; key in found; n++) key = `${selector}|${name}#${n}`
+          found[key] = value
+        }
+      }
+      stack.pop()
+      buf = ''
+    } else {
+      buf += ch
+    }
   }
   return found
 }
 
-/** Case and spacing do not change a colour: `#1E2A38` = `#1e2a38`, `rgba(0, 0, 0, .1)` = `rgba(0,0,0,.1)`. */
-function normalise(value: string): string {
-  return value.replace(/\s+/g, '').toLowerCase()
+/** Colour literals in the <script> blocks, in document order. */
+function scriptColours(html: string): string[] {
+  const js = [...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).join('\n')
+  return [...js.matchAll(SCRIPT_COLOUR)].map((m) => m[0])
+}
+
+function exempt(file: File, key: string): boolean {
+  const name = key.slice(key.lastIndexOf('|') + 1).replace(/#\d+$/, '')
+  return CHROME[file].includes(key) || CHROME[file].includes(name)
 }
 
 describe('anatomy viewers', () => {
@@ -105,11 +149,21 @@ describe('anatomy viewers', () => {
 
   test('structure colours unchanged', () => {
     for (const file of FILES) {
-      const current = declarations(read(file))
-      for (const [name, value] of Object.entries(colours[file])) {
-        if (CHROME[file].includes(name)) continue
-        expect(current.get(name) ?? [], `${file} ${name}`).toContain(normalise(value))
+      const current = cssColours(read(file))
+      const expected: Record<string, string> = {}
+      const actual: Record<string, string | undefined> = {}
+      for (const [key, value] of Object.entries(colours[file].css)) {
+        if (exempt(file, key)) continue
+        expected[key] = value
+        actual[key] = current[key]
       }
+      expect(actual, file).toEqual(expected)
+    }
+  })
+
+  test('scene colours in scripts unchanged', () => {
+    for (const file of FILES) {
+      expect(scriptColours(read(file)), file).toEqual(colours[file].script)
     }
   })
 })
