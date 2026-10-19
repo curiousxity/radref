@@ -33,7 +33,6 @@ export function ThemeToggle() {
       className="theme-toggle"
       onClick={handleToggle}
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      style={{ width: 44, height: 44 }}
     >
       <svg
         width="20"

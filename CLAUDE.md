@@ -43,25 +43,40 @@ Do not start the dev server or a browser to visually test/verify every change. R
 
 ## Typography
 
-The display face is Source Serif 4 (variable, weights 200-900), self-hosted at
-`public/fonts/source-serif-4-latin-wght-normal.woff2` with its licence alongside
-it. It is vendored rather than pulled from Google Fonts so the PWA keeps working
-with no network; `woff2` is in the Workbox `globPatterns` so the file is
-precached. Only the latin subset ships (~50 KB) - add another subset file and a
-matching `@font-face` in `src/styles.css` if non-latin text is ever needed.
-Body and UI text stay on the system sans stack, labels and data on the system
-mono stack.
+The site uses no webfont: system sans (`--font-sans`) for all text, headings included,
+and system mono (`--font-mono`) for labels and data. Weight and size carry the heading
+hierarchy; small labels (eyebrows, metric labels, group headings, table heads, tabs)
+are mono, uppercase and letter-spaced. Source Serif 4 is retired from the site
+stylesheet. The font file in `public/fonts/` stays only until the anatomy documents stop
+referencing it; `src/styles.test.ts` fails if `src/styles.css` gains a `@font-face` or a
+`Source Serif` reference again.
 
 ## Colour
 
-The palette follows the "RR" logo's teal. The tokens are on `:root` in
-`src/styles.css`: `--color-primary` #0e6b63 (the logo's teal), `--color-primary-dark`,
-`--color-primary-soft`, and `--color-accent` #13887a (focus rings and callout rules;
-it keeps 3:1 against the page background). The site is light-only. The manifest's
-`theme_color` and `background_color` and the `theme-color` meta in `index.html` are
-set to `--color-bg` (#eef0f1), so the phone status bar and splash screen blend with the
-sticky header. If the palette changes, change all of these together, and redraw the
-icons if the logo changes.
+The look is "reading room": dark-first, hairline rules instead of bordered cards, teal
+as the only accent. Every colour is a token in `src/styles.css`: the light palette on
+`:root`, the dark palette in a `[data-theme="dark"]` block that redefines every
+`--color-*` token. No colour literal belongs anywhere else in the file, shadows and the
+always-dark anatomy viewport (`--color-viewport`) included; `src/styles.test.ts` checks
+both rules. Page-specific colour needs (the fifth metatarsal figures' `--color-figure-*`)
+get their own tokens rather than literals.
+
+- Light: bg #fbfbfa, surface #ffffff, hairline #e3e5e6, control border #d5d9da, text
+  #111415, muted #5f676b, primary and accent #0e6b63 (the logo teal).
+- Dark: bg #0b0d0e, surface #141719, hairline #1d2123, control border #262b2e, text
+  #e6e8e9, muted #8d9599, primary and accent #3fb8a8. `--color-primary-dark` is the
+  hover state, so in the dark palette it is lighter than primary. Good/warn have dark
+  variants (#5ec48a, #f08070) that keep 4.5:1 on the dark background.
+- Text on a primary fill uses `--color-on-primary` (white in light, near-black in dark).
+
+`data-theme` on `<html>` is set before first paint by the inline script in `index.html`
+and afterwards by `src/lib/theme.ts` (`radref-theme` in `localStorage`, `light` | `dark`;
+absent means follow `prefers-color-scheme`). `index.html` has two `theme-color` metas,
+one per `prefers-color-scheme`, and `applyTheme` points both at the active background;
+`THEME_COLORS` in `src/lib/theme.ts` must equal the two `--color-bg` values (a test
+checks). The manifest's `theme_color` and `background_color` stay on the light
+background (#fbfbfa), since manifests have no dark variant. If the palette changes,
+change all of these together, and redraw the icons if the logo changes.
 
 ## Offline / PWA
 

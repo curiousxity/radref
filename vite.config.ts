@@ -17,8 +17,8 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         // Match the site header (--color-bg) so the status bar reads as part of it.
-        theme_color: '#eef0f1',
-        background_color: '#eef0f1',
+        theme_color: '#fbfbfa',
+        background_color: '#fbfbfa',
         icons: [
           { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },
