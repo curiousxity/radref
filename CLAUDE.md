@@ -82,6 +82,15 @@ checks). The manifest's `theme_color` and `background_color` stay on the light
 background (#fbfbfa), since manifests have no dark variant. If the palette changes,
 change all of these together, and redraw the icons if the logo changes.
 
+## Theme
+
+Summary of the theme plumbing (details in Colour and Anatomy section):
+
+- Key `radref-theme` in `localStorage`, values `light` | `dark`; absent follows `prefers-color-scheme`. Every access is in try/catch.
+- `index.html` sets `data-theme` and the `theme-color` metas before first paint; `src/lib/theme.ts` owns it afterwards, and `src/components/ThemeToggle.tsx` is the header button.
+- Anatomy viewers are separate documents: each inlines the pre-paint snippet from `public/anatomy/shared/radref.css` and links that stylesheet. The embedded frame follows the site's theme.
+- The 3D viewport (`--color-viewport` and in-canvas overlays) stays dark in both themes.
+
 ## Offline / PWA
 
 The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it can be installed to a phone home screen and used with no network connection after the first visit.
