@@ -45,6 +45,8 @@ const MIGRATED: readonly File[] = [
   'knee.html',
   'wrist.html',
   'ankle.html',
+  'online/tmj.html',
+  'online/skull-base.html',
 ]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
@@ -80,8 +82,27 @@ const CHROME: Record<File, string[]> = {
   'knee.html': ['--ink', '--slate', '--slate-2', '--line', '--paper', '--paper-dim', '--muted'],
   'wrist.html': ['--ink', '--ink-2', '--paper', '--line', '--link'],
   'ankle.html': ['--bg', '--paper', '--ink', '--ink-2', '--line', '--link', '--accent'],
-  'online/tmj.html': [],
-  'online/skull-base.html': [],
+  'online/tmj.html': [
+    '--bg',
+    '--bg2',
+    '--panel',
+    '--line',
+    '--ink',
+    '--ink2',
+    '--ink3',
+    '--accent',
+    '--accent2',
+  ],
+  'online/skull-base.html': [
+    '--bg',
+    '--pane',
+    '--pane2',
+    '--line',
+    '--ink',
+    '--mute',
+    '--amber',
+    '--cyan',
+  ],
   'online/suprahyoid-spaces.html': [],
   'online/larynx.html': [],
   'online/cervical-spine.html': [],
@@ -201,6 +222,10 @@ describe('anatomy viewers', () => {
   test('split scene colours keep their old values', () => {
     expect(cssColours(read('otic-capsule.html'))[':root|--cyan-scene']).toBe('#45C8D8')
     expect(cssColours(read('ankle.html'))[':root|--accent-scene']).toBe('#E0A100')
+    expect(cssColours(read('online/tmj.html'))[':root|--accent-scene']).toBe('#4fb8c9')
+    const skullBase = cssColours(read('online/skull-base.html'))
+    expect(skullBase[':root|--amber-scene']).toBe('#e8a33d')
+    expect(skullBase[':root|--cyan-scene']).toBe('#5fc6d0')
   })
 
   test('scene colours in scripts unchanged', () => {

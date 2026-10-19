@@ -4,6 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skull base foramina and cranial nerves — 3D reading-room reference</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <!--
   Bone, brainstem and optic nerve meshes: BodyParts3D, Copyright (c) 2008 Life Science Integrated Database Center (DBCLS), Japan.
   Licensed under Creative Commons Attribution-ShareAlike 2.1 Japan (CC BY-SA 2.1 JP).
@@ -13,25 +41,41 @@
   that exist in the bone mesh; openings that the mesh lacks are flagged in the model.
 -->
 <style>
-:root{--bg:#0e1216;--pane:#151b21;--pane2:#1b232b;--line:#2a343e;--ink:#e6e1d6;--mute:#93a0ab;--bone:#d8cfb8;--amber:#e8a33d;--cyan:#5fc6d0;--red:#e2574c;--ok:#7fc77f}
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --amber and --cyan were UI accents and also the ring colours in the scene (0xe8a33d flagged,
+   0x5fc6d0 real opening): the UI uses are now --rr-accent, and the scene values stay as
+   --amber-scene and --cyan-scene. --bone stays the bone colour; its heading uses take --ink. */
+:root{--bg:var(--rr-bg);--pane:var(--rr-surface);--pane2:var(--rr-bg);--line:var(--rr-hairline);--ink:var(--rr-text);--mute:var(--rr-muted);--bone:#d8cfb8;--amber:var(--rr-accent);--cyan:var(--rr-accent);--red:#e2574c;--ok:#7fc77f}
+:root{--amber-scene:#e8a33d;--cyan-scene:#5fc6d0}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--rr-font-sans)}
 header{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--pane);flex-wrap:wrap}
-header h1{font-size:15px;font-weight:600;margin:0 8px 0 0;letter-spacing:.2px;color:var(--bone)}
+header h1{font-size:15px;font-weight:600;margin:0 8px 0 0;letter-spacing:.2px;color:var(--ink)}
 header h1 small{color:var(--mute);font-weight:400;margin-left:6px}
 select,button,input[type=range]{font:inherit}
-select,button{background:var(--pane2);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+select,button{background:var(--pane2);color:var(--ink);border:1px solid var(--rr-border);border-radius:6px;padding:6px 10px}
 select{max-width:300px}
 button{cursor:pointer}button:hover{border-color:var(--amber)}
 #reset{margin-left:auto}
-main{display:grid;grid-template-columns:minmax(0,1fr) 400px;height:calc(100% - 48px)}
+main{display:grid;grid-template-columns:minmax(0,1fr) 400px;height:calc(100% - 61px)}
 #left{display:flex;flex-direction:column;min-height:0;min-width:0}
 #view{position:relative;flex:1;min-height:260px;overflow:hidden}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#view{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --pane:var(--rr-view-surface); --pane2:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --mute:var(--rr-view-muted); --amber:var(--rr-view-accent); --cyan:var(--rr-view-accent);
+}
 #view canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
 #drawerBtn{position:absolute;left:10px;bottom:10px;z-index:3;font-size:13px}
 #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .lab{position:absolute;transform:translate(-50%,-140%);font-size:11px;padding:1px 5px;border-radius:4px;background:rgba(14,18,22,.78);color:var(--ink);white-space:nowrap;border:1px solid var(--line)}
-.lab.sel{border-color:var(--amber);color:var(--amber)}
+.lab.sel{border-color:var(--amber-scene);color:var(--amber-scene)}
 #drawer{display:none;border-top:1px solid var(--line);background:var(--pane);padding:10px 12px;max-height:46%;overflow:auto}
 #drawer.open{display:block}
 .dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
@@ -44,7 +88,7 @@ main{display:grid;grid-template-columns:minmax(0,1fr) 400px;height:calc(100% - 4
 .row button.on{border-color:var(--amber);color:var(--amber)}
 input[type=range]{width:100%;accent-color:var(--amber)}
 aside{border-left:1px solid var(--line);background:var(--pane);overflow:auto;padding:14px 16px 30px}
-aside h2{font-size:17px;margin:0 0 2px;color:var(--bone)}
+aside h2{font-size:17px;margin:0 0 2px;color:var(--ink)}
 aside .sub{color:var(--mute);font-size:12.5px;margin-bottom:10px}
 aside h3{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--amber);margin:16px 0 6px;font-weight:600}
 aside ul{margin:0;padding-left:18px}aside li{margin:3px 0}
@@ -60,9 +104,11 @@ details[open] summary{color:var(--ink)}
 table.ft{width:100%;border-collapse:collapse;font-size:12.5px}
 table.ft td{padding:5px 4px;border-top:1px solid var(--line);vertical-align:top}
 table.ft tr{cursor:pointer}table.ft tr:hover td{background:var(--pane2)}
-table.ft td:first-child{color:var(--bone);font-weight:600;white-space:nowrap}
+table.ft td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
 .note{font-size:12px;color:var(--mute);border-left:2px solid var(--amber);padding-left:8px;margin:10px 0}
-.flag{color:var(--amber);font-size:11px}
+.flag{color:var(--rr-warn);font-size:11px}
+/* The dot in the foramen table is a swatch for the amber (flagged) ring, so it keeps the scene colour. */
+table.ft .flag{color:var(--amber-scene)}
 #mech{display:none;background:var(--pane2);border:1px solid var(--amber);border-radius:8px;padding:10px 12px;margin-bottom:12px}
 #mech b{color:var(--amber)}
 #mech .bar{height:3px;background:var(--line);margin-top:8px;border-radius:2px}#mech .bar i{display:block;height:100%;background:var(--amber);width:0;border-radius:2px}
