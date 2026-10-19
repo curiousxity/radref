@@ -1,4 +1,4 @@
-import { useRef, type KeyboardEvent } from 'react'
+import { useId, useRef, type KeyboardEvent } from 'react'
 import { nextChoiceIndex } from './choiceKeys'
 
 export type ChoiceOption<T extends string> = {
@@ -23,6 +23,7 @@ type ChoiceGroupProps<T extends string> = {
  *  focus and selection together. It sets exactly the values it is given, so swapping a
  *  `<select>` for it changes no state or logic. */
 export function ChoiceGroup<T extends string>({ label, value, options, onChange, layout = 'stack' }: ChoiceGroupProps<T>) {
+  const labelId = useId()
   const buttons = useRef<(HTMLButtonElement | null)[]>([])
   const checkedIndex = options.findIndex((option) => option.value === value)
   // If the value matches no option, the first one takes the tab stop so the group stays reachable.
@@ -38,8 +39,8 @@ export function ChoiceGroup<T extends string>({ label, value, options, onChange,
 
   return (
     <div className="choice-field">
-      <div className="choice-label" aria-hidden="true">{label}</div>
-      <div role="radiogroup" aria-label={label} className={`choice-group choice-group--${layout}`}>
+      <div className="choice-label" id={labelId}>{label}</div>
+      <div role="radiogroup" aria-labelledby={labelId} className={`choice-group choice-group--${layout}`}>
         {options.map((option, index) => {
           const checked = index === checkedIndex
           return (

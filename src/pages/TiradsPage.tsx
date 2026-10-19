@@ -1,16 +1,12 @@
 import { useMemo, useState } from 'react'
-import { ChoiceGroup, type ChoiceOption } from '../components/ChoiceGroup'
+import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { calculateTirads, tiradsPoints } from '../logic/tirads'
 import type { Composition, EchogenicFocus, Echogenicity, Margin, Shape, TiradsForm } from '../types/tirads'
+import { pointsDetail, withPoints } from './tiradsOptions'
 
 const initialForm: TiradsForm = {
   laterality: '', pole: '', sizeCm: '', composition: 'solid', echogenicity: 'hypoechoic', shape: 'widerThanTall', margin: 'smooth', echogenicFoci: [],
-}
-
-// Each option's points come from the same tables calculateTirads scores with.
-function withPoints<T extends string>(table: Record<T, number>, options: { value: T; label: string }[]): ChoiceOption<T>[] {
-  return options.map((option) => ({ ...option, detail: `+${table[option.value]}` }))
 }
 
 const compositionOptions = withPoints<Composition>(tiradsPoints.composition, [
@@ -20,25 +16,25 @@ const compositionOptions = withPoints<Composition>(tiradsPoints.composition, [
   { value: 'solid', label: 'Solid or almost completely solid' },
 ])
 
-const echogenicityOptions = withPoints<Echogenicity>(tiradsPoints.echogenicity, [
+const echogenicityOptions: { value: Echogenicity; label: string }[] = [
   { value: 'anechoic', label: 'Anechoic' },
   { value: 'hyperechoic', label: 'Hyperechoic' },
   { value: 'isoechoic', label: 'Isoechoic' },
   { value: 'hypoechoic', label: 'Hypoechoic' },
   { value: 'veryHypoechoic', label: 'Very hypoechoic' },
-])
+]
 
-const shapeOptions = withPoints<Shape>(tiradsPoints.shape, [
+const shapeOptions: { value: Shape; label: string }[] = [
   { value: 'widerThanTall', label: 'Wider-than-tall' },
   { value: 'tallerThanWide', label: 'Taller-than-wide' },
-])
+]
 
-const marginOptions = withPoints<Margin>(tiradsPoints.margin, [
+const marginOptions: { value: Margin; label: string }[] = [
   { value: 'smooth', label: 'Smooth' },
   { value: 'illDefined', label: 'Ill-defined' },
   { value: 'lobulated', label: 'Lobulated or irregular' },
   { value: 'extrathyroidal', label: 'Extrathyroidal extension' },
-])
+]
 
 const focusOptions: { value: EchogenicFocus; label: string }[] = [
   { value: 'macrocalcification', label: 'Macrocalcifications' },
@@ -53,6 +49,9 @@ export function TiradsPage() {
   function updateField<K extends keyof TiradsForm>(field: K, value: TiradsForm[K]) { setForm((current) => ({ ...current, [field]: value })) }
   function toggleFocus(focus: EchogenicFocus) { setForm((current) => ({ ...current, echogenicFoci: current.echogenicFoci.includes(focus) ? current.echogenicFoci.filter((item) => item !== focus) : [...current.echogenicFoci, focus] })) }
   function handleReset() { setForm(initialForm) }
+  // A spongiform nodule scores 0 whatever else is selected (calculateTirads), so the other
+  // features' points are hidden rather than shown as if they counted.
+  const spongiform = form.composition === 'spongiform'
   const copyDisabledReason = result.sizeMissing ? 'Enter the maximum size before copying.' : undefined
   return (
     <div className="page page-calculator">
@@ -73,17 +72,21 @@ export function TiradsPage() {
             <label><span>Maximum size (cm)</span><input type="number" inputMode="decimal" min="0" step="0.1" value={form.sizeCm} onChange={(event) => updateField('sizeCm', event.target.value)} placeholder="e.g. 1.4" /></label>
           </div>
           <ChoiceGroup label="Composition" layout="stack" value={form.composition} options={compositionOptions} onChange={(value) => updateField('composition', value)} />
-          <ChoiceGroup label="Echogenicity" layout="stack" value={form.echogenicity} options={echogenicityOptions} onChange={(value) => updateField('echogenicity', value)} />
-          <ChoiceGroup label="Shape" layout="stack" value={form.shape} options={shapeOptions} onChange={(value) => updateField('shape', value)} />
-          <ChoiceGroup label="Margin" layout="stack" value={form.margin} options={marginOptions} onChange={(value) => updateField('margin', value)} />
+          {spongiform ? <p className="choice-note">Spongiform: other features add no points (ACR TI-RADS).</p> : null}
+          <ChoiceGroup label="Echogenicity" layout="stack" value={form.echogenicity} options={withPoints(tiradsPoints.echogenicity, echogenicityOptions, spongiform)} onChange={(value) => updateField('echogenicity', value)} />
+          <ChoiceGroup label="Shape" layout="stack" value={form.shape} options={withPoints(tiradsPoints.shape, shapeOptions, spongiform)} onChange={(value) => updateField('shape', value)} />
+          <ChoiceGroup label="Margin" layout="stack" value={form.margin} options={withPoints(tiradsPoints.margin, marginOptions, spongiform)} onChange={(value) => updateField('margin', value)} />
           <fieldset className="focus-group">
             <legend>Echogenic foci</legend>
-            {focusOptions.map((focus) => (
-              <label key={focus.value} className="check-row check-row--detail">
-                <input type="checkbox" checked={form.echogenicFoci.includes(focus.value)} onChange={() => toggleFocus(focus.value)} /> {focus.label}
-                <span className="choice-option-detail">+{tiradsPoints.focus[focus.value]}</span>
-              </label>
-            ))}
+            {focusOptions.map((focus) => {
+              const detail = pointsDetail(tiradsPoints.focus[focus.value], spongiform)
+              return (
+                <label key={focus.value} className="check-row check-row--detail">
+                  <input type="checkbox" checked={form.echogenicFoci.includes(focus.value)} onChange={() => toggleFocus(focus.value)} /> {focus.label}
+                  {detail ? <span className="choice-option-detail">{detail}</span> : null}
+                </label>
+              )
+            })}
           </fieldset>
         </article>
         <article className="info-card result-card sticky-card">

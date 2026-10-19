@@ -221,6 +221,7 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .choice-group--row .choice-option[aria-checked='true'], .choice-group--row .choice-option:focus-visible { position: relative; z-index: 1; }
 .choice-option-detail { flex-shrink: 0; margin-left: auto; font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-muted); }
 .choice-option[aria-checked='true'] .choice-option-detail { color: var(--color-primary); }
+.choice-note { margin: 0.5rem 0 0; font-size: 0.82rem; line-height: 1.45; color: var(--color-text-muted); }
 .check-row--detail { grid-template-columns: auto 1fr auto; }
 
 /* Result strip: large mono category, the score beside it, then the summary line. */
