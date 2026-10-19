@@ -41,6 +41,16 @@ const focusPoints: Record<EchogenicFocus, number> = {
   punctate: 3,
 }
 
+/** The ACR points tables above, exported so the calculator page can show each option's
+ *  points beside its label. calculateTirads reads the same objects. */
+export const tiradsPoints = {
+  composition: compositionPoints,
+  echogenicity: echogenicityPoints,
+  shape: shapePoints,
+  margin: marginPoints,
+  focus: focusPoints,
+} as const
+
 const compositionLabels: Record<Composition, string> = {
   cystic: 'cystic or almost completely cystic',
   spongiform: 'spongiform',

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { EchogenicFocus, TiradsForm } from '../types/tirads'
-import { calculateTirads } from './tirads'
+import { calculateTirads, tiradsPoints } from './tirads'
 
 /*
  * ACR TI-RADS (Tessler et al., J Am Coll Radiol 2017;14:587-595, doi:10.1016/j.jacr.2017.01.046).
@@ -112,5 +112,15 @@ describe('ACR TI-RADS: FNA and follow-up thresholds', () => {
     expect(r.fna).toBe(false)
     expect(r.recommendation).toMatch(/^Enter the maximum size/)
     expect(r.impression).not.toContain('Enter the maximum size')
+  })
+})
+
+// The points tables are exported so the page can show each option's points beside its label.
+// Values from the ACR TI-RADS chart (Tessler et al., JACR 2017, Fig. 1): solid or almost
+// completely solid composition scores 2, very hypoechoic echogenicity scores 3.
+describe('tiradsPoints', () => {
+  it('exposes the ACR points the calculator uses', () => {
+    expect(tiradsPoints.composition.solid).toBe(2)
+    expect(tiradsPoints.echogenicity.veryHypoechoic).toBe(3)
   })
 })
