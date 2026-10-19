@@ -616,7 +616,7 @@ function renderPanel(){ var P=$('panel'), h='';
     h+='<h3>What to look for first</h3>'+list(p.look)+'<h3>Report checklist</h3>'+list(p.check)+'<h3>Pitfalls</h3>'+list(p.pit);
     h+='<details><summary>Differential</summary><p>'+p.ddx+'</p></details><details><summary>Papers</summary>'+refHtml(p.refs)+'</details>';
   } else if(S.sel){ var sp=SPACES[S.sel];
-    h+='<h2 style="color:'+sp.color+'">'+sp.name+'</h2><div class="sub">'+(sp.sided?'Paired space — showing the '+(S.side==='R'?'right':'left')+' side.':'Midline space.')+' Volume in this model: '+spaceVolume(S.sel)+'</div>';
+    h+='<h2><span class="chipdot" style="background:'+sp.color+';margin-right:6px"></span>'+sp.name+'</h2><div class="sub">'+(sp.sided?'Paired space — showing the '+(S.side==='R'?'right':'left')+' side.':'Midline space.')+' Volume in this model: '+spaceVolume(S.sel)+'</div>';
     h+='<h3>What to look for first</h3>'+list(sp.look)+'<h3>Report checklist</h3>'+list(sp.check)+'<h3>Pitfalls</h3>'+list(sp.pit);
     h+='<details><summary>Boundaries and contents</summary><p>'+sp.anat+'</p></details><details><summary>Differential</summary><p>'+sp.ddx+'</p></details><details><summary>Papers</summary>'+refHtml(sp.refs)+'</details>';
   } else { var o=OVERVIEW;
