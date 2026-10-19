@@ -36,6 +36,10 @@ const FILES = [
 
 type File = (typeof FILES)[number]
 
+// Viewers already moved onto public/anatomy/shared/radref.css. The link, theme and
+// no-remote-fonts tests run over these; the colour guards below run over all of FILES.
+const MIGRATED: readonly File[] = ['otic-capsule.html', 'ossicular-chain.html']
+
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
 // shared radref.css tokens. An entry is either a full `selector|--name` key from the
 // snapshot, exempting that one declaration, or a bare `--name`, exempting the name in every
@@ -43,8 +47,28 @@ type File = (typeof FILES)[number]
 // is a structure or scene colour and must keep its exact value. Script literals are never
 // exempt.
 const CHROME: Record<File, string[]> = {
-  'otic-capsule.html': [],
-  'ossicular-chain.html': [],
+  'otic-capsule.html': [
+    '--bg',
+    '--panel',
+    '--line',
+    '--line-soft',
+    '--ink',
+    '--ink-2',
+    '--ink-3',
+    '--cyan',
+    '--cyan-deep',
+  ],
+  'ossicular-chain.html': [
+    '--bg',
+    '--panel',
+    '--panel2',
+    '--ink',
+    '--ink2',
+    '--ink3',
+    '--rule',
+    '--rule2',
+    '--cut',
+  ],
   'shoulder.html': [],
   'knee.html': [],
   'wrist.html': [],
@@ -124,28 +148,31 @@ describe('anatomy viewers', () => {
     expect(Object.keys(CHROME).sort()).toEqual([...FILES].sort())
   })
 
-  // for (const file of FILES) {
-  //   const href = file.startsWith('online/') ? '../shared/radref.css' : 'shared/radref.css'
-  //   expect(read(file), file).toContain(`href="${href}"`)
-  // }
-  test.todo('links the shared stylesheet')
+  test('links the shared stylesheet', () => {
+    for (const file of MIGRATED) {
+      const href = file.startsWith('online/') ? '../shared/radref.css' : 'shared/radref.css'
+      expect(read(file), file).toContain(`href="${href}"`)
+    }
+  })
 
-  // for (const file of FILES) {
-  //   const html = read(file)
-  //   expect(html, file).toContain('radref-theme')
-  //   expect(html, file).toContain("addEventListener('storage'")
-  // }
-  test.todo('follows the site theme')
+  test('follows the site theme', () => {
+    for (const file of MIGRATED) {
+      const html = read(file)
+      expect(html, file).toContain('radref-theme')
+      expect(html, file).toContain("addEventListener('storage'")
+    }
+  })
 
-  // for (const file of FILES) {
-  //   const html = read(file)
-  //   const links = html.match(/<link\b[^>]*>/g) ?? []
-  //   const scripts = html.match(/<script\b[^>]*\bsrc=[^>]*>/g) ?? []
-  //   for (const tag of [...links, ...scripts]) expect(tag, file).not.toMatch(/https?:\/\//)
-  //   expect(html, file).not.toContain('fonts.googleapis')
-  //   expect(html, file).not.toContain('Source Serif')
-  // }
-  test.todo('no remote fonts or CDNs')
+  test('no remote fonts or CDNs', () => {
+    for (const file of MIGRATED) {
+      const html = read(file)
+      const links = html.match(/<link\b[^>]*>/g) ?? []
+      const scripts = html.match(/<script\b[^>]*\bsrc=[^>]*>/g) ?? []
+      for (const tag of [...links, ...scripts]) expect(tag, file).not.toMatch(/https?:\/\//)
+      expect(html, file).not.toContain('fonts.googleapis')
+      expect(html, file).not.toContain('Source Serif')
+    }
+  })
 
   test('structure colours unchanged', () => {
     for (const file of FILES) {

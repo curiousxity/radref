@@ -4,21 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The ossicular chain in its temporal bone</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
 <style>
-@font-face{
-  /* The same file the app shell already precaches, so this costs no extra bytes. */
-  font-family:'Source Serif 4 Variable';
-  font-style:normal;
-  font-weight:200 900;
-  font-display:swap;
-  src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
-}
+/* Chrome follows the site theme (shared/radref.css); structure colours keep their values. */
 :root{
-  --bg:#16181A; --panel:#1D2023; --panel2:#232629;
-  --ink:#EAE6DC; --ink2:#9C988D; --ink3:#6E6B64;
-  --rule:rgba(255,255,255,.10); --rule2:rgba(255,255,255,.18); --cut:#9FC3D4;
-  --serif:"Source Serif 4 Variable",Georgia,"Times New Roman",serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:var(--rr-bg); --panel:var(--rr-surface); --panel2:var(--rr-hairline);
+  --ink:var(--rr-text); --ink2:var(--rr-muted); --ink3:var(--rr-muted);
+  --rule:var(--rr-hairline); --rule2:var(--rr-border); --cut:var(--rr-accent);
+  --serif:var(--rr-font-sans);
+  --sans:var(--rr-font-sans);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -29,6 +50,19 @@ h1{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.15;marg
 header p{margin:0;color:var(--ink2);max-width:68ch}
 .row{display:grid;grid-template-columns:minmax(0,1fr) 306px;gap:16px;align-items:start}
 .stage{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+/* The 3D canvas is transparent, so .stage's background is the scene background. It stays
+   dark in both themes, with its old colour, and the chrome tokens (and this file's names for
+   them) take the always-dark --rr-view-* values over it. */
+.stage{
+  color-scheme:dark;
+  background:#1D2023;
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --panel2:var(--rr-view-hairline);
+  --ink:var(--rr-view-text); --ink2:var(--rr-view-muted); --ink3:var(--rr-view-muted);
+  --rule:var(--rr-view-hairline); --rule2:var(--rr-view-border); --cut:var(--rr-view-accent);
+}
 #oc{display:block;width:100%;height:min(66vh,600px);min-height:400px;touch-action:none;cursor:grab}
 #oc:active{cursor:grabbing}
 .hint{position:absolute;left:14px;bottom:11px;font-size:12px;color:var(--ink3);pointer-events:none}
@@ -617,7 +651,7 @@ function draw(){
     if(mode==='oto'&&(sel==='all'||sel==='stapes'))list.push([[-4.60,-1.60,0.95],'Otosclerotic focus','oto']);
     if(mode==='erosion'&&(sel==='all'||sel==='incus'))list.push([[-1.80,-1.60,-0.60],'Eroded segment','incusD']);
     var L=[],R=[];
-    X.font='15px "Source Serif 4 Variable",Georgia,serif';
+    X.font='15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
     for(i=0;i<list.length;i++){
       var it=list[i], g=it[2]||sel, s2=proj(toCam(xf(g,it[0],1)));
       var e={x:s2[0],y:s2[1],t:it[1],w:X.measureText(it[1]).width,dim:!!it[2]};

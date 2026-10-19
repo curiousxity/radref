@@ -4,26 +4,49 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Otic Capsule — an interactive labyrinth</title>
-<style>
-  @font-face {
-    /* The same file the app shell already precaches, so this costs no extra bytes. */
-    font-family:'Source Serif 4 Variable';
-    font-style:normal;
-    font-weight:200 900;
-    font-display:swap;
-    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
   }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
+<style>
+  /* Chrome follows the site theme (shared/radref.css); structure colours keep their values. */
   :root{
-    --bg:#0B141B;
-    --panel:#101C25;
+    --bg:var(--rr-bg);
+    --panel:var(--rr-surface);
     --panel-2:#16242F;
-    --line:#23394A;
-    --line-soft:#1A2C39;
-    --ink:#E4EDF2;
-    --ink-2:#93A9B8;
-    --ink-3:#617887;
-    --cyan:#45C8D8;
-    --cyan-deep:#1E5F6B;
+    --line:var(--rr-hairline);
+    --line-soft:var(--rr-hairline);
+    --ink:var(--rr-text);
+    --ink-2:var(--rr-muted);
+    --ink-3:var(--rr-muted);
+    --cyan:var(--rr-accent);
+    --cyan-deep:var(--rr-accent);
+    /* The selected-structure highlight on its floating label (was --cyan). */
+    --cyan-scene:#45C8D8;
     --bone:#EADFC8;
     --flag:#E8894A;
     --flag-2:#D9534F;
@@ -35,7 +58,7 @@
     margin:0;
     background:var(--bg);
     color:var(--ink);
-    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family:var(--rr-font-sans);
     font-size:15px;
     line-height:1.45;
     -webkit-font-smoothing:antialiased;
@@ -49,11 +72,11 @@
     display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
     padding:12px 20px 11px;
     border-bottom:1px solid var(--line);
-    background:linear-gradient(180deg,#0E1922,#0B141B);
+    background:var(--bg);
     flex:0 0 auto;
   }
   header.bar h1{
-    font-family:'Source Serif 4 Variable', Georgia, serif;
+    font-family:var(--rr-font-sans);
     font-weight:500; font-size:20px; letter-spacing:.2px;
     margin:0; color:var(--ink);
   }
@@ -72,14 +95,14 @@
 
   button{
     font-family:inherit; font-size:12.5px; color:var(--ink-2);
-    background:transparent; border:1px solid var(--line);
+    background:transparent; border:1px solid var(--rr-border);
     padding:5px 11px; border-radius:2px; cursor:pointer;
     transition:color .12s ease, border-color .12s ease, background .12s ease;
   }
   button:hover{color:var(--ink); border-color:var(--cyan-deep);}
   button:focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
   button[aria-pressed="true"], button.on{
-    color:#04171C; background:var(--cyan); border-color:var(--cyan); font-weight:500;
+    color:var(--rr-bg); background:var(--cyan); border-color:var(--cyan); font-weight:500;
   }
 
   /* ---------- main split ---------- */
@@ -89,6 +112,23 @@
     position:relative; flex:1 1 auto; min-width:0;
     background:
       radial-gradient(ellipse at 42% 40%, #17303C 0%, #0B141B 62%);
+    /* The viewport stays dark in both themes: inside it the chrome tokens, and this
+       file's names for them, take the always-dark --rr-view-* values. */
+    color-scheme:dark;
+    --rr-bg:var(--rr-view-bg);
+    --rr-surface:var(--rr-view-surface);
+    --rr-hairline:var(--rr-view-hairline);
+    --rr-border:var(--rr-view-border);
+    --rr-text:var(--rr-view-text);
+    --rr-muted:var(--rr-view-muted);
+    --rr-accent:var(--rr-view-accent);
+    --line:var(--rr-view-hairline);
+    --line-soft:var(--rr-view-hairline);
+    --ink:var(--rr-view-text);
+    --ink-2:var(--rr-view-muted);
+    --ink-3:var(--rr-view-muted);
+    --cyan:var(--rr-view-accent);
+    --cyan-deep:var(--rr-view-accent);
   }
   canvas{display:block; width:100%; height:100%; touch-action:none;}
 
@@ -114,7 +154,7 @@
     display:flex; gap:7px; flex-wrap:wrap; align-items:center;
   }
   .tray .lede{
-    font-family:'Source Serif 4 Variable', Georgia, serif; font-style:italic;
+    font-family:var(--rr-font-sans); font-style:italic;
     font-size:13px; color:var(--ink-3); margin-right:4px;
   }
   .tray button{
@@ -141,13 +181,13 @@
     background:var(--ink-3); flex:0 0 auto; display:block;
     box-shadow:0 0 0 3px rgba(11,20,27,.55);
   }
-  .lab.sel{color:var(--cyan); font-weight:500;}
-  .lab.sel i{background:var(--cyan); box-shadow:0 0 0 3px rgba(69,200,216,.16);}
+  .lab.sel{color:var(--cyan-scene); font-weight:500;}
+  .lab.sel i{background:var(--cyan-scene); box-shadow:0 0 0 3px rgba(69,200,216,.16);}
   .lab.flip{transform:translate(-100%,-50%); flex-direction:row-reverse;}
 
   .hint{
     position:absolute; top:14px; right:14px; z-index:5;
-    font-family:'Source Serif 4 Variable', Georgia, serif; font-style:italic;
+    font-family:var(--rr-font-sans); font-style:italic;
     font-size:12.5px; color:var(--ink-3);
     background:rgba(11,20,27,.7); padding:4px 9px; border-radius:2px;
     transition:opacity .4s ease;
@@ -165,7 +205,7 @@
   .panel::-webkit-scrollbar-thumb{background:var(--line); border-radius:0;}
 
   .panel h2{
-    font-family:'Source Serif 4 Variable', Georgia, serif; font-weight:500;
+    font-family:var(--rr-font-sans); font-weight:500;
     font-size:25px; line-height:1.15; margin:0 0 2px;
   }
   .panel .kicker{
@@ -180,39 +220,39 @@
     margin:0 0 6px; letter-spacing:.15px;
   }
   .block p{
-    font-family:'Source Serif 4 Variable', Georgia, serif;
+    font-family:var(--rr-font-sans);
     font-size:15.5px; line-height:1.62; color:var(--ink);
     margin:0 0 9px; max-width:62ch;
   }
   .block p:last-child{margin-bottom:0;}
   .block p em{color:var(--cyan); font-style:italic;}
-  .block p strong{font-weight:500; color:#FFF3DE;}
+  .block p strong{font-weight:500; color:var(--ink);}
 
   .num{
-    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:13px;
+    font-family:var(--rr-font-sans); font-size:13px;
     color:var(--flag); font-variant-numeric:tabular-nums;
   }
 
   .intro-list{list-style:none; margin:0; padding:0;}
   .intro-list li{
-    font-family:'Source Serif 4 Variable', Georgia, serif; font-size:15px; line-height:1.55;
+    font-family:var(--rr-font-sans); font-size:15px; line-height:1.55;
     padding:8px 0 8px 0; border-bottom:1px solid var(--line-soft); color:var(--ink);
   }
   .intro-list li:last-child{border-bottom:0;}
-  .intro-list b{font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:12.5px; font-weight:600; color:var(--ink-2); display:block;}
+  .intro-list b{font-family:var(--rr-font-sans); font-size:12.5px; font-weight:600; color:var(--ink-2); display:block;}
 
   .refs{list-style:none; margin:0; padding:0;}
   .refs li{margin:0 0 13px;}
   .refs li:last-child{margin-bottom:0;}
   .refs a{
-    font-family:'Source Serif 4 Variable', Georgia, serif; font-size:15px; line-height:1.42;
+    font-family:var(--rr-font-sans); font-size:15px; line-height:1.42;
     color:var(--ink); text-decoration:none;
     border-bottom:1px solid var(--line); transition:color .12s ease, border-color .12s ease;
   }
   .refs a:hover, .refs a:focus-visible{color:var(--cyan); border-color:var(--cyan-deep);}
   .refs .src{
     display:block; margin-top:3px; max-width:56ch;
-    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:11.5px; line-height:1.45; color:var(--ink-3);
+    font-family:var(--rr-font-sans); font-size:11.5px; line-height:1.45; color:var(--ink-3);
   }
   .refs .free{color:var(--cyan);}
 
