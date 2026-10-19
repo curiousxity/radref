@@ -226,7 +226,7 @@ export function FleischnerPage() {
             <div className="result-strip-head">
               <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
             </div>
-            <p className="result-strip-summary">{result.summary}</p>
+            {result.summary && <p className="result-strip-summary">{result.summary}</p>}
           </div>
           {result.impression && (
             <>

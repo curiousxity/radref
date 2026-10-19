@@ -232,11 +232,12 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .result-strip-value { margin: 0; font-family: var(--font-mono); font-size: 2.2rem; font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; color: var(--color-primary); }
 .result-strip-value.tone-warn { color: var(--color-warn); }
 .result-strip-value.tone-good { color: var(--color-good); }
+.result-strip-value.tone-neutral { color: var(--color-text-muted); }
 /* A result that is a phrase ("CT at 3-6 months") rather than a short code. */
 .result-strip-value--phrase { font-family: var(--font-sans); font-size: 1.35rem; line-height: 1.25; letter-spacing: 0; }
 .result-strip-meta { margin: 0; display: inline-flex; align-items: baseline; gap: 0.5rem; }
 .result-strip-points { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 600; color: var(--color-text); }
-.result-strip-summary { margin: 0.5rem 0 0; line-height: 1.5; color: var(--color-text-muted); }
+.result-strip-summary { margin: 0.5rem 0 0; line-height: 1.5; color: var(--color-text); }
 .info-card li a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
 .info-card li a:hover { color: var(--color-primary-dark); }
 .filter-row { margin: 0 0 1rem; grid-template-columns: 1fr; }

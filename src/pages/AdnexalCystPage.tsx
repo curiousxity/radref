@@ -657,7 +657,7 @@ export function AdnexalCystPage() {
               <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
             </div>
             {result.applicabilityNote && <p className="result-strip-summary"><strong>{result.applicabilityNote}</strong></p>}
-            <p className="result-strip-summary">{result.summary}</p>
+            {result.summary && <p className="result-strip-summary">{result.summary}</p>}
           </div>
           {result.outsideScope && (
             <p className="result-summary">This guideline covers simple cysts only. Assess this lesion with <Link to="/orads">O-RADS</Link> instead.</p>
