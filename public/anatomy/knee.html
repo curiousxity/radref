@@ -15,33 +15,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Knee atlas — interactive 3D anatomy for radiologists</title>
-<style>
-  @font-face {
-    /* The same file the app shell already precaches, so this costs no extra bytes. */
-    font-family:'Source Serif 4 Variable';
-    font-style:normal;
-    font-weight:200 900;
-    font-display:swap;
-    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
   }
-</style>
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
 <style>
+  /* Chrome follows the site theme (shared/radref.css); structure colours keep their values.
+     Here --ink is the page background and --paper the text. --acl is the ACL's structure
+     colour only: the link colour, focus ring and control accents that used it now use
+     --rr-accent. */
   :root{
-    --ink:#1c2128; --slate:#2a313b; --slate-2:#353d49; --line:#46505d;
-    --paper:#f3efe6; --paper-dim:#cfc9bc; --muted:#9aa3ae;
+    --ink:var(--rr-bg); --slate:var(--rr-surface); --slate-2:var(--rr-bg); --line:var(--rr-hairline);
+    --paper:var(--rr-text); --paper-dim:var(--rr-muted); --muted:var(--rr-muted);
     --bone:#e9e2d0; --acl:#4fb3a9; --pcl:#9b7fd4; --mcl:#e0a458; --lcl:#e07a5f;
     --men:#8fb58e; --ten:#d9c27a; --cart:#bfd7e6; --fat:#d6c25a; --art:#d4453e; --nerve:#f2d15c;
     --stress:#ff5a48;
-    --serif:'Source Serif 4 Variable', Georgia, "Times New Roman", serif;
-    --sans:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --serif:var(--rr-font-sans);
+    --sans:var(--rr-font-sans);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:15px;line-height:1.5}
   body{display:flex;flex-direction:column;overflow:hidden}
-  a{color:var(--acl)}
-  button{font:inherit;color:inherit;background:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer}
+  a{color:var(--rr-accent)}
+  button{font:inherit;color:inherit;background:none;border:1px solid var(--rr-border);border-radius:6px;padding:6px 10px;cursor:pointer}
   button:hover{border-color:var(--paper-dim)}
-  button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--acl);outline-offset:2px}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--rr-accent);outline-offset:2px}
   button[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 
   header{display:flex;align-items:baseline;gap:18px;padding:12px 18px 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
@@ -51,11 +73,25 @@
   .views button{padding:5px 10px;font-size:13px}
 
   main{flex:1;display:grid;grid-template-columns:1fr 400px;min-height:0}
-  #viewport{position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%, #323a46 0%, var(--ink) 70%);overflow:hidden}
+  #viewport{position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%, #323a46 0%, #1c2128 70%);overflow:hidden}
+  /* The viewport stays dark in both themes (its background keeps the old #1c2128): inside
+     it the chrome tokens, and this file's names for them, take the always-dark
+     --rr-view-* values. */
+  #viewport{
+    color-scheme:dark;
+    color:var(--rr-view-text);
+    --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+    --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+    --rr-accent:var(--rr-view-accent);
+    --ink:var(--rr-view-bg); --slate:var(--rr-view-surface); --slate-2:var(--rr-view-surface); --line:var(--rr-view-border);
+    --paper:var(--rr-view-text); --paper-dim:var(--rr-view-muted); --muted:var(--rr-view-muted);
+  }
   #viewport canvas{display:block;width:100%;height:100%;touch-action:none}
   #leaders{position:absolute;inset:0;pointer-events:none;overflow:visible}
   #labels{position:absolute;inset:0;pointer-events:none}
   .lbl{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;background:rgba(28,33,40,.82);border:1px solid var(--line);border-radius:4px;padding:2px 7px;font-size:12px;white-space:nowrap;color:var(--paper);backdrop-filter:blur(2px);transition:opacity .15s}
+  /* Floating labels keep their compact size, not the shared 44px control height. */
+  .lbl{min-height:0}
   .lbl.dim{opacity:.26}
   .lbl.sel{border-color:var(--paper);background:var(--paper);color:var(--ink)}
   .lbl.bruise{background:var(--stress);border-color:var(--stress);color:#fff;font-weight:600;font-size:11px;padding:0;width:19px;height:19px;border-radius:50%;display:grid;place-items:center}
@@ -66,8 +102,8 @@
   .hud summary{cursor:pointer;font-weight:500;list-style:none}
   .hud summary::-webkit-details-marker{display:none}
   .hud label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
-  .hud input[type=checkbox]{accent-color:var(--acl)}
-  .hud input[type=range]{width:100%;accent-color:var(--acl)}
+  .hud input[type=checkbox]{accent-color:var(--rr-accent)}
+  .hud input[type=range]{width:100%;accent-color:var(--rr-accent)}
   .hud .rng{margin-top:6px}
   .hud hr{border:none;border-top:1px solid var(--line);margin:8px 0 6px}
   .hud .lblrow em{display:block;color:var(--muted);font-size:12px;font-style:normal}
@@ -84,12 +120,12 @@
   #panel h2{font-family:var(--serif);font-weight:500;font-size:26px;margin:0 0 4px;line-height:1.15}
   #panel .kind{color:var(--muted);font-size:13px;margin-bottom:14px}
   #panel h3{font-family:var(--serif);font-weight:600;font-size:16px;margin:18px 0 4px;color:var(--paper)}
-  #panel p{margin:0 0 8px;max-width:62ch;color:#e6e1d6}
+  #panel p{margin:0 0 8px;max-width:62ch;color:var(--paper)}
   #panel ul{margin:0 0 8px;padding-left:18px;max-width:62ch}
   #panel li{margin:0 0 6px}
   .papers li{font-size:14px}
-  .papers a{text-decoration:none;border-bottom:1px solid rgba(79,179,169,.4)}
-  .papers a:hover{border-bottom-color:var(--acl)}
+  .papers a{text-decoration:none;border-bottom:1px solid var(--rr-border)}
+  .papers a:hover{border-bottom-color:var(--rr-accent)}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
   .chip{font-size:13px;padding:4px 9px;border-radius:14px;display:inline-flex;align-items:center;gap:6px}
   .chip .sw{width:9px;height:9px;border-radius:50%}
@@ -98,10 +134,10 @@
   .bruiselist{list-style:none;padding-left:0;max-width:62ch}
   .bruiselist li{display:flex;gap:9px;align-items:flex-start;margin-bottom:7px}
   .bruiselist b{flex:0 0 20px;height:20px;border-radius:50%;background:var(--stress);color:#fff;font-size:12px;display:grid;place-items:center;font-weight:600}
-  .h3btn{font-size:12px;padding:2px 9px;border-radius:12px;margin-left:9px;vertical-align:2px;color:var(--muted);font-family:var(--sans);font-weight:400}
+  .h3btn{font-size:12px;padding:2px 9px;border-radius:12px;margin-left:9px;vertical-align:2px;color:var(--muted);font-family:var(--sans);font-weight:400;min-height:0}
   .h3btn:hover{color:var(--paper)}
   .stresslist span{display:inline-block;padding:2px 8px;border-radius:12px;font-size:13px;margin:0 4px 4px 0;border:1px solid var(--line)}
-  .stresslist span.tear{border-color:var(--stress);color:#ffb3aa}
+  .stresslist span.tear{border-color:var(--stress);color:var(--paper)}
   .back{margin-bottom:12px;font-size:13px}
 
   @media (max-width: 900px){
@@ -111,7 +147,7 @@
     header h1{font-size:20px}
   }
   .steps{display:flex;gap:6px;align-items:center;margin:10px 0 14px;flex-wrap:wrap}
-  .steps .dot{width:10px;height:10px;border-radius:50%;background:var(--line);border:0;padding:0;cursor:pointer}
+  .steps .dot{width:10px;height:10px;min-height:0;border-radius:50%;background:var(--rr-border);border:0;padding:0;cursor:pointer}
   .steps .dot[aria-current="step"]{background:var(--stress);transform:scale(1.3)}
   .steps .of{font-size:13px;color:var(--muted);margin-left:6px}
   .nav{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
@@ -121,8 +157,8 @@
   .see{background:var(--slate-2);border-left:3px solid var(--stress);padding:10px 12px;border-radius:0 8px 8px 0;margin:8px 0 12px;max-width:62ch}
   .see b{display:block;margin-bottom:3px}
   #ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 20px 12px}
-  #ctrl select{font:inherit;font-size:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);max-width:100%}
-  #ctrl .reset{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer}
+  #ctrl select{font:inherit;font-size:14px;padding:7px 12px;border-radius:999px;border:1px solid var(--rr-border);background:var(--rr-surface);color:var(--rr-text);max-width:100%}
+  #ctrl .reset{font:inherit;font-size:14px;border:1px solid var(--rr-border);background:var(--rr-surface);color:var(--rr-text);padding:7px 14px;border-radius:999px;cursor:pointer}
   #drawerBtn{position:absolute;left:14px;bottom:14px;z-index:3;font:inherit;font-size:13px;border:1px solid rgba(243,239,230,.3);background:rgba(28,30,34,.88);color:#F3EFE6;padding:6px 13px;border-radius:999px;cursor:pointer}
   #overlay{position:absolute;left:14px;right:14px;bottom:56px;z-index:3;background:rgba(22,24,28,.96);border:1px solid rgba(243,239,230,.22);border-radius:12px;padding:13px 15px;display:none;flex-direction:column;gap:12px;max-height:74%;overflow:auto;color:#F3EFE6}
   #overlay[data-open="1"]{display:flex}

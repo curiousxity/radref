@@ -4,24 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Shoulder — interactive 3D anatomy, injury mechanisms and imaging</title>
-<style>
-  @font-face {
-    /* The same file the app shell already precaches, so this costs no extra bytes. */
-    font-family:'Source Serif 4 Variable';
-    font-style:normal;
-    font-weight:200 900;
-    font-display:swap;
-    src:url('/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2-variations');
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
   }
-</style>
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="shared/radref.css">
 <style>
+  /* Chrome follows the site theme (shared/radref.css); structure colours keep their values.
+     --cart (labrum) and --focus (labral clock face) are structure colours only: the link
+     colour, checkbox accent and focus ring that used them now use --rr-accent. */
   :root{
-    --bg:#1b1f24;        /* reading-room slate */
-    --panel:#242a31;
-    --panel-2:#2c333b;
-    --line:#39424c;
-    --ink:#e8e4da;       /* warm ivory text */
-    --ink-soft:#a9b0ba;
+    --bg:var(--rr-bg);
+    --panel:var(--rr-surface);
+    --panel-2:var(--rr-bg);
+    --line:var(--rr-hairline);
+    --ink:var(--rr-text);
+    --ink-soft:var(--rr-muted);
     --bone:#e9dfc8;
     --tendon:#d8b36a;
     --lig:#7fa88f;
@@ -33,18 +54,29 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
-    font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;font-size:16px;line-height:1.5}
-  a{color:var(--cart)} a:hover{color:#8ad0d0}
+    font-family:var(--rr-font-sans);font-size:16px;line-height:1.5}
+  a{color:var(--rr-accent)} a:hover{color:var(--ink)}
   button{font:inherit;color:inherit}
-  :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+  :focus-visible{outline:2px solid var(--rr-accent);outline-offset:2px}
 
   header{display:flex;align-items:baseline;gap:20px;padding:14px 22px 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  header h1{font-family:'Source Serif 4 Variable', Georgia, serif;font-size:1.25rem;margin:0;font-weight:700;letter-spacing:.01em}
+  header h1{font-family:var(--rr-font-sans);font-size:1.25rem;margin:0;font-weight:700;letter-spacing:.01em}
   header p{margin:0;color:var(--ink-soft);font-size:.95rem}
   header .credit{font-size:.82rem;opacity:.8}
 
   main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(360px,.9fr);height:calc(100% - 55px)}
   #viewer{position:relative;min-height:380px;background:radial-gradient(ellipse at 40% 40%,#252b33 0%,#1b1f24 70%)}
+  /* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+     names for them, take the always-dark --rr-view-* values. */
+  #viewer{
+    color-scheme:dark;
+    color:var(--rr-view-text);
+    --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+    --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+    --rr-accent:var(--rr-view-accent);
+    --panel-2:var(--rr-view-surface); --line:var(--rr-view-border);
+    --ink:var(--rr-view-text); --ink-soft:var(--rr-view-muted);
+  }
   #viewer canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
   #viewer canvas.dragging{cursor:grabbing}
   #viewer canvas.hovering{cursor:pointer}
@@ -60,7 +92,7 @@
   #layers{position:absolute;left:12px;bottom:12px;background:rgba(36,42,49,.9);border:1px solid var(--line);
     border-radius:10px;padding:10px 12px;font-size:.86rem;backdrop-filter:blur(4px)}
   #layers label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
-  #layers input{accent-color:var(--cart)}
+  #layers input{accent-color:var(--rr-accent)}
   .sw{width:12px;height:12px;border-radius:3px;display:inline-block;flex:none}
 
   #rightstack{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
@@ -73,8 +105,9 @@
   #planes .ptitle{color:var(--ink-soft);margin-bottom:6px}
   #planes .prow{margin-bottom:7px}
   #planes label.tog{display:flex;align-items:center;gap:8px;cursor:pointer}
-  #planes input[type=checkbox]{accent-color:var(--cart)}
-  #planes input[type=range]{width:100%;margin:4px 0 0;accent-color:var(--ink-soft)}
+  #planes input[type=checkbox]{accent-color:var(--rr-accent)}
+  /* min-height:0 keeps the shared 44px slider hit area from overflowing the viewport on phones. */
+  #planes input[type=range]{width:100%;margin:4px 0 0;accent-color:var(--ink-soft);min-height:0}
   #planes input[type=range]:disabled{opacity:.35}
   #planes .cutrow{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:8px;margin-top:2px}
   #planes .cutrow label{display:flex;align-items:center;gap:8px;cursor:pointer;flex:1}
@@ -90,7 +123,7 @@
 
   /* side panel */
   #panel{border-left:1px solid var(--line);overflow:auto;padding:22px 24px 40px;background:var(--panel)}
-  #panel h2{font-family:'Source Serif 4 Variable', Georgia, serif;font-size:1.35rem;margin:0 0 4px;line-height:1.25}
+  #panel h2{font-family:var(--rr-font-sans);font-size:1.35rem;margin:0 0 4px;line-height:1.25}
   #panel h3{font-size:.95rem;margin:20px 0 6px;color:var(--ink-soft);font-weight:700}
   #panel p{margin:0 0 10px;max-width:62ch}
   #panel ul{margin:0 0 10px;padding-left:20px;max-width:62ch}
@@ -101,7 +134,7 @@
   .chips button{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:.86rem;cursor:pointer}
   .chips button:hover{border-color:var(--ink-soft)}
   .links li{margin-bottom:8px}
-  .links a{text-decoration:none;border-bottom:1px solid rgba(95,179,179,.4)}
+  .links a{text-decoration:none;border-bottom:1px solid var(--rr-border)}
   .links a:hover{border-bottom-color:currentColor}
   .links small{display:block;color:var(--ink-soft);font-size:.82rem}
   .note{background:var(--panel-2);border-left:3px solid var(--tendon);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0}

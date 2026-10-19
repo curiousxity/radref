@@ -38,7 +38,12 @@ type File = (typeof FILES)[number]
 
 // Viewers already moved onto public/anatomy/shared/radref.css. The link, theme and
 // no-remote-fonts tests run over these; the colour guards below run over all of FILES.
-const MIGRATED: readonly File[] = ['otic-capsule.html', 'ossicular-chain.html']
+const MIGRATED: readonly File[] = [
+  'otic-capsule.html',
+  'ossicular-chain.html',
+  'shoulder.html',
+  'knee.html',
+]
 
 // Chrome variables (panel, ink, line and the like) that a viewer deliberately points at the
 // shared radref.css tokens. An entry is either a full `selector|--name` key from the
@@ -69,8 +74,8 @@ const CHROME: Record<File, string[]> = {
     '--rule2',
     '--cut',
   ],
-  'shoulder.html': [],
-  'knee.html': [],
+  'shoulder.html': ['--bg', '--panel', '--panel-2', '--line', '--ink', '--ink-soft'],
+  'knee.html': ['--ink', '--slate', '--slate-2', '--line', '--paper', '--paper-dim', '--muted'],
   'wrist.html': [],
   'ankle.html': [],
   'online/tmj.html': [],
