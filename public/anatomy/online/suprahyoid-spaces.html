@@ -4,6 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suprahyoid neck spaces — 3D reading-room reference</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <!--
   Suprahyoid neck spaces: parapharyngeal, masticator, carotid, parotid (+ pharyngeal mucosal,
   retropharyngeal, perivertebral, buccal, sublingual, submandibular).
@@ -13,11 +41,15 @@
   Only script dependency: Three.js r128, vendored alongside.
 -->
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --accent had the parapharyngeal fat's yellow but only UI uses (the scene takes the colour
+   from the script), so it moves to --rr-accent; --fat keeps #f2c94c, and its heading and
+   grade text uses take the accent, since yellow text fails on the light panel. */
 :root{
-  --bg:#14171b; --bg2:#1b1f25; --bg3:#232830; --line:#323944; --ink:#e6e9ee; --ink2:#a9b1bd; --ink3:#7a8492;
-  --fat:#f2c94c; --accent:#f2c94c; --warn:#ff8a65; --ok:#7bd88f;
+  --bg:var(--rr-bg); --bg2:var(--rr-surface); --bg3:var(--rr-bg); --line:var(--rr-hairline); --ink:var(--rr-text); --ink2:var(--rr-muted); --ink3:var(--rr-muted);
+  --fat:#f2c94c; --accent:var(--rr-accent); --warn:#ff8a65; --ok:#7bd88f;
   --radius:6px;
-  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--rr-font-sans);
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.45}
@@ -25,12 +57,23 @@ button,select,input{font:inherit;color:inherit}
 header{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--bg2);flex-wrap:wrap}
 header h1{font-size:15px;font-weight:600;margin:0 auto 0 0;letter-spacing:.1px}
 header h1 small{display:block;font-weight:400;color:var(--ink3);font-size:12px}
-.sel,.btn{background:var(--bg3);border:1px solid var(--line);border-radius:var(--radius);padding:7px 10px;cursor:pointer}
-.sel:hover,.btn:hover{border-color:#4a5463}
+.sel,.btn{background:var(--bg3);border:1px solid var(--rr-border);border-radius:var(--radius);padding:7px 10px;cursor:pointer}
+.sel:hover,.btn:hover{border-color:var(--accent)}
 .btn:focus-visible,.sel:focus-visible,input:focus-visible,summary:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-#app{display:grid;grid-template-columns:minmax(0,1fr) 420px;height:calc(100% - 52px)}
+#app{display:grid;grid-template-columns:minmax(0,1fr) 420px;height:calc(100% - 61px)}
 #stage{position:relative;min-height:0;display:flex;flex-direction:column;border-right:1px solid var(--line)}
 #view{position:relative;flex:1;min-height:240px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#232932 0%,#14171b 75%)}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#view{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --bg2:var(--rr-view-surface); --bg3:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --ink2:var(--rr-view-muted); --ink3:var(--rr-view-muted); --accent:var(--rr-view-accent);
+}
 #gl{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 #gl:active{cursor:grabbing}
 #drawerBtn{position:absolute;left:12px;bottom:12px;z-index:3}
@@ -59,7 +102,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #panel{flex:1;overflow:auto;padding:12px 14px 30px}
 #panel h2{font-size:16px;margin:0 0 2px;font-weight:600}
 #panel .sub{color:var(--ink2);font-size:12.5px;margin-bottom:10px}
-#panel h3{font-size:13px;margin:14px 0 5px;font-weight:600;color:var(--fat)}
+#panel h3{font-size:13px;margin:14px 0 5px;font-weight:600;color:var(--accent)}
 #panel ul{margin:0;padding-left:18px}
 #panel li{margin:3px 0}
 #panel table{border-collapse:collapse;width:100%;margin:6px 0;font-size:13px}
@@ -70,19 +113,19 @@ summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--ink2);padding:
 #ctl{background:var(--bg3);border:1px solid var(--line);border-radius:var(--radius);padding:10px;margin:8px 0 4px}
 #ctl .line{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 #ctl .line>span{color:var(--ink2);font-size:12.5px;min-width:64px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.seg{display:inline-flex;border:1px solid var(--rr-border);border-radius:var(--radius);overflow:hidden}
 .seg button{background:transparent;border:0;padding:4px 9px;cursor:pointer;font-size:12.5px;border-right:1px solid var(--line)}
 .seg button:last-child{border-right:0}
-.seg button[aria-pressed=true]{background:var(--accent);color:#1a1a1a;font-weight:600}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--rr-bg);font-weight:600}
 #readout{margin-top:8px;border-top:1px dashed var(--line);padding-top:8px;font-size:13px}
-#readout .grade{font-size:15px;font-weight:600;color:var(--fat);margin-bottom:3px}
+#readout .grade{font-size:15px;font-weight:600;color:var(--accent);margin-bottom:3px}
 #readout div{margin:2px 0}
 #readout .k{color:var(--ink2)}
 .ref{font-size:12.5px;margin:6px 0;color:var(--ink2)}
-.ref a{color:#8fc2ff}
+.ref a{color:var(--accent)}
 .tag{font-size:10.5px;border:1px solid var(--line);border-radius:8px;padding:0 5px;margin-left:4px;color:var(--ink2)}
 .note{font-size:12px;color:var(--ink3);margin-top:8px}
-#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink2);background:var(--bg);z-index:5}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink2);background:#14171b;z-index:5}
 @media (max-width:900px){
   html,body{height:auto}
   #app{grid-template-columns:1fr;height:auto}

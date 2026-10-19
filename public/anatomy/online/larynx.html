@@ -4,6 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Larynx — subsites, fat spaces and cartilage invasion for T staging</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <!--
   Larynx reference model. Single self-contained file; the only external script is Three.js r128.
   Bones and soft tissue meshes: BodyParts3D, (c) The Database Center for Life Science,
@@ -16,10 +44,13 @@
   anchored to points measured on the real thyroid cartilage, hyoid and trachea (see LM below).
 -->
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --accent was the UI accent and also the sagittal plane's colour (0xe7c46a in the script):
+   the UI use is now --rr-accent, and the plane's colour stays #e7c46a as --accent-scene. */
 :root{
-  --bg:#182029; --bg2:#1f2933; --panel:#232f3b; --line:#33424f; --ink:#e8e4da; --ink2:#a9b3bc; --ink3:#7b8791;
-  --accent:#e7c46a; --supra:#e08a8a; --glot:#62b8ae; --sub:#a094de; --fat:#e9d27a; --tumour:#d9484f; --cart:#d6d0c1;
-  --radius:6px; --sans:"Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --bg:var(--rr-bg); --bg2:var(--rr-surface); --panel:var(--rr-surface); --line:var(--rr-hairline); --ink:var(--rr-text); --ink2:var(--rr-muted); --ink3:var(--rr-muted);
+  --accent:var(--rr-accent); --accent-scene:#e7c46a; --supra:#e08a8a; --glot:#62b8ae; --sub:#a094de; --fat:#e9d27a; --tumour:#d9484f; --cart:#d6d0c1;
+  --radius:6px; --sans:var(--rr-font-sans);
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box}
@@ -30,12 +61,23 @@ header{grid-area:head;display:flex;align-items:center;gap:10px;padding:8px 14px;
 header h1{font-size:15px;font-weight:600;margin:0 12px 0 0;letter-spacing:.01em}
 header h1 span{color:var(--ink2);font-weight:400}
 select,button,input[type=range]{font:inherit;color:var(--ink)}
-select{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:6px 8px;max-width:260px}
-button{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:6px 10px;cursor:pointer}
+select{background:var(--panel);border:1px solid var(--rr-border);border-radius:var(--radius);padding:6px 8px;max-width:260px}
+button{background:var(--panel);border:1px solid var(--rr-border);border-radius:var(--radius);padding:6px 10px;cursor:pointer}
 button:hover{border-color:var(--ink3)}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-button.primary{background:var(--accent);color:#1b1a15;border-color:var(--accent);font-weight:600}
-#stage{grid-area:stage;position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%,#243140 0%,var(--bg) 70%)}
+button.primary{background:var(--accent);color:var(--rr-bg);border-color:var(--accent);font-weight:600}
+#stage{grid-area:stage;position:relative;min-height:0;background:radial-gradient(ellipse at 50% 40%,#243140 0%,var(--scene-bg,#182029) 70%)}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#stage{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --bg2:var(--rr-view-surface); --panel:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --ink2:var(--rr-view-muted); --ink3:var(--rr-view-muted); --accent:var(--rr-view-accent);
+}
 #stage canvas{display:block;width:100%;height:100%;touch-action:none}
 #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .lbl{position:absolute;transform:translate(-50%,-100%);font-size:11px;color:var(--ink);background:rgba(24,32,41,.78);padding:2px 6px;border-radius:4px;white-space:nowrap;border-left:3px solid var(--ink3);pointer-events:none}
@@ -48,7 +90,7 @@ button.primary{background:var(--accent);color:#1b1a15;border-color:var(--accent)
 #drawer label{display:flex;align-items:center;gap:6px;font-size:13px;margin:2px 0;cursor:pointer}
 #drawer .row{display:flex;flex-wrap:wrap;gap:6px}
 #drawer button{padding:4px 8px;font-size:12px}
-#drawer button.on{background:var(--accent);color:#1b1a15;border-color:var(--accent)}
+#drawer button.on{background:var(--accent);color:var(--rr-bg);border-color:var(--accent)}
 #drawer .sl{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;font-size:12px;margin:3px 0}
 #drawerClose{position:absolute;right:10px;top:8px}
 #tip{position:absolute;left:12px;top:10px;font-size:12px;color:var(--ink2);pointer-events:none;background:rgba(24,32,41,.6);padding:3px 8px;border-radius:4px}
@@ -64,7 +106,7 @@ aside p{margin:6px 0}
 .sev{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin:6px 0}
 input[type=range]{width:100%;accent-color:var(--accent)}
 .side{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink2);margin:4px 0 8px}
-.side button{padding:2px 8px;font-size:12px} .side button.on{background:var(--accent);color:#1b1a15;border-color:var(--accent)}
+.side button{padding:2px 8px;font-size:12px} .side button.on{background:var(--accent);color:var(--rr-bg);border-color:var(--accent)}
 details{border-top:1px solid var(--line);padding:6px 0}
 details summary{cursor:pointer;font-size:13px;color:var(--ink2);font-weight:600;list-style:none;display:flex;justify-content:space-between}
 details summary::after{content:"+";color:var(--ink3)} details[open] summary::after{content:"–"}
@@ -73,7 +115,7 @@ details summary::after{content:"+";color:var(--ink3)} details[open] summary::aft
 .struct button.supra{border-left-color:var(--supra)} .struct button.glot{border-left-color:var(--glot)} .struct button.sub{border-left-color:var(--sub)} .struct button.fat{border-left-color:var(--fat)} .struct button.cart{border-left-color:var(--cart)} .struct button.oth{border-left-color:var(--ink3)}
 #anatCard{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;font-size:13px;margin-top:6px;display:none}
 #anatCard b{display:block;margin-bottom:3px}
-.refs li{font-size:12px;margin:5px 0;color:var(--ink2)} .refs a{color:var(--ink)} .refs .oa{color:var(--glot);font-size:11px;margin-left:4px} .refs .site{color:var(--accent);font-size:11px;margin-left:4px}
+.refs li{font-size:12px;margin:5px 0;color:var(--ink2)} .refs a{color:var(--ink)} .refs .oa{color:var(--rr-good);font-size:11px;margin-left:4px} .refs .site{color:var(--accent);font-size:11px;margin-left:4px}
 .key{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--ink2);margin:4px 0 8px}
 .key i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:middle}
 .small{font-size:12px;color:var(--ink2)}
@@ -601,7 +643,10 @@ document.querySelectorAll('[data-plane]').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('[data-cut]').forEach(b=>b.addEventListener('click',()=>setCut(b.dataset.cut)));
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{ setView(b.dataset.view); target.set(0,4,0); }));
 document.getElementById('subsiteColours').addEventListener('change',e=>{ const on=e.target.checked; for(const s of structures){ const c=s.userData.cls; if(c==='supra') s.material.color.setHex(on?COL.supra:COL.plain); if(c==='glot') s.material.color.setHex(on?COL.glot:COL.plain); if(s.userData.name.includes('lumen')) s.material.color.setHex(on?COL.sub:COL.plain); } });
-document.getElementById('lightBg').addEventListener('change',e=>{ const on=e.target.checked; document.documentElement.style.setProperty('--bg',on?'#e9e6df':'#182029'); document.documentElement.style.setProperty('--bg2',on?'#f4f2ec':'#1f2933'); document.documentElement.style.setProperty('--panel',on?'#ffffff':'#232f3b'); document.documentElement.style.setProperty('--line',on?'#d5d0c5':'#33424f'); document.documentElement.style.setProperty('--ink',on?'#1f2429':'#e8e4da'); document.documentElement.style.setProperty('--ink2',on?'#4c565f':'#a9b3bc'); stage.style.background=on?'radial-gradient(ellipse at 50% 40%,#f6f4ee 0%,#dedad0 70%)':''; renderer.setClearColor(on?0xe4e0d6:COL.bg,1); });
+// Light background changes the scene only (clear colour and stage gradient), never the page
+// chrome, which follows the site theme. Only --scene-bg is read (the #stage gradient); the other
+// --scene-* values have no reader and are kept so the colour snapshot still sees these literals.
+document.getElementById('lightBg').addEventListener('change',e=>{ const on=e.target.checked; stage.style.setProperty('--scene-bg',on?'#e9e6df':'#182029'); stage.style.setProperty('--scene-bg2',on?'#f4f2ec':'#1f2933'); stage.style.setProperty('--scene-panel',on?'#ffffff':'#232f3b'); stage.style.setProperty('--scene-line',on?'#d5d0c5':'#33424f'); stage.style.setProperty('--scene-ink',on?'#1f2429':'#e8e4da'); stage.style.setProperty('--scene-ink2',on?'#4c565f':'#a9b3bc'); stage.style.background=on?'radial-gradient(ellipse at 50% 40%,#f6f4ee 0%,#dedad0 70%)':''; renderer.setClearColor(on?0xe4e0d6:COL.bg,1); });
 renderer.setClearColor(COL.bg,1);
 function resize(){ const w=stage.clientWidth, h=stage.clientHeight; if(!w||!h) return; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
 window.addEventListener('resize',resize); resize();

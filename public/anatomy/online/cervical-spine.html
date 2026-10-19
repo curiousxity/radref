@@ -4,16 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cervical spine trauma &mdash; 3D reference</title>
+<script>
+(function () {
+  var KEY = 'radref-theme'
+  var mq = null
+  try { mq = window.matchMedia('(prefers-color-scheme: dark)') } catch (e) {}
+  function stored() {
+    try {
+      var v = window.localStorage.getItem(KEY)
+      return v === 'light' || v === 'dark' ? v : null
+    } catch (e) {
+      return null
+    }
+  }
+  function apply() {
+    document.documentElement.dataset.theme = stored() || (mq && mq.matches ? 'dark' : 'light')
+  }
+  apply()
+  window.addEventListener('storage', function (e) {
+    if (e.key === KEY || e.key === null) apply()
+  })
+  if (mq) {
+    var onSystemChange = function () { if (!stored()) apply() }
+    if (mq.addEventListener) mq.addEventListener('change', onSystemChange)
+    else if (mq.addListener) mq.addListener(onSystemChange)
+  }
+})()
+</script>
+<link rel="stylesheet" href="../shared/radref.css">
 <style>
+/* Chrome follows the site theme (../shared/radref.css); structure colours keep their values.
+   --acc was the UI accent and also the imaging plane's colour (0x4fb3d9 in the script): the UI
+   use is now --rr-accent, and the plane's colour stays #4fb3d9 as --acc-scene. --acc2 (the
+   marker), --bad (torn ligament) and --ok keep their values; their text uses take warn/good. */
 :root{
-  --bg:#0d1117; --bg2:#141b24; --panel:#161d27; --line:#26303d;
-  --ink:#dfe6ef; --dim:#8d9bad; --dimmer:#65717f;
-  --acc:#4fb3d9; --acc2:#f0b429; --bad:#e0605e; --ok:#63c08a;
+  --bg:var(--rr-bg); --bg2:var(--rr-surface); --panel:var(--rr-surface); --line:var(--rr-hairline);
+  --ink:var(--rr-text); --dim:var(--rr-muted); --dimmer:var(--rr-muted);
+  --acc:var(--rr-accent); --acc-scene:#4fb3d9; --acc2:#f0b429; --bad:#e0605e; --ok:#63c08a;
   --hdr:52px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
-  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font:14px/1.5 var(--rr-font-sans);
   -webkit-text-size-adjust:100%}
 button,select{font:inherit;color:inherit}
 #app{display:flex;flex-direction:column;height:100%}
@@ -24,7 +56,7 @@ header{height:var(--hdr);flex:0 0 auto;display:flex;align-items:center;gap:10px;
 header h1{font-size:14px;font-weight:600;margin:0 8px 0 0;white-space:nowrap;letter-spacing:.2px}
 header h1 span{color:var(--dim);font-weight:400}
 .menu{position:relative;flex:0 0 auto}
-.menu>button{background:#1d2732;border:1px solid var(--line);border-radius:7px;
+.menu>button{background:var(--rr-bg);border:1px solid var(--rr-border);border-radius:7px;
   padding:7px 12px;cursor:pointer;white-space:nowrap}
 .menu>button:hover{border-color:var(--acc)}
 .menu>button.on{border-color:var(--acc);color:var(--acc)}
@@ -33,18 +65,29 @@ header h1 span{color:var(--dim);font-weight:400}
   border:1px solid var(--line);border-radius:9px;box-shadow:0 12px 34px rgba(0,0,0,.6)}
 .menu.open ul{display:block}
 .menu li{padding:8px 10px;border-radius:6px;cursor:pointer;white-space:normal}
-.menu li:hover{background:#1f2b38}
+.menu li:hover{background:var(--rr-hairline)}
 .menu li.sel{color:var(--acc)}
 .menu li small{display:block;color:var(--dimmer);font-size:11.5px}
 .menu li.grp{cursor:default;color:var(--dimmer);font-size:11px;letter-spacing:.6px;
   padding:9px 10px 4px;pointer-events:none}
-#reset{margin-left:auto;background:transparent;border:1px solid var(--line);
+#reset{margin-left:auto;background:transparent;border:1px solid var(--rr-border);
   border-radius:7px;padding:7px 12px;cursor:pointer;flex:0 0 auto}
-#reset:hover{border-color:var(--bad);color:var(--bad)}
+#reset:hover{border-color:var(--bad);color:var(--rr-warn)}
 
 /* ---------- body ---------- */
 #body{flex:1;display:flex;min-height:0}
 #stage{position:relative;flex:1;min-width:0;background:radial-gradient(ellipse at 50% 35%,#182029,#0b0f14 72%)}
+/* The viewport stays dark in both themes: inside it the chrome tokens, and this file's
+   names for them, take the always-dark --rr-view-* values. */
+#stage{
+  color-scheme:dark;
+  color:var(--rr-view-text);
+  --rr-bg:var(--rr-view-bg); --rr-surface:var(--rr-view-surface); --rr-hairline:var(--rr-view-hairline);
+  --rr-border:var(--rr-view-border); --rr-text:var(--rr-view-text); --rr-muted:var(--rr-view-muted);
+  --rr-accent:var(--rr-view-accent);
+  --bg:var(--rr-view-bg); --bg2:var(--rr-view-surface); --panel:var(--rr-view-surface); --line:var(--rr-view-border);
+  --ink:var(--rr-view-text); --dim:var(--rr-view-muted); --dimmer:var(--rr-view-muted); --acc:var(--rr-view-accent);
+}
 #stage canvas{display:block;width:100%;height:100%;touch-action:none}
 #drawerBtn{position:absolute;left:12px;bottom:12px;z-index:20;background:rgba(22,29,39,.94);
   border:1px solid var(--line);border-radius:8px;padding:9px 13px;cursor:pointer;backdrop-filter:blur(6px)}
@@ -58,10 +101,10 @@ header h1 span{color:var(--dim);font-weight:400}
 .dsec:last-child{margin-bottom:0}
 .dsec h4{margin:0 0 7px;font-size:11px;letter-spacing:.7px;color:var(--dimmer);font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{background:#1b242f;border:1px solid var(--line);border-radius:6px;padding:6px 10px;
+.chip{background:var(--rr-bg);border:1px solid var(--rr-border);border-radius:6px;padding:6px 10px;
   cursor:pointer;font-size:12.5px}
 .chip:hover{border-color:var(--acc)}
-.chip.on{background:#1d3a48;border-color:var(--acc);color:var(--acc)}
+.chip.on{background:var(--rr-hairline);border-color:var(--acc);color:var(--acc)}
 .row{display:flex;align-items:center;gap:9px;margin:7px 0;font-size:12.5px;color:var(--dim)}
 .row input[type=range]{flex:1;accent-color:var(--acc)}
 #attrib{font-size:10.5px;color:var(--dimmer);line-height:1.45;border-top:1px solid var(--line);
@@ -78,18 +121,18 @@ header h1 span{color:var(--dim);font-weight:400}
 .sect p{margin:0 0 8px}
 ul.tight{margin:0;padding-left:17px}
 ul.tight li{margin-bottom:5px}
-.pitfall{border-left:2px solid var(--acc2);padding-left:10px;color:#e7d9b4}
-#grade{background:#101720;border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:16px}
+.pitfall{border-left:2px solid var(--acc2);padding-left:10px;color:var(--rr-warn)}
+#grade{background:var(--rr-bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:16px}
 #grade.hide{display:none}
 #gradeLbl{font-size:11px;letter-spacing:.7px;color:var(--dimmer);margin-bottom:8px}
 #sevWrap{display:flex;align-items:center;gap:10px}
-#sev{flex:1;accent-color:var(--acc2)}
+#sev{flex:1;accent-color:var(--acc)}
 #sevNum{width:38px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums;font-size:12px}
 #readout{margin-top:11px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px}
 #readout .k{color:var(--dimmer)}
 #readout .v{text-align:right;font-variant-numeric:tabular-nums}
-#readout .v.flag{color:var(--bad)}
-#readout .v.norm{color:var(--ok)}
+#readout .v.flag{color:var(--rr-warn)}
+#readout .v.norm{color:var(--rr-good)}
 #sideOpts{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
 details{border-top:1px solid var(--line);padding:11px 0 2px}
 details>summary{cursor:pointer;font-size:12.5px;color:var(--dim);list-style:none;outline:none}
