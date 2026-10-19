@@ -195,6 +195,14 @@ describe('anatomy viewers', () => {
     }
   })
 
+  // Variables split out of a shared UI/scene variable during the restyle: the UI half moved to
+  // --rr-accent, and the scene half kept the old value under a new name, which the snapshot
+  // (taken before the split) does not know. Pin them here.
+  test('split scene colours keep their old values', () => {
+    expect(cssColours(read('otic-capsule.html'))[':root|--cyan-scene']).toBe('#45C8D8')
+    expect(cssColours(read('ankle.html'))[':root|--accent-scene']).toBe('#E0A100')
+  })
+
   test('scene colours in scripts unchanged', () => {
     for (const file of FILES) {
       expect(scriptColours(read(file)), file).toEqual(colours[file].script)

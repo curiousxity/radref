@@ -63,6 +63,9 @@
   --rr-text: #111415;
   --rr-muted: #5f676b;
   --rr-accent: #0e6b63;
+  /* Status text (injury, warning, correct answer): the site's --color-warn / --color-good. */
+  --rr-warn: #b23a2e;
+  --rr-good: #2b7049;
   --rr-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --rr-font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace;
 
@@ -85,6 +88,8 @@
   --rr-text: #e6e8e9;
   --rr-muted: #8d9599;
   --rr-accent: #3fb8a8;
+  --rr-warn: #f08070;
+  --rr-good: #5ec48a;
 }
 
 /* In-canvas chrome: the theme tokens take their dark values inside, whatever the theme. */
