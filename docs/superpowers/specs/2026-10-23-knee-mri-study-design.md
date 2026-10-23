@@ -65,8 +65,9 @@ way end to end. The author chose:
    horn, root); extrusion. Tear criteria (for example abnormal signal touching the surface on
    more than one image) only if a cited paper states them.
 4. **Lateral meniscus:** the same fields, plus discoid meniscus.
-5. **Anterior cruciate ligament:** intact, partial tear, complete tear, reconstructed graft;
-   secondary signs only if cited.
+5. **Anterior cruciate ligament:** intact, partial tear, complete tear; secondary signs only
+   if cited. After reconstruction: graft intact, partial or complete graft tear, and tunnel
+   position or widening if a cited source gives the criteria.
 6. **Posterior cruciate ligament:** intact, partial, complete.
 7. **Medial collateral ligament:** intact or grade of injury as the cited grading defines it.
 8. **Lateral side and posterolateral corner:** lateral collateral ligament, biceps femoris
@@ -165,9 +166,9 @@ waits until those hosts are allowed (or the work moves to a machine that can rea
   the step has no chips; the tests then pin the report text, required fields and
   contradiction warnings.
 
-## Questions for the author
+## Author's answers (2026-10-23)
 
-- Should the study also cover a reconstructed ACL (graft appearance, tunnel position), or
-  leave post-operative knees out?
-- Same open question as the ankle: do anatomical variants (discoid meniscus, bipartite
-  patella, fabella) get an impression line, or stay in findings only?
+- **Reconstructed ACL: included.** Step 5 covers the graft (intact, partial or complete
+  graft tear) and its tunnels, from cited sources only.
+- **Anatomical variants get their own impression line** (discoid meniscus, bipartite
+  patella, fabella and so on), not findings only.
