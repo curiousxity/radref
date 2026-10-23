@@ -55,7 +55,8 @@ region at a time, end to end, following the ankle pilot
 - [ ] Foot: foot MRI study ("pain or injury" history) plus three calculators: Hawkins (talar
   neck), Sanders (calcaneus) and Myerson (Lisfranc). Drafted 2026-10-23 as an unchecked draft;
   spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Not yet merged to `main`.
-  Ask the author whether the diabetic foot (osteomyelitis against Charcot) should be added.
+  The diabetic foot is its own study (`/studies/diabetic-foot-mri`, the author's choice,
+  2026-10-23). The author said not to deploy the foot pages yet.
 - [ ] Spine: candidate calculators SLIC and TLICS
 - [ ] Pelvis: candidate calculators Young-Burgess and Letournel
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
@@ -231,6 +232,20 @@ classification wording is under the calculators below.
 - [ ] Plantar plate tears at the second MTP joint and the neuroma-like fibrosis beside them
   (F6-1, F6-2, Umans 2014).
 - [ ] Turf toe and the sesamoids (F5-1 to F5-3, Sanders and Rathur 2008).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
+
+### Diabetic foot MRI study
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/diabetic-foot-mri`). Every paper and claim
+is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`, marked "to check".
+
+- [ ] Match references D1–D7 on PubMed and Crossref.
+- [ ] The T1 rule (D3-1, Johnson 2009) and spread from the ulcer (D2-1, Ledermann 2002): these
+  two decide the "osteomyelitis" line, so check them first.
+- [ ] Secondary signs (D1-1), pressure-point sites and septic arthritis (D2-2, D2-3).
+- [ ] Ghost sign and abscess (D4-1, D4-2, Donovan 2010); Charcot distribution (D5-1);
+  non-enhancing tissue (D6-1); active Charcot before radiographs (D7-1, Chantelau 2005).
 - [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
   and update the tests that pin the unchecked state.
 
