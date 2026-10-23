@@ -72,6 +72,14 @@ describe('registry', () => {
     }
   })
 
+  test('the pelvis CT study and the two pelvic calculators link to the 3D pelvis and each other', () => {
+    const pelvis = relatedTo('/pelvis-si').map((item) => item.path)
+    for (const path of ['/studies/pelvis-ct', '/young-burgess', '/letournel']) expect(pelvis).toContain(path)
+    for (const path of ['/young-burgess', '/letournel']) {
+      expect(relatedTo(path).map((item) => item.path), path).toContain('/studies/pelvis-ct')
+    }
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')

@@ -62,7 +62,10 @@ region at a time, end to end, following the ankle pilot
 - [ ] Spine: spine trauma CT study ("pain or injury" history) plus an AO Spine calculator
   (subaxial cervical and thoracolumbar), the author's choice over SLIC and TLICS (2026-10-23).
   Deployed before the check; done once it passes and the author signs it off.
-- [ ] Pelvis: candidate calculators Young-Burgess and Letournel
+- [ ] Pelvis: pelvis CT study ("pain or injury" history) plus two calculators, Young-Burgess
+  (pelvic ring) and Letournel (acetabulum). Drafted 2026-10-23 as an unchecked draft; spec
+  `docs/superpowers/specs/2026-10-23-pelvis-ct-study-design.md`. On the branch only until the
+  author says to merge. Done once the sources check passes and the author signs it off.
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
   ossicular chain, TMJ, skull base, suprahyoid neck, larynx, brachial plexus.
   TMJ: skipped for now (2026-10-23); it already has a 3D model.
@@ -280,6 +283,36 @@ Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
 - [ ] Facets F1–F4 and the 1 cm / 40% boundary (AO-6, AO-7); neurology, "+" and the
   modifiers (AO-8 to AO-10).
 - [ ] Then: add DOIs and reword the source note.
+
+### Pelvis CT for pain or injury
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/pelvis-ct`). Every paper and claim is in
+`docs/superpowers/research/2026-10-23-pelvis-ct-sources.md`, marked "to check"; the
+classification wording is under the calculators below.
+
+- [ ] Match references P-R1 to P-R12 on PubMed and Crossref. Rehman 2016 (occult hip fracture)
+  is the least certain.
+- [ ] L5 transverse process fracture as a marker of vertical instability (P2-2): find the source.
+- [ ] Denis zones and the deficit rates, about 6%, 28% and 57% (P3-1).
+- [ ] U- or H-shaped sacral fracture (P3-2, Roy-Camille 1985); insufficiency fracture pattern
+  (P3-3, Lyders 2010).
+- [ ] Dalal 1989 on injury type and fluid needs (P2-1); MRI against CT for occult hip
+  fracture (P5-1).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
+
+### Pelvis calculators (Young-Burgess, Letournel)
+
+Drafted 2026-10-23 as an unchecked draft (`/young-burgess`, `/letournel`). Every paper and claim
+is in `docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md`, marked "to check".
+
+- [ ] Match references PC1 to PC7 on PubMed and Crossref (the 3D pelvis viewer has PMIDs for most).
+- [ ] Young-Burgess types (YB-1 to YB-4) and the order the calculator applies them (YB-5, YB-7).
+- [ ] The 2.5 cm diastasis (YB-6): in Young or Burgess, or only in later reviews?
+- [ ] The stability of each type (YB-8): where is it stated?
+- [ ] Letournel types (LT-1 to LT-3), the column lines (LT-4), and the CT questions (LT-5 to
+  LT-7). Check that an anterior column with a posterior wall fragment has no type (LT-9).
+- [ ] Then: add DOIs and reword the source notes.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
