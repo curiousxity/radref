@@ -41,6 +41,12 @@ describe('registry', () => {
     expect(relatedTo('/neer').map((item) => item.path)).toContain('/studies/shoulder-mri')
   })
 
+  test('the wrist MRI study and the four wrist calculators link to the 3D wrist', () => {
+    const wrist = relatedTo('/wrist').map((item) => item.path)
+    for (const path of ['/studies/wrist-mri', '/mayfield', '/herbert', '/palmer', '/lichtman']) expect(wrist).toContain(path)
+    expect(relatedTo('/mayfield').map((item) => item.path)).toContain('/studies/wrist-mri')
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')

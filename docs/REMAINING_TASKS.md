@@ -164,6 +164,39 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, marked 
 - [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source
   notes, and update the tests that pin the unchecked state.
 
+### Wrist MRI study
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and claim is
+in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`, marked "to check"; the
+classification wording is under the calculators below. **Do not merge to `main` until the
+check is done.**
+
+- [ ] Match references R1–R18 on PubMed and Crossref; fix citation text. The author lists
+  and pages of Theumann 2003, Vo 1995 and Conway 1985 are the least certain.
+- [ ] Fall on the outstretched hand as the usual mechanism (W1-1).
+- [ ] MRI finds occult scaphoid fractures when radiographs are normal (W2-1, Gaebler 1996:
+  is it the right paper?).
+- [ ] Ulnar impaction: focal signal at the ulnar proximal lunate, triquetrum and ulnar head
+  with positive ulnar variance (W2-4, Imaeda 1996, Cerezal 2002); diffuse versus focal
+  signal tells Kienböck from impaction (W2-5).
+- [ ] Scapholunate ligament parts, dorsal strongest (W3-1, Berger 1996).
+- [ ] Scapholunate angle 30–60° normal, over 60° DISI, under 30° VISI (W3-2, Linscheid
+  1972): are these the paper's bounds, and do they apply on sagittal MRI?
+- [ ] Lunotriquetral disruption and VISI (W4-1).
+- [ ] Mayfield progression starts at the scapholunate unless the injury runs through the
+  scaphoid (W5-2). The study counts the capitolunate joint as disrupted when the lunate is
+  dislocated (the site's reading of the sequence).
+- [ ] Palmer 2D and 2E include lunotriquetral perforation (W6-2); TFCC defects in wrists
+  without symptoms (W6-3, Zanetti 2000).
+- [ ] Extrinsic ligaments on MR arthrography (W7-1, Theumann 2003).
+- [ ] de Quervain (W8-1, Glajchen 1996); intersection syndrome (W8-2, Costa 2003).
+- [ ] Median nerve signs in carpal tunnel syndrome (W9-1, Mesgarzadeh 1989).
+- [ ] Guyon canal and accessory muscles (W10-1, W12-3, Zeiss 1992); occult dorsal ganglia
+  (W11-1, Vo 1995).
+- [ ] Type II lunate (W12-1, Viegas 1990); carpal boss (W12-2, Conway 1985).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
+
 ### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
 
 Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
