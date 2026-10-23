@@ -41,7 +41,11 @@ describe('registry', () => {
     expect(relatedTo('/neer').map((item) => item.path)).toContain('/studies/shoulder-mri')
   })
 
-  test('the pediatric elbow study links to the 3D elbow', () => {
-    expect(relatedTo('/elbow').map((item) => item.path)).toContain('/studies/pediatric-elbow')
+  test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
+    const elbow = relatedTo('/elbow').map((item) => item.path)
+    expect(elbow).toContain('/studies/elbow-mri')
+    expect(elbow).toContain('/studies/pediatric-elbow')
+    expect(elbow).toContain('/mason')
+    expect(relatedTo('/mason').map((item) => item.path)).toContain('/studies/elbow-mri')
   })
 })

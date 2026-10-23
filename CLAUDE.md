@@ -209,6 +209,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Contrast extravasation (triage, surgical consult flags, documentation text)
 - Schatzker (tibial plateau fracture types I-VI; logic shared in `src/logic/schatzker.ts`; unchecked draft)
 - Neer (proximal humerus fracture parts; logic shared in `src/logic/neer.ts`; unchecked draft)
+- Mason (radial head fracture types I-IV with Johnston's type IV; logic shared in `src/logic/mason.ts`; unchecked draft)
 
 The registry in `src/data/calculators.ts` is the source of truth; keep this list in step
 with it when adding a calculator.
@@ -344,13 +345,14 @@ notes, and labelled as unreviewed drafts in their source note until the author s
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
 
-Unchecked drafts: knee MRI, shoulder MRI and pediatric elbow radiographs (and the Schatzker
-and Neer calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
+Unchecked drafts: knee MRI, shoulder MRI, elbow MRI and pediatric elbow radiographs (and the
+Schatzker, Neer and Mason calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
 citations are from memory and no claim has been checked. Their source note starts
 "Unchecked draft", their references have no DOI, and their citations are plain text rather
 than `<Cite>` links; tests pin all three. The claims to check are in
 `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
-`2026-10-23-shoulder-mri-sources.md` and `2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. Do not merge them
+`2026-10-23-shoulder-mri-sources.md`, `2026-10-23-elbow-mri-sources.md` and
+`2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. Do not merge them
 to `main` before that check.
 
 How it is built:
@@ -363,7 +365,7 @@ How it is built:
 - Rules in `derive`/`build` must come from the lesson text or from a shared calculator
   in `src/logic/`, with the lesson's thresholds. Never add thresholds or management
   advice the lesson does not state. When a study and a calculator apply the same rules
-  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`. `pirads.ts`, `bosniak.ts`, `tirads.ts`, `lirads.ts`, `lungrads.ts`, `fleischner.ts`, `schatzker.ts` and `neer.ts` are each shared by a calculator and a study, so a fix there changes both, and `src/logic/*.test.ts` pins them against their guidelines. (`orads.ts` backs the O-RADS calculator only; the adnexal MRI study implements the lesson's O-RADS MRI algorithm itself.)
+  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`. `pirads.ts`, `bosniak.ts`, `tirads.ts`, `lirads.ts`, `lungrads.ts`, `fleischner.ts`, `schatzker.ts`, `neer.ts` and `mason.ts` are each shared by a calculator and a study, so a fix there changes both, and `src/logic/*.test.ts` pins them against their guidelines. (`orads.ts` backs the O-RADS calculator only; the adnexal MRI study implements the lesson's O-RADS MRI algorithm itself.)
 - Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
   `/lessons/<slug>` redirects there; the pages were briefly called lessons.
 - Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds
