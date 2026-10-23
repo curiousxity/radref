@@ -344,13 +344,13 @@ notes, and labelled as unreviewed drafts in their source note until the author s
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
 
-Unchecked drafts: knee MRI and shoulder MRI (and the Schatzker and Neer calculators) were
-written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
+Unchecked drafts: knee MRI, shoulder MRI and pediatric elbow radiographs (and the Schatzker
+and Neer calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
 citations are from memory and no claim has been checked. Their source note starts
 "Unchecked draft", their references have no DOI, and their citations are plain text rather
 than `<Cite>` links; tests pin all three. The claims to check are in
-`docs/superpowers/research/2026-10-23-knee-mri-sources.md` and
-`2026-10-23-shoulder-mri-sources.md`, with the method at the top of each. Do not merge them
+`docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
+`2026-10-23-shoulder-mri-sources.md` and `2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. Do not merge them
 to `main` before that check.
 
 How it is built:

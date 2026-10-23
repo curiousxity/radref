@@ -40,4 +40,8 @@ describe('registry', () => {
     expect(shoulder).toContain('/neer')
     expect(relatedTo('/neer').map((item) => item.path)).toContain('/studies/shoulder-mri')
   })
+
+  test('the pediatric elbow study links to the 3D elbow', () => {
+    expect(relatedTo('/elbow').map((item) => item.path)).toContain('/studies/pediatric-elbow')
+  })
 })
