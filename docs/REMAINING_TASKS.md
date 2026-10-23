@@ -32,7 +32,9 @@ region at a time, end to end, following the ankle pilot
 
 - [x] Ankle: ankle MRI study. No calculator, by the author's choice (no Weber or
   Lauge-Hansen).
-- [ ] Knee: candidate calculator Schatzker
+- [ ] Knee: knee MRI study ("pain" only history) plus a Schatzker calculator, chosen
+  2026-10-23. Spec: `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Waiting
+  on the sources check, which the cloud environment's network blocks (PubMed, Crossref).
 - [ ] Shoulder: candidate calculator Neer
 - [ ] Elbow: candidate calculator Mason
 - [ ] Wrist: candidate calculator Mayfield
