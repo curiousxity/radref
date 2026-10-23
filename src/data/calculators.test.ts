@@ -25,7 +25,7 @@ describe('registry', () => {
   // ordered from shoulder to foot, rather than sitting under Trauma.
   test('the musculoskeletal calculators sit in their own category, shoulder to foot', () => {
     expect(calculators.filter((item) => item.category === 'Musculoskeletal').map((item) => item.path)).toEqual([
-      '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/schatzker', '/fifth-metatarsal',
+      '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/schatzker', '/hawkins', '/sanders', '/myerson', '/fifth-metatarsal',
     ])
     expect(calculators.filter((item) => item.category === 'Trauma').map((item) => item.path)).toEqual(['/aast-organ-injury'])
   })

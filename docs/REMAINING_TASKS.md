@@ -208,6 +208,22 @@ Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
 - [ ] Lichtman stages (LI-1, LI-2, LI-4), and who split stage III into IIIA and IIIB (LI-3):
   find that paper and add it.
 
+### Foot calculators (Hawkins, Sanders, Myerson)
+
+Drafted 2026-10-23 as an unchecked draft (`/hawkins`, `/sanders`, `/myerson`). Every paper and
+claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`, marked "to
+check".
+
+- [ ] Match references C1–C4 on PubMed and Crossref.
+- [ ] Hawkins types I–III (HK-1 to HK-3) against Hawkins 1970, type IV (HK-4) against Canale
+  and Kelly 1978; osteonecrosis risk by type (HK-7) and the Hawkins sign at 6–8 weeks (HK-8).
+- [ ] Hawkins named no type for a displaced fracture with every joint in place (HK-6).
+- [ ] Sanders: the coronal image and lines A–C (SA-1, SA-2); is "undisplaced" defined as under
+  2 mm in the paper (SA-3)? Types II–IV and the subtype letters (SA-4, SA-5); prognosis (SA-6).
+- [ ] Myerson types A, B1, B2, C1, C2 (MY-1 to MY-4); check that the paper names no type for the
+  first metatarsal displaced laterally with only some lesser ones (MY-6).
+- [ ] Then: add DOIs and reword the source notes.
+
 ### Pediatric elbow radiographs
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/pediatric-elbow`). Every paper and
