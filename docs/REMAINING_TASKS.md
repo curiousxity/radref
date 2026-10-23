@@ -37,7 +37,10 @@ region at a time, end to end, following the ankle pilot
   Schatzker calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Done once the sources check
   in "To do when on a computer" passes and the author signs it off.
-- [ ] Shoulder: candidate calculator Neer
+- [ ] Shoulder: shoulder MRI study ("pain" only history, repaired rotator cuff included)
+  plus a Neer calculator. Drafted 2026-10-23 as an unchecked draft; spec
+  `docs/superpowers/specs/2026-10-23-shoulder-mri-study-design.md`. Done once the sources
+  check in "To do when on a computer" passes and the author signs it off.
 - [ ] Elbow: candidate calculator Mason
 - [ ] Wrist: candidate calculator Mayfield
 - [ ] Foot: candidate calculator Sanders
@@ -88,6 +91,39 @@ to `main` until the check is done**, because `main` deploys.
 - [ ] Cartilage depth categories (K10-1).
 - [ ] Then: add the DOIs, switch the plain-text citations to `<Cite>` links, reword the
   source notes, and update the tests that pin the unchecked state.
+
+### Shoulder MRI study and Neer calculator
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/shoulder-mri`, `/neer`). Every paper and
+claim is in `docs/superpowers/research/2026-10-23-shoulder-mri-sources.md`, marked "to
+check". **Do not merge to `main` until the check is done.**
+
+- [ ] Match every reference on PubMed and Crossref; fix wrong citation text, drop any paper
+  that cannot be found. The author lists and pages of R2, R11, R12, R18 and R21 are the
+  least certain.
+- [ ] Neer (N1–N5): the four segments, displaced meaning more than 1 cm or more than 45°,
+  one-part when nothing is displaced, the two-, three- and four-part patterns,
+  fracture-dislocation and head-splitting / impression wording. N6 (how the calculator
+  handles combinations Neer did not name) is this site's own choice; confirm it with the
+  author.
+- [ ] Hill-Sachs: definition (Hill and Sachs 1940), Workman 1992, and the Richards 1994
+  rule that tells it from the normal groove by level ("at or above the coracoid").
+- [ ] Ellman partial-thickness tears: sides and depth grades (under 3, 3–6, over 6 mm). Is
+  grade 3 "over 6 mm" or "over half the thickness"?
+- [ ] Patte retraction stages 1–3.
+- [ ] Goutallier grades 0–4 (exact grade 2 wording), and Fuchs 1999 on MRI against CT.
+- [ ] Walch 1998: biceps dislocation goes with subscapularis tears.
+- [ ] Snyder SLAP types I–IV.
+- [ ] ALPSA and GLAD (Neviaser 1993), Bankart, bony Bankart and Perthes (Woertler and Waldt
+  2006), HAGL (Wolf 1995).
+- [ ] Paralabral cysts and labral tears (Tirman 1994), suprascapular versus spinoglenoid
+  notch (Fritz 1992), teres minor atrophy in quadrilateral space syndrome (Linker 1993).
+- [ ] Sugaya types I–V (IV and V are re-tears); the exact type III wording; is the 2005
+  Arthroscopy paper the right first source?
+- [ ] Variants: sublabral foramen (Tuite and Orwin 1996), Buford complex (Williams 1994),
+  sublabral recess mimicking SLAP II (Smith 1996), os acromiale and impingement (Park 1994).
+- [ ] Then: add the DOIs, switch plain-text citations to `<Cite>` links, reword the source
+  notes, and update the tests that pin the unchecked state.
 
 ## Housekeeping
 

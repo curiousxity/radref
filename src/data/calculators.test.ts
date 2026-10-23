@@ -33,4 +33,11 @@ describe('registry', () => {
     expect(knee).toContain('/schatzker')
     expect(relatedTo('/schatzker').map((item) => item.path)).toContain('/studies/knee-mri')
   })
+
+  test('the shoulder MRI study and the Neer calculator link to the 3D shoulder and each other', () => {
+    const shoulder = relatedTo('/shoulder').map((item) => item.path)
+    expect(shoulder).toContain('/studies/shoulder-mri')
+    expect(shoulder).toContain('/neer')
+    expect(relatedTo('/neer').map((item) => item.path)).toContain('/studies/shoulder-mri')
+  })
 })
