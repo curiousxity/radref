@@ -92,6 +92,20 @@ Summary of the theme plumbing (details in Colour and Anatomy section):
 - Anatomy viewers are separate documents: each inlines the pre-paint snippet from `public/anatomy/shared/radref.css` and links that stylesheet. The embedded frame follows the site's theme.
 - The 3D viewport (`--color-viewport` and in-canvas overlays) stays dark in both themes.
 
+## Version
+
+Every page ends with a footer line such as "Version 1.0.0 · built 2026-10-23 · 9cc2037", so
+anyone can tell which build a phone (or an offline install) is running.
+
+- The number is `version` in `package.json` (and `package-lock.json`); bump it by hand when a
+  release is worth naming, with `npm version <x.y.z> --no-git-tag-version`.
+- The build day (UTC) and short git commit are stamped in at build time by `define` in
+  `vite.config.ts` (`__APP_VERSION__`, `__BUILD_DATE__`, `__BUILD_COMMIT__`, declared in
+  `src/buildInfo.d.ts`). Outside a git checkout the commit falls back to `GITHUB_SHA`, then
+  is left out.
+- `versionLine` in `src/lib/version.ts` formats the line; `src/lib/version.test.ts` pins it
+  and checks that `package.json` carries a real number.
+
 ## Offline / PWA
 
 The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it can be installed to a phone home screen and used with no network connection after the first visit.

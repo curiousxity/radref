@@ -121,6 +121,9 @@ button, input, select, textarea { font: inherit; }
 .theme-toggle:hover { color: var(--color-text); background: var(--color-surface-2); }
 
 .main-content { padding: 1.5rem 0 4rem; }
+/* Version, build day and commit, so a phone's build can be told apart from the latest. */
+.site-footer { border-top: 1px solid var(--color-hairline); }
+.site-version { margin: 0 auto; padding: 1rem 0 1.5rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.02em; color: var(--color-text-muted); }
 /* Shown only while a lazily loaded calculator chunk is in flight. */
 .route-loading { margin: 0; padding: 2rem 0; font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); }
 

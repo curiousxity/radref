@@ -6,6 +6,7 @@ import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
 import { calculators, categories } from './data/calculators'
 import { pushRecent, readRecent, writeRecent } from './lib/recent'
+import { versionLine } from './lib/version'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
@@ -78,6 +79,12 @@ export default function App() {
           </Routes>
         </Suspense>
       </main>
+
+      <footer className="site-footer">
+        <p className="container site-version">
+          {versionLine({ version: __APP_VERSION__, date: __BUILD_DATE__, commit: __BUILD_COMMIT__ })}
+        </p>
+      </footer>
     </div>
   )
 }

@@ -1,9 +1,28 @@
+import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }
+
+/** Short commit for the footer; empty outside a git checkout rather than failing the build. */
+function gitCommit(): string {
+  try {
+    return execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+  } catch {
+    return process.env.GITHUB_SHA?.slice(0, 7) ?? ''
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
+  // The footer's version line (src/lib/version.ts); declared in src/buildInfo.d.ts.
+  define: {
+    __APP_VERSION__: JSON.stringify(version),
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+    __BUILD_COMMIT__: JSON.stringify(gitCommit()),
+  },
   plugins: [
     react(),
     VitePWA({
