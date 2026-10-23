@@ -1,7 +1,8 @@
 # Remaining tasks
 
-Last updated 2026-10-23, when the knee, shoulder, elbow, pediatric elbow and wrist drafts were
-merged to `main` and deployed, before their sources check, by the author's choice.
+Last updated 2026-10-23, when the knee, shoulder, elbow, pediatric elbow and wrist drafts, and
+later the foot, diabetic foot and spine drafts, were merged to `main` and deployed, before
+their sources check, by the author's choice.
 
 ## Fix soon
 
@@ -54,12 +55,13 @@ region at a time, end to end, following the ankle pilot
   `docs/superpowers/specs/2026-10-23-wrist-mri-study-design.md`.
 - [ ] Foot: foot MRI study ("pain or injury" history) plus three calculators: Hawkins (talar
   neck), Sanders (calcaneus) and Myerson (Lisfranc). Drafted 2026-10-23 as an unchecked draft;
-  spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Not yet merged to `main`.
+  spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Deployed before the check.
+  Done once the sources check passes and the author signs it off.
   The diabetic foot is its own study (`/studies/diabetic-foot-mri`, the author's choice,
-  2026-10-23). The author said not to deploy the foot pages yet.
+  2026-10-23).
 - [ ] Spine: spine trauma CT study ("pain or injury" history) plus an AO Spine calculator
   (subaxial cervical and thoracolumbar), the author's choice over SLIC and TLICS (2026-10-23).
-  Not yet merged to `main`.
+  Deployed before the check; done once it passes and the author signs it off.
 - [ ] Pelvis: candidate calculators Young-Burgess and Letournel
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
   ossicular chain, TMJ, skull base, suprahyoid neck, larynx, brachial plexus.

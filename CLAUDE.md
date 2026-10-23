@@ -371,8 +371,7 @@ than `<Cite>` links; tests pin all three. The claims to check are in
 `2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. The author chose
 to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
 note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot, diabetic
-foot and spine drafts were written after that deploy and are on the branch only until the author says
-to merge them to `main`.
+foot and spine drafts followed later the same day and were deployed the same way.
 
 How it is built:
 
