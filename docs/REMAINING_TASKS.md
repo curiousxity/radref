@@ -251,6 +251,22 @@ is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`, marke
 - [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
   and update the tests that pin the unchecked state.
 
+### Spine CT for pain or injury
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/spine-trauma-ct`). Every paper and claim
+is in `docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md`, marked "to check";
+the AO Spine wording is under the calculator below.
+
+- [ ] Match references T-R1 to T-R10 on PubMed and Crossref.
+- [ ] Basion–dens 8.5 mm and atlantodental 2 mm on adult CT (T2-1, Rojas 2007).
+- [ ] Spence 6.9 mm and that MRI shows what the rule misses (T2-2, T2-3); odontoid types (T2-4).
+- [ ] Expanded Denver criteria (T5-1, Burlew 2012); a C3 injury entered as a subaxial level does
+  not trigger the chip.
+- [ ] Genant grades and their boundaries (T6-1); benign and malignant collapse (T6-2, Laredo
+  1995); ankylosed spine (T1-1, Westerveld 2009).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
+
 ### AO Spine calculator
 
 Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
