@@ -144,8 +144,13 @@ Candidate papers to check (none verified yet; each must pass the check before us
 This cloud environment's network policy blocks the paper databases:
 `eutils.ncbi.nlm.nih.gov`, `pubmed.ncbi.nlm.nih.gov`, `pmc.ncbi.nlm.nih.gov`,
 `www.ncbi.nlm.nih.gov`, `api.crossref.org`, `doi.org` and `www.ebi.ac.uk` (Europe PMC) all
-fail. Web search works but cannot read abstracts. The sources file, and everything after it,
-waits until those hosts are allowed (or the work moves to a machine that can reach them).
+fail. Web search works but cannot read abstracts.
+
+The author chose to draft the pages anyway and check them later on a computer. So the knee
+pages are an **unchecked draft**: references from memory with no DOI, plain-text citations
+instead of `<Cite>` links, and a source note starting "Unchecked draft", all pinned by tests.
+Every claim is in `docs/superpowers/research/2026-10-23-knee-mri-sources.md` marked "to
+check". The branch must not be merged to `main` (which deploys) before that check.
 
 ## Constraints
 

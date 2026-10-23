@@ -26,4 +26,11 @@ describe('registry', () => {
     expect(relatedTo('/ankle').map((item) => item.path)).toContain('/studies/ankle-mri')
     expect(relatedTo('/studies/ankle-mri').map((item) => item.path)).toContain('/ankle')
   })
+
+  test('the knee MRI study and the Schatzker calculator link to the 3D knee and each other', () => {
+    const knee = relatedTo('/knee').map((item) => item.path)
+    expect(knee).toContain('/studies/knee-mri')
+    expect(knee).toContain('/schatzker')
+    expect(relatedTo('/schatzker').map((item) => item.path)).toContain('/studies/knee-mri')
+  })
 })

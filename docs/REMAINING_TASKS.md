@@ -33,9 +33,10 @@ region at a time, end to end, following the ankle pilot
 
 - [x] Ankle: ankle MRI study. No calculator, by the author's choice (no Weber or
   Lauge-Hansen).
-- [ ] Knee: knee MRI study ("pain" only history) plus a Schatzker calculator, chosen
-  2026-10-23. Spec: `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Waiting
-  on the sources check; see "To do when on a computer".
+- [ ] Knee: knee MRI study ("pain" only history, ACL reconstruction included) plus a
+  Schatzker calculator. Drafted 2026-10-23 as an unchecked draft; spec
+  `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Done once the sources check
+  in "To do when on a computer" passes and the author signs it off.
 - [ ] Shoulder: candidate calculator Neer
 - [ ] Elbow: candidate calculator Mason
 - [ ] Wrist: candidate calculator Mayfield
@@ -60,41 +61,33 @@ The browser check of both themes (under "Fix soon") also needs a computer.
 
 ### Knee MRI study and Schatzker calculator
 
-Write the results to `docs/superpowers/research/<date>-knee-mri-sources.md`.
+Drafted 2026-10-23 as an unchecked draft (`/studies/knee-mri`, `/schatzker`). Every paper
+and every claim is listed in `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
+each marked "to check", with the method at the top of that file. **Do not merge this work
+to `main` until the check is done**, because `main` deploys.
 
-- [ ] **Schatzker types I–VI.** Find the wording of each type in Schatzker J, McBroom R,
-  Bruce D, "The tibial plateau fracture: the Toronto experience 1968-1975", Clin Orthop
-  Relat Res 1979. Sources disagree on type IV (medial split, with or without depression):
-  record which wording the original uses.
-- [ ] **CT and MRI change the Schatzker type.** Check Markhardt BK, Gross JM, Monu JU,
-  "Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves
-  assessment", Radiographics 2009: its DOI, and that the abstract says CT and MRI are more
-  accurate than radiographs and changed surgical plans.
-- [ ] **Meniscal tear criteria.** Find the De Smet paper on the "two-slice touch" rule
-  (abnormal signal touching the surface on two or more images) and record its exact
-  wording.
-- [ ] **Meniscal tear types and root tears.** A review that names the tear types
-  (horizontal, longitudinal, radial, root, complex, bucket handle).
-- [ ] **Meniscal extrusion.** A paper that states the extrusion threshold (often quoted as
-  3 mm) and how it is measured.
-- [ ] **Discoid lateral meniscus.** A paper that states the MRI criteria.
-- [ ] **Bone bruise patterns.** A review linking bruise patterns to mechanism (pivot shift
-  and ACL tear, transient lateral patellar dislocation, dashboard injury, hyperextension).
-- [ ] **ACL tear.** Primary and secondary MRI signs of complete and partial tears.
-- [ ] **ACL reconstruction.** Normal graft appearance with time, graft tear signs, tunnel
-  position and widening, cyclops lesion (arthrofibrosis).
-- [ ] **PCL tear.** MRI signs of partial and complete tears.
-- [ ] **MCL injury grading** on MRI.
-- [ ] **Posterolateral corner.** Structures to check and MRI signs of injury.
-- [ ] **Segond fracture** and its link to ACL tear.
-- [ ] **Transient lateral patellar dislocation.** The MRI pattern, MPFL tear, and trochlear
-  dysplasia signs.
-- [ ] **Cartilage grading on MRI** (for example a modified Outerbridge scale).
-- [ ] **Subchondral insufficiency fracture** of the knee: MRI signs.
-- [ ] **Osteochondritis dissecans.** MRI signs of an unstable fragment.
-- [ ] **Cysts and fat pads.** Popliteal (Baker) cyst, parameniscal cyst and its link to a
-  meniscal tear, Hoffa fat pad.
-- [ ] **Lipohaemarthrosis** (fat-fluid level) as a sign of an intra-articular fracture.
+- [ ] Match the 19 references (K1–K19) on PubMed and Crossref; fix any citation text that
+  is wrong, and drop any paper that cannot be found.
+- [ ] Schatzker types I–VI (SZ-1 to SZ-6) against Schatzker 1979. Sources disagree on
+  type IV (medial split, depression, or either): record the original wording.
+- [ ] CT and MRI change the Schatzker type (SZ-7), Markhardt 2009.
+- [ ] Fat-fluid level means an intra-articular fracture (K1-1).
+- [ ] Bone bruise patterns and what each points to (K2-1 to K2-5).
+- [ ] Segond fracture and ACL tear (K2-6).
+- [ ] Subchondral lesion: over 4 mm thick or over 14 mm long predicts an irreversible
+  lesion (K2-7).
+- [ ] Osteochondritis dissecans instability signs, juvenile versus adult (K2-8).
+- [ ] Two-slice-touch rule (K3-1), meniscal tear types (K3-2), extrusion of 3 mm or more
+  (K3-3).
+- [ ] Discoid lateral meniscus: bow-tie on 3 or more consecutive 5-mm images (K4-1);
+  parameniscal cysts and meniscal tears (K4-2).
+- [ ] ACL indirect signs (K5-1) and ACL graft complications (K5-2).
+- [ ] MCL (K7-1) and the lateral stabilising structures (K8-1).
+- [ ] MPFL injury after patellar dislocation (K9-1); lateral trochlear inclination below
+  11° (K9-2).
+- [ ] Cartilage depth categories (K10-1).
+- [ ] Then: add the DOIs, switch the plain-text citations to `<Cite>` links, reword the
+  source notes, and update the tests that pin the unchecked state.
 
 ## Housekeeping
 
