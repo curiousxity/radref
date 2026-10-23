@@ -355,19 +355,20 @@ notes, and labelled as unreviewed drafts in their source note until the author s
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
 
-Unchecked drafts: knee MRI, shoulder MRI, elbow MRI, wrist MRI and pediatric elbow
-radiographs (and the Schatzker, Neer, Mason, Mayfield, Herbert, Palmer and Lichtman
-calculators, and the Hawkins, Sanders and Myerson calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
+Unchecked drafts: knee MRI, shoulder MRI, elbow MRI, wrist MRI, foot MRI and pediatric elbow
+radiographs (and the Schatzker, Neer, Mason, Mayfield, Herbert, Palmer, Lichtman, Hawkins,
+Sanders and Myerson calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
 citations are from memory and no claim has been checked. Their source note starts
 "Unchecked draft", their references have no DOI, and their citations are plain text rather
 than `<Cite>` links; tests pin all three. The claims to check are in
 `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
 `2026-10-23-shoulder-mri-sources.md`, `2026-10-23-elbow-mri-sources.md`,
 `2026-10-23-wrist-mri-sources.md`, `2026-10-23-wrist-calculators-sources.md`,
-`2026-10-23-foot-calculators-sources.md` and
+`2026-10-23-foot-mri-sources.md`, `2026-10-23-foot-calculators-sources.md` and
 `2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. The author chose
 to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
-note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`.
+note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot drafts were
+written after that deploy and are on the branch only until they are merged to `main`.
 
 How it is built:
 

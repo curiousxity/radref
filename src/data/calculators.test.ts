@@ -56,6 +56,15 @@ describe('registry', () => {
     expect(relatedTo('/mayfield').map((item) => item.path)).toContain('/studies/wrist-mri')
   })
 
+  test('the foot MRI study links to the 3D foot and the foot calculators', () => {
+    expect(relatedTo('/foot').map((item) => item.path)).toContain('/studies/foot-mri')
+    for (const path of ['/hawkins', '/sanders', '/myerson', '/fifth-metatarsal']) {
+      expect(relatedTo(path).map((item) => item.path), path).toContain('/studies/foot-mri')
+    }
+    expect(relatedTo('/myerson').map((item) => item.path)).toContain('/foot')
+    expect(relatedTo('/ankle').map((item) => item.path)).toEqual(expect.arrayContaining(['/hawkins', '/sanders']))
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')

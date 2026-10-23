@@ -52,7 +52,10 @@ region at a time, end to end, following the ankle pilot
   Mayfield, scaphoid fracture (Herbert), Palmer TFCC and Kienböck (Lichtman). Drafted
   2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-wrist-mri-study-design.md`.
-- [ ] Foot: candidate calculator Sanders
+- [ ] Foot: foot MRI study ("pain or injury" history) plus three calculators: Hawkins (talar
+  neck), Sanders (calcaneus) and Myerson (Lisfranc). Drafted 2026-10-23 as an unchecked draft;
+  spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Not yet merged to `main`.
+  Ask the author whether the diabetic foot (osteomyelitis against Charcot) should be added.
 - [ ] Spine: candidate calculators SLIC and TLICS
 - [ ] Pelvis: candidate calculators Young-Burgess and Letournel
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
@@ -207,6 +210,29 @@ Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
 - [ ] Palmer classes 1A–1D and 2A–2E (PA-1 to PA-3).
 - [ ] Lichtman stages (LI-1, LI-2, LI-4), and who split stage III into IIIA and IIIB (LI-3):
   find that paper and add it.
+
+### Foot MRI study
+
+Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and claim is in
+`docs/superpowers/research/2026-10-23-foot-mri-sources.md`, marked "to check"; the
+classification wording is under the calculators below.
+
+- [ ] Match references R1–R14 on PubMed and Crossref; fix citation text. Castro 2010, Umans
+  2014 and Sanders and Rathur 2008 are the least certain.
+- [ ] Lisfranc ligament parts, interosseous the strongest (F3-1, F3-2, Castro 2010).
+- [ ] Plantar Lisfranc ligament disruption predicts instability (F3-3, Raikin 2009): did it
+  count sprains too?
+- [ ] Coalitions (F2-3, Newman 2000); accessory navicular edema (F9-2, Miller 1995); painful
+  os peroneum syndrome (F9-1, Sobel 1994).
+- [ ] Stress injury and Freiberg (F4-1, F4-2), Morton neuroma site and signal (F7-1), all
+  Ashman 2001.
+- [ ] Neuromas and bursal fluid up to 3 mm in volunteers without symptoms (F7-2, F7-3, Zanetti
+  1997); the 5 mm neuroma size (F7-4): Bencardino 2000, or another paper?
+- [ ] Plantar plate tears at the second MTP joint and the neuroma-like fibrosis beside them
+  (F6-1, F6-2, Umans 2014).
+- [ ] Turf toe and the sesamoids (F5-1 to F5-3, Sanders and Rathur 2008).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
