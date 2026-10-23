@@ -217,6 +217,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Hawkins (talar neck fracture types I-IV with Canale-Kelly type IV; logic shared in `src/logic/hawkins.ts`; unchecked draft)
 - Sanders (intra-articular calcaneal fracture types I-IV from the posterior facet lines on CT; logic shared in `src/logic/sanders.ts`; unchecked draft)
 - Lisfranc, Myerson (tarsometatarsal fracture-dislocation types A-C2; logic shared in `src/logic/myerson.ts`; unchecked draft)
+- AO Spine (subaxial cervical and thoracolumbar types A0-C, facets, neurology, modifiers; logic shared in `src/logic/aospine.ts`; unchecked draft)
 
 The registry in `src/data/calculators.ts` is the source of truth; keep this list in step
 with it when adding a calculator.
@@ -315,8 +316,8 @@ home page.
 - Categories may set `itemLabel` (Anatomy uses `'reference'`, Studies `'study'`), so the
   home-page count reads "16 references" rather than "16 calculators". They may also set a
   `blurb`, shown under the category heading.
-- Bone and joint calculators (Neer, Mason, the wrist four, Schatzker, fifth metatarsal) sit
-  in the Musculoskeletal category, ordered from shoulder to foot; Trauma keeps organ injury
+- Bone and joint calculators (AO Spine, Neer, Mason, the wrist four, Schatzker, the foot three,
+  fifth metatarsal) sit in the Musculoskeletal category, spine first, then shoulder to foot; Trauma keeps organ injury
   grading. A new one goes in Musculoskeletal at its place in that order (a test pins it).
 - Items may set `group`, which becomes a subheading on the home page and a label in the
   menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
@@ -357,7 +358,7 @@ screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ank
 
 Unchecked drafts: knee MRI, shoulder MRI, elbow MRI, wrist MRI, foot MRI, diabetic foot MRI and
 pediatric elbow radiographs (and the Schatzker, Neer, Mason, Mayfield, Herbert, Palmer, Lichtman, Hawkins,
-Sanders and Myerson calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
+Sanders, Myerson and AO Spine calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
 citations are from memory and no claim has been checked. Their source note starts
 "Unchecked draft", their references have no DOI, and their citations are plain text rather
 than `<Cite>` links; tests pin all three. The claims to check are in
@@ -365,11 +366,11 @@ than `<Cite>` links; tests pin all three. The claims to check are in
 `2026-10-23-shoulder-mri-sources.md`, `2026-10-23-elbow-mri-sources.md`,
 `2026-10-23-wrist-mri-sources.md`, `2026-10-23-wrist-calculators-sources.md`,
 `2026-10-23-foot-mri-sources.md`, `2026-10-23-foot-calculators-sources.md`,
-`2026-10-23-diabetic-foot-mri-sources.md` and
+`2026-10-23-diabetic-foot-mri-sources.md`, `2026-10-23-spine-calculators-sources.md` and
 `2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. The author chose
 to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
-note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot and diabetic
-foot drafts were written after that deploy and are on the branch only until the author says
+note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot, diabetic
+foot and spine drafts were written after that deploy and are on the branch only until the author says
 to merge them to `main`.
 
 How it is built:
@@ -382,7 +383,7 @@ How it is built:
 - Rules in `derive`/`build` must come from the lesson text or from a shared calculator
   in `src/logic/`, with the lesson's thresholds. Never add thresholds or management
   advice the lesson does not state. When a study and a calculator apply the same rules
-  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`. `pirads.ts`, `bosniak.ts`, `tirads.ts`, `lirads.ts`, `lungrads.ts`, `fleischner.ts`, `schatzker.ts`, `neer.ts`, `mason.ts`, `mayfield.ts`, `herbert.ts`, `palmer.ts`, `lichtman.ts`, `hawkins.ts`, `sanders.ts` and `myerson.ts` are each shared by a calculator and a study, so a fix there changes both, and `src/logic/*.test.ts` pins them against their guidelines. (`orads.ts` backs the O-RADS calculator only; the adnexal MRI study implements the lesson's O-RADS MRI algorithm itself.)
+  (PI-RADS, Bosniak, O-RADS), reuse one implementation from `src/logic/`. `pirads.ts`, `bosniak.ts`, `tirads.ts`, `lirads.ts`, `lungrads.ts`, `fleischner.ts`, `schatzker.ts`, `neer.ts`, `mason.ts`, `mayfield.ts`, `herbert.ts`, `palmer.ts`, `lichtman.ts`, `hawkins.ts`, `sanders.ts`, `myerson.ts` and `aospine.ts` are each shared by a calculator and a study, so a fix there changes both, and `src/logic/*.test.ts` pins them against their guidelines. (`orads.ts` backs the O-RADS calculator only; the adnexal MRI study implements the lesson's O-RADS MRI algorithm itself.)
 - Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
   `/lessons/<slug>` redirects there; the pages were briefly called lessons.
 - Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds

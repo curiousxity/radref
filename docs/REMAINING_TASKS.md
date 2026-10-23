@@ -57,7 +57,9 @@ region at a time, end to end, following the ankle pilot
   spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Not yet merged to `main`.
   The diabetic foot is its own study (`/studies/diabetic-foot-mri`, the author's choice,
   2026-10-23). The author said not to deploy the foot pages yet.
-- [ ] Spine: candidate calculators SLIC and TLICS
+- [ ] Spine: spine trauma CT study ("pain or injury" history) plus an AO Spine calculator
+  (subaxial cervical and thoracolumbar), the author's choice over SLIC and TLICS (2026-10-23).
+  Not yet merged to `main`.
 - [ ] Pelvis: candidate calculators Young-Burgess and Letournel
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
   ossicular chain, TMJ, skull base, suprahyoid neck, larynx, brachial plexus.
@@ -248,6 +250,18 @@ is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`, marke
   non-enhancing tissue (D6-1); active Charcot before radiographs (D7-1, Chantelau 2005).
 - [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
   and update the tests that pin the unchecked state.
+
+### AO Spine calculator
+
+Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
+`docs/superpowers/research/2026-10-23-spine-calculators-sources.md`, marked "to check".
+
+- [ ] Match references S1 and S2 on PubMed and Crossref.
+- [ ] Types A0–A4, B1–B3, C (AO-1 to AO-3); the B3 > B2 > B1 order (AO-4) and how a B or C
+  injury writes its body type (AO-5).
+- [ ] Facets F1–F4 and the 1 cm / 40% boundary (AO-6, AO-7); neurology, "+" and the
+  modifiers (AO-8 to AO-10).
+- [ ] Then: add DOIs and reword the source note.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
