@@ -312,6 +312,9 @@ home page.
 - Categories may set `itemLabel` (Anatomy uses `'reference'`, Studies `'study'`), so the
   home-page count reads "16 references" rather than "16 calculators". They may also set a
   `blurb`, shown under the category heading.
+- Bone and joint calculators (Neer, Mason, the wrist four, Schatzker, fifth metatarsal) sit
+  in the Musculoskeletal category, ordered from shoulder to foot; Trauma keeps organ injury
+  grading. A new one goes in Musculoskeletal at its place in that order (a test pins it).
 - Items may set `group`, which becomes a subheading on the home page and a label in the
   menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
   pelvis and limbs), and Studies by body area. `groupItems` groups consecutive items, so

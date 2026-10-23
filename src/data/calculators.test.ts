@@ -21,6 +21,15 @@ describe('registry', () => {
     expect(byPath('/tirads')?.tag).toBe('ACR 2017')
   })
 
+  // The author's decision (2026-10-23): bone and joint calculators have their own category,
+  // ordered from shoulder to foot, rather than sitting under Trauma.
+  test('the musculoskeletal calculators sit in their own category, shoulder to foot', () => {
+    expect(calculators.filter((item) => item.category === 'Musculoskeletal').map((item) => item.path)).toEqual([
+      '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/schatzker', '/fifth-metatarsal',
+    ])
+    expect(calculators.filter((item) => item.category === 'Trauma').map((item) => item.path)).toEqual(['/aast-organ-injury'])
+  })
+
   test('the ankle MRI study links to the 3D ankle, both ways', () => {
     // The study declares related: ['/ankle']; relatedTo makes it show on the ankle page too.
     expect(relatedTo('/ankle').map((item) => item.path)).toContain('/studies/ankle-mri')
