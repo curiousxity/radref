@@ -293,6 +293,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Before writing the impression, read the steps against each other. Ligaments and adjacent tendons work together and are most often injured together, and bone contusion, osteochondral lesion and joint effusion are other common associations (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). A more diffuse BME pattern can come from early avascular necrosis, inflammation or stress fracture, so the history matters (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
+        <p>Anatomical variants (an accessory ossicle, a peroneus quartus, a low-lying peroneus brevis belly) each get their own line in this site's impression, after the findings, so the referrer knows they were seen and judged.</p>
         <p>Grading the injury from mild to severe and judging instability combines the MRI features with clinical tests such as the drawer, inversion and eversion tests (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). Sawant and Sanghvi add, as background, that most sprains are stable and treated conservatively, those with osteochondral lesions arthroscopically, and severe sprains with instability by ligament reconstruction (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
         <div className="lesson-key">
           <p>An osteochondral lesion on MRI is not always the cause of the pain: in a cohort Walther and colleagues quote, lesions were found in 42% of 37 asymptomatic professional soccer players, and Walther and colleagues advise that MRI findings alone are no reason to urge patients with minimal or no symptoms toward prophylactic surgery (<Cite doi={WALTHER}>Walther et al., Cartilage 2023</Cite>).</p>
@@ -974,20 +975,33 @@ function warnChipFired(values: Values): boolean {
   return steps.some((step) => (step.derive?.(values) ?? []).some((chip) => chip.tone === 'warn'))
 }
 
+/**
+ * The anatomical variants marked present, one impression sentence each. The author's
+ * decision (2026-10-23): variants get their own impression line, not findings only.
+ */
+function variantSentences(values: Values): string[] {
+  const out = chosen(values, fields.ossicles).map((name) => `${upperFirst(name)} (anatomical variant).`)
+  if (str(values, 'quartus') === 'present') out.push('Peroneus quartus (anatomical variant).')
+  if (list(values, 'pb-belly').length > 0) out.push('Low-lying peroneus brevis muscle belly (anatomical variant).')
+  return out
+}
+
 function impression(values: Values): string {
   const found = findings(values)
+  const variants = variantSentences(values)
   const limited = str(values, 'protocol') === 'incomplete' && 'Limited study (protocol incomplete).'
   const other = otherFindings(values)
   const negatives = list(values, 'impression-negatives').map((value) => `${optionLabel(fields.impressionNegatives, value)}.`)
   if (found.length === 0) {
     // Free text, and any warn chip without a sentence of its own, are not findings the
     // impression can name, so never call such a study normal: say only that they are above.
-    if (other || warnChipFired(values)) return `Impression: ${lines(limited, 'Findings as above.', ...negatives)}`
+    if (other || warnChipFired(values)) return `Impression: ${lines(limited, 'Findings as above.', ...negatives, ...variants)}`
     // A normal impression only once every required item is answered.
     const complete = steps.every((step) => step.fields.every((field) => !field.required || str(values, field.id) !== ''))
-    return complete ? `Impression: ${lines(limited, NORMAL_IMPRESSION)}` : ''
+    if (complete) return `Impression: ${lines(limited, NORMAL_IMPRESSION, ...variants)}`
+    return variants.length > 0 ? `Impression: ${lines(...variants)}` : ''
   }
-  return `Impression: ${lines(limited, ...found, other && 'Other findings as above.', ...negatives)}`
+  return `Impression: ${lines(limited, ...found, other && 'Other findings as above.', ...negatives, ...variants)}`
 }
 
 /* "Check before signing": contradictions between entered findings. */

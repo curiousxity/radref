@@ -67,7 +67,7 @@ uses a claim, its ID is in a comment next to the chip, warning or test.
 | N3 | With no displaced segment the fracture is one-part, however many fracture lines. | — | R1 | to check |
 | N4 | Two-part: one segment displaced (anatomical neck, surgical neck, greater or lesser tuberosity). Three-part: surgical neck plus one tuberosity. Four-part: both tuberosities and the articular segment. | Named patterns as listed | R1 | to check |
 | N5 | Fracture-dislocations (anterior, posterior) and articular surface fractures (head-splitting, impression) are named separately. | — | R1 | to check |
-| N6 | Combinations outside the named patterns (e.g. both tuberosities without the neck) are not Neer types; the calculator counts their parts and flags them. | Site's own handling | — | site rule, not a claim |
+| N6 | Combinations outside the named patterns (e.g. both tuberosities without the neck) are not Neer types. By the author's decision (2026-10-23) the calculator gives no part count for them, only "not a named Neer pattern" and the list of displaced segments. Check that Neer names no such pattern. | Site's own handling | R1 | author's decision; check R1 names no such pattern |
 
 ### Step 1: technique
 

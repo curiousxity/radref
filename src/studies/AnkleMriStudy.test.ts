@@ -508,7 +508,18 @@ describe('ankle MRI report: exact builder output', () => {
   test('ossicle edema names the ossicle it is in', () => {
     const values = { ...normal, marrow: 'bme', ossicles: ['trigonum', 'peroneum'], 'ossicle-bme': ['trigonum'] }
     expect(textLines(values)).toContain('Accessory ossicles: os trigonum, os peroneum; bone marrow edema in os trigonum')
-    expect(impressionOf(values)).toBe('Bone marrow edema.\nBone marrow edema in an accessory ossicle: os trigonum.')
+    expect(impressionOf(values)).toBe('Bone marrow edema.\nBone marrow edema in an accessory ossicle: os trigonum.\nOs trigonum (anatomical variant).\nOs peroneum (anatomical variant).')
+  })
+
+  // The author's decision (2026-10-23): anatomical variants get their own impression line.
+  // Before it, variants appeared in the findings only, so a normal study with an os trigonum
+  // read as the bare normal impression.
+  test('each anatomical variant gets its own impression line', () => {
+    expect(impressionOf({ ...normal, ossicles: ['naviculare'], quartus: 'present', 'pb-belly': ['below-spr'] }))
+      .toBe(`${NORMAL_IMPRESSION}\nOs naviculare accessorium (anatomical variant).\nPeroneus quartus (anatomical variant).\nLow-lying peroneus brevis muscle belly (anatomical variant).`)
+    expect(impressionOf({ ...normal, atfl: 'complete', quartus: 'present' })).toBe('Complete tear of the ATFL.\nPeroneus quartus (anatomical variant).')
+    expect(impressionOf({ ...normal, quartus: 'absent' })).toBe(NORMAL_IMPRESSION)
+    expect(report(study, { ...normal, quartus: 'present' }).warnings).toEqual([])
   })
 
   test('the Achilles partial option is labelled "Partial tear"', () => {

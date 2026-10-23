@@ -24,14 +24,18 @@ export type NeerInput = {
 }
 
 export type NeerResult = {
-  /** 1 to 4, the segments counted as parts. */
-  parts: number
+  /**
+   * 1 to 4, the segments counted as parts; 0 when nothing is entered. Undefined when the
+   * displaced segments are not one of Neer's named patterns: the author's decision
+   * (2026-10-23) is to give no part count then, only the list of displaced segments.
+   */
+  parts: number | undefined
   /** e.g. "Three-part (surgical neck and greater tuberosity)". */
   label: string
   description: string
   /** Report sentence, ready to paste. */
   report: string
-  /** True when the displaced lines are not one of Neer's named patterns. */
+  /** True when the displaced lines are not one of Neer's named patterns (no part count). */
   unusual: boolean
 }
 
@@ -69,7 +73,9 @@ function named(displaced: NeerLine[]): string | undefined {
   if (displaced.length === 2 && has('surgicalNeck') && (has('greaterTuberosity') || has('lesserTuberosity'))) {
     return `surgical neck and ${has('greaterTuberosity') ? 'greater' : 'lesser'} tuberosity displaced`
   }
-  if (displaced.length === 3 && has('greaterTuberosity') && has('lesserTuberosity') && (has('surgicalNeck') || has('anatomicalNeck'))) {
+  // Three or four displaced lines including both tuberosities still leave four segments:
+  // the articular segment, both tuberosities and the shaft.
+  if (displaced.length >= 3 && has('greaterTuberosity') && has('lesserTuberosity') && (has('surgicalNeck') || has('anatomicalNeck'))) {
     return 'articular segment and both tuberosities displaced'
   }
   return undefined
@@ -85,10 +91,10 @@ const descriptions: Record<number, string> = {
 export function classifyNeer(input: NeerInput): NeerResult {
   const fractured = NEER_LINES.filter((line) => input.lines[line] !== 'none')
   const displaced = NEER_LINES.filter((line) => input.lines[line] === 'displaced')
-  // Displacing every line still leaves four segments at most.
-  const parts = Math.min(4, displaced.length + 1)
   const pattern = displaced.length === 0 ? undefined : named(displaced)
   const unusual = displaced.length > 0 && pattern === undefined
+  // Displacing every line still leaves four segments at most.
+  const count = Math.min(4, displaced.length + 1)
 
   const dislocation = input.dislocation === 'none' ? '' : `${input.dislocation} fracture-dislocation`
   const articular = input.articular === 'head-split' ? 'head-splitting fracture' : input.articular === 'impression' ? 'impression fracture of the articular surface' : ''
@@ -98,13 +104,23 @@ export function classifyNeer(input: NeerInput): NeerResult {
     return { parts: 0, label: 'No fracture entered', description: 'Mark the fracture lines present.', report: '', unusual: false }
   }
 
-  const head = parts === 1 ? 'One-part' : `${partWords[parts]}${pattern ? ` (${pattern})` : ` (${list(displaced.map((line) => lineNames[line]))} displaced)`}`
-  const label = [head, ...extras].join(', ')
-  const description = [
-    descriptions[parts],
-    unusual ? 'This combination of displaced segments is not one of Neer\'s named patterns; check the images.' : '',
-  ].filter(Boolean).join(' ')
   const lines = fractured.length > 0 ? ` Fracture lines: ${list(fractured.map((line) => `${lineNames[line]}${input.lines[line] === 'displaced' ? ' (displaced)' : ''}`))}.` : ''
-  const report = `Proximal humerus fracture, Neer ${partWords[parts].toLowerCase()}${extras.length > 0 ? ` ${extras.join(' with ')}` : ''}.${lines}`
-  return { parts, label, description, report, unusual }
+  const withExtras = extras.length > 0 ? ` ${extras.join(' with ')}` : ''
+
+  // N6: no part count for a combination Neer did not name; list the displaced segments instead.
+  if (unusual) {
+    const segments = list(displaced.map((line) => lineNames[line]))
+    return {
+      parts: undefined,
+      label: [`Not a named Neer pattern (${segments} displaced)`, ...extras].join(', '),
+      description: 'These displaced segments do not match one of Neer\'s named patterns, so no part count is given. Check the images and describe the displaced segments.',
+      report: `Proximal humerus fracture${withExtras}, with displaced ${segments}; not one of Neer's named patterns.${lines}`,
+      unusual,
+    }
+  }
+
+  const head = count === 1 ? 'One-part' : `${partWords[count]} (${pattern})`
+  const label = [head, ...extras].join(', ')
+  const report = `Proximal humerus fracture, Neer ${partWords[count].toLowerCase()}${withExtras}.${lines}`
+  return { parts: count, label, description: descriptions[count], report, unusual }
 }

@@ -21,8 +21,8 @@ to `main`.
   `docs/superpowers/research/2026-10-19-ankle-mri-sources.md`. Sign it off by removing
   "Not yet reviewed by the site author" from its source note.
 - Anatomical variants (os trigonum, peroneus quartus, low-lying peroneus brevis belly and
-  so on) get their own impression line, not findings only: answered 2026-10-23 for the
-  knee, as the same question. Not yet applied to the ankle MRI report.
+  so on) get their own impression line, not findings only: decided 2026-10-23 and applied to
+  the ankle, knee and shoulder reports.
 
 ## Regions: model, lesson and calculator
 
@@ -103,9 +103,9 @@ check". **Do not merge to `main` until the check is done.**
   least certain.
 - [ ] Neer (N1–N5): the four segments, displaced meaning more than 1 cm or more than 45°,
   one-part when nothing is displaced, the two-, three- and four-part patterns,
-  fracture-dislocation and head-splitting / impression wording. N6 (how the calculator
-  handles combinations Neer did not name) is this site's own choice; confirm it with the
-  author.
+  fracture-dislocation and head-splitting / impression wording. N6: the author decided
+  (2026-10-23) that a combination Neer did not name gets no part count; check that the
+  paper really names no such pattern.
 - [ ] Hill-Sachs: definition (Hill and Sachs 1940), Workman 1992, and the Richards 1994
   rule that tells it from the normal groove by level ("at or above the coracoid").
 - [ ] Ellman partial-thickness tears: sides and depth grades (under 3, 3–6, over 6 mm). Is

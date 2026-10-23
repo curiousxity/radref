@@ -60,7 +60,7 @@ export function NeerPage() {
   }), [form])
   const result = useMemo(() => classifyNeer(input), [input])
   const unmeasured = NEER_LINES.filter((line) => form.lines[line].present === 'yes' && form.lines[line].cm.trim() === '' && form.lines[line].deg.trim() === '')
-  const tone = result.parts === 0 ? 'neutral' : result.parts >= 3 || form.dislocation !== 'none' || form.articular !== 'none' ? 'warn' : 'accent'
+  const tone = result.parts === 0 ? 'neutral' : result.parts === undefined || result.parts >= 3 || form.dislocation !== 'none' || form.articular !== 'none' ? 'warn' : 'accent'
 
   function updateLine(line: NeerLine, patch: Partial<LineForm>) {
     setForm((current) => ({ ...current, lines: { ...current.lines, [line]: { ...current.lines[line], ...patch } } }))

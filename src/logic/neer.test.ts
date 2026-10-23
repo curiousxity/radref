@@ -79,12 +79,16 @@ describe('Neer: parts', () => {
     expect(classifyNeer(input({ surgicalNeck: 'displaced', greaterTuberosity: 'undisplaced' })).parts).toBe(2)
   })
 
-  test('a combination outside the named patterns is flagged', () => {
+  // N6: the author's decision (2026-10-23). The earlier draft counted parts for these and
+  // flagged them; the author ruled that a combination Neer did not name gets no part count.
+  test('a combination outside the named patterns gets no part count, only its displaced segments', () => {
     const result = classifyNeer(input({ greaterTuberosity: 'displaced', lesserTuberosity: 'displaced' }))
-    expect(result.parts).toBe(3)
+    expect(result.parts).toBeUndefined()
     expect(result.unusual).toBe(true)
-    expect(result.label).toBe('Three-part (greater tuberosity and lesser tuberosity displaced)')
-    expect(result.description).toContain('not one of Neer\'s named patterns')
+    expect(result.label).toBe('Not a named Neer pattern (greater tuberosity and lesser tuberosity displaced)')
+    expect(result.description).toContain('so no part count is given')
+    expect(result.report).toBe('Proximal humerus fracture, with displaced greater tuberosity and lesser tuberosity; not one of Neer\'s named patterns. Fracture lines: greater tuberosity (displaced) and lesser tuberosity (displaced).')
+    expect(result.report).not.toMatch(/part/)
   })
 })
 
