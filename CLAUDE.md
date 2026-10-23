@@ -361,8 +361,9 @@ than `<Cite>` links; tests pin all three. The claims to check are in
 `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
 `2026-10-23-shoulder-mri-sources.md`, `2026-10-23-elbow-mri-sources.md`,
 `2026-10-23-wrist-mri-sources.md`, `2026-10-23-wrist-calculators-sources.md` and
-`2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. Do not merge them
-to `main` before that check.
+`2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. The author chose
+to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
+note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`.
 
 How it is built:
 

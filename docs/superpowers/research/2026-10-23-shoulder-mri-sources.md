@@ -12,7 +12,7 @@ The study and calculator were drafted while the cloud environment's network bloc
 PubMed Central, Crossref, doi.org and Europe PMC. **No reference has been matched and no claim
 has been read in its paper.** The citations and claims below are from memory of the papers.
 Every row is marked **to check**, and the site shows the pages as an unchecked draft
-(`sourceNote` starting "Unchecked draft"). Do not merge to `main` until the checks are done.
+(`sourceNote` starting "Unchecked draft"). The author chose (2026-10-23) to deploy before the checks; the pages stay labelled "Unchecked draft" on the live site until they are done.
 
 What that means in the code:
 

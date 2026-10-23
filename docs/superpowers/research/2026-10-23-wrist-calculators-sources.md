@@ -13,7 +13,7 @@ Written in a cloud session whose network blocks PubMed, PubMed Central, Crossref
 and Europe PMC. The citations and the wording of every stage, type and class are **from
 memory**. Every row is **to check**. The pages say "Unchecked draft" in their source note,
 their references have no DOI, and `src/logic/wristClassifications.test.ts` quotes each claim
-by ID. Do not merge to `main` before the check.
+by ID. The author chose (2026-10-23) to deploy before the check; the pages stay labelled "Unchecked draft" on the live site until it is done.
 
 ## How to check (on a computer)
 

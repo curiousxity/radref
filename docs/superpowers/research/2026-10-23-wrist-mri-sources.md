@@ -20,7 +20,7 @@ check them later on a computer. So:
   (`src/logic/mayfield.ts`, `herbert.ts`, `palmer.ts`, `lichtman.ts`). Their wording is claimed
   in `2026-10-23-wrist-calculators-sources.md` (claims MF-, HB-, PA-, LI-); this file refers to
   those IDs rather than repeating them.
-- Do not merge this branch to `main` before the check, because `main` deploys.
+- The author chose (2026-10-23) to deploy these pages before the check; they stay labelled "Unchecked draft" on the live site until it is done.
 
 ## How to check (on a computer)
 

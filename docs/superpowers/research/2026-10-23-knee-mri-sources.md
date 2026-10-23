@@ -16,7 +16,7 @@ anyway and check them later on a computer. So:
   text (no `<Cite>` links), and the source note on both pages starts with "Unchecked draft".
   Tests in `src/studies/KneeMriStudy.test.ts` and `src/logic/schatzker.test.ts` pin that, so
   the unchecked state cannot be lost by accident.
-- Do not merge this branch to `main` before the check, because `main` deploys.
+- The author chose (2026-10-23) to deploy these pages before the check; they stay labelled "Unchecked draft" on the live site until it is done.
 
 ## How to check (on a computer)
 

@@ -1,7 +1,7 @@
 # Remaining tasks
 
-Last updated 2026-10-23 (knee started). Before that, 2026-10-22, after the reading-room redesign and the ankle MRI study were merged
-to `main`.
+Last updated 2026-10-23, when the knee, shoulder, elbow, pediatric elbow and wrist drafts were
+merged to `main` and deployed, before their sources check, by the author's choice.
 
 ## Fix soon
 
@@ -76,8 +76,7 @@ The browser check of both themes (under "Fix soon") also needs a computer.
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/knee-mri`, `/schatzker`). Every paper
 and every claim is listed in `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
-each marked "to check", with the method at the top of that file. **Do not merge this work
-to `main` until the check is done**, because `main` deploys.
+each marked "to check", with the method at the top of that file. Deployed before the check by the author's choice (2026-10-23); the pages say "Unchecked draft" until it is done.
 
 - [ ] Match the 19 references (K1–K19) on PubMed and Crossref; fix any citation text that
   is wrong, and drop any paper that cannot be found.
@@ -106,7 +105,7 @@ to `main` until the check is done**, because `main` deploys.
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/shoulder-mri`, `/neer`). Every paper and
 claim is in `docs/superpowers/research/2026-10-23-shoulder-mri-sources.md`, marked "to
-check". **Do not merge to `main` until the check is done.**
+check". Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
 - [ ] Match every reference on PubMed and Crossref; fix wrong citation text, drop any paper
   that cannot be found. The author lists and pages of R2, R11, R12, R18 and R21 are the
@@ -139,7 +138,7 @@ check". **Do not merge to `main` until the check is done.**
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/elbow-mri`, `/mason`). Every paper and
 claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, marked "to check".
-**Do not merge to `main` until the check is done.**
+Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
 - [ ] Match references E1–E17 on PubMed and Crossref; fix citation text. E1, E2 and E7 may
   have no DOI. The author lists and pages of E9, E11, E13 and E17 are the least certain.
@@ -168,8 +167,7 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, marked 
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and claim is
 in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`, marked "to check"; the
-classification wording is under the calculators below. **Do not merge to `main` until the
-check is done.**
+classification wording is under the calculators below. Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
 - [ ] Match references R1–R18 on PubMed and Crossref; fix citation text. The author lists
   and pages of Theumann 2003, Vo 1995 and Conway 1985 are the least certain.
@@ -214,7 +212,7 @@ Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/pediatric-elbow`). Every paper and
 claim is in `docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md`, marked "to
-check". **Do not merge to `main` until the check is done.**
+check". Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
 - [ ] Match references E1–E12 on PubMed and Crossref; fix wrong citation text, drop any
   paper that cannot be found. Cheng, Rogers and Judet are the least certain.
