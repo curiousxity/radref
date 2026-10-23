@@ -22,10 +22,11 @@ describe('registry', () => {
   })
 
   // The author's decision (2026-10-23): bone and joint calculators have their own category,
-  // ordered from shoulder to foot, rather than sitting under Trauma. The spine comes first.
+  // ordered from shoulder to foot, rather than sitting under Trauma. The spine comes first, and
+  // the pelvis sits between the wrist and the knee.
   test('the musculoskeletal calculators sit in their own category, spine, then shoulder to foot', () => {
     expect(calculators.filter((item) => item.category === 'Musculoskeletal').map((item) => item.path)).toEqual([
-      '/ao-spine', '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/schatzker', '/hawkins', '/sanders', '/myerson', '/fifth-metatarsal',
+      '/ao-spine', '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/young-burgess', '/letournel', '/schatzker', '/hawkins', '/sanders', '/myerson', '/fifth-metatarsal',
     ])
     expect(calculators.filter((item) => item.category === 'Trauma').map((item) => item.path)).toEqual(['/aast-organ-injury'])
   })
