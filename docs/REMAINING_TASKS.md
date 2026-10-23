@@ -48,7 +48,10 @@ region at a time, end to end, following the ankle pilot
   Weiss lateral condyle, medial epicondyle, O'Brien radial neck), no separate calculator.
   Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-pediatric-elbow-study-design.md`.
-- [ ] Wrist: candidate calculator Mayfield
+- [ ] Wrist: wrist MRI study ("pain or injury" history, no post-op) plus four calculators:
+  Mayfield, scaphoid fracture (Herbert), Palmer TFCC and Kienböck (Lichtman). Drafted
+  2026-10-23 as an unchecked draft; spec
+  `docs/superpowers/specs/2026-10-23-wrist-mri-study-design.md`.
 - [ ] Foot: candidate calculator Sanders
 - [ ] Spine: candidate calculators SLIC and TLICS
 - [ ] Pelvis: candidate calculators Young-Burgess and Letournel
@@ -160,6 +163,19 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, marked 
 - [ ] Anconeus epitrochlearis and the ulnar nerve (E11-1, Rosenberg 1995).
 - [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source
   notes, and update the tests that pin the unchecked state.
+
+### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
+
+Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
+`docs/superpowers/research/2026-10-23-wrist-calculators-sources.md`, marked "to check".
+
+- [ ] Match references W1–W4 on PubMed and Crossref.
+- [ ] Mayfield stages I–IV (MF-1 to MF-4) and that they are progressive (MF-5). Does the
+  paper say a scaphoid fracture can take the place of the scapholunate tear?
+- [ ] Herbert types A1–D2 (HB-1 to HB-5). Is the comminuted B5 in the original?
+- [ ] Palmer classes 1A–1D and 2A–2E (PA-1 to PA-3).
+- [ ] Lichtman stages (LI-1, LI-2, LI-4), and who split stage III into IIIA and IIIB (LI-3):
+  find that paper and add it.
 
 ### Pediatric elbow radiographs
 

@@ -1,0 +1,93 @@
+import { useState } from 'react'
+import { ChoiceGroup } from '../components/ChoiceGroup'
+import { CopyBlock } from '../components/CopyBlock'
+import { LessonReferences } from '../components/LessonPage'
+import type { LessonReference } from '../components/LessonPage'
+import { palmerClasses, palmerDescriptions, palmerKind, palmerSentence } from '../logic/palmer'
+import type { PalmerClass } from '../logic/palmer'
+
+type Kind = 'traumatic' | 'degenerative'
+
+const kindOptions: { value: Kind; label: string }[] = [
+  { value: 'traumatic', label: 'Traumatic (class 1)' },
+  { value: 'degenerative', label: 'Degenerative (class 2)' },
+]
+
+const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
+const classOption = (c: PalmerClass) => ({ value: c, label: `${c}: ${palmerDescriptions[c]}` })
+
+const traumaticOptions = palmerClasses.filter((c) => palmerKind(c) === 'traumatic').map(classOption)
+const degenerativeOptions = palmerClasses.filter((c) => palmerKind(c) === 'degenerative').map(classOption)
+
+const references: LessonReference[] = [
+  { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.' },
+]
+
+export function PalmerPage() {
+  const [kind, setKind] = useState<Kind>('traumatic')
+  const [traumatic, setTraumatic] = useState<PalmerClass>('1A')
+  const [degenerative, setDegenerative] = useState<PalmerClass>('2A')
+  const selected = kind === 'traumatic' ? traumatic : degenerative
+
+  function reset() {
+    setKind('traumatic')
+    setTraumatic('1A')
+    setDegenerative('2A')
+  }
+
+  return (
+    <div className="page page-calculator">
+      <section className="section-block calc-title">
+        <div className="calc-title-row">
+          <h2>Palmer TFCC classification</h2>
+          <span className="calc-tag">TFCC</span>
+        </div>
+        <p>Class a triangular fibrocartilage complex lesion as traumatic or degenerative, with copyable report text.</p>
+        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the class wording has not yet been checked against Palmer's paper. Not yet reviewed by the site author. Source: Palmer, J Hand Surg Am 1989.</p>
+      </section>
+
+      <section className="calculator-grid">
+        <article className="info-card form-card">
+          <h3>Lesion</h3>
+          <div className="form-grid">
+            <ChoiceGroup label="Cause" layout="row" value={kind} options={kindOptions} onChange={setKind} />
+            {kind === 'traumatic'
+              ? <ChoiceGroup label="Traumatic lesion" layout="stack" value={traumatic} options={traumaticOptions} onChange={setTraumatic} />
+              : <ChoiceGroup label="Degenerative stage" layout="stack" value={degenerative} options={degenerativeOptions} onChange={setDegenerative} />}
+          </div>
+        </article>
+
+        <article className="info-card result-card sticky-card">
+          <h3 className="sr-only">Result</h3>
+          <div className="result-strip">
+            <div className="result-strip-head">
+              <p className="result-strip-value tone-warn">Palmer {selected}</p>
+            </div>
+            <p className="result-strip-summary">{capitalise(palmerKind(selected))}: {palmerDescriptions[selected]}.</p>
+          </div>
+          <CopyBlock label="Report text" text={palmerSentence(selected)} />
+          <button type="button" className="reset-button" onClick={reset}>Reset</button>
+        </article>
+      </section>
+
+      <section className="info-card">
+        <h3>The classes</h3>
+        <div className="table-wrap">
+          <table className="ref-table">
+            <thead>
+              <tr><th>Class</th><th>Lesion</th></tr>
+            </thead>
+            <tbody>
+              {palmerClasses.map((c) => (
+                <tr key={c}><td className="vessel-name">{c}</td><td>{capitalise(palmerDescriptions[c])}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it.</p>
+      </section>
+
+      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+    </div>
+  )
+}
