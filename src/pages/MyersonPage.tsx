@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { myerson, myersonDescriptions, myersonGroup, myersonSentence, myersonTypes } from '../logic/myerson'
 import type { FirstRay, LesserRays } from '../logic/myerson'
@@ -21,7 +21,7 @@ const lesserOptions: { value: LesserRays; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.' },
+  { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.', doi: '10.1177/107110078600600504' },
 ]
 
 export function MyersonPage() {
@@ -44,7 +44,7 @@ export function MyersonPage() {
           <span className="calc-tag">Lisfranc</span>
         </div>
         <p>Type a tarsometatarsal (Lisfranc) fracture-dislocation from which metatarsals are displaced and which way, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Myerson's paper. Not yet reviewed by the site author. Source: Myerson et al., Foot Ankle 1986.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract does not give the types, so the wording of every type has not yet been checked against it. Not yet reviewed by the site author. Source: <Cite doi="10.1177/107110078600600504">Myerson et al., Foot Ankle 1986</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -88,7 +88,7 @@ export function MyersonPage() {
         <p>The types describe fracture-dislocations. A subtle ligament injury without displacement has no Myerson type; describe the ligaments and the alignment instead.</p>
       </section>
 
-      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, and its abstract does not give the types." />
     </div>
   )
 }

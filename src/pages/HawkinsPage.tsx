@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { hawkins, hawkinsDescriptions, hawkinsGaps, hawkinsSentence, hawkinsTypes } from '../logic/hawkins'
 import type { HawkinsInput } from '../logic/hawkins'
@@ -25,8 +25,8 @@ const jointQuestions: [keyof HawkinsInput, string][] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.' },
-  { citation: 'Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156.' },
+  { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.', doi: '10.2106/00004623-197052050-00013' },
+  { citation: 'Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156.', doi: '10.2106/00004623-197860020-00001' },
 ]
 
 export function HawkinsPage() {
@@ -49,7 +49,7 @@ export function HawkinsPage() {
           <span className="calc-tag">Talar neck</span>
         </div>
         <p>Type a talar neck fracture from its displacement and the joints around the talus, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Hawkins' or Canale and Kelly's paper. Not yet reviewed by the site author. Source: Hawkins, J Bone Joint Surg Am 1970; type IV from Canale and Kelly, J Bone Joint Surg Am 1978.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, but the papers are paywalled and Hawkins' has no abstract, so only the first three groups and the rising rate of osteonecrosis are checked (against Canale and Kelly's abstract); type IV, the joint wording of each type and the Hawkins sign have not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.2106/00004623-197052050-00013">Hawkins, J Bone Joint Surg Am 1970</Cite>; type IV from <Cite doi="10.2106/00004623-197860020-00001">Canale and Kelly, J Bone Joint Surg Am 1978</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -97,7 +97,7 @@ export function HawkinsPage() {
         <p>The Hawkins sign is a band of subchondral lucency under the talar dome on radiographs some 6 to 8 weeks after the injury. It shows that the body still has a blood supply, so osteonecrosis is unlikely.</p>
       </section>
 
-      <LessonReferences references={references} note="These citations are from memory and have not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled, so the type wording has been checked only where an abstract states it." />
     </div>
   )
 }

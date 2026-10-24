@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { hawkinsDescriptions, hawkinsSentence, hawkinsTypes } from '../logic/hawkins'
 import type { HawkinsType } from '../logic/hawkins'
@@ -10,45 +11,58 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims);
- * the Hawkins, Sanders and Myerson wording is claimed in
- * 2026-10-23-foot-calculators-sources.md (HK, SA and MY claims). Rule chips and warnings carry
- * their claim IDs. Until the check, citations are plain text rather than <Cite> links, and the
- * references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled, so only claims whose wording is in an abstract are verified. The
+ * claims table, with each claim's status, is docs/superpowers/research/2026-10-23-foot-mri-sources.md
+ * (F claims); the Hawkins, Sanders and Myerson wording is in 2026-10-23-foot-calculators-sources.md
+ * (HK, SA and MY claims). Rule chips and warnings carry their claim IDs.
  */
 
-const HAWKINS = 'Hawkins, J Bone Joint Surg Am 1970'
-const CANALE = 'Canale and Kelly, J Bone Joint Surg Am 1978'
-const SANDERS = 'Sanders et al., Clin Orthop Relat Res 1993'
-const MYERSON = 'Myerson et al., Foot Ankle 1986'
-const CASTRO = 'Castro et al., AJR 2010'
-const RAIKIN = 'Raikin et al., J Bone Joint Surg Am 2009'
-const NEWMAN = 'Newman and Newberg, Radiographics 2000'
-const MILLER = 'Miller et al., Radiology 1995'
-const ASHMAN = 'Ashman et al., Radiographics 2001'
-const ZANETTI = 'Zanetti et al., Radiology 1997'
-const BENCARDINO = 'Bencardino et al., AJR 2000'
-const UMANS = 'Umans et al., Skeletal Radiol 2014'
-const SANDERS_RATHUR = 'Sanders and Rathur, Radiol Clin North Am 2008'
-const SOBEL = 'Sobel et al., Foot Ankle Int 1994'
+const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
+const CANALE_DOI = '10.2106/00004623-197860020-00001'
+const SANDERS_DOI = '10.1097/00003086-199305000-00012'
+const MYERSON_DOI = '10.1177/107110078600600504'
+const CASTRO_DOI = '10.2214/AJR.10.4674'
+const RAIKIN_DOI = '10.2106/JBJS.H.01075'
+const NEWMAN_DOI = '10.1148/radiographics.20.2.g00mc03321'
+const MILLER_DOI = '10.1148/radiology.195.3.7754020'
+const ASHMAN_DOI = '10.1148/radiographics.21.6.g01nv071425'
+const ZANETTI_DOI = '10.1148/radiology.203.2.9114115'
+const BENCARDINO_DOI = '10.2214/ajr.175.3.1750649'
+const UMANS_DOI = '10.1007/s00256-014-1920-8'
+const SANDERS_RATHUR_DOI = '10.1016/j.rcl.2008.09.001'
+const SOBEL_DOI = '10.1177/107110079401500306'
+
+const HAWKINS = <Cite doi={HAWKINS_DOI}>Hawkins, J Bone Joint Surg Am 1970</Cite>
+const CANALE = <Cite doi={CANALE_DOI}>Canale and Kelly, J Bone Joint Surg Am 1978</Cite>
+const SANDERS = <Cite doi={SANDERS_DOI}>Sanders et al., Clin Orthop Relat Res 1993</Cite>
+const MYERSON = <Cite doi={MYERSON_DOI}>Myerson et al., Foot Ankle 1986</Cite>
+const CASTRO = <Cite doi={CASTRO_DOI}>Castro et al., AJR 2010</Cite>
+const RAIKIN = <Cite doi={RAIKIN_DOI}>Raikin et al., J Bone Joint Surg Am 2009</Cite>
+const NEWMAN = <Cite doi={NEWMAN_DOI}>Newman and Newberg, Radiographics 2000</Cite>
+const MILLER = <Cite doi={MILLER_DOI}>Miller et al., Radiology 1995</Cite>
+const ASHMAN = <Cite doi={ASHMAN_DOI}>Ashman et al., Radiographics 2001</Cite>
+const ZANETTI = <Cite doi={ZANETTI_DOI}>Zanetti et al., Radiology 1997</Cite>
+const BENCARDINO = <Cite doi={BENCARDINO_DOI}>Bencardino et al., AJR 2000</Cite>
+const UMANS = <Cite doi={UMANS_DOI}>Umans et al., Skeletal Radiol 2014</Cite>
+const SANDERS_RATHUR = <Cite doi={SANDERS_RATHUR_DOI}>Sanders and Rathur, Radiol Clin North Am 2008</Cite>
+const SOBEL = <Cite doi={SOBEL_DOI}>Sobel et al., Foot Ankle Int 1994</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.' },
-  { citation: 'Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156.' },
-  { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.' },
-  { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.' },
-  { citation: 'Castro M, Melão L, Canella C, Weber M, Negrão P, Trudell D, Resnick D. Lisfranc joint ligamentous complex: MRI with anatomic correlation in cadavers. AJR Am J Roentgenol. 2010;195(6):W447-W455.' },
-  { citation: 'Raikin SM, Elias I, Dheer S, Besser MP, Morrison WB, Zoga AC. Prediction of midfoot instability in the subtle Lisfranc injury. Comparison of magnetic resonance imaging with intraoperative findings. J Bone Joint Surg Am. 2009;91(4):892-899.' },
-  { citation: 'Newman JS, Newberg AH. Congenital tarsal coalition: multimodality evaluation with emphasis on CT and MR imaging. Radiographics. 2000;20(2):321-332.' },
-  { citation: 'Miller TT, Staron RB, Feldman F, Parisien M, Glucksman WJ, Gandolfo LH. The symptomatic accessory tarsal navicular bone: assessment with MR imaging. Radiology. 1995;195(3):849-853.' },
-  { citation: 'Ashman CJ, Klecker RJ, Yu JS. Forefoot pain involving the metatarsal region: differential diagnosis with MR imaging. Radiographics. 2001;21(6):1425-1440.' },
-  { citation: 'Zanetti M, Strehle JK, Zollinger H, Hodler J. Morton neuroma and fluid in the intermetatarsal bursae on MR images of 70 asymptomatic volunteers. Radiology. 1997;203(2):516-520.' },
-  { citation: 'Bencardino J, Rosenberg ZS, Beltran J, Liu X, Marty-Delfaut E. Morton\'s neuroma: is it always symptomatic? AJR Am J Roentgenol. 2000;175(3):649-653.' },
-  { citation: 'Umans H, Srinivasan R, Elsinger E, Wilde GE. MRI of lesser metatarsophalangeal joint plantar plate tears and associated adjacent interspace lesions. Skeletal Radiol. 2014;43(10):1361-1368.' },
-  { citation: 'Sanders TG, Rathur SK. Imaging of painful conditions of the hallucal sesamoid complex and plantar capsular structures of the first metatarsophalangeal joint. Radiol Clin North Am. 2008;46(6):1079-1092.' },
-  { citation: 'Sobel M, Pavlov H, Geppert MJ, Thompson FM, DiCarlo EF, Davis WH. Painful os peroneum syndrome: a spectrum of conditions responsible for plantar lateral foot pain. Foot Ankle Int. 1994;15(3):112-124.' },
+  { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.', doi: HAWKINS_DOI },
+  { citation: 'Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156.', doi: CANALE_DOI },
+  { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.', doi: SANDERS_DOI },
+  { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.', doi: MYERSON_DOI },
+  { citation: 'Castro M, Melão L, Canella C, Weber M, Negrão P, Trudell D, Resnick D. Lisfranc joint ligamentous complex: MRI with anatomic correlation in cadavers. AJR Am J Roentgenol. 2010;195(6):W447-W455.', doi: CASTRO_DOI },
+  { citation: 'Raikin SM, Elias I, Dheer S, Besser MP, Morrison WB, Zoga AC. Prediction of midfoot instability in the subtle Lisfranc injury. Comparison of magnetic resonance imaging with intraoperative findings. J Bone Joint Surg Am. 2009;91(4):892-899.', doi: RAIKIN_DOI },
+  { citation: 'Newman JS, Newberg AH. Congenital tarsal coalition: multimodality evaluation with emphasis on CT and MR imaging. Radiographics. 2000;20(2):321-332.', doi: NEWMAN_DOI },
+  { citation: 'Miller TT, Staron RB, Feldman F, Parisien M, Glucksman WJ, Gandolfo LH. The symptomatic accessory tarsal navicular bone: assessment with MR imaging. Radiology. 1995;195(3):849-853.', doi: MILLER_DOI },
+  { citation: 'Ashman CJ, Klecker RJ, Yu JS. Forefoot pain involving the metatarsal region: differential diagnosis with MR imaging. Radiographics. 2001;21(6):1425-1440.', doi: ASHMAN_DOI },
+  { citation: 'Zanetti M, Strehle JK, Zollinger H, Hodler J. Morton neuroma and fluid in the intermetatarsal bursae on MR images of 70 asymptomatic volunteers. Radiology. 1997;203(2):516-520.', doi: ZANETTI_DOI },
+  { citation: 'Bencardino J, Rosenberg ZS, Beltran J, Liu X, Marty-Delfaut E. Morton\'s neuroma: is it always symptomatic? AJR Am J Roentgenol. 2000;175(3):649-653.', doi: BENCARDINO_DOI },
+  { citation: 'Umans H, Srinivasan R, Elsinger E, Wilde GE. MRI of lesser metatarsophalangeal joint plantar plate tears and associated adjacent interspace lesions. Skeletal Radiol. 2014;43(10):1361-1368.', doi: UMANS_DOI },
+  { citation: 'Sanders TG, Rathur SK. Imaging of painful conditions of the hallucal sesamoid complex and plantar capsular structures of the first metatarsophalangeal joint. Radiol Clin North Am. 2008;46(6):1079-1092.', doi: SANDERS_RATHUR_DOI },
+  { citation: 'Sobel M, Pavlov H, Geppert MJ, Thompson FM, DiCarlo EF, Davis WH. Painful os peroneum syndrome: a spectrum of conditions responsible for plantar lateral foot pain. Foot Ankle Int. 1994;15(3):112-124.', doi: SOBEL_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -105,7 +119,7 @@ const learn: LearnSection[] = [
         <h4>Navicular and the other tarsal bones</h4>
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
         <h4>Tarsal coalition</h4>
-        <p>The commonest coalitions are calcaneonavicular and talocalcaneal, at the middle facet. A coalition may be osseous or non-osseous (fibrous or cartilaginous); MRI shows the non-osseous ones, with irregular joint margins and marrow edema on both sides ({NEWMAN}).</p>
+        <p>Calcaneonavicular and talocalcaneal coalitions (the latter at the middle facet) are encountered most frequently. A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
       </>
     ),
   },
@@ -114,8 +128,8 @@ const learn: LearnSection[] = [
     title: 'Step 3. Lisfranc complex and the tarsometatarsal joints',
     body: (
       <>
-        <p>The Lisfranc ligament complex has dorsal, interosseous and plantar ligaments. The interosseous ligament, from the medial cuneiform to the base of the second metatarsal, is the Lisfranc ligament proper and the strongest of the three ({CASTRO}). The plantar ligament runs from the medial cuneiform to the bases of the second and third metatarsals ({CASTRO}). Say which of the three is sprained or torn.</p>
-        <p>In subtle Lisfranc injuries, disruption of the plantar ligament on MRI predicted midfoot instability found at surgery ({RAIKIN}).</p>
+        <p>The Lisfranc ligament complex has dorsal, interosseous and plantar ligaments. The interosseous ligament, from the medial cuneiform to the base of the second metatarsal, is the Lisfranc ligament proper and the strongest of the three ({CASTRO}). The plantar ligament runs between the first cuneiform and the bases of the second and third metatarsals ({RAIKIN}). Say which of the three is sprained or torn.</p>
+        <p>In subtle Lisfranc injuries, disruption of that plantar ligament was the strongest MRI predictor of the instability found at surgery, and a rupture or grade-2 sprain of it is highly suggestive of an unstable midfoot ({RAIKIN}).</p>
         <p>Then check the alignment of each tarsometatarsal joint, and the gap between the medial cuneiform and the base of the second metatarsal.</p>
         <p>Type a fracture-dislocation by Myerson ({MYERSON}); the Myerson calculator on this site applies the same rules.</p>
         {myersonTable}
@@ -160,9 +174,9 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Number the spaces by the metatarsals either side: the first lies between the first and second metatarsals, the third between the third and fourth.</p>
-        <p>A Morton neuroma is commonest in the third space, then the second. It lies plantar to the deep transverse intermetatarsal ligament and has low to intermediate signal on T1- and T2-weighted images ({ASHMAN}). Measure its transverse diameter on short-axis images.</p>
-        <p>Neuroma-like lesions were found in about a third of 70 volunteers without symptoms ({ZANETTI}). Neuromas of 5 mm or more in transverse diameter were the ones that went with symptoms ({BENCARDINO}). So a small neuroma is not by itself the cause of the pain.</p>
-        <p>In the same volunteers, fluid up to 3 mm in transverse diameter was found in the first three intermetatarsal bursae ({ZANETTI}). Treat more than that, or fluid in the fourth space, as a finding.</p>
+        <p>A Morton neuroma is commonest in the third space, then the second. It lies plantar to the deep transverse intermetatarsal ligament ({ASHMAN}), and shows as a low- to intermediate-signal-intensity soft-tissue mass in the intermetatarsal space ({BENCARDINO}). Measure its transverse diameter on short-axis images.</p>
+        <p>Neuroma-like lesions were found in about a third of 70 volunteers without symptoms ({ZANETTI}). The diagnosis of Morton neuroma at MR imaging may be relevant only when the transverse diameter is 5 mm or more and can be correlated to clinical findings ({ZANETTI}). So a small neuroma is not by itself the cause of the pain.</p>
+        <p>In the same volunteers, fluid in the intermetatarsal bursae measured 1 to 4 mm in transverse diameter, and none was found in the fourth space. Fluid collections in the first three bursae with a transverse diameter of 3 mm or less can be considered physiologic ({ZANETTI}). Treat more than that, or fluid in the fourth space, as a finding.</p>
       </>
     ),
   },
@@ -181,7 +195,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Follow the tibialis posterior to its insertion on the navicular, the peroneus longus under the cuboid, the tibialis anterior to the medial cuneiform and first metatarsal, then the long flexors and extensors to the toes.</p>
-        <p>An accessory navicular sits at the tibialis posterior insertion. In patients with pain there, MRI showed marrow edema in the accessory navicular, sometimes across the synchondrosis that joins it to the navicular ({MILLER}).</p>
+        <p>An accessory navicular sits at the tibialis posterior insertion. In patients with focal medial foot pain, MRI showed a bone marrow edema pattern in the accessory navicular, and in some also in the adjacent navicular tuberosity; in a symptomatic accessory navicular it is indicative of chronic stress and/or osteonecrosis ({MILLER}).</p>
         <p>An os peroneum sits in the peroneus longus near the cuboid. Painful os peroneum syndrome is a spectrum: fracture or separation of the os peroneum, fraying or rupture of the peroneus longus beside it, and an enlarged peroneal tubercle ({SOBEL}).</p>
         <p>This site gives the accessory navicular and the os peroneum their own variant line, and a finding line when they are abnormal.</p>
       </>
@@ -227,6 +241,13 @@ function chosen(values: Values, field: { id: string; options: Option[] }): strin
 const ligamentOptions: Option[] = [
   { value: 'intact', label: 'Intact' },
   { value: 'sprain', label: 'Sprain (edema, fibres continuous)' },
+  { value: 'tear', label: 'Torn' },
+]
+/** F3-3: Raikin counts a grade-2 sprain of the plantar ligament with a rupture. */
+const plantarLigamentOptions: Option[] = [
+  { value: 'intact', label: 'Intact' },
+  { value: 'sprain', label: 'Sprain, grade 1' },
+  { value: 'sprain-2', label: 'Sprain, grade 2' },
   { value: 'tear', label: 'Torn' },
 ]
 const normalAbnormal: Option[] = [
@@ -315,7 +336,7 @@ const fields = {
 
   lisfrancDorsal: { id: 'lisfranc-dorsal', kind: 'choice', label: 'Dorsal Lisfranc ligament', required: true, options: ligamentOptions },
   lisfrancInterosseous: { id: 'lisfranc-interosseous', kind: 'choice', label: 'Interosseous Lisfranc ligament', required: true, help: 'Medial cuneiform to the second metatarsal base: the Lisfranc ligament proper.', options: ligamentOptions },
-  lisfrancPlantar: { id: 'lisfranc-plantar', kind: 'choice', label: 'Plantar Lisfranc ligament', required: true, help: 'Medial cuneiform to the second and third metatarsal bases.', options: ligamentOptions },
+  lisfrancPlantar: { id: 'lisfranc-plantar', kind: 'choice', label: 'Plantar Lisfranc ligament', required: true, help: 'First cuneiform to the second and third metatarsal bases.', options: plantarLigamentOptions },
   tmt: { id: 'tmt', kind: 'choice', label: 'Tarsometatarsal alignment', required: true, options: [
     { value: 'aligned', label: 'Aligned' },
     { value: 'widened', label: 'Widened between the medial cuneiform and the second metatarsal base' },
@@ -384,7 +405,7 @@ const fields = {
   accessoryNavicular: { id: 'accessory-navicular', kind: 'choice', label: 'Accessory navicular', options: [
     { value: 'none', label: 'None' },
     { value: 'present', label: 'Present' },
-    { value: 'edema', label: 'Present, with marrow edema in it or across its synchondrosis' },
+    { value: 'edema', label: 'Present, with marrow edema in it (and perhaps the adjacent navicular tuberosity)' },
   ] },
   pl: { id: 'pl', kind: 'choice', label: 'Peroneus longus at the cuboid', required: true, options: tendonOptions },
   osPeroneum: { id: 'os-peroneum', kind: 'choice', label: 'Os peroneum', options: [
@@ -427,10 +448,15 @@ const ordinal: Record<string, string> = { 1: 'first', 2: 'second', 3: 'third', 4
 
 const lisfrancLigaments = [['lisfranc-dorsal', 'dorsal'], ['lisfranc-interosseous', 'interosseous'], ['lisfranc-plantar', 'plantar']] as const
 
-/** F7-3: bursal fluid up to 3 mm in the first three spaces was seen in volunteers without symptoms. */
+/** F7-3: fluid of 3 mm or less in the first three bursae can be considered physiologic. */
 function bursaWithinVolunteerRange(values: Values): boolean {
   const size = num(values, 'bursa-size')
   return str(values, 'bursa') === 'present' && size !== undefined && size <= 3 && ['1', '2', '3'].includes(str(values, 'bursa-space'))
+}
+
+/** F3-3: a rupture or grade-2 sprain of the plantar Lisfranc ligament. */
+function plantarUnstable(values: Values): boolean {
+  return ['tear', 'sprain-2'].includes(str(values, 'lisfranc-plantar'))
 }
 
 function variantSentences(values: Values): string[] {
@@ -460,8 +486,9 @@ function deriveHindfoot(values: Values): Derived[] {
 
 function deriveLisfranc(values: Values): Derived[] {
   const out: Derived[] = []
-  // F3-3: disruption of the plantar ligament predicted midfoot instability at surgery.
-  if (str(values, 'lisfranc-plantar') === 'tear') out.push({ label: 'Plantar ligament', value: 'Torn: predicted midfoot instability at surgery', tone: 'warn' })
+  // F3-3: "Rupture or grade-2 sprain of the plantar ligament ... is highly suggestive of an
+  // unstable midfoot" (Raikin 2009).
+  if (plantarUnstable(values)) out.push({ label: 'Plantar ligament', value: 'Rupture or grade-2 sprain: highly suggestive of an unstable midfoot', tone: 'warn' })
   // F3-4 (MY-): the Myerson type from the shared logic.
   const myerson = myersonType(values)
   if (myerson) out.push({ label: 'Myerson', value: `Type ${myerson} (${myersonGroup(myerson)})`, tone: 'warn' })
@@ -470,20 +497,21 @@ function deriveLisfranc(values: Values): Derived[] {
 
 function deriveInterspaces(values: Values): Derived[] {
   const out: Derived[] = []
-  // F7-2, F7-4: neuromas are found without symptoms; 5 mm or more went with symptoms.
+  // F7-2, F7-4: the diagnosis "may be relevant only when the transverse diameter is 5 mm or
+  // more and can be correlated to clinical findings" (Zanetti 1997).
   const neuroma = num(values, 'neuroma-size')
   if (str(values, 'neuroma') === 'present' && neuroma !== undefined) {
     out.push(neuroma >= 5
-      ? { label: 'Neuroma size', value: '5 mm or more: the size that went with symptoms', tone: 'warn' }
-      : { label: 'Neuroma size', value: 'Under 5 mm: neuromas this size are also found in feet without symptoms' })
+      ? { label: 'Neuroma size', value: '5 mm or more: may be relevant if it can be correlated to clinical findings', tone: 'warn' }
+      : { label: 'Neuroma size', value: 'Under 5 mm: below the size at which the diagnosis may be relevant' })
   }
-  // F7-3: up to 3 mm of bursal fluid in the first three spaces was seen in volunteers.
+  // F7-3: fluid of 3 mm or less in the first three bursae can be considered physiologic.
   const bursa = num(values, 'bursa-size')
   const space = str(values, 'bursa-space')
   if (str(values, 'bursa') === 'present' && bursa !== undefined && space) {
-    if (space === '4') out.push({ label: 'Bursal fluid', value: 'The volunteer range covers the first three spaces only' })
-    else if (bursa <= 3) out.push({ label: 'Bursal fluid', value: 'Up to 3 mm: within what volunteers without symptoms showed', tone: 'good' })
-    else out.push({ label: 'Bursal fluid', value: 'More than 3 mm: beyond what volunteers without symptoms showed', tone: 'warn' })
+    if (space === '4') out.push({ label: 'Bursal fluid', value: 'Fourth space: volunteers without symptoms had none here' })
+    else if (bursa <= 3) out.push({ label: 'Bursal fluid', value: '3 mm or less: can be considered physiologic', tone: 'good' })
+    else out.push({ label: 'Bursal fluid', value: 'More than 3 mm: beyond the size considered physiologic', tone: 'warn' })
   }
   return out
 }
@@ -618,8 +646,10 @@ function findings(values: Values): string[] {
 
   for (const [id, name] of lisfrancLigaments) {
     const status = str(values, id)
+    const unstable = name === 'plantar' ? ', highly suggestive of an unstable midfoot' : ''
     if (status === 'sprain') out.push(`Sprain of the ${name} Lisfranc ligament.`)
-    if (status === 'tear') out.push(`Tear of the ${name} Lisfranc ligament${name === 'plantar' ? ', a finding that predicted midfoot instability at surgery' : ''}.`)
+    if (status === 'sprain-2') out.push(`Grade-2 sprain of the ${name} Lisfranc ligament${unstable}.`)
+    if (status === 'tear') out.push(`Tear of the ${name} Lisfranc ligament${unstable}.`)
   }
   const tmt = str(values, 'tmt')
   if (tmt === 'widened') out.push('Widening between the medial cuneiform and the second metatarsal base.')
@@ -673,8 +703,9 @@ function findings(values: Values): string[] {
     if (status && status !== 'normal') out.push(`${field.label}: ${picked(values, field)}.`)
   }
   if (str(values, 'other-tendons') === 'abnormal') out.push(`Long flexors and extensors: ${str(values, 'other-tendons-text') || 'abnormal'}.`)
-  // F9-2: marrow edema in the accessory navicular in symptomatic patients.
-  if (str(values, 'accessory-navicular') === 'edema') out.push('Marrow edema in the accessory navicular, which suggests it is the source of pain.')
+  // F9-2: "The BMEP in a symptomatic accessory navicular bone is indicative of chronic stress
+  // and/or osteonecrosis" (Miller 1995).
+  if (str(values, 'accessory-navicular') === 'edema') out.push('Marrow edema in the accessory navicular; in a symptomatic accessory navicular this indicates chronic stress or osteonecrosis.')
   // F9-1: the painful os peroneum syndrome spectrum.
   if (str(values, 'os-peroneum') === 'abnormal') out.push('Os peroneum fractured, separated or edematous, in the spectrum of painful os peroneum syndrome.')
   return out.filter((sentence): sentence is string => Boolean(sentence))
@@ -721,7 +752,7 @@ function warnings(values: Values): string[] {
     str(values, 'sesamoids') === 'fracture' && 'sesamoid fracture',
   ].filter((item): item is string => Boolean(item))
   const lisfranc = [
-    ...lisfrancLigaments.filter(([id]) => ['sprain', 'tear'].includes(str(values, id))).map(([id, name]) => `${name} Lisfranc ligament ${str(values, id)}`),
+    ...lisfrancLigaments.filter(([id]) => ['sprain', 'sprain-2', 'tear'].includes(str(values, id))).map(([id, name]) => `${name} Lisfranc ligament ${str(values, id) === 'sprain-2' ? 'grade-2 sprain' : str(values, id)}`),
     str(values, 'tmt') === 'widened' && 'medial cuneiform to second metatarsal widening',
     str(values, 'tmt') === 'dislocated' && 'tarsometatarsal fracture-dislocation',
   ].filter((item): item is string => Boolean(item))
@@ -797,7 +828,7 @@ const steps: ReportStep[] = [
     learn: 'lisfranc',
     teach: (
       <>
-        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). Plantar ligament disruption predicted instability at surgery ({RAIKIN}). Myerson types ({MYERSON}):</p>
+        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}):</p>
         {myersonTable}
       </>
     ),
@@ -829,7 +860,7 @@ const steps: ReportStep[] = [
     id: 'interspaces',
     title: 'Step 7. Intermetatarsal spaces',
     learn: 'interspaces',
-    teach: <p>Morton neuroma: third space, then second, plantar to the intermetatarsal ligament ({ASHMAN}). Found in a third of volunteers without symptoms, as was bursal fluid up to 3 mm in the first three spaces ({ZANETTI}); 5 mm or more went with symptoms ({BENCARDINO}).</p>,
+    teach: <p>Morton neuroma: third space, then second, plantar to the intermetatarsal ligament ({ASHMAN}). Found in a third of volunteers without symptoms; the diagnosis may be relevant only at 5 mm or more, with clinical correlation, and bursal fluid of 3 mm or less in the first three spaces can be considered physiologic ({ZANETTI}).</p>,
     fields: [fields.neuroma, fields.neuromaSpace, fields.neuromaSize, fields.bursa, fields.bursaSpace, fields.bursaSize],
     derive: deriveInterspaces,
   },
@@ -844,7 +875,7 @@ const steps: ReportStep[] = [
     id: 'tendons',
     title: 'Step 9. Tendons and their ossicles',
     learn: 'tendons',
-    teach: <p>Marrow edema in an accessory navicular in patients with pain ({MILLER}); the painful os peroneum spectrum ({SOBEL}).</p>,
+    teach: <p>Marrow edema in a symptomatic accessory navicular indicates chronic stress or osteonecrosis ({MILLER}); the painful os peroneum spectrum ({SOBEL}).</p>,
     fields: [fields.tp, fields.accessoryNavicular, fields.pl, fields.osPeroneum, fields.ta, fields.otherTendons, fields.otherTendonsText],
   },
   {
@@ -867,7 +898,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them Hawkins type IV and the Hawkins sign, the Sanders lines and subtypes, the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -912,10 +943,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'lisfranc-plantar',
-      question: 'In a subtle Lisfranc injury, which MRI finding predicted midfoot instability at surgery?',
+      question: 'In a subtle Lisfranc injury, which MRI finding was the strongest predictor of midfoot instability at surgery?',
       options: ['Dorsal ligament sprain', 'Disruption of the plantar ligament', 'Marrow edema in the cuboid', 'Fluid in the first intermetatarsal bursa'],
       answer: 1,
-      explanation: <p>Disruption of the plantar Lisfranc ligament on MRI predicted the instability found at surgery ({RAIKIN}).</p>,
+      explanation: <p>Disruption of the plantar ligament between the first cuneiform and the second and third metatarsal bases was the strongest predictor; a rupture or grade-2 sprain of it is highly suggestive of an unstable midfoot ({RAIKIN}).</p>,
     },
     {
       id: 'myerson-c',
@@ -934,9 +965,9 @@ const study: StudyDefinition = {
     {
       id: 'morton-size',
       question: 'A 3 mm neuroma-like lesion is seen in the third space. What does the lesson caution?',
-      options: ['It always explains the pain', 'Lesions like this are found in about a third of feet without symptoms; those of 5 mm or more went with symptoms', 'It must be excised', 'It is an artefact'],
+      options: ['It always explains the pain', 'Lesions like this are found in about a third of feet without symptoms; the diagnosis may be relevant only at 5 mm or more, with clinical correlation', 'It must be excised', 'It is an artefact'],
       answer: 1,
-      explanation: <p>Neuroma-like lesions were found in about a third of volunteers without symptoms ({ZANETTI}), and those of 5 mm or more were the ones that went with symptoms ({BENCARDINO}).</p>,
+      explanation: <p>Neuroma-like lesions were found in about a third of volunteers without symptoms, and the diagnosis may be relevant only when the transverse diameter is 5 mm or more and can be correlated to clinical findings ({ZANETTI}).</p>,
     },
     {
       id: 'plate-mimic',

@@ -5,8 +5,9 @@ import { sanders, sandersDescription, sandersGroup, sandersSentence, sandersType
 
 /*
  * The three foot classifications. Each case quotes its claim from
- * docs/superpowers/research/2026-10-23-foot-calculators-sources.md by ID. None has been
- * checked against its paper yet (PubMed was unreachable): the wording is from memory.
+ * docs/superpowers/research/2026-10-23-foot-calculators-sources.md by ID. The papers are
+ * matched on PubMed, but only the claims marked verified there were read in an abstract; the
+ * rest of the wording is still from memory.
  */
 
 describe('Hawkins (unchecked)', () => {
@@ -60,8 +61,9 @@ describe('Sanders (unchecked)', () => {
     expect(sanders({ displaced: true, lines: [] })).toBeUndefined()
   })
 
-  // SA-4: "Type II two-part, type III three-part with a central depressed fragment, type IV
-  // four-part or more." SA-5: the subtype letters name the lines.
+  // SA-4: "Type II were two-part or split fractures; Type III were three-part or split
+  // depression fractures; and Type IV were four-part or highly comminuted articular fractures"
+  // (Sanders 1993, abstract). SA-5: the subtype letters name the lines.
   test('displaced: the type from the number of lines, the subtype from which', () => {
     expect(sanders({ displaced: true, lines: ['A'] })).toBe('IIA')
     expect(sanders({ displaced: true, lines: ['B'] })).toBe('IIB')
@@ -75,8 +77,11 @@ describe('Sanders (unchecked)', () => {
 
   test('groups, descriptions and sentence', () => {
     expect(sandersTypes.map(sandersGroup)).toEqual(['I', 'II', 'II', 'II', 'III', 'III', 'III', 'IV'])
-    expect(sandersDescription('IIIAC')).toBe('three-part fracture of the posterior facet, with a centrally depressed fragment (lines A and C)')
-    expect(sandersSentence('IIB')).toBe('Intra-articular calcaneal fracture, Sanders type IIB: two-part fracture of the posterior facet (line B).')
+    // The wording is the abstract's (SA-4). Was "with a centrally depressed fragment" and "four-part
+    // or more comminuted", from memory; the paper names type III "split depression".
+    expect(sandersDescription('IIIAC')).toBe('three-part or split depression fracture of the posterior facet (lines A and C)')
+    expect(sandersDescription('IV')).toBe('four-part or highly comminuted fracture of the posterior facet')
+    expect(sandersSentence('IIB')).toBe('Intra-articular calcaneal fracture, Sanders type IIB: two-part or split fracture of the posterior facet (line B).')
   })
 })
 

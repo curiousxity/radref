@@ -2,8 +2,9 @@
  * Myerson classification of tarsometatarsal (Lisfranc) fracture-dislocations (Myerson et al.,
  * Foot Ankle 1986). Shared by the Myerson calculator and the foot MRI study.
  *
- * Unchecked draft: the type wording has not yet been checked against the paper (claims MY-1
- * to MY-6 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * Unchecked draft: the paper is matched on PubMed (PMID 3710321) but paywalled, and its abstract
+ * does not give the types, so the type wording is still unchecked (claims MY-1 to MY-6 in
+ * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 
 /** How the first metatarsal is displaced at its tarsometatarsal joint. */

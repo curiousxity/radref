@@ -3,8 +3,11 @@
  * type IV added by Canale and Kelly (J Bone Joint Surg Am 1978). Shared by the Hawkins
  * calculator and the foot MRI study.
  *
- * Unchecked draft: the type wording has not yet been checked against the papers (claims HK-1
- * to HK-7 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * Unchecked draft: both papers are matched on PubMed (PMIDs 5479485, 417084) but paywalled,
+ * and Hawkins' has no abstract. Canale and Kelly's abstract names the first three groups
+ * (non-displaced; subtalar subluxation or dislocation; complete dislocation of the body) and
+ * the rising rate of osteonecrosis; type IV, the joint wording and the Hawkins sign are still
+ * unchecked (claims HK-1 to HK-8 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 
 /** Whether the fracture is displaced, and which joints around the talus are subluxed or dislocated. */

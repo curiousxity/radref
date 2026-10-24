@@ -3,8 +3,10 @@
  * Relat Res 1993), read on the coronal CT image where the posterior facet is widest. Shared
  * by the Sanders calculator and the foot MRI study.
  *
- * Unchecked draft: the type wording has not yet been checked against the paper (claims SA-1
- * to SA-6 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * Unchecked draft: the paper is matched on PubMed (PMID 8472475) but paywalled. Its abstract
+ * states the four types (SA-4, worded as there) and that type I is nondisplaced (SA-3); the
+ * widest-facet image, the A-B-C lines, the subtype letters and the 2 mm are still unchecked
+ * (claims SA-1 to SA-6 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 
 /** Fracture lines through the posterior facet, lateral (A) to medial (C). */
@@ -32,9 +34,12 @@ export const sandersTypes: SandersType[] = ['I', 'IIA', 'IIB', 'IIC', 'IIIAB', '
 
 const groupDescriptions: Record<'I' | 'II' | 'III' | 'IV', string> = {
   I: 'undisplaced articular fracture, whatever the number of fracture lines', // SA-3
-  II: 'two-part fracture of the posterior facet', // SA-4
-  III: 'three-part fracture of the posterior facet, with a centrally depressed fragment', // SA-4
-  IV: 'four-part or more comminuted fracture of the posterior facet', // SA-4
+  // SA-4, the abstract's wording: "Type II were two-part or split fractures; Type III were
+  // three-part or split depression fractures; and Type IV were four-part or highly comminuted
+  // articular fractures."
+  II: 'two-part or split fracture of the posterior facet',
+  III: 'three-part or split depression fracture of the posterior facet',
+  IV: 'four-part or highly comminuted fracture of the posterior facet',
 }
 
 export function sandersGroup(type: SandersType): 'I' | 'II' | 'III' | 'IV' {

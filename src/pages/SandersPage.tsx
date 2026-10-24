@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { sanders, sandersDescription, sandersLineDescriptions, sandersLines, sandersSentence } from '../logic/sanders'
 import type { SandersInput, SandersLine } from '../logic/sanders'
@@ -20,13 +20,15 @@ const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 
 const tableRows: [string, string][] = [
   ['I', 'Undisplaced articular fracture (under 2 mm), whatever the number of fracture lines'],
-  ['II (IIA, IIB, IIC)', 'Two-part fracture of the posterior facet; the letter names the line'],
-  ['III (IIIAB, IIIAC, IIIBC)', 'Three-part fracture with a centrally depressed fragment; the letters name the two lines'],
-  ['IV', 'Four-part or more, highly comminuted'],
+  // SA-4, the abstract's wording: "two-part or split", "three-part or split depression",
+  // "four-part or highly comminuted articular fractures".
+  ['II (IIA, IIB, IIC)', 'Two-part or split fracture of the posterior facet; the letter names the line'],
+  ['III (IIIAB, IIIAC, IIIBC)', 'Three-part or split depression fracture; the letters name the two lines'],
+  ['IV', 'Four-part or highly comminuted articular fracture'],
 ]
 
 const references: LessonReference[] = [
-  { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.' },
+  { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.', doi: '10.1097/00003086-199305000-00012' },
 ]
 
 export function SandersPage() {
@@ -47,7 +49,7 @@ export function SandersPage() {
           <span className="calc-tag">Calcaneus</span>
         </div>
         <p>Type an intra-articular calcaneal fracture from the fracture lines through the posterior facet on coronal CT, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Sanders' paper. Not yet reviewed by the site author. Source: Sanders et al., Clin Orthop Relat Res 1993.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, and the four types are worded as in its abstract, but the paper is paywalled, so the widest-facet image, the A, B and C lines, the subtype letters and the 2 mm have not yet been checked against it. Not yet reviewed by the site author. Source: <Cite doi="10.1097/00003086-199305000-00012">Sanders et al., Clin Orthop Relat Res 1993</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -90,10 +92,10 @@ export function SandersPage() {
           </table>
         </div>
         <p>Sanders read the coronal CT image where the undersurface of the posterior facet is widest. Three lines, A, B and C from lateral to medial, split the facet into lateral, central and medial columns, with the sustentaculum medial to line C. The type counts the parts; the letters say where the lines run.</p>
-        <p>Sanders found that the outcome after surgery worsened as the type rose.</p>
+        <p>Sanders found that the outcome after surgery worsened as the type rose: excellent or good results in 73% of type II, 70% of type III and 9% of type IV fractures.</p>
       </section>
 
-      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the type wording has been checked only where its abstract states it." />
     </div>
   )
 }

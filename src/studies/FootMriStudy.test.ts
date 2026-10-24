@@ -11,9 +11,10 @@ const study = studyOf(FootMriStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims) or, for the three
- * shared classifications, 2026-10-23-foot-calculators-sources.md (HK, SA, MY claims). None
- * has been checked against its paper yet (PubMed was unreachable), so when the check is done
- * a case may have to change; say in that commit why the old expectation was wrong.
+ * shared classifications, 2026-10-23-foot-calculators-sources.md (HK, SA, MY claims). The
+ * references are matched, but only the claims marked verified there were read in their papers;
+ * when the rest are checked a case may have to change; say in that commit why the old
+ * expectation was wrong.
  */
 
 describe('foot MRI lesson', () => {
@@ -24,11 +25,12 @@ describe('foot MRI lesson', () => {
     ])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(14)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
 
@@ -173,11 +175,13 @@ describe('foot MRI report: variants get their own impression line', () => {
     expect(impressionOf({ ...normal, 'accessory-navicular': 'none', 'os-peroneum': 'none' })).toBe(NORMAL_IMPRESSION)
   })
 
-  // F9-2: marrow edema in the accessory navicular in symptomatic patients.
+  // F9-2: "The BMEP in a symptomatic accessory navicular bone is indicative of chronic stress
+  // and/or osteonecrosis" (Miller 1995, abstract). Was "suggests it is the source of pain",
+  // which the paper does not say.
   // F9-1: the painful os peroneum syndrome spectrum.
   test('an abnormal accessory navicular or os peroneum also gets a finding line', () => {
     expect(impressionOf({ ...normal, 'accessory-navicular': 'edema' }))
-      .toBe('Marrow edema in the accessory navicular, which suggests it is the source of pain.\nAccessory navicular (anatomical variant).')
+      .toBe('Marrow edema in the accessory navicular; in a symptomatic accessory navicular this indicates chronic stress or osteonecrosis.\nAccessory navicular (anatomical variant).')
     expect(impressionOf({ ...normal, 'os-peroneum': 'abnormal' }))
       .toBe('Os peroneum fractured, separated or edematous, in the spectrum of painful os peroneum syndrome.\nOs peroneum (anatomical variant).')
   })
@@ -224,11 +228,19 @@ describe('foot MRI rules (unchecked)', () => {
     expect(impressionOf({ ...normal, calcaneus: 'intra' })).toBe('Intra-articular calcaneal fracture.')
   })
 
-  // F3-3: "Disruption of the plantar ligament on MRI predicted midfoot instability at surgery."
-  test('a torn plantar Lisfranc ligament is flagged; a sprain is not', () => {
-    expect(chips(study, 'lisfranc', { 'lisfranc-plantar': 'tear' })['Plantar ligament']).toBe('Torn: predicted midfoot instability at surgery')
+  // F3-3: "Rupture or grade-2 sprain of the plantar ligament between the first cuneiform and the
+  // bases of the second and third metatarsals is highly suggestive of an unstable midfoot"
+  // (Raikin 2009, abstract). The old case flagged a tear only; the paper counts a grade-2 sprain
+  // too, so a grade-2 sprain now fires the chip. A grade-1 sprain still does not.
+  test('a torn or grade-2 sprained plantar Lisfranc ligament is flagged; a grade-1 sprain is not', () => {
+    const chip = 'Rupture or grade-2 sprain: highly suggestive of an unstable midfoot'
+    expect(chips(study, 'lisfranc', { 'lisfranc-plantar': 'tear' })['Plantar ligament']).toBe(chip)
+    expect(chips(study, 'lisfranc', { 'lisfranc-plantar': 'sprain-2' })['Plantar ligament']).toBe(chip)
     expect(chips(study, 'lisfranc', { 'lisfranc-plantar': 'sprain' })['Plantar ligament']).toBeUndefined()
-    expect(impressionOf({ ...normal, 'lisfranc-plantar': 'tear' })).toBe('Tear of the plantar Lisfranc ligament, a finding that predicted midfoot instability at surgery.')
+    expect(impressionOf({ ...normal, 'lisfranc-plantar': 'tear' })).toBe('Tear of the plantar Lisfranc ligament, highly suggestive of an unstable midfoot.')
+    expect(impressionOf({ ...normal, 'lisfranc-plantar': 'sprain-2' })).toBe('Grade-2 sprain of the plantar Lisfranc ligament, highly suggestive of an unstable midfoot.')
+    expect(report(study, { ...normal, 'lisfranc-plantar': 'sprain-2', 'impression-negatives': ['no-lisfranc'] }).warnings)
+      .toContain('Impression says no Lisfranc injury, but these are entered: plantar Lisfranc ligament grade-2 sprain.')
     expect(impressionOf({ ...normal, 'lisfranc-dorsal': 'tear' })).toBe('Tear of the dorsal Lisfranc ligament.')
   })
 
@@ -240,24 +252,29 @@ describe('foot MRI rules (unchecked)', () => {
     expect(impressionOf({ ...normal, tmt: 'widened' })).toBe('Widening between the medial cuneiform and the second metatarsal base.')
   })
 
-  // F7-2, F7-4: "Neuromas of 5 mm or more in transverse diameter were the ones that went with symptoms."
+  // F7-4: "The diagnosis of Morton neuroma at MR imaging may be relevant only when the transverse
+  // diameter is 5 mm or more and can be correlated to clinical findings" (Zanetti 1997, abstract).
+  // The old chip said 5 mm or more "went with symptoms" and cited Bencardino 2000, whose abstract
+  // sets no cut-off and reports "significant overlap" between the groups. The 5 mm boundary stays.
   test('neuroma size at 5 mm', () => {
     const size = (mm: string) => chips(study, 'interspaces', { neuroma: 'present', 'neuroma-size': mm })['Neuroma size']
-    expect(size('5')).toBe('5 mm or more: the size that went with symptoms')
-    expect(size('4.5')).toBe('Under 5 mm: neuromas this size are also found in feet without symptoms')
+    expect(size('5')).toBe('5 mm or more: may be relevant if it can be correlated to clinical findings')
+    expect(size('4.5')).toBe('Under 5 mm: below the size at which the diagnosis may be relevant')
     expect(size('')).toBeUndefined()
     expect(impressionOf({ ...normal, neuroma: 'present', 'neuroma-space': '3', 'neuroma-size': '6' })).toBe('Morton neuroma in the third intermetatarsal space, 6 mm.')
   })
 
-  // F7-3: "Fluid up to 3 mm in transverse diameter was found in the first three intermetatarsal
-  // bursae of volunteers without symptoms."
+  // F7-3: "Fluid collections in the first three intermetatarsal bursae with a transverse diameter
+  // of 3 mm or less can be considered physiologic"; prevalence "0% for the ... fourth" space
+  // (Zanetti 1997, abstract). The old wording said volunteers had fluid "up to 3 mm"; they had
+  // 1-4 mm, and 3 mm is the paper's physiologic cut-off. The rule and its boundary are unchanged.
   test('bursal fluid at 3 mm, and the fourth space', () => {
     const bursa = (space: string, mm: string) => chips(study, 'interspaces', { bursa: 'present', 'bursa-space': space, 'bursa-size': mm })['Bursal fluid']
-    expect(bursa('2', '3')).toBe('Up to 3 mm: within what volunteers without symptoms showed')
-    expect(bursa('2', '3.5')).toBe('More than 3 mm: beyond what volunteers without symptoms showed')
-    expect(bursa('4', '2')).toBe('The volunteer range covers the first three spaces only')
+    expect(bursa('2', '3')).toBe('3 mm or less: can be considered physiologic')
+    expect(bursa('2', '3.5')).toBe('More than 3 mm: beyond the size considered physiologic')
+    expect(bursa('4', '2')).toBe('Fourth space: volunteers without symptoms had none here')
     expect(bursa('', '2')).toBeUndefined()
-    // Within the volunteer range: a findings line, but no impression line.
+    // Physiologic: a findings line, but no impression line.
     const within = { ...normal, bursa: 'present', 'bursa-space': '2', 'bursa-size': '3' }
     expect(report(study, within).text).toContain('Intermetatarsal bursal fluid: present, second intermetatarsal space, 3 mm')
     expect(impressionOf(within)).toBe(NORMAL_IMPRESSION)

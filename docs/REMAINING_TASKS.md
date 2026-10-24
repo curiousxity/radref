@@ -182,26 +182,19 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculat
 
 ### Foot MRI study
 
-Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and claim is in
-`docs/superpowers/research/2026-10-23-foot-mri-sources.md`, marked "to check"; the
-classification wording is under the calculators below.
+Every paper and claim is in `docs/superpowers/research/2026-10-23-foot-mri-sources.md`.
 
-- [ ] Match references R1–R14 on PubMed and Crossref; fix citation text. Castro 2010, Umans
-  2014 and Sanders and Rathur 2008 are the least certain.
-- [ ] Lisfranc ligament parts, interosseous the strongest (F3-1, F3-2, Castro 2010).
-- [ ] Plantar Lisfranc ligament disruption predicts instability (F3-3, Raikin 2009): did it
-  count sprains too?
-- [ ] Coalitions (F2-3, Newman 2000); accessory navicular edema (F9-2, Miller 1995); painful
-  os peroneum syndrome (F9-1, Sobel 1994).
-- [ ] Stress injury and Freiberg (F4-1, F4-2), Morton neuroma site and signal (F7-1), all
-  Ashman 2001.
-- [ ] Neuromas and bursal fluid up to 3 mm in volunteers without symptoms (F7-2, F7-3, Zanetti
-  1997); the 5 mm neuroma size (F7-4): Bencardino 2000, or another paper?
-- [ ] Plantar plate tears at the second MTP joint and the neuroma-like fibrosis beside them
-  (F6-1, F6-2, Umans 2014).
-- [ ] Turf toe and the sesamoids (F5-1 to F5-3, Sanders and Rathur 2008).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references R1–R14 on PubMed and Crossref (2026-10-23). All found as written;
+  DOIs and `<Cite>` links added.
+- [x] Verified from abstracts: F3-3, F6-1, F7-2, F7-3, F9-1; others in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): Morton's neuroma 5 mm is
+  Zanetti's "may be relevant only when … 5 mm or more and can be correlated to clinical
+  findings" (Bencardino found size overlapped and "does not imply symptomatology"); the
+  plantar Lisfranc ligament is cited to Raikin, and a grade-2 sprain counts with a rupture;
+  intermetatarsal bursa fluid of 3 mm or less "can be considered physiologic"; tarsal
+  coalition and accessory navicular wording follow Newman and Miller.
+- [ ] Still unchecked, because the papers are paywalled: F3-1, F3-4, F4-1, F4-2, F5-1 to
+  F5-3, and the unread parts of the partly verified rows (including the F6-2 warning).
 
 ### Diabetic foot MRI study
 
@@ -277,18 +270,15 @@ is in `docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md`.
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
 Drafted 2026-10-23 as an unchecked draft (`/hawkins`, `/sanders`, `/myerson`). Every paper and
-claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`, marked "to
-check".
+claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`.
 
-- [ ] Match references C1–C4 on PubMed and Crossref.
-- [ ] Hawkins types I–III (HK-1 to HK-3) against Hawkins 1970, type IV (HK-4) against Canale
-  and Kelly 1978; osteonecrosis risk by type (HK-7) and the Hawkins sign at 6–8 weeks (HK-8).
-- [ ] Hawkins named no type for a displaced fracture with every joint in place (HK-6).
-- [ ] Sanders: the coronal image and lines A–C (SA-1, SA-2); is "undisplaced" defined as under
-  2 mm in the paper (SA-3)? Types II–IV and the subtype letters (SA-4, SA-5); prognosis (SA-6).
-- [ ] Myerson types A, B1, B2, C1, C2 (MY-1 to MY-4); check that the paper names no type for the
-  first metatarsal displaced laterally with only some lesser ones (MY-6).
-- [ ] Then: add DOIs and reword the source notes.
+- [x] Match references C1–C4 on PubMed and Crossref (2026-10-23). All found; DOIs added.
+- [x] HK-7 (types I–III, from Canale and Kelly) and SA-6 verified; HK-1 to HK-3, SA-1, SA-3
+  and SA-4 in part. Sanders types now use the abstract's names ("split depression" for type
+  III) and the page gives its outcome figures by type, by the author's choice to match the
+  papers (2026-10-23).
+- [ ] Still unchecked: HK-4, HK-5, HK-6 and HK-8 (Hawkins 1970 has no abstract), SA-2, SA-5,
+  the 2 mm in SA-3, and Myerson MY-1 to MY-6 (the abstract gives no types).
 
 ### Pediatric elbow radiographs
 
