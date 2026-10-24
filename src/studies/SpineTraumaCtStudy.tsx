@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { aoBodies, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoSentence, aoTypes } from '../logic/aospine'
 import type { AoBody, AoFacet, AoRegion, AoType } from '../logic/aospine'
@@ -6,36 +7,47 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md
- * (T claims); the AO Spine wording is claimed in 2026-10-23-spine-calculators-sources.md
- * (AO claims). Rule chips and warnings carry their claim IDs. Until the check, citations are
- * plain text rather than <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * most of the papers are paywalled, so only claims whose wording is in an abstract or in open
+ * full text are verified. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims); the AO Spine
+ * wording is in 2026-10-23-spine-calculators-sources.md (AO claims). Rule chips and warnings
+ * carry their claim IDs.
  */
 
-const VACCARO_TL = 'Vaccaro et al., Spine 2013'
-const VACCARO_CX = 'Vaccaro et al., Eur Spine J 2016'
-const ROJAS = 'Rojas et al., AJNR 2007'
-const SPENCE = 'Spence et al., J Bone Joint Surg Am 1970'
-const DICKMAN = 'Dickman et al., Neurosurgery 1996'
-const ANDERSON = "Anderson and D'Alonzo, J Bone Joint Surg Am 1974"
-const BURLEW = 'Burlew et al., J Trauma Acute Care Surg 2012'
-const LAREDO = 'Laredo et al., Radiology 1995'
-const GENANT = 'Genant et al., J Bone Miner Res 1993'
-const WESTERVELD = 'Westerveld et al., Eur Spine J 2009'
+const VACCARO_TL_DOI = '10.1097/BRS.0b013e3182a8a381'
+const VACCARO_CX_DOI = '10.1007/s00586-015-3831-3'
+const ROJAS_DOI = '10.3174/ajnr.A0660'
+const SPENCE_DOI = '10.2106/00004623-197052030-00013'
+const DICKMAN_DOI = '10.1097/00006123-199601000-00012'
+const ANDERSON_DOI = '10.2106/00004623-197456080-00017'
+const BURLEW_DOI = '10.1097/TA.0b013e31823de8a0'
+const LAREDO_DOI = '10.1148/radiology.194.1.7997579'
+const GENANT_DOI = '10.1002/jbmr.5650080915'
+const WESTERVELD_DOI = '10.1007/s00586-008-0764-0'
+
+const VACCARO_TL = <Cite doi={VACCARO_TL_DOI}>Vaccaro et al., Spine 2013</Cite>
+const VACCARO_CX = <Cite doi={VACCARO_CX_DOI}>Vaccaro et al., Eur Spine J 2016</Cite>
+const ROJAS = <Cite doi={ROJAS_DOI}>Rojas et al., AJNR 2007</Cite>
+const SPENCE = <Cite doi={SPENCE_DOI}>Spence et al., J Bone Joint Surg Am 1970</Cite>
+const DICKMAN = <Cite doi={DICKMAN_DOI}>Dickman et al., Neurosurgery 1996</Cite>
+const ANDERSON = <Cite doi={ANDERSON_DOI}>Anderson and D'Alonzo, J Bone Joint Surg Am 1974</Cite>
+const BURLEW = <Cite doi={BURLEW_DOI}>Burlew et al., J Trauma Acute Care Surg 2012</Cite>
+const LAREDO = <Cite doi={LAREDO_DOI}>Laredo et al., Radiology 1995</Cite>
+const GENANT = <Cite doi={GENANT_DOI}>Genant et al., J Bone Miner Res 1993</Cite>
+const WESTERVELD = <Cite doi={WESTERVELD_DOI}>Westerveld et al., Eur Spine J 2009</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.' },
-  { citation: 'Vaccaro AR, Koerner JD, Radcliff KE, Oner FC, Reinhold M, Schnake KJ, Kandziora F, Fehlings MG, Dvorak MF, Aarabi B, Rajasekaran S, Schroeder GD, Kepler CK, Vialle LR. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184.' },
-  { citation: 'Rojas CA, Bertozzi JC, Martinez CR, Whitlow J. Reassessment of the craniocervical junction: normal values on CT. AJNR Am J Neuroradiol. 2007;28(9):1819-1823.' },
-  { citation: 'Spence KF Jr, Decker S, Sell KW. Bursting atlantal fracture associated with rupture of the transverse ligament. J Bone Joint Surg Am. 1970;52(3):543-549.' },
-  { citation: 'Dickman CA, Greene KA, Sonntag VK. Injuries involving the transverse atlantal ligament: classification and treatment guidelines based upon experience with 39 injuries. Neurosurgery. 1996;38(1):44-50.' },
-  { citation: 'Anderson LD, D\'Alonzo RT. Fractures of the odontoid process of the axis. J Bone Joint Surg Am. 1974;56(8):1663-1674.' },
-  { citation: 'Burlew CC, Biffl WL, Moore EE, Barnett CC, Johnson JL, Bensard DD. Blunt cerebrovascular injuries: redefining screening criteria in the era of noninvasive diagnosis. J Trauma Acute Care Surg. 2012;72(2):330-335.' },
-  { citation: 'Laredo JD, Lakhdar F, Bellaïche L, Hamze B, Champsaur P, Morvan G. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.' },
-  { citation: 'Genant HK, Wu CY, van Kuijk C, Nevitt MC. Vertebral fracture assessment using a semiquantitative technique. J Bone Miner Res. 1993;8(9):1137-1148.' },
-  { citation: 'Westerveld LA, Verlaan JJ, Oner FC. Spinal fractures in patients with ankylosing spinal disorders: a systematic review of the literature on treatment, neurological status and complications. Eur Spine J. 2009;18(2):145-156.' },
+  { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: VACCARO_TL_DOI },
+  { citation: 'Vaccaro AR, Koerner JD, Radcliff KE, Oner FC, Reinhold M, Schnake KJ, Kandziora F, Fehlings MG, Dvorak MF, Aarabi B, Rajasekaran S, Schroeder GD, Kepler CK, Vialle LR. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184.', doi: VACCARO_CX_DOI },
+  { citation: 'Rojas CA, Bertozzi JC, Martinez CR, Whitlow J. Reassessment of the craniocervical junction: normal values on CT. AJNR Am J Neuroradiol. 2007;28(9):1819-1823.', doi: ROJAS_DOI },
+  { citation: 'Spence KF Jr, Decker S, Sell KW. Bursting atlantal fracture associated with rupture of the transverse ligament. J Bone Joint Surg Am. 1970;52(3):543-549.', doi: SPENCE_DOI },
+  { citation: 'Dickman CA, Greene KA, Sonntag VK. Injuries involving the transverse atlantal ligament: classification and treatment guidelines based upon experience with 39 injuries. Neurosurgery. 1996;38(1):44-50.', doi: DICKMAN_DOI },
+  { citation: 'Anderson LD, D\'Alonzo RT. Fractures of the odontoid process of the axis. J Bone Joint Surg Am. 1974;56(8):1663-1674.', doi: ANDERSON_DOI },
+  { citation: 'Burlew CC, Biffl WL, Moore EE, Barnett CC, Johnson JL, Bensard DD. Blunt cerebrovascular injuries: redefining screening criteria in the era of noninvasive diagnosis. J Trauma Acute Care Surg. 2012;72(2):330-335.', doi: BURLEW_DOI },
+  { citation: 'Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.', doi: LAREDO_DOI },
+  { citation: 'Genant HK, Wu CY, van Kuijk C, Nevitt MC. Vertebral fracture assessment using a semiquantitative technique. J Bone Miner Res. 1993;8(9):1137-1148.', doi: GENANT_DOI },
+  { citation: 'Westerveld LA, Verlaan JJ, Oner FC. Spinal fractures in patients with ankylosing spinal disorders: a systematic review of the literature on treatment, neurological status and complications. Eur Spine J. 2009;18(2):145-156.', doi: WESTERVELD_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -89,7 +101,7 @@ const learn: LearnSection[] = [
     title: 'Step 2. Craniocervical junction and C1–C2',
     body: (
       <>
-        <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults the basion–dens interval was at most 8.5 mm and the atlantodental interval at most 2 mm ({ROJAS}). Larger values raise the question of craniocervical or atlantoaxial injury.</p>
+        <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm, which the authors propose as normal values ({ROJAS}). Values of 8.5 mm and 2 mm or more raise the question of craniocervical or atlantoaxial injury.</p>
         <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). That figure comes from open-mouth radiographs, and the rule can miss ligament injuries that MRI shows directly ({DICKMAN}).</p>
         <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I through the tip, type II through the base of the dens, type III extending into the body of C2. Then look at the rest of C2, including the pars interarticularis.</p>
       </>
@@ -132,7 +144,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Grade the height loss of a collapsed vertebra by Genant: grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}).</p>
-        <p>Then decide whether the collapse looks osteoporotic or malignant. Features of benign collapse on CT include fracture lines in cancellous bone without destruction and a retropulsed fragment of the posterior wall. Features of malignant collapse include destruction of the anterolateral or posterior cortex, destruction of cancellous bone, destruction of a pedicle, and an epidural or focal paraspinal mass ({LAREDO}).</p>
+        <p>Then decide whether the collapse looks osteoporotic or malignant. CT findings significantly more frequent in benign collapse include fracture lines within the cancellous bone and retropulsion of a fragment of the posterior cortex into the canal. Findings significantly more frequent in malignant collapse include destruction of the anterolateral or posterior cortex, destruction of cancellous bone, destruction of a pedicle, a focal paraspinal soft-tissue mass and an epidural mass ({LAREDO}). These are differences in frequency, not proof either way.</p>
       </>
     ),
   },
@@ -325,9 +337,10 @@ function denverReasons(values: Values): string[] {
   ].filter((reason): reason is string => Boolean(reason))
 }
 
-const over = (values: Values, id: string, limit: number) => {
+/** T2-1: the CT normal is less than the limit, so a value at the limit is outside it. */
+const atOrOver = (values: Values, id: string, limit: number) => {
   const value = num(values, id)
-  return cervicalCovered(values) && value !== undefined && value > limit ? value : undefined
+  return cervicalCovered(values) && value !== undefined && value >= limit ? value : undefined
 }
 
 /* Rule chips. */
@@ -335,11 +348,11 @@ const over = (values: Values, id: string, limit: number) => {
 function deriveCcj(values: Values): Derived[] {
   if (!cervicalCovered(values)) return []
   const out: Derived[] = []
-  // T2-1: on CT in adults, BDI at most 8.5 mm and ADI at most 2 mm.
+  // T2-1: on CT in adults, 95% had a BDI less than 8.5 mm and an ADI less than 2 mm.
   const bdi = num(values, 'bdi')
-  if (bdi !== undefined) out.push(bdi > 8.5 ? { label: 'Basion–dens', value: 'Above 8.5 mm', tone: 'warn' } : { label: 'Basion–dens', value: 'Within 8.5 mm', tone: 'good' })
+  if (bdi !== undefined) out.push(bdi >= 8.5 ? { label: 'Basion–dens', value: '8.5 mm or more', tone: 'warn' } : { label: 'Basion–dens', value: 'Under 8.5 mm', tone: 'good' })
   const adi = num(values, 'adi')
-  if (adi !== undefined) out.push(adi > 2 ? { label: 'Atlantodental', value: 'Above 2 mm', tone: 'warn' } : { label: 'Atlantodental', value: 'Within 2 mm', tone: 'good' })
+  if (adi !== undefined) out.push(adi >= 2 ? { label: 'Atlantodental', value: '2 mm or more', tone: 'warn' } : { label: 'Atlantodental', value: 'Under 2 mm', tone: 'good' })
   // T2-2, T2-3: combined overhang over 6.9 mm suggests transverse ligament rupture.
   const overhang = num(values, 'c1-overhang')
   if (str(values, 'c1') === 'present' && overhang !== undefined) {
@@ -375,10 +388,10 @@ function deriveCollapse(values: Values): Derived[] {
     const grade = genantGrade(loss)
     out.push(grade === 0 ? { label: 'Genant', value: 'Under 20%: below grade 1' } : { label: 'Genant', value: `Grade ${grade}`, tone: 'warn' })
   }
-  // T6-2: features of malignant and benign collapse.
+  // T6-2: findings significantly more frequent in malignant or in benign collapse.
   const features = list(values, 'collapse-features')
-  if (features.some((f) => MALIGNANT.includes(f))) out.push({ label: 'Collapse', value: 'Features of malignant collapse', tone: 'warn' })
-  else if (features.some((f) => BENIGN.includes(f))) out.push({ label: 'Collapse', value: 'Features of benign (osteoporotic) collapse', tone: 'good' })
+  if (features.some((f) => MALIGNANT.includes(f))) out.push({ label: 'Collapse', value: 'Findings more frequent in malignant collapse', tone: 'warn' })
+  else if (features.some((f) => BENIGN.includes(f))) out.push({ label: 'Collapse', value: 'Findings more frequent in benign (osteoporotic) collapse', tone: 'good' })
   return out
 }
 
@@ -445,10 +458,10 @@ function collapseLines(values: Values): (string | false)[] {
 
 function findings(values: Values): string[] {
   const out: (string | false)[] = []
-  const bdi = over(values, 'bdi', 8.5)
-  if (bdi !== undefined) out.push(`Basion–dens interval ${bdi} mm, above the 8.5 mm upper limit on CT.`)
-  const adi = over(values, 'adi', 2)
-  if (adi !== undefined) out.push(`Atlantodental interval ${adi} mm, above the 2 mm upper limit in adults on CT.`)
+  const bdi = atOrOver(values, 'bdi', 8.5)
+  if (bdi !== undefined) out.push(`Basion–dens interval ${bdi} mm; on CT, normal is less than 8.5 mm.`)
+  const adi = atOrOver(values, 'adi', 2)
+  if (adi !== undefined) out.push(`Atlantodental interval ${adi} mm; in adults on CT, normal is less than 2 mm.`)
   if (cervicalCovered(values)) {
     if (str(values, 'condyle') === 'present') out.push('Occipital condyle fracture.')
     if (str(values, 'c1') === 'present') {
@@ -471,7 +484,7 @@ function findings(values: Values): string[] {
     const loss = num(values, 'height-loss')
     const grade = loss !== undefined ? genantGrade(loss) : 0
     const features = list(values, 'collapse-features')
-    const kind = features.some((f) => MALIGNANT.includes(f)) ? ', with features of malignant collapse' : features.some((f) => BENIGN.includes(f)) ? ', with features of benign (osteoporotic) collapse' : ''
+    const kind = features.some((f) => MALIGNANT.includes(f)) ? ', with findings more frequent in malignant collapse' : features.some((f) => BENIGN.includes(f)) ? ', with findings more frequent in benign (osteoporotic) collapse' : ''
     out.push(`Vertebral collapse${level ? ` of ${level}` : ''}${grade > 0 ? `, Genant grade ${grade} (${loss}% height loss)` : ''}${kind}.`)
   }
   if (str(values, 'canal') === 'narrowed') out.push(`Spinal canal narrowed${str(values, 'canal-text') ? `: ${str(values, 'canal-text')}` : ''}.`)
@@ -522,8 +535,8 @@ function warnings(values: Values): string[] {
   const cx = injury(values, 'subaxial')
   const tl = injury(values, 'thoracolumbar')
   const malalignment = [
-    over(values, 'bdi', 8.5) !== undefined && 'basion–dens interval above 8.5 mm',
-    over(values, 'adi', 2) !== undefined && 'atlantodental interval above 2 mm',
+    atOrOver(values, 'bdi', 8.5) !== undefined && 'basion–dens interval 8.5 mm or more',
+    atOrOver(values, 'adi', 2) !== undefined && 'atlantodental interval 2 mm or more',
     cx?.type === 'C' && 'subaxial type C',
     cx && [facetValue(values, 'cx-facet-right'), facetValue(values, 'cx-facet-left')].includes('F4') && 'F4 facet',
     tl?.type === 'C' && 'thoracolumbar type C',
@@ -557,7 +570,7 @@ const steps: ReportStep[] = [
     id: 'ccj',
     title: 'Step 2. Craniocervical junction and C1–C2',
     learn: 'ccj',
-    teach: <p>On adult CT, basion–dens at most 8.5 mm and atlantodental at most 2 mm ({ROJAS}). C1 lateral mass overhang over 6.9 mm in total suggests transverse ligament rupture ({SPENCE}), though MRI shows ruptures the rule misses ({DICKMAN}). Odontoid types I–III ({ANDERSON}).</p>,
+    teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). C1 lateral mass overhang over 6.9 mm in total suggests transverse ligament rupture ({SPENCE}), though MRI shows ruptures the rule misses ({DICKMAN}). Odontoid types I–III ({ANDERSON}).</p>,
     fields: [fields.bdi, fields.adi, fields.condyle, fields.c1, fields.c1Overhang, fields.dens, fields.c2, fields.c2Text],
     derive: deriveCcj,
   },
@@ -594,7 +607,7 @@ const steps: ReportStep[] = [
     id: 'collapse',
     title: 'Step 6. Vertebral collapse without major trauma',
     learn: 'collapse',
-    teach: <p>Genant grades: about 20–25%, 25–40%, over 40% ({GENANT}). Cortical, cancellous or pedicle destruction and an epidural or paraspinal mass suggest malignant collapse ({LAREDO}).</p>,
+    teach: <p>Genant grades: about 20–25%, 25–40%, over 40% ({GENANT}). Cortical, cancellous or pedicle destruction, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse ({LAREDO}).</p>,
     fields: [fields.collapse, fields.collapseLevel, fields.heightLoss, fields.collapseFeatures],
     derive: deriveCollapse,
   },
@@ -618,7 +631,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the AO Spine subtypes, facet grades and modifiers, the 6.9 mm rule of Spence, the odontoid types, the Denver criteria and the Genant grades) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -628,10 +641,10 @@ const study: StudyDefinition = {
   quiz: [
     {
       id: 'bdi',
-      question: 'On adult CT, what is the upper limit of the basion–dens interval in this lesson?',
+      question: 'On adult CT, below what basion–dens interval did 95% of the population fall?',
       options: ['2 mm', '5 mm', '8.5 mm', '12 mm'],
       answer: 2,
-      explanation: <p>On CT in adults the basion–dens interval was at most 8.5 mm, and the atlantodental interval at most 2 mm ({ROJAS}).</p>,
+      explanation: <p>On CT in adults, 95% had a basion–dens interval less than 8.5 mm (against 12 mm on radiographs) and an atlantodental interval less than 2 mm ({ROJAS}).</p>,
     },
     {
       id: 'spence',
@@ -694,7 +707,7 @@ const study: StudyDefinition = {
       question: 'Which CT feature suggests that a vertebral collapse is malignant rather than osteoporotic?',
       options: ['A retropulsed fragment of the posterior wall', 'Fracture lines in cancellous bone without destruction', 'Destruction of a pedicle', 'Loss of height under 20%'],
       answer: 2,
-      explanation: <p>Destruction of the cortex, cancellous bone or a pedicle, and an epidural or focal paraspinal mass, suggest malignant collapse; a retropulsed posterior wall fragment suggests benign collapse ({LAREDO}).</p>,
+      explanation: <p>Destruction of the cortex, cancellous bone or a pedicle, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse; retropulsion of a posterior cortex fragment and fracture lines in cancellous bone were more frequent in benign collapse ({LAREDO}).</p>,
     },
   ],
 }

@@ -3,8 +3,9 @@ import { aoBody, aoCode, aoFacetCode, aoFacetFracture, aoNeuroDescription, aoSen
 
 /*
  * AO Spine subaxial cervical and thoracolumbar classification. Each case quotes its claim from
- * docs/superpowers/research/2026-10-23-spine-calculators-sources.md by ID. None has been
- * checked against its paper yet (PubMed was unreachable): the wording is from memory.
+ * docs/superpowers/research/2026-10-23-spine-calculators-sources.md by ID. The papers are
+ * matched on PubMed, but only the claims marked verified there were read in an abstract; the
+ * rest of the wording is still from memory.
  */
 
 describe('AO Spine morphology (unchecked)', () => {

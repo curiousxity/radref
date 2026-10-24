@@ -4,8 +4,9 @@
  * morphology; the subaxial system adds facet injuries. Shared by the AO Spine calculator and
  * the spine trauma CT study.
  *
- * Unchecked draft: the wording has not yet been checked against the papers (claims AO-1 to
- * AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * Unchecked draft: both papers are matched on PubMed, but their abstracts give only the A, B
+ * and C types, so the rest of the wording has not yet been checked against them (claims AO-1
+ * to AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
  */
 
 export type AoRegion = 'subaxial' | 'thoracolumbar'

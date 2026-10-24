@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { aoCode, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoGroup, aoModifiers, aoNeuroDescription, aoNeuros, aoSentence, aoSpine, aoTypes } from '../logic/aospine'
 import type { AoFacet, AoNeuro, AoRegion, PosteriorTensionBand } from '../logic/aospine'
@@ -68,8 +68,8 @@ const facetOptions: { value: FacetChoice; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.' },
-  { citation: 'Vaccaro AR, Koerner JD, Radcliff KE, Oner FC, Reinhold M, Schnake KJ, Kandziora F, Fehlings MG, Dvorak MF, Aarabi B, Rajasekaran S, Schroeder GD, Kepler CK, Vialle LR. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184.' },
+  { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: '10.1097/BRS.0b013e3182a8a381' },
+  { citation: 'Vaccaro AR, Koerner JD, Radcliff KE, Oner FC, Reinhold M, Schnake KJ, Kandziora F, Fehlings MG, Dvorak MF, Aarabi B, Rajasekaran S, Schroeder GD, Kepler CK, Vialle LR. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184.', doi: '10.1007/s00586-015-3831-3' },
 ]
 
 export function AoSpinePage() {
@@ -112,7 +112,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the wording has not yet been checked against the AO Spine papers. Not yet reviewed by the site author. Source: Vaccaro et al., Spine 2013 (thoracolumbar) and Eur Spine J 2016 (subaxial cervical).</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, but the papers are paywalled and their abstracts name only the A, B and C types and say that facet, neurology and modifier grades exist, so the subtypes, facet grades, neurology grades and modifiers have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">
@@ -167,7 +167,7 @@ export function AoSpinePage() {
         <p>The most severe injury names the type: C over B over A. A B or C injury also carries the type of its vertebral body fracture; this page writes it in brackets, as in B2 (A3). Neurology comes from the examination, not the images.</p>
       </section>
 
-      <LessonReferences references={references} note="These citations are from memory and have not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled, so the wording has been checked only where an abstract states it." />
     </div>
   )
 }

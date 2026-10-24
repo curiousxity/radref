@@ -9,9 +9,9 @@ const study = studyOf(SpineTraumaCtStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims) or, for AO
- * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). None has been checked against
- * its paper yet (PubMed was unreachable), so when the check is done a case may have to
- * change; say in that commit why the old expectation was wrong.
+ * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). The references are matched,
+ * but only the claims marked verified there were read in their papers; when the rest are
+ * checked a case may have to change; say in that commit why the old expectation was wrong.
  */
 
 describe('spine trauma CT lesson', () => {
@@ -19,11 +19,14 @@ describe('spine trauma CT lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'ccj', 'subaxial', 'thoracolumbar', 'vessels', 'collapse', 'canal', 'impression'])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(10)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
+    // T-R8: the author list was wrong after Laredo (it read Lakhdar F ... Champsaur P, Morvan G).
+    expect(study.references.map((ref) => ref.citation)).toContain('Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.')
   })
 })
 
@@ -123,14 +126,18 @@ describe('spine trauma CT report: whole cases', () => {
 })
 
 describe('spine trauma CT rules (unchecked)', () => {
-  // T2-1: "On CT in adults the basion–dens interval was at most 8.5 mm and the atlantodental
-  // interval at most 2 mm."
-  test('basion–dens at 8.5 mm and atlantodental at 2 mm', () => {
-    expect(chips(study, 'ccj', { coverage: 'cervical', bdi: '8.5' })['Basion–dens']).toBe('Within 8.5 mm')
-    expect(chips(study, 'ccj', { coverage: 'cervical', bdi: '8.6' })['Basion–dens']).toBe('Above 8.5 mm')
-    expect(chips(study, 'ccj', { coverage: 'cervical', adi: '2' }).Atlantodental).toBe('Within 2 mm')
-    expect(chips(study, 'ccj', { coverage: 'cervical', adi: '2.1' }).Atlantodental).toBe('Above 2 mm')
-    expect(impressionOf({ ...normal, bdi: '10', adi: '3' })).toBe('Basion–dens interval 10 mm, above the 8.5 mm upper limit on CT.\nAtlantodental interval 3 mm, above the 2 mm upper limit in adults on CT.')
+  // T2-1: "Ninety-five percent of the population was found to have a BDI less than 8.5 mm" and
+  // "an ADI less than 2 mm" (Rojas 2007, abstract); Table 1 gives the normal values as "<8.5"
+  // and "<2.0", against measured ranges of 1.4-9.1 and 0.5-2.4 mm. The old cases read them as
+  // maxima ("at most"), so a value of exactly 8.5 or 2 mm was within; the paper's normal is
+  // strictly less, so it is now outside.
+  test('basion–dens under 8.5 mm and atlantodental under 2 mm', () => {
+    expect(chips(study, 'ccj', { coverage: 'cervical', bdi: '8.4' })['Basion–dens']).toBe('Under 8.5 mm')
+    expect(chips(study, 'ccj', { coverage: 'cervical', bdi: '8.5' })['Basion–dens']).toBe('8.5 mm or more')
+    expect(chips(study, 'ccj', { coverage: 'cervical', adi: '1.9' }).Atlantodental).toBe('Under 2 mm')
+    expect(chips(study, 'ccj', { coverage: 'cervical', adi: '2' }).Atlantodental).toBe('2 mm or more')
+    expect(impressionOf({ ...normal, bdi: '10', adi: '3' })).toBe('Basion–dens interval 10 mm; on CT, normal is less than 8.5 mm.\nAtlantodental interval 3 mm; in adults on CT, normal is less than 2 mm.')
+    expect(impressionOf({ ...normal, bdi: '8.5' })).toBe('Basion–dens interval 8.5 mm; on CT, normal is less than 8.5 mm.')
     expect(impressionOf({ ...normal, bdi: '8', adi: '1' })).toBe('No acute fracture or malalignment of the spine.')
   })
 
@@ -173,12 +180,15 @@ describe('spine trauma CT rules (unchecked)', () => {
     expect(genant('41')).toBe('Grade 3')
   })
 
-  // T6-2: features of benign and malignant collapse.
+  // T6-2: "The following CT findings were significantly more frequent in benign AVCs" and "...
+  // significantly more frequent in malignant AVCs" (Laredo 1995, abstract). The old chips called
+  // them "features of" benign or malignant collapse, as if each settled it; the paper reports
+  // differences in frequency, so the wording now says so. The rule itself is unchanged.
   test('benign against malignant collapse', () => {
     const collapse = { ...normal, history: 'pain', collapse: 'present', 'collapse-level': 'T12', 'height-loss': '30' }
-    expect(chips(study, 'collapse', { ...collapse, 'collapse-features': ['retropulsion'] }).Collapse).toBe('Features of benign (osteoporotic) collapse')
-    expect(chips(study, 'collapse', { ...collapse, 'collapse-features': ['retropulsion', 'pedicle'] }).Collapse).toBe('Features of malignant collapse')
-    expect(impressionOf({ ...collapse, 'collapse-features': ['epidural'] })).toBe('Vertebral collapse of T12, Genant grade 2 (30% height loss), with features of malignant collapse.')
+    expect(chips(study, 'collapse', { ...collapse, 'collapse-features': ['retropulsion'] }).Collapse).toBe('Findings more frequent in benign (osteoporotic) collapse')
+    expect(chips(study, 'collapse', { ...collapse, 'collapse-features': ['retropulsion', 'pedicle'] }).Collapse).toBe('Findings more frequent in malignant collapse')
+    expect(impressionOf({ ...collapse, 'collapse-features': ['epidural'] })).toBe('Vertebral collapse of T12, Genant grade 2 (30% height loss), with findings more frequent in malignant collapse.')
     expect(impressionOf({ ...collapse, 'height-loss': '15' })).toBe('Vertebral collapse of T12.')
   })
 })
@@ -190,7 +200,7 @@ describe('spine trauma CT report: contradictions', () => {
     expect(report(study, { ...normal, cx: 'present', 'cx-facet-right': 'F4', 'impression-negatives': ['no-malalignment'] }).warnings)
       .toContain('Impression says no malalignment, but these are entered: F4 facet.')
     expect(report(study, { ...normal, adi: '4', 'impression-negatives': ['no-malalignment'] }).warnings)
-      .toContain('Impression says no malalignment, but these are entered: atlantodental interval above 2 mm.')
+      .toContain('Impression says no malalignment, but these are entered: atlantodental interval 2 mm or more.')
   })
 
   test('negatives that match the findings raise nothing', () => {

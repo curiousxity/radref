@@ -214,30 +214,28 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-
 ### Spine CT for pain or injury
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/spine-trauma-ct`). Every paper and claim
-is in `docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md`, marked "to check";
-the AO Spine wording is under the calculator below.
+is in `docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md`; the AO Spine wording
+is under the calculator below.
 
-- [ ] Match references T-R1 to T-R10 on PubMed and Crossref.
-- [ ] Basion–dens 8.5 mm and atlantodental 2 mm on adult CT (T2-1, Rojas 2007).
-- [ ] Spence 6.9 mm and that MRI shows what the rule misses (T2-2, T2-3); odontoid types (T2-4).
-- [ ] Expanded Denver criteria (T5-1, Burlew 2012); a C3 injury entered as a subaxial level does
-  not trigger the chip.
-- [ ] Genant grades and their boundaries (T6-1); benign and malignant collapse (T6-2, Laredo
-  1995); ankylosed spine (T1-1, Westerveld 2009).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references T-R1 to T-R10 on PubMed and Crossref (2026-10-23). All found; Laredo
+  1995's author list corrected; DOIs and `<Cite>` links added.
+- [x] Verified: T1-1 (Westerveld, open full text) and T6-2 (Laredo).
+- [x] Matched to the papers by the author's choice (2026-10-23): Rojas gives 8.5 mm (BDI) and
+  2 mm (ADI) as 95% limits ("less than"), so those values are now outside normal; Laredo's
+  features are "significantly more frequent" in benign or malignant collapse, not proof.
+- [ ] Still unchecked: Spence 6.9 mm and odontoid types (T2-2, T2-4, no abstracts), MRI for
+  what the rule misses (T2-3), the expanded Denver criteria and the C3 question (T5-1), the
+  Genant grades (T6-1).
 
 ### AO Spine calculator
 
 Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
-`docs/superpowers/research/2026-10-23-spine-calculators-sources.md`, marked "to check".
+`docs/superpowers/research/2026-10-23-spine-calculators-sources.md`.
 
-- [ ] Match references S1 and S2 on PubMed and Crossref.
-- [ ] Types A0–A4, B1–B3, C (AO-1 to AO-3); the B3 > B2 > B1 order (AO-4) and how a B or C
-  injury writes its body type (AO-5).
-- [ ] Facets F1–F4 and the 1 cm / 40% boundary (AO-6, AO-7); neurology, "+" and the
-  modifiers (AO-8 to AO-10).
-- [ ] Then: add DOIs and reword the source note.
+- [x] Match references S1 and S2 on PubMed and Crossref (2026-10-23). Both found; DOIs added.
+- [x] AO-3 verified; AO-1, AO-2, AO-6, AO-8 and AO-10 in part (the abstracts give the type
+  names and say facet, neurology and modifier grades exist).
+- [ ] Still unchecked: AO-4, AO-5, AO-7 (the 1 cm / 40% boundary), AO-9, AO-11, AO-12.
 
 ### Pelvis CT for pain or injury
 
