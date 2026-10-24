@@ -115,7 +115,7 @@ const learn: LearnSection[] = [
         {ybTable}
         <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}).</p>
         <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse. A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}).</p>
-        <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: AP compression injuries needed the most fluid ({DALAL}).</p>
+        <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: needs rose with the grade of AP compression, and APC III needed the most fluid in the first 24 hours ({DALAL}).</p>
       </>
     ),
   },
@@ -126,7 +126,7 @@ const learn: LearnSection[] = [
       <>
         <p>Give a sacral fracture its Denis zone ({DENIS}): zone 1 lateral to the sacral foramina, zone 2 through the foramina, zone 3 medial to them, into the central canal. Neurological deficit rose with the zone, from about 6% in zone 1 to about 28% in zone 2 and about 57% in zone 3.</p>
         <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}).</p>
-        <p>Insufficiency fractures of the sacrum run vertically through the sacral ala, parallel to the sacroiliac joints and often on both sides, sometimes joined by a horizontal limb into an H. On CT they show as sclerotic bands or fracture lines, and they often come with fractures of the pubic bones ({LYDERS}).</p>
+        <p>Insufficiency fractures of the sacrum run vertically through the sacral ala, parallel to the sacroiliac joints, on one side or both about equally often, sometimes with a horizontal component through the sacral bodies. On CT they show as sclerosis or fracture lines, and they often come with insufficiency fractures of the pubic rami ({LYDERS}).</p>
       </>
     ),
   },
@@ -335,7 +335,7 @@ function deriveSacrum(values: Values): Derived[] {
   // P3-2, P3-3: the H or U shape.
   if (str(values, 'sacrum-transverse') === 'yes') {
     out.push(str(values, 'sacrum') === 'insufficiency'
-      ? { label: 'Pattern', value: 'H-shaped insufficiency fracture', tone: 'warn' }
+      ? { label: 'Pattern', value: 'Insufficiency fracture with a horizontal component through the sacral bodies', tone: 'warn' }
       : { label: 'Pattern', value: 'U- or H-shaped: the spine is separated from the pelvis', tone: 'warn' })
   }
   return out
@@ -453,7 +453,7 @@ function findings(values: Values): string[] {
     const insufficiency = str(values, 'sacrum') === 'insufficiency'
     const zone = str(values, 'sacrum-zone')
     const side = sideWord(values, 'sacrum-side')
-    const shape = str(values, 'sacrum-transverse') === 'yes' && (insufficiency ? 'H-shaped' : 'U- or H-shaped, separating the spine from the pelvis')
+    const shape = str(values, 'sacrum-transverse') === 'yes' && (insufficiency ? 'with a horizontal component through the sacral bodies' : 'U- or H-shaped, separating the spine from the pelvis')
     const head = `${side ? `${side} sacral` : 'Sacral'} ${insufficiency ? 'insufficiency fracture' : 'fracture'}`
     out.push(`${head}${zone ? `, Denis zone ${zone}` : ''}${shape ? `, ${shape}` : ''}.`)
   }
@@ -562,7 +562,7 @@ const steps: ReportStep[] = [
     id: 'sacrum',
     title: 'Step 3. Sacrum and insufficiency fractures',
     learn: 'sacrum',
-    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}). A U- or H-shaped fracture separates the spine from the pelvis ({ROY_CAMILLE}). Insufficiency fractures run vertically through the ala, often on both sides ({LYDERS}).</p>,
+    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}). A U- or H-shaped fracture separates the spine from the pelvis ({ROY_CAMILLE}). Insufficiency fractures run vertically through the ala, on one side or both ({LYDERS}).</p>,
     fields: [fields.sacrum, fields.sacrumSide, fields.sacrumZone, fields.sacrumTransverse],
     derive: deriveSacrum,
   },
@@ -658,7 +658,7 @@ const study: StudyDefinition = {
       question: 'An older woman has buttock pain and no injury. Where do sacral insufficiency fractures usually run?',
       options: ['Horizontally through S4', 'Vertically through the sacral ala, parallel to the sacroiliac joints', 'Through the coccyx', 'Through the S1 body only'],
       answer: 1,
-      explanation: <p>They run vertically through the sacral ala, parallel to the sacroiliac joints and often on both sides, sometimes joined into an H ({LYDERS}).</p>,
+      explanation: <p>They run vertically through the sacral ala, parallel to the sacroiliac joints, on one side or both, sometimes with a horizontal component through the sacral bodies ({LYDERS}).</p>,
     },
     {
       id: 'transverse',

@@ -100,7 +100,7 @@ describe('pelvis CT report: whole cases', () => {
 
   test('a low-energy fall: hip fracture and an insufficiency fracture', () => {
     const values = { ...normal, history: 'low', hip: 'neck', 'hip-side': 'Left', 'hip-text': 'displaced', sacrum: 'insufficiency', 'sacrum-side': 'Both', 'sacrum-zone': '1', 'sacrum-transverse': 'yes', extravasation: 'unenhanced' }
-    expect(impressionOf(values)).toBe('Bilateral sacral insufficiency fracture, Denis zone 1, H-shaped.\nLeft femoral neck fracture, displaced.')
+    expect(impressionOf(values)).toBe('Bilateral sacral insufficiency fracture, Denis zone 1, with a horizontal component through the sacral bodies.\nLeft femoral neck fracture, displaced.')
   })
 
   test('an injury with no type yet still gets a line', () => {
@@ -152,10 +152,12 @@ describe('pelvis CT rules (unchecked)', () => {
     expect(zone('3')).toBe("Zone 3: neurological deficit in about 57% in Denis's series")
   })
 
-  // P3-2, P3-3: the U or H shape, traumatic or insufficiency.
+  // P3-2: the U or H shape after injury. P3-3: "There may also be a horizontal component to the
+  // fracture through the sacral bodies" (Lyders). The insufficiency chip said "H-shaped", but in
+  // Lyders the H is the bone-scan Honda sign, not a CT shape.
   test('H or U shape', () => {
     expect(chips(study, 'sacrum', { sacrum: 'traumatic', 'sacrum-transverse': 'yes' }).Pattern).toBe('U- or H-shaped: the spine is separated from the pelvis')
-    expect(chips(study, 'sacrum', { sacrum: 'insufficiency', 'sacrum-transverse': 'yes' }).Pattern).toBe('H-shaped insufficiency fracture')
+    expect(chips(study, 'sacrum', { sacrum: 'insufficiency', 'sacrum-transverse': 'yes' }).Pattern).toBe('Insufficiency fracture with a horizontal component through the sacral bodies')
   })
 
   // LT-1 to LT-3 via the shared logic.
