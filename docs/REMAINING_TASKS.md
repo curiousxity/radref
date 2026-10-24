@@ -1,8 +1,8 @@
 # Remaining tasks
 
-Last updated 2026-10-23, when the knee, shoulder, elbow, pediatric elbow and wrist drafts, and
-later the foot, diabetic foot and spine drafts, were merged to `main` and deployed, before
-their sources check, by the author's choice.
+Last updated 2026-10-24, after the sources check of every October draft: references matched
+and DOIs added, claims that differed matched to their papers, and claims that only the
+paywalled full text could confirm kept as unchecked, all by the author's choice.
 
 ## Fix soon
 
@@ -143,7 +143,7 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`.
 
 ### Wrist MRI study
 
-Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`.
+Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`.
 
 - [x] Match references R1–R18 on PubMed and Crossref (2026-10-23). All found as written;
   DOIs and `<Cite>` links added.
@@ -171,7 +171,7 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculat
 
 ### Foot MRI study
 
-Every paper and claim is in `docs/superpowers/research/2026-10-23-foot-mri-sources.md`.
+Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and claim is in `docs/superpowers/research/2026-10-23-foot-mri-sources.md`.
 
 - [x] Match references R1–R14 on PubMed and Crossref (2026-10-23). All found as written;
   DOIs and `<Cite>` links added.
@@ -187,6 +187,7 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-foot-mri-sourc
 
 ### Diabetic foot MRI study
 
+Drafted 2026-10-23 as an unchecked draft (`/studies/diabetic-foot-mri`).
 Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`.
 
 - [x] Match references D1–D7 on PubMed and Crossref (2026-10-23). All found; DOIs and

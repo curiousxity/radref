@@ -376,9 +376,7 @@ screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ank
 Unchecked drafts: knee MRI, shoulder MRI, elbow MRI, wrist MRI, foot MRI, diabetic foot MRI,
 spine CT for pain or injury, pelvis CT for pain or injury and pediatric elbow radiographs (and the Schatzker, Neer, Mason, Mayfield, Herbert, Palmer, Lichtman, Hawkins,
 Sanders, Myerson, AO Spine, Young-Burgess and Letournel calculators) were written in October 2026 in a cloud session that could not reach PubMed or Crossref, so their
-citations are from memory and no claim has been checked. Their source note starts
-"Unchecked draft", their references have no DOI, and their citations are plain text rather
-than `<Cite>` links; tests pin all three. The claims to check are in
+citations were from memory. The claims are listed in
 `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
 `2026-10-23-shoulder-mri-sources.md`, `2026-10-23-elbow-mri-sources.md`,
 `2026-10-23-wrist-mri-sources.md`, `2026-10-23-wrist-calculators-sources.md`,
@@ -386,17 +384,20 @@ than `<Cite>` links; tests pin all three. The claims to check are in
 `2026-10-23-diabetic-foot-mri-sources.md`, `2026-10-23-spine-calculators-sources.md`,
 `2026-10-23-spine-trauma-ct-sources.md`, `2026-10-23-pelvis-calculators-sources.md`,
 `2026-10-23-pelvis-ct-sources.md` and
-`2026-10-23-pediatric-elbow-sources.md`, with the method at the top of each. The author chose
+`2026-10-23-pediatric-elbow-sources.md`, with each claim's verdict and quoted evidence. The author chose
 to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
-note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot, diabetic
+note. The foot, diabetic
 foot and spine drafts followed later the same day and were deployed the same way. The pelvis
 drafts followed after that and are on the branch only until the author says to merge them.
 
-The check started on 2026-10-23 on a computer. For a draft whose papers are paywalled, the
-author chose to add the DOIs and `<Cite>` links once every reference is matched, but to keep
-the claims that no abstract or open full text states, with the "Unchecked draft" note, until
-they are checked; the tests then pin a DOI on every reference and the note's first words. The
-pelvis drafts (study, Young-Burgess, Letournel) are in that state.
+The check was done on 2026-10-23 on a computer, for all of these drafts. Every reference was
+matched on PubMed and Crossref, citation errors were fixed, and the DOIs and `<Cite>` links
+were added (a few pre-1980 papers have no DOI; their study tests exempt them by name). Where
+a claim differed from its paper, the author chose to match the paper's wording and rule.
+Most papers are paywalled, so claims that no abstract or open full text states are kept,
+by the author's choice, with a source note that still starts "Unchecked draft" and names
+them; the tests pin a DOI on every reference and the note's first words. What is still
+unchecked is tracked in `docs/REMAINING_TASKS.md`; it needs the full text.
 
 How it is built:
 
