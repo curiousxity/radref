@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { letournel, ltAssociated, ltDescriptions, ltElementary, ltExtraWall, ltIsAssociated, ltNames, ltSentence } from '../logic/letournel'
 import type { LtLines, LtType } from '../logic/letournel'
@@ -59,10 +59,10 @@ const patternOptions: { value: 'stem' | 'hemitransverse'; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.' },
-  { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.' },
-  { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.' },
-  { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.' },
+  { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: '10.2106/00004623-196446080-00001' },
+  { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.', doi: '10.1097/00003086-198009000-00012' },
+  { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.', doi: '10.2214/AJR.05.1269' },
+  { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.', doi: '10.1148/rg.352140098' },
 ]
 
 function TypeTable({ types }: { types: LtType[] }) {
@@ -110,7 +110,7 @@ export function LetournelPage() {
           <span className="calc-tag">Acetabulum</span>
         </div>
         <p>Name an acetabular fracture from a few questions about the column lines, the posterior wall, the obturator ring and the ilium, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Judet and Letournel's papers or the radiology reviews. Not yet reviewed by the site author. Sources: Judet et al., J Bone Joint Surg Am 1964; Letournel, Clin Orthop Relat Res 1980.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, and the ten type names are checked against Scheinfeld 2015, but the papers are paywalled, so the wording of each type, the column lines and the CT questions have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -152,7 +152,7 @@ export function LetournelPage() {
         <p>The iliopectineal line belongs to the anterior column and the ilioischial line to the posterior column. With both lines broken, an intact obturator ring means a transverse fracture. A both-column fracture leaves no joint surface on the intact ilium, and the spike of ilium left behind is the spur sign on the obturator oblique view.</p>
       </section>
 
-      <LessonReferences references={references} note="These citations are from memory and have not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Most of these papers are paywalled, so the type wording has been checked only where an abstract states it." />
     </div>
   )
 }

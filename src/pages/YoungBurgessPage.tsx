@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { diastasisOver, ybDescriptions, ybGroup, ybSentence, ybStability, ybTypes, youngBurgess } from '../logic/youngburgess'
 import type { YbLateral, YbSacroiliac } from '../logic/youngburgess'
@@ -51,9 +51,9 @@ const sacroiliacOptions: { value: YbSacroiliac; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.' },
-  { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.' },
-  { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.' },
+  { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: '10.1148/radiology.160.2.3726125' },
+  { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: '10.1097/00005373-199007000-00015' },
+  { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: '10.1148/rg.345135113' },
 ]
 
 export function YoungBurgessPage() {
@@ -79,7 +79,7 @@ export function YoungBurgessPage() {
           <span className="calc-tag">Pelvic ring</span>
         </div>
         <p>Type a pelvic ring injury by the force that caused it, from what CT shows at the sacrum, the sacroiliac joints and the symphysis, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Young's and Burgess's papers. Not yet reviewed by the site author. Sources: Young et al., Radiology 1986; Burgess et al., J Trauma 1990.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, but the papers are paywalled and their abstracts name only the four force patterns and the three grades, so the wording of each type, the 2.5 cm diastasis and the stability column have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -135,7 +135,7 @@ export function YoungBurgessPage() {
         <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. A symphyseal diastasis over 2.5 cm usually goes with torn pelvic floor ligaments, APC II or worse. The stability column is as usually taught with the classification; the posterior ring decides it.</p>
       </section>
 
-      <LessonReferences references={references} note="These citations are from memory and have not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Most of these papers are paywalled, so the type wording has been checked only where an abstract states it." />
     </div>
   )
 }

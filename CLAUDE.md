@@ -392,6 +392,12 @@ note; the check is still owed, tracked in `docs/REMAINING_TASKS.md`. The foot, d
 foot and spine drafts followed later the same day and were deployed the same way. The pelvis
 drafts followed after that and are on the branch only until the author says to merge them.
 
+The check started on 2026-10-23 on a computer. For a draft whose papers are paywalled, the
+author chose to add the DOIs and `<Cite>` links once every reference is matched, but to keep
+the claims that no abstract or open full text states, with the "Unchecked draft" note, until
+they are checked; the tests then pin a DOI on every reference and the note's first words. The
+pelvis drafts (study, Young-Burgess, Letournel) are in that state.
+
 How it is built:
 
 - Each study is data: `src/studies/<Name>Study.tsx` declares a `StudyDefinition`

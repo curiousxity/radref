@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { ltAssociated, ltDescriptions, ltElementary, ltExtraWall, ltIsAssociated, ltNames, ltSentence, ltTypes } from '../logic/letournel'
 import type { LtType } from '../logic/letournel'
@@ -8,40 +9,53 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims);
- * the Young-Burgess and Letournel wording is claimed in 2026-10-23-pelvis-calculators-sources.md
- * (YB and LT claims). Rule chips and warnings carry their claim IDs. Until the check, citations
- * are plain text rather than <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * most of the papers are paywalled, so only claims whose wording is in an abstract or in open
+ * full text are verified. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims); the Young-Burgess and
+ * Letournel wording is in 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). Rule
+ * chips and warnings carry their claim IDs.
  */
 
-const YOUNG = 'Young et al., Radiology 1986'
-const BURGESS = 'Burgess et al., J Trauma 1990'
-const DALAL = 'Dalal et al., J Trauma 1989'
-const KHURANA = 'Khurana et al., RadioGraphics 2014'
-const DENIS = 'Denis et al., Clin Orthop Relat Res 1988'
-const ROY_CAMILLE = 'Roy-Camille et al., Spine 1985'
-const LYDERS = 'Lyders et al., AJNR 2010'
-const JUDET = 'Judet et al., J Bone Joint Surg Am 1964'
-const LETOURNEL = 'Letournel, Clin Orthop Relat Res 1980'
-const DURKEE = 'Durkee et al., AJR 2006'
-const SCHEINFELD = 'Scheinfeld et al., RadioGraphics 2015'
-const REHMAN = 'Rehman et al., Injury 2016'
+const YOUNG_DOI = '10.1148/radiology.160.2.3726125'
+const BURGESS_DOI = '10.1097/00005373-199007000-00015'
+const DALAL_DOI = '10.1097/00005373-198907000-00012'
+const KHURANA_DOI = '10.1148/rg.345135113'
+const DENIS_DOI = '10.1097/00003086-198802000-00010'
+const ROY_CAMILLE_DOI = '10.1097/00007632-198511000-00011'
+const LYDERS_DOI = '10.3174/ajnr.A1666'
+const JUDET_DOI = '10.2106/00004623-196446080-00001'
+const LETOURNEL_DOI = '10.1097/00003086-198009000-00012'
+const DURKEE_DOI = '10.2214/AJR.05.1269'
+const SCHEINFELD_DOI = '10.1148/rg.352140098'
+const KELLOCK_DOI = '10.2214/AJR.19.21510'
+
+const YOUNG = <Cite doi={YOUNG_DOI}>Young et al., Radiology 1986</Cite>
+const BURGESS = <Cite doi={BURGESS_DOI}>Burgess et al., J Trauma 1990</Cite>
+const DALAL = <Cite doi={DALAL_DOI}>Dalal et al., J Trauma 1989</Cite>
+const KHURANA = <Cite doi={KHURANA_DOI}>Khurana et al., RadioGraphics 2014</Cite>
+const DENIS = <Cite doi={DENIS_DOI}>Denis et al., Clin Orthop Relat Res 1988</Cite>
+const ROY_CAMILLE = <Cite doi={ROY_CAMILLE_DOI}>Roy-Camille et al., Spine 1985</Cite>
+const LYDERS = <Cite doi={LYDERS_DOI}>Lyders et al., AJNR 2010</Cite>
+const JUDET = <Cite doi={JUDET_DOI}>Judet et al., J Bone Joint Surg Am 1964</Cite>
+const LETOURNEL = <Cite doi={LETOURNEL_DOI}>Letournel, Clin Orthop Relat Res 1980</Cite>
+const DURKEE = <Cite doi={DURKEE_DOI}>Durkee et al., AJR 2006</Cite>
+const SCHEINFELD = <Cite doi={SCHEINFELD_DOI}>Scheinfeld et al., RadioGraphics 2015</Cite>
+const KELLOCK = <Cite doi={KELLOCK_DOI}>Kellock et al., AJR 2019</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.' },
-  { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.' },
-  { citation: 'Dalal SA, Burgess AR, Siegel JH, Young JW, Brumback RJ, Poka A, Dunham CM, Gens D, Bathon H. Pelvic fracture in multiple trauma: classification by mechanism is key to pattern of organ injury, resuscitative requirements, and outcome. J Trauma. 1989;29(7):981-1002.' },
-  { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.' },
-  { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.' },
-  { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.' },
-  { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.' },
-  { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.' },
-  { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.' },
-  { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.' },
-  { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.' },
-  { citation: 'Rehman H, Clement RG, Perks F, White TO. Imaging of occult hip fractures: CT or MRI? Injury. 2016;47(6):1297-1301.' },
+  { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: YOUNG_DOI },
+  { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: BURGESS_DOI },
+  { citation: 'Dalal SA, Burgess AR, Siegel JH, Young JW, Brumback RJ, Poka A, Dunham CM, Gens D, Bathon H. Pelvic fracture in multiple trauma: classification by mechanism is key to pattern of organ injury, resuscitative requirements, and outcome. J Trauma. 1989;29(7):981-1002.', doi: DALAL_DOI },
+  { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: KHURANA_DOI },
+  { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.', doi: DENIS_DOI },
+  { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.', doi: ROY_CAMILLE_DOI },
+  { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.', doi: LYDERS_DOI },
+  { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: JUDET_DOI },
+  { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.', doi: LETOURNEL_DOI },
+  { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.', doi: DURKEE_DOI },
+  { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.', doi: SCHEINFELD_DOI },
+  { citation: 'Kellock TT, Khurana B, Mandell JC. Diagnostic performance of CT for occult proximal femoral fractures: a systematic review and meta-analysis. AJR Am J Roentgenol. 2019;213(6):1324-1330.', doi: KELLOCK_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -135,7 +149,7 @@ const learn: LearnSection[] = [
     title: 'Step 5. Proximal femora',
     body: (
       <>
-        <p>Look at both femoral heads, necks and trochanters. After a low-energy fall, a hip fracture may not show on radiographs. MRI found fractures that CT missed, so when CT is negative and the hip still hurts, MRI is the more sensitive test ({REHMAN}).</p>
+        <p>Look at both femoral heads, necks and trochanters. After a low-energy fall, a hip fracture may not show on radiographs. CT finds most of them (a summary sensitivity of 94% and specificity of 100% against MRI or clinical follow-up), but when concern about a hip fracture continues despite a normal CT, MRI should be performed ({KELLOCK}).</p>
       </>
     ),
   },
@@ -335,9 +349,9 @@ function deriveAcetabulum(values: Values): Derived[] {
 }
 
 function deriveHips(values: Values): Derived[] {
-  // P5-1: MRI is more sensitive than CT for an occult hip fracture.
+  // P5-1: with ongoing concern despite a normal CT, MRI should be performed.
   if (str(values, 'hip') === 'none' && str(values, 'history') !== 'high' && str(values, 'history') !== '') {
-    return [{ label: 'Occult hip fracture', value: 'If the hip still hurts, MRI is more sensitive than CT' }]
+    return [{ label: 'Occult hip fracture', value: 'If concern continues despite a normal CT, MRI should be performed' }]
   }
   return []
 }
@@ -564,7 +578,7 @@ const steps: ReportStep[] = [
     id: 'hips',
     title: 'Step 5. Proximal femora',
     learn: 'hips',
-    teach: <p>When CT is negative and the hip still hurts, MRI is the more sensitive test ({REHMAN}).</p>,
+    teach: <p>When concern about a hip fracture continues despite a normal CT, MRI should be performed ({KELLOCK}).</p>,
     fields: [fields.hip, fields.hipSide, fields.hipText],
     derive: deriveHips,
   },
@@ -589,7 +603,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Young-Burgess and Letournel type wording, the 2.5 cm diastasis, the L5 transverse process and the Denis deficit rates) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -663,9 +677,9 @@ const study: StudyDefinition = {
     {
       id: 'occult-hip',
       question: 'After a fall from standing, CT shows no hip fracture but the patient still cannot bear weight. What does the lesson suggest?',
-      options: ['No further imaging', 'MRI, which is more sensitive than CT for an occult hip fracture', 'A repeat CT the same day', 'Radiographs only'],
+      options: ['No further imaging', 'MRI, because CT can miss an occult hip fracture', 'A repeat CT the same day', 'Radiographs only'],
       answer: 1,
-      explanation: <p>MRI found fractures that CT missed ({REHMAN}).</p>,
+      explanation: <p>CT had a summary sensitivity of 94% for an occult proximal femoral fracture; with ongoing concern despite a normal CT, MRI should be performed ({KELLOCK}).</p>,
     },
   ],
 }

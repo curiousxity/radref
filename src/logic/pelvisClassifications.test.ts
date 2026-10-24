@@ -4,8 +4,9 @@ import { diastasisOver, ybDescriptions, ybGroup, ybSentence, ybStability, ybType
 
 /*
  * The two pelvic classifications. Each case quotes its claim from
- * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md by ID. None has been
- * checked against its paper yet (PubMed was unreachable): the wording is from memory.
+ * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md by ID. The papers are
+ * matched on PubMed, but only the claims marked verified there were read in an abstract; the
+ * rest of the wording is still from memory.
  */
 
 describe('Young-Burgess (unchecked)', () => {

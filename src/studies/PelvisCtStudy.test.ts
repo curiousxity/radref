@@ -10,9 +10,10 @@ const study = studyOf(PelvisCtStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims) or, for Young-Burgess
- * and Letournel, 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). None has been
- * checked against its paper yet (PubMed was unreachable), so when the check is done a case may
- * have to change; say in that commit why the old expectation was wrong.
+ * and Letournel, 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). The references
+ * are matched, but only the claims marked verified there were read in their papers; when the
+ * rest are checked a case may have to change; say in that commit why the old expectation was
+ * wrong.
  */
 
 describe('pelvis CT lesson', () => {
@@ -20,11 +21,12 @@ describe('pelvis CT lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'ring', 'sacrum', 'acetabulum', 'hips', 'soft-tissues', 'impression'])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(12)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
 
@@ -162,9 +164,11 @@ describe('pelvis CT rules (unchecked)', () => {
     expect(chips(study, 'acetabulum', { acet: 'present', 'acet-type': 'PW' }).Letournel).toBe('Posterior wall (elementary)')
   })
 
-  // P5-1: "MRI found fractures that CT missed."
+  // P5-1: "for patients with ongoing clinical concern about hip fracture despite normal CT
+  // findings, MRI should be performed" (Kellock 2019, abstract). Replaces Rehman 2016, which
+  // concluded the opposite (CT as the first-line test), so the old chip claimed more than it said.
   test('occult hip fracture chip after pain or a low-energy fall', () => {
-    expect(chips(study, 'hips', { history: 'low', hip: 'none' })['Occult hip fracture']).toBe('If the hip still hurts, MRI is more sensitive than CT')
+    expect(chips(study, 'hips', { history: 'low', hip: 'none' })['Occult hip fracture']).toBe('If concern continues despite a normal CT, MRI should be performed')
     expect(chips(study, 'hips', { history: 'pain', hip: 'none' })['Occult hip fracture']).toBeDefined()
     expect(chips(study, 'hips', { history: 'high', hip: 'none' })['Occult hip fracture']).toBeUndefined()
     expect(chips(study, 'hips', { history: 'low', hip: 'neck' })['Occult hip fracture']).toBeUndefined()
