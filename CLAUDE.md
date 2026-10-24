@@ -221,7 +221,7 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)
 - Contrast extravasation (triage, surgical consult flags, documentation text)
-- Schatzker (tibial plateau fracture types I-VI; logic shared in `src/logic/schatzker.ts`; unchecked draft)
+- Schatzker (tibial plateau fracture types I-VI, with Markhardt's IIIA and IIIB; logic shared in `src/logic/schatzker.ts`; unchecked draft)
 - Neer (proximal humerus fracture parts; logic shared in `src/logic/neer.ts`; unchecked draft)
 - Mason (radial head fracture types I-IV with Johnston's type IV; logic shared in `src/logic/mason.ts`; unchecked draft)
 - Mayfield (perilunate injury stages I-IV; logic shared in `src/logic/mayfield.ts`; unchecked draft)

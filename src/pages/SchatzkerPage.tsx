@@ -1,19 +1,20 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { schatzker, schatzkerDescriptions, schatzkerSentence } from '../logic/schatzker'
-import type { LateralPattern, Plateau, SchatzkerType } from '../logic/schatzker'
+import { schatzker, schatzkerDescriptions, schatzkerSentence, schatzkerTypes } from '../logic/schatzker'
+import type { DepressionSite, LateralPattern, Plateau } from '../logic/schatzker'
 
 type Form = {
   dissociation: 'no' | 'yes'
   plateau: Plateau
   pattern: LateralPattern
+  depressionSite: DepressionSite | 'unstated'
   depression: string
 }
 
-const initialForm: Form = { dissociation: 'no', plateau: 'lateral', pattern: 'split', depression: '' }
+const initialForm: Form = { dissociation: 'no', plateau: 'lateral', pattern: 'split', depressionSite: 'unstated', depression: '' }
 
 const dissociationOptions: { value: Form['dissociation']; label: string }[] = [
   { value: 'no', label: 'No' },
@@ -32,12 +33,19 @@ const patternOptions: { value: LateralPattern; label: string }[] = [
   { value: 'depression', label: 'Depression only' },
 ]
 
-const types: SchatzkerType[] = ['I', 'II', 'III', 'IV', 'V', 'VI']
+// SZ-3: Markhardt's IIIA (lateral) and IIIB (central).
+const depressionSiteOptions: { value: Form['depressionSite']; label: string }[] = [
+  { value: 'unstated', label: 'Not stated' },
+  { value: 'lateral', label: 'Lateral (IIIA)' },
+  { value: 'central', label: 'Central (IIIB)' },
+]
 
-/** Unchecked draft: these citations are from memory and have not been matched on PubMed. */
+const MARKHARDT_DOI = '10.1148/rg.292085078'
+
+/** Matched on PubMed. Schatzker 1979 has no DOI on Crossref, so it has none here. */
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
-  { citation: 'Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597.' },
+  { citation: 'Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597.', doi: MARKHARDT_DOI },
 ]
 
 export function SchatzkerPage() {
@@ -49,8 +57,13 @@ export function SchatzkerPage() {
 
   const depressionMm = form.depression.trim() === '' || !Number.isFinite(Number(form.depression)) ? undefined : Number(form.depression)
   const result = useMemo(
-    () => schatzker({ plateau: form.plateau, pattern: form.pattern, dissociation: form.dissociation === 'yes' }),
-    [form.plateau, form.pattern, form.dissociation],
+    () => schatzker({
+      plateau: form.plateau,
+      pattern: form.pattern,
+      depressionSite: form.depressionSite === 'unstated' ? undefined : form.depressionSite,
+      dissociation: form.dissociation === 'yes',
+    }),
+    [form.plateau, form.pattern, form.depressionSite, form.dissociation],
   )
 
   return (
@@ -60,8 +73,8 @@ export function SchatzkerPage() {
           <h2>Schatzker classification</h2>
           <span className="calc-tag">Tibial plateau</span>
         </div>
-        <p>Type a tibial plateau fracture from three questions, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Schatzker's paper. Not yet reviewed by the site author. Source: Schatzker et al., Clin Orthop Relat Res 1979.</p>
+        <p>Type a tibial plateau fracture from a few questions, with copyable report text.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, and the types are checked against Markhardt 2009's abstract, since Schatzker's 1979 paper has none; how type IV is broken has not yet been checked against the original. Not yet reviewed by the site author. Sources: Schatzker et al., Clin Orthop Relat Res 1979; <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -72,6 +85,9 @@ export function SchatzkerPage() {
             <ChoiceGroup label="Which plateau is broken?" layout="stack" value={form.plateau} options={plateauOptions} onChange={(value) => update('plateau', value)} />
             {form.plateau === 'lateral' && (
               <ChoiceGroup label="Lateral plateau pattern" layout="stack" value={form.pattern} options={patternOptions} onChange={(value) => update('pattern', value)} />
+            )}
+            {form.plateau === 'lateral' && form.pattern === 'depression' && (
+              <ChoiceGroup label="Where is the depression?" layout="stack" value={form.depressionSite} options={depressionSiteOptions} onChange={(value) => update('depressionSite', value)} />
             )}
             <label>
               <span>Articular depression (optional, mm)</span>
@@ -108,7 +124,7 @@ export function SchatzkerPage() {
               </tr>
             </thead>
             <tbody>
-              {types.map((type) => (
+              {schatzkerTypes.map((type) => (
                 <tr key={type}>
                   <td className="vessel-name">{type}</td>
                   <td>{schatzkerDescriptions[type].charAt(0).toUpperCase() + schatzkerDescriptions[type].slice(1)}</td>
@@ -117,11 +133,11 @@ export function SchatzkerPage() {
             </tbody>
           </table>
         </div>
-        <p>Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. Sources word type IV differently (a medial split, a medial depression, or either), so this page uses only "fracture of the medial plateau" until the original wording is checked.</p>
-        <p>CT and MRI are reported to be more accurate than radiographs for Schatzker typing, and to change surgical plans made from radiographs (Markhardt et al., Radiographics 2009; unchecked).</p>
+        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. Sources word type IV differently (a medial split, a medial depression, or either), so this page uses only "fracture of the medial plateau" until the original wording is checked.</p>
+        <p>CT and MRI are more accurate than radiographs for Schatzker typing, and surgical plans made from radiographs were changed after CT or MRI (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>).</p>
       </section>
 
-      <LessonReferences references={references} note="These citations are from memory and have not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Schatzker's 1979 paper has no abstract or DOI, so the types are checked against Markhardt's abstract." />
     </div>
   )
 }

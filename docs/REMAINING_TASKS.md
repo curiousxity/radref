@@ -86,31 +86,24 @@ The browser check of both themes (under "Fix soon") also needs a computer.
 ### Knee MRI study and Schatzker calculator
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/knee-mri`, `/schatzker`). Every paper
-and every claim is listed in `docs/superpowers/research/2026-10-23-knee-mri-sources.md`,
-each marked "to check", with the method at the top of that file. Deployed before the check by the author's choice (2026-10-23); the pages say "Unchecked draft" until it is done.
+and every claim is in `docs/superpowers/research/2026-10-23-knee-mri-sources.md`. Deployed
+before the check by the author's choice (2026-10-23); the pages say "Unchecked draft" until
+it is done.
 
-- [ ] Match the 19 references (K1–K19) on PubMed and Crossref; fix any citation text that
-  is wrong, and drop any paper that cannot be found.
-- [ ] Schatzker types I–VI (SZ-1 to SZ-6) against Schatzker 1979. Sources disagree on
-  type IV (medial split, depression, or either): record the original wording.
-- [ ] CT and MRI change the Schatzker type (SZ-7), Markhardt 2009.
-- [ ] Fat-fluid level means an intra-articular fracture (K1-1).
-- [ ] Bone bruise patterns and what each points to (K2-1 to K2-5).
-- [ ] Segond fracture and ACL tear (K2-6).
-- [ ] Subchondral lesion: over 4 mm thick or over 14 mm long predicts an irreversible
-  lesion (K2-7).
-- [ ] Osteochondritis dissecans instability signs, juvenile versus adult (K2-8).
-- [ ] Two-slice-touch rule (K3-1), meniscal tear types (K3-2), extrusion of 3 mm or more
-  (K3-3).
-- [ ] Discoid lateral meniscus: bow-tie on 3 or more consecutive 5-mm images (K4-1);
-  parameniscal cysts and meniscal tears (K4-2).
-- [ ] ACL indirect signs (K5-1) and ACL graft complications (K5-2).
-- [ ] MCL (K7-1) and the lateral stabilising structures (K8-1).
-- [ ] MPFL injury after patellar dislocation (K9-1); lateral trochlear inclination below
-  11° (K9-2).
-- [ ] Cartilage depth categories (K10-1).
-- [ ] Then: add the DOIs, switch the plain-text citations to `<Cite>` links, reword the
-  source notes, and update the tests that pin the unchecked state.
+- [x] Match the 19 references (K1–K19) on PubMed and Crossref (2026-10-23). All found; K13's
+  title punctuation corrected; DOIs and `<Cite>` links added (Schatzker 1979 has no DOI).
+- [x] Schatzker types checked against Markhardt 2009's abstract (Schatzker 1979 has none);
+  SZ-1, SZ-2, SZ-5 to SZ-7 verified, SZ-3 and SZ-4 in part.
+- [x] Verified from abstracts or open full text (Crema, PMC6939857): K1-1, K2-5, K2-7, K3-1,
+  K3-2, K4-1, K4-2, K5-1, K8-1; others in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): extrusion is "more than 3 mm"
+  (Costa; exactly 3 mm is minor), MPFL injury uses Elias's figures, the 11° trochlear
+  inclination is a test for patellar instability (Carrillon), and type III is split into
+  IIIA (lateral) and IIIB (central) as Markhardt gives it.
+- [ ] Still unchecked, because the papers are paywalled: the ligament each bruise pattern
+  points to, Segond with ACL tear, juvenile OCD signs, cyclops and arthrofibrosis, the MCL
+  bruise sites, SZ-4's wording, the four cartilage depth grades (K10-1) and the level of the
+  11° measurement. Kept with the "Unchecked draft" note by the author's choice.
 
 ### Shoulder MRI study and Neer calculator
 

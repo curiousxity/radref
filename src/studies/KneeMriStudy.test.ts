@@ -7,9 +7,9 @@ const study = studyOf(KneeMriStudyPage)
 
 /*
  * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-23-knee-mri-sources.md by its ID. None of those claims
- * has been checked against its paper yet (PubMed was unreachable), so when the check is done
- * a case may have to change; say in that commit why the old expectation was wrong.
+ * docs/superpowers/research/2026-10-23-knee-mri-sources.md by its ID. The references are
+ * matched, but only the claims marked verified there were read in their papers; when the rest
+ * are checked a case may have to change; say in that commit why the old expectation was wrong.
  */
 
 describe('knee MRI lesson', () => {
@@ -20,12 +20,16 @@ describe('knee MRI lesson', () => {
     ])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident. When the citations are
-  // checked on PubMed, these change together: DOIs added, the note reworded.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so. Schatzker 1979 is the one exception: PubMed has no
+  // DOI for it and Crossref finds none, so it is cited without one.
+  test('is still marked as an unchecked draft, with a DOI on every reference but Schatzker 1979', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(19)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) {
+      if (ref.citation.startsWith('Schatzker J, McBroom R, Bruce D.')) expect(ref.doi, ref.citation).toBeUndefined()
+      else expect(ref.doi, ref.citation).toMatch(/^10\./)
+    }
   })
 })
 
@@ -237,6 +241,18 @@ describe('knee MRI rules (unchecked)', () => {
       .toBe('Lipohemarthrosis, indicating an intra-articular fracture.\nTibial plateau fracture, Schatzker type II: split with depression of the lateral plateau, articular depression 6 mm.')
   })
 
+  // SZ-3: "compression fracture of the lateral (type IIIA) or central (type IIIB) plateau"
+  // (Markhardt 2009, abstract). The draft had type III only; the subtypes are added because the
+  // paper gives them.
+  test('a pure depression of the lateral plateau is IIIA or IIIB by its site', () => {
+    const depression = { fracture: 'present', plateau: 'lateral', 'plateau-pattern': 'depression', 'plateau-dissociation': 'no' }
+    expect(chips(study, 'bones', depression).Schatzker).toBe('Type III')
+    expect(chips(study, 'bones', { ...depression, 'plateau-depression-site': 'lateral' }).Schatzker).toBe('Type IIIA')
+    expect(chips(study, 'bones', { ...depression, 'plateau-depression-site': 'central' }).Schatzker).toBe('Type IIIB')
+    expect(impressionOf({ ...normal, ...depression, 'plateau-depression-site': 'central' }))
+      .toBe('Tibial plateau fracture, Schatzker type IIIB: compression fracture of the central plateau.')
+  })
+
   // K2-6: a Segond fracture "is associated with ACL tear".
   test('a Segond fracture with an intact ACL is flagged', () => {
     expect(chips(study, 'bones', { segond: 'present' })['Segond fracture']).toBe('Associated with ACL tear')
@@ -266,14 +282,16 @@ describe('knee MRI rules (unchecked)', () => {
     expect(report(study, values).warnings).toContain('A medial meniscal tear is entered, but signal touches the surface on one image only, which the two-slice-touch rule calls a possible tear.')
   })
 
-  // K3-3: "Medial meniscal extrusion of 3 mm or more is associated with severe degeneration,
-  // extensive tearing and root tears."
-  test('medial meniscal extrusion at 3 mm', () => {
+  // K3-3: "Substantial medial meniscus extrusion (> 3 mm) is associated with severe meniscal
+  // degeneration, extensive tear, complex tear, large radial tear, and tear involving the
+  // meniscal root" (Costa 2004, abstract), with "minor (</= 3 mm)" the other group. The draft
+  // fired at 3 mm or more, so it put exactly 3 mm in the wrong group.
+  test('medial meniscal extrusion over 3 mm', () => {
     const extrusion = (mm: string) => chips(study, 'medial-meniscus', { 'mm-extrusion': mm }).Extrusion
-    expect(extrusion('3')).toBe('≥ 3 mm: associated with severe degeneration, extensive tearing and root tears')
-    expect(extrusion('2.5')).toBeUndefined()
-    expect(impressionOf({ ...normal, 'mm-extrusion': '3' })).toBe('Medial meniscal extrusion 3 mm.')
-    expect(impressionOf({ ...normal, 'mm-extrusion': '2.5' })).toBe(NORMAL_IMPRESSION)
+    expect(extrusion('3.5')).toBe('> 3 mm: associated with severe degeneration, extensive tearing and root tears')
+    expect(extrusion('3')).toBeUndefined()
+    expect(impressionOf({ ...normal, 'mm-extrusion': '3.5' })).toBe('Medial meniscal extrusion 3.5 mm.')
+    expect(impressionOf({ ...normal, 'mm-extrusion': '3' })).toBe(NORMAL_IMPRESSION)
   })
 
   // K4-1: "continuity between the anterior and posterior horns ... on three or more consecutive
@@ -294,12 +312,14 @@ describe('knee MRI rules (unchecked)', () => {
     expect(report(study, { ...normal, parameniscal: 'lateral', lm: 'tear', 'lm-images': '2' }).warnings).toEqual([])
   })
 
-  // K9-2: "A lateral trochlear inclination below 11° ... indicates trochlear dysplasia."
+  // K9-2: "Below a threshold value fixed at 11 degrees, LTI appears to be an excellent
+  // diagnostic test of PI" (Carrillon 2000, abstract; PI is patellar instability). The draft
+  // called it trochlear dysplasia, which the paper did not test; the threshold is unchanged.
   test('lateral trochlear inclination at 11°', () => {
     const inclination = (degrees: string) => chips(study, 'extensor', { trochlea: degrees })['Lateral trochlear inclination']
-    expect(inclination('10.9')).toBe('Trochlear dysplasia (< 11°)')
-    expect(inclination('11')).toBe('Not dysplastic by this measure (≥ 11°)')
-    expect(impressionOf({ ...normal, trochlea: '9' })).toBe('Trochlear dysplasia (lateral trochlear inclination 9°).')
+    expect(inclination('10.9')).toBe('Below the 11° threshold for patellar instability')
+    expect(inclination('11')).toBe('Not below the 11° threshold for patellar instability')
+    expect(impressionOf({ ...normal, trochlea: '9' })).toBe('Lateral trochlear inclination 9°, below the 11° threshold for patellar instability.')
   })
 })
 

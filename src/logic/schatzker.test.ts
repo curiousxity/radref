@@ -3,35 +3,48 @@ import { schatzker, schatzkerSentence } from './schatzker'
 
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-knee-mri-sources.md.
- * None of these claims has been checked against Schatzker et al. (Clin Orthop Relat Res
- * 1979) yet: the wording is from memory, pending the check on a computer.
+ * Schatzker et al. (Clin Orthop Relat Res 1979) has no abstract on PubMed, so the types are
+ * checked against the abstract of Markhardt et al. (Radiographics 2009), quoted per case. How
+ * type IV is broken (SZ-4) is still unchecked.
  */
 
 const type = (input: Parameters<typeof schatzker>[0]) => schatzker(input)?.type
 
 describe('Schatzker types (unchecked)', () => {
   test('lateral plateau: split, split with depression, depression', () => {
-    // SZ-1: "Type I is a pure split (cleavage) fracture of the lateral plateau."
+    // SZ-1: "lateral plateau fracture without depression (type I)" (Markhardt).
     expect(type({ plateau: 'lateral', pattern: 'split', dissociation: false })).toBe('I')
-    // SZ-2: "Type II is a split combined with depression of the lateral plateau."
+    // SZ-2: "lateral plateau fracture with depression (type II)" (Markhardt).
     expect(type({ plateau: 'lateral', pattern: 'split-depression', dissociation: false })).toBe('II')
-    // SZ-3: "Type III is a pure depression of the lateral plateau, without a split."
+    // SZ-3: "compression fracture of the lateral (type IIIA) or central (type IIIB) plateau"
+    // (Markhardt). Without the site it stays type III.
     expect(type({ plateau: 'lateral', pattern: 'depression', dissociation: false })).toBe('III')
   })
 
+  test('a pure depression is IIIA when lateral and IIIB when central', () => {
+    // SZ-3: "compression fracture of the lateral (type IIIA) or central (type IIIB) plateau"
+    // (Markhardt). The draft had type III only; the subtypes are added because the paper gives them.
+    expect(type({ plateau: 'lateral', pattern: 'depression', depressionSite: 'lateral', dissociation: false })).toBe('IIIA')
+    expect(type({ plateau: 'lateral', pattern: 'depression', depressionSite: 'central', dissociation: false })).toBe('IIIB')
+    expect(schatzker({ plateau: 'lateral', pattern: 'depression', depressionSite: 'central', dissociation: false })?.description).toBe('compression fracture of the central plateau')
+    // The site is read only for a pure depression.
+    expect(type({ plateau: 'lateral', pattern: 'split-depression', depressionSite: 'central', dissociation: false })).toBe('II')
+    expect(type({ plateau: 'lateral', pattern: 'depression', depressionSite: 'central', dissociation: true })).toBe('VI')
+  })
+
   test('medial plateau is type IV, whatever the pattern', () => {
-    // SZ-4: "Type IV is a fracture of the medial plateau."
+    // SZ-4: "medial plateau fracture (type IV)" (Markhardt).
     expect(type({ plateau: 'medial', dissociation: false })).toBe('IV')
     expect(type({ plateau: 'medial', pattern: 'depression', dissociation: false })).toBe('IV')
   })
 
   test('both plateaus is type V', () => {
-    // SZ-5: "Type V is a bicondylar fracture."
+    // SZ-5: "bicondylar plateau fracture (type V)" (Markhardt).
     expect(type({ plateau: 'both', dissociation: false })).toBe('V')
   })
 
   test('metaphyseal-diaphyseal dissociation is type VI, whatever the plateaus', () => {
-    // SZ-6: "Type VI is a plateau fracture with dissociation of the metaphysis from the diaphysis."
+    // SZ-6: "plateau fracture with diaphyseal discontinuity (type VI)" (Markhardt).
     expect(type({ plateau: 'lateral', pattern: 'split', dissociation: true })).toBe('VI')
     expect(type({ plateau: 'both', dissociation: true })).toBe('VI')
     expect(type({ dissociation: true })).toBe('VI')

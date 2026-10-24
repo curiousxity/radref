@@ -1,58 +1,79 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { schatzker, schatzkerDescriptions, schatzkerSentence } from '../logic/schatzker'
-import type { LateralPattern, Plateau, SchatzkerResult, SchatzkerType } from '../logic/schatzker'
+import { schatzker, schatzkerDescriptions, schatzkerSentence, schatzkerTypes } from '../logic/schatzker'
+import type { DepressionSite, LateralPattern, Plateau, SchatzkerResult } from '../logic/schatzker'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-knee-mri-sources.md; rule chips
- * and warnings carry its claim IDs. Until the check, citations are plain text rather than
- * <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled except Crema 2011, so only claims whose wording is in an abstract
+ * or in open full text are verified. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-knee-mri-sources.md; rule chips and warnings carry its
+ * claim IDs. Schatzker 1979 has no abstract and no DOI, so its citation stays plain text.
  */
 
+/** Schatzker 1979 has no DOI (none on Crossref), so it is cited in plain text. */
 const SCHATZKER = 'Schatzker et al., Clin Orthop Relat Res 1979'
-const MARKHARDT = 'Markhardt et al., Radiographics 2009'
-const DE_SMET = 'De Smet and Tuite, AJR 2006'
-const NGUYEN = 'Nguyen et al., Radiographics 2014'
-const COSTA = 'Costa et al., AJR 2004'
-const SILVERMAN = 'Silverman et al., Radiology 1989'
-const SANDERS = 'Sanders et al., Radiographics 2000'
-const GENTILI = 'Gentili et al., Radiology 1994'
-const CAMPOS = 'Campos et al., Radiology 2001'
-const SCHWEITZER = 'Schweitzer et al., Radiology 1995'
-const RECONDO = 'Recondo et al., Radiographics 2000'
-const ELIAS = 'Elias et al., Radiology 2002'
-const CARRILLON = 'Carrillon et al., Radiology 2000'
-const CREMA = 'Crema et al., Radiographics 2011'
-const KIJOWSKI = 'Kijowski et al., Radiology 2008'
-const LECOUVET = 'Lecouvet et al., AJR 1998'
-const BENCARDINO = 'Bencardino et al., Radiographics 2009'
-const CAMPBELL = 'Campbell et al., AJR 2001'
-const LEE = 'Lee et al., Radiology 1989'
+const MARKHARDT_DOI = '10.1148/rg.292085078'
+const DE_SMET_DOI = '10.2214/AJR.05.1354'
+const NGUYEN_DOI = '10.1148/rg.344125202'
+const COSTA_DOI = '10.2214/ajr.183.1.1830017'
+const SILVERMAN_DOI = '10.1148/radiology.173.2.2798867'
+const SANDERS_DOI = '10.1148/radiographics.20.suppl_1.g00oc19s135'
+const GENTILI_DOI = '10.1148/radiology.193.3.7972834'
+const CAMPOS_DOI = '10.1148/radiology.219.2.r01ma23381'
+const SCHWEITZER_DOI = '10.1148/radiology.194.3.7862987'
+const RECONDO_DOI = '10.1148/radiographics.20.suppl_1.g00oc02s91'
+const ELIAS_DOI = '10.1148/radiol.2253011578'
+const CARRILLON_DOI = '10.1148/radiology.216.2.r00au07582'
+const CREMA_DOI = '10.1148/rg.311105084'
+const KIJOWSKI_DOI = '10.1148/radiol.2482071234'
+const LECOUVET_DOI = '10.2214/ajr.170.1.9423603'
+const BENCARDINO_DOI = '10.1148/rg.297095036'
+const CAMPBELL_DOI = '10.2214/ajr.177.2.1770409'
+const LEE_DOI = '10.1148/radiology.173.1.2781006'
+
+const MARKHARDT = <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>
+const DE_SMET = <Cite doi={DE_SMET_DOI}>De Smet and Tuite, AJR 2006</Cite>
+const NGUYEN = <Cite doi={NGUYEN_DOI}>Nguyen et al., Radiographics 2014</Cite>
+const COSTA = <Cite doi={COSTA_DOI}>Costa et al., AJR 2004</Cite>
+const SILVERMAN = <Cite doi={SILVERMAN_DOI}>Silverman et al., Radiology 1989</Cite>
+const SANDERS = <Cite doi={SANDERS_DOI}>Sanders et al., Radiographics 2000</Cite>
+const GENTILI = <Cite doi={GENTILI_DOI}>Gentili et al., Radiology 1994</Cite>
+const CAMPOS = <Cite doi={CAMPOS_DOI}>Campos et al., Radiology 2001</Cite>
+const SCHWEITZER = <Cite doi={SCHWEITZER_DOI}>Schweitzer et al., Radiology 1995</Cite>
+const RECONDO = <Cite doi={RECONDO_DOI}>Recondo et al., Radiographics 2000</Cite>
+const ELIAS = <Cite doi={ELIAS_DOI}>Elias et al., Radiology 2002</Cite>
+const CARRILLON = <Cite doi={CARRILLON_DOI}>Carrillon et al., Radiology 2000</Cite>
+const CREMA = <Cite doi={CREMA_DOI}>Crema et al., Radiographics 2011</Cite>
+const KIJOWSKI = <Cite doi={KIJOWSKI_DOI}>Kijowski et al., Radiology 2008</Cite>
+const LECOUVET = <Cite doi={LECOUVET_DOI}>Lecouvet et al., AJR 1998</Cite>
+const BENCARDINO = <Cite doi={BENCARDINO_DOI}>Bencardino et al., Radiographics 2009</Cite>
+const CAMPBELL = <Cite doi={CAMPBELL_DOI}>Campbell et al., AJR 2001</Cite>
+const LEE = <Cite doi={LEE_DOI}>Lee et al., Radiology 1989</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
-  { citation: 'Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597.' },
-  { citation: 'De Smet AA, Tuite MJ. Use of the "two-slice-touch" rule for the MRI diagnosis of meniscal tears. AJR Am J Roentgenol. 2006;187(4):911-914.' },
-  { citation: 'Nguyen JC, De Smet AA, Graf BK, Rosas HG. MR imaging-based diagnosis and classification of meniscal tears. Radiographics. 2014;34(4):981-999.' },
-  { citation: 'Costa CR, Morrison WB, Carrino JA. Medial meniscus extrusion on knee MRI: is extent associated with severity of degeneration or type of tear? AJR Am J Roentgenol. 2004;183(1):17-23.' },
-  { citation: 'Silverman JM, Mink JH, Deutsch AL. Discoid menisci of the knee: MR imaging appearance. Radiology. 1989;173(2):351-354.' },
-  { citation: 'Sanders TG, Medynski MA, Feller JF, Lawhorn KW. Bone contusion patterns of the knee at MR imaging: footprint of the mechanism of injury. Radiographics. 2000;20 Spec No:S135-S151.' },
-  { citation: 'Gentili A, Seeger LL, Yao L, Do HM. Anterior cruciate ligament tear: indirect signs at MR imaging. Radiology. 1994;193(3):835-840.' },
-  { citation: 'Campos JC, Chung CB, Lektrakul N, Pedowitz R, Trudell D, Yu J, Resnick D. Pathogenesis of the Segond fracture: anatomic and MR imaging evidence of an iliotibial tract or anterior oblique band avulsion. Radiology. 2001;219(2):381-386.' },
-  { citation: 'Schweitzer ME, Tran D, Deely DM, Hume EL. Medial collateral ligament injuries: evaluation of multiple signs, prevalence and location of associated bone bruises, and assessment with MR imaging. Radiology. 1995;194(3):825-829.' },
-  { citation: 'Recondo JA, Salvador E, Villanúa JA, Barrera MC, Gervás C, Alústiza JM. Lateral stabilizing structures of the knee: functional anatomy and injuries assessed with MR imaging. Radiographics. 2000;20 Spec No:S91-S102.' },
-  { citation: 'Elias DA, White LM, Fithian DC. Acute lateral patellar dislocation at MR imaging: injury patterns of medial patellar soft-tissue restraints and osteochondral injuries of the inferomedial patella. Radiology. 2002;225(3):736-743.' },
-  { citation: 'Carrillon Y, Abidi H, Dejour D, Fantino O, Moyen B, Tran-Minh VA. Patellar instability: assessment on MR images by measuring the lateral trochlear inclination—initial experience. Radiology. 2000;216(2):582-585.' },
-  { citation: 'Crema MD, Roemer FW, Marra MD, Burstein D, Gold GE, Eckstein F, Baum T, Mosher TJ, Carrino JA, Guermazi A. Articular cartilage in the knee: current MR imaging techniques and applications in clinical practice and research. Radiographics. 2011;31(1):37-61.' },
-  { citation: 'Kijowski R, Blankenbaker DG, Shinki K, Fine JP, Graf BK, De Smet AA. Juvenile versus adult osteochondritis dissecans of the knee: appropriate MR imaging criteria for instability. Radiology. 2008;248(2):571-578.' },
-  { citation: 'Lecouvet FE, van de Berg BC, Maldague BE, Lebon CJ, Jamart J, Saleh M, Noël H, Malghem J. Early irreversible osteonecrosis versus transient lesions of the femoral condyles: prognostic value of subchondral bone and marrow changes on MR imaging. AJR Am J Roentgenol. 1998;170(1):71-77.' },
-  { citation: 'Bencardino JT, Beltran J, Feldman MI, Rose DJ. MR imaging of complications of anterior cruciate ligament graft reconstruction. Radiographics. 2009;29(7):2115-2126.' },
-  { citation: 'Campbell SE, Sanders TG, Morrison WB. MR imaging of meniscal cysts: incidence, location, and clinical significance. AJR Am J Roentgenol. 2001;177(2):409-413.' },
-  { citation: 'Lee JH, Weissman BN, Nikpoor N, Aliabadi P, Sosman JL. Lipohemarthrosis of the knee: a review of recent experiences. Radiology. 1989;173(1):189-191.' },
+  { citation: 'Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597.', doi: MARKHARDT_DOI },
+  { citation: 'De Smet AA, Tuite MJ. Use of the "two-slice-touch" rule for the MRI diagnosis of meniscal tears. AJR Am J Roentgenol. 2006;187(4):911-914.', doi: DE_SMET_DOI },
+  { citation: 'Nguyen JC, De Smet AA, Graf BK, Rosas HG. MR imaging-based diagnosis and classification of meniscal tears. Radiographics. 2014;34(4):981-999.', doi: NGUYEN_DOI },
+  { citation: 'Costa CR, Morrison WB, Carrino JA. Medial meniscus extrusion on knee MRI: is extent associated with severity of degeneration or type of tear? AJR Am J Roentgenol. 2004;183(1):17-23.', doi: COSTA_DOI },
+  { citation: 'Silverman JM, Mink JH, Deutsch AL. Discoid menisci of the knee: MR imaging appearance. Radiology. 1989;173(2):351-354.', doi: SILVERMAN_DOI },
+  { citation: 'Sanders TG, Medynski MA, Feller JF, Lawhorn KW. Bone contusion patterns of the knee at MR imaging: footprint of the mechanism of injury. Radiographics. 2000;20 Spec No:S135-S151.', doi: SANDERS_DOI },
+  { citation: 'Gentili A, Seeger LL, Yao L, Do HM. Anterior cruciate ligament tear: indirect signs at MR imaging. Radiology. 1994;193(3):835-840.', doi: GENTILI_DOI },
+  { citation: 'Campos JC, Chung CB, Lektrakul N, Pedowitz R, Trudell D, Yu J, Resnick D. Pathogenesis of the Segond fracture: anatomic and MR imaging evidence of an iliotibial tract or anterior oblique band avulsion. Radiology. 2001;219(2):381-386.', doi: CAMPOS_DOI },
+  { citation: 'Schweitzer ME, Tran D, Deely DM, Hume EL. Medial collateral ligament injuries: evaluation of multiple signs, prevalence and location of associated bone bruises, and assessment with MR imaging. Radiology. 1995;194(3):825-829.', doi: SCHWEITZER_DOI },
+  { citation: 'Recondo JA, Salvador E, Villanúa JA, Barrera MC, Gervás C, Alústiza JM. Lateral stabilizing structures of the knee: functional anatomy and injuries assessed with MR imaging. Radiographics. 2000;20 Spec No:S91-S102.', doi: RECONDO_DOI },
+  { citation: 'Elias DA, White LM, Fithian DC. Acute lateral patellar dislocation at MR imaging: injury patterns of medial patellar soft-tissue restraints and osteochondral injuries of the inferomedial patella. Radiology. 2002;225(3):736-743.', doi: ELIAS_DOI },
+  { citation: 'Carrillon Y, Abidi H, Dejour D, Fantino O, Moyen B, Tran-Minh VA. Patellar instability: assessment on MR images by measuring the lateral trochlear inclination-initial experience. Radiology. 2000;216(2):582-585.', doi: CARRILLON_DOI },
+  { citation: 'Crema MD, Roemer FW, Marra MD, Burstein D, Gold GE, Eckstein F, Baum T, Mosher TJ, Carrino JA, Guermazi A. Articular cartilage in the knee: current MR imaging techniques and applications in clinical practice and research. Radiographics. 2011;31(1):37-61.', doi: CREMA_DOI },
+  { citation: 'Kijowski R, Blankenbaker DG, Shinki K, Fine JP, Graf BK, De Smet AA. Juvenile versus adult osteochondritis dissecans of the knee: appropriate MR imaging criteria for instability. Radiology. 2008;248(2):571-578.', doi: KIJOWSKI_DOI },
+  { citation: 'Lecouvet FE, van de Berg BC, Maldague BE, Lebon CJ, Jamart J, Saleh M, Noël H, Malghem J. Early irreversible osteonecrosis versus transient lesions of the femoral condyles: prognostic value of subchondral bone and marrow changes on MR imaging. AJR Am J Roentgenol. 1998;170(1):71-77.', doi: LECOUVET_DOI },
+  { citation: 'Bencardino JT, Beltran J, Feldman MI, Rose DJ. MR imaging of complications of anterior cruciate ligament graft reconstruction. Radiographics. 2009;29(7):2115-2126.', doi: BENCARDINO_DOI },
+  { citation: 'Campbell SE, Sanders TG, Morrison WB. MR imaging of meniscal cysts: incidence, location, and clinical significance. AJR Am J Roentgenol. 2001;177(2):409-413.', doi: CAMPBELL_DOI },
+  { citation: 'Lee JH, Weissman BN, Nikpoor N, Aliabadi P, Sosman JL. Lipohemarthrosis of the knee: a review of recent experiences. Radiology. 1989;173(1):189-191.', doi: LEE_DOI },
 ]
 
 const bruiseTable = (
@@ -86,7 +107,7 @@ const schatzkerTable = (
         </tr>
       </thead>
       <tbody>
-        {(['I', 'II', 'III', 'IV', 'V', 'VI'] as SchatzkerType[]).map((type) => (
+        {schatzkerTypes.map((type) => (
           <tr key={type}>
             <td className="vessel-name">{type}</td>
             <td>{schatzkerDescriptions[type].charAt(0).toUpperCase() + schatzkerDescriptions[type].slice(1)}</td>
@@ -120,9 +141,9 @@ const learn: LearnSection[] = [
         <p>With a history of pain only, the bruise pattern may be the best history the study gives you.</p>
 
         <h4>Tibial plateau fracture</h4>
-        <p>When the tibial plateau is broken, give the Schatzker type ({SCHATZKER}). CT and MRI are reported to be more accurate than radiographs for Schatzker typing, and to change surgical plans made from radiographs ({MARKHARDT}). The Schatzker calculator on this site applies the same rules.</p>
+        <p>When the tibial plateau is broken, give the Schatzker type ({SCHATZKER}; the types as {MARKHARDT} give them). CT and MRI are more accurate than radiographs for Schatzker typing, and surgical plans made from radiographs were changed after CT or MRI ({MARKHARDT}). The Schatzker calculator on this site applies the same rules.</p>
         {schatzkerTable}
-        <p>Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken.</p>
+        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) ({MARKHARDT}). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken.</p>
 
         <h4>Segond fracture</h4>
         <p>A Segond fracture is a small avulsion from the lateral rim of the tibial plateau. It is pulled off by the iliotibial tract or the anterior oblique band of the lateral collateral ligament, and it is associated with ACL tear ({CAMPOS}). A Segond fracture with an ACL called intact deserves a second look at the ACL.</p>
@@ -151,7 +172,7 @@ const learn: LearnSection[] = [
         <p>Tears are described as horizontal, longitudinal (vertical), radial, root, complex, or displaced, which includes the bucket-handle and flap tears ({NGUYEN}). Say where it is: anterior horn, body, posterior horn or root. A displaced fragment matters to the surgeon, so look for it in the notch and in the recesses whenever a meniscus looks short.</p>
 
         <h4>Extrusion</h4>
-        <p>Medial meniscal extrusion of 3 mm or more was associated with severe degeneration, extensive tearing and root tears ({COSTA}). An extruded meniscus sends you back to look hard at the posterior root.</p>
+        <p>Medial meniscal extrusion of more than 3 mm was associated with severe degeneration, extensive tearing and root tears; extrusion of 3 mm or less was the minor group ({COSTA}). An extruded meniscus sends you back to look hard at the posterior root.</p>
       </>
     ),
   },
@@ -213,9 +234,9 @@ const learn: LearnSection[] = [
       <>
         <p>Check the quadriceps and patellar tendons for tendinosis and tears.</p>
         <h4>Transient lateral patellar dislocation</h4>
-        <p>After an acute lateral patellar dislocation, the medial patellofemoral ligament (MPFL) is commonly injured, often at its femoral attachment, and the inferomedial patella may have an osteochondral injury ({ELIAS}). The bruise pattern (inferomedial patella and anterolateral lateral femoral condyle) may be the only clue that a dislocation happened ({SANDERS}).</p>
+        <p>After an acute lateral patellar dislocation, the medial retinaculum was disrupted at its patellar insertion in 76% of examinations; where the femoral origin of the medial patellofemoral ligament (MPFL) could be seen, 49% showed injury; and 70% had an osteochondral injury of the inferomedial patella ({ELIAS}). The bruise pattern (inferomedial patella and anterolateral lateral femoral condyle) may be the only clue that a dislocation happened ({SANDERS}).</p>
         <h4>Trochlear shape</h4>
-        <p>A lateral trochlear inclination below 11°, measured on the first axial image that shows trochlear cartilage, indicates trochlear dysplasia ({CARRILLON}).</p>
+        <p>A lateral trochlear inclination below 11°, measured on the first axial image that shows trochlear cartilage, was a diagnostic test for patellar instability, with a sensitivity of 93% and a specificity of 87% ({CARRILLON}).</p>
       </>
     ),
   },
@@ -385,6 +406,10 @@ const fields = {
     { value: 'split-depression', label: 'Split with depression' },
     { value: 'depression', label: 'Depression only' },
   ] },
+  plateauDepressionSite: { id: 'plateau-depression-site', kind: 'choice', label: 'Where is the depression', showIf: (v) => str(v, 'fracture') === 'present' && str(v, 'plateau') === 'lateral' && str(v, 'plateau-pattern') === 'depression', help: 'Lateral is type IIIA, central type IIIB.', options: [
+    { value: 'lateral', label: 'Lateral (IIIA)' },
+    { value: 'central', label: 'Central (IIIB)' },
+  ] },
   plateauDissociation: { id: 'plateau-dissociation', kind: 'choice', label: 'Metaphysis separated from the diaphysis', showIf: (v) => str(v, 'fracture') === 'present' && plateauInvolved(v), options: [
     { value: 'no', label: 'No' },
     { value: 'yes', label: 'Yes' },
@@ -418,7 +443,7 @@ const fields = {
     { value: 'fabella', label: 'Fabella' },
   ] },
 
-  mmExtrusion: { id: 'mm-extrusion', kind: 'number', label: 'Medial meniscal extrusion', unit: 'mm', min: 0, step: 0.5, help: '3 mm or more: associated with severe degeneration, extensive tearing and root tears.' },
+  mmExtrusion: { id: 'mm-extrusion', kind: 'number', label: 'Medial meniscal extrusion', unit: 'mm', min: 0, step: 0.5, help: 'Over 3 mm: associated with severe degeneration, extensive tearing and root tears.' },
   lmDiscoid: { id: 'lm-discoid', kind: 'choice', label: 'Discoid lateral meniscus', options: [
     { value: 'no', label: 'No' },
     { value: 'yes', label: 'Yes' },
@@ -467,7 +492,7 @@ const fields = {
     { value: 'mid', label: 'Mid substance' },
     { value: 'femoral', label: 'Femoral attachment' },
   ] },
-  trochlea: { id: 'trochlea', kind: 'number', label: 'Lateral trochlear inclination', unit: '°', min: 0, step: 1, help: 'First axial image with trochlear cartilage. Below 11°: trochlear dysplasia.' },
+  trochlea: { id: 'trochlea', kind: 'number', label: 'Lateral trochlear inclination', unit: '°', min: 0, step: 1, help: 'First axial image with trochlear cartilage. Below 11°: the threshold for patellar instability.' },
 
   cartilagePf: { id: 'cartilage-pf', kind: 'choice', label: 'Patellofemoral cartilage', required: true, options: cartilageOptions },
   cartilageMedial: { id: 'cartilage-medial', kind: 'choice', label: 'Medial compartment cartilage', required: true, options: cartilageOptions },
@@ -506,6 +531,7 @@ function plateauResult(values: Values): SchatzkerResult | undefined {
   return schatzker({
     plateau: str(values, 'plateau') as Plateau,
     pattern: (str(values, 'plateau-pattern') || undefined) as LateralPattern | undefined,
+    depressionSite: (str(values, 'plateau-depression-site') || undefined) as DepressionSite | undefined,
     dissociation: dissociation === '' ? undefined : dissociation === 'yes',
   })
 }
@@ -582,9 +608,9 @@ function meniscusChip(values: Values, prefix: 'mm' | 'lm'): Derived[] {
 function deriveMedialMeniscus(values: Values): Derived[] {
   const out = meniscusChip(values, 'mm')
   const extrusion = num(values, 'mm-extrusion')
-  // K3-3: extrusion of 3 mm or more.
-  if (extrusion !== undefined && extrusion >= 3) {
-    out.push({ label: 'Extrusion', value: '≥ 3 mm: associated with severe degeneration, extensive tearing and root tears', tone: 'warn' })
+  // K3-3: Costa's "Substantial medial meniscus extrusion (> 3 mm)"; 3 mm itself is in the minor group.
+  if (extrusion !== undefined && extrusion > 3) {
+    out.push({ label: 'Extrusion', value: '> 3 mm: associated with severe degeneration, extensive tearing and root tears', tone: 'warn' })
   }
   return out
 }
@@ -599,11 +625,12 @@ function deriveLateralMeniscus(values: Values): Derived[] {
 
 function deriveExtensor(values: Values): Derived[] {
   const inclination = num(values, 'trochlea')
-  // K9-2: below 11° indicates trochlear dysplasia.
+  // K9-2: Carrillon, "Below a threshold value fixed at 11 degrees, LTI appears to be an
+  // excellent diagnostic test of PI" (patellar instability).
   if (inclination === undefined) return []
   return inclination < 11
-    ? [{ label: 'Lateral trochlear inclination', value: 'Trochlear dysplasia (< 11°)', tone: 'warn' }]
-    : [{ label: 'Lateral trochlear inclination', value: 'Not dysplastic by this measure (≥ 11°)', tone: 'good' }]
+    ? [{ label: 'Lateral trochlear inclination', value: 'Below the 11° threshold for patellar instability', tone: 'warn' }]
+    : [{ label: 'Lateral trochlear inclination', value: 'Not below the 11° threshold for patellar instability', tone: 'good' }]
 }
 
 /* Report lines, one per entered finding. */
@@ -755,7 +782,7 @@ function findings(values: Values): string[] {
     out.push(possible ? `Possible ${phrase} (signal touching the surface on one image only).` : `${upperFirst(phrase)}.`)
   }
   const extrusion = num(values, 'mm-extrusion')
-  if (extrusion !== undefined && extrusion >= 3) out.push(`Medial meniscal extrusion ${extrusion} mm.`)
+  if (extrusion !== undefined && extrusion > 3) out.push(`Medial meniscal extrusion ${extrusion} mm.`)
 
   if (nativeAcl(values)) {
     const acl = str(values, 'acl')
@@ -779,7 +806,7 @@ function findings(values: Values): string[] {
   }
   if (str(values, 'itb') === 'abnormal') out.push(`Iliotibial tract: ${str(values, 'itb-text') || 'abnormal'}.`)
   const inclination = num(values, 'trochlea')
-  if (inclination !== undefined && inclination < 11) out.push(`Trochlear dysplasia (lateral trochlear inclination ${inclination}°).`)
+  if (inclination !== undefined && inclination < 11) out.push(`Lateral trochlear inclination ${inclination}°, below the 11° threshold for patellar instability.`)
 
   const cartilage = cartilageRegions
     .filter(([id]) => !['', 'normal'].includes(str(values, id)))
@@ -947,12 +974,12 @@ const steps: ReportStep[] = [
       <>
         <p>The bruise pattern is the footprint of the mechanism ({SANDERS}):</p>
         {bruiseTable}
-        <p>Type a tibial plateau fracture by Schatzker ({SCHATZKER}). A Segond fracture is associated with ACL tear ({CAMPOS}). A subchondral low-signal area over 4 mm thick or over 14 mm long predicted an irreversible lesion ({LECOUVET}).</p>
+        <p>Type a tibial plateau fracture by Schatzker ({SCHATZKER}; {MARKHARDT}). A Segond fracture is associated with ACL tear ({CAMPOS}). A subchondral low-signal area over 4 mm thick or over 14 mm long predicted an irreversible lesion ({LECOUVET}).</p>
       </>
     ),
     fields: [
       fields.bruisePattern, fields.bmeSite, fields.fracture, fields.fractureSite, fields.plateau, fields.plateauPattern,
-      fields.plateauDissociation, fields.plateauDepression, fields.segond, fields.subchondral, fields.subchondralThickness,
+      fields.plateauDepressionSite, fields.plateauDissociation, fields.plateauDepression, fields.segond, fields.subchondral, fields.subchondralThickness,
       fields.subchondralLength, fields.subchondralSite, fields.ocd, fields.ocdSite, fields.ocdAge, fields.ocdSigns, fields.boneVariants,
     ],
     derive: deriveBones,
@@ -964,7 +991,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>Abnormal signal touching the surface on two or more images is a tear; on one image only, a possible tear ({DE_SMET}).</p>
-        <p>Medial meniscal extrusion of 3 mm or more was associated with severe degeneration, extensive tearing and root tears ({COSTA}).</p>
+        <p>Medial meniscal extrusion of more than 3 mm was associated with severe degeneration, extensive tearing and root tears ({COSTA}).</p>
       </>
     ),
     fields: [mm.status, mm.images, mm.type, mm.sites, fields.mmExtrusion],
@@ -1021,8 +1048,8 @@ const steps: ReportStep[] = [
     learn: 'extensor',
     teach: (
       <>
-        <p>After lateral patellar dislocation, the MPFL is commonly injured, often at the femur ({ELIAS}).</p>
-        <p>A lateral trochlear inclination below 11° indicates trochlear dysplasia ({CARRILLON}).</p>
+        <p>After lateral patellar dislocation, the medial retinaculum was disrupted at its patellar insertion in 76%, the MPFL femoral origin was injured in 49% of those seen, and the inferomedial patella had an osteochondral injury in 70% ({ELIAS}).</p>
+        <p>A lateral trochlear inclination below 11° was a diagnostic test for patellar instability ({CARRILLON}).</p>
       </>
     ),
     fields: [fields.quadriceps, fields.patellarTendon, fields.mpfl, fields.mpflSite, fields.trochlea],
@@ -1055,7 +1082,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, the four cartilage depth grades and how Schatzker type IV is broken) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -1073,9 +1100,9 @@ const study: StudyDefinition = {
     {
       id: 'extrusion',
       question: 'The medial meniscus is extruded by 4 mm. What does the lesson say to do next?',
-      options: ['Nothing: extrusion under 5 mm is normal', 'Look hard at the posterior root, since extrusion of 3 mm or more is associated with root tears', 'Call a bucket-handle tear', 'Measure the lateral meniscus for comparison'],
+      options: ['Nothing: extrusion under 5 mm is normal', 'Look hard at the posterior root, since extrusion of more than 3 mm is associated with root tears', 'Call a bucket-handle tear', 'Measure the lateral meniscus for comparison'],
       answer: 1,
-      explanation: <p>Medial meniscal extrusion of 3 mm or more was associated with severe degeneration, extensive tearing and root tears ({COSTA}).</p>,
+      explanation: <p>Medial meniscal extrusion of more than 3 mm was associated with severe degeneration, extensive tearing and root tears ({COSTA}).</p>,
     },
     {
       id: 'pivot-shift',
@@ -1089,7 +1116,7 @@ const study: StudyDefinition = {
       question: 'Contusions are seen in the inferomedial patella and the anterolateral lateral femoral condyle. Which ligament should you look at hardest?',
       options: ['The MPFL', 'The ACL', 'The LCL', 'The PCL'],
       answer: 0,
-      explanation: <p>That is the pattern of a lateral patellar dislocation, after which the medial patellofemoral ligament is commonly injured, often at its femoral attachment ({SANDERS}; {ELIAS}).</p>,
+      explanation: <p>That is the pattern of a lateral patellar dislocation, after which the medial restraints are injured: the medial retinaculum at its patellar insertion in 76%, and the MPFL femoral origin in 49% of those seen ({SANDERS}; {ELIAS}).</p>,
     },
     {
       id: 'segond',
@@ -1110,14 +1137,14 @@ const study: StudyDefinition = {
       question: 'The lateral tibial plateau has a split fragment with a depressed articular surface, and the metaphysis is still joined to the diaphysis. What is the Schatzker type?',
       options: ['Type I', 'Type II', 'Type III', 'Type IV'],
       answer: 1,
-      explanation: <p>A split with depression of the lateral plateau is Schatzker type II; a pure split is type I and a pure depression type III ({SCHATZKER}).</p>,
+      explanation: <p>A split with depression of the lateral plateau is Schatzker type II; a pure split is type I and a pure depression type III ({MARKHARDT}).</p>,
     },
     {
       id: 'schatzker-vi',
       question: 'A lateral plateau split also separates the metaphysis from the diaphysis. What is the Schatzker type?',
       options: ['Type I', 'Type V', 'Type VI', 'It depends on the medial plateau'],
       answer: 2,
-      explanation: <p>Dissociation of the metaphysis from the diaphysis makes a plateau fracture type VI, whichever plateaus are broken ({SCHATZKER}).</p>,
+      explanation: <p>Dissociation of the metaphysis from the diaphysis makes a plateau fracture type VI, whichever plateaus are broken ({MARKHARDT}).</p>,
     },
     {
       id: 'discoid',
@@ -1128,10 +1155,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'trochlea',
-      question: 'The lateral trochlear inclination measures 9°. What does that indicate?',
-      options: ['A normal trochlea', 'Trochlear dysplasia', 'Patella alta', 'An MPFL tear'],
+      question: 'The lateral trochlear inclination measures 9°. What does that suggest?',
+      options: ['A normal trochlea', 'Patellar instability, since it is below the 11° threshold', 'Patella alta', 'An MPFL tear'],
       answer: 1,
-      explanation: <p>A lateral trochlear inclination below 11° indicates trochlear dysplasia ({CARRILLON}).</p>,
+      explanation: <p>A lateral trochlear inclination below 11° was a diagnostic test for patellar instability ({CARRILLON}).</p>,
     },
     {
       id: 'parameniscal-cyst',
