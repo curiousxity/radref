@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { palmerClasses, palmerDescriptions, palmerKind, palmerSentence } from '../logic/palmer'
 import type { PalmerClass } from '../logic/palmer'
@@ -20,7 +20,7 @@ const traumaticOptions = palmerClasses.filter((c) => palmerKind(c) === 'traumati
 const degenerativeOptions = palmerClasses.filter((c) => palmerKind(c) === 'degenerative').map(classOption)
 
 const references: LessonReference[] = [
-  { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.' },
+  { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.', doi: '10.1016/0363-5023(89)90174-3' },
 ]
 
 export function PalmerPage() {
@@ -43,7 +43,7 @@ export function PalmerPage() {
           <span className="calc-tag">TFCC</span>
         </div>
         <p>Class a triangular fibrocartilage complex lesion as traumatic or degenerative, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the class wording has not yet been checked against Palmer's paper. Not yet reviewed by the site author. Source: Palmer, J Hand Surg Am 1989.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract says only that traumatic lesions are classed by location and degenerative ones by the location and severity of the changes, so the wording of each class has not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -87,7 +87,7 @@ export function PalmerPage() {
         <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it.</p>
       </section>
 
-      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the class wording has been checked only where the abstract states it." />
     </div>
   )
 }

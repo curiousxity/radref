@@ -13,8 +13,9 @@ const study = studyOf(WristMriStudyPage)
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims) or, for the four
  * shared classifications, 2026-10-23-wrist-calculators-sources.md (MF, HB, PA, LI claims).
- * None has been checked against its paper yet (PubMed was unreachable), so when the check is
- * done a case may have to change; say in that commit why the old expectation was wrong.
+ * The references are matched, but only the claims marked verified there were read in their
+ * papers; when the rest are checked a case may have to change; say in that commit why the old
+ * expectation was wrong.
  */
 
 describe('wrist MRI lesson', () => {
@@ -25,11 +26,12 @@ describe('wrist MRI lesson', () => {
     ])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(18)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
 
@@ -192,15 +194,18 @@ describe('wrist MRI rules (unchecked)', () => {
     expect(impressionOf({ ...normal, lunate: 'diffuse' })).toBe('Diffuse abnormal signal in the lunate, as in Kienböck disease.')
   })
 
-  // W2-4: "Ulnar impaction gives focal abnormal signal in the ulnar (medial) part of the
-  // proximal lunate ... and goes with positive ulnar variance."
+  // W2-4: "focal abnormal signal intensity of the ulnar aspect of the lunate in 87% of wrists,
+  // of the radial aspects of the triquetrum in 43%, and of the radial aspects of the ulnar head
+  // in 10%" (Imaeda 1996, abstract); "positive ulnar variance in ulnar impaction syndrome"
+  // (Cerezal 2002, abstract). The old impression said "proximal lunate", which Imaeda does not
+  // say, so the wording now follows the paper.
   test('focal ulnar-side lunate signal against the ulnar variance', () => {
     const focal = { lunate: 'focal-ulnar' }
     expect(chips(study, 'bones', { ...focal, 'ulnar-variance': 'positive' })['Ulnar impaction']).toBe('Fits: focal ulnar-side lunate signal with positive ulnar variance')
     expect(chips(study, 'bones', focal)['Ulnar impaction']).toBe('Pattern of ulnar impaction: check the ulnar variance (step 6)')
     expect(chips(study, 'bones', { ...focal, 'ulnar-variance': 'neutral' })['Ulnar impaction']).toBeUndefined()
     expect(impressionOf({ ...normal, ...focal, 'ulnar-variance': 'positive' }))
-      .toBe('Focal abnormal signal on the ulnar side of the proximal lunate with positive ulnar variance, in keeping with ulnar impaction.')
+      .toBe('Focal abnormal signal on the ulnar side of the lunate with positive ulnar variance, in keeping with ulnar impaction.')
     expect(report(study, { ...normal, ...focal, 'ulnar-variance': 'negative' }).warnings)
       .toEqual(['Focal ulnar-side lunate signal is entered, the pattern of ulnar impaction, which goes with positive ulnar variance, but the ulnar variance is entered as negative.'])
   })

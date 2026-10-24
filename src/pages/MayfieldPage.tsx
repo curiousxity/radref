@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { mayfield, mayfieldDescriptions, mayfieldGaps, mayfieldSentence, mayfieldStages } from '../logic/mayfield'
 import type { MayfieldInput } from '../logic/mayfield'
@@ -26,7 +26,7 @@ const questions: [keyof MayfieldInput, string][] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const references: LessonReference[] = [
-  { citation: 'Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241.' },
+  { citation: 'Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241.', doi: '10.1016/s0363-5023(80)80007-4' },
 ]
 
 export function MayfieldPage() {
@@ -48,7 +48,7 @@ export function MayfieldPage() {
           <span className="calc-tag">Perilunate injury</span>
         </div>
         <p>Stage a perilunate injury, from scapholunate disruption to lunate dislocation, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the stage wording has not yet been checked against Mayfield's paper. Not yet reviewed by the site author. Source: Mayfield et al., J Hand Surg Am 1980.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, and stages I (scapholunate diastasis) and IV (lunate dislocation) and the sequential progression are checked against its abstract, but the paper is paywalled, so stages II and III and the greater-arc sentence have not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -94,7 +94,7 @@ export function MayfieldPage() {
         <p>The injury travels around the lunate: from the scapholunate joint, through the capitolunate and lunotriquetral joints, to dislocation of the lunate itself. When the scaphoid breaks instead of the scapholunate ligament tearing, the path runs through the bone (a greater arc injury).</p>
       </section>
 
-      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the stage wording has been checked only where the abstract states it." />
     </div>
   )
 }

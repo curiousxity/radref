@@ -154,48 +154,31 @@ Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is d
 
 ### Wrist MRI study
 
-Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and claim is
-in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`, marked "to check"; the
-classification wording is under the calculators below. Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
+Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-mri-sources.md`.
 
-- [ ] Match references R1–R18 on PubMed and Crossref; fix citation text. The author lists
-  and pages of Theumann 2003, Vo 1995 and Conway 1985 are the least certain.
-- [ ] Fall on the outstretched hand as the usual mechanism (W1-1).
-- [ ] MRI finds occult scaphoid fractures when radiographs are normal (W2-1, Gaebler 1996:
-  is it the right paper?).
-- [ ] Ulnar impaction: focal signal at the ulnar proximal lunate, triquetrum and ulnar head
-  with positive ulnar variance (W2-4, Imaeda 1996, Cerezal 2002); diffuse versus focal
-  signal tells Kienböck from impaction (W2-5).
-- [ ] Scapholunate ligament parts, dorsal strongest (W3-1, Berger 1996).
-- [ ] Scapholunate angle 30–60° normal, over 60° DISI, under 30° VISI (W3-2, Linscheid
-  1972): are these the paper's bounds, and do they apply on sagittal MRI?
-- [ ] Lunotriquetral disruption and VISI (W4-1).
-- [ ] Mayfield progression starts at the scapholunate unless the injury runs through the
-  scaphoid (W5-2). The study counts the capitolunate joint as disrupted when the lunate is
-  dislocated (the site's reading of the sequence).
-- [ ] Palmer 2D and 2E include lunotriquetral perforation (W6-2); TFCC defects in wrists
-  without symptoms (W6-3, Zanetti 2000).
-- [ ] Extrinsic ligaments on MR arthrography (W7-1, Theumann 2003).
-- [ ] de Quervain (W8-1, Glajchen 1996); intersection syndrome (W8-2, Costa 2003).
-- [ ] Median nerve signs in carpal tunnel syndrome (W9-1, Mesgarzadeh 1989).
-- [ ] Guyon canal and accessory muscles (W10-1, W12-3, Zeiss 1992); occult dorsal ganglia
-  (W11-1, Vo 1995).
-- [ ] Type II lunate (W12-1, Viegas 1990); carpal boss (W12-2, Conway 1985).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references R1–R18 on PubMed and Crossref (2026-10-23). All found as written;
+  DOIs and `<Cite>` links added.
+- [x] Verified from abstracts: W2-1, W6-3, W7-1, W9-1, W10-1, W11-1, W12-1 to W12-3; others
+  in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): ulnar impaction signal is in
+  the ulnar lunate and the radial aspects of the triquetrum and ulnar head (Imaeda, no
+  "proximal"); de Quervain thickening is the reliable sign and intratendinous signal less
+  reliable (Glajchen); "MRI shows stage I" Kienböck is dropped, since Lichtman 1977 predates
+  clinical MRI (stage I is "normal radiographs").
+- [ ] Still unchecked, because the papers are paywalled or have no abstract: W2-5, W3-2,
+  W4-1 (both on Linscheid 1972), W5-2, and the unread parts of the partly verified rows.
 
 ### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
 
-Drafted 2026-10-23 as an unchecked draft. Every paper and claim is in
-`docs/superpowers/research/2026-10-23-wrist-calculators-sources.md`, marked "to check".
+Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculators-sources.md`.
 
-- [ ] Match references W1–W4 on PubMed and Crossref.
-- [ ] Mayfield stages I–IV (MF-1 to MF-4) and that they are progressive (MF-5). Does the
-  paper say a scaphoid fracture can take the place of the scapholunate tear?
-- [ ] Herbert types A1–D2 (HB-1 to HB-5). Is the comminuted B5 in the original?
-- [ ] Palmer classes 1A–1D and 2A–2E (PA-1 to PA-3).
-- [ ] Lichtman stages (LI-1, LI-2, LI-4), and who split stage III into IIIA and IIIB (LI-3):
-  find that paper and add it.
+- [x] Match references W1–W4 on PubMed and Crossref (2026-10-23). All found; DOIs added.
+- [x] MF-1 and MF-4 verified from Mayfield's abstract; MF-5, HB-5, PA-3 and LI-1 in part.
+- [x] Lichtman stage I is "normal radiographs"; the MRI wording is dropped (the 1977 paper
+  predates clinical MRI), by the author's choice (2026-10-23).
+- [ ] Still unchecked, because the papers are paywalled: MF-2, MF-3, the greater-arc
+  sentence, HB-1 to HB-4 (and whether B5 is in Herbert 1984), PA-1, PA-2, LI-2 to LI-4. Who
+  split Lichtman III into IIIA and IIIB (LI-3) still has no source, nor does IIIC.
 
 ### Foot MRI study
 

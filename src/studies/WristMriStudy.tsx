@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { herbertDescriptions, herbertGroup, herbertSentence, herbertTypes } from '../logic/herbert'
 import type { HerbertType } from '../logic/herbert'
@@ -12,53 +13,71 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims);
- * the Mayfield, Herbert, Palmer and Lichtman wording is claimed in
- * 2026-10-23-wrist-calculators-sources.md (MF, HB, PA and LI claims). Rule chips and warnings
- * carry their claim IDs. Until the check, citations are plain text rather than <Cite> links,
- * and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled and Linscheid 1972 has no abstract, so only claims whose wording is
+ * in an abstract are verified. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims); the Mayfield, Herbert,
+ * Palmer and Lichtman wording is in 2026-10-23-wrist-calculators-sources.md (MF, HB, PA and LI
+ * claims). Rule chips and warnings carry their claim IDs.
  */
 
-const LINSCHEID = 'Linscheid et al., J Bone Joint Surg Am 1972'
-const MAYFIELD = 'Mayfield et al., J Hand Surg Am 1980'
-const HERBERT = 'Herbert and Fisher, J Bone Joint Surg Br 1984'
-const PALMER = 'Palmer, J Hand Surg Am 1989'
-const LICHTMAN = 'Lichtman et al., J Bone Joint Surg Am 1977'
-const GAEBLER = 'Gaebler et al., J Trauma 1996'
-const IMAEDA = 'Imaeda et al., Radiology 1996'
-const CEREZAL = 'Cerezal et al., Radiographics 2002'
-const VIEGAS = 'Viegas et al., J Hand Surg Am 1990'
-const ZANETTI = 'Zanetti et al., Radiology 2000'
-const THEUMANN = 'Theumann et al., Radiology 2003'
-const GLAJCHEN = 'Glajchen and Schweitzer, Skeletal Radiol 1996'
-const COSTA = 'Costa et al., AJR 2003'
-const MESGARZADEH = 'Mesgarzadeh et al., Radiology 1989'
-const ZEISS = 'Zeiss et al., AJR 1992'
-const BERGER = 'Berger, J Hand Surg Am 1996'
-const VO = 'Vo et al., J Hand Surg Am 1995'
-const CONWAY = 'Conway et al., Radiology 1985'
+const LINSCHEID_DOI = '10.2106/00004623-197254080-00003'
+const MAYFIELD_DOI = '10.1016/s0363-5023(80)80007-4'
+const HERBERT_DOI = '10.1302/0301-620X.66B1.6693468'
+const PALMER_DOI = '10.1016/0363-5023(89)90174-3'
+const LICHTMAN_DOI = '10.2106/00004623-197759070-00011'
+const GAEBLER_DOI = '10.1097/00005373-199607000-00011'
+const IMAEDA_DOI = '10.1148/radiology.201.2.8888248'
+const CEREZAL_DOI = '10.1148/radiographics.22.1.g02ja01105'
+const VIEGAS_DOI = '10.1016/s0363-5023(09)90016-8'
+const ZANETTI_DOI = '10.1148/radiology.216.3.r00se06840'
+const THEUMANN_DOI = '10.1148/radiol.2261011715'
+const GLAJCHEN_DOI = '10.1007/s002560050033'
+const COSTA_DOI = '10.2214/ajr.181.5.1811245'
+const MESGARZADEH_DOI = '10.1148/radiology.171.3.2541464'
+const ZEISS_DOI = '10.2214/ajr.158.5.1566671'
+const BERGER_DOI = '10.1016/S0363-5023(96)80096-7'
+const VO_DOI = '10.1016/S0363-5023(05)80288-6'
+const CONWAY_DOI = '10.1148/radiology.156.1.3923555'
+
+const LINSCHEID = <Cite doi={LINSCHEID_DOI}>Linscheid et al., J Bone Joint Surg Am 1972</Cite>
+const MAYFIELD = <Cite doi={MAYFIELD_DOI}>Mayfield et al., J Hand Surg Am 1980</Cite>
+const HERBERT = <Cite doi={HERBERT_DOI}>Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>
+const PALMER = <Cite doi={PALMER_DOI}>Palmer, J Hand Surg Am 1989</Cite>
+const LICHTMAN = <Cite doi={LICHTMAN_DOI}>Lichtman et al., J Bone Joint Surg Am 1977</Cite>
+const GAEBLER = <Cite doi={GAEBLER_DOI}>Gaebler et al., J Trauma 1996</Cite>
+const IMAEDA = <Cite doi={IMAEDA_DOI}>Imaeda et al., Radiology 1996</Cite>
+const CEREZAL = <Cite doi={CEREZAL_DOI}>Cerezal et al., Radiographics 2002</Cite>
+const VIEGAS = <Cite doi={VIEGAS_DOI}>Viegas et al., J Hand Surg Am 1990</Cite>
+const ZANETTI = <Cite doi={ZANETTI_DOI}>Zanetti et al., Radiology 2000</Cite>
+const THEUMANN = <Cite doi={THEUMANN_DOI}>Theumann et al., Radiology 2003</Cite>
+const GLAJCHEN = <Cite doi={GLAJCHEN_DOI}>Glajchen and Schweitzer, Skeletal Radiol 1996</Cite>
+const COSTA = <Cite doi={COSTA_DOI}>Costa et al., AJR 2003</Cite>
+const MESGARZADEH = <Cite doi={MESGARZADEH_DOI}>Mesgarzadeh et al., Radiology 1989</Cite>
+const ZEISS = <Cite doi={ZEISS_DOI}>Zeiss et al., AJR 1992</Cite>
+const BERGER = <Cite doi={BERGER_DOI}>Berger, J Hand Surg Am 1996</Cite>
+const VO = <Cite doi={VO_DOI}>Vo et al., J Hand Surg Am 1995</Cite>
+const CONWAY = <Cite doi={CONWAY_DOI}>Conway et al., Radiology 1985</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Linscheid RL, Dobyns JH, Beabout JW, Bryan RS. Traumatic instability of the wrist. Diagnosis, classification, and pathomechanics. J Bone Joint Surg Am. 1972;54(8):1612-1632.' },
-  { citation: 'Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241.' },
-  { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.' },
-  { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.' },
-  { citation: 'Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck\'s disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908.' },
-  { citation: 'Gaebler C, Kukla C, Breitenseher M, Trattnig S, Mittlboeck M, Vécsei V. Magnetic resonance imaging of occult scaphoid fractures. J Trauma. 1996;41(1):73-76.' },
-  { citation: 'Imaeda T, Nakamura R, Shionoya K, Makino N. Ulnar impaction syndrome: MR imaging findings. Radiology. 1996;201(2):495-500.' },
-  { citation: 'Cerezal L, del Piñal F, Abascal F, García-Valtuille R, Pereda T, Canga A. Imaging findings in ulnar-sided wrist impaction syndromes. Radiographics. 2002;22(1):105-121.' },
-  { citation: 'Viegas SF, Wagner K, Patterson R, Peterson P. Medial (hamate) facet of the lunate. J Hand Surg Am. 1990;15(4):564-571.' },
-  { citation: 'Zanetti M, Linkous MD, Gilula LA, Hodler J. Characteristics of triangular fibrocartilage defects in symptomatic and contralateral asymptomatic wrists. Radiology. 2000;216(3):840-845.' },
-  { citation: 'Theumann NH, Pfirrmann CW, Antonio GE, Chung CB, Gilula LA, Trudell DJ, Resnick D. Extrinsic carpal ligaments: normal MR arthrographic appearance in cadavers. Radiology. 2003;226(1):171-179.' },
-  { citation: 'Glajchen N, Schweitzer M. MRI features in de Quervain\'s tenosynovitis of the wrist. Skeletal Radiol. 1996;25(1):63-65.' },
-  { citation: 'Costa CR, Morrison WB, Carrino JA. MRI features of intersection syndrome of the forearm. AJR Am J Roentgenol. 2003;181(5):1245-1249.' },
-  { citation: 'Mesgarzadeh M, Schneck CD, Bonakdarpour A, Mitra A, Conaway D. Carpal tunnel: MR imaging. Part II. Carpal tunnel syndrome. Radiology. 1989;171(3):749-754.' },
-  { citation: 'Zeiss J, Jakab E, Khimji T, Imbriglia J. The ulnar tunnel at the wrist (Guyon\'s canal): normal MR anatomy and variants. AJR Am J Roentgenol. 1992;158(5):1081-1085.' },
-  { citation: 'Berger RA. The gross and histologic anatomy of the scapholunate interosseous ligament. J Hand Surg Am. 1996;21(2):170-178.' },
-  { citation: 'Vo P, Wright T, Hayden F, Dell P, Chidgey L. Evaluating dorsal wrist pain: MRI diagnosis of occult dorsal wrist ganglion. J Hand Surg Am. 1995;20(4):667-670.' },
-  { citation: 'Conway WF, Destouet JM, Gilula LA, Bellinghausen HW, Weeks PM. The carpal boss: an overview of radiographic evaluation. Radiology. 1985;156(1):29-31.' },
+  { citation: 'Linscheid RL, Dobyns JH, Beabout JW, Bryan RS. Traumatic instability of the wrist. Diagnosis, classification, and pathomechanics. J Bone Joint Surg Am. 1972;54(8):1612-1632.', doi: LINSCHEID_DOI },
+  { citation: 'Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241.', doi: MAYFIELD_DOI },
+  { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: HERBERT_DOI },
+  { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.', doi: PALMER_DOI },
+  { citation: 'Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck\'s disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908.', doi: LICHTMAN_DOI },
+  { citation: 'Gaebler C, Kukla C, Breitenseher M, Trattnig S, Mittlboeck M, Vécsei V. Magnetic resonance imaging of occult scaphoid fractures. J Trauma. 1996;41(1):73-76.', doi: GAEBLER_DOI },
+  { citation: 'Imaeda T, Nakamura R, Shionoya K, Makino N. Ulnar impaction syndrome: MR imaging findings. Radiology. 1996;201(2):495-500.', doi: IMAEDA_DOI },
+  { citation: 'Cerezal L, del Piñal F, Abascal F, García-Valtuille R, Pereda T, Canga A. Imaging findings in ulnar-sided wrist impaction syndromes. Radiographics. 2002;22(1):105-121.', doi: CEREZAL_DOI },
+  { citation: 'Viegas SF, Wagner K, Patterson R, Peterson P. Medial (hamate) facet of the lunate. J Hand Surg Am. 1990;15(4):564-571.', doi: VIEGAS_DOI },
+  { citation: 'Zanetti M, Linkous MD, Gilula LA, Hodler J. Characteristics of triangular fibrocartilage defects in symptomatic and contralateral asymptomatic wrists. Radiology. 2000;216(3):840-845.', doi: ZANETTI_DOI },
+  { citation: 'Theumann NH, Pfirrmann CW, Antonio GE, Chung CB, Gilula LA, Trudell DJ, Resnick D. Extrinsic carpal ligaments: normal MR arthrographic appearance in cadavers. Radiology. 2003;226(1):171-179.', doi: THEUMANN_DOI },
+  { citation: 'Glajchen N, Schweitzer M. MRI features in de Quervain\'s tenosynovitis of the wrist. Skeletal Radiol. 1996;25(1):63-65.', doi: GLAJCHEN_DOI },
+  { citation: 'Costa CR, Morrison WB, Carrino JA. MRI features of intersection syndrome of the forearm. AJR Am J Roentgenol. 2003;181(5):1245-1249.', doi: COSTA_DOI },
+  { citation: 'Mesgarzadeh M, Schneck CD, Bonakdarpour A, Mitra A, Conaway D. Carpal tunnel: MR imaging. Part II. Carpal tunnel syndrome. Radiology. 1989;171(3):749-754.', doi: MESGARZADEH_DOI },
+  { citation: 'Zeiss J, Jakab E, Khimji T, Imbriglia J. The ulnar tunnel at the wrist (Guyon\'s canal): normal MR anatomy and variants. AJR Am J Roentgenol. 1992;158(5):1081-1085.', doi: ZEISS_DOI },
+  { citation: 'Berger RA. The gross and histologic anatomy of the scapholunate interosseous ligament. J Hand Surg Am. 1996;21(2):170-178.', doi: BERGER_DOI },
+  { citation: 'Vo P, Wright T, Hayden F, Dell P, Chidgey L. Evaluating dorsal wrist pain: MRI diagnosis of occult dorsal wrist ganglion. J Hand Surg Am. 1995;20(4):667-670.', doi: VO_DOI },
+  { citation: 'Conway WF, Destouet JM, Gilula LA, Bellinghausen HW, Weeks PM. The carpal boss: an overview of radiographic evaluation. Radiology. 1985;156(1):29-31.', doi: CONWAY_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -111,8 +130,8 @@ const learn: LearnSection[] = [
         <h4>Other carpal bones and the distal radius</h4>
         <p>Look along every carpal bone, including the hook of the hamate and the dorsal surface of the triquetrum, and at the distal radius.</p>
         <h4>The lunate: Kienböck disease or ulnar impaction</h4>
-        <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar (medial) part of the proximal lunate, sometimes with the triquetrum and the ulnar head, and goes with positive ulnar variance ({IMAEDA}; {CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}).</p>
-        <p>Stage Kienböck disease by Lichtman ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. The stages are mostly read on radiographs: stage I has normal radiographs, and MRI is what shows it.</p>
+        <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar aspect of the lunate, sometimes also in the radial aspects of the triquetrum and the ulnar head ({IMAEDA}), and goes with positive ulnar variance ({CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}).</p>
+        <p>Stage Kienböck disease by Lichtman, whose four stages are clinical and radiographic ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. Stage I has normal radiographs.</p>
         {lichtmanTable}
       </>
     ),
@@ -175,7 +194,7 @@ const learn: LearnSection[] = [
     title: 'Step 8. Extensor compartments',
     body: (
       <>
-        <p>Go through the six compartments. In de Quervain tenosynovitis the abductor pollicis longus and extensor pollicis brevis tendons of the first compartment are thickened, with increased signal within and around them ({GLAJCHEN}).</p>
+        <p>Go through the six compartments. In de Quervain tenosynovitis, thickening of the abductor pollicis longus and extensor pollicis brevis tendons of the first compartment is the most reliable sign, with edema around them; edema in the subcutaneous fat and increased signal within the tendons are less reliable ({GLAJCHEN}).</p>
         <p>Intersection syndrome shows peritendinous edema where the first compartment crosses the second, proximal to Lister's tubercle ({COSTA}).</p>
         <p>Check the extensor carpi ulnaris for tendinopathy, tears and its position in the groove.</p>
       </>
@@ -302,12 +321,12 @@ const fields = {
   lunate: { id: 'lunate', kind: 'choice', label: 'Lunate signal', required: true, options: [
     { value: 'normal', label: 'Normal' },
     { value: 'diffuse', label: 'Diffuse, through the whole lunate' },
-    { value: 'focal-ulnar', label: 'Focal, ulnar side of the proximal lunate' },
+    { value: 'focal-ulnar', label: 'Focal, ulnar side of the lunate' },
   ] },
   lichtman: { id: 'lichtman', kind: 'choice', label: 'Lichtman stage', showIf: (v) => str(v, 'lunate') === 'diffuse', help: 'Mostly read on radiographs; as in the Lichtman calculator.', options: lichtmanStages.map((stage) => ({ value: stage, label: `${stage}: ${lichtmanDescriptions[stage]}` })) },
   impactionSites: { id: 'impaction-sites', kind: 'multi', label: 'Also abnormal', showIf: (v) => str(v, 'lunate') === 'focal-ulnar', options: [
-    { value: 'triquetrum', label: 'Triquetrum' },
-    { value: 'ulnar-head', label: 'Ulnar head' },
+    { value: 'triquetrum', label: 'Radial aspect of the triquetrum' },
+    { value: 'ulnar-head', label: 'Radial aspect of the ulnar head' },
   ] },
 
   sl: { id: 'sl', kind: 'choice', label: 'Scapholunate ligament', required: true, options: tearOptions },
@@ -527,7 +546,7 @@ function boneLines(values: Values): (string | false)[] {
     radius === 'present' && `Distal radius: fracture${str(values, 'radius-text') ? `, ${str(values, 'radius-text')}` : ''}`,
     lunate === 'normal' && 'Lunate: normal signal',
     lunate === 'diffuse' && `Lunate: diffuse abnormal signal${stage ? `, Lichtman stage ${stage}` : ''}`,
-    lunate === 'focal-ulnar' && `Lunate: focal abnormal signal on the ulnar side of the proximal lunate${impaction.length > 0 ? `; also ${impaction.join(', ')}` : ''}`,
+    lunate === 'focal-ulnar' && `Lunate: focal abnormal signal on the ulnar side of the lunate${impaction.length > 0 ? `; also ${impaction.join(', ')}` : ''}`,
   ]
 }
 
@@ -611,7 +630,7 @@ function findings(values: Values): string[] {
   }
   if (lunate === 'focal-ulnar') {
     const positive = str(values, 'ulnar-variance') === 'positive'
-    out.push(`Focal abnormal signal on the ulnar side of the proximal lunate${positive ? ' with positive ulnar variance, in keeping with ulnar impaction' : ''}.`)
+    out.push(`Focal abnormal signal on the ulnar side of the lunate${positive ? ' with positive ulnar variance, in keeping with ulnar impaction' : ''}.`)
   }
 
   for (const [id, name] of [['sl', 'scapholunate'], ['lt', 'lunotriquetral']] as const) {
@@ -760,7 +779,7 @@ const steps: ReportStep[] = [
       <>
         <p>MRI shows occult scaphoid fractures when radiographs are normal ({GAEBLER}). Herbert types ({HERBERT}):</p>
         {herbertTable}
-        <p>Diffuse lunate signal is the Kienböck pattern, staged by Lichtman ({LICHTMAN}); focal signal on the ulnar side of the proximal lunate with positive ulnar variance is ulnar impaction ({IMAEDA}; {CEREZAL}).</p>
+        <p>Diffuse lunate signal is the Kienböck pattern, staged by Lichtman ({LICHTMAN}); focal signal on the ulnar side of the lunate ({IMAEDA}) with positive ulnar variance ({CEREZAL}) is ulnar impaction.</p>
       </>
     ),
     fields: [fields.scaphoid, fields.herbert, fields.otherFracture, fields.otherFractureSites, fields.radius, fields.radiusText, fields.lunate, fields.lichtman, fields.impactionSites],
@@ -819,7 +838,7 @@ const steps: ReportStep[] = [
     id: 'extensors',
     title: 'Step 8. Extensor compartments',
     learn: 'extensors',
-    teach: <p>de Quervain: thickened first-compartment tendons with signal within and around them ({GLAJCHEN}). Intersection syndrome: edema where the first compartment crosses the second ({COSTA}).</p>,
+    teach: <p>de Quervain: thickened first-compartment tendons and edema around them; signal within the tendons is less reliable ({GLAJCHEN}). Intersection syndrome: edema where the first compartment crosses the second ({COSTA}).</p>,
     fields: [fields.firstCompartment, fields.intersection, fields.ecu, fields.ecuPosition, fields.otherExtensors, fields.otherExtensorsText],
   },
   {
@@ -863,7 +882,7 @@ const study: StudyDefinition = {
   slug: 'wrist-mri',
   name: 'Wrist MRI',
   lede: 'Read a wrist MRI for pain or injury: a fixed search pattern through the scaphoid and lunate, the intrinsic ligaments and perilunate ring, the TFCC, tendons, tunnels and ganglia, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Mayfield, Herbert, Palmer and Lichtman wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -880,17 +899,17 @@ const study: StudyDefinition = {
     },
     {
       id: 'lunate-patterns',
-      question: 'Signal is abnormal only on the ulnar side of the proximal lunate, and the ulnar variance is positive. Which diagnosis fits?',
+      question: 'Signal is abnormal only on the ulnar side of the lunate, and the ulnar variance is positive. Which diagnosis fits?',
       options: ['Kienböck disease', 'Ulnar impaction', 'Scaphoid nonunion', 'Perilunate dislocation'],
       answer: 1,
-      explanation: <p>Ulnar impaction gives focal signal in the ulnar part of the proximal lunate and goes with positive ulnar variance; Kienböck disease involves the whole lunate ({IMAEDA}; {CEREZAL}).</p>,
+      explanation: <p>Ulnar impaction gives focal signal in the ulnar aspect of the lunate ({IMAEDA}) and goes with positive ulnar variance; Kienböck disease involves the whole lunate ({CEREZAL}).</p>,
     },
     {
       id: 'lichtman-i',
-      question: 'Which Lichtman stage of Kienböck disease is found only on MRI?',
+      question: 'Which Lichtman stage of Kienböck disease has normal radiographs?',
       options: ['Stage I', 'Stage II', 'Stage IIIA', 'Stage IV'],
       answer: 0,
-      explanation: <p>Lichtman stage I has normal radiographs, with the lunate abnormal only on MRI ({LICHTMAN}).</p>,
+      explanation: <p>Lichtman stage I has normal radiographs; sclerosis of the lunate is stage II ({LICHTMAN}).</p>,
     },
     {
       id: 'sl-strongest',
@@ -932,7 +951,7 @@ const study: StudyDefinition = {
       question: 'Which tendons are thickened in de Quervain tenosynovitis?',
       options: ['ECRL and ECRB', 'APL and EPB', 'ECU', 'EPL'],
       answer: 1,
-      explanation: <p>In de Quervain tenosynovitis the abductor pollicis longus and extensor pollicis brevis of the first compartment are thickened, with increased signal within and around them ({GLAJCHEN}).</p>,
+      explanation: <p>Increased thickness of the abductor pollicis longus and extensor pollicis brevis tendons of the first compartment was the most reliable sign, with peritendinous edema ({GLAJCHEN}).</p>,
     },
     {
       id: 'carpal-tunnel',

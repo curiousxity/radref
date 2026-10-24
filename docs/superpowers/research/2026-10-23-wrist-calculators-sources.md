@@ -7,31 +7,67 @@ Evidence base for the four wrist calculators (`/mayfield`, `/herbert`, `/palmer`
 `palmer.ts`, `lichtman.ts`), which the wrist MRI study also uses. The study's own claims are
 in `2026-10-23-wrist-mri-sources.md`.
 
-## Status: nothing here is verified
+## Status: references matched, claims partly verified (2026-10-23)
 
-Written in a cloud session whose network blocks PubMed, PubMed Central, Crossref, doi.org
-and Europe PMC. The citations and the wording of every stage, type and class are **from
-memory**. Every row is **to check**. The pages say "Unchecked draft" in their source note,
-their references have no DOI, and `src/logic/wristClassifications.test.ts` quotes each claim
-by ID. The author chose (2026-10-23) to deploy before the check; the pages stay labelled "Unchecked draft" on the live site until it is done.
+Checked on a computer on 2026-10-23 by the ankle method (`2026-10-19-ankle-mri-sources.md`):
+each paper matched in PubMed (E-utilities `esummary`), its DOI resolved on Crossref, and a
+claim marked verified only when its wording was read in the PubMed abstract (`efetch`). None
+of the four has a PMC copy; Unpaywall could not be used (it refuses the placeholder address)
+and the journal pages are paywalled. As expected for classic papers, the abstracts say that a
+classification exists and how it is organised, but not the wording of each stage, type or
+class, so most claims below stay unchecked. All four citations, as written from memory,
+matched their PubMed records.
 
-## How to check (on a computer)
+The author chose (2026-10-23) to deploy before the check, and that claims which cannot be
+verified (paywalled) stay as they are, marked unchecked.
 
-Same method as the ankle (`2026-10-19-ankle-mri-sources.md`): match each paper on PubMed,
-resolve its DOI on Crossref, and mark a claim verified only when its wording is read in the
-abstract or full text. These are classic papers, so the classification tables may be in
-figures or the full text only. If a paper's wording differs, correct the descriptions in the
-logic file and the test in the same commit, saying why. Then add the DOIs to the pages'
-references and reword their source notes.
+The author decided (2026-10-23), after this check: add the DOIs and `<Cite doi>` links now,
+keeping the "Unchecked draft" source notes, which now name what is still unchecked; rewrite
+the claims marked "for the author" to the paper's wording, or drop what no listed paper states.
+Applied: the four pages carry the DOI on their reference and a `<Cite>` link in "Source:", and
+LI-1 and LI-4 are changed (below). `src/logic/wristClassifications.test.ts` quotes each claim
+by ID, and the verified ones (MF-1, MF-4, MF-5) by the abstract's sentence.
 
 ## References
 
-| # | Citation (from memory) | Candidate DOI | Used for |
-|---|---|---|---|
-| W1 | Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241. | 10.1016/s0363-5023(80)80007-4 (unconfirmed) | Mayfield |
-| W2 | Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123. | 10.1302/0301-620X.66B1.6693468 (unconfirmed) | Herbert |
-| W3 | Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606. | 10.1016/0363-5023(89)90174-3 (unconfirmed) | Palmer |
-| W4 | Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck's disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908. | — | Lichtman |
+| # | Citation (corrected to PubMed) | PMID | DOI | Read |
+|---|---|---|---|---|
+| W1 | Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241. | 7400560 | 10.1016/s0363-5023(80)80007-4 | Abstract |
+| W2 | Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123. | 6693468 | 10.1302/0301-620X.66B1.6693468 | Abstract |
+| W3 | Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606. | 2666492 | 10.1016/0363-5023(89)90174-3 | Abstract |
+| W4 | Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck's disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908. | 908720 | 10.2106/00004623-197759070-00011 | Abstract |
+
+Notes on the set:
+
+- No citation needed correcting. The three candidate DOIs (W1, W2, W3) were right.
+- W4: PubMed has no DOI; it was found by a Crossref bibliographic search and the record
+  matches authors, volume, issue and pages. Crossref titles it only "Kienböck's disease"; the
+  pages keep PubMed's full title.
+- W4 is from 1977, before clinical MRI, so it cannot be the source for "MRI shows stage I"
+  (LI-1, LI-4). For the author.
+- LI-3 (who split stage III into IIIA and IIIB) is not settled. The 1982 update by the same
+  group (Lichtman DM, Alexander AH, Mack GR, Gunther SF. J Hand Surg Am. 1982;7(4):343-347;
+  PMID 7150434) was looked at, but its abstract mentions stages I to III only, with no IIIA or
+  IIIB, so no paper has been added. For the author.
+
+What the abstracts do say:
+
+- W1: "These dislocations occurred in a sequential fashion due to progressive and specific
+  ligamentous disruptions and were classified according to the degree of perilunar
+  instability (PLI). Stage I perilunar instability (scapholunate diastasis) had the least
+  degree of carpal instability. Lunate dislocations (stage IV PLI) had the highest degree of
+  carpal instability." Also: "The mechanism of injury was extension, ulnar deviation, and
+  intercarpal supination."
+- W2: "A classification of scaphoid fractures is proposed. The indications for operation
+  included not only acute unstable fractures, but also fractures with delayed healing and
+  those with established non-union".
+- W3: "The classification recognizes both traumatic and degenerative lesions. Traumatic
+  lesions are classified according to their location. Degenerative lesions are classified by
+  the location and severity of degenerative changes of the triangular fibrocartilage complex,
+  ulnar head, ulnocarpal bones and lunotriquetral ligament."
+- W4: "delay in diagnosis and prolonged treatment by plaster immobilization led to
+  progressive collapse of the lunate"; "Four clinical and roentgenographic stages were
+  identified".
 
 ## Claims
 
@@ -39,44 +75,45 @@ references and reword their source notes.
 
 | ID | Claim | Rule | Verified |
 |---|---|---|---|
-| MF-1 | Stage I is scapholunate disruption (scapholunate dissociation). | SL disrupted → I | to check |
-| MF-2 | Stage II adds capitolunate disruption: the capitate dislocates from the lunate (perilunate dislocation). | + capitolunate → II | to check |
-| MF-3 | Stage III extends through the lunotriquetral joint (lunotriquetral dissociation; called midcarpal dislocation in some texts). | + LT → III | to check |
-| MF-4 | Stage IV is dislocation of the lunate from the radius. | lunate dislocated → IV | to check |
-| MF-5 | The stages are progressive: each includes the injuries of the stages before it. The page and study give the highest stage marked and list unmarked earlier stages as a "check the images" note (the site's handling). | highest stage; gaps listed | to check |
+| MF-1 | Stage I is scapholunate disruption (scapholunate dissociation). | SL disrupted → I | yes. W1 abstract: "Stage I perilunar instability (scapholunate diastasis)". |
+| MF-2 | Stage II adds capitolunate disruption: the capitate dislocates from the lunate (perilunate dislocation). | + capitolunate → II | no: stage II is not described in the W1 abstract. Kept, unchecked. |
+| MF-3 | Stage III extends through the lunotriquetral joint (lunotriquetral dissociation; called midcarpal dislocation in some texts). | + LT → III | no: stage III is not described in the W1 abstract. Kept, unchecked. |
+| MF-4 | Stage IV is dislocation of the lunate from the radius. | lunate dislocated → IV | yes. W1 abstract: "Lunate dislocations (stage IV PLI) had the highest degree of carpal instability." (That the lunate dislocates from the radius is not spelled out.) |
+| MF-5 | The stages are progressive: each includes the injuries of the stages before it. The page and study give the highest stage marked and list unmarked earlier stages as a "check the images" note (the site's handling). | highest stage; gaps listed | partly. W1 abstract: "These dislocations occurred in a sequential fashion due to progressive and specific ligamentous disruptions". The "highest stage, gaps listed" handling is the site's own. |
 
 The Mayfield page also says that a scaphoid fracture can take the place of the
-scapholunate tear (a greater arc injury). Check that W1 says so, or remove the sentence.
+scapholunate tear (a greater arc injury). no: not in the W1 abstract (which mentions radial
+styloid avulsion fractures and scaphoid rotation, but no scaphoid fracture). Kept, unchecked.
 
 ### Herbert (W2)
 
 | ID | Claim | Rule | Verified |
 |---|---|---|---|
-| HB-1 | Type A (acute stable): A1 fracture of the tubercle, A2 incomplete fracture through the waist. | — | to check |
-| HB-2 | Type B (acute unstable): B1 distal oblique, B2 complete waist, B3 proximal pole, B4 trans-scaphoid perilunate fracture-dislocation. | — | to check |
-| HB-3 | Type C is delayed union. | — | to check |
-| HB-4 | Type D is established non-union: D1 fibrous, D2 sclerotic (pseudarthrosis). | — | to check |
-| HB-5 | The groups: A acute stable, B acute unstable, C delayed union, D non-union. | — | to check |
+| HB-1 | Type A (acute stable): A1 fracture of the tubercle, A2 incomplete fracture through the waist. | — | no: the types are not in the W2 abstract. Kept, unchecked. |
+| HB-2 | Type B (acute unstable): B1 distal oblique, B2 complete waist, B3 proximal pole, B4 trans-scaphoid perilunate fracture-dislocation. | — | no: as HB-1. Kept, unchecked. |
+| HB-3 | Type C is delayed union. | — | no: as HB-1 (the abstract mentions "fractures with delayed healing" but not as a type). Kept, unchecked. |
+| HB-4 | Type D is established non-union: D1 fibrous, D2 sclerotic (pseudarthrosis). | — | no: as HB-1 (the abstract mentions "established non-union" but not D1 or D2). Kept, unchecked. |
+| HB-5 | The groups: A acute stable, B acute unstable, C delayed union, D non-union. | — | partly. W2 abstract: "acute unstable fractures, but also fractures with delayed healing and those with established non-union". "Acute stable" and the letters A to D are not stated. Kept. |
 
-Not included: the comminuted type B5 found in later versions (the page says so). Check
-whether it is in W2.
+Not included: the comminuted type B5 found in later versions (the page says so). Whether it
+is in W2 cannot be told from the abstract; unchecked.
 
 ### Palmer (W3)
 
 | ID | Claim | Rule | Verified |
 |---|---|---|---|
-| PA-1 | Class 1 (traumatic): 1A central perforation; 1B ulnar avulsion, with or without ulnar styloid fracture; 1C distal avulsion (from the lunate or triquetrum); 1D radial avulsion, with or without sigmoid notch fracture. | — | to check |
-| PA-2 | Class 2 (degenerative): 2A TFCC wear; 2B with lunate and/or ulnar chondromalacia; 2C TFCC perforation with chondromalacia; 2D adds lunotriquetral ligament perforation; 2E adds ulnocarpal arthritis. | — | to check |
-| PA-3 | Class 1 is traumatic and class 2 degenerative, the class 2 stages being progressive stages of ulnocarpal abutment. | — | to check |
+| PA-1 | Class 1 (traumatic): 1A central perforation; 1B ulnar avulsion, with or without ulnar styloid fracture; 1C distal avulsion (from the lunate or triquetrum); 1D radial avulsion, with or without sigmoid notch fracture. | — | no: the subclasses are not in the W3 abstract, which says only "Traumatic lesions are classified according to their location." Kept, unchecked. |
+| PA-2 | Class 2 (degenerative): 2A TFCC wear; 2B with lunate and/or ulnar chondromalacia; 2C TFCC perforation with chondromalacia; 2D adds lunotriquetral ligament perforation; 2E adds ulnocarpal arthritis. | — | no: the subclasses are not in the W3 abstract; it confirms only that degenerative lesions are graded by changes of the TFCC, ulnar head, ulnocarpal bones and lunotriquetral ligament. Kept, unchecked. |
+| PA-3 | Class 1 is traumatic and class 2 degenerative, the class 2 stages being progressive stages of ulnocarpal abutment. | — | partly. W3 abstract: "The classification recognizes both traumatic and degenerative lesions"; degenerative lesions "are classified by the location and severity of degenerative changes". "Progressive stages of ulnocarpal abutment" is not stated. Kept. |
 
 ### Lichtman (W4 and its later modification)
 
 | ID | Claim | Rule | Verified |
 |---|---|---|---|
-| LI-1 | Stage I: normal radiographs (MRI shows the lunate abnormality); II: lunate sclerosis without collapse; IV: collapse with degenerative changes of the radiocarpal or midcarpal joint. | — | to check |
-| LI-2 | Stage III is split into IIIA (lunate collapse with carpal height and alignment kept) and IIIB (with carpal collapse and fixed scaphoid rotation). | collapse + carpal collapse → IIIB, else IIIA | to check |
-| LI-3 | The IIIA/IIIB split is a later modification, not in W4. Find who made it and when, and add that paper. | — | to check |
-| LI-4 | MRI finds stage I disease that radiographs miss. | — | to check |
+| LI-1 | Stage I: normal radiographs (MRI shows the lunate abnormality); II: lunate sclerosis without collapse; IV: collapse with degenerative changes of the radiocarpal or midcarpal joint. | — | partly. W4 abstract: "Four clinical and roentgenographic stages were identified"; the content of each stage is not stated. For the author: the MRI part cannot come from W4 (1977, before clinical MRI). Kept, unchecked. Changed: stage I in `src/logic/lichtman.ts` is now "normal radiographs" (was "normal radiographs, with the lunate abnormal only on MRI"); the Lichtman page lede says "The stages are clinical and radiographic; stage I has normal radiographs" (was "stage I is found on MRI"), and its first question reads "Lunate abnormal on imaging?" (was "on MRI or radiographs"). The rule is unchanged: an abnormal lunate without sclerosis is stage I. |
+| LI-2 | Stage III is split into IIIA (lunate collapse with carpal height and alignment kept) and IIIB (with carpal collapse and fixed scaphoid rotation). | collapse + carpal collapse → IIIB, else IIIA | no: IIIA and IIIB are not in the W4 abstract (and LI-3 says they are not in W4). Kept, unchecked. |
+| LI-3 | The IIIA/IIIB split is a later modification, not in W4. Find who made it and when, and add that paper. | — | no: not settled. The 1982 update (PMID 7150434) abstract mentions stages I to III only. No source added; for the author. |
+| LI-4 | MRI finds stage I disease that radiographs miss. | — | no: not in the W4 abstract, and W4 (1977) predates clinical MRI, so it cannot be the source. For the author: needs its own paper. Kept, unchecked. Changed: dropped from the Lichtman page, the lesson and the quiz, since no listed paper states it (see LI-1). |
 
 Not included: stage IIIC (coronal fracture of the lunate), from a later modification. The
-page says so.
+page says so. Not checked (no paper cited for it).

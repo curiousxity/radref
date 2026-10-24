@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
-import { LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { herbertDescriptions, herbertGroup, herbertSentence, herbertTypes } from '../logic/herbert'
 import type { HerbertType } from '../logic/herbert'
@@ -21,7 +21,7 @@ const acuteOptions = (['A1', 'A2', 'B1', 'B2', 'B3', 'B4'] as HerbertType[]).map
 const nonunionOptions = (['D1', 'D2'] as HerbertType[]).map(typeOption)
 
 const references: LessonReference[] = [
-  { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.' },
+  { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: '10.1302/0301-620X.66B1.6693468' },
 ]
 
 export function HerbertPage() {
@@ -45,7 +45,7 @@ export function HerbertPage() {
           <span className="calc-tag">Scaphoid</span>
         </div>
         <p>Type a scaphoid fracture as stable, unstable, delayed union or non-union, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so the type wording has not yet been checked against Herbert's paper. Not yet reviewed by the site author. Source: Herbert and Fisher, J Bone Joint Surg Br 1984.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract names only acute unstable fractures, delayed healing and established non-union, so the wording of each type has not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -88,7 +88,7 @@ export function HerbertPage() {
         <p>Later versions add a comminuted type (B5); this page keeps to the original types until the paper is checked.</p>
       </section>
 
-      <LessonReferences references={references} note="This citation is from memory and has not yet been matched on PubMed." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the type wording has been checked only where the abstract states it." />
     </div>
   )
 }

@@ -2,8 +2,9 @@
  * Mayfield stages of progressive perilunate instability (Mayfield et al., J Hand Surg Am
  * 1980). Shared by the Mayfield calculator and the wrist MRI study.
  *
- * Unchecked draft: the stage wording has not yet been checked against the paper (claims
- * MF-1 to MF-5 in docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
+ * Unchecked draft: the paper is matched on PubMed, and stages I and IV and the sequential
+ * progression are checked against its abstract, but stages II and III have not yet been
+ * checked (claims MF-1 to MF-5 in docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
  */
 
 /** Which structures around the lunate are disrupted. */

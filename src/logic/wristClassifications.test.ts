@@ -6,19 +6,20 @@ import { palmerClasses, palmerKind, palmerSentence } from './palmer'
 
 /*
  * The four wrist classifications. Each case quotes its claim from
- * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md by ID. None has been
- * checked against its paper yet (PubMed was unreachable): the wording is from memory.
+ * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md by ID. The papers are
+ * matched on PubMed, but only the claims marked verified there were read in an abstract; the
+ * rest of the wording is still from memory.
  */
 
 describe('Mayfield (unchecked)', () => {
   test('each stage from its structure', () => {
-    // MF-1: "Stage I: scapholunate disruption."
+    // MF-1: "Stage I perilunar instability (scapholunate diastasis)" (Mayfield 1980, abstract).
     expect(mayfield({ scapholunate: true })?.stage).toBe('I')
     // MF-2: "Stage II: the capitate dislocates from the lunate (perilunate dislocation)."
     expect(mayfield({ scapholunate: true, capitolunate: true })?.stage).toBe('II')
     // MF-3: "Stage III: the injury extends through the lunotriquetral joint."
     expect(mayfield({ scapholunate: true, capitolunate: true, lunotriquetral: true })?.stage).toBe('III')
-    // MF-4: "Stage IV: the lunate dislocates from the radius."
+    // MF-4: "Lunate dislocations (stage IV PLI)" (Mayfield 1980, abstract).
     expect(mayfield({ scapholunate: true, capitolunate: true, lunotriquetral: true, lunateDislocated: true })?.stage).toBe('IV')
   })
 
@@ -27,7 +28,8 @@ describe('Mayfield (unchecked)', () => {
     expect(mayfield({ scapholunate: false, capitolunate: false })).toBeUndefined()
   })
 
-  // MF-5: "The stages are progressive: each includes the injuries of the stages before it."
+  // MF-5: "These dislocations occurred in a sequential fashion due to progressive and specific
+  // ligamentous disruptions" (Mayfield 1980, abstract). Listing the gaps is the site's handling.
   test('the highest stage wins, and the unmarked earlier stages are listed', () => {
     const input = { lunotriquetral: true }
     expect(mayfield(input)?.stage).toBe('III')
@@ -71,7 +73,8 @@ describe('Palmer (unchecked)', () => {
 
 describe('Lichtman (unchecked)', () => {
   test('stages from the findings', () => {
-    // LI-1: "Stage I: normal radiographs, abnormal lunate on MRI."
+    // LI-1: "Stage I: normal radiographs." (Unchecked; the 1977 abstract says only "Four
+    // clinical and roentgenographic stages were identified".)
     expect(lichtman({ abnormal: true })).toBe('I')
     // LI-1: "Stage II: sclerosis without collapse."
     expect(lichtman({ abnormal: true, sclerosis: true })).toBe('II')
@@ -86,6 +89,13 @@ describe('Lichtman (unchecked)', () => {
     expect(lichtman({})).toBeUndefined()
     // Collapse without the carpal-collapse answer could be IIIA or IIIB.
     expect(lichtman({ collapse: true })).toBeUndefined()
+  })
+
+  // LI-1, LI-4: the 1977 paper predates clinical MRI, so it cannot be the source for "abnormal
+  // only on MRI", and no other listed paper states it; stage I now says only what the stage
+  // wording claims, normal radiographs.
+  test('stage I does not claim MRI from the 1977 paper', () => {
+    expect(lichtmanSentence('I')).toBe('Kienböck disease, Lichtman stage I: normal radiographs.')
   })
 
   test('report sentence for every stage', () => {
