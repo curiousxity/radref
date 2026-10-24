@@ -1,71 +1,93 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md; rule
- * chips and warnings carry its claim IDs. Until the check, citations are plain text rather
- * than <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled, so only claims whose wording is in an abstract are verified; the
+ * Iyer review's abstract states none of its claims, and Gartland, O'Brien and Judet have no
+ * abstract. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md; rule chips and warnings carry
+ * its claim IDs. Gartland (1959) and Judet (1962) have no DOI, so their citations stay plain text.
  */
 
-const IYER = 'Iyer et al., AJR 2012'
-const CHENG = 'Cheng et al., J Pediatr Orthop 1998'
-const SKAGGS = 'Skaggs and Mirzayan, J Bone Joint Surg Am 1999'
-const ROGERS = 'Rogers et al., Radiology 1978'
-const HERMAN = 'Herman et al., J Bone Joint Surg Am 2009'
+const IYER_DOI = '10.2214/AJR.10.7314'
+const CHENG_DOI = '10.1097/01241398-199803000-00006'
+const SKAGGS_DOI = '10.2106/00004623-199910000-00007'
+const ROGERS_DOI = '10.1148/128.1.145'
+const HERMAN_DOI = '10.2106/JBJS.H.01316'
+const LEITCH_DOI = '10.2106/JBJS.D.02956'
+const WEISS_DOI = '10.1097/BPO.0b013e3181b2842c'
+const JAKOB_DOI = '10.1302/0301-620X.57B4.430'
+const EDMONDS_DOI = '10.2106/JBJS.I.01637'
+const OBRIEN_DOI = '10.1097/00003086-196500410-00006'
+
+const IYER = <Cite doi={IYER_DOI}>Iyer et al., AJR 2012</Cite>
+const CHENG = <Cite doi={CHENG_DOI}>Cheng et al., J Pediatr Orthop 1998</Cite>
+const SKAGGS = <Cite doi={SKAGGS_DOI}>Skaggs and Mirzayan, J Bone Joint Surg Am 1999</Cite>
+const ROGERS = <Cite doi={ROGERS_DOI}>Rogers et al., Radiology 1978</Cite>
+const HERMAN = <Cite doi={HERMAN_DOI}>Herman et al., J Bone Joint Surg Am 2009</Cite>
 const GARTLAND = 'Gartland, Surg Gynecol Obstet 1959'
-const LEITCH = 'Leitch et al., J Bone Joint Surg Am 2006'
-const WEISS = 'Weiss et al., J Pediatr Orthop 2009'
-const JAKOB = 'Jakob et al., J Bone Joint Surg Br 1975'
-const EDMONDS = 'Edmonds, J Bone Joint Surg Am 2010'
-const OBRIEN = "O'Brien, Clin Orthop Relat Res 1965"
+const LEITCH = <Cite doi={LEITCH_DOI}>Leitch et al., J Bone Joint Surg Am 2006</Cite>
+const WEISS = <Cite doi={WEISS_DOI}>Weiss et al., J Pediatr Orthop 2009</Cite>
+const JAKOB = <Cite doi={JAKOB_DOI}>Jakob et al., J Bone Joint Surg Br 1975</Cite>
+const EDMONDS = <Cite doi={EDMONDS_DOI}>Edmonds, J Bone Joint Surg Am 2010</Cite>
+const OBRIEN = <Cite doi={OBRIEN_DOI}>O'Brien, Clin Orthop Relat Res 1965</Cite>
 const JUDET = 'Judet et al., Ann Chir 1962'
 
 const references: LessonReference[] = [
-  { citation: 'Iyer RS, Thapa MM, Khanna PC, Chew FS. Pediatric bone imaging: imaging elbow trauma in children—a review of acute and chronic injuries. AJR Am J Roentgenol. 2012;198(5):1053-1068.' },
-  { citation: 'Cheng JC, Wing-Man K, Shen WY, Yurianto H, Xia G, Lau JT, Cheung AY. A new look at the sequential development of elbow-ossification centers in children. J Pediatr Orthop. 1998;18(2):161-167.' },
-  { citation: 'Skaggs DL, Mirzayan R. The posterior fat pad sign in association with occult fracture of the elbow in children. J Bone Joint Surg Am. 1999;81(10):1429-1433.' },
-  { citation: 'Rogers LF, Malave S Jr, White H, Tachdjian MO. Plastic bowing, torus and greenstick supracondylar fractures of the humerus: radiographic clues to obscure fractures of the elbow in children. Radiology. 1978;128(1):145-150.' },
-  { citation: 'Herman MJ, Boardman MJ, Hoover JR, Chafetz RS. Relationship of the anterior humeral line to the capitellar ossific nucleus: variability with age. J Bone Joint Surg Am. 2009;91(9):2188-2193.' },
+  { citation: 'Iyer RS, Thapa MM, Khanna PC, Chew FS. Pediatric bone imaging: imaging elbow trauma in children—a review of acute and chronic injuries. AJR Am J Roentgenol. 2012;198(5):1053-1068.', doi: IYER_DOI },
+  { citation: 'Cheng JC, Wing-Man K, Shen WY, Yurianto H, Xia G, Lau JT, Cheung AY. A new look at the sequential development of elbow-ossification centers in children. J Pediatr Orthop. 1998;18(2):161-167.', doi: CHENG_DOI },
+  { citation: 'Skaggs DL, Mirzayan R. The posterior fat pad sign in association with occult fracture of the elbow in children. J Bone Joint Surg Am. 1999;81(10):1429-1433.', doi: SKAGGS_DOI },
+  { citation: 'Rogers LF, Malave S Jr, White H, Tachdjian MO. Plastic bowing, torus and greenstick supracondylar fractures of the humerus: radiographic clues to obscure fractures of the elbow in children. Radiology. 1978;128(1):145-150.', doi: ROGERS_DOI },
+  { citation: 'Herman MJ, Boardman MJ, Hoover JR, Chafetz RS. Relationship of the anterior humeral line to the capitellar ossific nucleus: variability with age. J Bone Joint Surg Am. 2009;91(9):2188-2193.', doi: HERMAN_DOI },
   { citation: 'Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154.' },
-  { citation: 'Leitch KK, Kay RM, Femino JD, Tolo VT, Storer SK, Skaggs DL. Treatment of multidirectionally unstable supracondylar humeral fractures in children. A modified Gartland type-IV fracture. J Bone Joint Surg Am. 2006;88(5):980-985.' },
-  { citation: 'Weiss JM, Graves S, Yang S, Mendelsohn E, Kay RM, Skaggs DL. A new classification system predictive of complications in surgically treated pediatric humeral lateral condyle fractures. J Pediatr Orthop. 2009;29(6):602-605.' },
-  { citation: 'Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436.' },
-  { citation: 'Edmonds EW. How displaced are "nondisplaced" fractures of the medial humeral epicondyle in children? Results of a three-dimensional computed tomography analysis. J Bone Joint Surg Am. 2010;92(17):2785-2791.' },
-  { citation: "O'Brien PI. Injuries involving the proximal radial epiphysis. Clin Orthop Relat Res. 1965;41:51-58." },
-  { citation: "Judet J, Judet R, Lefranc J. Fracture du col radial chez l'enfant. Ann Chir. 1962;16:1377-1385." },
+  { citation: 'Leitch KK, Kay RM, Femino JD, Tolo VT, Storer SK, Skaggs DL. Treatment of multidirectionally unstable supracondylar humeral fractures in children. A modified Gartland type-IV fracture. J Bone Joint Surg Am. 2006;88(5):980-985.', doi: LEITCH_DOI },
+  { citation: 'Weiss JM, Graves S, Yang S, Mendelsohn E, Kay RM, Skaggs DL. A new classification system predictive of complications in surgically treated pediatric humeral lateral condyle fractures. J Pediatr Orthop. 2009;29(6):602-605.', doi: WEISS_DOI },
+  { citation: 'Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436.', doi: JAKOB_DOI },
+  { citation: 'Edmonds EW. How displaced are "nondisplaced" fractures of the medial humeral epicondyle in children? Results of a three-dimensional computed tomography analysis. J Bone Joint Surg Am. 2010;92(17):2785-2791.', doi: EDMONDS_DOI },
+  { citation: "O'Brien PI. Injuries involving the proximal radial epiphysis. Clin Orthop Relat Res. 1965;41:51-58.", doi: OBRIEN_DOI },
+  { citation: 'Judet J, Judet R, Lefranc J. [Fracture of the radial head in the child]. Ann Chir. 1962;16:1377-1385. French.' },
 ]
 
-/* PE2-1: the CRITOE order and approximate ages (Iyer et al.). */
-type Centre = { id: string; name: string; age: number }
+/*
+ * PE2-1: Cheng's order, and the ages by which 50% of girls showed each centre (Cheng et al.,
+ * abstract: "the capitulum first, followed by the radial head, medial epicondyle, olecranon,
+ * trochlea, and last, the lateral epicondyle", in girls at "ages 1, 5, 5, 9, 9, and 10 years";
+ * in boys, "with the exception of the capitulum, an average delay of 2 years").
+ */
+type Centre = { id: string; name: string; girls: number; boys: number }
 const centres: Centre[] = [
-  { id: 'oc-capitellum', name: 'Capitellum', age: 1 },
-  { id: 'oc-radial-head', name: 'Radial head', age: 3 },
-  { id: 'oc-medial-epicondyle', name: 'Medial (internal) epicondyle', age: 5 },
-  { id: 'oc-trochlea', name: 'Trochlea', age: 7 },
-  { id: 'oc-olecranon', name: 'Olecranon', age: 9 },
-  { id: 'oc-lateral-epicondyle', name: 'Lateral (external) epicondyle', age: 11 },
+  { id: 'oc-capitellum', name: 'Capitellum', girls: 1, boys: 1 },
+  { id: 'oc-radial-head', name: 'Radial head', girls: 5, boys: 7 },
+  { id: 'oc-medial-epicondyle', name: 'Medial (internal) epicondyle', girls: 5, boys: 7 },
+  { id: 'oc-olecranon', name: 'Olecranon', girls: 9, boys: 11 },
+  { id: 'oc-trochlea', name: 'Trochlea', girls: 9, boys: 11 },
+  { id: 'oc-lateral-epicondyle', name: 'Lateral (external) epicondyle', girls: 10, boys: 12 },
 ]
 
-const critoeTable = (
+const years = (age: number) => `${age} ${age === 1 ? 'year' : 'years'}`
+
+const centreTable = (
   <div className="table-wrap">
     <table className="ref-table">
       <thead>
         <tr>
           <th>Order</th>
           <th>Centre</th>
-          <th>Usually seen by about</th>
+          <th>Half of girls by</th>
+          <th>Half of boys by about</th>
         </tr>
       </thead>
       <tbody>
         {centres.map((centre, index) => (
           <tr key={centre.id}>
-            <td className="vessel-name">{'CRITOE'[index]}</td>
+            <td className="vessel-name">{index + 1}</td>
             <td>{centre.name}</td>
-            <td>{centre.age} {centre.age === 1 ? 'year' : 'years'}</td>
+            <td>{years(centre.girls)}</td>
+            <td>{years(centre.boys)}</td>
           </tr>
         ))}
       </tbody>
@@ -105,14 +127,14 @@ const learn: LearnSection[] = [
   },
   {
     id: 'ossification',
-    title: 'Step 2. Ossification centres (CRITOE)',
+    title: 'Step 2. Ossification centres',
     body: (
       <>
-        <p>The six secondary ossification centres of the elbow appear in a fixed order, remembered as CRITOE: capitellum, radial head, internal (medial) epicondyle, trochlea, olecranon, external (lateral) epicondyle, at roughly 1, 3, 5, 7, 9 and 11 years ({IYER}):</p>
-        {critoeTable}
-        <p>Those ages are approximate. Measured ages vary from child to child, and the centres appear earlier in girls than in boys ({CHENG}). So a centre not yet seen at its listed age is a prompt to look again, not a diagnosis; this site uses one source's ages and says "usually present by about".</p>
+        <p>The six secondary ossification centres of the elbow appear in a fixed order. In Cheng and colleagues' radiographs of 1,577 children, the order was the same in boys and girls: capitellum, radial head, medial epicondyle, olecranon, trochlea, and last the lateral epicondyle. Half of the girls showed them by ages 1, 5, 5, 9, 9 and 10 years; in boys every centre but the capitellum came on average 2 years later ({CHENG}). The CRITOE mnemonic puts the trochlea before the olecranon; in Cheng's series the olecranon came first.</p>
+        {centreTable}
+        <p>Those are the ages by which half of the children showed each centre, so many normal children show a centre later. A centre not yet seen at that age is a prompt to look again, not a diagnosis. This site uses the girls' ages when the child is a girl and the boys' ages otherwise.</p>
         <div className="lesson-key">
-          <p>The order matters more than the ages. The medial epicondyle ossifies before the trochlea, so an ossified trochlea with no medial epicondyle in its place should make you think of an avulsed medial epicondyle displaced into the joint, where it can look like the trochlear centre ({IYER}).</p>
+          <p>The order matters more than the ages. The medial epicondyle ossifies before the trochlea ({CHENG}), so an ossified trochlea with no medial epicondyle in its place should make you think of an avulsed medial epicondyle displaced into the joint, where it can look like the trochlear centre ({IYER}).</p>
         </div>
       </>
     ),
@@ -133,8 +155,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <h4>Anterior humeral line</h4>
-        <p>On a true lateral, a line along the anterior cortex of the humerus normally passes through the middle third of the capitellum. When the capitellum lies behind it, so that the line passes through the anterior third or in front of the capitellum, look for an extension supracondylar fracture ({ROGERS}).</p>
-        <p>In young children the line often passes through the anterior third without any fracture; that was common under the age of 4 ({HERMAN}). Read the line with the age.</p>
+        <p>On a true lateral, draw a line along the anterior cortex of the humerus. It is a valuable aid in the search for a supracondylar fracture, and when it is abnormal, other signs of fracture should be carefully sought ({ROGERS}). In most normal children it passes through the middle third of the capitellum ({HERMAN}).</p>
+        <p>In young children the line may pass through the anterior third of the capitellum because the ossification centre is small: Rogers and colleagues put this under 2½ years ({ROGERS}), and Herman and colleagues found that under 4 years it passed nearly equally through the anterior or the middle third ({HERMAN}). Read the line with the age.</p>
         <h4>Radiocapitellar line</h4>
         <p>A line along the radial neck passes through the capitellum in every view. If it does not, the radial head is dislocated, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}).</p>
       </>
@@ -177,7 +199,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>An avulsed medial epicondyle can become entrapped in the joint, notably with an elbow dislocation, and an entrapped fragment must be named ({IYER}). Remember step 2: an ossified trochlea with no medial epicondyle in place may be that fragment.</p>
-        <p>Measure the displacement, but know that radiographs are unreliable for it and underestimate the true displacement seen on CT ({EDMONDS}). This report records the number without a threshold.</p>
+        <p>Measure the displacement, but know that standard radiographs are not sufficient to measure anterior displacement nor accurate enough to measure medial displacement. Against three-dimensional CT, the lateral view underestimated anterior displacement (a mean of 0.9 mm against 8.8 mm) and the AP view overestimated medial displacement (3.5 mm against 0.3 mm); an internal oblique view came closer to the true anterior displacement ({EDMONDS}). This report records the number without a threshold.</p>
       </>
     ),
   },
@@ -252,7 +274,7 @@ const centreFields: Field[] = centres.map((centre) => ({
   label: centre.name,
   required: true,
   options: seenOptions,
-  help: `Usually seen by about ${centre.age} ${centre.age === 1 ? 'year' : 'years'}.`,
+  help: `Half of girls show it by ${years(centre.girls)}, half of boys by about ${years(centre.boys)}.`,
 }))
 
 const fields = {
@@ -265,6 +287,10 @@ const fields = {
     { value: 'lateral', label: 'A true lateral at 90°' },
   ] },
   age: { id: 'age', kind: 'number', label: 'Age', unit: 'years', min: 0, max: 18, step: 0.5, required: true, help: 'Sets which ossification centres are expected.' },
+  sex: { id: 'sex', kind: 'choice', label: 'Sex', help: "Girls ossify earlier; without an answer the boys' (later) ages are used.", options: [
+    { value: 'girl', label: 'Girl' },
+    { value: 'boy', label: 'Boy' },
+  ] },
 
   anteriorFatPad: { id: 'anterior-fat-pad', kind: 'choice', label: 'Anterior fat pad', required: true, options: [
     { value: 'normal', label: 'Normal' },
@@ -275,7 +301,7 @@ const fields = {
     { value: 'visible', label: 'Visible' },
   ] },
 
-  ahl: { id: 'ahl', kind: 'choice', label: 'Anterior humeral line', required: true, help: 'Normally through the middle third of the capitellum.', options: [
+  ahl: { id: 'ahl', kind: 'choice', label: 'Anterior humeral line', required: true, help: 'Through the middle third of the capitellum in most normal children.', options: [
     { value: 'middle', label: 'Through the middle third' },
     { value: 'anterior-third', label: 'Through the anterior third' },
     { value: 'anterior', label: 'In front of the capitellum' },
@@ -302,7 +328,7 @@ const fields = {
   ] },
 
   meFracture: { id: 'me-fracture', kind: 'choice', label: 'Medial epicondyle avulsion', required: true, options: nonePresent },
-  meDisplacement: { id: 'me-displacement', kind: 'number', label: 'Displacement', unit: 'mm', min: 0, step: 0.5, showIf: present('me-fracture'), help: 'Radiographs underestimate it; no threshold is applied.' },
+  meDisplacement: { id: 'me-displacement', kind: 'number', label: 'Displacement', unit: 'mm', min: 0, step: 0.5, showIf: present('me-fracture'), help: 'Radiographs underestimate anterior and overestimate medial displacement; no threshold is applied.' },
   meEntrapped: { id: 'me-entrapped', kind: 'choice', label: 'Fragment in the joint', showIf: present('me-fracture'), options: [
     { value: 'no', label: 'No' },
     { value: 'yes', label: 'Yes, entrapped' },
@@ -332,10 +358,15 @@ const fields = {
 
 /* Rule helpers shared by the chips, the report and the warnings. */
 
-/** PE2-1: the centres usually present by this age, or [] without an age. */
+/** PE2-1: the age by which half of children of this sex show the centre (boys' when not stated). */
+function centreAge(values: Values, centre: Centre): number {
+  return str(values, 'sex') === 'girl' ? centre.girls : centre.boys
+}
+
+/** PE2-1: the centres half of children show by this age, or [] without an age. */
 function expectedCentres(values: Values): Centre[] {
   const age = num(values, 'age')
-  return age === undefined ? [] : centres.filter((centre) => age >= centre.age)
+  return age === undefined ? [] : centres.filter((centre) => age >= centreAge(values, centre))
 }
 
 /** Expected by the age but marked not seen. */
@@ -420,10 +451,10 @@ function deriveOssification(values: Values): Derived[] {
   const age = num(values, 'age')
   if (age === undefined) return out
   const expected = expectedCentres(values)
-  // PE2-1: the centres usually seen by this age.
-  out.push({ label: `Usually seen by age ${age}`, value: expected.length > 0 ? expected.map((centre) => centre.name).join(', ') : 'None yet' })
+  // PE2-1: the centres half of children show by this age (Cheng et al.).
+  out.push({ label: `Seen in half of children by age ${age}`, value: expected.length > 0 ? expected.map((centre) => centre.name).join(', ') : 'None yet' })
   const missing = missingCentres(values)
-  if (missing.length > 0) out.push({ label: 'Not seen, though usually present by now', value: missing.map((centre) => centre.name).join(', '), tone: 'warn' })
+  if (missing.length > 0) out.push({ label: 'Not seen, though half of children show it by now', value: missing.map((centre) => centre.name).join(', '), tone: 'warn' })
   // PE2-3: trochlea before medial epicondyle.
   if (trochleaWithoutMedialEpicondyle(values)) out.push({ label: 'Order', value: 'Trochlea without medial epicondyle: look for an entrapped medial epicondyle', tone: 'warn' })
   return out
@@ -628,10 +659,11 @@ function warnings(values: Values): string[] {
     if (negatives.includes(key) && found.length > 0) out.push(`Impression says ${phrase}, but these are entered: ${found.join(', ')}.`)
   }
 
-  // PE2-1: a centre usually present by this age is not seen.
+  // PE2-1: a centre that half of children show by this age is not seen (Cheng et al.).
   const age = num(values, 'age')
+  const group = str(values, 'sex') === 'girl' ? 'girls' : 'boys'
   for (const centre of missingCentres(values)) {
-    out.push(`${centre.name} is not seen, although it usually appears by about age ${centre.age} (the child is ${age}); ages vary, so look again.`)
+    out.push(`${centre.name} is not seen, although half of ${group} show it by about age ${centreAge(values, centre)} (the child is ${age}); ages vary, so look again.`)
   }
   // PE2-3: trochlea before medial epicondyle.
   if (trochleaWithoutMedialEpicondyle(values)) {
@@ -675,17 +707,17 @@ const steps: ReportStep[] = [
     id: 'technique',
     title: 'Step 1. Technique and the child\'s age',
     learn: 'technique',
-    teach: <p>Check for an AP and a true lateral at 90° (this site's checklist). The age sets which ossification centres to expect.</p>,
-    fields: [fields.views, fields.viewsMissing, fields.age],
+    teach: <p>Check for an AP and a true lateral at 90° (this site's checklist). The age and sex set which ossification centres to expect.</p>,
+    fields: [fields.views, fields.viewsMissing, fields.age, fields.sex],
   },
   {
     id: 'ossification',
-    title: 'Step 2. Ossification centres (CRITOE)',
+    title: 'Step 2. Ossification centres',
     learn: 'ossification',
     teach: (
       <>
-        <p>CRITOE, at roughly 1, 3, 5, 7, 9 and 11 years ({IYER}); ages vary, and girls are earlier ({CHENG}).</p>
-        {critoeTable}
+        <p>Capitellum, radial head, medial epicondyle, olecranon, trochlea, lateral epicondyle; half of girls show them by 1, 5, 5, 9, 9 and 10 years, boys about 2 years later except the capitellum ({CHENG}).</p>
+        {centreTable}
         <p>An ossified trochlea with no medial epicondyle: think of an avulsed medial epicondyle in the joint ({IYER}).</p>
       </>
     ),
@@ -706,7 +738,7 @@ const steps: ReportStep[] = [
     learn: 'lines',
     teach: (
       <>
-        <p>The anterior humeral line normally passes through the middle third of the capitellum ({ROGERS}); the anterior third is common under age 4 ({HERMAN}).</p>
+        <p>When the anterior humeral line is abnormal, look carefully for other signs of a supracondylar fracture ({ROGERS}). It passes through the middle third of the capitellum in most normal children; under age 4, nearly equally through the anterior or the middle third ({HERMAN}).</p>
         <p>The radiocapitellar line passes through the capitellum in every view; if not, the radial head is dislocated ({IYER}).</p>
       </>
     ),
@@ -738,7 +770,7 @@ const steps: ReportStep[] = [
     id: 'medial-epicondyle',
     title: 'Step 7. Medial epicondyle avulsion',
     learn: 'medial-epicondyle',
-    teach: <p>Name an entrapped fragment ({IYER}). Radiographs underestimate the displacement ({EDMONDS}).</p>,
+    teach: <p>Name an entrapped fragment ({IYER}). Radiographs underestimate anterior displacement and overestimate medial displacement ({EDMONDS}).</p>,
     fields: [fields.meFracture, fields.meDisplacement, fields.meEntrapped],
     derive: deriveMedialEpicondyle,
   },
@@ -770,7 +802,7 @@ const study: StudyDefinition = {
   slug: 'pediatric-elbow',
   name: 'Pediatric elbow radiographs',
   lede: 'Read an injured child\'s elbow radiographs by age: which ossification centres to expect, the fat pads, the alignment lines, and the common fractures with their gradings.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them everything cited to the Iyer review: the fat pads as a sign of effusion, the radiocapitellar line, the entrapped medial epicondyle and the commonest fracture; the Gartland, O'Brien and Judet types; and Jakob's stages) have still not been checked against their papers. Not yet reviewed by the site author.",
   references,
   report: {
     steps,
@@ -781,23 +813,23 @@ const study: StudyDefinition = {
     {
       id: 'critoe-order',
       question: 'In what order do the elbow ossification centres appear?',
-      options: ['Capitellum, radial head, medial epicondyle, trochlea, olecranon, lateral epicondyle', 'Capitellum, trochlea, radial head, olecranon, medial epicondyle, lateral epicondyle', 'Radial head, capitellum, olecranon, trochlea, medial epicondyle, lateral epicondyle', 'Capitellum, radial head, trochlea, medial epicondyle, olecranon, lateral epicondyle'],
+      options: ['Capitellum, radial head, medial epicondyle, olecranon, trochlea, lateral epicondyle', 'Capitellum, trochlea, radial head, olecranon, medial epicondyle, lateral epicondyle', 'Radial head, capitellum, olecranon, trochlea, medial epicondyle, lateral epicondyle', 'Capitellum, radial head, trochlea, medial epicondyle, olecranon, lateral epicondyle'],
       answer: 0,
-      explanation: <p>CRITOE: capitellum, radial head, internal (medial) epicondyle, trochlea, olecranon, external (lateral) epicondyle, at roughly 1, 3, 5, 7, 9 and 11 years ({IYER}).</p>,
+      explanation: <p>In Cheng and colleagues' series: capitellum, radial head, medial epicondyle, olecranon, trochlea, and last the lateral epicondyle, the same in boys and girls ({CHENG}). The CRITOE mnemonic swaps the olecranon and the trochlea.</p>,
     },
     {
       id: 'trochlea-first',
       question: 'An 8-year-old has an ossified trochlea but no medial epicondyle in its usual place. What should you think of?',
       options: ['Normal variation', 'An avulsed medial epicondyle displaced into the joint', 'A lateral condyle fracture', 'Delayed bone age'],
       answer: 1,
-      explanation: <p>The medial epicondyle ossifies before the trochlea, so an ossified trochlea without a medial epicondyle in place suggests an avulsed medial epicondyle entrapped in the joint ({IYER}).</p>,
+      explanation: <p>The medial epicondyle ossifies before the trochlea ({CHENG}), so an ossified trochlea without a medial epicondyle in place suggests an avulsed medial epicondyle entrapped in the joint ({IYER}).</p>,
     },
     {
       id: 'ages-vary',
-      question: 'Which statement about the CRITOE ages is right?',
-      options: ['They are fixed limits for every child', 'They are approximate; measured ages vary and the centres appear earlier in girls', 'Boys ossify earlier than girls', 'They apply only after age 5'],
+      question: 'Which statement about the ossification ages is right?',
+      options: ['They are fixed limits for every child', 'They are the ages by which half of children show each centre, and boys are about 2 years later than girls', 'Boys ossify earlier than girls', 'They apply only after age 5'],
       answer: 1,
-      explanation: <p>The 1-3-5-7-9-11 ages are approximate ({IYER}); measured ages vary and the centres appear earlier in girls than in boys ({CHENG}).</p>,
+      explanation: <p>Cheng and colleagues give the ages by which 50% of girls showed each centre (1, 5, 5, 9, 9 and 10 years); in boys every centre but the capitellum came on average 2 years later ({CHENG}).</p>,
     },
     {
       id: 'posterior-fat-pad',
@@ -809,16 +841,16 @@ const study: StudyDefinition = {
     {
       id: 'ahl',
       question: 'In a 7-year-old, the anterior humeral line passes in front of the capitellum. What should you look for?',
-      options: ['A radial neck fracture', 'An extension supracondylar fracture', 'A medial epicondyle avulsion', 'Nothing: this is normal at 7'],
+      options: ['A radial neck fracture', 'A supracondylar fracture', 'A medial epicondyle avulsion', 'Nothing: this is normal at 7'],
       answer: 1,
-      explanation: <p>The line normally passes through the middle third of the capitellum; with the capitellum behind it, look for an extension supracondylar fracture ({ROGERS}).</p>,
+      explanation: <p>The anterior humeral line is a valuable aid in the search for a supracondylar fracture; when it is abnormal, other signs of fracture should be carefully sought ({ROGERS}).</p>,
     },
     {
       id: 'ahl-young',
       question: 'In a 2-year-old, the anterior humeral line passes through the anterior third of the capitellum, and nothing else is abnormal. How should you read it?',
       options: ['Certainly a supracondylar fracture', 'It can be normal at this age', 'A sign of radial head dislocation', 'A sign of a lateral condyle fracture'],
       answer: 1,
-      explanation: <p>In young children the line often passes through the anterior third without a fracture; this was common under age 4 ({HERMAN}).</p>,
+      explanation: <p>Under age 4 the line passes nearly equally through the anterior or the middle third of the capitellum ({HERMAN}); Rogers and colleagues put the anterior third as possible under 2½ years, because the ossification centre is small ({ROGERS}).</p>,
     },
     {
       id: 'radiocapitellar',

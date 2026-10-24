@@ -7,9 +7,10 @@ const study = studyOf(PediatricElbowStudyPage)
 
 /*
  * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md by its ID. None of those
- * claims has been checked against its paper yet (PubMed was unreachable), so when the check is
- * done a case may have to change; say in that commit why the old expectation was wrong.
+ * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md by its ID. The references
+ * are matched, but only the claims marked verified there were read in their papers; when the
+ * rest are checked a case may have to change; say in that commit why the old expectation was
+ * wrong.
  */
 
 describe('pediatric elbow lesson', () => {
@@ -20,11 +21,16 @@ describe('pediatric elbow lesson', () => {
     ])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI but two), but claims not in an abstract are
+  // still unchecked, so the note keeps saying so. Gartland (Surg Gynecol Obstet 1959) and Judet
+  // (Ann Chir 1962) have no DOI on PubMed or Crossref.
+  test('is still marked as an unchecked draft, with a DOI on every reference but Gartland and Judet', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(12)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) {
+      if (/^(Gartland JJ\.|Judet J, Judet R)/.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
+      else expect(ref.doi, ref.citation).toMatch(/^10\./)
+    }
   })
 })
 
@@ -89,7 +95,7 @@ describe('pediatric elbow report: whole cases', () => {
     expect(warnings).toEqual([])
     expect(impressionOf(normal)).toBe(NORMAL_IMPRESSION)
     expect(text).toContain('Age: 12 years')
-    expect(text).toContain('Ossification centres: seen: capitellum, radial head, medial (internal) epicondyle, trochlea, olecranon, lateral (external) epicondyle')
+    expect(text).toContain('Ossification centres: seen: capitellum, radial head, medial (internal) epicondyle, olecranon, trochlea, lateral (external) epicondyle')
   })
 
   test('normal 4-year-old with only the early centres: still normal', () => {
@@ -168,21 +174,28 @@ describe('pediatric elbow report: hidden fields', () => {
 })
 
 describe('pediatric elbow rules (unchecked)', () => {
-  // PE2-1: CRITOE "at roughly 1, 3, 5, 7, 9 and 11 years". Each centre is expected from its
-  // listed age; half a year earlier it is not.
+  // PE2-1: "the capitulum first, followed by the radial head, medial epicondyle, olecranon,
+  // trochlea, and last, the lateral epicondyle", with 50% of girls ossified at "ages 1, 5, 5, 9,
+  // 9, and 10 years", and in boys, "with the exception of the capitulum, an average delay of 2
+  // years" (Cheng 1998, abstract). The old case used the CRITOE order and 1-3-5-7-9-11 ages
+  // cited to the Iyer review, whose abstract does not state them; Cheng's own series puts the
+  // olecranon before the trochlea and gives later ages. Without a sex the boys' (later) ages
+  // apply, the site's choice so that the warning does not fire early for a boy.
   test.each([
-    ['oc-capitellum', 'Capitellum', 1],
-    ['oc-radial-head', 'Radial head', 3],
-    ['oc-medial-epicondyle', 'Medial (internal) epicondyle', 5],
-    ['oc-trochlea', 'Trochlea', 7],
-    ['oc-olecranon', 'Olecranon', 9],
-    ['oc-lateral-epicondyle', 'Lateral (external) epicondyle', 11],
-  ])('%s is expected from age %s', (id, name, age) => {
-    const at = (years: number) => chips(study, 'ossification', { age: String(years), [id]: 'not-seen' })['Not seen, though usually present by now']
-    expect(at(age)).toContain(name as string)
-    expect(at((age as number) - 0.5) ?? '').not.toContain(name as string)
-    expect(chips(study, 'ossification', { age: String(age) })[`Usually seen by age ${age}`]).toContain(name as string)
-    expect(report(study, { ...normal, age: String(age), [id]: 'not-seen' }).warnings.join(' ')).toContain(`${name} is not seen, although it usually appears by about age ${age}`)
+    ['oc-capitellum', 'Capitellum', 1, 1],
+    ['oc-radial-head', 'Radial head', 5, 7],
+    ['oc-medial-epicondyle', 'Medial (internal) epicondyle', 5, 7],
+    ['oc-olecranon', 'Olecranon', 9, 11],
+    ['oc-trochlea', 'Trochlea', 9, 11],
+    ['oc-lateral-epicondyle', 'Lateral (external) epicondyle', 10, 12],
+  ])('%s is expected from age %s in girls and %s in boys', (id, name, girls, boys) => {
+    for (const [sex, age, group] of [['girl', girls, 'girls'], ['boy', boys, 'boys'], ['', boys, 'boys']] as const) {
+      const at = (years: number) => chips(study, 'ossification', { age: String(years), sex, [id]: 'not-seen' })['Not seen, though half of children show it by now']
+      expect(at(age as number), `${sex} ${age}`).toContain(name as string)
+      expect(at((age as number) - 0.5) ?? '', `${sex} ${age}`).not.toContain(name as string)
+      expect(chips(study, 'ossification', { age: String(age), sex })[`Seen in half of children by age ${age}`]).toContain(name as string)
+      expect(report(study, { ...normal, age: String(age), sex, [id]: 'not-seen' }).warnings.join(' ')).toContain(`${name} is not seen, although half of ${group} show it by about age ${age}`)
+    }
   })
 
   test('without an age no centre is expected', () => {
@@ -190,11 +203,12 @@ describe('pediatric elbow rules (unchecked)', () => {
   })
 
   test('under 1 year nothing is expected yet', () => {
-    expect(chips(study, 'ossification', { age: '0.5' })['Usually seen by age 0.5']).toBe('None yet')
+    expect(chips(study, 'ossification', { age: '0.5' })['Seen in half of children by age 0.5']).toBe('None yet')
   })
 
   // PE2-3: "an ossified trochlea with no medial epicondyle in its place should raise the
-  // suspicion of an avulsed medial epicondyle displaced (entrapped) into the joint."
+  // suspicion of an avulsed medial epicondyle displaced (entrapped) into the joint." The order
+  // it rests on, medial epicondyle before trochlea, is Cheng's (abstract, quoted at PE2-1).
   test('trochlea seen without the medial epicondyle', () => {
     const values = { ...normal, 'oc-medial-epicondyle': 'not-seen' }
     expect(chips(study, 'ossification', values).Order).toBe('Trochlea without medial epicondyle: look for an entrapped medial epicondyle')
@@ -224,8 +238,13 @@ describe('pediatric elbow rules (unchecked)', () => {
     expect(impressionOf({ ...normal, 'anterior-fat-pad': 'elevated' })).toBe('Joint effusion (elevated anterior fat pad).')
   })
 
-  // PE4-1: through the middle third is normal; otherwise "look for an extension supracondylar
-  // fracture". PE4-2: the anterior third "was common under age 4".
+  // PE4-1: "When it is abnormal other signs of fracture should be carefully sought" (Rogers
+  // 1978, abstract); "The anterior humeral line passes through the middle third of the
+  // capitellum in the majority of normal children" (Herman 2009, abstract). PE4-2: "In children
+  // younger than four years of age, it passes nearly equally through the anterior or middle
+  // third" (Herman). The rule is unchanged; the middle-third statement is now cited to Herman,
+  // who states it, rather than Rogers, and "extension" is dropped from the wording since
+  // neither abstract says it. Rogers gives a lower age (2½ years); the rule keeps Herman's 4.
   test('anterior humeral line, with the age-4 boundary', () => {
     const line = (ahl: string, age: string) => chips(study, 'lines', { ahl, age })['Anterior humeral line']
     expect(line('middle', '8')).toBe('Normal')
@@ -267,7 +286,9 @@ describe('pediatric elbow rules (unchecked)', () => {
     expect(weiss('')).toBeUndefined()
   })
 
-  // PE7-1: "an entrapped fragment must be named". PE7-2: no displacement threshold.
+  // PE7-1: "an entrapped fragment must be named". PE7-2: no displacement threshold; radiographs
+  // "are not sufficient to measure anterior displacement nor accurate enough to measure medial
+  // displacement" (Edmonds 2010, abstract).
   test('an entrapped medial epicondyle', () => {
     const values = { ...normal, 'me-fracture': 'present', 'me-displacement': '12', 'me-entrapped': 'yes' }
     expect(chips(study, 'medial-epicondyle', values)['Medial epicondyle']).toBe('Entrapped in the joint')

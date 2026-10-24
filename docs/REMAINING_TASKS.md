@@ -271,31 +271,20 @@ claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`.
 ### Pediatric elbow radiographs
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/pediatric-elbow`). Every paper and
-claim is in `docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md`, marked "to
-check". Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
+claim is in `docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md`. Deployed before
+the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
-- [ ] Match references E1–E12 on PubMed and Crossref; fix wrong citation text, drop any
-  paper that cannot be found. Cheng, Rogers and Judet are the least certain.
-- [ ] CRITOE order and ages 1, 3, 5, 7, 9, 11 (PE2-1, Iyer 2012: are these ages really in
-  that paper?); measured ages vary and girls ossify earlier (PE2-2, Cheng 1998).
-- [ ] Trochlea seen without the medial epicondyle suggests an entrapped medial epicondyle
-  (PE2-3).
-- [ ] Fat pads mean an effusion (PE3-1); a posterior fat pad with no visible fracture means
-  an occult fracture is likely, 76% (PE3-2, Skaggs 1999). The "occult fracture likely"
-  impression line rests on PE3-2 alone.
-- [ ] Anterior humeral line through the middle third of the capitellum (PE4-1, Rogers 1978);
-  the anterior third is common under age 4 (PE4-2, Herman 2009).
-- [ ] Radiocapitellar line and Monteggia (PE4-3).
-- [ ] Supracondylar fracture is the commonest (PE5-1); Gartland I–III wording (PE5-2);
-  type IV (PE5-3, Leitch 2006).
-- [ ] Weiss lateral condyle types I–III at 2 mm and the articular surface (PE6-1, PE6-2);
-  Jakob stages (PE6-3).
-- [ ] Medial epicondyle entrapment (PE7-1); radiographs underestimate displacement
-  (PE7-2, Edmonds 2010).
-- [ ] O'Brien radial neck types I–III at 30° and 60° (PE8-1): do exactly 30° and 60° fall
-  in type II, as the page assumes? Judet (PE8-2).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references E1–E12 on PubMed and Crossref (2026-10-23). All found; Weiss's DOI and
+  Judet's title corrected; DOIs and `<Cite>` links added (Gartland and Judet have no DOI).
+- [x] Verified from abstracts: PE2-2, PE3-2 (76%), PE4-2, PE6-1; others in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): ossification follows Cheng's
+  order and ages (girls 1, 5, 5, 9, 9, 10; boys about 2 years later except the capitellum),
+  not CRITOE at 1-3-5-7-9-11, which Iyer's abstract does not state; an optional Sex field
+  picks the ages, and with no sex entered the later (boys') ages are used, the site's choice.
+  The anterior humeral line cites Herman for the middle third and Rogers for under 2½ years;
+  radiographs underestimate anterior but overestimate medial displacement (Edmonds).
+- [ ] Still unchecked: everything cited to Iyer (its abstract states none of it), the Gartland,
+  O'Brien and Judet types (no abstracts), Jakob's stages, PE2-3, PE3-1, PE4-3, PE5-1, PE5-2.
 
 ## Housekeeping
 
