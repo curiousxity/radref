@@ -126,31 +126,20 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
 ### Elbow MRI study and Mason calculator
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/elbow-mri`, `/mason`). Every paper and
-claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, marked "to check".
-Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
+claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`.
 
-- [ ] Match references E1–E17 on PubMed and Crossref; fix citation text. E1, E2 and E7 may
-  have no DOI. The author lists and pages of E9, E11, E13 and E17 are the least certain.
-- [ ] Mason types I–III (MA-1 to MA-3) against Mason 1954; Johnston's type IV, fracture
-  with dislocation (MA-4), against Johnston 1962.
-- [ ] Broberg-Morrey: under 2 mm is type I, 2 mm or more with 30% or more of the head is
-  type II (MA-5, MA-6). Are these numbers really in the 1986 paper? A fragment displaced
-  2 mm or more but under 30% of the head gets no type on the page (the site's choice).
-- [ ] Horii circle: soft tissues fail lateral to medial, LUCL first (E1-1, O'Driscoll 1992).
-- [ ] Regan-Morrey coronoid types (E2-2); terrible triad (E2-3, Ring 2002, or should it be
-  Hotchkiss?).
-- [ ] Panner versus osteochondritis dissecans (E2-4); the capitellar pseudodefect (E2-5);
-  OCD stability signs (E2-6).
-- [ ] UCL anterior bundle (E3-1); the undersurface tear or T-sign (E3-2): was it described
-  on MRI or only on CT arthrography (Timmerman)?
-- [ ] LUCL insufficiency and posterolateral rotatory instability (E4-1, O'Driscoll 1991).
-- [ ] Medial epicondylitis (E5-1); lateral epicondylitis (E6-1) and LUCL abnormalities with
-  it (E6-2).
-- [ ] Distal biceps, partial versus complete (E7-1); triceps and brachialis (E8-1); nerves
-  and denervation edema (E9-1).
-- [ ] Anconeus epitrochlearis and the ulnar nerve (E11-1, Rosenberg 1995).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source
-  notes, and update the tests that pin the unchecked state.
+- [x] Match references E1–E17 on PubMed and Crossref (2026-10-23). All found; Kijowski's (E8)
+  DOI corrected; DOIs and `<Cite>` links added (Johnston 1962 has no DOI). Timmerman and
+  Andrews 1994, the undersurface tear paper, added beside its CT arthrography companion.
+- [x] Verified from abstracts: E2-2, E2-3, E4-1, E5-1, E6-2, E7-1; others in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): instability stages follow
+  O'Driscoll's wording (specimens dislocated with the anterior band intact); the capitellar
+  pseudodefect is "at the junction of the capitellum and lateral epicondyle", not posterior;
+  the undersurface UCL tear is a deep-layer detachment, the T-sign a CT arthrography sign, and
+  the sublime tubercle is no longer named; lateral epicondylitis cites Potter for ECRB
+  degeneration and Bredella for the MRI signal.
+- [ ] Still unchecked: Mason MA-1 to MA-6 and Johnston (no abstracts), Broberg-Morrey 2 mm and
+  30%, E2-1, E11-1, and the unread parts of the partly verified rows.
 
 ### Wrist MRI study
 

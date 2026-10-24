@@ -7,9 +7,9 @@ const study = studyOf(ElbowMriStudyPage)
 
 /*
  * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-23-elbow-mri-sources.md by its ID. None of those claims
- * has been checked against its paper yet (PubMed was unreachable), so when the check is done
- * a case may have to change; say in that commit why the old expectation was wrong.
+ * docs/superpowers/research/2026-10-23-elbow-mri-sources.md by its ID. The references are
+ * matched, but only the claims marked verified there were read in their papers; when the rest
+ * are checked a case may have to change; say in that commit why the old expectation was wrong.
  */
 
 describe('elbow MRI lesson', () => {
@@ -20,12 +20,16 @@ describe('elbow MRI lesson', () => {
     ])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident. When the citations are
-  // checked on PubMed, these change together: DOIs added, the note reworded.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
-    expect(study.sourceNote).toBe('Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.')
-    expect(study.references).toHaveLength(17)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+  // The references are matched (each has a DOI but Johnston's), but claims not in an abstract
+  // are still unchecked, so the note keeps saying so. Johnston (Ulster Med J 1962) has no DOI on
+  // PubMed or Crossref; the paper is in PMC only (PMC2384652).
+  test('is still marked as an unchecked draft, with a DOI on every reference but Johnston 1962', () => {
+    expect(study.sourceNote).toMatch(/^Unchecked draft: every reference has been matched on PubMed and Crossref/)
+    expect(study.references).toHaveLength(18)
+    for (const ref of study.references) {
+      if (ref.citation.startsWith('Johnston GW.')) expect(ref.doi, ref.citation).toBeUndefined()
+      else expect(ref.doi, ref.citation).toMatch(/^10\./)
+    }
   })
 })
 
@@ -166,7 +170,7 @@ describe('elbow MRI report: hidden fields', () => {
 
   test('a UCL partial-tear type left behind when the UCL is intact writes nothing', () => {
     const values = { ...normal, ucl: 'intact', 'ucl-partial-type': 'undersurface' }
-    expect(report(study, values).text).not.toContain('sublime')
+    expect(report(study, values).text).not.toContain('undersurface')
     expect(chips(study, 'ucl', values)['Undersurface partial tear']).toBeUndefined()
   })
 
@@ -219,7 +223,9 @@ describe('elbow MRI rules (unchecked)', () => {
     ].join('\n'))
   })
 
-  // E1-1: soft tissues fail "from lateral to medial" after a dislocation.
+  // E1-1: "Dislocation is the final of three sequential stages of elbow instability resulting
+  // from posterolateral rotation, with soft-tissue disruption progressing from lateral to
+  // medial" (O'Driscoll 1992, abstract). The rule is unchanged.
   test('after a dislocation, the Horii circle chip and the lateral-before-medial check', () => {
     expect(chips(study, 'technique', { history: 'dislocation' })['After a dislocation']).toBe('Read the ligaments lateral to medial (Horii circle)')
     expect(chips(study, 'technique', { history: 'pain' })['After a dislocation']).toBeUndefined()
@@ -243,19 +249,27 @@ describe('elbow MRI rules (unchecked)', () => {
     expect(chips(study, 'bones', { capitellum: 'ocd' })['Osteochondritis dissecans']).toBe('Typically adolescents; a focal lesion')
   })
 
-  // E2-5: the pseudodefect is at the posterior capitellum.
-  test('an osteochondral lesion at the posterior capitellum is flagged as a possible pseudodefect', () => {
-    const values = { ...normal, capitellum: 'ocd', 'ocd-site': 'posterior' }
-    expect(report(study, values).warnings).toEqual(['An osteochondral lesion is entered at the posterior capitellum, where the normal pseudodefect sits; check that it is not the pseudodefect.'])
+  // E2-5: "the pseudodefect of the distal humerus at the junction of the capitellum and lateral
+  // epicondyle, which may simulate an osteochondral lesion" (Rosenberg 1994, abstract). The old
+  // case put it at the "posterior capitellum", a word the paper does not use, so the site option
+  // and the warning now name the junction instead.
+  test('an osteochondral lesion at the capitellum-lateral epicondyle junction is flagged as a possible pseudodefect', () => {
+    const values = { ...normal, capitellum: 'ocd', 'ocd-site': 'junction' }
+    expect(report(study, values).warnings).toEqual(['An osteochondral lesion is entered at the junction of the capitellum and the lateral epicondyle, where the normal pseudodefect sits; check that it is not the pseudodefect.'])
+    expect(report(study, { ...values, 'ocd-site': 'posterior' }).warnings).toEqual([])
     expect(report(study, { ...values, 'ocd-site': 'anterior' }).warnings).toEqual([])
   })
 
-  // E3-2: the undersurface partial tear at the sublime tubercle (T-sign).
+  // E3-2: "an undersurface tear of the deep capsular layer of the anterior bundle" with "a
+  // detachment of the undersurface of the ligament at the ulna or the humerus" (Timmerman and
+  // Andrews 1994, abstract); the "T-sign" was "seen on the computed tomography arthrogram"
+  // (Timmerman et al. 1994, abstract). The old chip placed it at the sublime tubercle and called
+  // it the T-sign on MRI; neither paper says the first, and the sign is a CT arthrography one.
   test('the undersurface UCL tear', () => {
     const values = { ...normal, ucl: 'partial', 'ucl-partial-type': 'undersurface' }
-    expect(chips(study, 'ucl', values)['Undersurface partial tear']).toBe('Deep fibres off the sublime tubercle (T-sign)')
+    expect(chips(study, 'ucl', values)['Undersurface partial tear']).toBe('Deep layer detached from bone, superficial layer intact')
     expect(chips(study, 'ucl', { ...values, 'ucl-partial-type': 'other' })['Undersurface partial tear']).toBeUndefined()
-    expect(impressionOf(values)).toBe('Partial tear of the UCL, undersurface at the sublime tubercle.')
+    expect(impressionOf(values)).toBe('Partial tear of the UCL, undersurface (deep layer).')
   })
 
   // E4-1: LUCL insufficiency underlies posterolateral rotatory instability.

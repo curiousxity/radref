@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { brobergMorrey, mason, masonDescriptions, masonSentence } from '../logic/mason'
 import type { MasonPattern, MasonResult, MasonType } from '../logic/mason'
@@ -6,49 +7,69 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-elbow-mri-sources.md; rule chips
- * and warnings carry its claim IDs. Until the check, citations are plain text rather than
- * <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled, so only claims whose wording is in an abstract are verified; Mason
+ * and Johnston have no abstract at all. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-elbow-mri-sources.md; rule chips and warnings carry its
+ * claim IDs. Johnston (Ulster Med J 1962) has no DOI, so its citation stays plain text.
  */
 
-const MASON = 'Mason, Br J Surg 1954'
+const MASON_DOI = '10.1002/bjs.18004217203'
+const BROBERG_DOI = '10.2106/00004623-198668050-00005'
+const REGAN_DOI = '10.2106/00004623-198971090-00011'
+const RING_DOI = '10.2106/00004623-200204000-00006'
+const ODRISCOLL_PLRI_DOI = '10.2106/00004623-199173030-00015'
+const ODRISCOLL_SPECTRUM_DOI = '10.1097/00003086-199207000-00024'
+const KIJOWSKI_PART2_DOI = '10.1007/s00256-004-0854-y'
+const TIMMERMAN_DOI = '10.1177/036354659402200105'
+const TIMMERMAN_ANDREWS_DOI = '10.1177/036354659402200106'
+const POTTER_DOI = '10.1148/radiology.196.1.7784585'
+const BREDELLA_DOI = '10.2214/ajr.173.5.10541124'
+const KIJOWSKI_MEDIAL_DOI = '10.1007/s00256-005-0896-9'
+const FALCHOOK_DOI = '10.1148/radiology.190.3.8115606'
+const KOBAYASHI_DOI = '10.5435/00124635-200407000-00005'
+const ROSENBERG_PSEUDO_DOI = '10.1148/radiology.191.3.8184072'
+const KIJOWSKI_OCD_DOI = '10.2214/AJR.04.1570'
+const ROSENBERG_TUNNEL_DOI = '10.2214/ajr.164.2.7839980'
+
+const MASON = <Cite doi={MASON_DOI}>Mason, Br J Surg 1954</Cite>
 const JOHNSTON = 'Johnston, Ulster Med J 1962'
-const BROBERG = 'Broberg and Morrey, J Bone Joint Surg Am 1986'
-const REGAN = 'Regan and Morrey, J Bone Joint Surg Am 1989'
-const RING = 'Ring et al., J Bone Joint Surg Am 2002'
-const ODRISCOLL_PLRI = "O'Driscoll et al., J Bone Joint Surg Am 1991"
-const ODRISCOLL_SPECTRUM = "O'Driscoll et al., Clin Orthop Relat Res 1992"
-const KIJOWSKI_PART2 = 'Kijowski et al., Skeletal Radiol 2005'
-const TIMMERMAN = 'Timmerman et al., Am J Sports Med 1994'
-const POTTER = 'Potter et al., Radiology 1995'
-const BREDELLA = 'Bredella et al., AJR 1999'
-const KIJOWSKI_MEDIAL = 'Kijowski and De Smet, Skeletal Radiol 2005'
-const FALCHOOK = 'Falchook et al., Radiology 1994'
-const KOBAYASHI = 'Kobayashi et al., J Am Acad Orthop Surg 2004'
-const ROSENBERG_PSEUDO = 'Rosenberg et al., Radiology 1994'
-const KIJOWSKI_OCD = 'Kijowski and De Smet, AJR 2005'
-const ROSENBERG_TUNNEL = 'Rosenberg et al., AJR 1995'
+const BROBERG = <Cite doi={BROBERG_DOI}>Broberg and Morrey, J Bone Joint Surg Am 1986</Cite>
+const REGAN = <Cite doi={REGAN_DOI}>Regan and Morrey, J Bone Joint Surg Am 1989</Cite>
+const RING = <Cite doi={RING_DOI}>Ring et al., J Bone Joint Surg Am 2002</Cite>
+const ODRISCOLL_PLRI = <Cite doi={ODRISCOLL_PLRI_DOI}>O'Driscoll et al., J Bone Joint Surg Am 1991</Cite>
+const ODRISCOLL_SPECTRUM = <Cite doi={ODRISCOLL_SPECTRUM_DOI}>O'Driscoll et al., Clin Orthop Relat Res 1992</Cite>
+const KIJOWSKI_PART2 = <Cite doi={KIJOWSKI_PART2_DOI}>Kijowski et al., Skeletal Radiol 2005</Cite>
+const TIMMERMAN = <Cite doi={TIMMERMAN_DOI}>Timmerman et al., Am J Sports Med 1994</Cite>
+const TIMMERMAN_ANDREWS = <Cite doi={TIMMERMAN_ANDREWS_DOI}>Timmerman and Andrews, Am J Sports Med 1994</Cite>
+const POTTER = <Cite doi={POTTER_DOI}>Potter et al., Radiology 1995</Cite>
+const BREDELLA = <Cite doi={BREDELLA_DOI}>Bredella et al., AJR 1999</Cite>
+const KIJOWSKI_MEDIAL = <Cite doi={KIJOWSKI_MEDIAL_DOI}>Kijowski and De Smet, Skeletal Radiol 2005</Cite>
+const FALCHOOK = <Cite doi={FALCHOOK_DOI}>Falchook et al., Radiology 1994</Cite>
+const KOBAYASHI = <Cite doi={KOBAYASHI_DOI}>Kobayashi et al., J Am Acad Orthop Surg 2004</Cite>
+const ROSENBERG_PSEUDO = <Cite doi={ROSENBERG_PSEUDO_DOI}>Rosenberg et al., Radiology 1994</Cite>
+const KIJOWSKI_OCD = <Cite doi={KIJOWSKI_OCD_DOI}>Kijowski and De Smet, AJR 2005</Cite>
+const ROSENBERG_TUNNEL = <Cite doi={ROSENBERG_TUNNEL_DOI}>Rosenberg et al., AJR 1995</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132.' },
+  { citation: 'Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132.', doi: MASON_DOI },
   { citation: 'Johnston GW. A follow-up of one hundred cases of fracture of the head of the radius with a review of the literature. Ulster Med J. 1962;31(1):51-56.' },
-  { citation: 'Broberg MA, Morrey BF. Results of delayed excision of the radial head after fracture. J Bone Joint Surg Am. 1986;68(5):669-674.' },
-  { citation: 'Regan W, Morrey B. Fractures of the coronoid process of the ulna. J Bone Joint Surg Am. 1989;71(9):1348-1354.' },
-  { citation: 'Ring D, Jupiter JB, Zilberfarb J. Posterior dislocation of the elbow with fractures of the radial head and coronoid. J Bone Joint Surg Am. 2002;84(4):547-551.' },
-  { citation: "O'Driscoll SW, Bell DF, Morrey BF. Posterolateral rotatory instability of the elbow. J Bone Joint Surg Am. 1991;73(3):440-446." },
-  { citation: "O'Driscoll SW, Morrey BF, Korinek S, An KN. Elbow subluxation and dislocation. A spectrum of instability. Clin Orthop Relat Res. 1992;(280):186-197." },
-  { citation: 'Kijowski R, Tuite M, Sanford M. Magnetic resonance imaging of the elbow. Part II: Abnormalities of the ligaments, tendons, and nerves. Skeletal Radiol. 2005;34(1):1-18.' },
-  { citation: 'Timmerman LA, Schwartz ML, Andrews JR. Preoperative evaluation of the ulnar collateral ligament by magnetic resonance imaging and computed tomography arthrography. Evaluation in 25 baseball players with surgical confirmation. Am J Sports Med. 1994;22(1):26-31.' },
-  { citation: 'Potter HG, Hannafin JA, Morwessel RM, DiCarlo EF, O\'Brien SJ, Altchek DW. Lateral epicondylitis: correlation of MR imaging, surgical, and histopathologic findings. Radiology. 1995;196(1):43-46.' },
-  { citation: 'Bredella MA, Tirman PF, Fritz RC, Feller JF, Wischer TK, Genant HK. MR imaging findings of lateral ulnar collateral ligament abnormalities in patients with lateral epicondylitis. AJR Am J Roentgenol. 1999;173(5):1379-1382.' },
-  { citation: 'Kijowski R, De Smet AA. Magnetic resonance imaging findings in patients with medial epicondylitis. Skeletal Radiol. 2005;34(4):196-202.' },
-  { citation: 'Falchook FS, Zlatkin MB, Erbacher GE, Moulton JS, Bisset GS, Murphy BJ. Rupture of the distal biceps tendon: evaluation with MR imaging. Radiology. 1994;190(3):659-663.' },
-  { citation: "Kobayashi K, Burton KJ, Rodner C, Smith B, Caputo AE. Lateral compression injuries in the pediatric elbow: Panner's disease and osteochondritis dissecans of the capitellum. J Am Acad Orthop Surg. 2004;12(4):246-254." },
-  { citation: 'Rosenberg ZS, Beltran J, Cheung YY. Pseudodefect of the capitellum: potential MR imaging pitfall. Radiology. 1994;191(3):821-823.' },
-  { citation: 'Kijowski R, De Smet AA. MRI findings of osteochondritis dissecans of the capitellum with surgical correlation. AJR Am J Roentgenol. 2005;185(6):1453-1459.' },
-  { citation: 'Rosenberg ZS, Beltran J, Cheung Y, Broker M. MR imaging of the elbow: normal variant and potential diagnostic pitfalls of the trochlear groove and cubital tunnel. AJR Am J Roentgenol. 1995;164(2):415-418.' },
+  { citation: 'Broberg MA, Morrey BF. Results of delayed excision of the radial head after fracture. J Bone Joint Surg Am. 1986;68(5):669-674.', doi: BROBERG_DOI },
+  { citation: 'Regan W, Morrey B. Fractures of the coronoid process of the ulna. J Bone Joint Surg Am. 1989;71(9):1348-1354.', doi: REGAN_DOI },
+  { citation: 'Ring D, Jupiter JB, Zilberfarb J. Posterior dislocation of the elbow with fractures of the radial head and coronoid. J Bone Joint Surg Am. 2002;84(4):547-551.', doi: RING_DOI },
+  { citation: "O'Driscoll SW, Bell DF, Morrey BF. Posterolateral rotatory instability of the elbow. J Bone Joint Surg Am. 1991;73(3):440-446.", doi: ODRISCOLL_PLRI_DOI },
+  { citation: "O'Driscoll SW, Morrey BF, Korinek S, An KN. Elbow subluxation and dislocation. A spectrum of instability. Clin Orthop Relat Res. 1992;(280):186-197.", doi: ODRISCOLL_SPECTRUM_DOI },
+  { citation: 'Kijowski R, Tuite M, Sanford M. Magnetic resonance imaging of the elbow. Part II: Abnormalities of the ligaments, tendons, and nerves. Skeletal Radiol. 2005;34(1):1-18.', doi: KIJOWSKI_PART2_DOI },
+  { citation: 'Timmerman LA, Schwartz ML, Andrews JR. Preoperative evaluation of the ulnar collateral ligament by magnetic resonance imaging and computed tomography arthrography. Evaluation in 25 baseball players with surgical confirmation. Am J Sports Med. 1994;22(1):26-31.', doi: TIMMERMAN_DOI },
+  { citation: 'Timmerman LA, Andrews JR. Undersurface tear of the ulnar collateral ligament in baseball players. A newly recognized lesion. Am J Sports Med. 1994;22(1):33-36.', doi: TIMMERMAN_ANDREWS_DOI },
+  { citation: 'Potter HG, Hannafin JA, Morwessel RM, DiCarlo EF, O\'Brien SJ, Altchek DW. Lateral epicondylitis: correlation of MR imaging, surgical, and histopathologic findings. Radiology. 1995;196(1):43-46.', doi: POTTER_DOI },
+  { citation: 'Bredella MA, Tirman PF, Fritz RC, Feller JF, Wischer TK, Genant HK. MR imaging findings of lateral ulnar collateral ligament abnormalities in patients with lateral epicondylitis. AJR Am J Roentgenol. 1999;173(5):1379-1382.', doi: BREDELLA_DOI },
+  { citation: 'Kijowski R, De Smet AA. Magnetic resonance imaging findings in patients with medial epicondylitis. Skeletal Radiol. 2005;34(4):196-202.', doi: KIJOWSKI_MEDIAL_DOI },
+  { citation: 'Falchook FS, Zlatkin MB, Erbacher GE, Moulton JS, Bisset GS, Murphy BJ. Rupture of the distal biceps tendon: evaluation with MR imaging. Radiology. 1994;190(3):659-663.', doi: FALCHOOK_DOI },
+  { citation: "Kobayashi K, Burton KJ, Rodner C, Smith B, Caputo AE. Lateral compression injuries in the pediatric elbow: Panner's disease and osteochondritis dissecans of the capitellum. J Am Acad Orthop Surg. 2004;12(4):246-254.", doi: KOBAYASHI_DOI },
+  { citation: 'Rosenberg ZS, Beltran J, Cheung YY. Pseudodefect of the capitellum: potential MR imaging pitfall. Radiology. 1994;191(3):821-823.', doi: ROSENBERG_PSEUDO_DOI },
+  { citation: 'Kijowski R, De Smet AA. MRI findings of osteochondritis dissecans of the capitellum with surgical correlation. AJR Am J Roentgenol. 2005;185(6):1453-1459.', doi: KIJOWSKI_OCD_DOI },
+  { citation: 'Rosenberg ZS, Beltran J, Cheung Y, Broker M. MR imaging of the elbow: normal variant and potential diagnostic pitfalls of the trochlear groove and cubital tunnel. AJR Am J Roentgenol. 1995;164(2):415-418.', doi: ROSENBERG_TUNNEL_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -105,7 +126,7 @@ const learn: LearnSection[] = [
         <p>This lesson is for the elbow MRI that arrives with pain, sometimes after an injury. It walks a fixed search pattern through every structure, and uses the injury, when there is one, to decide where to look hardest. The order, and the protocol checklist below, are this site's own; none of the papers below prescribes them.</p>
         <p>Check that the study has all three planes, fat-suppressed fluid-sensitive imaging (proton density or T2) for edema and tears, and a T1-weighted sequence for anatomy and marrow. Note any effusion and any bone marrow edema.</p>
         <h4>After a dislocation: the Horii circle</h4>
-        <p>O'Driscoll and colleagues describe elbow subluxation and dislocation as a spectrum in which the soft tissues fail in a ring from lateral to medial: first the lateral ulnar collateral ligament (stage 1, posterolateral subluxation), then the rest of the lateral side with the anterior and posterior capsule (stage 2), and last the medial side (stage 3) ({ODRISCOLL_SPECTRUM}). After a dislocation, read the lateral ligaments first, and expect a medial tear only when the lateral side is torn too.</p>
+        <p>O'Driscoll and colleagues describe elbow subluxation and dislocation as three sequential stages of instability from posterolateral rotation, with the soft-tissue disruption progressing from lateral to medial, and dislocation as the final stage ({ODRISCOLL_SPECTRUM}). As usually taught from that paper, the lateral ulnar collateral ligament fails first (posterolateral subluxation), then the rest of the lateral side with the anterior and posterior capsule. In their specimens, though, the elbows dislocated with the anterior band of the medial collateral ligament still intact, so a dislocation does not mean the anterior bundle of the UCL is torn. After a dislocation, read the lateral ligaments first, and expect a medial tear only when the lateral side is torn too.</p>
       </>
     ),
   },
@@ -125,7 +146,7 @@ const learn: LearnSection[] = [
         <p>Posterior dislocation of the elbow with fractures of both the radial head and the coronoid is the combination Ring and colleagues reported on ({RING}), known as the terrible triad. When the history is a dislocation and both fractures are present, say so in the impression.</p>
         <h4>Capitellum: osteochondritis dissecans, Panner, and the pseudodefect</h4>
         <p>Panner's disease is fragmentation of the whole capitellum in children younger than about 10; osteochondritis dissecans is a focal lesion of the capitellum in adolescents, typically throwers and gymnasts ({KOBAYASHI}). On MRI, judge whether an osteochondritis dissecans fragment is stable by looking at the interface between the fragment and the bone and at the overlying cartilage ({KIJOWSKI_OCD}).</p>
-        <p>Do not call the pseudodefect a lesion: at the posterior capitellum, where it meets the lateral epicondyle, a normal groove can mimic an osteochondral defect ({ROSENBERG_PSEUDO}). True osteochondritis dissecans sits more anteriorly.</p>
+        <p>Do not call the pseudodefect a lesion: at the junction of the capitellum and the lateral epicondyle, a groove and the overhanging lateral edges of the capitellum can simulate an osteochondral lesion on axial and coronal images ({ROSENBERG_PSEUDO}).</p>
       </>
     ),
   },
@@ -135,7 +156,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>The anterior bundle of the ulnar collateral ligament is the one that matters for valgus stability; describe it as intact, with edema around intact fibres, partially torn or completely torn ({KIJOWSKI_PART2}).</p>
-        <p>In throwers, look at its distal attachment on the sublime tubercle. Timmerman and colleagues described an undersurface partial tear there, the deep fibres detached from the tubercle with the superficial fibres intact, seen as a "T" when contrast tracks along the bone ({TIMMERMAN}).</p>
+        <p>In throwers, look at the deep surface of the anterior bundle where it attaches to bone. Timmerman and Andrews described an undersurface tear of the deep capsular layer of the anterior bundle: the ligament intact externally, but its undersurface detached at the ulna or the humerus ({TIMMERMAN_ANDREWS}). It is hard to see on MRI: six of their seven patients had a normal MRI. On CT arthrography it gives the "T-sign", contrast leaking around the detachment from bone but contained within the intact superficial layer and capsule, and that was the arthrogram's main advantage over MRI ({TIMMERMAN}).</p>
       </>
     ),
   },
@@ -163,7 +184,7 @@ const learn: LearnSection[] = [
     title: 'Step 6. Common extensor origin',
     body: (
       <>
-        <p>In lateral epicondylitis, MRI shows thickening and increased signal in the common extensor tendon, and the MRI findings matched the surgical and histological ones ({POTTER}).</p>
+        <p>In refractory lateral epicondylitis, the MRI findings correlated with the surgical finding of primary degeneration of the extensor carpi radialis brevis, and the tendon degeneration and degree of tear seen on MRI correlated well with the surgical and histological findings ({POTTER}). Bredella and colleagues defined lateral epicondylitis on MRI as increased signal in the extensor tendons close to their insertion on the lateral epicondyle ({BREDELLA}).</p>
         <p>Read the LUCL again when the extensor origin is abnormal: LUCL abnormalities, thickening and tears, were found in patients with lateral epicondylitis ({BREDELLA}).</p>
       </>
     ),
@@ -325,7 +346,7 @@ const fields = {
   ocdSite: { id: 'ocd-site', kind: 'choice', label: 'Lesion site on the capitellum', showIf: (v) => str(v, 'capitellum') === 'ocd', options: [
     { value: 'anterior', label: 'Anterior or anterolateral' },
     { value: 'central', label: 'Central' },
-    { value: 'posterior', label: 'Posterior, at the lateral epicondyle' },
+    { value: 'junction', label: 'At the junction with the lateral epicondyle' },
   ] },
   ocdSigns: { id: 'ocd-signs', kind: 'multi', label: 'Signs around the fragment', showIf: (v) => str(v, 'capitellum') === 'ocd', options: [
     { value: 'rim', label: 'High T2 signal at the fragment-bone interface' },
@@ -336,7 +357,7 @@ const fields = {
 
   ucl: { id: 'ucl', kind: 'choice', label: 'UCL (anterior bundle)', required: true, options: ligamentOptions },
   uclPartialType: { id: 'ucl-partial-type', kind: 'choice', label: 'UCL partial tear', showIf: (v) => str(v, 'ucl') === 'partial', options: [
-    { value: 'undersurface', label: 'Undersurface tear at the sublime tubercle, superficial fibres intact' },
+    { value: 'undersurface', label: 'Undersurface tear, deep layer detached from bone, superficial layer intact' },
     { value: 'other', label: 'Other partial tear' },
   ] },
 
@@ -419,7 +440,7 @@ function otherFindings(values: Values): string {
 /* Rule chips. */
 
 function deriveTechnique(values: Values): Derived[] {
-  // E1-1: after a dislocation the soft tissues fail from lateral to medial.
+  // E1-1: "soft-tissue disruption progressing from lateral to medial" (O'Driscoll 1992).
   return dislocationHistory(values) ? [{ label: 'After a dislocation', value: 'Read the ligaments lateral to medial (Horii circle)' }] : []
 }
 
@@ -444,9 +465,10 @@ function deriveBones(values: Values): Derived[] {
 }
 
 function deriveUcl(values: Values): Derived[] {
-  // E3-2: the undersurface partial tear at the sublime tubercle (T-sign).
+  // E3-2: the undersurface tear of the deep layer (Timmerman and Andrews); the T-sign is its
+  // CT arthrography sign (Timmerman et al.), and MRI was normal in six of their seven patients.
   return str(values, 'ucl') === 'partial' && str(values, 'ucl-partial-type') === 'undersurface'
-    ? [{ label: 'Undersurface partial tear', value: 'Deep fibres off the sublime tubercle (T-sign)', tone: 'warn' }]
+    ? [{ label: 'Undersurface partial tear', value: 'Deep layer detached from bone, superficial layer intact', tone: 'warn' }]
     : []
 }
 
@@ -512,7 +534,7 @@ function boneLines(values: Values): (string | false)[] {
 
 function uclLine(values: Values): string {
   const partialType = str(values, 'ucl-partial-type')
-  return choiceLine(values, fields.ucl, partialType === 'undersurface' && 'undersurface tear at the sublime tubercle, superficial fibres intact')
+  return choiceLine(values, fields.ucl, partialType === 'undersurface' && 'undersurface tear, deep layer detached from bone, superficial layer intact')
 }
 
 function nerveLines(values: Values): (string | false)[] {
@@ -556,7 +578,7 @@ function findings(values: Values): string[] {
   if (ucl === 'edema') out.push('Edema around an intact UCL.')
   if (ucl === 'partial' || ucl === 'complete') {
     const undersurface = ucl === 'partial' && str(values, 'ucl-partial-type') === 'undersurface'
-    out.push(`${upperFirst(ucl)} tear of the UCL${undersurface ? ', undersurface at the sublime tubercle' : ''}.`)
+    out.push(`${upperFirst(ucl)} tear of the UCL${undersurface ? ', undersurface (deep layer)' : ''}.`)
   }
   for (const [id, name] of [['lucl', 'LUCL'], ['rcl', 'radial collateral ligament']] as const) {
     const status = str(values, id)
@@ -639,7 +661,7 @@ function warnings(values: Values): string[] {
     if (negatives.includes(key) && found.length > 0) out.push(`Impression says ${phrase}, but these are entered: ${found.join(', ')}.`)
   }
 
-  // E1-1: after a dislocation the medial side fails last, after the lateral side.
+  // E1-1: "soft-tissue disruption progressing from lateral to medial" (O'Driscoll 1992).
   if (dislocationHistory(values) && torn(values, 'ucl') && str(values, 'lucl') === 'intact') {
     out.push('The history is a dislocation and the UCL is torn, but the LUCL is entered as intact; after a dislocation the lateral side fails before the medial side.')
   }
@@ -647,9 +669,10 @@ function warnings(values: Values): string[] {
   if (dislocationHistory(values) && radialHeadPresent(values) && str(values, 'radial-head-dislocation') === 'no') {
     out.push('The history is a dislocation, but the radial head fracture is entered without one; if they happened together it is Mason type IV (Johnston).')
   }
-  // E2-5: the pseudodefect sits at the posterior capitellum.
-  if (str(values, 'capitellum') === 'ocd' && str(values, 'ocd-site') === 'posterior') {
-    out.push('An osteochondral lesion is entered at the posterior capitellum, where the normal pseudodefect sits; check that it is not the pseudodefect.')
+  // E2-5: the pseudodefect is "at the junction of the capitellum and lateral epicondyle"
+  // (Rosenberg 1994).
+  if (str(values, 'capitellum') === 'ocd' && str(values, 'ocd-site') === 'junction') {
+    out.push('An osteochondral lesion is entered at the junction of the capitellum and the lateral epicondyle, where the normal pseudodefect sits; check that it is not the pseudodefect.')
   }
   return out
 }
@@ -690,7 +713,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>Check for all three planes, fat-suppressed PD or T2 imaging, and a T1-weighted sequence (this site's checklist).</p>
-        <p>After a dislocation the soft tissues fail in a ring from lateral to medial: the LUCL first, then the rest of the lateral side and the capsule, the medial side last ({ODRISCOLL_SPECTRUM}).</p>
+        <p>Dislocation is the final of three stages of instability, with the soft-tissue disruption progressing from lateral to medial; in O'Driscoll's specimens the elbows dislocated with the anterior band of the medial collateral ligament intact ({ODRISCOLL_SPECTRUM}).</p>
       </>
     ),
     fields: [fields.history, fields.protocol, fields.protocolMissing, fields.effusion, fields.marrow],
@@ -706,7 +729,7 @@ const steps: ReportStep[] = [
         {masonTable}
         <p>Coronoid fractures by Regan and Morrey ({REGAN}):</p>
         {reganTable}
-        <p>A dislocation with radial head and coronoid fractures is the terrible triad ({RING}). The pseudodefect at the posterior capitellum is normal ({ROSENBERG_PSEUDO}).</p>
+        <p>A dislocation with radial head and coronoid fractures is the terrible triad ({RING}). The pseudodefect at the junction of the capitellum and the lateral epicondyle is normal ({ROSENBERG_PSEUDO}).</p>
       </>
     ),
     fields: [
@@ -720,7 +743,7 @@ const steps: ReportStep[] = [
     id: 'ucl',
     title: 'Step 3. Ulnar (medial) collateral ligament',
     learn: 'ucl',
-    teach: <p>In throwers, look for an undersurface partial tear at the sublime tubercle, the deep fibres detached and the superficial fibres intact ({TIMMERMAN}).</p>,
+    teach: <p>In throwers, look for an undersurface tear of the deep layer of the anterior bundle, detached from bone with the ligament intact externally ({TIMMERMAN_ANDREWS}). MRI was normal in six of their seven patients; CT arthrography shows it as the T-sign ({TIMMERMAN}).</p>,
     fields: [fields.ucl, fields.uclPartialType],
     derive: deriveUcl,
   },
@@ -743,7 +766,7 @@ const steps: ReportStep[] = [
     id: 'extensor',
     title: 'Step 6. Common extensor origin',
     learn: 'extensor',
-    teach: <p>Lateral epicondylitis: thickening and increased signal in the common extensor tendon ({POTTER}). LUCL abnormalities were found with it ({BREDELLA}).</p>,
+    teach: <p>Lateral epicondylitis: increased signal in the extensor tendons near the lateral epicondyle ({BREDELLA}); MRI's tendon degeneration and degree of tear correlated well with surgery and histology ({POTTER}). Thickening and tears of the LUCL often went with it ({BREDELLA}).</p>,
     fields: [fields.extensor],
     derive: deriveExtensor,
   },
@@ -794,7 +817,7 @@ const study: StudyDefinition = {
   slug: 'elbow-mri',
   name: 'Elbow MRI',
   lede: 'Read an elbow MRI for pain or after an injury: a fixed search pattern through the bones, collateral ligaments, tendons, nerves and bursae, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Mason and Johnston type wording, the Broberg-Morrey 2 mm and 30% thresholds, the structures failing at each stage after a dislocation, the anterior bundle as the main valgus restraint, the nerve signs and the anconeus epitrochlearis) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -842,7 +865,7 @@ const study: StudyDefinition = {
       question: 'After an elbow dislocation, which structure fails first?',
       options: ['The anterior bundle of the UCL', 'The lateral ulnar collateral ligament', 'The annular ligament', 'The posterior capsule'],
       answer: 1,
-      explanation: <p>The soft tissues fail in a ring from lateral to medial: the LUCL first, then the rest of the lateral side and the capsule, the medial side last ({ODRISCOLL_SPECTRUM}).</p>,
+      explanation: <p>The soft-tissue disruption progresses from lateral to medial, so the lateral ulnar collateral ligament fails first; in O'Driscoll's specimens even a dislocation left the anterior band of the medial collateral ligament intact ({ODRISCOLL_SPECTRUM}).</p>,
     },
     {
       id: 'plri',
@@ -853,17 +876,17 @@ const study: StudyDefinition = {
     },
     {
       id: 't-sign',
-      question: 'In a baseball pitcher, the deep fibres of the UCL are detached from the sublime tubercle while the superficial fibres are intact. What is this?',
+      question: "On CT arthrography in a baseball pitcher, contrast leaks around the UCL's attachment to bone but stays within the intact superficial layer. What is this?",
       options: ['A complete UCL tear', 'An undersurface partial tear (the T-sign)', 'A normal recess', 'Medial epicondylitis'],
       answer: 1,
-      explanation: <p>Timmerman and colleagues described this undersurface partial tear of the UCL at the sublime tubercle ({TIMMERMAN}).</p>,
+      explanation: <p>The T-sign of an undersurface tear: the deep layer detached from bone, the superficial layer and capsule intact ({TIMMERMAN}). MRI often misses it: six of seven such patients had a normal MRI ({TIMMERMAN_ANDREWS}).</p>,
     },
     {
       id: 'pseudodefect',
-      question: 'An apparent defect sits at the posterior capitellum, where it meets the lateral epicondyle. What should you consider first?',
+      question: 'An apparent defect sits at the junction of the capitellum and the lateral epicondyle. What should you consider first?',
       options: ['Osteochondritis dissecans', "Panner's disease", 'The normal pseudodefect of the capitellum', 'An impaction fracture'],
       answer: 2,
-      explanation: <p>A normal groove at the posterior capitellum can mimic an osteochondral defect: the pseudodefect ({ROSENBERG_PSEUDO}).</p>,
+      explanation: <p>A groove at that junction, with the overhanging lateral edges of the capitellum, can simulate an osteochondral lesion: the pseudodefect ({ROSENBERG_PSEUDO}).</p>,
     },
     {
       id: 'panner',

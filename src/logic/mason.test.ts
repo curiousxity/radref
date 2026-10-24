@@ -3,9 +3,10 @@ import { brobergMorrey, mason, masonSentence } from './mason'
 
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-elbow-mri-sources.md.
- * None of these claims has been checked against Mason (Br J Surg 1954), Johnston (Ulster Med J
- * 1962) or Broberg and Morrey (J Bone Joint Surg Am 1986) yet: the wording is from memory,
- * pending the check on a computer.
+ * The papers are matched on PubMed, but none of these claims could be checked against Mason (Br
+ * J Surg 1954) or Johnston (Ulster Med J 1962), which have no abstract, or Broberg and Morrey
+ * (J Bone Joint Surg Am 1986), whose abstract does not state the thresholds: the wording is
+ * still from memory.
  */
 
 const type = (input: Parameters<typeof mason>[0]) => mason(input)?.type

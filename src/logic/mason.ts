@@ -4,8 +4,10 @@
  * (J Bone Joint Surg Am 1986). Shared by the Mason calculator and the elbow MRI study's bones
  * step.
  *
- * Unchecked draft: the wording has not yet been checked against the papers (claims MA-1 to
- * MA-6 in docs/superpowers/research/2026-10-23-elbow-mri-sources.md).
+ * Unchecked draft: the papers are matched on PubMed, but Mason and Johnston have no abstract and
+ * Broberg and Morrey's abstract does not state the thresholds, so the wording has not yet been
+ * checked against them (claims MA-1 to MA-6 in
+ * docs/superpowers/research/2026-10-23-elbow-mri-sources.md).
  */
 
 /** How the radial head is broken, worded as Mason's three original types. */
