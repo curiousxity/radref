@@ -198,17 +198,18 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-foot-mri-sourc
 
 ### Diabetic foot MRI study
 
-Drafted 2026-10-23 as an unchecked draft (`/studies/diabetic-foot-mri`). Every paper and claim
-is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`, marked "to check".
+Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md`.
 
-- [ ] Match references D1–D7 on PubMed and Crossref.
-- [ ] The T1 rule (D3-1, Johnson 2009) and spread from the ulcer (D2-1, Ledermann 2002): these
-  two decide the "osteomyelitis" line, so check them first.
-- [ ] Secondary signs (D1-1), pressure-point sites and septic arthritis (D2-2, D2-3).
-- [ ] Ghost sign and abscess (D4-1, D4-2, Donovan 2010); Charcot distribution (D5-1);
-  non-enhancing tissue (D6-1); active Charcot before radiographs (D7-1, Chantelau 2005).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references D1–D7 on PubMed and Crossref (2026-10-23). All found; DOIs and
+  `<Cite>` links added.
+- [x] Verified from abstracts: D1-1, D2-1, D6-1; D2-2, D2-3, D3-1, D4-1 and D7-1 in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): the T1 pattern is Johnson's
+  single "hazy reticulated" pattern, with no unstated "even with high fluid-sensitive signal";
+  the Charcot distribution chip now follows Donovan ("most commonly affects the
+  tarsometatarsal and metatarsophalangeal joints"), not "midfoot, away from the pressure
+  points", which no listed abstract states.
+- [ ] Still unchecked: the ghost sign (D4-2), and the parts of the partly verified rows the
+  abstracts do not state.
 
 ### Spine CT for pain or injury
 

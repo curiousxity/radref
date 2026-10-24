@@ -1,32 +1,41 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md
- * (D claims). Rule chips and warnings carry their claim IDs. Until the check, citations are
- * plain text rather than <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * the papers are paywalled, so only claims whose wording is in an abstract are verified. The
+ * claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). Rule chips and
+ * warnings carry their claim IDs.
  */
 
-const MORRISON = 'Morrison et al., Radiology 1998'
-const LEDERMANN = 'Ledermann et al., Radiology 2002'
-const JOHNSON = 'Johnson et al., AJR 2009'
-const DONOVAN = 'Donovan and Schweitzer, Radiographics 2010'
-const LEDERMANN_MORRISON = 'Ledermann and Morrison, Semin Musculoskelet Radiol 2005'
-const LEDERMANN_NONENHANCING = 'Ledermann et al., AJR 2002'
-const CHANTELAU = 'Chantelau, Diabet Med 2005'
+const MORRISON_DOI = '10.1148/radiology.207.3.9609883'
+const LEDERMANN_DOI = '10.1148/radiol.2233011279'
+const JOHNSON_DOI = '10.2214/AJR.08.1376'
+const DONOVAN_DOI = '10.1148/rg.303095111'
+const LEDERMANN_MORRISON_DOI = '10.1055/s-2005-921945'
+const LEDERMANN_NONENHANCING_DOI = '10.2214/ajr.178.1.1780215'
+const CHANTELAU_DOI = '10.1111/j.1464-5491.2005.01677.x'
+
+const MORRISON = <Cite doi={MORRISON_DOI}>Morrison et al., Radiology 1998</Cite>
+const LEDERMANN = <Cite doi={LEDERMANN_DOI}>Ledermann et al., Radiology 2002</Cite>
+const JOHNSON = <Cite doi={JOHNSON_DOI}>Johnson et al., AJR 2009</Cite>
+const DONOVAN = <Cite doi={DONOVAN_DOI}>Donovan and Schweitzer, RadioGraphics 2010</Cite>
+const LEDERMANN_MORRISON = <Cite doi={LEDERMANN_MORRISON_DOI}>Ledermann and Morrison, Semin Musculoskelet Radiol 2005</Cite>
+const LEDERMANN_NONENHANCING = <Cite doi={LEDERMANN_NONENHANCING_DOI}>Ledermann et al., AJR 2002</Cite>
+const CHANTELAU = <Cite doi={CHANTELAU_DOI}>Chantelau, Diabet Med 2005</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Morrison WB, Schweitzer ME, Batte WG, Radack DP, Russel KM. Osteomyelitis of the foot: relative importance of primary and secondary MR imaging signs. Radiology. 1998;207(3):625-632.' },
-  { citation: 'Ledermann HP, Morrison WB, Schweitzer ME. MR image analysis of pedal osteomyelitis: distribution, patterns of spread, and frequency of associated ulceration and septic arthritis. Radiology. 2002;223(3):747-755.' },
-  { citation: 'Johnson PW, Collins MS, Wenger DE. Diagnostic utility of T1-weighted MRI characteristics in evaluation of osteomyelitis of the foot. AJR Am J Roentgenol. 2009;192(1):96-100.' },
-  { citation: 'Donovan A, Schweitzer ME. Use of MR imaging in diagnosing diabetes-related pedal osteomyelitis. Radiographics. 2010;30(3):723-736.' },
-  { citation: 'Ledermann HP, Morrison WB. Differential diagnosis of pedal osteomyelitis and diabetic neuroarthropathy: MR imaging. Semin Musculoskelet Radiol. 2005;9(3):272-283.' },
-  { citation: 'Ledermann HP, Schweitzer ME, Morrison WB. Nonenhancing tissue on MR imaging of pedal infection: characterization of necrotic tissue and associated limitations for diagnosis of osteomyelitis and abscess. AJR Am J Roentgenol. 2002;178(1):215-222.' },
-  { citation: 'Chantelau E. The perils of procrastination: effects of early vs. delayed detection and treatment of incipient Charcot fracture. Diabet Med. 2005;22(12):1707-1712.' },
+  { citation: 'Morrison WB, Schweitzer ME, Batte WG, Radack DP, Russel KM. Osteomyelitis of the foot: relative importance of primary and secondary MR imaging signs. Radiology. 1998;207(3):625-632.', doi: MORRISON_DOI },
+  { citation: 'Ledermann HP, Morrison WB, Schweitzer ME. MR image analysis of pedal osteomyelitis: distribution, patterns of spread, and frequency of associated ulceration and septic arthritis. Radiology. 2002;223(3):747-755.', doi: LEDERMANN_DOI },
+  { citation: 'Johnson PW, Collins MS, Wenger DE. Diagnostic utility of T1-weighted MRI characteristics in evaluation of osteomyelitis of the foot. AJR Am J Roentgenol. 2009;192(1):96-100.', doi: JOHNSON_DOI },
+  { citation: 'Donovan A, Schweitzer ME. Use of MR imaging in diagnosing diabetes-related pedal osteomyelitis. RadioGraphics. 2010;30(3):723-736.', doi: DONOVAN_DOI },
+  { citation: 'Ledermann HP, Morrison WB. Differential diagnosis of pedal osteomyelitis and diabetic neuroarthropathy: MR imaging. Semin Musculoskelet Radiol. 2005;9(3):272-283.', doi: LEDERMANN_MORRISON_DOI },
+  { citation: 'Ledermann HP, Schweitzer ME, Morrison WB. Nonenhancing tissue on MR imaging of pedal infection: characterization of necrotic tissue and associated limitations for diagnosis of osteomyelitis and abscess. AJR Am J Roentgenol. 2002;178(1):215-222.', doi: LEDERMANN_NONENHANCING_DOI },
+  { citation: 'Chantelau E. The perils of procrastination: effects of early vs. delayed detection and treatment of incipient Charcot fracture. Diabet Med. 2005;22(12):1707-1712.', doi: CHANTELAU_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -59,7 +68,7 @@ const learn: LearnSection[] = [
     title: 'Step 3. Bone: osteomyelitis',
     body: (
       <>
-        <p>Read the marrow on the T1-weighted images first. Confluent low signal that replaces the fatty marrow in a medullary pattern is the pattern of osteomyelitis. Hazy or reticulated low signal that does not replace the marrow is not, even when the fluid-sensitive images are bright ({JOHNSON}). Marrow edema on fluid-sensitive images alone does not establish osteomyelitis.</p>
+        <p>Read the marrow on the T1-weighted images first. A confluent pattern of decreased T1 marrow signal in a medullary distribution correlates highly with osteomyelitis; in the same series, no case with a hazy reticulated pattern had osteomyelitis ({JOHNSON}).</p>
         <p>Secondary signs add weight: an adjacent ulcer, a sinus tract, interruption of the cortex and a soft-tissue abscess ({MORRISON}).</p>
         <p>So the question for each abnormal bone is: is the T1 signal confluent, and does the bone touch the ulcer or sinus tract? Confluent T1 change in a bone with no ulcer or sinus tract next to it should make you think again, often of neuroarthropathy (step 5).</p>
       </>
@@ -79,7 +88,7 @@ const learn: LearnSection[] = [
     title: 'Step 5. Charcot neuroarthropathy',
     body: (
       <>
-        <p>Neuroarthropathy centres on joints and affects several of them, most often in the midfoot (the tarsometatarsal and the naviculocuneiform and Chopart joints), usually away from the pressure points where ulcers form. Osteomyelitis, by contrast, sits under an ulcer at a pressure point ({LEDERMANN_MORRISON}).</p>
+        <p>Telling neuroarthropathy from osteomyelitis requires careful analysis of where the bone signal changes are, their distribution and their pattern ({LEDERMANN_MORRISON}). Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints, whereas osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>
         <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
         <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection; a neuropathic bone keeps its outline ({DONOVAN}).</p>
       </>
@@ -150,7 +159,7 @@ const fields = {
   boneSite: { id: 'bone-site', kind: 'text', label: 'Which bone', placeholder: 'e.g. first metatarsal head', showIf: (v) => str(v, 'marrow') === 'abnormal' },
   t1: { id: 't1', kind: 'choice', label: 'T1 marrow signal', required: true, showIf: (v) => str(v, 'marrow') === 'abnormal', help: 'Read on T1 without fat suppression.', options: [
     { value: 'normal', label: 'Normal: fatty marrow kept (edema on fluid-sensitive images only)' },
-    { value: 'hazy', label: 'Hazy or reticulated low signal, not confluent' },
+    { value: 'hazy', label: 'Hazy reticulated low signal, not confluent' },
     { value: 'confluent', label: 'Confluent low signal replacing the marrow' },
   ] },
   contiguous: { id: 'contiguous', kind: 'choice', label: 'Bone next to the ulcer or sinus tract', required: true, showIf: (v) => str(v, 'marrow') === 'abnormal', options: [
@@ -167,7 +176,8 @@ const fields = {
 
   charcot: { id: 'charcot', kind: 'choice', label: 'Neuroarthropathy (Charcot)', required: true, options: nonePresent },
   charcotSites: { id: 'charcot-sites', kind: 'multi', label: 'Joints involved', showIf: (v) => str(v, 'charcot') === 'present', options: [
-    { value: 'forefoot', label: 'Forefoot (MTP and interphalangeal)' },
+    { value: 'mtp', label: 'Metatarsophalangeal' },
+    { value: 'ip', label: 'Interphalangeal' },
     { value: 'tmt', label: 'Tarsometatarsal (Lisfranc)' },
     { value: 'chopart', label: 'Naviculocuneiform and Chopart' },
     { value: 'ankle', label: 'Subtalar and ankle' },
@@ -204,8 +214,8 @@ const charcotPresent = (values: Values) => str(values, 'charcot') === 'present'
 /** D3, D2: confluent T1 change in a bone next to an ulcer or sinus tract. */
 const osteomyelitis = (values: Values) => confluent(values) && touchesUlcer(values)
 
-/** D5: the usual Charcot distribution, midfoot joints. */
-const midfootCharcot = (values: Values) => charcotPresent(values) && list(values, 'charcot-sites').some((site) => site === 'tmt' || site === 'chopart')
+/** D5: the commonest Charcot sites, the tarsometatarsal and metatarsophalangeal joints (Donovan). */
+const usualCharcot = (values: Values) => charcotPresent(values) && list(values, 'charcot-sites').some((site) => site === 'tmt' || site === 'mtp')
 
 function bone(values: Values): string {
   return str(values, 'bone-site') || 'the abnormal bone'
@@ -216,7 +226,7 @@ function bone(values: Values): string {
 function deriveBone(values: Values): Derived[] {
   if (!abnormalBone(values)) return []
   const out: Derived[] = []
-  // D3: confluent medullary low T1 signal is the pattern of osteomyelitis; hazy is not.
+  // D3: confluent medullary low T1 signal correlates with osteomyelitis; no hazy reticulated case had it.
   const t1 = str(values, 't1')
   if (t1 === 'confluent') out.push({ label: 'T1', value: 'Confluent low signal: the pattern of osteomyelitis', tone: 'warn' })
   if (t1 === 'hazy' || t1 === 'normal') out.push({ label: 'T1', value: 'Not confluent: does not establish osteomyelitis' })
@@ -232,8 +242,8 @@ function deriveBone(values: Values): Derived[] {
 function deriveCharcot(values: Values): Derived[] {
   if (!charcotPresent(values)) return []
   const out: Derived[] = []
-  // D5: neuroarthropathy is periarticular, multi-joint and mostly midfoot.
-  if (midfootCharcot(values)) out.push({ label: 'Distribution', value: 'Midfoot joints: the usual Charcot distribution', tone: 'good' })
+  // D5: neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints.
+  if (usualCharcot(values)) out.push({ label: 'Distribution', value: 'Tarsometatarsal or metatarsophalangeal: the commonest Charcot sites', tone: 'good' })
   // D4: the ghost sign suggests infection within the neuropathic joint.
   if (str(values, 'ghost') === 'present') out.push({ label: 'Ghost sign', value: 'Suggests infection within the neuropathic bone', tone: 'warn' })
   // D7: active disease shows marrow edema, before radiographic change.
@@ -384,7 +394,7 @@ const steps: ReportStep[] = [
     id: 'bone',
     title: 'Step 3. Bone: osteomyelitis',
     learn: 'bone',
-    teach: <p>Confluent low T1 signal replacing the marrow is the pattern of osteomyelitis; hazy or reticulated signal is not ({JOHNSON}). Ulcer, sinus tract, cortical interruption and abscess are secondary signs ({MORRISON}).</p>,
+    teach: <p>Confluent low T1 marrow signal in a medullary distribution correlates highly with osteomyelitis; no case with a hazy reticulated pattern had it ({JOHNSON}). Ulcer, sinus tract, cortical interruption and abscess are secondary signs ({MORRISON}).</p>,
     fields: [fields.marrow, fields.boneSite, fields.t1, fields.contiguous, fields.cortex],
     derive: deriveBone,
   },
@@ -399,7 +409,7 @@ const steps: ReportStep[] = [
     id: 'charcot',
     title: 'Step 5. Charcot neuroarthropathy',
     learn: 'charcot',
-    teach: <p>Neuroarthropathy: several joints, mostly midfoot, away from the ulcers ({LEDERMANN_MORRISON}). Active disease shows on MRI before radiographs ({CHANTELAU}). The ghost sign suggests infection within it ({DONOVAN}).</p>,
+    teach: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints ({DONOVAN}). Active disease shows on MRI before radiographs ({CHANTELAU}). The ghost sign suggests infection within it ({DONOVAN}).</p>,
     fields: [fields.charcot, fields.charcotSites, fields.charcotActivity, fields.charcotDeformity, fields.ghost],
     derive: deriveCharcot,
   },
@@ -416,7 +426,7 @@ const study: StudyDefinition = {
   slug: 'diabetic-foot-mri',
   name: 'Diabetic foot MRI',
   lede: 'Read the diabetic foot MRI: find the ulcer, decide osteomyelitis on T1, look for collections and septic joints, and tell neuroarthropathy from infection.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the ghost sign, the rim-enhancing abscess and soft-tissue gas, septic arthritis alongside osteomyelitis, and marrow edema as the sign of active Charcot disease) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -427,9 +437,9 @@ const study: StudyDefinition = {
     {
       id: 't1-pattern',
       question: 'Which T1 marrow pattern is the pattern of osteomyelitis?',
-      options: ['Hazy, reticulated low signal', 'Confluent low signal replacing the fatty marrow', 'Normal T1 with high signal on fluid-sensitive images', 'Any signal change at all'],
+      options: ['Hazy reticulated low signal', 'Confluent low signal in a medullary distribution', 'Normal T1 with high signal on fluid-sensitive images', 'Any signal change at all'],
       answer: 1,
-      explanation: <p>Confluent medullary low signal on T1 is the pattern of osteomyelitis; hazy or reticulated signal is not ({JOHNSON}).</p>,
+      explanation: <p>Confluent decreased T1 marrow signal in a medullary distribution correlates highly with osteomyelitis; no case with a hazy reticulated pattern had it ({JOHNSON}).</p>,
     },
     {
       id: 'spread',
@@ -447,10 +457,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'charcot-distribution',
-      question: 'Which distribution fits neuroarthropathy rather than osteomyelitis?',
-      options: ['A single metatarsal head under an ulcer', 'Several midfoot joints, away from any ulcer', 'The tip of the great toe', 'The calcaneus under a heel ulcer'],
+      question: 'Which site does neuroarthropathy most commonly affect?',
+      options: ['The calcaneus', 'The tarsometatarsal joints', 'The malleoli', 'The talar dome'],
       answer: 1,
-      explanation: <p>Neuroarthropathy is periarticular, affects several joints and is most often in the midfoot ({LEDERMANN_MORRISON}).</p>,
+      explanation: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints; osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>,
     },
     {
       id: 'ghost',

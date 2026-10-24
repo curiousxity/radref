@@ -7,9 +7,10 @@ const study = studyOf(DiabeticFootMriStudyPage)
 
 /*
  * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). None has
- * been checked against its paper yet (PubMed was unreachable), so when the check is done a
- * case may have to change; say in that commit why the old expectation was wrong.
+ * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). The
+ * references are matched, but only the claims marked verified there were read in their
+ * papers; when the rest are checked a case may have to change; say in that commit why the old
+ * expectation was wrong.
  */
 
 describe('diabetic foot MRI lesson', () => {
@@ -17,11 +18,12 @@ describe('diabetic foot MRI lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'soft-tissue', 'bone', 'joints', 'charcot', 'impression'])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(7)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
 
@@ -120,8 +122,11 @@ describe('diabetic foot MRI report: whole cases', () => {
 })
 
 describe('diabetic foot MRI rules (unchecked)', () => {
-  // D3: "Confluent medullary low T1 signal is the pattern of osteomyelitis; hazy or reticulated
-  // signal is not."
+  // D3: "Confluent decreased T1 marrow signal intensity in a medullary distribution was 95%
+  // sensitive in the prediction of osteomyelitis" and "None of the cases with a subcortical
+  // distribution or hazy reticulated pattern of abnormal signal intensity had positive results
+  // for osteomyelitis" (Johnson 2009, abstract). The chips are unchanged; the lesson no longer
+  // adds "even with high fluid-sensitive signal", which the paper (T1 only) does not state.
   test('the T1 marrow pattern', () => {
     expect(chips(study, 'bone', infected).T1).toBe('Confluent low signal: the pattern of osteomyelitis')
     expect(chips(study, 'bone', { ...infected, t1: 'hazy' }).T1).toBe('Not confluent: does not establish osteomyelitis')
@@ -149,13 +154,18 @@ describe('diabetic foot MRI rules (unchecked)', () => {
     expect(chips(study, 'bone', { ...infected, contiguous: 'no' })['Secondary signs']).toBeUndefined()
   })
 
-  // D5: neuroarthropathy is multi-joint and mostly midfoot.
+  // D5: "neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal
+  // joints" (Donovan 2010, abstract). The old chip called the tarsometatarsal and Chopart joints
+  // "the usual Charcot distribution" (midfoot, away from the pressure points), which no listed
+  // abstract states; it now fires on the tarsometatarsal or metatarsophalangeal joints.
   // D7: active disease shows marrow edema before radiographs change.
   // D4: the ghost sign suggests infection within the neuropathic bone.
   test('Charcot distribution, activity and the ghost sign', () => {
     const charcot = { ...normal, charcot: 'present', 'charcot-sites': ['tmt', 'chopart'], 'charcot-activity': 'active' }
-    expect(chips(study, 'charcot', charcot).Distribution).toBe('Midfoot joints: the usual Charcot distribution')
-    expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['forefoot'] }).Distribution).toBeUndefined()
+    expect(chips(study, 'charcot', charcot).Distribution).toBe('Tarsometatarsal or metatarsophalangeal: the commonest Charcot sites')
+    expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['mtp'] }).Distribution).toBe('Tarsometatarsal or metatarsophalangeal: the commonest Charcot sites')
+    expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['chopart'] }).Distribution).toBeUndefined()
+    expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['ip'] }).Distribution).toBeUndefined()
     expect(chips(study, 'charcot', charcot).Activity).toBe('Active: MRI shows this before radiographs change')
     expect(chips(study, 'charcot', { ...charcot, ghost: 'present' })['Ghost sign']).toBe('Suggests infection within the neuropathic bone')
     expect(impressionOf({ ...charcot, 'charcot-deformity': 'collapse', ghost: 'present' })).toBe([
