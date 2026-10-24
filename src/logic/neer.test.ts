@@ -3,9 +3,9 @@ import { classifyNeer, emptyNeerInput, isDisplaced } from './neer'
 import type { LineStatus, NeerInput, NeerLine } from './neer'
 
 /*
- * Neer classification (Neer, J Bone Joint Surg Am 1970). UNCHECKED: the quoted rules are
- * from memory of the paper, listed as N1-N6 in
- * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md for checking against it.
+ * Neer classification (Neer, J Bone Joint Surg Am 1970). UNCHECKED: the paper is matched on
+ * PubMed but has no abstract and is paywalled, so the quoted rules are still from memory of the
+ * paper, listed as N1-N6 in docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
  */
 function input(lines: Partial<Record<NeerLine, LineStatus>>, extra: Partial<NeerInput> = {}): NeerInput {
   return { ...emptyNeerInput, ...extra, lines: { ...emptyNeerInput.lines, ...lines } }

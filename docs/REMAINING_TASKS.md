@@ -115,35 +115,20 @@ each marked "to check", with the method at the top of that file. Deployed before
 ### Shoulder MRI study and Neer calculator
 
 Drafted 2026-10-23 as an unchecked draft (`/studies/shoulder-mri`, `/neer`). Every paper and
-claim is in `docs/superpowers/research/2026-10-23-shoulder-mri-sources.md`, marked "to
-check". Deployed before the check (2026-10-23); labelled "Unchecked draft" until it is done.
+claim is in `docs/superpowers/research/2026-10-23-shoulder-mri-sources.md`. Deployed before
+the check (2026-10-23); labelled "Unchecked draft" until it is done.
 
-- [ ] Match every reference on PubMed and Crossref; fix wrong citation text, drop any paper
-  that cannot be found. The author lists and pages of R2, R11, R12, R18 and R21 are the
-  least certain.
-- [ ] Neer (N1–N5): the four segments, displaced meaning more than 1 cm or more than 45°,
-  one-part when nothing is displaced, the two-, three- and four-part patterns,
-  fracture-dislocation and head-splitting / impression wording. N6: the author decided
-  (2026-10-23) that a combination Neer did not name gets no part count; check that the
-  paper really names no such pattern.
-- [ ] Hill-Sachs: definition (Hill and Sachs 1940), Workman 1992, and the Richards 1994
-  rule that tells it from the normal groove by level ("at or above the coracoid").
-- [ ] Ellman partial-thickness tears: sides and depth grades (under 3, 3–6, over 6 mm). Is
-  grade 3 "over 6 mm" or "over half the thickness"?
-- [ ] Patte retraction stages 1–3.
-- [ ] Goutallier grades 0–4 (exact grade 2 wording), and Fuchs 1999 on MRI against CT.
-- [ ] Walch 1998: biceps dislocation goes with subscapularis tears.
-- [ ] Snyder SLAP types I–IV.
-- [ ] ALPSA and GLAD (Neviaser 1993), Bankart, bony Bankart and Perthes (Woertler and Waldt
-  2006), HAGL (Wolf 1995).
-- [ ] Paralabral cysts and labral tears (Tirman 1994), suprascapular versus spinoglenoid
-  notch (Fritz 1992), teres minor atrophy in quadrilateral space syndrome (Linker 1993).
-- [ ] Sugaya types I–V (IV and V are re-tears); the exact type III wording; is the 2005
-  Arthroscopy paper the right first source?
-- [ ] Variants: sublabral foramen (Tuite and Orwin 1996), Buford complex (Williams 1994),
-  sublabral recess mimicking SLAP II (Smith 1996), os acromiale and impingement (Park 1994).
-- [ ] Then: add the DOIs, switch plain-text citations to `<Cite>` links, reword the source
-  notes, and update the tests that pin the unchecked state.
+- [x] Match every reference on PubMed and Crossref (2026-10-23). All 22 found (Hill-Sachs 1940
+  on Crossref only); R3's author list and R20's title corrected; DOIs and `<Cite>` links added.
+- [x] Verified from abstracts or open full text (Woertler and Waldt, PMC1705542): S2-2,
+  S3-4, S5-1, S6-2 to S6-4, S7-1, S10-1, S10-3, S12-2, S12-4; others in part.
+- [x] Matched to the papers by the author's choice (2026-10-23): S3-4 now says Fuchs found MRI
+  and CT grades correlated only fairly to moderately; S12-3 (recess mimicking SLAP II) now
+  cites Woertler and Waldt, which states it, rather than Smith.
+- [ ] Still unchecked, because the papers are paywalled or have no abstract: Neer N1–N6,
+  S2-1, S3-2, and the unread parts of S2-3 (the coracoid level), S3-1 (Ellman depths), S3-3
+  (Goutallier wording), S6-1 (Snyder types), S10-2, S11-1 (Sugaya re-tears) and S12-1.
+  Kept with the "Unchecked draft" note by the author's choice (2026-10-23).
 
 ### Elbow MRI study and Mason calculator
 

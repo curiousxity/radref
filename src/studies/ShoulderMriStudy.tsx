@@ -1,3 +1,4 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { classifyNeer, emptyNeerInput } from '../logic/neer'
 import type { LineStatus, NeerInput, NeerLine } from '../logic/neer'
@@ -6,58 +7,82 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * UNCHECKED DRAFT. PubMed and Crossref could not be reached when this was written, so the
- * references carry no DOI and are cited in plain text, not with <Cite>. Every claim and rule is
- * listed with an ID (S2-1 and so on) in
- * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md, marked "to check".
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23; Hill and
+ * Sachs 1940 is not in PubMed, so on Crossref only), but most of the papers are paywalled, so
+ * only claims whose wording is in an abstract or in open full text are verified. Every claim and
+ * rule is listed with an ID (S2-1 and so on), with its status, in
+ * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
  */
 
-const NEER = 'Neer, J Bone Joint Surg Am 1970'
-const HILL_SACHS = 'Hill and Sachs, Radiology 1940'
-const WORKMAN = 'Workman et al., Radiology 1992'
-const RICHARDS = 'Richards et al., Radiology 1994'
-const ELLMAN = 'Ellman, Clin Orthop Relat Res 1990'
-const PATTE = 'Patte, Clin Orthop Relat Res 1990'
-const GOUTALLIER = 'Goutallier et al., Clin Orthop Relat Res 1994'
-const FUCHS = 'Fuchs et al., J Shoulder Elbow Surg 1999'
-const WALCH = 'Walch et al., J Shoulder Elbow Surg 1998'
-const SNYDER = 'Snyder et al., Arthroscopy 1990'
-const NEVIASER_ALPSA = 'Neviaser, Arthroscopy 1993 (ALPSA)'
-const NEVIASER_GLAD = 'Neviaser, Arthroscopy 1993 (GLAD)'
-const WOERTLER = 'Woertler and Waldt, Eur Radiol 2006'
-const WOLF = 'Wolf et al., Arthroscopy 1995'
-const TIRMAN = 'Tirman et al., Radiology 1994'
-const FRITZ = 'Fritz et al., Radiology 1992'
-const LINKER = 'Linker et al., Radiology 1993'
-const SUGAYA = 'Sugaya et al., Arthroscopy 2005'
-const TUITE = 'Tuite and Orwin, Radiology 1996'
-const WILLIAMS = 'Williams et al., Arthroscopy 1994'
-const SMITH = 'Smith et al., Radiology 1996'
-const PARK = 'Park et al., Radiology 1994'
+const NEER_DOI = '10.2106/00004623-197052060-00001'
+const HILL_SACHS_DOI = '10.1148/35.6.690'
+const WORKMAN_DOI = '10.1148/radiology.185.3.1438774'
+const RICHARDS_DOI = '10.1148/radiology.190.3.8115607'
+const ELLMAN_DOI = '10.1097/00003086-199005000-00010'
+const PATTE_DOI = '10.1097/00003086-199005000-00012'
+const GOUTALLIER_DOI = '10.1097/00003086-199407000-00014'
+const FUCHS_DOI = '10.1016/s1058-2746(99)90097-6'
+const WALCH_DOI = '10.1016/s1058-2746(98)90218-x'
+const SNYDER_DOI = '10.1016/0749-8063(90)90056-j'
+const NEVIASER_ALPSA_DOI = '10.1016/s0749-8063(05)80338-x'
+const NEVIASER_GLAD_DOI = '10.1016/s0749-8063(05)80339-1'
+const WOERTLER_DOI = '10.1007/s00330-006-0258-6'
+const WOLF_DOI = '10.1016/0749-8063(95)90139-6'
+const TIRMAN_DOI = '10.1148/radiology.190.3.8115605'
+const FRITZ_DOI = '10.1148/radiology.182.2.1732962'
+const LINKER_DOI = '10.1148/radiology.188.3.8351331'
+const SUGAYA_DOI = '10.1016/j.arthro.2005.08.011'
+const TUITE_DOI = '10.1148/radiology.199.2.8668808'
+const WILLIAMS_DOI = '10.1016/s0749-8063(05)80105-7'
+const SMITH_DOI = '10.1148/radiology.201.1.8816553'
+const PARK_DOI = '10.1148/radiology.193.1.8090902'
+
+const NEER = <Cite doi={NEER_DOI}>Neer, J Bone Joint Surg Am 1970</Cite>
+const HILL_SACHS = <Cite doi={HILL_SACHS_DOI}>Hill and Sachs, Radiology 1940</Cite>
+const WORKMAN = <Cite doi={WORKMAN_DOI}>Workman et al., Radiology 1992</Cite>
+const RICHARDS = <Cite doi={RICHARDS_DOI}>Richards et al., Radiology 1994</Cite>
+const ELLMAN = <Cite doi={ELLMAN_DOI}>Ellman, Clin Orthop Relat Res 1990</Cite>
+const PATTE = <Cite doi={PATTE_DOI}>Patte, Clin Orthop Relat Res 1990</Cite>
+const GOUTALLIER = <Cite doi={GOUTALLIER_DOI}>Goutallier et al., Clin Orthop Relat Res 1994</Cite>
+const FUCHS = <Cite doi={FUCHS_DOI}>Fuchs et al., J Shoulder Elbow Surg 1999</Cite>
+const WALCH = <Cite doi={WALCH_DOI}>Walch et al., J Shoulder Elbow Surg 1998</Cite>
+const SNYDER = <Cite doi={SNYDER_DOI}>Snyder et al., Arthroscopy 1990</Cite>
+const NEVIASER_ALPSA = <Cite doi={NEVIASER_ALPSA_DOI}>Neviaser, Arthroscopy 1993 (ALPSA)</Cite>
+const NEVIASER_GLAD = <Cite doi={NEVIASER_GLAD_DOI}>Neviaser, Arthroscopy 1993 (GLAD)</Cite>
+const WOERTLER = <Cite doi={WOERTLER_DOI}>Woertler and Waldt, Eur Radiol 2006</Cite>
+const WOLF = <Cite doi={WOLF_DOI}>Wolf et al., Arthroscopy 1995</Cite>
+const TIRMAN = <Cite doi={TIRMAN_DOI}>Tirman et al., Radiology 1994</Cite>
+const FRITZ = <Cite doi={FRITZ_DOI}>Fritz et al., Radiology 1992</Cite>
+const LINKER = <Cite doi={LINKER_DOI}>Linker et al., Radiology 1993</Cite>
+const SUGAYA = <Cite doi={SUGAYA_DOI}>Sugaya et al., Arthroscopy 2005</Cite>
+const TUITE = <Cite doi={TUITE_DOI}>Tuite and Orwin, Radiology 1996</Cite>
+const WILLIAMS = <Cite doi={WILLIAMS_DOI}>Williams et al., Arthroscopy 1994</Cite>
+const SMITH = <Cite doi={SMITH_DOI}>Smith et al., Radiology 1996</Cite>
+const PARK = <Cite doi={PARK_DOI}>Park et al., Radiology 1994</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089.' },
-  { citation: 'Hill HA, Sachs MD. The grooved defect of the humeral head: a frequently unrecognized complication of dislocations of the shoulder joint. Radiology. 1940;35(6):690-700.' },
-  { citation: 'Workman TL, Burkhard TK, Resnick D, et al. Hill-Sachs lesion: comparison of detection with MR imaging, radiography, and arthroscopy. Radiology. 1992;185(3):847-852.' },
-  { citation: 'Richards RD, Sartoris DJ, Pathria MN, Resnick D. Hill-Sachs lesion and normal humeral groove: MR imaging features allowing their differentiation. Radiology. 1994;190(3):665-668.' },
-  { citation: 'Ellman H. Diagnosis and treatment of incomplete rotator cuff tears. Clin Orthop Relat Res. 1990;(254):64-74.' },
-  { citation: 'Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;(254):81-86.' },
-  { citation: 'Goutallier D, Postel JM, Bernageau J, Lavau L, Voisin MC. Fatty muscle degeneration in cuff ruptures. Pre- and postoperative evaluation by CT scan. Clin Orthop Relat Res. 1994;(304):78-83.' },
-  { citation: 'Fuchs B, Weishaupt D, Zanetti M, Hodler J, Gerber C. Fatty degeneration of the muscles of the rotator cuff: assessment by computed tomography versus magnetic resonance imaging. J Shoulder Elbow Surg. 1999;8(6):599-605.' },
-  { citation: 'Walch G, Nové-Josserand L, Boileau P, Levigne C. Subluxations and dislocations of the tendon of the long head of the biceps. J Shoulder Elbow Surg. 1998;7(2):100-108.' },
-  { citation: 'Snyder SJ, Karzel RP, Del Pizzo W, Ferkel RD, Friedman MJ. SLAP lesions of the shoulder. Arthroscopy. 1990;6(4):274-279.' },
-  { citation: 'Neviaser TJ. The anterior labroligamentous periosteal sleeve avulsion lesion: a cause of anterior instability of the shoulder. Arthroscopy. 1993;9(1):17-21.' },
-  { citation: 'Neviaser TJ. The GLAD lesion: another cause of anterior shoulder pain. Arthroscopy. 1993;9(1):22-23.' },
-  { citation: 'Woertler K, Waldt S. MR imaging in sports-related glenohumeral instability. Eur Radiol. 2006;16(12):2622-2636.' },
-  { citation: 'Wolf EM, Cheng JC, Dickson K. Humeral avulsion of glenohumeral ligaments as a cause of anterior shoulder instability. Arthroscopy. 1995;11(5):600-607.' },
-  { citation: 'Tirman PF, Feller JF, Janzen DL, Peterfy CG, Bergman AG. Association of glenoid labral cysts with labral tears and glenohumeral instability: radiologic findings and clinical significance. Radiology. 1994;190(3):653-658.' },
-  { citation: 'Fritz RC, Helms CA, Steinbach LS, Genant HK. Suprascapular nerve entrapment: evaluation with MR imaging. Radiology. 1992;182(2):437-444.' },
-  { citation: 'Linker CS, Helms CA, Fritz RC. Quadrilateral space syndrome: findings at MR imaging. Radiology. 1993;188(3):675-676.' },
-  { citation: 'Sugaya H, Maeda K, Matsuki K, Moriishi J. Functional and structural outcome after arthroscopic full-thickness rotator cuff repair: single-row versus dual-row fixation. Arthroscopy. 2005;21(11):1307-1316.' },
-  { citation: 'Tuite MJ, Orwin JF. Anterosuperior labral variants of the shoulder: appearance on gradient-recalled-echo and fast spin-echo MR images. Radiology. 1996;199(2):537-540.' },
-  { citation: 'Williams MM, Snyder SJ, Buford D Jr. The Buford complex: the "cord-like" middle glenohumeral ligament and absent anterosuperior labrum complex. A normal anatomic capsulolabral variant. Arthroscopy. 1994;10(3):241-247.' },
-  { citation: 'Smith DK, Chopp TM, Aufdemorte TB, Witkowski EG, Jones RC. Sublabral recess of the superior glenoid labrum: study of cadavers with conventional nonenhanced MR imaging, MR arthrography, anatomic dissection, and limited histologic examination. Radiology. 1996;201(1):251-256.' },
-  { citation: 'Park JG, Lee JK, Phelps CT. Os acromiale associated with rotator cuff impingement: MR imaging of the shoulder. Radiology. 1994;193(1):255-257.' },
+  { citation: 'Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089.', doi: NEER_DOI },
+  { citation: 'Hill HA, Sachs MD. The grooved defect of the humeral head: a frequently unrecognized complication of dislocations of the shoulder joint. Radiology. 1940;35(6):690-700.', doi: HILL_SACHS_DOI },
+  { citation: 'Workman TL, Burkhard TK, Resnick D, Goff WB 2nd, Balsara ZN, Davis DJ, Lapoint JM. Hill-Sachs lesion: comparison of detection with MR imaging, radiography, and arthroscopy. Radiology. 1992;185(3):847-852.', doi: WORKMAN_DOI },
+  { citation: 'Richards RD, Sartoris DJ, Pathria MN, Resnick D. Hill-Sachs lesion and normal humeral groove: MR imaging features allowing their differentiation. Radiology. 1994;190(3):665-668.', doi: RICHARDS_DOI },
+  { citation: 'Ellman H. Diagnosis and treatment of incomplete rotator cuff tears. Clin Orthop Relat Res. 1990;(254):64-74.', doi: ELLMAN_DOI },
+  { citation: 'Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;(254):81-86.', doi: PATTE_DOI },
+  { citation: 'Goutallier D, Postel JM, Bernageau J, Lavau L, Voisin MC. Fatty muscle degeneration in cuff ruptures. Pre- and postoperative evaluation by CT scan. Clin Orthop Relat Res. 1994;(304):78-83.', doi: GOUTALLIER_DOI },
+  { citation: 'Fuchs B, Weishaupt D, Zanetti M, Hodler J, Gerber C. Fatty degeneration of the muscles of the rotator cuff: assessment by computed tomography versus magnetic resonance imaging. J Shoulder Elbow Surg. 1999;8(6):599-605.', doi: FUCHS_DOI },
+  { citation: 'Walch G, Nové-Josserand L, Boileau P, Levigne C. Subluxations and dislocations of the tendon of the long head of the biceps. J Shoulder Elbow Surg. 1998;7(2):100-108.', doi: WALCH_DOI },
+  { citation: 'Snyder SJ, Karzel RP, Del Pizzo W, Ferkel RD, Friedman MJ. SLAP lesions of the shoulder. Arthroscopy. 1990;6(4):274-279.', doi: SNYDER_DOI },
+  { citation: 'Neviaser TJ. The anterior labroligamentous periosteal sleeve avulsion lesion: a cause of anterior instability of the shoulder. Arthroscopy. 1993;9(1):17-21.', doi: NEVIASER_ALPSA_DOI },
+  { citation: 'Neviaser TJ. The GLAD lesion: another cause of anterior shoulder pain. Arthroscopy. 1993;9(1):22-23.', doi: NEVIASER_GLAD_DOI },
+  { citation: 'Woertler K, Waldt S. MR imaging in sports-related glenohumeral instability. Eur Radiol. 2006;16(12):2622-2636.', doi: WOERTLER_DOI },
+  { citation: 'Wolf EM, Cheng JC, Dickson K. Humeral avulsion of glenohumeral ligaments as a cause of anterior shoulder instability. Arthroscopy. 1995;11(5):600-607.', doi: WOLF_DOI },
+  { citation: 'Tirman PF, Feller JF, Janzen DL, Peterfy CG, Bergman AG. Association of glenoid labral cysts with labral tears and glenohumeral instability: radiologic findings and clinical significance. Radiology. 1994;190(3):653-658.', doi: TIRMAN_DOI },
+  { citation: 'Fritz RC, Helms CA, Steinbach LS, Genant HK. Suprascapular nerve entrapment: evaluation with MR imaging. Radiology. 1992;182(2):437-444.', doi: FRITZ_DOI },
+  { citation: 'Linker CS, Helms CA, Fritz RC. Quadrilateral space syndrome: findings at MR imaging. Radiology. 1993;188(3):675-676.', doi: LINKER_DOI },
+  { citation: 'Sugaya H, Maeda K, Matsuki K, Moriishi J. Functional and structural outcome after arthroscopic full-thickness rotator cuff repair: single-row versus dual-row fixation. Arthroscopy. 2005;21(11):1307-1316.', doi: SUGAYA_DOI },
+  { citation: 'Tuite MJ, Orwin JF. Anterosuperior labral variants of the shoulder: appearance on gradient-recalled-echo and fast spin-echo MR images. Radiology. 1996;199(2):537-540.', doi: TUITE_DOI },
+  { citation: 'Williams MM, Snyder SJ, Buford D Jr. The Buford complex--the "cord-like" middle glenohumeral ligament and absent anterosuperior labrum complex: a normal anatomic capsulolabral variant. Arthroscopy. 1994;10(3):241-247.', doi: WILLIAMS_DOI },
+  { citation: 'Smith DK, Chopp TM, Aufdemorte TB, Witkowski EG, Jones RC. Sublabral recess of the superior glenoid labrum: study of cadavers with conventional nonenhanced MR imaging, MR arthrography, anatomic dissection, and limited histologic examination. Radiology. 1996;201(1):251-256.', doi: SMITH_DOI },
+  { citation: 'Park JG, Lee JK, Phelps CT. Os acromiale associated with rotator cuff impingement: MR imaging of the shoulder. Radiology. 1994;193(1):255-257.', doi: PARK_DOI },
 ]
 
 const goutallierTable = (
@@ -149,7 +174,7 @@ const learn: LearnSection[] = [
         <h4>Fatty infiltration of the muscles</h4>
         <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}):</p>
         {goutallierTable}
-        <p>Fuchs and colleagues applied the same grades to MRI and compared them with CT ({FUCHS}). Grade the supraspinatus, infraspinatus and subscapularis on oblique sagittal T1-weighted images.</p>
+        <p>Fuchs and colleagues applied the same grades to MRI and compared them with CT: each method was reproducible between observers, but the correlation between MRI and CT grades was only fair to moderate, even on a simplified 3-grade scale ({FUCHS}). Grade the supraspinatus, infraspinatus and subscapularis on oblique sagittal T1-weighted images.</p>
       </>
     ),
   },
@@ -185,7 +210,7 @@ const learn: LearnSection[] = [
         <p>Snyder and colleagues described four types of superior labrum anterior to posterior (SLAP) lesion at arthroscopy ({SNYDER}):</p>
         {snyderTable}
         <div className="lesson-key">
-          <p>Before calling a SLAP tear, rule out the normal variants of step 12: a sublabral recess under the biceps anchor can mimic a type II SLAP tear ({SMITH}).</p>
+          <p>Before calling a SLAP tear, rule out the normal variants of step 12: a sublabral recess looks like published examples of SLAP lesions ({SMITH}), and misreading a sublabral recess as a tear, or a tear as a recess, gives false positive and false negative diagnoses of a type II SLAP lesion ({WOERTLER}).</p>
         </div>
         <h4>Posterior labrum</h4>
         <p>Read the posterior labrum on every axial image too, even when the history gives no hint of instability.</p>
@@ -249,7 +274,7 @@ const learn: LearnSection[] = [
         <ul className="plain-list">
           <li><strong>Sublabral foramen:</strong> the anterosuperior labrum is not attached to the glenoid, between about the 1 and 3 o'clock positions; do not call it a tear ({TUITE}).</li>
           <li><strong>Buford complex:</strong> an absent anterosuperior labrum with a thick, cord-like middle glenohumeral ligament, a normal variant ({WILLIAMS}).</li>
-          <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, which can mimic a type II SLAP tear ({SMITH}).</li>
+          <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, with an appearance similar to SLAP lesions ({SMITH}); it can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</li>
           <li><strong>Os acromiale:</strong> an unfused ossification centre of the acromion, associated with rotator cuff impingement ({PARK}).</li>
         </ul>
       </>
@@ -867,7 +892,9 @@ function warnings(values: Values): string[] {
   if ((position === 'subluxed' || position === 'dislocated') && ['normal', 'tendinosis'].includes(str(values, 'subscapularis'))) {
     out.push('The long head of biceps is displaced medially, but no subscapularis tear is entered. Displaced biceps tendons go with subscapularis tears: look at it again.')
   }
-  // S6-1 and S12-3 (to check): a sublabral recess can mimic a type II SLAP tear.
+  // S12-3: "false positive and false negative diagnoses of a SLAP type 2 lesion can be caused by
+  // misinterpretation of a sublabral recess as a tear and vice versa" (Woertler and Waldt 2006,
+  // full text). S6-1 (the Snyder type wording) is still unchecked.
   if (str(values, 'labrum-superior') === 'ii' && list(values, 'variants').includes('sublabral-recess')) {
     out.push('Both a type II SLAP tear and a sublabral recess are entered at the biceps anchor. The recess can mimic the tear: decide which it is.')
   }
@@ -926,7 +953,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>Ellman (arthroscopic): articular (A), bursal (B) or interstitial (C); grade 1 less than 3 mm deep, grade 2 3 to 6 mm, grade 3 more than 6 mm ({ELLMAN}). Patte retraction: stage 1 near the insertion, 2 at the humeral head, 3 at the glenoid ({PATTE}).</p>
-        <p>Goutallier grades of fatty infiltration ({GOUTALLIER}), applied to MRI by Fuchs and colleagues ({FUCHS}):</p>
+        <p>Goutallier grades of fatty infiltration ({GOUTALLIER}), applied to MRI by Fuchs and colleagues, who found the MRI and CT grades correlated only fairly to moderately ({FUCHS}):</p>
         {goutallierTable}
       </>
     ),
@@ -1028,7 +1055,7 @@ const study: StudyDefinition = {
   slug: 'shoulder-mri',
   name: 'Shoulder MRI',
   lede: 'Read a shoulder MRI with no history beyond pain: a fixed search pattern through the bones, rotator cuff, biceps, labrum, ligaments, nerves and a repaired cuff, and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Neer segments and displacement thresholds, the Ellman depth grades, the Patte stages, the Goutallier and Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -1083,7 +1110,7 @@ const study: StudyDefinition = {
       question: 'The superior labrum and the biceps anchor are detached from the glenoid. What SLAP type is that, and what variant should you rule out first?',
       options: ['Type I; a Buford complex', 'Type II; a sublabral recess', 'Type III; a sublabral foramen', 'Type IV; an os acromiale'],
       answer: 1,
-      explanation: <p>In Snyder's type II the superior labrum and biceps anchor are detached from the glenoid ({SNYDER}). A sublabral recess at the biceps anchor can mimic it ({SMITH}).</p>,
+      explanation: <p>In Snyder's type II the superior labrum and biceps anchor are detached from the glenoid ({SNYDER}). A sublabral recess can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</p>,
     },
     {
       id: 'alpsa',

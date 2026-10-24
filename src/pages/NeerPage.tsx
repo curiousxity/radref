@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { Cite } from '../components/LessonPage'
 import { classifyNeer, emptyNeerInput, isDisplaced, lineNames, NEER_LINES } from '../logic/neer'
 import type { LineStatus, NeerInput, NeerLine } from '../logic/neer'
 
@@ -74,7 +75,7 @@ export function NeerPage() {
           <span className="calc-tag">Proximal humerus</span>
         </div>
         <p>Counts the displaced segments of a proximal humerus fracture and gives the Neer type with copyable report text. Usually applied on radiographs and CT.</p>
-        <p className="source-note">Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author. Source: Neer CS 2nd, Displaced proximal humeral fractures. Part I. Classification and evaluation. J Bone Joint Surg Am 1970.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed and Crossref, but the paper has no abstract and is paywalled, so the four segments, the 1 cm and 45 degree thresholds and the part counts have not yet been checked against it. Not yet reviewed by the site author. Source: <Cite doi="10.2106/00004623-197052060-00001">Neer CS 2nd, Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am 1970</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

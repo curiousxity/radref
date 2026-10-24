@@ -6,10 +6,12 @@ import { ShoulderMriStudyPage } from './ShoulderMriStudy'
 const study = studyOf(ShoulderMriStudyPage)
 
 /*
- * UNCHECKED DRAFT. Each rule case quotes its claim from
- * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md, where every claim is marked
- * "to check": the wording is from memory of the paper, not read from it. When a claim is checked,
- * replace the comment with the paper's sentence and fix the expectation if the paper differs.
+ * Unchecked draft. Each rule case quotes its claim from
+ * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md. The references are matched on
+ * PubMed and Crossref; a case quoting the paper's sentence was read in its abstract or open full
+ * text, and a case still marked "(to check)" or "(partly checked)" rests on wording no abstract
+ * states. When one is checked, replace the comment with the paper's sentence and fix the
+ * expectation if the paper differs; say in that commit why the old expectation was wrong.
  */
 
 describe('shoulder MRI: unchecked state', () => {
@@ -17,9 +19,11 @@ describe('shoulder MRI: unchecked state', () => {
     expect(study.sourceNote.startsWith('Unchecked draft')).toBe(true)
   })
 
-  test('no reference carries a DOI until it is checked', () => {
-    expect(study.references.length).toBeGreaterThan(0)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+  // The references are matched (each has a DOI; Hill and Sachs 1940 has one on Crossref but no
+  // PMID), but claims not in an abstract are still unchecked, so the note keeps saying so.
+  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
+    expect(study.references).toHaveLength(22)
+    for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
 
@@ -195,21 +199,27 @@ describe('shoulder MRI report: contradictions', () => {
     expect(report(study, { ...normal, 'impression-negatives': ['no-cuff-tear', 'no-labral-tear', 'no-fracture'] }).warnings).toEqual([])
   })
 
-  // S10-1 (to check): "paralabral cysts are associated with labral tears" (Tirman 1994).
+  // S10-1: "Glenoid labral cysts are associated with glenoid labral tears and shoulder
+  // instability" (Tirman 1994, abstract).
   test('a paralabral cyst with an intact labrum', () => {
     const values = { ...normal, 'paralabral-cyst': 'present', 'cyst-site': 'spinoglenoid' }
     expect(report(study, values).warnings).toContain('A paralabral cyst is entered with an intact labrum. Paralabral cysts go with labral tears: look at the labrum again.')
     expect(report(study, { ...values, 'labrum-posterior': 'tear' }).warnings).toEqual([])
   })
 
-  // S5-1 (to check): dislocation of the long head of biceps goes with subscapularis tears (Walch 1998).
+  // S5-1: "Dislocation was associated with complete rupture of the subscapularis tendon in 23
+  // cases, with partial tearing in 21 cases, and with an intact subscapularis tendon in 2 cases"
+  // (Walch 1998, abstract).
   test('a displaced biceps with no subscapularis tear', () => {
     const values = { ...normal, 'biceps-position': 'dislocated' }
     expect(report(study, values).warnings).toContain('The long head of biceps is displaced medially, but no subscapularis tear is entered. Displaced biceps tendons go with subscapularis tears: look at it again.')
     expect(report(study, { ...values, subscapularis: 'full' }).warnings).toEqual([])
   })
 
-  // S12-3 (to check): a sublabral recess can mimic a type II SLAP tear (Smith 1996).
+  // S12-3: "false positive and false negative diagnoses of a SLAP type 2 lesion can be caused by
+  // misinterpretation of a sublabral recess as a tear and vice versa" (Woertler and Waldt 2006,
+  // full text). Was cited to Smith 1996, whose abstract says only that the recess looks like SLAP
+  // lesions, not type II; the warning itself is unchanged.
   test('a type II SLAP tear and a sublabral recess together', () => {
     expect(report(study, { ...normal, 'labrum-superior': 'ii', variants: ['sublabral-recess'] }).warnings)
       .toContain('Both a type II SLAP tear and a sublabral recess are entered at the biceps anchor. The recess can mimic the tear: decide which it is.')
@@ -227,7 +237,8 @@ describe('shoulder MRI rules: Neer (shared logic, src/logic/neer.ts)', () => {
 })
 
 describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', () => {
-  // S3-1 (to check): grade 1 "less than 3 mm" deep, grade 2 "3 to 6 mm", grade 3 "more than 6 mm".
+  // S3-1 (partly checked: the abstract says only that tears are graded by "location, depth,
+  // and area"; the thresholds are to check): grade 1 "less than 3 mm" deep, grade 2 "3 to 6 mm", grade 3 "more than 6 mm".
   test.each([
     ['2.9', 'Articular (A), grade 1'],
     ['3', 'Articular (A), grade 2'],
@@ -251,7 +262,8 @@ describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', 
     expect(impressionOf(values)).toBe('Full-thickness tear of the supraspinatus, Patte stage 2 retraction.')
   })
 
-  // S3-3 (to check): grade 0 normal, 1 some fatty streaks, 2 more muscle than fat, 3 as much
+  // S3-3 (partly checked: the abstract says only "grading muscular fatty degeneration in five
+  // stages"; the wording is to check): grade 0 normal, 1 some fatty streaks, 2 more muscle than fat, 3 as much
   // fat as muscle, 4 more fat than muscle.
   test.each(['0', '1', '2', '3', '4'])('Goutallier grade %s', (grade) => {
     expect(chips(study, 'cuff', { 'supraspinatus-fat': grade })['Supraspinatus (Goutallier)']).toBe(`Grade ${grade}`)
@@ -264,7 +276,8 @@ describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', 
 })
 
 describe('shoulder MRI rules: labrum (Snyder 1990)', () => {
-  // S6-1 (to check): type I fraying with the anchor attached; II labrum and anchor detached;
+  // S6-1 (partly checked: "We divided the superior labrum pathology into four distinct types";
+  // the wording of each type is to check): type I fraying with the anchor attached; II labrum and anchor detached;
   // III bucket-handle with the anchor attached; IV bucket-handle extending into the biceps.
   test.each([['i', 'Type I'], ['ii', 'Type II'], ['iii', 'Type III'], ['iv', 'Type IV']])('superior labrum %s is SLAP %s', (value, expected) => {
     expect(chips(study, 'labrum', { 'labrum-superior': value })['SLAP (Snyder)']).toBe(expected)
@@ -275,8 +288,10 @@ describe('shoulder MRI rules: labrum (Snyder 1990)', () => {
 })
 
 describe('shoulder MRI rules: nerves (Fritz 1992; Linker 1993)', () => {
-  // S10-2 (to check): at the suprascapular notch both muscles; at the spinoglenoid notch the
-  // infraspinatus alone.
+  // S10-2 (partly checked): "Atrophy of both the supraspinatus and infraspinatus muscles was
+  // seen in association with anteriorly located masses and proximal entrapment of the nerve ...
+  // isolated atrophy of the infraspinatus muscle was seen in association with posteriorly located
+  // masses and distal entrapment" (Fritz 1992, abstract). The notch names are to check.
   test.each([
     ['suprascapular', 'Can affect the supraspinatus and infraspinatus'],
     ['spinoglenoid', 'Can affect the infraspinatus alone'],
@@ -285,7 +300,8 @@ describe('shoulder MRI rules: nerves (Fritz 1992; Linker 1993)', () => {
     expect(chips(study, 'nerves', { 'paralabral-cyst': 'present', 'cyst-site': site })['Cyst site (Fritz)']).toBe(expected)
   })
 
-  // S10-3 (to check): quadrilateral space syndrome shows teres minor atrophy.
+  // S10-3: "Selective atrophy of the teres minor muscle ... was demonstrated at magnetic resonance
+  // imaging in three patients with clinical findings of the syndrome" (Linker 1993, abstract).
   test('teres minor denervation raises quadrilateral space syndrome', () => {
     expect(chips(study, 'nerves', { denervation: 'present', 'denervation-muscles': ['teres-minor'] })['Teres minor denervation (Linker)']).toBe('Consider quadrilateral space syndrome')
     expect(chips(study, 'nerves', { denervation: 'present', 'denervation-muscles': ['infraspinatus'] })['Teres minor denervation (Linker)']).toBeUndefined()
@@ -293,7 +309,10 @@ describe('shoulder MRI rules: nerves (Fritz 1992; Linker 1993)', () => {
 })
 
 describe('shoulder MRI rules: repaired cuff (Sugaya 2005)', () => {
-  // S11-1 (to check): five types; IV and V are re-tears.
+  // S11-1 (partly checked): "type I, sufficient thickness with homogenously low intensity; type
+  // II, sufficient thickness with partial high intensity; type III, insufficient thickness without
+  // discontinuity; type IV, presence of a minor discontinuity; type V, presence of a major
+  // discontinuity" (Sugaya 2005, abstract). "IV and V are re-tears" is to check.
   test.each([
     ['i', 'Type I: no re-tear'],
     ['ii', 'Type II: no re-tear'],
