@@ -6,10 +6,15 @@ paywalled full text could confirm kept as unchecked, all by the author's choice.
 
 ## Fix soon
 
-- **Browser check of both themes**, which has not been done yet. Check light and dark on:
-  home, TI-RADS, Doppler indices, one older study, ankle MRI, fifth metatarsal, one
-  embedded viewer, one full-screen viewer, at 320px wide, and the header between 641 and
-  900px.
+Nothing at the moment. The browser check of both themes was done on 2026-10-25 (home,
+TI-RADS, Doppler indices, rectal MRI, ankle MRI, fifth metatarsal, the otic capsule embed and
+the knee full screen, at 320px, 700px and 860px). Both themes looked right and no page
+scrolled sideways. It found one bug, now fixed: above phone width the categories wrap and
+the header grows to 91–138px, while sticky panels and study tabs assumed 57px and slid under
+it. `App.tsx` now measures the header into `--header-h`.
+
+- Design question for the author: between 641 and 700px the header takes three rows
+  (138px). A phone-style menu button up to ~900px would keep it to one row.
 
 ## Author review
 
@@ -76,8 +81,6 @@ doi.org, Europe PMC), so these checks wait for a machine that can reach them. Do
 check the way the ankle was done (`docs/superpowers/research/2026-10-19-ankle-mri-sources.md`):
 match the paper on PubMed, resolve its DOI on Crossref, and count a claim as verified only
 when its wording is in the abstract or open full text.
-
-The browser check of both themes (under "Fix soon") also needs a computer.
 
 ### Knee MRI study and Schatzker calculator
 

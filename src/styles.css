@@ -40,7 +40,8 @@
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
-  /* .header-inner min-height plus the header's 1px hairline. */
+  /* .header-inner min-height plus the header's 1px hairline: the phone header. App.tsx
+     overwrites it with the measured height, which is taller once the categories wrap. */
   --header-h: 57px;
 }
 
@@ -101,7 +102,7 @@ button, input, select, textarea { font: inherit; }
 .header-inner { display: flex; gap: 1rem; justify-content: space-between; align-items: center; min-height: 56px; }
 .brand-mark { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; }
 .brand-logo { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; height: 26px; padding: 0 0.4rem; border: 1.5px solid var(--color-primary); border-radius: var(--radius-sm); font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--color-primary); }
-.brand-title { margin: 0; font-family: var(--font-sans); font-weight: 650; font-size: 0.98rem; letter-spacing: -0.01em; line-height: 1.2; }
+.brand-title { margin: 0; font-family: var(--font-sans); font-weight: 650; font-size: 0.98rem; letter-spacing: -0.01em; line-height: 1.2; white-space: nowrap; }
 .top-nav { display: flex; gap: 0.15rem; flex-wrap: wrap; align-items: center; }
 /* Takes focus only as the drawer's landing point (CategoryNav); its links show their own focus. */
 .top-nav:focus { outline: none; }

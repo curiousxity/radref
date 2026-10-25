@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { Link, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { CategoryNav } from './components/CategoryNav'
 import { ThemeToggle } from './components/ThemeToggle'
@@ -19,10 +19,27 @@ function LessonRedirect() {
 export default function App() {
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     setMenuOpen(false)
   }, [location.pathname])
+
+  // Above phone width the category links wrap onto two or three rows, so the header is taller
+  // than the 57px default in styles.css. Sticky panels and tabs sit below it via --header-h.
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header || typeof ResizeObserver === 'undefined') return
+    const root = document.documentElement
+    const observer = new ResizeObserver(() => {
+      root.style.setProperty('--header-h', `${Math.ceil(header.getBoundingClientRect().height)}px`)
+    })
+    observer.observe(header)
+    return () => {
+      observer.disconnect()
+      root.style.removeProperty('--header-h')
+    }
+  }, [])
 
   useEffect(() => {
     const path = location.pathname
@@ -33,7 +50,7 @@ export default function App() {
     <div className="app-shell">
       <ScrollToTop />
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <header className="site-header">
+      <header className="site-header" ref={headerRef}>
         <div className="container header-inner">
           <Link to="/" className="brand-mark" aria-label="Rad Ref home">
             <span className="brand-logo" aria-hidden="true">RR</span>
