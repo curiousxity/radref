@@ -60,10 +60,9 @@ describe('AO Spine code and sentence', () => {
   // AO-8, AO-9: both posters give the same neurology grades and "+ Continued spinal cord compression".
   test('neurology', () => {
     // The poster: "N3 Incomplete spinal cord injury or any degree of cauda equina injury".
-    expect(aoNeuroDescription('N3', 'thoracolumbar')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
     // The subaxial N3 said "incomplete spinal cord injury" only; the subaxial poster has the same
     // N3 as the thoracolumbar one, and "+" tied to no grade (was N3 only).
-    expect(aoNeuroDescription('N3', 'subaxial')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
+    expect(aoNeuroDescription('N3')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
     expect(aoNeuroDescription('N2')).toBe('radicular symptoms')
     expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N3', compression: true })).toBe('C (N3+)')
     expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')

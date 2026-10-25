@@ -1,7 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { aoBodies, aoCode, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoSentence, aoTypes } from '../logic/aospine'
-import type { AoBody, AoFacet, AoRegion, AoType } from '../logic/aospine'
+import type { AoBody, AoFacet, AoFull, AoRegion, AoType } from '../logic/aospine'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -320,9 +320,14 @@ function injury(values: Values, region: AoRegion): Injury | undefined {
   return { region, level: str(values, `${prefix}-level`), ...(type ? { type } : {}), ...(body ? { body } : {}), ...(facet ? { facet } : {}), modifiers }
 }
 
+/** The AO Spine code's parts for an injury with a type; the modifiers are added where they are wanted. */
+function aoFullOf(item: Injury & { type: AoType }): AoFull {
+  return { region: item.region, morphology: { type: item.type, ...(item.body ? { body: item.body } : {}) }, ...(item.facet ? { facet: item.facet } : {}) }
+}
+
 function injurySentence(item: Injury): string {
   if (!item.type) return `${item.region === 'subaxial' ? 'Subaxial cervical' : 'Thoracolumbar'} spine injury${item.level ? ` at ${item.level}` : ''}.`
-  return aoSentence({ region: item.region, morphology: { type: item.type, ...(item.body ? { body: item.body } : {}) }, ...(item.facet ? { facet: item.facet } : {}), modifiers: item.modifiers }, item.level || undefined)
+  return aoSentence({ ...aoFullOf({ ...item, type: item.type }), modifiers: item.modifiers }, item.level || undefined)
 }
 
 /** T5-1: the expanded Denver criteria that this form can see. */
@@ -368,7 +373,7 @@ function deriveRegion(region: AoRegion) {
     const item = injury(values, region)
     if (!item) return []
     const out: Derived[] = []
-    if (item.type) out.push({ label: 'AO Spine', value: aoCode({ region: item.region, morphology: { type: item.type, ...(item.body ? { body: item.body } : {}) }, ...(item.facet ? { facet: item.facet } : {}) }), tone: item.type === 'A0' ? 'neutral' : 'warn' })
+    if (item.type) out.push({ label: 'AO Spine', value: aoCode(aoFullOf({ ...item, type: item.type })), tone: item.type === 'A0' ? 'neutral' : 'warn' })
     // T1-1, AO-10: fractures in an ankylosed spine.
     if (item.modifiers.length > 0) out.push({ label: 'Ankylosed spine', value: `Modifier ${item.modifiers[0]}; fractures here often follow minor trauma`, tone: 'warn' })
     return out

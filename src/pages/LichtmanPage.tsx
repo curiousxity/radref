@@ -30,7 +30,7 @@ export function LichtmanPage() {
     sclerosis: form.sclerosis === 'yes',
     collapse: form.collapse === 'yes',
     carpalCollapse: form.collapse === 'yes' ? form.carpalCollapse === 'yes' : undefined,
-    coronalFracture: form.collapse === 'yes' && form.coronalFracture === 'yes',
+    coronalFracture: form.coronalFracture === 'yes',
     arthritis: form.arthritis === 'yes',
   })
 

@@ -3,7 +3,7 @@ import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { aoCode, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoGroup, aoModifiers, aoNeuroDescription, aoNeuros, aoSentence, aoSpine, aoTypes } from '../logic/aospine'
+import { aoCode, aoDescription, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoGroup, aoModifiers, aoNeuroDescription, aoNeuros, aoSentence, aoSpine, aoTypes } from '../logic/aospine'
 import type { AoFacet, AoNeuro, AoRegion, PosteriorTensionBand } from '../logic/aospine'
 
 type YesNo = 'no' | 'yes'
@@ -85,7 +85,7 @@ export function AoSpinePage() {
     posteriorTensionBand: form.posterior,
     endplates: Number(form.endplates) as 0 | 1 | 2,
     posteriorWall: form.endplates !== '0' && form.wall === 'yes',
-    processFracture: form.endplates === '0' && form.process === 'yes',
+    processFracture: form.process === 'yes',
   })
   const facet = subaxial ? aoFacetCode(form.right === 'none' ? undefined : form.right, form.left === 'none' ? undefined : form.left) : ''
   const modifiers = Object.keys(aoModifiers[form.region]).filter((m) => form.modifiers.includes(m))
@@ -101,7 +101,7 @@ export function AoSpinePage() {
 
   const neuroOptions: { value: AoNeuro | 'unknown'; label: string }[] = [
     { value: 'unknown', label: 'Not given' },
-    ...aoNeuros.map((n) => ({ value: n, label: `${n}: ${aoNeuroDescription(n, form.region)}` })),
+    ...aoNeuros.map((n) => ({ value: n, label: `${n}: ${aoNeuroDescription(n)}` })),
   ]
   const modifierOptions = Object.entries(aoModifiers[form.region])
   const toggleModifier = (m: string) => (value: YesNo) =>
@@ -146,7 +146,7 @@ export function AoSpinePage() {
               <p className={`result-strip-value tone-${morphology ? (morphology.type === 'A0' ? 'good' : 'warn') : 'neutral'}`}>{full ? aoCode(full) : 'No type'}</p>
             </div>
             <p className="result-strip-summary">
-              {morphology ? `${capitalise(aoGroup(morphology.type))}: ${aoDescriptions[morphology.type]}${morphology.body ? `, with a type ${morphology.body} vertebral body fracture` : ''}.` : (facet ? 'Facet injury only, with no type A, B or C injury: written facets first.' : 'No injury entered: mark a fracture or a tension band injury.')}
+              {full && morphology ? `${capitalise(aoGroup(morphology.type))}: ${aoDescription(full)}.` : (facet ? 'Facet injury only, with no type A, B or C injury: written facets first.' : 'No injury entered: mark a fracture or a tension band injury.')}
             </p>
           </div>
           {full && <CopyBlock label="Impression" text={aoSentence(full)} />}

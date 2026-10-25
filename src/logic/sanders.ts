@@ -36,7 +36,7 @@ export type SandersType = 'I' | 'IIA' | 'IIB' | 'IIC' | 'IIIAB' | 'IIIAC' | 'III
 
 export const sandersTypes: SandersType[] = ['I', 'IIA', 'IIB', 'IIC', 'IIIAB', 'IIIAC', 'IIIBC', 'IV']
 
-const groupDescriptions: Record<'I' | 'II' | 'III' | 'IV', string> = {
+export const sandersGroupDescriptions: Record<'I' | 'II' | 'III' | 'IV', string> = {
   I: 'minimally displaced (2 mm or less) articular fracture, whatever the number of fracture lines', // SA-3
   // SA-4, the abstract's wording: "Type II were two-part or split fractures; Type III were
   // three-part or split depression fractures; and Type IV were four-part or highly comminuted
@@ -54,7 +54,7 @@ export function sandersDescription(type: SandersType): string {
   const group = sandersGroup(type)
   const letters = type.slice(group.length).split('') as SandersLine[]
   const where = letters.length > 0 ? ` (line${letters.length === 1 ? '' : 's'} ${letters.join(' and ')})` : ''
-  return `${groupDescriptions[group]}${where}`
+  return `${sandersGroupDescriptions[group]}${where}`
 }
 
 /**

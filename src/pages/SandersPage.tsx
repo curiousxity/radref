@@ -3,7 +3,7 @@ import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { sanders, sandersDescription, sandersLineDescriptions, sandersLines, sandersSentence } from '../logic/sanders'
+import { sanders, sandersDescription, sandersGroupDescriptions, sandersLineDescriptions, sandersLines, sandersSentence } from '../logic/sanders'
 import type { SandersInput, SandersLine } from '../logic/sanders'
 
 type YesNo = 'no' | 'yes'
@@ -19,12 +19,10 @@ const yesNo: { value: YesNo; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const tableRows: [string, string][] = [
-  ['I', 'Minimally displaced articular fracture (2 mm or less), whatever the number of fracture lines'],
-  // SA-4, the abstract's wording: "two-part or split", "three-part or split depression",
-  // "four-part or highly comminuted articular fractures".
-  ['II (IIA, IIB, IIC)', 'Two-part or split fracture of the posterior facet; the letter names the line'],
-  ['III (IIIAB, IIIAC, IIIBC)', 'Three-part or split depression fracture; the letters name the two lines'],
-  ['IV', 'Four-part or highly comminuted articular fracture'],
+  ['I', capitalise(sandersGroupDescriptions.I)],
+  ['II (IIA, IIB, IIC)', `${capitalise(sandersGroupDescriptions.II)}; the letter names the line`],
+  ['III (IIIAB, IIIAC, IIIBC)', `${capitalise(sandersGroupDescriptions.III)}; the letters name the two lines`],
+  ['IV', capitalise(sandersGroupDescriptions.IV)],
 ]
 
 const references: LessonReference[] = [

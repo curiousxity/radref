@@ -17,8 +17,8 @@ const timingOptions: { value: Timing; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 const typeOption = (type: HerbertType) => ({ value: type, label: `${type}: ${herbertDescriptions[type]}` })
 
-const acuteOptions = (['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5'] as HerbertType[]).map(typeOption)
-const nonunionOptions = (['D1', 'D2'] as HerbertType[]).map(typeOption)
+const acuteOptions = herbertTypes.filter((type) => /^[AB]/.test(type)).map(typeOption)
+const nonunionOptions = herbertTypes.filter((type) => type.startsWith('D')).map(typeOption)
 
 const references: LessonReference[] = [
   { citation: 'Dráč P, Kastelec M, Suarez FA. Classifications for fractures of carpal bones: Herbert classification for scaphoid fractures. AO Surgery Reference (surgeryreference.aofoundation.org), AO Foundation; accessed 2026-10-25.' },
@@ -86,7 +86,6 @@ export function HerbertPage() {
             </tbody>
           </table>
         </div>
-        <p>Later versions add a comminuted type (B5); this page keeps to the original types until the paper is checked.</p>
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1984 paper is paywalled; the types follow AO Surgery Reference's Herbert page." />

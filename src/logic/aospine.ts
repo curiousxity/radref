@@ -115,8 +115,8 @@ export type AoNeuro = 'N0' | 'N1' | 'N2' | 'N3' | 'N4' | 'NX'
 
 export const aoNeuros: AoNeuro[] = ['N0', 'N1', 'N2', 'N3', 'N4', 'NX']
 
-/** AO-8: both posters give the same grades, word for word. The region is kept for callers. */
-export function aoNeuroDescription(neuro: AoNeuro, _region?: AoRegion): string {
+/** AO-8: both posters give the same grades, word for word. */
+export function aoNeuroDescription(neuro: AoNeuro): string {
   return {
     N0: 'neurologically intact',
     N1: 'transient deficit, now resolved',
@@ -160,20 +160,21 @@ export type AoFull = {
  */
 export function aoCode({ region, morphology, facet, neuro, compression, modifiers = [] }: AoFull): string {
   const neuroCode = neuro && `${neuro}${compression ? '+' : ''}`
-  if (region === 'thoracolumbar') {
-    const inside = [morphology?.body, neuroCode, ...modifiers].filter(Boolean)
-    return `${morphology?.type ?? ''}${inside.length > 0 ? ` (${inside.join('; ')})` : ''}`.trim()
-  }
-  const head = morphology?.type ?? facet ?? ''
-  const inside = [morphology?.body, morphology ? facet : undefined, neuroCode, ...modifiers].filter(Boolean)
-  return `${head}${inside.length > 0 ? ` (${inside.join(', ')})` : ''}`
+  const facets = region === 'subaxial' ? facet : undefined
+  const head = morphology?.type ?? facets ?? ''
+  const inside = [morphology?.body, morphology ? facets : undefined, neuroCode, ...modifiers].filter(Boolean)
+  return `${head}${inside.length > 0 ? ` (${inside.join(region === 'thoracolumbar' ? '; ' : ', ')})` : ''}`.trim()
 }
 
 const regionName: Record<AoRegion, string> = { subaxial: 'subaxial cervical', thoracolumbar: 'thoracolumbar' }
 
-export function aoSentence(full: AoFull, level?: string): string {
-  const what = full.morphology
-    ? `${aoDescriptions[full.morphology.type]}${full.morphology.body ? `, with a type ${full.morphology.body} vertebral body fracture` : ''}`
+/** The injury in words, shared by the calculator's summary and the report sentence. */
+export function aoDescription({ morphology }: AoFull): string {
+  return morphology
+    ? `${aoDescriptions[morphology.type]}${morphology.body ? `, with a type ${morphology.body} vertebral body fracture` : ''}`
     : 'facet injury without a type A, B or C injury'
-  return `${level ? `${level}: ` : ''}AO Spine ${regionName[full.region]} ${aoCode(full)}: ${what}.`
+}
+
+export function aoSentence(full: AoFull, level?: string): string {
+  return `${level ? `${level}: ` : ''}AO Spine ${regionName[full.region]} ${aoCode(full)}: ${aoDescription(full)}.`
 }
