@@ -153,3 +153,17 @@ Read in full: Tysver T, Jawa A. In brief: fractures in brief: scaphoid fractures
 Herbert and Fisher 1984 but does not give the A to D types, so HB-1 to HB-n stay unchecked. The author
 suggested AO Surgery Reference's free Herbert classification page; `surgeryreference.aofoundation.org`
 is not reachable from this environment, so it needs a PDF or the host allowed.
+
+## Fifth check, 2026-10-25: fourth batch from the author
+
+Read: AO Surgery Reference, "Classifications for fractures of carpal bones: Herbert classification for
+scaphoid fractures" (Dráč P, Kastelec M, Suarez FA; citing Herbert's 1990 book), saved as a PDF by
+the author. It has no DOI, so it is cited on the Herbert page only (the wrist study's tests require a
+DOI on every reference).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| HB-1 | yes | "A1 – fracture of the scaphoid tubercle"; "A2 – nondisplaced crack of the wrist [waist] (incomplete fracture)". |
+| HB-2 | yes, B5 added | "B1 – distal oblique fracture; B2 – complete waist fracture; B3 – proximal pole fracture; B4 – fracture dislocation; B5 – comminuted fracture". The calculator had no B5; it is added. B4 keeps "trans-scaphoid perilunate fracture-dislocation". |
+| HB-3, HB-4 | yes | "C – delayed union"; "D – established nonunion; D1 – fibrous nonunion; D2 – sclerotic nonunion (pseudoarthrosis)". |
+| HB-5 | yes | "A – acute stable (may be treated conservatively)"; "B – acute unstable (indicated for surgery)". |

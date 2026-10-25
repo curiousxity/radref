@@ -92,3 +92,14 @@ Not sourced, and labelled as the site's own on the page: the order of the steps,
 checklist, the pointers from the history (high-energy: every level; low-energy fall in an
 older patient: craniocervical junction and C2; pain alone: bone quality and collapse), and the
 note that CT does not show the cord, discs or ligaments well.
+
+## Fifth check, 2026-10-25: fourth batch from the author
+
+Read in full: Anderson and D'Alonzo 1974 (T-R6), a page scan. Spence 1970 (T-R4) has still not
+arrived; on the author's advice the 6.9 mm rule is presented as an old radiographic pointer to ligament
+injury, not a CT test, and a total within 6.9 mm no longer reads as reassurance.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| T2-4 | yes, reworded | Fig. 1: "Type I is an oblique fracture through the upper part of the odontoid process itself. Type II is a fracture at the junction of the odontoid process with the vertebral body of the second cervical vertebra. Type III is really a fracture through the body of the atlas [sic: axis]." Abstract: "two avulsion, thirty-two body, and fifteen basilar fractures ... Body fractures are most prone to non-union". The options now use the paper's words. |
+| T2-2, T2-3 | wording only | The chip said "rupture likely" above 6.9 mm; now "suggests rupture", the rule's own word. Below: "does not rule out a rupture". |

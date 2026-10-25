@@ -180,10 +180,13 @@ describe('suprahyoid neck rules (unchecked)', () => {
   test('signs around the mass', () => {
     const sign = (signs: string[]) => chips(study, 'lesion', { ...mass, 'mass-signs': signs })
     expect(sign(['tunnel']).Parotid).toBe('Points to the deep lobe of the parotid')
-    // N2-6: the sign was "internal carotid pushed forward: carotid space", which Harnsberger and
-    // Osborn do not state. They give the carotid as the sign of a lateral retropharyngeal mass:
-    // "In lateral retropharyngeal space masses, internal carotid artery is displaced laterally".
-    expect(sign(['ica-back']).Carotid).toBe('Points to a lateral retropharyngeal node')
+    // N2-6: Harnsberger and Osborn do not state the forward sign, but Shin does: "In tumors arising
+    // from the poststyloid parapharyngeal space, anteromedial displacement of the carotid sheath
+    // structures is frequent ... whereas posterolateral displacement ... is frequent in tumors arising
+    // from the prestyloid parapharyngeal space"; Harnsberger gives posterolateral for a lateral
+    // retropharyngeal node.
+    expect(sign(['ica-forward']).Carotid).toBe('Points to the carotid space (poststyloid)')
+    expect(sign(['ica-back']).Carotid).toBe('Points to a prestyloid parapharyngeal mass or a lateral retropharyngeal node')
     expect(sign(['ica-back', 'splay']).Carotid).toBe('Splayed bifurcation: carotid body paraganglioma')
     expect(sign(['prevertebral'])['Prevertebral muscles']).toBe('Points to the perivertebral space')
   })
@@ -211,6 +214,8 @@ describe('suprahyoid neck rules (unchecked)', () => {
   test('retropharyngeal edema against abscess', () => {
     const infection = { ...normalInfection, 'collection-spaces': ['rps'] }
     expect(chips(study, 'lesion', { ...infection, collection: 'fluid', 'rp-pattern': 'edema' }).Retropharyngeal).toBe('Edema rather than abscess')
+    // Hoang's table has a third pattern: a suppurative node, "Unilateral", rounded.
+    expect(chips(study, 'lesion', { ...infection, collection: 'rim', 'rp-pattern': 'node' }).Retropharyngeal).toBe('Suppurative node pattern')
     expect(report(study, { ...infection, collection: 'rim', 'rp-pattern': 'edema' }).warnings)
       .toEqual(['Retropharyngeal edema has no enhancing wall, but a rim-enhancing collection is entered: look again at the wall.'])
   })

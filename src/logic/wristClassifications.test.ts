@@ -53,11 +53,12 @@ describe('Mayfield (unchecked)', () => {
   })
 })
 
-describe('Herbert (unchecked)', () => {
-  // HB-5: "A acute stable, B acute unstable, C delayed union, D non-union."
+describe('Herbert', () => {
+  // HB-5, AO Surgery Reference: "A – acute stable", "B – acute unstable", "C – delayed union",
+  // "D – established nonunion". B5, "comminuted fracture", was missing from the type list.
   test('groups', () => {
     expect(herbertTypes.map(herbertGroup)).toEqual([
-      'acute stable', 'acute stable', 'acute unstable', 'acute unstable', 'acute unstable', 'acute unstable', 'delayed union', 'non-union', 'non-union',
+      'acute stable', 'acute stable', 'acute unstable', 'acute unstable', 'acute unstable', 'acute unstable', 'acute unstable', 'delayed union', 'non-union', 'non-union',
     ])
   })
 

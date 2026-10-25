@@ -149,11 +149,11 @@ const learn: LearnSection[] = [
         {shiftTable}
         <p>Two more spaces lie behind the pharynx. A retropharyngeal mass lies in front of the prevertebral muscles; a perivertebral mass lifts them forward ({HARNSBERGER}).</p>
         <p>A tumour of the deep lobe of the parotid passes through the stylomandibular tunnel, between the mandible and the styloid process, and widens it. There is no fat plane between it and the parotid. A true prestyloid parapharyngeal mass, most often a pleomorphic adenoma from a minor salivary rest, has fat around it ({SHIN}).</p>
-        <p>A carotid space mass pushes the parapharyngeal fat forward. A lateral retropharyngeal node can look like one; the key is the internal carotid artery, which a lateral retropharyngeal mass pushes back and out (posterolaterally) ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, serpiginous flow voids among areas of high signal give a paraganglioma a salt-and-pepper look; Olsen saw it in every paraganglioma over 2 cm ({OLSEN}).</p>
+        <p>A carotid space mass pushes the parapharyngeal fat forward ({HARNSBERGER}). The internal carotid artery helps: a carotid space (poststyloid) tumour usually pushes it forward and inward, because the vagus nerve and sympathetic chain lie behind it, while a prestyloid parapharyngeal mass pushes it back and out ({SHIN}), as does a lateral retropharyngeal node ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, serpiginous flow voids among areas of high signal give a paraganglioma a salt-and-pepper look; Olsen saw it in every paraganglioma over 2 cm ({OLSEN}).</p>
         <h3>An infection: the collection and its source</h3>
         <p>Name the collection, the spaces it fills and, where it can be seen, its source: a tooth, the tonsil, a salivary stone or a suppurative node. Note gas. These fields are this site's own.</p>
         <p>In Freling's series of 76 patients thought clinically to have a deep neck abscess, a fluid collection with complete or partial rim enhancement was an abscess in 82% (53 of 65), and fluid without rim enhancement in 67% (8 of 12). Gas in or beside a collection, or much free gas between the fascias, meant an abscess in every case ({FRELING}).</p>
-        <p>In the retropharyngeal space, tell edema from an abscess. Edema fills the space from side to side, with no enhancing wall and no mass effect. An abscess has an enhancing wall and mass effect ({HOANG}).</p>
+        <p>In the retropharyngeal space, tell edema from a suppurative node and an abscess by four things: where the fluid is, its shape and mass effect, its wall, and the findings around it. Edema fills the space from side to side, smooth, with tapered top and bottom on sagittal images, no wall and only mild mass effect. A suppurative node sits on one side, rounded, sometimes with a thin rim. An abscess is rounded, with moderate to marked mass effect, and usually has a thick enhancing wall. No one sign settles it: a rim with a low-density centre was under 57% specific for pus at surgery ({HOANG}).</p>
         <p>The mylohyoid line on the inside of the mandible decides where a dental infection goes. The roots of the second and third molars lie below it, so their infections reach the submandibular space; those of the premolars and the first molar lie above it and reach the sublingual space ({MARDINI}). An odontogenic abscess in the masticator space spreads by where it sits. In Schuknecht's 30 patients, abscesses in the medial pterygoid spread out of the space, to the parapharyngeal space or soft palate in 7 of 13; those in the lateral (masseter and pterygoid) part spread within the space, often through the sub-masseteric space ({SCHUKNECHT}).</p>
       </>
     ),
@@ -257,6 +257,7 @@ const fields = {
   massSigns: { id: 'mass-signs', kind: 'multi', label: 'Signs', showIf: massPresent, options: [
     { value: 'tunnel', label: 'Widened stylomandibular tunnel' },
     { value: 'parotid-contact', label: 'No fat plane with the deep lobe of the parotid' },
+    { value: 'ica-forward', label: 'Internal carotid artery pushed forward and inward (anteromedially)' },
     { value: 'ica-back', label: 'Internal carotid artery pushed back and out (posterolaterally)' },
     { value: 'splay', label: 'Internal and external carotid arteries splayed' },
     { value: 'prevertebral', label: 'Prevertebral muscles lifted forward' },
@@ -280,8 +281,9 @@ const fields = {
   collectionSpaces: { id: 'collection-spaces', kind: 'multi', label: 'Spaces involved', showIf: hasCollection, options: spaceOptions },
   collectionSize: { id: 'collection-size', kind: 'number', label: 'Largest size', unit: 'cm', min: 0, max: 30, step: 0.1, showIf: (v) => hasCollection(v) && str(v, 'collection') !== 'phlegmon' },
   rpPattern: { id: 'rp-pattern', kind: 'choice', label: 'Retropharyngeal fluid', showIf: (v) => hasCollection(v) && list(v, 'collection-spaces').includes('rps'), options: [
-    { value: 'edema', label: 'Fills it side to side, no wall, no mass effect' },
-    { value: 'abscess', label: 'Enhancing wall or mass effect' },
+    { value: 'edema', label: 'Fills it side to side, smooth and tapered, no wall, only mild mass effect' },
+    { value: 'node', label: 'One side only, a rounded node, perhaps a thin rim' },
+    { value: 'abscess', label: 'Rounded, moderate or marked mass effect, usually a thick enhancing wall' },
   ] },
   gas: { id: 'gas', kind: 'choice', label: 'Gas', showIf: hasCollection, options: noYes },
   source: { id: 'source', kind: 'multi', label: 'Source', showIf: hasCollection, options: [
@@ -388,11 +390,14 @@ function deriveLesion(values: Values): Derived[] {
     const signs = list(values, 'mass-signs')
     // N2-5: deep-lobe parotid.
     if (signs.includes('tunnel') || signs.includes('parotid-contact')) out.push({ label: 'Parotid', value: 'Points to the deep lobe of the parotid' })
-    // N2-6: Harnsberger, "In lateral retropharyngeal space masses, internal carotid artery is
-    // displaced laterally"; a lateral retropharyngeal node "displaces internal carotid artery (c)
+    // N2-6: Shin, "In tumors arising from the poststyloid parapharyngeal space, anteromedial
+    // displacement of the carotid sheath structures is frequent ... whereas posterolateral
+    // displacement ... is frequent in tumors arising from the prestyloid parapharyngeal space";
+    // Harnsberger, a lateral retropharyngeal node "displaces internal carotid artery (c)
     // posterolaterally". N2-7: the carotid body.
     if (signs.includes('splay')) out.push({ label: 'Carotid', value: 'Splayed bifurcation: carotid body paraganglioma', tone: 'warn' })
-    else if (signs.includes('ica-back')) out.push({ label: 'Carotid', value: 'Points to a lateral retropharyngeal node' })
+    else if (signs.includes('ica-forward')) out.push({ label: 'Carotid', value: 'Points to the carotid space (poststyloid)' })
+    else if (signs.includes('ica-back')) out.push({ label: 'Carotid', value: 'Points to a prestyloid parapharyngeal mass or a lateral retropharyngeal node' })
     // N2-3: perivertebral.
     if (signs.includes('prevertebral')) out.push({ label: 'Prevertebral muscles', value: 'Points to the perivertebral space' })
     // N2-8: flow voids on MRI, seen in every paraganglioma over 2 cm.
@@ -407,9 +412,12 @@ function deriveLesion(values: Values): Derived[] {
     if (str(values, 'collection') === 'rim') out.push({ label: 'Rim', value: 'An abscess in 82% in Freling\'s series', tone: 'warn' })
     if (str(values, 'collection') === 'fluid') out.push({ label: 'No rim', value: 'An abscess in 67% in Freling\'s series', tone: 'warn' })
     if (str(values, 'gas') === 'yes') out.push({ label: 'Gas', value: 'Meant an abscess in every case in Freling\'s series', tone: 'warn' })
-    // N2-9: retropharyngeal edema against abscess.
+    // N2-9, Hoang's table: edema fills the space side to side with "only mild mass effect" and no
+    // wall; a suppurative node is unilateral and rounded; an abscess is rounded with
+    // "moderate-to-marked mass effect" and "usually has a thick enhancing wall".
     const rp = str(values, 'rp-pattern')
     if (rp === 'edema') out.push({ label: 'Retropharyngeal', value: 'Edema rather than abscess' })
+    if (rp === 'node') out.push({ label: 'Retropharyngeal', value: 'Suppurative node pattern', tone: 'warn' })
     if (rp === 'abscess') out.push({ label: 'Retropharyngeal', value: 'Abscess pattern', tone: 'warn' })
     // N2-12: the mylohyoid line.
     const tooth = str(values, 'tooth')
@@ -687,7 +695,7 @@ const steps: ReportStep[] = [
       <>
         <p>A mass pushes the parapharyngeal fat away from the space it starts in; a mass with fat all round it is parapharyngeal ({HARNSBERGER}). A widened stylomandibular tunnel points to the deep parotid ({SHIN}); a splayed carotid bifurcation to a carotid body paraganglioma ({RAO}).</p>
         {shiftTable}
-        <p>With an infection, a rim-enhancing collection was an abscess in 82%, and gas meant an abscess every time ({FRELING}); retropharyngeal edema has no wall and no mass effect ({HOANG}); the mylohyoid line decides where a dental infection goes ({MARDINI}).</p>
+        <p>With an infection, a rim-enhancing collection was an abscess in 82%, and gas meant an abscess every time ({FRELING}); retropharyngeal edema has no wall and only mild mass effect ({HOANG}); the mylohyoid line decides where a dental infection goes ({MARDINI}).</p>
       </>
     ),
     fields: [
@@ -725,7 +733,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the deep parotid and carotid bifurcation signs, retropharyngeal edema against abscess, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the carotid bifurcation sign, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -770,10 +778,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'rp-edema',
-      question: 'Fluid fills the retropharyngeal space from side to side, with no enhancing wall and no mass effect. What is it?',
+      question: 'Fluid fills the retropharyngeal space from side to side, smooth and tapered, with no enhancing wall and only mild mass effect. What is it?',
       options: ['Retropharyngeal abscess', 'Retropharyngeal edema', 'Suppurative node', 'Perivertebral abscess'],
       answer: 1,
-      explanation: <p>Edema fills the space side to side without a wall or mass effect; an abscess has an enhancing wall and mass effect ({HOANG}).</p>,
+      explanation: <p>Edema fills the space side to side without a wall and with only mild mass effect; an abscess is rounded, with more mass effect, and usually a thick enhancing wall ({HOANG}).</p>,
     },
     {
       id: 'gas',

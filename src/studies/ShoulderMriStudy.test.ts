@@ -22,8 +22,8 @@ describe('shoulder MRI: unchecked state', () => {
   // The references are matched (each has a DOI; Hill and Sachs 1940 has one on Crossref but no
   // PMID), but claims not in an abstract are still unchecked, so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    // 25 since the Neer, Ellman and Goutallier reviews were added (2026-10-25).
-    expect(study.references).toHaveLength(25)
+    // 26 since the Neer (Kilcoyne, Carofino), Ellman and Goutallier reviews were added (2026-10-25).
+    expect(study.references).toHaveLength(26)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

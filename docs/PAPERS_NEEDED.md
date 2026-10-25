@@ -11,12 +11,12 @@ These define the categories the calculators give. First batch sent 2026-10-25: w
 ticked, with what was checked in its place; what could not be found is marked **pending**. The
 review papers in "Next batch" below stand in for most of the pending ones.
 
-- [ ] **Pending.** Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089. doi:10.2106/00004623-197052060-00001 (checked meanwhile against Kilcoyne et al., AJR 1990, doi:10.2214/ajr.154.5.2108538, received)
+- [ ] **Pending** (checked against Kilcoyne 1990 and Carofino 2013). Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089. doi:10.2106/00004623-197052060-00001 (checked meanwhile against Kilcoyne et al., AJR 1990, doi:10.2214/ajr.154.5.2108538, received)
 - [ ] **Pending.** Mason ML. Br J Surg. 1954;42(172):123-132. doi:10.1002/bjs.18004217203 (types checked meanwhile against Iannuzzi and Leopold, Clin Orthop Relat Res 2012, doi:10.1007/s11999-012-2319-2, received, which reproduces his table)
 - [x] Johnston GW. Ulster Med J. 1962;31(1):51-56. PMC2384652 (received; type IV confirmed)
 - [x] Broberg MA, Morrey BF. J Bone Joint Surg Am. 1986;68(5):669-674. doi:10.2106/00004623-198668050-00005 (received; it does **not** state 2 mm and 30%, see the next batch)
 - [ ] **Pending.** Mayfield JK, Johnson RP, Kilcoyne RK. J Hand Surg Am. 1980;5(3):226-241. doi:10.1016/s0363-5023(80)80007-4 (the zip sent held letters from the same issue, not the paper; checked meanwhile against Kennedy and Allan, Clin Orthop Relat Res 2012, doi:10.1007/s11999-012-2275-x, received)
-- [ ] **Pending.** Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468
+- [ ] **Pending** (types checked against AO Surgery Reference). Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468
 - [ ] **Pending.** Palmer AK. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3
 - [ ] **Pending** (stages checked against Kennedy and Abrams 2019). Lichtman DM, et al. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011
 - [x] ~~Lichtman DM, et al. J Hand Surg Am. 1982;7(4):343-347.~~ Not needed: Kennedy and Abrams 2019 shows stage III was split in 1993 (Lichtman and Degnan, Hand Clin), not 1982
@@ -65,21 +65,21 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 
 ## Fourth batch (asked for 2026-10-25)
 
-- [ ] Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (Mason 2 mm and 30%)
-- [ ] Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
-- [ ] Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113 (pelvis: L5 transverse process, ring breaking twice)
-- [ ] Herbert classification page from AO Surgery Reference (save as PDF; the site is blocked here) (Herbert types)
-- [ ] Recht MP, Goodwin DW, Winalski CS, White LM. MRI of articular cartilage: revisiting current status and future directions. AJR. 2005;185(4):899-914. doi:10.2214/AJR.05.0099 (a source for the knee study's MRI cartilage depth grades)
-- [ ] Shin JH, et al. AJR. 2001;177(6):1465-1470. doi:10.2214/ajr.177.6.1771465 (neck: deep parotid against prestyloid parapharyngeal)
-- [ ] Rao AB, Koeller KK, Adair CF. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605 (neck: carotid body splaying)
-- [ ] Hoang JK, et al. AJR. 2011;196(4):W426-W432. doi:10.2214/AJR.10.5116 (neck: retropharyngeal edema against abscess)
-- [ ] Spence KF Jr, Decker S, Sell KW. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013 (spine CT: the 6.9 mm rule)
-- [ ] Anderson LD, D'Alonzo RT. J Bone Joint Surg Am. 1974;56(8):1663-1674. doi:10.2106/00004623-197456080-00017 (spine CT: odontoid types)
+- [ ] **Pending.** Broberg MA, Morrey BF. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017
+- [x] Carofino BC, Leopold SS. Neer review. doi:10.1007/s11999-012-2454-9 (received)
+- [ ] **Pending.** Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113
+- [x] AO Surgery Reference Herbert page (received; added B5)
+- [x] Recht MP, et al. AJR 2005. doi:10.2214/AJR.05.0099 (received; does not give the depth grades)
+- [x] Shin JH, et al. AJR 2001. doi:10.2214/ajr.177.6.1771465 (received)
+- [ ] **Pending.** Rao AB, Koeller KK, Adair CF. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605
+- [x] Hoang JK, et al. AJR 2011. doi:10.2214/AJR.10.5116 (received)
+- [ ] **Pending.** Spence KF Jr, Decker S, Sell KW. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013
+- [x] Anderson LD, D'Alonzo RT. J Bone Joint Surg Am 1974. doi:10.2106/00004623-197456080-00017 (received)
 
 ## 2. Paediatric elbow study
 
-- [ ] Iyer RS, Thapa MM, Khanna PC, Chew FS. Pediatric bone imaging: imaging elbow trauma in children, a review of acute and chronic injuries. AJR. 2012;198(5):1053-1068. doi:10.2214/AJR.10.7314 (six claims rest on it)
-- [ ] Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154. No DOI
+- [x] Iyer RS, Thapa MM, Khanna PC, Chew FS. Pediatric bone imaging: imaging elbow trauma in children, a review of acute and chronic injuries. AJR. 2012;198(5):1053-1068. doi:10.2214/AJR.10.7314 (six claims rest on it)
+- [x] (Wilkins's modification checked via Alton 2015) Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154. No DOI
 - [ ] Leitch KK, Kay RM, Femino JD, et al. Treatment of multidirectionally unstable supracondylar humeral fractures in children. J Bone Joint Surg Am. 2006;88(5):980-985. doi:10.2106/JBJS.D.02956
 - [ ] Weiss JM, Graves S, Yang S, et al. A new classification system predictive of complications in surgically treated pediatric humeral lateral condyle fractures. J Pediatr Orthop. 2009;29(6):602-605. doi:10.1097/BPO.0b013e3181b2842c
 - [ ] Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436. doi:10.1302/0301-620X.57B4.430
@@ -91,7 +91,7 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 ## 3. Spine CT study
 
 - [ ] Spence KF Jr, Decker S, Sell KW. Bursting atlantal fracture associated with rupture of the transverse ligament. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013 (the 6.9 mm rule)
-- [ ] Anderson LD, D'Alonzo RT. Fractures of the odontoid process of the axis. J Bone Joint Surg Am. 1974;56(8):1663-1674. doi:10.2106/00004623-197456080-00017 (odontoid types)
+- [x] Anderson LD, D'Alonzo RT. Fractures of the odontoid process of the axis. J Bone Joint Surg Am. 1974;56(8):1663-1674. doi:10.2106/00004623-197456080-00017 (odontoid types)
 - [ ] Dickman CA, Greene KA, Sonntag VK. Injuries involving the transverse atlantal ligament. Neurosurgery. 1996;38(1):44-50. doi:10.1097/00006123-199601000-00012
 - [ ] Burlew CC, Biffl WL, Moore EE, et al. Blunt cerebrovascular injuries: redefining screening criteria in the era of noninvasive diagnosis. J Trauma Acute Care Surg. 2012;72(2):330-335. doi:10.1097/TA.0b013e31823de8a0 (expanded Denver criteria)
 - [ ] Genant HK, Wu CY, van Kuijk C, Nevitt MC. Vertebral fracture assessment using a semiquantitative technique. J Bone Miner Res. 1993;8(9):1137-1148. doi:10.1002/jbmr.5650080915
@@ -171,10 +171,10 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 
 ## 11. Suprahyoid neck study
 
-- [ ] Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR. 1991;157(1):147-154. doi:10.2214/ajr.157.1.2048510 (five claims rest on it)
-- [ ] Shin JH, Lee HK, Kim SY, Choi CG, Suh DC. Imaging of parapharyngeal space lesions: focus on the prestyloid compartment. AJR. 2001;177(6):1465-1470. doi:10.2214/ajr.177.6.1771465
+- [x] Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR. 1991;157(1):147-154. doi:10.2214/ajr.157.1.2048510 (five claims rest on it)
+- [x] Shin JH, Lee HK, Kim SY, Choi CG, Suh DC. Imaging of parapharyngeal space lesions: focus on the prestyloid compartment. AJR. 2001;177(6):1465-1470. doi:10.2214/ajr.177.6.1771465
 - [ ] Rao AB, Koeller KK, Adair CF. Paragangliomas of the head and neck: radiologic-pathologic correlation. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605
-- [ ] Hoang JK, Branstetter BF 4th, Eastwood JD, Glastonbury CM. Multiplanar CT and MRI of collections in the retropharyngeal space: is it an abscess? AJR. 2011;196(4):W426-W432. doi:10.2214/AJR.10.5116
+- [x] Hoang JK, Branstetter BF 4th, Eastwood JD, Glastonbury CM. Multiplanar CT and MRI of collections in the retropharyngeal space: is it an abscess? AJR. 2011;196(4):W426-W432. doi:10.2214/AJR.10.5116
 - [ ] Mardini S, Gohel A. Imaging of odontogenic infections. Radiol Clin North Am. 2018;56(1):31-44. doi:10.1016/j.rcl.2017.08.003
 - [ ] Lemierre A. On certain septicaemias due to anaerobic organisms. Lancet. 1936;227(5874):701-703. doi:10.1016/s0140-6736(00)57035-4
 - [ ] Ginsberg LE. Imaging of perineural tumor spread in head and neck cancer. Semin Ultrasound CT MR. 1999;20(3):175-186. doi:10.1016/s0887-2171(99)90018-5
@@ -182,5 +182,5 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 ## Not a paper problem
 
 - Knee cartilage grades (K10-1): the four depth grades come from the modified Noyes and Outerbridge
-  scales, which the knee study does not cite yet. Outerbridge (third batch) turned out to be arthroscopic, not these MRI grades; Recht 2005 in the fourth batch is the candidate.
+  scales, which the knee study does not cite yet. Outerbridge (third batch) turned out to be arthroscopic, not these MRI grades; Recht 2005 (fourth batch) does not give them either; the author to decide.
 - ~~Lichtman stage IIIC~~: settled by Kennedy and Abrams 2019; IIIC is now in the calculator.

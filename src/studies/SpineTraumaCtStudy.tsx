@@ -102,8 +102,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm, which the authors propose as normal values ({ROJAS}). Values of 8.5 mm and 2 mm or more raise the question of craniocervical or atlantoaxial injury.</p>
-        <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). That figure comes from open-mouth radiographs, and the rule can miss ligament injuries that MRI shows directly ({DICKMAN}).</p>
-        <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I through the tip, type II through the base of the dens, type III extending into the body of C2. Then look at the rest of C2, including the pars interarticularis.</p>
+        <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). It is an old rule from open-mouth radiographs, not a validated CT test: use it as a pointer to a ligament injury, and do not take a smaller total as proof the ligament is intact, since the rule misses ruptures that MRI shows directly ({DICKMAN}).</p>
+        <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I an oblique fracture through the upper part of the dens, type II at the junction of the dens with the body of C2, type III through the body of C2. In their series type II fractures were the most prone to non-union. Then look at the rest of C2, including the pars interarticularis.</p>
       </>
     ),
   },
@@ -230,9 +230,9 @@ const fields = {
   c1Overhang: { id: 'c1-overhang', kind: 'number', label: 'Combined lateral mass overhang', unit: 'mm', min: 0, max: 30, step: 0.1, showIf: (v) => cervicalCovered(v) && str(v, 'c1') === 'present', help: 'Both lateral masses of C1 over C2, added together.' },
   dens: { id: 'dens', kind: 'choice', label: 'Odontoid fracture', required: true, showIf: cervicalCovered, options: [
     { value: 'none', label: 'None' },
-    { value: 'I', label: 'Type I: through the tip' },
-    { value: 'II', label: 'Type II: through the base of the dens' },
-    { value: 'III', label: 'Type III: extending into the body of C2' },
+    { value: 'I', label: 'Type I: oblique, through the upper part of the dens' },
+    { value: 'II', label: 'Type II: at the junction of the dens with the body of C2' },
+    { value: 'III', label: 'Type III: through the body of C2' },
   ] },
   c2: { id: 'c2', kind: 'choice', label: 'Other C2 fracture', required: true, showIf: cervicalCovered, options: nonePresent },
   c2Text: { id: 'c2-text', kind: 'text', label: 'C2 fracture (describe)', placeholder: 'e.g. bilateral pars fractures', showIf: (v) => cervicalCovered(v) && str(v, 'c2') === 'present' },
@@ -357,8 +357,8 @@ function deriveCcj(values: Values): Derived[] {
   const overhang = num(values, 'c1-overhang')
   if (str(values, 'c1') === 'present' && overhang !== undefined) {
     out.push(overhang > 6.9
-      ? { label: 'Transverse ligament', value: 'Overhang above 6.9 mm: rupture likely', tone: 'warn' }
-      : { label: 'Transverse ligament', value: 'Overhang within 6.9 mm: the rule can miss a rupture that MRI shows' })
+      ? { label: 'Transverse ligament', value: 'Overhang above 6.9 mm: suggests rupture', tone: 'warn' }
+      : { label: 'Transverse ligament', value: 'Overhang within 6.9 mm: does not rule out a rupture; MRI shows it directly' })
   }
   return out
 }
@@ -631,7 +631,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the 6.9 mm rule of Spence, the odontoid types, the Denver criteria and the Genant grades) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the 6.9 mm rule of Spence, the Denver criteria and the Genant grades) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

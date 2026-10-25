@@ -29,6 +29,7 @@ const RECONDO_DOI = '10.1148/radiographics.20.suppl_1.g00oc02s91'
 const ELIAS_DOI = '10.1148/radiol.2253011578'
 const CARRILLON_DOI = '10.1148/radiology.216.2.r00au07582'
 const CREMA_DOI = '10.1148/rg.311105084'
+const RECHT_DOI = '10.2214/AJR.05.0099'
 const KIJOWSKI_DOI = '10.1148/radiol.2482071234'
 const LECOUVET_DOI = '10.2214/ajr.170.1.9423603'
 const BENCARDINO_DOI = '10.1148/rg.297095036'
@@ -48,6 +49,7 @@ const RECONDO = <Cite doi={RECONDO_DOI}>Recondo et al., Radiographics 2000</Cite
 const ELIAS = <Cite doi={ELIAS_DOI}>Elias et al., Radiology 2002</Cite>
 const CARRILLON = <Cite doi={CARRILLON_DOI}>Carrillon et al., Radiology 2000</Cite>
 const CREMA = <Cite doi={CREMA_DOI}>Crema et al., Radiographics 2011</Cite>
+const RECHT = <Cite doi={RECHT_DOI}>Recht et al., AJR 2005</Cite>
 const KIJOWSKI = <Cite doi={KIJOWSKI_DOI}>Kijowski et al., Radiology 2008</Cite>
 const LECOUVET = <Cite doi={LECOUVET_DOI}>Lecouvet et al., AJR 1998</Cite>
 const BENCARDINO = <Cite doi={BENCARDINO_DOI}>Bencardino et al., Radiographics 2009</Cite>
@@ -69,6 +71,7 @@ const references: LessonReference[] = [
   { citation: 'Elias DA, White LM, Fithian DC. Acute lateral patellar dislocation at MR imaging: injury patterns of medial patellar soft-tissue restraints and osteochondral injuries of the inferomedial patella. Radiology. 2002;225(3):736-743.', doi: ELIAS_DOI },
   { citation: 'Carrillon Y, Abidi H, Dejour D, Fantino O, Moyen B, Tran-Minh VA. Patellar instability: assessment on MR images by measuring the lateral trochlear inclination-initial experience. Radiology. 2000;216(2):582-585.', doi: CARRILLON_DOI },
   { citation: 'Crema MD, Roemer FW, Marra MD, Burstein D, Gold GE, Eckstein F, Baum T, Mosher TJ, Carrino JA, Guermazi A. Articular cartilage in the knee: current MR imaging techniques and applications in clinical practice and research. Radiographics. 2011;31(1):37-61.', doi: CREMA_DOI },
+  { citation: 'Recht MP, Goodwin DW, Winalski CS, White LM. MRI of articular cartilage: revisiting current status and future directions. AJR Am J Roentgenol. 2005;185(4):899-914.', doi: RECHT_DOI },
   { citation: 'Kijowski R, Blankenbaker DG, Shinki K, Fine JP, Graf BK, De Smet AA. Juvenile versus adult osteochondritis dissecans of the knee: appropriate MR imaging criteria for instability. Radiology. 2008;248(2):571-578.', doi: KIJOWSKI_DOI },
   { citation: 'Lecouvet FE, van de Berg BC, Maldague BE, Lebon CJ, Jamart J, Saleh M, Noël H, Malghem J. Early irreversible osteonecrosis versus transient lesions of the femoral condyles: prognostic value of subchondral bone and marrow changes on MR imaging. AJR Am J Roentgenol. 1998;170(1):71-77.', doi: LECOUVET_DOI },
   { citation: 'Bencardino JT, Beltran J, Feldman MI, Rose DJ. MR imaging of complications of anterior cruciate ligament graft reconstruction. Radiographics. 2009;29(7):2115-2126.', doi: BENCARDINO_DOI },
@@ -245,7 +248,7 @@ const learn: LearnSection[] = [
     title: 'Step 10. Cartilage',
     body: (
       <>
-        <p>Go compartment by compartment: patellofemoral, medial and lateral. Describe each lesion by its depth: signal change only, partial thickness under half, partial thickness half or more, or full thickness, and give its site ({CREMA}).</p>
+        <p>Go compartment by compartment: patellofemoral, medial and lateral. Describe each lesion by its depth: signal change only, partial thickness under half, partial thickness half or more, or full thickness, and give its site ({CREMA}). For a traumatic defect, give its location, size and depth, and say whether there is a chondral fragment; if a defect is found, look through the joint for a loose fragment ({RECHT}).</p>
       </>
     ),
   },

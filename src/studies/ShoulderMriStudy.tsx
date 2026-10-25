@@ -22,6 +22,7 @@ const ELLMAN_DOI = '10.1097/00003086-199005000-00010'
 const PATTE_DOI = '10.1097/00003086-199005000-00012'
 const GOUTALLIER_DOI = '10.1097/00003086-199407000-00014'
 const KILCOYNE_DOI = '10.2214/ajr.154.5.2108538'
+const CAROFINO_DOI = '10.1007/s11999-012-2454-9'
 const BI_VERMA_DOI = '10.1097/CORR.0000000000003297'
 const SOMERSON_DOI = '10.1007/s11999-015-4630-1'
 const FUCHS_DOI = '10.1016/s1058-2746(99)90097-6'
@@ -48,6 +49,7 @@ const ELLMAN = <Cite doi={ELLMAN_DOI}>Ellman, Clin Orthop Relat Res 1990</Cite>
 const PATTE = <Cite doi={PATTE_DOI}>Patte, Clin Orthop Relat Res 1990</Cite>
 const GOUTALLIER = <Cite doi={GOUTALLIER_DOI}>Goutallier et al., Clin Orthop Relat Res 1994</Cite>
 const KILCOYNE = <Cite doi={KILCOYNE_DOI}>Kilcoyne et al., AJR 1990</Cite>
+const CAROFINO = <Cite doi={CAROFINO_DOI}>Carofino and Leopold, Clin Orthop Relat Res 2013</Cite>
 const BI_VERMA = <Cite doi={BI_VERMA_DOI}>Bi and Verma, Clin Orthop Relat Res 2025</Cite>
 const SOMERSON = <Cite doi={SOMERSON_DOI}>Somerson et al., Clin Orthop Relat Res 2016</Cite>
 const FUCHS = <Cite doi={FUCHS_DOI}>Fuchs et al., J Shoulder Elbow Surg 1999</Cite>
@@ -75,6 +77,7 @@ const references: LessonReference[] = [
   { citation: 'Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;(254):81-86.', doi: PATTE_DOI },
   { citation: 'Goutallier D, Postel JM, Bernageau J, Lavau L, Voisin MC. Fatty muscle degeneration in cuff ruptures. Pre- and postoperative evaluation by CT scan. Clin Orthop Relat Res. 1994;(304):78-83.', doi: GOUTALLIER_DOI },
   { citation: 'Kilcoyne RF, Shuman WP, Matsen FA 3rd, Morris M, Rockwood CA. The Neer classification of displaced proximal humeral fractures: spectrum of findings on plain radiographs and CT scans. AJR Am J Roentgenol. 1990;154(5):1029-1033.', doi: KILCOYNE_DOI },
+  { citation: 'Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43.', doi: CAROFINO_DOI },
   { citation: 'Bi AS, Verma NN. Classifications in brief: the Ellman and Snyder classifications of partial-thickness rotator cuff tears. Clin Orthop Relat Res. 2025;483(3):411-414.', doi: BI_VERMA_DOI },
   { citation: 'Somerson JS, Hsu JE, Gorbaty JD, Gee AO. Classifications in brief: Goutallier classification of fatty infiltration of the rotator cuff musculature. Clin Orthop Relat Res. 2016;474(5):1328-1332.', doi: SOMERSON_DOI },
   { citation: 'Fuchs B, Weishaupt D, Zanetti M, Hodler J, Gerber C. Fatty degeneration of the muscles of the rotator cuff: assessment by computed tomography versus magnetic resonance imaging. J Shoulder Elbow Surg. 1999;8(6):599-605.', doi: FUCHS_DOI },
@@ -166,7 +169,7 @@ const learn: LearnSection[] = [
           <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process ({RICHARDS}).</p>
         </div>
         <h4>Proximal humerus fracture: Neer</h4>
-        <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}).</p>
+        <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}). Neer later added the valgus-impacted four-part fracture, in which the head is driven down between splayed tuberosities but stays in contact with the glenoid ({CAROFINO}).</p>
         <p>The Neer calculator on this site applies the same rules, and the report step below uses the same code.</p>
       </>
     ),
@@ -1064,7 +1067,7 @@ const study: StudyDefinition = {
   slug: 'shoulder-mri',
   name: 'Shoulder MRI',
   lede: 'Read a shoulder MRI with no history beyond pain: a fixed search pattern through the bones, rotator cuff, biceps, labrum, ligaments, nerves and a repaired cuff, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Neer segments, the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

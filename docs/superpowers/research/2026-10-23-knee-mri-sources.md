@@ -204,3 +204,12 @@ doi:10.1007/s11999.0000000000000255.
 | SZ-4 | yes, reworded | "a medial tibial plateau fracture with a split or depressed component". The author confirmed (2026-10-25) that type IV is not restricted to a split: any isolated medial plateau fracture, split, depressed or both. Wording now "fracture of the medial plateau, split or depressed". |
 | SZ-5 | yes | "a wedge fracture of the medial and lateral tibial plateau, often with an inverted 'Y' appearance"; distinguished from VI "by the maintenance of metaphyseal-diaphyseal continuity". |
 | K10-1 | still no source | Outerbridge is an arthroscopic grading (softening and swelling; fissuring by diameter; exposed subchondral bone), not the MRI depth grades the study uses (signal change, under half, half or more, full thickness). As the author noted, the depth grades are a modified MRI system that needs its own citation; the candidate is Recht MP, Goodwin DW, Winalski CS, White LM. MRI of articular cartilage: revisiting current status and future directions. AJR. 2005;185(4):899-914. doi:10.2214/AJR.05.0099 (abstract does not state the grades; on the fourth batch). |
+
+## Fifth check, 2026-10-25: fourth batch from the author
+
+Read in full: Recht 2005 (now K-R, cited in the study). It does not give the four depth grades either:
+it says only that a traumatic cartilage lesion's "description should include the location, size, and
+depth of the lesion and the presence or absence of associated chondral fragments", and that a defect
+"should prompt careful inspection of the joint for a displaced intraarticular chondral body". That
+sentence is now in the cartilage step, cited to Recht. K10-1 (the under-half / half-or-more split)
+still has no source: for the author.

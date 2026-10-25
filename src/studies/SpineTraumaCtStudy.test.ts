@@ -145,8 +145,10 @@ describe('spine trauma CT rules (unchecked)', () => {
   // T2-3: the rule can miss ruptures that MRI shows.
   test('C1 lateral mass overhang at 6.9 mm', () => {
     const overhang = (mm: string) => chips(study, 'ccj', { coverage: 'cervical', c1: 'present', 'c1-overhang': mm })['Transverse ligament']
-    expect(overhang('7')).toBe('Overhang above 6.9 mm: rupture likely')
-    expect(overhang('6.9')).toBe('Overhang within 6.9 mm: the rule can miss a rupture that MRI shows')
+    // "Rupture likely" claimed more than the rule's own "suggested"; and a total within 6.9 mm
+    // must not read as reassurance, since the rule misses ruptures MRI shows (Dickman).
+    expect(overhang('7')).toBe('Overhang above 6.9 mm: suggests rupture')
+    expect(overhang('6.9')).toBe('Overhang within 6.9 mm: does not rule out a rupture; MRI shows it directly')
     expect(impressionOf({ ...normal, c1: 'present', 'c1-overhang': '8' }).split('\n')[0]).toBe('C1 fracture, with combined lateral mass overhang of 8 mm suggesting transverse ligament rupture.')
   })
 

@@ -17,10 +17,11 @@ const timingOptions: { value: Timing; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 const typeOption = (type: HerbertType) => ({ value: type, label: `${type}: ${herbertDescriptions[type]}` })
 
-const acuteOptions = (['A1', 'A2', 'B1', 'B2', 'B3', 'B4'] as HerbertType[]).map(typeOption)
+const acuteOptions = (['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5'] as HerbertType[]).map(typeOption)
 const nonunionOptions = (['D1', 'D2'] as HerbertType[]).map(typeOption)
 
 const references: LessonReference[] = [
+  { citation: 'Dráč P, Kastelec M, Suarez FA. Classifications for fractures of carpal bones: Herbert classification for scaphoid fractures. AO Surgery Reference (surgeryreference.aofoundation.org), AO Foundation; accessed 2026-10-25.' },
   { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: '10.1302/0301-620X.66B1.6693468' },
 ]
 
@@ -45,7 +46,7 @@ export function HerbertPage() {
           <span className="calc-tag">Scaphoid</span>
         </div>
         <p>Type a scaphoid fracture as stable, unstable, delayed union or non-union, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract names only acute unstable fractures, delayed healing and established non-union, so the wording of each type has not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
+        <p className="source-note">Unchecked draft: the 1984 paper is paywalled, so the types are checked against AO Surgery Reference's Herbert classification page, which follows Herbert's 1990 book and includes B5, a comminuted fracture. Not yet reviewed by the site author. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -88,7 +89,7 @@ export function HerbertPage() {
         <p>Later versions add a comminuted type (B5); this page keeps to the original types until the paper is checked.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the type wording has been checked only where the abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1984 paper is paywalled; the types follow AO Surgery Reference's Herbert page." />
     </div>
   )
 }

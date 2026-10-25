@@ -75,13 +75,13 @@ export function NeerPage() {
           <span className="calc-tag">Proximal humerus</span>
         </div>
         <p>Counts the displaced segments of a proximal humerus fracture and gives the Neer type with copyable report text. Usually applied on radiographs and CT.</p>
-        <p className="source-note">Unchecked draft: Neer's paper has no abstract and is paywalled, so the 1 cm and 45 degree thresholds, the shaft counting as a part and the named two-, three- and four-part patterns are checked against a pictorial review of his classification (<Cite doi="10.2214/ajr.154.5.2108538">Kilcoyne et al., AJR 1990</Cite>); the rest is not yet checked. Not yet reviewed by the site author. Source: <Cite doi="10.2106/00004623-197052060-00001">Neer CS 2nd, Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am 1970</Cite>.</p>
+        <p className="source-note">Unchecked draft: Neer's paper has no abstract and is paywalled, so the 1 cm and 45 degree thresholds, the shaft counting as a part and the named two-, three- and four-part patterns and the four segments, one-part fractures, dislocations and articular surface fractures are checked against two reviews of his classification (<Cite doi="10.2214/ajr.154.5.2108538">Kilcoyne et al., AJR 1990</Cite>; <Cite doi="10.1007/s11999-012-2454-9">Carofino and Leopold, Clin Orthop Relat Res 2013</Cite>). Not yet reviewed by the site author. Source: <Cite doi="10.2106/00004623-197052060-00001">Neer CS 2nd, Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am 1970</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Fracture lines</h3>
-          <p>A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Exactly 1 cm or 45° is not displaced.</p>
+          <p>A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Exactly 1 cm or 45° is not displaced. In 2002 Neer added the valgus-impacted four-part fracture: the head is tilted into valgus and driven down between the splayed tuberosities but stays in contact with the glenoid, unlike the classic four-part fracture, and it has a better outlook. Name it in the report when you see it.</p>
           <div className="form-grid">
             {NEER_LINES.map((line) => (
               <div key={line} className="form-grid">

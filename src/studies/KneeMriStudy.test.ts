@@ -25,7 +25,8 @@ describe('knee MRI lesson', () => {
   // DOI for it and Crossref finds none, so it is cited without one.
   test('is still marked as an unchecked draft, with a DOI on every reference but Schatzker 1979', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(19)
+    // 20 since Recht 2005 was added for describing a cartilage defect.
+    expect(study.references).toHaveLength(20)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Schatzker J, McBroom R, Bruce D.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)

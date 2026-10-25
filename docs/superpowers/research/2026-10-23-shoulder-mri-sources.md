@@ -205,3 +205,17 @@ the Ellman and Snyder classifications of partial-thickness rotator cuff tears. C
 | S3-1 | yes | "three types of partial tears (A, articular-sided; B, bursal-sided; and C, interstitial or intratendinous tears) ... Grade 1, < 3 mm deep; Grade 2, 3 to 6 mm deep; and Grade 3, > 6 mm deep". |
 | S3-3 | yes | Table 1: "Completely normal muscle, without any fatty streak"; "Muscle contains some fatty streaks"; "more muscle than fat"; "Equal amounts of fat and muscle"; "More fat than muscle is present". |
 | S6-1 | no | The "Snyder" in Bi and Verma is his partial cuff tear grading, not the SLAP types. Still unchecked. |
+
+## Fifth check, 2026-10-25: fourth batch from the author
+
+Read in full: Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal
+humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| N1 | yes | "all proximal humerus fractures were composed of four major segments: the lesser tuberosity, greater tuberosity, articular surface, and humeral shaft". |
+| N2 | yes | "A segment is defined as displaced if there is greater than 1 cm separation or 45° angulation." Exactly 45° is still read as not displaced. |
+| N3 | yes | "a fracture with no fragments considered displaced is defined as a one-part fracture regardless of the actual number of fracture lines or their location". |
+| N4 | yes | Two-part: one segment displaced; three-part: "one tuberosity is displaced and the surgical neck fracture is displaced"; four-part: "All four segments ... meet criteria for displacement". |
+| N5 | yes | Fracture-dislocations, and articular surface injuries in "two varieties, head-splitting fractures and impaction fractures". |
+| N6 | consistent | The only later pattern is "the valgus impacted four-part fracture category in 2002": "the head is rotated into a valgus posture and driven down between the tuberosities ... the articular surface maintains contact with the glenoid". Now described on the Neer page and in the study; the calculator does not code it separately. |

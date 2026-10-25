@@ -418,7 +418,16 @@ document. Where the site differed, the author chose the newer source, and these 
 - [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
-- [ ] The fourth batch is listed in `docs/PAPERS_NEEDED.md`.
+- [ ] Still pending: Broberg and Morrey 1987, Khurana 2014, Rao 1999, Spence 1970 (`docs/PAPERS_NEEDED.md`).
+- [ ] Knee cartilage depth grades (under half / half or more): neither Outerbridge nor Recht gives them.
+  For the author: name a source, or drop the half split.
+
+Fourth batch, the same day: Neer review, AO Surgery Reference's Herbert page, Recht, Shin, Hoang,
+Anderson and D'Alonzo ("Fifth check" sections). Changed: Herbert gains B5 (comminuted); Neer's
+valgus-impacted four-part fracture is described; the carotid "forward and inward" sign is back, from
+Shin; retropharyngeal edema has "only mild" mass effect and an abscess "usually" a thick wall, with a
+suppurative node option (Hoang); odontoid types in Anderson's words; the 6.9 mm rule no longer
+reassures below the threshold.
 
 Third batch, the same day: AO Spine's subaxial poster, Markhardt, Harnsberger and Osborn, Iyer, and the
 Outerbridge and scaphoid reviews ("Fourth check" sections). Changed:
