@@ -344,8 +344,14 @@ every claim read before it went in; the table is
 The author asked (2026-10-25) for every calculator's copy boxes to be the standard report sections
 (done: see CLAUDE.md, "Copy boxes") and for every guideline follow-up interval to be in the
 calculators, checked against the guideline. The guidelines' full text is paywalled or on hosts
-this environment cannot reach (acr.org, pubs.rsna.org, jacr.org, escholarship.org,
-spiral.imperial.ac.uk), so the check is still to do. Done so far: the pancreatic cyst calculator
+this environment cannot reach, so the check is still to do. Tested 2026-10-25 after the author
+allowed www.acr.org, pubs.rsna.org, www.jacr.org, escholarship.org and spiral.imperial.ac.uk:
+acr.org's pages load, but its PDFs are served from `edge.sitecorecloud.io` and `files.acr.org`,
+which the environment still blocks (those two would unlock TI-RADS, Lung-RADS, LI-RADS and
+O-RADS US). pubs.rsna.org and jacr.org answer with a Cloudflare bot check and escholarship.org
+with a CloudFront 403, so Fleischner, Bosniak, the SRU adnexal paper, Doubilet (NEJM) and the
+three JACR white papers need the author's PDFs. Bosniak 2019 is in PubMed Central
+(PMC6677285), but efetch gives only the abstract and the PMC page shows a reCAPTCHA. Done so far: the pancreatic cyst calculator
 and the incidental page's pancreatic cyst tool now use the pancreatic cysts study's ACR 2017
 intervals, and LI-RADS and O-RADS now show their recommendation in a copy box.
 
@@ -357,6 +363,9 @@ intervals, and LI-RADS and O-RADS now show their recommendation in a copy box.
 - [ ] LI-RADS v2018: LR-1 and LR-2 surveillance in 6 months, LR-3 3-6 months, LR-NC 3 months or
   less. Check against the v2018 core.
 - [ ] SRU simple adnexal cysts 2019: the intervals in the page's table. Check against Levine 2019.
+  The abstract (PMID 31549945) matches the page's thresholds (postmenopausal: report over 1 cm,
+  follow up over 3-5 cm; premenopausal: 3 cm and over 5-7 cm) and the 2-year follow-up for a
+  cyst stable at first follow-up; the 3-6 and 6-12 month intervals need the full text.
 - [ ] Early pregnancy loss: the page says follow-up ultrasound in 7 to 14 days for suspicious
   findings; Doubilet 2013 may say 7 to 10 days. Check against the paper before changing.
 - [ ] O-RADS US 2020: categories 2 and 3 say only "depends on size and menopausal status" and
