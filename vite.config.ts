@@ -50,7 +50,7 @@ export default defineConfig({
         // navigation, so without this the service worker would serve the React shell
         // inside the frame instead of the viewer.
         navigateFallbackDenylist: [/^\/anatomy\//],
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,jpg,ico,woff2}'],
         // Online-only viewers: together they would add ~8 MB to every install, so
         // they load from the network and are not available offline.
         globIgnores: ['anatomy/online/**'],

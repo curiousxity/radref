@@ -101,6 +101,12 @@ export const categories: CalculatorCategory[] = [
     ],
   },
   {
+    name: 'Neuro',
+    items: [
+      { path: '/calvarium', name: 'Calvarial lesions', related: ['/studies/skull-base'], description: 'Skull vault lesions compared, with drawings and CT: normal variants, lucent holes and dense bone, and how to tell them apart.', keywords: ['calvarium', 'calvarial', 'skull', 'skull vault', 'lytic', 'sclerotic', 'arachnoid granulation', 'venous lake', 'parietal foramina', 'hyperostosis frontalis interna', 'burr hole', 'epidermoid', 'dermoid', 'hemangioma', 'venous malformation', 'langerhans cell histiocytosis', 'eosinophilic granuloma', 'bevelled edge', 'metastasis', 'myeloma', 'punched out', 'osteomyelitis', 'pott puffy tumour', 'osteoma', 'fibrous dysplasia', 'ground glass', 'paget', 'meningioma', 'hyperostosis', 'neuro', 'head'], component: lazyPage(() => import('../pages/CalvariumPage'), 'CalvariumPage') },
+    ],
+  },
+  {
     name: 'Neck',
     items: [
       { path: '/tirads', tag: 'ACR 2017', name: 'TI-RADS', description: 'Thyroid nodule scoring, description, and report-ready impression.', keywords: ['thyroid', 'nodule', 'neck', 'acr'], component: lazyPage(() => import('../pages/TiradsPage'), 'TiradsPage') },

@@ -379,6 +379,19 @@ Questions found in the check, decided by the author on 2026-10-25 (all "match th
   cyst), and a new "irregular inner wall" input makes a unilocular cyst 3 and a bilocular or
   multilocular one 4.
 
+## Calvarial lesions page
+
+Written on 2026-10-25 (`/calvarium`) from three open-access CC BY 4.0 sources read in full: Gomez
+et al., Insights Imaging 2018 (doi:10.1007/s13244-018-0643-0); Pons Escoda et al., Insights Imaging
+2020 (doi:10.1186/s13244-019-0820-9); Sideris et al., Brain Sci 2023 (doi:10.3390/brainsci13040587).
+Every statement on the cards is from those texts, cited inline; the scans are single panels cropped
+from Gomez's and Pons Escoda's figures (fetched with the Europe PMC supplementary-files API, since
+the PMC pages show a reCAPTCHA and Springer's image host is blocked), each credited with its figure.
+Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page gives both.
+
+- [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
+- [ ] No open image for a burr hole or osteomyelitis yet; both have drawings only.
+
 ## Housekeeping
 
 - Delete the `design-update` branch and the `radref-design` worktree
