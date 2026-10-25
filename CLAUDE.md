@@ -367,7 +367,7 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI (both unchecked drafts,
+FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI, skull base MRI and CT (all three unchecked drafts,
 below). Drafted from the guidelines (ankle MRI from the published
 papers in its reference list) rather than from the site author's
 notes, and labelled as unreviewed drafts in their source note until the author signs
@@ -416,8 +416,11 @@ read in an abstract or open full text before it went in
 (`docs/superpowers/research/2026-10-25-larynx-sources.md`); the T4a cartilage wording was checked
 later that day against Joshi's AJCC table, which differed for subglottic tumours (matched to the
 paper by the author's choice). Its source note still starts "Unchecked draft" only because the
-author has not reviewed it. Also on the branch only. The skull base study follows, written the
-same way. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+author has not reviewed it. Also on the branch only. The skull base study (`/studies/skull-base`:
+MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base mass) was written
+the same way the same day (`docs/superpowers/research/2026-10-25-skull-base-sources.md`); Russo
+1997, Nemzek 1998 and Eldevik 2000 have no DOI. Its note starts "Unchecked draft" only because the
+author has not reviewed it. Also on the branch only. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
 `doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
 and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
 Europe PMC API on `www.ebi.ac.uk`.

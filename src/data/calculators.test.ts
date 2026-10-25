@@ -90,6 +90,11 @@ describe('registry', () => {
     expect(relatedTo('/studies/larynx').map((item) => item.path)).toContain('/larynx')
   })
 
+  test('the skull base study links to the 3D skull base, both ways', () => {
+    expect(relatedTo('/skull-base').map((item) => item.path)).toContain('/studies/skull-base')
+    expect(relatedTo('/studies/skull-base').map((item) => item.path)).toContain('/skull-base')
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')

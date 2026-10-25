@@ -81,7 +81,11 @@ region at a time, end to end, following the ankle pilot
   says to merge. Every claim is now checked (the T4a wording on 2026-10-25, from Joshi's AJCC
   table); done once the author signs it off.
 - [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
-  mass (the author's choice, 2026-10-25). Not started.
+  mass (the author's choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable,
+  every claim read in an abstract or open full text (`/studies/skull-base`); spec
+  `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
+  `docs/superpowers/research/2026-10-25-skull-base-sources.md`. On the branch only until the
+  author says to merge. Done once the author signs it off.
 - [ ] Decide whether the brachial plexus viewer gets a study.
 
 For each region, ask first which exam the study covers and what history usually comes
