@@ -76,19 +76,23 @@ const TR5 = { composition: 'solid' as const, echogenicity: 'hypoechoic' as const
 describe('ACR TI-RADS: FNA and follow-up thresholds', () => {
   // TR3: FNA if >= 2.5 cm, follow if >= 1.5 cm. TR4: FNA if >= 1.5 cm, follow if >= 1 cm.
   // TR5: FNA if >= 1 cm, follow if >= 0.5 cm. TR1 and TR2: no FNA.
+  // The ACR reporting template gives follow-up only below the FNA size ("follow-up if 1.5 - 2.4 cm"
+  // for TR3, "1 - 1.4 cm" for TR4, "0.5 - 0.9 cm" for TR5). The calculator also offered follow-up
+  // at the FNA size ("If observed instead ..."), which the template does not say, so those cases
+  // expected follow-up true; the author chose to remove it on 2026-10-25.
   it.each([
     ['TR3', TR3, '1.4', false, false],
     ['TR3', TR3, '1.5', true, false],
     ['TR3', TR3, '2.4', true, false],
-    ['TR3', TR3, '2.5', true, true],
+    ['TR3', TR3, '2.5', false, true],
     ['TR4', TR4, '0.9', false, false],
     ['TR4', TR4, '1.0', true, false],
     ['TR4', TR4, '1.4', true, false],
-    ['TR4', TR4, '1.5', true, true],
+    ['TR4', TR4, '1.5', false, true],
     ['TR5', TR5, '0.4', false, false],
     ['TR5', TR5, '0.5', true, false],
     ['TR5', TR5, '0.9', true, false],
-    ['TR5', TR5, '1.0', true, true],
+    ['TR5', TR5, '1.0', false, true],
     ['TR1', {}, '5.0', false, false],
     ['TR2', { composition: 'solid' as const }, '5.0', false, false],
   ])('%s at %s cm: follow-up %s, FNA %s', (_level, over, sizeCm, followUp, fna) => {
@@ -120,7 +124,7 @@ describe('ACR TI-RADS: FNA and follow-up thresholds', () => {
   it('keeps the recommendation out of the impression', () => {
     const r = run({ ...TR5, sizeCm: '1.2' })
     expect(r.impression).toBe('thyroid nodule is classified as ACR TI-RADS TR5 (7 points).')
-    expect(r.recommendation).toMatch(/^FNA is recommended/)
+    expect(r.recommendation).toBe('FNA is recommended.')
   })
 })
 

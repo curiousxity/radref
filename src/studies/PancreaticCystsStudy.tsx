@@ -1,5 +1,5 @@
 import { CopyBlock } from '../components/CopyBlock'
-import { PER_ACR, acrSurveillance } from '../logic/pancreaticCyst'
+import { CHART3_LOW_RISK, PER_ACR, acrSurveillance } from '../logic/pancreaticCyst'
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
@@ -301,8 +301,9 @@ function acrRecommendation(v: Values, f: Features, warnings: string[]): string {
   // The surveillance intervals themselves are shared with the calculator (src/logic/pancreaticCyst.ts).
   const communication = str(v, 'comm') === 'present' ? 'present' : 'absentOrUnknown'
   if (age !== undefined && age >= 80) {
-    // An unstated size takes Chart 4's general sentence, as for a cyst over 2.5 cm.
-    return acrSurveillance(size ?? 26, '80plus', communication)
+    // An unstated size takes Chart 4's general sentence.
+    if (size === undefined) return `Follow-up or EUS/FNA advised only if the patient is a surgical candidate, ${PER_ACR} (Chart 4).`
+    return acrSurveillance(size, '80plus', communication)
   }
   if (size === undefined) return ''
 
@@ -331,7 +332,7 @@ function acrRecommendation(v: Values, f: Features, warnings: string[]): string {
     str(v, 'calc') === '' && 'calcification',
   ].filter((item): item is string => Boolean(item))
   if (unknown.length === 0) {
-    return `Low-risk by imaging (no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification): careful follow-up, or EUS/FNA at detection, ${PER_ACR} (Chart 3).`
+    return `Low-risk by imaging (no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification): ${CHART3_LOW_RISK}, or EUS/FNA at detection, ${PER_ACR} (Chart 3).`
   }
   warnings.push(`ACR Chart 3 risk not established (${unknown.join(', ')}): low-risk needs no mural nodule, no wall thickening, a normal-caliber duct and no peripheral calcification.`)
   return acrSurveillance(size, age !== undefined && age < 65 ? 'under65' : '65to79', communication)
@@ -909,7 +910,7 @@ const learn: LearnSection[] = [
         <p><strong>Cysts under 1.5 cm (Chart 1)</strong></p>
         <ul className="plain-list">
           <li>Under 65 at presentation: image yearly for 5 years, then every 2 years for 2 more; stop if stable over a minimum of 9 years.</li>
-          <li>Age 65–79: image every 2 years for 5 rounds; stop if still under 1.5 cm over 10 years.</li>
+          <li>Age 65–79: image every 2 years for 5 rounds; stop if stable over 10 years.</li>
           <li>"White dot" cysts (&lt;5 mm on T2): a single follow-up at 2 years showing stability is enough to stop; some radiologists don't report these at all in patients over 75–80.</li>
           <li>If it grows: move up in frequency (yearly) or go to EUS/FNA. If it reaches 1.5 cm, switch to Chart 2.</li>
         </ul>
@@ -923,12 +924,12 @@ const learn: LearnSection[] = [
         <ul className="plain-list">
           <li>Many centers do EUS/FNA on every cyst this size at detection.</li>
           <li>Sort by imaging risk. Low-risk = no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification; high-risk = any of mural nodule, wall thickening, MPD ≥7 mm, or peripheral calcification.</li>
-          <li>Low-risk cysts can be carefully followed, even if 3 cm or more; high-risk cysts go immediately to EUS/FNA and surgical evaluation.</li>
+          <li>Low-risk cysts can be carefully followed, even if 3 cm or more: image every 6 months for 2 years; if stable, yearly for 2 years, then every 2 years for 3 rounds; stop if stable over 10 years. High-risk cysts go immediately to EUS/FNA and surgical evaluation.</li>
           <li>Confident SCA: follow-up depends on symptoms; an SCA over 4 cm or symptomatic may need resection because of expected growth.</li>
         </ul>
         <p><strong>Patients 80 or older at presentation (Chart 4)</strong></p>
         <ul className="plain-list">
-          <li>Follow-up or EUS/FNA is advised only if the patient is a surgical candidate; ≤2.5 cm → image every 2 years twice and stop if stable.</li>
+          <li>Follow-up or EUS/FNA is advised only if the patient is a surgical candidate; ≤2.5 cm → image every 2 years twice and stop if stable. Over 2.5 cm: a low-risk cyst is also imaged every 2 years twice, stopping if stable; a high-risk cyst goes to EUS/FNA and surgical consultation.</li>
           <li>Follow-up generally stops once a patient reaches 80, and for most patients the ACR advocates a 9–10-year follow-up window.</li>
         </ul>
         <div className="lesson-key">

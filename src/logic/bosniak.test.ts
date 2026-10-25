@@ -116,3 +116,16 @@ describe('Bosniak 2019: impression and recommendation are separate', () => {
     expect(r.management).toBe('Bosniak IIF masses are generally followed by imaging at 6 months and 12 months, then annually for a total of 5 years, to assess for morphologic change, per Bosniak v2019.')
   })
 })
+
+// Silverman 2019, Table 4's suggested phrases: Bosniak III "have an intermediate probability of
+// being malignant. If not already obtained, consider urology consultation."; Bosniak IV "The large
+// majority of Bosniak IV masses are malignant. If not already obtained, consider urology
+// consultation." The calculator had its own wording; the author chose the paper's on 2026-10-25.
+describe('Bosniak 2019: Table 4 recommendation phrases', () => {
+  it('III', () => {
+    expect(classify({ ...initialBosniakForm, ...enh, wallThickness: 'thick' }).management).toBe('Bosniak III masses have an intermediate probability of being malignant. If not already obtained, consider urology consultation.')
+  })
+  it('IV', () => {
+    expect(classify({ ...initialBosniakForm, ...enh, enhancingNodule: 'nodule' }).management).toBe('The large majority of Bosniak IV masses are malignant. If not already obtained, consider urology consultation.')
+  })
+})

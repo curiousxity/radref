@@ -8,26 +8,33 @@
 export const PER_ACR = 'per ACR 2017 incidental pancreatic cyst recommendations'
 export const ACR_IMAGING = 'Contrast-enhanced MRI or pancreas-protocol CT'
 
+/**
+ * Chart 3, low risk by imaging (Megibow 2017, Fig. 3): "Reimage q6mos x 4"; "Stable over initial 2
+ * years: Reimage q1y x 2, then q2y x 3"; "STOP if stable over 10 years".
+ */
+export const CHART3_LOW_RISK = `${ACR_IMAGING} every 6 months for 2 years; if stable, yearly for 2 years, then every 2 years for 3 rounds, stopping if stable over 10 years`
+
 export type AcrAgeBand = 'under65' | '65to79' | '80plus'
 /** Main pancreatic duct communication: 'present' is Chart 2A, anything else Chart 2B. */
 export type AcrCommunication = 'present' | 'absentOrUnknown'
 
 /**
  * The follow-up for a cyst of this size (largest diameter in mm), age band and duct
- * communication. A cyst over 2.5 cm gets Chart 3's general advice, since its low-risk test needs
- * the wall, mural nodule, duct calibre and calcification.
+ * communication. A cyst over 2.5 cm gets Chart 3's (or Chart 4's) schedule for a low-risk cyst,
+ * stated as conditional, since the low-risk test needs the wall, mural nodule, duct calibre and
+ * calcification.
  */
 export function acrSurveillance(sizeMm: number, age: AcrAgeBand, communication: AcrCommunication): string {
   if (age === '80plus') {
     if (sizeMm < 5) return `White-dot cyst in a patient 80 or older: follow-up only if the patient would be a surgical candidate, and then a single follow-up at 2 years at most, ${PER_ACR}.`
     return sizeMm <= 25
       ? `Follow-up or EUS/FNA only if the patient is a surgical candidate; if so, imaging every 2 years twice, stopping if stable, ${PER_ACR} (Chart 4).`
-      : `Follow-up or EUS/FNA advised only if the patient is a surgical candidate, ${PER_ACR} (Chart 4).`
+      : `Follow-up or EUS/FNA only if the patient is a surgical candidate; if so, a low-risk cyst over 2.5 cm is imaged every 2 years twice, stopping if stable, and a high-risk cyst goes to EUS/FNA and surgical consultation, ${PER_ACR} (Chart 4).`
   }
   if (sizeMm < 15) {
     if (sizeMm < 5) return `Single follow-up at 2 years; stop if stable, ${PER_ACR} (Chart 1, white-dot cyst).`
     if (age === 'under65') return `${ACR_IMAGING} yearly for 5 years, then every 2 years for 2 more; stop if stable over a minimum of 9 years, ${PER_ACR} (Chart 1).`
-    return `${ACR_IMAGING} every 2 years for 5 rounds; stop if still under 1.5 cm over 10 years, ${PER_ACR} (Chart 1).`
+    return `${ACR_IMAGING} every 2 years for 5 rounds; stop if stable over 10 years, ${PER_ACR} (Chart 1).`
   }
   if (sizeMm <= 25) {
     if (communication === 'present') {
@@ -37,7 +44,7 @@ export function acrSurveillance(sizeMm: number, age: AcrAgeBand, communication: 
     }
     return `${ACR_IMAGING} every 6 months for 2 years, then yearly for 2, then every 2 years for 3 rounds, or EUS/FNA to establish whether it is mucinous, ${PER_ACR} (Chart 2B).`
   }
-  return `Cyst over 2.5 cm: low-risk cysts can be carefully followed and high-risk cysts go to EUS/FNA and surgical evaluation; EUS/FNA at detection is an option, ${PER_ACR} (Chart 3).`
+  return `Cyst over 2.5 cm: if low risk by imaging, ${CHART3_LOW_RISK}; a high-risk cyst goes to EUS/FNA and surgical evaluation. EUS/FNA at detection is an option, ${PER_ACR} (Chart 3).`
 }
 
 /* The pancreatic cyst calculator. */

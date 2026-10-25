@@ -98,6 +98,12 @@ function getCategory(points: number): TiradsResult['category'] {
   return 'TR5'
 }
 
+/*
+ * The ACR TI-RADS reporting template: "TR5 (≥7 points) - FNA if ≥ 1cm, follow-up if 0.5 - 0.9 cm
+ * every year for 5 years; TR4 (4-6 points) - FNA if ≥ 1.5cm, follow-up if 1 - 1.4 cm in 1, 2, 3 and
+ * 5 years; TR3 (3 points) - FNA if ≥ 2.5cm, follow-up if 1.5 - 2.4 cm in 1, 3 and 5 years". Follow-up
+ * belongs to the band below the FNA threshold only.
+ */
 function getRecommendation(category: TiradsResult['category'], sizeCm: number) {
   if (sizeCm > 0 && sizeCm < 0.5) {
     return { recommendation: 'No FNA or follow-up is recommended for nodules smaller than 5 mm, even if highly suspicious.', followUp: false, fna: false }
@@ -111,16 +117,16 @@ function getRecommendation(category: TiradsResult['category'], sizeCm: number) {
     return { recommendation: 'Enter the maximum size to apply the FNA and follow-up thresholds.', followUp: false, fna: false }
   }
   if (category === 'TR3') {
-    if (sizeCm >= 2.5) return { recommendation: 'FNA is recommended. Ultrasound follow-up may also be considered.', followUp: true, fna: true }
+    if (sizeCm >= 2.5) return { recommendation: 'FNA is recommended.', followUp: false, fna: true }
     if (sizeCm >= 1.5) return { recommendation: 'Follow-up ultrasound is recommended at 1, 3, and 5 years. FNA threshold is 2.5 cm.', followUp: true, fna: false }
     return { recommendation: 'No FNA or follow-up recommended at the current size.', followUp: false, fna: false }
   }
   if (category === 'TR4') {
-    if (sizeCm >= 1.5) return { recommendation: 'FNA is recommended. If observed instead, follow-up ultrasound is typically at 1, 2, 3, and 5 years.', followUp: true, fna: true }
+    if (sizeCm >= 1.5) return { recommendation: 'FNA is recommended.', followUp: false, fna: true }
     if (sizeCm >= 1.0) return { recommendation: 'Follow-up ultrasound is recommended at 1, 2, 3, and 5 years. FNA threshold is 1.5 cm.', followUp: true, fna: false }
     return { recommendation: 'No FNA or follow-up recommended at the current size.', followUp: false, fna: false }
   }
-  if (sizeCm >= 1.0) return { recommendation: 'FNA is recommended. If observed, annual follow-up for up to 5 years is generally advised.', followUp: true, fna: true }
+  if (sizeCm >= 1.0) return { recommendation: 'FNA is recommended.', followUp: false, fna: true }
   if (sizeCm >= 0.5) return { recommendation: 'Follow-up ultrasound is recommended annually for up to 5 years. FNA threshold is 1.0 cm.', followUp: true, fna: false }
   return { recommendation: 'No FNA or follow-up recommended at the current size.', followUp: false, fna: false }
 }

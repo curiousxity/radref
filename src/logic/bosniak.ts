@@ -44,7 +44,7 @@ export function classify(form: BosniakForm): BosniakResult {
     return {
       category: 'Bosniak IV',
       reason: 'Enhancing nodules are Bosniak IV.',
-      management: 'Urologic referral and definitive management should be considered.',
+      management: 'The large majority of Bosniak IV masses are malignant. If not already obtained, consider urology consultation.',
       impression: 'Cystic renal mass contains an enhancing nodule, compatible with Bosniak IV.',
     }
   }
@@ -53,7 +53,7 @@ export function classify(form: BosniakForm): BosniakResult {
     return {
       category: 'Bosniak III',
       reason: 'Enhancing thick wall/septa or enhancing irregularity corresponds to Bosniak III.',
-      management: 'Urologic consultation and individualized management should be considered.',
+      management: 'Bosniak III masses have an intermediate probability of being malignant. If not already obtained, consider urology consultation.',
       impression: 'Cystic renal mass demonstrates enhancing thickened and/or irregular wall or septa, compatible with Bosniak III.',
     }
   }

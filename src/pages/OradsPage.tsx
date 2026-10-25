@@ -15,6 +15,7 @@ const initialForm: OradsForm = {
   papillaryProjections: 0,
   locules: 1,
   smoothContour: true,
+  irregularWall: false,
   ascites: false,
   peritonealDisease: false,
   colorScore: '1',
@@ -62,7 +63,7 @@ export function OradsPage() {
             <label><span>Size (cm)</span><input type="number" min="0" step="0.1" inputMode="decimal" value={form.sizeCm} onChange={(e) => updateField('sizeCm', e.target.value)} placeholder="e.g. 3.2" /></label>
             <label>
               <span className="term">Morphology<Definition text="The lesion's overall ultrasound/MRI structure — for example a simple cyst, a unilocular cyst with a solid or papillary component, a multilocular cyst, or a solid mass — which drives the O-RADS risk category." /></span>
-              <select value={form.cystType} onChange={(e) => updateField('cystType', e.target.value as OradsForm['cystType'])}><option value="simple">Simple cyst</option><option value="nonsimple">Nonsimple unilocular cyst</option><option value="solid">Solid lesion</option><option value="classicBenign">Classic benign lesion</option><option value="multilocular">Multilocular lesion</option><option value="indeterminate">Indeterminate lesion</option></select>
+              <select value={form.cystType} onChange={(e) => updateField('cystType', e.target.value as OradsForm['cystType'])}><option value="simple">Simple cyst</option><option value="nonsimple">Nonsimple unilocular cyst</option><option value="solid">Solid lesion</option><option value="classicBenign">Classic benign lesion</option><option value="multilocular">Bilocular or multilocular cyst</option><option value="indeterminate">Indeterminate lesion</option></select>
             </label>
             {isUs && form.cystType === 'classicBenign' && (
               <label>
@@ -84,8 +85,14 @@ export function OradsPage() {
             )}
             {isUs && (
               <label>
-                <span className="term">Locules<Definition text="The number of fluid-filled compartments within a cystic lesion, separated by septations." /></span>
+                <span className="term">Locules<Definition text="The number of fluid-filled compartments within a cystic lesion, separated by septations: 2 is bilocular, 3 or more multilocular." /></span>
                 <input type="number" min="1" step="1" value={form.locules} onChange={(e) => updateField('locules', Number(e.target.value))} />
+              </label>
+            )}
+            {isUs && (form.cystType === 'nonsimple' || form.cystType === 'multilocular') && (
+              <label className="check-row">
+                <input type="checkbox" checked={form.irregularWall} onChange={(e) => updateField('irregularWall', e.target.checked)} />
+                <span className="term">Irregular inner wall<Definition text="An irregular inner wall or septation, under 3 mm high (3 mm or more counts as a solid component). An irregular unilocular cyst is O-RADS 3; an irregular bilocular or multilocular cyst is O-RADS 4." /></span>
               </label>
             )}
             {isUs && form.cystType === 'solid' && (

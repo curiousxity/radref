@@ -120,6 +120,8 @@ export function calculateOrads(form: OradsForm): OradsResult {
       return result(1, 'Simple cyst of 3 cm or less in a premenopausal patient is a follicle (normal ovary).')
     }
     if (form.cystType === 'simple' && size < 10 && noSolid) return result(2, 'Simple cyst smaller than 10 cm without suspicious features.', cystManagement(form, size))
+    // "Unilocular cyst, irregular, any size" is category 3.
+    if (form.cystType === 'nonsimple' && form.irregularWall && noSolid) return result(3, 'Unilocular cyst with an irregular inner wall is low risk at any size.')
     if (form.cystType === 'nonsimple' && size < 10 && noSolid) return result(2, 'Nonsimple unilocular cyst smaller than 10 cm without suspicious features.', cystManagement(form, size))
     if (form.cystType === 'classicBenign') {
       // "Typical benign extraovarian lesion ... Any size" is category 2; an ovarian one of 10 cm or more is 3.
@@ -139,6 +141,19 @@ export function calculateOrads(form: OradsForm): OradsResult {
       if (form.solidComponent) {
         if (cs >= 3) return result(5, 'Multilocular cyst with a solid component and color score 3 or 4 is high risk.')
         return result(4, 'Multilocular cyst with a solid component and color score 1 or 2 is intermediate risk.')
+      }
+      // v2022 chart: "Bilocular cyst without solid component(s): Irregular, any size, any CS" and
+      // "Multilocular cyst without solid component(s): ... Irregular, any size, any CS" are 4; a
+      // "Bilocular, smooth cyst" under 10 cm is 2 (managed with the non-simple cysts), and a smooth
+      // "Uni- or bilocular cyst ... ≥10 cm" is 3.
+      const bilocular = form.locules === 2
+      if (form.irregularWall) {
+        return result(4, `${bilocular ? 'Bilocular' : 'Multilocular'} cyst with an irregular inner wall is intermediate risk at any size and color score.`)
+      }
+      if (bilocular) {
+        return size < 10
+          ? result(2, 'Smooth bilocular cyst smaller than 10 cm without a solid component.', cystManagement(form, size))
+          : result(3, 'Smooth bilocular cyst of 10 cm or more is low risk.')
       }
       if (size < 10 && cs <= 3) return result(3, 'Multilocular cyst smaller than 10 cm with color score 1 to 3 is low risk.')
       return result(4, 'Multilocular cyst of 10 cm or more, or with color score 4, is intermediate risk.')

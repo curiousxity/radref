@@ -7,13 +7,16 @@ import type { PancreaticCystForm } from './pancreaticCyst'
  * pancreatic cysts study's lesson gives it:
  * - Chart 1 (< 1.5 cm): "Under 65 at presentation: image yearly for 5 years, then every 2 years
  *   for 2 more; stop if stable over a minimum of 9 years." "Age 65–79: image every 2 years for 5
- *   rounds; stop if still under 1.5 cm over 10 years." "White dot" cysts (< 5 mm): "a single
+ *   rounds; stop if stable over 10 years." "White dot" cysts (< 5 mm): "a single
  *   follow-up at 2 years showing stability is enough to stop".
  * - Chart 2A, duct communication proven: "1.5–1.9 cm → yearly for 5 years then every 2 years for
  *   4 years; 2.0–2.5 cm → every 6 months for 2 years, yearly for 2, then every 2 years for 6".
  * - Chart 2B, communication absent or unknown: "image every 6 months for 2 years, then yearly for
  *   2, then every 2 years for 3 rounds, or go straight to EUS/FNA".
  * - Chart 4 (80 or older): "≤2.5 cm → image every 2 years twice and stop if stable".
+ * - Megibow 2017, Figs. 3 and 4, for cysts over 2.5 cm (added by the author's choice on 2026-10-25):
+ *   Chart 3 low risk "Reimage q6mos x 4", then "q1y x 2, then q2y x 3", "STOP if stable over 10
+ *   years"; Chart 4 low risk "Reimage q2y x 2". Chart 1 at 65-79: "STOP if stable over 10 years".
  */
 describe('ACR 2017 surveillance intervals', () => {
   it.each([
@@ -26,7 +29,8 @@ describe('ACR 2017 surveillance intervals', () => {
     [25, '65to79', 'absentOrUnknown', 'every 6 months for 2 years, then yearly for 2, then every 2 years for 3 rounds'],
     [26, '65to79', 'absentOrUnknown', 'Cyst over 2.5 cm'],
     [25, '80plus', 'absentOrUnknown', 'imaging every 2 years twice'],
-    [26, '80plus', 'absentOrUnknown', 'advised only if the patient is a surgical candidate'],
+    [26, '80plus', 'absentOrUnknown', 'a low-risk cyst over 2.5 cm is imaged every 2 years twice'],
+    [26, 'under65', 'absentOrUnknown', 'if low risk by imaging, Contrast-enhanced MRI or pancreas-protocol CT every 6 months for 2 years'],
   ] as const)('%s mm, %s, communication %s: %s', (sizeMm, age, communication, expected) => {
     expect(acrSurveillance(sizeMm, age, communication)).toContain(expected)
   })

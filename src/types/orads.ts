@@ -17,6 +17,8 @@ export type OradsForm = {
   papillaryProjections: number
   locules: number
   smoothContour: boolean
+  /** A cyst's inner wall or septation is irregular (under 3 mm high; 3 mm or more is a solid component). */
+  irregularWall: boolean
   ascites: boolean
   peritonealDisease: boolean
   colorScore: OradsColorScore

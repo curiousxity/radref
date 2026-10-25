@@ -64,10 +64,12 @@ describe('pancreatic cysts: ACR chart by size and age', () => {
 
 describe('pancreatic cysts: ACR recommendations', () => {
   // Chart 1: "Under 65 at presentation: image yearly for 5 years, then every 2 years for 2 more; stop if stable over a minimum of 9 years."
-  // "Age 65–79: image every 2 years for 5 rounds; stop if still under 1.5 cm over 10 years."
+  // "Age 65–79: image every 2 years for 5 rounds; stop if stable over 10 years." (The lesson said
+  // "stop if still under 1.5 cm", the chart's wording after growth; Megibow's Chart 1 says "STOP if
+  // stable over 10 years", and the author chose the paper's wording on 2026-10-25.)
   it('under 65 vs 65-79', () => {
     expect(rec({ ...case1, age: '64' })).toMatch(/yearly for 5 years, then every 2 years for 2 more; stop if stable over a minimum of 9 years.*Chart 1/)
-    expect(rec({ ...case1, age: '65' })).toMatch(/every 2 years for 5 rounds; stop if still under 1\.5 cm over 10 years.*Chart 1/)
+    expect(rec({ ...case1, age: '65' })).toMatch(/every 2 years for 5 rounds; stop if stable over 10 years.*Chart 1/)
   })
   it('Chart 1 without an age asks for it', () => {
     expect(rec({ ...case1, age: '' })).toBe('')
@@ -102,9 +104,11 @@ describe('pancreatic cysts: ACR recommendations', () => {
     expect(rec(below)).not.toMatch(/definable growth/)
     expect(warn(below)).toMatch(/Growth by the ACR definition \(20%\) in a Chart 2 cyst/)
   })
-  // "Low-risk = no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification ... Low-risk cysts can be carefully followed"
+  // "Low-risk = no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification ... Low-risk cysts can be carefully followed".
+  // The lesson gave no interval; Megibow's Chart 3 does ("Reimage q6mos x 4", then "q1y x 2, then q2y
+  // x 3", "STOP if stable over 10 years"), and the author chose to add it on 2026-10-25.
   it('Chart 3 low-risk when every item is stated', () => {
-    expect(rec({ ...case1, size: '28' })).toMatch(/^Low-risk by imaging.*careful follow-up.*Chart 3/)
+    expect(rec({ ...case1, size: '28' })).toMatch(/^Low-risk by imaging.*every 6 months for 2 years; if stable, yearly for 2 years, then every 2 years for 3 rounds.*Chart 3/)
   })
   it('Chart 3 risk not established when an item is unstated', () => {
     const values = { ...case1, size: '28', wall: '', calc: '' }
@@ -120,9 +124,11 @@ describe('pancreatic cysts: ACR recommendations', () => {
     expect(rec({ ...case1, size: '25', calc: 'peripheral' })).not.toMatch(/^EUS\/FNA/)
   })
   // "Patients 80 or older ... Follow-up or EUS/FNA is advised only if the patient is a surgical candidate; ≤2.5 cm → image every 2 years twice and stop if stable."
+  // Over 2.5 cm the lesson gave no interval; Megibow's Chart 4 gives "Low Risk by Imaging: Reimage q2y
+  // x 2", added by the author's choice on 2026-10-25.
   it.each([
     ['25', /every 2 years twice, stopping if stable.*Chart 4/],
-    ['25.1', /^Follow-up or EUS\/FNA advised only if the patient is a surgical candidate.*Chart 4/],
+    ['25.1', /^Follow-up or EUS\/FNA only if the patient is a surgical candidate; if so, a low-risk cyst over 2\.5 cm is imaged every 2 years twice.*Chart 4/],
   ])('age 80, %s mm', (size, expected) => {
     expect(rec({ ...case1, age: '80', size })).toMatch(expected)
   })

@@ -17,6 +17,7 @@ const us: OradsForm = {
   papillaryProjections: 0,
   locules: 1,
   smoothContour: true,
+  irregularWall: false,
   ascites: false,
   peritonealDisease: false,
   colorScore: '1',
@@ -228,5 +229,30 @@ describe('O-RADS US v2022 management', () => {
   it('a classic benign extraovarian lesion stays O-RADS 2 at 10 cm or more', () => {
     expect(cat({ cystType: 'classicBenign', classicType: 'hydrosalpinx', sizeCm: '12' })).toBe('O-RADS 2')
     expect(cat({ cystType: 'classicBenign', classicType: 'dermoid', sizeCm: '12' })).toBe('O-RADS 3')
+  })
+})
+
+/*
+ * O-RADS US v2022 chart, two rows the calculator missed: "Bilocular, smooth cyst" under 10 cm is
+ * category 2 (the calculator made every multilocular lesion without a solid component 3 or 4), and
+ * an irregular inner wall ("Unilocular cyst, irregular, any size" is 3; "Bilocular cyst without
+ * solid component(s): Irregular" and "Multilocular cyst without solid component(s): Irregular" are
+ * 4) had no input. Fixed by the author's choice on 2026-10-25.
+ */
+describe('O-RADS US v2022: bilocular cysts and irregular inner walls', () => {
+  const bi = { cystType: 'multilocular' as const, locules: 2 }
+  it.each([
+    ['smooth bilocular 9.9 cm', { ...bi, sizeCm: '9.9' }, 'O-RADS 2'],
+    ['smooth bilocular 10 cm', { ...bi, sizeCm: '10' }, 'O-RADS 3'],
+    ['irregular bilocular 3 cm', { ...bi, sizeCm: '3', irregularWall: true }, 'O-RADS 4'],
+    ['irregular multilocular 3 cm', { cystType: 'multilocular' as const, locules: 3, sizeCm: '3', irregularWall: true }, 'O-RADS 4'],
+    ['irregular unilocular 3 cm', { cystType: 'nonsimple' as const, sizeCm: '3', irregularWall: true }, 'O-RADS 3'],
+    ['smooth multilocular 3 cm', { cystType: 'multilocular' as const, locules: 3, sizeCm: '3' }, 'O-RADS 3'],
+  ])('%s is %s', (_label, over, expected) => {
+    expect(cat(over)).toBe(expected)
+  })
+
+  it('a smooth bilocular cyst is followed like a non-simple cyst', () => {
+    expect(calculateOrads({ ...us, ...bi, sizeCm: '4' }).recommendation).toContain('Follow-up US in 6 months')
   })
 })

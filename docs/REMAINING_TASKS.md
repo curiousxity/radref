@@ -365,26 +365,19 @@ jacr.org and escholarship.org refuse automated requests even when allowed).
   `src/logic/incidentalAdrenal.ts` and `src/logic/incidentalRenal.ts`, with their intervals.
 - [x] ACR 2017 pancreatic cysts: Charts 1, 2A, 2B and 4 (2.5 cm or less) match Megibow's figures.
 
-Questions for the author, found in the check and not changed:
+Questions found in the check, decided by the author on 2026-10-25 (all "match the paper"):
 
-- [ ] Pancreatic cysts, Chart 3 (over 2.5 cm, low risk): the paper gives "reimage every 6 months x 4;
-  if stable over the first 2 years, yearly x 2, then every 2 years x 3; stop if stable over 10
-  years". The lesson, and so the study and the calculator, say only "careful follow-up". Add it?
-- [ ] Pancreatic cysts, Chart 4 (80 or older, over 2.5 cm, low risk): the paper gives "reimage every 2
-  years x 2, stop if stable"; the lesson gives no interval. Add it?
-- [ ] Pancreatic cysts, Chart 1 at 65-79: the chart says "STOP if stable over 10 years"; the lesson
-  says "stop if still under 1.5 cm over 10 years" (the chart's wording after growth).
-- [ ] TI-RADS: the calculator adds follow-up advice for nodules at the FNA size ("If observed instead,
-  follow-up ultrasound is typically at 1, 2, 3, and 5 years"; TR3 "Ultrasound follow-up may also be
-  considered"; TR5 "If observed, annual follow-up for up to 5 years"). The ACR template gives
-  follow-up only for the size band below the FNA threshold. Keep or remove?
-- [ ] Bosniak III and IV: the calculator says "Urologic consultation and individualized management
-  should be considered" and "Urologic referral and definitive management should be considered";
-  Silverman's Table 4 says "If not already obtained, consider urology consultation." Match it?
-- [ ] O-RADS US classification (not intervals): a smooth bilocular cyst under 10 cm without a solid
-  component is O-RADS 2 in v2022, but the calculator's multilocular branch makes it 3; and a
-  unilocular cyst with an irregular inner wall is O-RADS 3 at any size, but the calculator has no
-  input for it. Fix both?
+- [x] Pancreatic cysts over 2.5 cm: Megibow's Chart 3 low-risk schedule (every 6 months for 2
+  years; if stable, yearly for 2, then every 2 years for 3; stop if stable over 10 years) and
+  Chart 4's (every 2 years twice) added to the shared intervals, so the calculator, the study's
+  report and the study's Learn text all give them. Chart 1 at 65-79 now says "stop if stable over
+  10 years", as the chart does.
+- [x] TI-RADS: the follow-up advice at the FNA size ("If observed instead ...") removed; the ACR
+  template gives follow-up only below the FNA threshold.
+- [x] Bosniak III and IV: the calculator uses Silverman's Table 4 phrases.
+- [x] O-RADS US: a smooth bilocular cyst under 10 cm is category 2 (followed like a non-simple
+  cyst), and a new "irregular inner wall" input makes a unilocular cyst 3 and a bilocular or
+  multilocular one 4.
 
 ## Housekeeping
 
