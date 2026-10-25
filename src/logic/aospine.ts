@@ -4,12 +4,10 @@
  * morphology; the subaxial system adds facet injuries. Shared by the AO Spine calculator and
  * the spine trauma CT study.
  *
- * Unchecked draft: both papers are matched on PubMed but paywalled. The thoracolumbar types,
- * order, neurology, modifiers and notation are checked against AO Spine's own thoracolumbar
- * poster (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged at
- * public/references/aospine-thoracolumbar-poster.pdf). The subaxial facets, neurology and
- * modifiers are still unchecked (claims AO-1 to AO-12 in
- * docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * Unchecked draft: both papers are matched on PubMed but paywalled. The types, order, facets,
+ * neurology, modifiers and notation are checked against AO Spine's own posters for both systems
+ * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/; claims AO-1 to
+ * AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
  */
 
 export type AoRegion = 'subaxial' | 'thoracolumbar'
@@ -22,10 +20,10 @@ export const aoBodies: AoBody[] = ['A0', 'A1', 'A2', 'A3', 'A4']
 
 /** AO-1 to AO-3, worded after the thoracolumbar poster. */
 export const aoDescriptions: Record<AoType, string> = {
-  // "Minor, nonstructural fractures, which do not compromise the structural integrity of the
-  // spinal column such as transverse process or spinous process fractures." It said "no vertebral
-  // body fracture, or ..."; the poster's algorithm gives no fracture at all as "No injury".
-  A0: 'minor, non-structural fracture such as a transverse or spinous process fracture',
+  // Thoracolumbar poster: "Minor, nonstructural fractures ... such as transverse process or
+  // spinous process fractures"; subaxial poster: "minor injury such as an isolated lamina fracture
+  // or spinous process fracture". Both algorithms give no fracture at all as "No injury".
+  A0: 'minor, non-structural fracture, such as a spinous or transverse process fracture (in the neck, also an isolated lamina fracture)',
   A1: 'wedge-compression fracture of a single endplate, posterior wall intact',
   A2: 'split or pincer fracture of both endplates, posterior wall intact',
   A3: 'incomplete burst fracture, through a single endplate and the posterior wall',
@@ -97,7 +95,10 @@ export const aoFacetDescriptions: Record<AoFacet, string> = {
   F4: 'pathological subluxation, or a perched or dislocated facet',
 }
 
-/** AO-6: F1 against F2 from the fragment, at 1 cm and 40% (the boundary is the site's reading). */
+/**
+ * AO-6, subaxial poster: F1 "fragment <1cm in height, <40% of lateral mass"; F2 "fragment >1cm, >
+ * than 40% lateral mass, or displaced". Exactly 1 cm or 40% is read as F2 (the site's reading).
+ */
 export function aoFacetFracture(heightMm: number, lateralMassPercent: number, displaced: boolean): AoFacet {
   return displaced || heightMm >= 10 || lateralMassPercent >= 40 ? 'F2' : 'F1'
 }
@@ -114,12 +115,13 @@ export type AoNeuro = 'N0' | 'N1' | 'N2' | 'N3' | 'N4' | 'NX'
 
 export const aoNeuros: AoNeuro[] = ['N0', 'N1', 'N2', 'N3', 'N4', 'NX']
 
-export function aoNeuroDescription(neuro: AoNeuro, region: AoRegion): string {
+/** AO-8: both posters give the same grades, word for word. The region is kept for callers. */
+export function aoNeuroDescription(neuro: AoNeuro, _region?: AoRegion): string {
   return {
     N0: 'neurologically intact',
     N1: 'transient deficit, now resolved',
-    N2: region === 'thoracolumbar' ? 'radicular symptoms' : 'radiculopathy',
-    N3: region === 'thoracolumbar' ? 'incomplete spinal cord injury or any degree of cauda equina injury' : 'incomplete spinal cord injury',
+    N2: 'radicular symptoms',
+    N3: 'incomplete spinal cord injury or any degree of cauda equina injury',
     N4: 'complete spinal cord injury',
     NX: 'cannot be examined',
   }[neuro]
@@ -129,7 +131,7 @@ export const aoModifiers: Record<AoRegion, Record<string, string>> = {
   subaxial: {
     M1: 'posterior capsuloligamentous complex injury without complete disruption',
     M2: 'critical disc herniation',
-    M3: 'stiffening or metabolic bone disease (DISH, ankylosing spondylitis, OPLL)',
+    M3: 'stiffening or metabolic bone disease (DISH, ankylosing spondylitis, OPLL, OLF)',
     M4: 'vertebral artery abnormality',
   },
   thoracolumbar: {
@@ -140,38 +142,38 @@ export const aoModifiers: Record<AoRegion, Record<string, string>> = {
 
 export type AoFull = {
   region: AoRegion
-  morphology: { type: AoType; body?: AoBody }
+  /** Absent for a subaxial facet injury with no A, B or C injury. */
+  morphology?: { type: AoType; body?: AoBody }
   facet?: string
   neuro?: AoNeuro
-  /**
-   * AO-9: continued spinal cord compression. The thoracolumbar poster lists "+" with the
-   * neurology grades without tying it to one; the subaxial "+" is kept with N3 only (unchecked).
-   */
+  /** AO-9: "+ Continued spinal cord compression", listed with the grades on both posters, tied to none. */
   compression?: boolean
   modifiers?: string[]
 }
 
 /**
- * The code. Thoracolumbar follows the poster's nomenclature, the primary type then the secondary
- * injury, neurology and modifiers in brackets: "C (A3; N3; M2)", "A4 (N0; M1)". Subaxial keeps
- * the site's own notation, e.g. "B2 (A1); F4 BL; N3+; M3", until its paper is checked.
+ * The code, as each poster writes it: the primary type, then the secondary injury, neurology and
+ * modifiers in brackets. Thoracolumbar separates them with semicolons, "C (A3; N3; M2)"; subaxial
+ * with commas and puts the facets after the type A injury, "B2 (F4, F2, N2, M3)". A subaxial
+ * injury with facets only is written facets first ("If only facet injuries are identified ...
+ * they are listed first after the level of injury").
  */
 export function aoCode({ region, morphology, facet, neuro, compression, modifiers = [] }: AoFull): string {
+  const neuroCode = neuro && `${neuro}${compression ? '+' : ''}`
   if (region === 'thoracolumbar') {
-    const inside = [morphology.body, neuro && `${neuro}${compression ? '+' : ''}`, ...modifiers].filter(Boolean)
-    return `${morphology.type}${inside.length > 0 ? ` (${inside.join('; ')})` : ''}`
+    const inside = [morphology?.body, neuroCode, ...modifiers].filter(Boolean)
+    return `${morphology?.type ?? ''}${inside.length > 0 ? ` (${inside.join('; ')})` : ''}`.trim()
   }
-  return [
-    `${morphology.type}${morphology.body ? ` (${morphology.body})` : ''}`,
-    facet,
-    neuro && `${neuro}${compression && neuro === 'N3' ? '+' : ''}`,
-    ...modifiers,
-  ].filter(Boolean).join('; ')
+  const head = morphology?.type ?? facet ?? ''
+  const inside = [morphology?.body, morphology ? facet : undefined, neuroCode, ...modifiers].filter(Boolean)
+  return `${head}${inside.length > 0 ? ` (${inside.join(', ')})` : ''}`
 }
 
 const regionName: Record<AoRegion, string> = { subaxial: 'subaxial cervical', thoracolumbar: 'thoracolumbar' }
 
 export function aoSentence(full: AoFull, level?: string): string {
-  const { type, body } = full.morphology
-  return `${level ? `${level}: ` : ''}AO Spine ${regionName[full.region]} ${aoCode(full)}: ${aoDescriptions[type]}${body ? `, with a type ${body} vertebral body fracture` : ''}.`
+  const what = full.morphology
+    ? `${aoDescriptions[full.morphology.type]}${full.morphology.body ? `, with a type ${full.morphology.body} vertebral body fracture` : ''}`
+    : 'facet injury without a type A, B or C injury'
+  return `${level ? `${level}: ` : ''}AO Spine ${regionName[full.region]} ${aoCode(full)}: ${what}.`
 }

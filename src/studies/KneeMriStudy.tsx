@@ -143,7 +143,7 @@ const learn: LearnSection[] = [
         <h4>Tibial plateau fracture</h4>
         <p>When the tibial plateau is broken, give the Schatzker type ({SCHATZKER}; the types as {MARKHARDT} give them). CT and MRI are more accurate than radiographs for Schatzker typing, and surgical plans made from radiographs were changed after CT or MRI ({MARKHARDT}). The Schatzker calculator on this site applies the same rules.</p>
         {schatzkerTable}
-        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) ({MARKHARDT}). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken.</p>
+        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) ({MARKHARDT}). Type IV is any fracture of the medial plateau alone, split or depressed, and it carries a risk to the peroneal nerve and popliteal vessels from its fracture-dislocation mechanism. Schatzker counted depression only when it was more than 4 mm, so a lateral split with 4 mm or less is type I ({MARKHARDT}). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken.</p>
 
         <h4>Segond fracture</h4>
         <p>A Segond fracture is a small avulsion from the lateral rim of the tibial plateau. It is pulled off by the iliotibial tract or the anterior oblique band of the lateral collateral ligament, and it is associated with ACL tear ({CAMPOS}). A Segond fracture with an ACL called intact deserves a second look at the ACL.</p>
@@ -1082,7 +1082,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, the four cartilage depth grades and how Schatzker type IV is broken) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, and the four cartilage depth grades) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

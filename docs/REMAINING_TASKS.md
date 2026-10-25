@@ -418,7 +418,19 @@ document. Where the site differed, the author chose the newer source, and these 
 - [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
-- [ ] The third batch is listed in `docs/PAPERS_NEEDED.md`.
+- [ ] The fourth batch is listed in `docs/PAPERS_NEEDED.md`.
+
+Third batch, the same day: AO Spine's subaxial poster, Markhardt, Harnsberger and Osborn, Iyer, and the
+Outerbridge and scaphoid reviews ("Fourth check" sections). Changed:
+
+- Schatzker: the author confirmed type IV is any isolated medial plateau fracture, split or depressed
+  (Markhardt's wording); the 4 mm depression threshold is now in the text.
+- AO Spine (subaxial): neurology and "+" as the thoracolumbar poster; M3 adds OLF; the code follows
+  the subaxial poster ("B2 (A1, F4 BL, N2, M3)"), with facet-only injuries coded; poster hosted.
+- Suprahyoid neck: "internal carotid pushed forward" is not in Harnsberger and Osborn; the sign is now
+  theirs, "pushed back and out" for a lateral retropharyngeal node.
+- Knee cartilage depth grades: still no source; Outerbridge is arthroscopic. Recht 2005 is asked for.
+- Herbert: the scaphoid review does not give the types; AO Surgery Reference is blocked here.
 
 Second batch, the same day: reviews of Lichtman, Hawkins, Lisfranc, Letournel, AO thoracolumbar,
 Gartland, Goutallier, Ellman and Denis ("Third check" sections in the sources documents). Changed:

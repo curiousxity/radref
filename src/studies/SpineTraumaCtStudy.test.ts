@@ -162,7 +162,7 @@ describe('spine trauma CT rules (unchecked)', () => {
 
   // AO-1 to AO-7 via the shared logic, and AO-10: the ankylosed spine modifier by region.
   test('AO Spine chips and the ankylosed spine modifier', () => {
-    expect(chips(study, 'subaxial', { ...normal, cx: 'present', 'cx-type': 'C', 'cx-body': 'A4', 'cx-facet-right': 'F4', 'cx-facet-left': 'F4' })['AO Spine']).toBe('C (A4); F4 BL')
+    expect(chips(study, 'subaxial', { ...normal, cx: 'present', 'cx-type': 'C', 'cx-body': 'A4', 'cx-facet-right': 'F4', 'cx-facet-left': 'F4' })['AO Spine']).toBe('C (A4, F4 BL)')
     expect(chips(study, 'subaxial', { ...normal, ankylosis: 'as', cx: 'present', 'cx-type': 'B3' })['Ankylosed spine']).toBe('Modifier M3; fractures here often follow minor trauma')
     expect(chips(study, 'thoracolumbar', { ...normal, ankylosis: 'dish', tl: 'present', 'tl-type': 'B3' })['Ankylosed spine']).toBe('Modifier M2; fractures here often follow minor trauma')
     expect(impressionOf({ ...normal, ankylosis: 'dish', tl: 'present', 'tl-level': 'T10', 'tl-type': 'B3' }))

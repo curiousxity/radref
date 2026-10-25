@@ -20,8 +20,8 @@ review papers in "Next batch" below stand in for most of the pending ones.
 - [ ] **Pending.** Palmer AK. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3
 - [ ] **Pending** (stages checked against Kennedy and Abrams 2019). Lichtman DM, et al. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011
 - [x] ~~Lichtman DM, et al. J Hand Surg Am. 1982;7(4):343-347.~~ Not needed: Kennedy and Abrams 2019 shows stage III was split in 1993 (Lichtman and Degnan, Hand Clin), not 1982
-- [ ] **Pending.** Schatzker J, McBroom R, Bruce D. Clin Orthop Relat Res. 1979;(138):94-104. PMID 445923 (checked meanwhile against Zeltser and Leopold, Clin Orthop Relat Res 2013, doi:10.1007/s11999-012-2451-z, received)
-- [ ] **Pending.** Markhardt BK, Gross JM, Monu JU. Radiographics. 2009;29(2):585-597. doi:10.1148/rg.292085078
+- [ ] **Pending** (types checked against Markhardt's full text). Schatzker J, McBroom R, Bruce D. Clin Orthop Relat Res. 1979;(138):94-104. PMID 445923 (checked meanwhile against Zeltser and Leopold, Clin Orthop Relat Res 2013, doi:10.1007/s11999-012-2451-z, received)
+- [x] Markhardt BK, Gross JM, Monu JU. Radiographics. 2009;29(2):585-597. doi:10.1148/rg.292085078 (received in the third batch)
 - [ ] **Pending** (checked against Alton et al. 2015). Hawkins LG. J Bone Joint Surg Am. 1970;52(5):991-1002. doi:10.2106/00004623-197052050-00013
 - [ ] **Pending** (checked against Alton et al. 2015). Canale ST, Kelly FB Jr. J Bone Joint Surg Am. 1978;60(2):143-156. doi:10.2106/00004623-197860020-00001
 - [ ] **Pending.** Sanders R, et al. Clin Orthop Relat Res. 1993;(290):87-95. doi:10.1097/00003086-199305000-00012 (checked meanwhile against Jiménez-Almonte et al., Clin Orthop Relat Res 2019, doi:10.1097/CORR.0000000000000539, received)
@@ -53,20 +53,28 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 
 ## Third batch (asked for 2026-10-25)
 
-The three pending from the second batch, two more short reviews, and the four papers that the
-most unchecked claims rest on. All DOIs checked on Crossref.
+- [x] AO Spine subaxial cervical poster (received; now hosted on the AO Spine page)
+- [ ] **Pending.** Broberg MA, Morrey BF. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017
+- [ ] **Pending.** Carofino BC, Leopold SS. Neer review. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
+- [x] Tysver T, Jawa A. Scaphoid fractures. doi:10.1007/s11999-010-1261-4 (received; does not give the Herbert types)
+- [x] Slattery C, Kweon CY. Outerbridge. doi:10.1007/s11999.0000000000000255 (received; arthroscopic, not the MRI depth grades)
+- [x] Iyer RS, et al. AJR 2012. doi:10.2214/AJR.10.7314 (received; five of six claims confirmed)
+- [x] Harnsberger HR, Osborn AG. AJR 1991. doi:10.2214/ajr.157.1.2048510 (received; one claim changed)
+- [x] Markhardt BK, et al. RadioGraphics 2009. doi:10.1148/rg.292085078 (received)
+- [ ] **Pending.** Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113
 
-- [ ] AO Spine Subaxial Cervical Spine Injury Classification System poster (aospine.org/classification)
-- [ ] Broberg MA, Morrey BF. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (Mason 2 mm and 30%)
+## Fourth batch (asked for 2026-10-25)
+
+- [ ] Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (Mason 2 mm and 30%)
 - [ ] Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
-- [ ] Tysver T, Jawa A. In brief: fractures in brief: scaphoid fractures. Clin Orthop Relat Res. 2010;468(9):2553-2555. doi:10.1007/s11999-010-1261-4 (may cover Herbert)
-- [ ] Slattery C, Kweon CY. Classifications in brief: Outerbridge classification of chondral lesions. Clin Orthop Relat Res. 2018;476(10):2101-2104. doi:10.1007/s11999.0000000000000255 (a source for the knee cartilage grades)
-- [ ] Iyer RS, Thapa MM, Khanna PC, Chew FS. AJR. 2012;198(5):1053-1068. doi:10.2214/AJR.10.7314 (six paediatric elbow claims)
-- [ ] Harnsberger HR, Osborn AG. AJR. 1991;157(1):147-154. doi:10.2214/ajr.157.1.2048510 (five suprahyoid neck claims)
-- [ ] Markhardt BK, Gross JM, Monu JU. RadioGraphics. 2009;29(2):585-597. doi:10.1148/rg.292085078 (Schatzker IIIA and IIIB)
 - [ ] Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113 (pelvis: L5 transverse process, ring breaking twice)
-
-Palmer, Herbert's own paper and Myerson have no review in the Clin Orthop Relat Res series.
+- [ ] Herbert classification page from AO Surgery Reference (save as PDF; the site is blocked here) (Herbert types)
+- [ ] Recht MP, Goodwin DW, Winalski CS, White LM. MRI of articular cartilage: revisiting current status and future directions. AJR. 2005;185(4):899-914. doi:10.2214/AJR.05.0099 (a source for the knee study's MRI cartilage depth grades)
+- [ ] Shin JH, et al. AJR. 2001;177(6):1465-1470. doi:10.2214/ajr.177.6.1771465 (neck: deep parotid against prestyloid parapharyngeal)
+- [ ] Rao AB, Koeller KK, Adair CF. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605 (neck: carotid body splaying)
+- [ ] Hoang JK, et al. AJR. 2011;196(4):W426-W432. doi:10.2214/AJR.10.5116 (neck: retropharyngeal edema against abscess)
+- [ ] Spence KF Jr, Decker S, Sell KW. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013 (spine CT: the 6.9 mm rule)
+- [ ] Anderson LD, D'Alonzo RT. J Bone Joint Surg Am. 1974;56(8):1663-1674. doi:10.2106/00004623-197456080-00017 (spine CT: odontoid types)
 
 ## 2. Paediatric elbow study
 
@@ -174,5 +182,5 @@ Palmer, Herbert's own paper and Myerson have no review in the Clin Orthop Relat 
 ## Not a paper problem
 
 - Knee cartilage grades (K10-1): the four depth grades come from the modified Noyes and Outerbridge
-  scales, which the knee study does not cite yet. The Outerbridge review in the third batch could be that source.
+  scales, which the knee study does not cite yet. Outerbridge (third batch) turned out to be arthroscopic, not these MRI grades; Recht 2005 in the fourth batch is the candidate.
 - ~~Lichtman stage IIIC~~: settled by Kennedy and Abrams 2019; IIIC is now in the calculator.

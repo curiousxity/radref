@@ -1,6 +1,6 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { aoBodies, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoSentence, aoTypes } from '../logic/aospine'
+import { aoBodies, aoCode, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoSentence, aoTypes } from '../logic/aospine'
 import type { AoBody, AoFacet, AoRegion, AoType } from '../logic/aospine'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -368,7 +368,7 @@ function deriveRegion(region: AoRegion) {
     const item = injury(values, region)
     if (!item) return []
     const out: Derived[] = []
-    if (item.type) out.push({ label: 'AO Spine', value: `${item.type}${item.body ? ` (${item.body})` : ''}${item.facet ? `; ${item.facet}` : ''}`, tone: item.type === 'A0' ? 'neutral' : 'warn' })
+    if (item.type) out.push({ label: 'AO Spine', value: aoCode({ region: item.region, morphology: { type: item.type, ...(item.body ? { body: item.body } : {}) }, ...(item.facet ? { facet: item.facet } : {}) }), tone: item.type === 'A0' ? 'neutral' : 'warn' })
     // T1-1, AO-10: fractures in an ankylosed spine.
     if (item.modifiers.length > 0) out.push({ label: 'Ankylosed spine', value: `Modifier ${item.modifiers[0]}; fractures here often follow minor trauma`, tone: 'warn' })
     return out
@@ -631,7 +631,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the AO Spine subtypes, facet grades and modifiers, the 6.9 mm rule of Spence, the odontoid types, the Denver criteria and the Genant grades) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the 6.9 mm rule of Spence, the odontoid types, the Denver criteria and the Genant grades) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

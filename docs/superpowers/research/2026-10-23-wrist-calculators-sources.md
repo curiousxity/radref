@@ -145,3 +145,11 @@ author's rule (the newer source) applied.
 | LI-2 | yes, reworded | "Stages IIIA (without fixed scaphoid rotation) and IIIB (with fixed scaphoid rotation)"; "radioscaphoid angle < 60° classified as Stage IIIA and ... > 60° classified as Stage IIIB"; IIIB "often seen with a cortical 'ring sign'". |
 | LI-3 | settled | "Stage III was modified in 1993 and divided into two stages, IIIA and IIB" (Lichtman and Degnan, Hand Clin 1993), not in the 1982 update. "Stage IIIC representing a coronal fracture of the lunate" was added later (Lichtman 2010, 2016). IIIC is now a stage in the calculator and the study. |
 | LI-4 | yes | "The original classification was later modified in 1993 ... with Stage I including decreased T1 signal on MRI". Stage I has its MRI finding back, credited to 1993. Stage 0 (2010) is mentioned on the page only. |
+
+## Fourth check, 2026-10-25: Herbert
+
+Read in full: Tysver T, Jawa A. In brief: fractures in brief: scaphoid fractures. Clin Orthop Relat Res.
+2010;468(9):2553-2555. doi:10.1007/s11999-010-1261-4. It names the Herbert classification and cites
+Herbert and Fisher 1984 but does not give the A to D types, so HB-1 to HB-n stay unchecked. The author
+suggested AO Surgery Reference's free Herbert classification page; `surgeryreference.aofoundation.org`
+is not reachable from this environment, so it needs a PDF or the host allowed.

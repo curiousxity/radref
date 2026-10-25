@@ -93,3 +93,21 @@ is AO Spine's own and the two are the same age:
 
 M2 examples in the review: "ankylosing spondylitis, skin injuries overlying a fracture, or
 rheumatologic conditions"; table: "rheumatoid arthritis, osteoporosis, or ankylosing spondylitis".
+
+## Fourth check, 2026-10-25: third batch from the author
+
+Read in full: AO Spine Subaxial Injury Classification System poster. © 2020 AO Foundation, AO Spine, CC
+BY-NC-ND 4.0 (citing Vaccaro 2015/2016). Hosted unchanged at
+`public/references/aospine-subaxial-poster.pdf`, linked beside the thoracolumbar poster.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| AO-1 (subaxial) | yes, A0 reworded | A0 "No bony injury or minor injury such as an isolated lamina fracture or spinous process fracture"; the algorithm gives no process fracture as "No injury". The page asks about a lamina or spinous process in the neck. A1-A4 match. |
+| AO-2 (subaxial) | yes | B1 "Physical separation through fractured bony structures only"; B2 "Complete disruption of the posterior capsuloligamentous or bony capsuloligamentous structures together with a vertebral body, disc, and/or facet injury"; B3 "Physical disruption or separation of the anterior structures (bone/disc) with tethering of the posterior elements". |
+| AO-3 | yes | "Translational injury in any axis: displacement or translation of one vertebral body relative to another in any direction". |
+| AO-6 | yes | F1 "Nondisplaced facet fracture with fragment <1cm in height, <40% of lateral mass"; F2 "Facet fracture with potential for instability: with fragment >1cm, > than 40% lateral mass, or displaced"; F3 "Floating lateral mass"; F4 "Pathologic subluxation or perched/dislocated facet". Exactly 1 cm or 40% is not stated; still read as F2. "If there are multiple injuries to the same facet ... only the highest level facet injury is classified." |
+| AO-7 | yes | "BL Bilateral injury". |
+| AO-8 (subaxial) | yes, changed | Same grades as the thoracolumbar poster: "N2 Radicular symptoms", "N3 Incomplete spinal cord injury or any degree of cauda equina injury" (was "radiculopathy" and "incomplete spinal cord injury"). |
+| AO-9 (subaxial) | yes, changed | "+ Continued spinal cord compression", tied to no grade (was N3 only). |
+| AO-10 (subaxial) | yes, OLF added | M1 "Posterior Capsuloligamentous Complex injury without complete disruption"; M2 "Critical disc herniation"; M3 "Stiffening/metabolic bone disease (ie DISH, AS, OPLL, OLF)"; M4 "Vertebral artery abnormality". |
+| AO-5 (subaxial) | yes, notation changed | "C6-C7: C (C7: A1)"; "C6-C7: B2 (F4, F2, N2, M3)"; "If only facet injuries are identified – no A, B, or C injury –, they are listed first after the level of injury." The subaxial code now follows this, commas inside the brackets; facet-only injuries are coded. |

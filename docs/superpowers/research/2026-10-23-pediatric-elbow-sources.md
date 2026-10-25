@@ -197,3 +197,16 @@ doi:10.1007/s11999-014-4033-8.
 |----|---------|----------|
 | PE5-2 | yes, credit changed | Gartland's own types were "type I, nondisplaced; type II, moderately displaced; and type III, severely displaced". The cortical wording is Wilkins's: "type II injuries were displaced anteriorly (anterior humeral line anterior to capitellum) but had posterior humeral cortical contact; and type III fractures were displaced with no cortical contact"; IIA "no rotational abnormality or fragment translation", IIB with them. The study now calls them the modified Gartland (Wilkins) types. |
 | PE5-3 | yes | Leitch's type IV: "multiplanar instability, identified intraoperatively, from no intact periosteal hinge". |
+
+## Fourth check, 2026-10-25: Iyer in full
+
+Read in full: Iyer 2012 (E1).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| PE2-1 | consistent | "The first ossification center to appear is the capitellum ... by age 1 year. The radial head and medial epicondyle typically follow at about 5–6 years, in that order. The trochlea and olecranon epiphysis appear at 8–10 years of age. The lateral epicondyle is typically the last ... approximately 10 years"; girls earlier "by up to 2 years". The study already uses Cheng's ages (E2), which agree in order. |
+| PE2-3 | yes | "If radiographs do not reveal a medial epicondyle in its expected location in children older than 6–7 years, then close inspection of the elbow joint is warranted to evaluate for epicondylar joint entrapment"; "the normal trochlear ossification center may closely mimic an entrapped and incompletely ossified medial epicondyle". |
+| PE3-1 | yes | "the posterior fat pad is displaced out of its fossa by fluid and becomes visible"; "The anterior fat pad also gets displaced and becomes more bulbous or saillike". |
+| PE4-3 | partly | "If the integrity of one or both of these lines [anterior humeral, radial head–capitellar] is compromised, then fracture or dislocation, or both, should be suspected"; "In dislocations, there is compromise of the radial head–capitellum line". The link to a Monteggia injury is not in Iyer; still unchecked. |
+| PE5-1 | yes | "Supracondylar humerus fractures are the most common elbow fractures in children, accounting for 50–70%". |
+| PE7-1 | yes | "Thirty percent to 55% of medial epicondyle fractures are associated with elbow dislocations ... the risk of trapping an avulsed medial epicondylar fragment within the ulnar-humeral joint"; "Intraarticular incarceration ... occurs in 5–18%". |

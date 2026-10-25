@@ -190,3 +190,17 @@ plateau fractures. Clin Orthop Relat Res. 2013;471(2):371-374. doi:10.1007/s1199
 | SZ-1, SZ-2, SZ-5, SZ-6 | yes | "split fracture of the lateral tibial plateau (Type I), split depression of the lateral tibial plateau (Type II), ... bicondylar tibial plateau fracture (Type V), and dissociation between the metaphysis and diaphysis (Type VI)". |
 | SZ-3 | yes | "central depression of the lateral plateau (Type III)". |
 | SZ-4 | partly | "split of the medial tibial plateau (Type IV)". The site still counts any medial plateau fracture as IV, as Markhardt's "medial plateau fracture" does; the page now says the review calls it a split. For the author. |
+
+## Fourth check, 2026-10-25: third batch from the author
+
+Read in full: Markhardt 2009 (K2), and Slattery C, Kweon CY. Classifications in brief: Outerbridge
+classification of chondral lesions. Clin Orthop Relat Res. 2018;476(10):2101-2104.
+doi:10.1007/s11999.0000000000000255.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| SZ-1 | yes, detail added | "a wedge-shaped pure cleavage fracture of the lateral tibial plateau, originally defined as having less than 4 mm of depression or displacement"; "Schatzker et al originally defined depression as measuring greater than 4 mm". The 4 mm is now on the page and in the study's text. |
+| SZ-3 | yes | "those with lateral depression (type IIIA) ... and those with central depression (type IIIB)"; type III "a pure compression fracture of the lateral tibial plateau". |
+| SZ-4 | yes, reworded | "a medial tibial plateau fracture with a split or depressed component". The author confirmed (2026-10-25) that type IV is not restricted to a split: any isolated medial plateau fracture, split, depressed or both. Wording now "fracture of the medial plateau, split or depressed". |
+| SZ-5 | yes | "a wedge fracture of the medial and lateral tibial plateau, often with an inverted 'Y' appearance"; distinguished from VI "by the maintenance of metaphyseal-diaphyseal continuity". |
+| K10-1 | still no source | Outerbridge is an arthroscopic grading (softening and swelling; fissuring by diameter; exposed subchondral bone), not the MRI depth grades the study uses (signal change, under half, half or more, full thickness). As the author noted, the depth grades are a modified MRI system that needs its own citation; the candidate is Recht MP, Goodwin DW, Winalski CS, White LM. MRI of articular cartilage: revisiting current status and future directions. AJR. 2005;185(4):899-914. doi:10.2214/AJR.05.0099 (abstract does not state the grades; on the fourth batch). |

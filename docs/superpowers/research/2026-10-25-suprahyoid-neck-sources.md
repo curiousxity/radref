@@ -66,3 +66,16 @@ and Lemierre.
 Not sourced, and labelled as the site's own on the page: the order of the steps, the protocol
 checklists for CT and MRI, the notes on what CT and MRI each show best, the source, gas and
 airway fields, and the order of the impression (airway first).
+
+## Fourth check, 2026-10-25: third batch from the author
+
+Read in full: Harnsberger and Osborn 1991 (N-R1). It is Part 1, the suprahyoid neck; the study makes no
+infrahyoid claim, so Smoker and Harnsberger's Part 2 is not needed.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| N2-1 | yes | "the normal spatial anatomy as defined by the deep cervical fascia ... and the unique differential diagnoses involved in each individual space". |
+| N2-2 | yes | Pharyngeal mucosal "centered medial to the parapharyngeal space, displacing it laterally"; masticator "anterior to the parapharyngeal space, displacing the fat from anterior to posterior"; parotid "displaces the parapharyngeal fat from lateral to medial"; carotid "posterior to the parapharyngeal space ... displaces it anteriorly"; retropharyngeal node "posteromedial to parapharyngeal space ... displaces it anterolaterally"; parapharyngeal: "fat must be identified surrounding the whole circumference of the lesion". |
+| N2-3 | yes | "a retropharyngeal space lesion displaces the prevertebral muscles posteriorly, whereas a prevertebral space lesion displaces the muscles anteriorly". |
+| N2-4 | yes | Table 1 lists, among others, SCC, NHL, minor salivary tumours and retention cyst (pharyngeal mucosal); pleomorphic adenoma of a salivary rest, lipoma, atypical second branchial cleft cyst (parapharyngeal); odontogenic abscess, sarcoma, masseteric hypertrophy (masticator); pleomorphic adenoma, Warthin, mucoepidermoid (parotid); paraganglioma, nerve sheath tumour, nodal metastasis, jugular thrombosis (carotid); nodal metastases, NHL, abscess, edema (retropharyngeal); vertebral osteomyelitis and tumours (prevertebral). |
+| N2-6 | no, changed | Not in the paper. Its carotid artery sign belongs to the retropharyngeal space: "In lateral retropharyngeal space masses, internal carotid artery is displaced laterally"; a lateral retropharyngeal node "displaces internal carotid artery (c) posterolaterally". By the author's standing rule (match the paper), the sign "internal carotid pushed forward → carotid space" is replaced by "internal carotid pushed back and out → lateral retropharyngeal node"; the text, quiz and test changed with it. |

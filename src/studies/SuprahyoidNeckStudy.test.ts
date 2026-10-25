@@ -180,8 +180,11 @@ describe('suprahyoid neck rules (unchecked)', () => {
   test('signs around the mass', () => {
     const sign = (signs: string[]) => chips(study, 'lesion', { ...mass, 'mass-signs': signs })
     expect(sign(['tunnel']).Parotid).toBe('Points to the deep lobe of the parotid')
-    expect(sign(['ica-forward']).Carotid).toBe('Points to the carotid space')
-    expect(sign(['ica-forward', 'splay']).Carotid).toBe('Splayed bifurcation: carotid body paraganglioma')
+    // N2-6: the sign was "internal carotid pushed forward: carotid space", which Harnsberger and
+    // Osborn do not state. They give the carotid as the sign of a lateral retropharyngeal mass:
+    // "In lateral retropharyngeal space masses, internal carotid artery is displaced laterally".
+    expect(sign(['ica-back']).Carotid).toBe('Points to a lateral retropharyngeal node')
+    expect(sign(['ica-back', 'splay']).Carotid).toBe('Splayed bifurcation: carotid body paraganglioma')
     expect(sign(['prevertebral'])['Prevertebral muscles']).toBe('Points to the perivertebral space')
   })
 

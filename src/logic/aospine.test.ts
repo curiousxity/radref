@@ -56,14 +56,17 @@ describe('AO Spine subaxial facets (unchecked)', () => {
   })
 })
 
-describe('AO Spine code and sentence (unchecked)', () => {
-  // AO-8: N3 covers the cauda equina in the thoracolumbar system. AO-9: "+" for ongoing compression.
+describe('AO Spine code and sentence', () => {
+  // AO-8, AO-9: both posters give the same neurology grades and "+ Continued spinal cord compression".
   test('neurology', () => {
     // The poster: "N3 Incomplete spinal cord injury or any degree of cauda equina injury".
     expect(aoNeuroDescription('N3', 'thoracolumbar')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
-    expect(aoNeuroDescription('N3', 'subaxial')).toBe('incomplete spinal cord injury')
-    expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N3', compression: true })).toBe('C; N3+')
-    expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C; N4')
+    // The subaxial N3 said "incomplete spinal cord injury" only; the subaxial poster has the same
+    // N3 as the thoracolumbar one, and "+" tied to no grade (was N3 only).
+    expect(aoNeuroDescription('N3', 'subaxial')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
+    expect(aoNeuroDescription('N2')).toBe('radicular symptoms')
+    expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N3', compression: true })).toBe('C (N3+)')
+    expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
     // The thoracolumbar poster lists "+ Continued spinal cord compression" without tying it to N3.
     expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
   })
@@ -75,10 +78,20 @@ describe('AO Spine code and sentence (unchecked)', () => {
     expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'A1' } })).toBe('A1')
   })
 
+  // The subaxial code was the site's own, "B2 (A1); F4 BL; N1; M3". The subaxial poster's examples:
+  // "C6-C7: C (C7: A1)" and "C6-C7: B2 (F4, F2, N2, M3)", and facet injuries alone are "listed first
+  // after the level of injury".
+  test('subaxial code follows the poster', () => {
+    expect(aoCode({ region: 'subaxial', morphology: { type: 'C', body: 'A1' } })).toBe('C (A1)')
+    expect(aoCode({ region: 'subaxial', morphology: { type: 'B2' }, facet: 'F4 right, F2 left', neuro: 'N2', modifiers: ['M3'] })).toBe('B2 (F4 right, F2 left, N2, M3)')
+    expect(aoCode({ region: 'subaxial', facet: 'F4 BL', neuro: 'N1' })).toBe('F4 BL (N1)')
+    expect(aoSentence({ region: 'subaxial', facet: 'F2 right' }, 'C4–C5')).toBe('C4–C5: AO Spine subaxial cervical F2 right: facet injury without a type A, B or C injury.')
+  })
+
   test('the full code and sentence', () => {
     const full = { region: 'subaxial' as const, morphology: { type: 'B2' as const, body: 'A1' as const }, facet: 'F4 BL', neuro: 'N1' as const, modifiers: ['M3'] }
-    expect(aoCode(full)).toBe('B2 (A1); F4 BL; N1; M3')
-    expect(aoSentence(full, 'C5–C6')).toBe('C5–C6: AO Spine subaxial cervical B2 (A1); F4 BL; N1; M3: posterior tension band failure through the ligaments, or through bone and ligament, with a type A1 vertebral body fracture.')
+    expect(aoCode(full)).toBe('B2 (A1, F4 BL, N1, M3)')
+    expect(aoSentence(full, 'C5–C6')).toBe('C5–C6: AO Spine subaxial cervical B2 (A1, F4 BL, N1, M3): posterior tension band failure through the ligaments, or through bone and ligament, with a type A1 vertebral body fracture.')
     expect(aoSentence({ region: 'thoracolumbar', morphology: { type: 'A3' } })).toBe('AO Spine thoracolumbar A3: incomplete burst fracture, through a single endplate and the posterior wall.')
   })
 })

@@ -3,10 +3,9 @@
  * Res 1979), with the type III subtypes as Markhardt et al. (Radiographics 2009) give them.
  * Shared by the Schatzker calculator and the knee MRI study's bones step.
  *
- * Unchecked draft: Schatzker 1979 has no abstract on PubMed, so the types are checked against
- * Markhardt's abstract (claims SZ-1 to SZ-6 in
- * docs/superpowers/research/2026-10-23-knee-mri-sources.md). How type IV is broken (SZ-4) is
- * still unchecked.
+ * Schatzker 1979 has no abstract on PubMed and is paywalled, so the types are checked against
+ * Markhardt's full text (claims SZ-1 to SZ-7 in
+ * docs/superpowers/research/2026-10-23-knee-mri-sources.md).
  */
 
 export type Plateau = 'lateral' | 'medial' | 'both'
@@ -41,7 +40,8 @@ export const schatzkerDescriptions: Record<SchatzkerType, string> = {
   // SZ-3: Markhardt, "compression fracture of the lateral (type IIIA) or central (type IIIB) plateau".
   IIIA: 'compression fracture of the lateral plateau',
   IIIB: 'compression fracture of the central plateau',
-  IV: 'fracture of the medial plateau',
+  // SZ-4, Markhardt: "a medial tibial plateau fracture with a split or depressed component".
+  IV: 'fracture of the medial plateau, split or depressed',
   V: 'bicondylar fracture',
   VI: 'plateau fracture with dissociation of the metaphysis from the diaphysis',
 }

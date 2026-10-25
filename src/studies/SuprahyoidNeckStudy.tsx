@@ -149,7 +149,7 @@ const learn: LearnSection[] = [
         {shiftTable}
         <p>Two more spaces lie behind the pharynx. A retropharyngeal mass lies in front of the prevertebral muscles; a perivertebral mass lifts them forward ({HARNSBERGER}).</p>
         <p>A tumour of the deep lobe of the parotid passes through the stylomandibular tunnel, between the mandible and the styloid process, and widens it. There is no fat plane between it and the parotid. A true prestyloid parapharyngeal mass, most often a pleomorphic adenoma from a minor salivary rest, has fat around it ({SHIN}).</p>
-        <p>A carotid space mass pushes the internal carotid artery forward ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, serpiginous flow voids among areas of high signal give a paraganglioma a salt-and-pepper look; Olsen saw it in every paraganglioma over 2 cm ({OLSEN}).</p>
+        <p>A carotid space mass pushes the parapharyngeal fat forward. A lateral retropharyngeal node can look like one; the key is the internal carotid artery, which a lateral retropharyngeal mass pushes back and out (posterolaterally) ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, serpiginous flow voids among areas of high signal give a paraganglioma a salt-and-pepper look; Olsen saw it in every paraganglioma over 2 cm ({OLSEN}).</p>
         <h3>An infection: the collection and its source</h3>
         <p>Name the collection, the spaces it fills and, where it can be seen, its source: a tooth, the tonsil, a salivary stone or a suppurative node. Note gas. These fields are this site's own.</p>
         <p>In Freling's series of 76 patients thought clinically to have a deep neck abscess, a fluid collection with complete or partial rim enhancement was an abscess in 82% (53 of 65), and fluid without rim enhancement in 67% (8 of 12). Gas in or beside a collection, or much free gas between the fascias, meant an abscess in every case ({FRELING}).</p>
@@ -257,7 +257,7 @@ const fields = {
   massSigns: { id: 'mass-signs', kind: 'multi', label: 'Signs', showIf: massPresent, options: [
     { value: 'tunnel', label: 'Widened stylomandibular tunnel' },
     { value: 'parotid-contact', label: 'No fat plane with the deep lobe of the parotid' },
-    { value: 'ica-forward', label: 'Internal carotid artery pushed forward' },
+    { value: 'ica-back', label: 'Internal carotid artery pushed back and out (posterolaterally)' },
     { value: 'splay', label: 'Internal and external carotid arteries splayed' },
     { value: 'prevertebral', label: 'Prevertebral muscles lifted forward' },
   ] },
@@ -388,9 +388,11 @@ function deriveLesion(values: Values): Derived[] {
     const signs = list(values, 'mass-signs')
     // N2-5: deep-lobe parotid.
     if (signs.includes('tunnel') || signs.includes('parotid-contact')) out.push({ label: 'Parotid', value: 'Points to the deep lobe of the parotid' })
-    // N2-6, N2-7: carotid space and the carotid body.
+    // N2-6: Harnsberger, "In lateral retropharyngeal space masses, internal carotid artery is
+    // displaced laterally"; a lateral retropharyngeal node "displaces internal carotid artery (c)
+    // posterolaterally". N2-7: the carotid body.
     if (signs.includes('splay')) out.push({ label: 'Carotid', value: 'Splayed bifurcation: carotid body paraganglioma', tone: 'warn' })
-    else if (signs.includes('ica-forward')) out.push({ label: 'Carotid', value: 'Points to the carotid space' })
+    else if (signs.includes('ica-back')) out.push({ label: 'Carotid', value: 'Points to a lateral retropharyngeal node' })
     // N2-3: perivertebral.
     if (signs.includes('prevertebral')) out.push({ label: 'Prevertebral muscles', value: 'Points to the perivertebral space' })
     // N2-8: flow voids on MRI, seen in every paraganglioma over 2 cm.
@@ -723,7 +725,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the fat-shift directions and the usual lesions of each space, the deep parotid and carotid bifurcation signs, retropharyngeal edema against abscess, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the deep parotid and carotid bifurcation signs, retropharyngeal edema against abscess, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -743,7 +745,7 @@ const study: StudyDefinition = {
       question: 'Which way does a carotid space mass push the parapharyngeal fat?',
       options: ['Laterally', 'Medially', 'Anteriorly', 'Not at all'],
       answer: 2,
-      explanation: <p>The carotid space lies behind the parapharyngeal fat, so its masses push the fat forward, and the internal carotid artery with it ({HARNSBERGER}).</p>,
+      explanation: <p>The carotid space lies behind the parapharyngeal fat, so its masses push the fat forward ({HARNSBERGER}).</p>,
     },
     {
       id: 'shift-pps',
@@ -755,7 +757,7 @@ const study: StudyDefinition = {
     {
       id: 'tunnel',
       question: 'Which sign points to a deep-lobe parotid tumour rather than a true parapharyngeal mass?',
-      options: ['Fat all round the mass', 'A widened stylomandibular tunnel', 'Flow voids', 'The internal carotid pushed forward'],
+      options: ['Fat all round the mass', 'A widened stylomandibular tunnel', 'Flow voids', 'The parapharyngeal fat pushed forward'],
       answer: 1,
       explanation: <p>A deep-lobe parotid tumour passes through the stylomandibular tunnel and widens it, with no fat plane between it and the parotid ({SHIN}).</p>,
     },

@@ -90,14 +90,14 @@ export function AoSpinePage() {
   const facet = subaxial ? aoFacetCode(form.right === 'none' ? undefined : form.right, form.left === 'none' ? undefined : form.left) : ''
   const modifiers = Object.keys(aoModifiers[form.region]).filter((m) => form.modifiers.includes(m))
   const neuro = form.neuro === 'unknown' ? undefined : form.neuro
-  const full = morphology && {
+  const full = (morphology || facet) ? {
     region: form.region,
     morphology,
     ...(facet ? { facet } : {}),
     ...(neuro ? { neuro } : {}),
     compression: form.compression === 'yes',
     modifiers,
-  }
+  } : undefined
 
   const neuroOptions: { value: AoNeuro | 'unknown'; label: string }[] = [
     { value: 'unknown', label: 'Not given' },
@@ -115,7 +115,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled. The thoracolumbar types, neurology grades, modifiers and notation are checked against AO Spine's own thoracolumbar poster (below); the subaxial facet grades, neurology and modifiers are not yet checked. Not yet reviewed by the site author. Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
+        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below). Not yet reviewed by the site author. Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">
@@ -128,11 +128,11 @@ export function AoSpinePage() {
             <ChoiceGroup label="Posterior tension band" layout="stack" value={form.posterior} options={posteriorOptions} onChange={set('posterior')} />
             <ChoiceGroup label="Vertebral body endplates fractured" layout="row" value={form.endplates} options={endplateOptions} onChange={set('endplates')} />
             {form.endplates !== '0' && <ChoiceGroup label="Posterior wall fractured?" layout="row" value={form.wall} options={yesNo} onChange={set('wall')} />}
-            {form.endplates === '0' && <ChoiceGroup label="Transverse or spinous process fractured?" layout="row" value={form.process} options={yesNo} onChange={set('process')} />}
+            {form.endplates === '0' && <ChoiceGroup label={subaxial ? 'Isolated lamina or spinous process fractured?' : 'Transverse or spinous process fractured?'} layout="row" value={form.process} options={yesNo} onChange={set('process')} />}
             {subaxial && <ChoiceGroup label="Right facet" layout="stack" value={form.right} options={facetOptions} onChange={set('right')} />}
             {subaxial && <ChoiceGroup label="Left facet" layout="stack" value={form.left} options={facetOptions} onChange={set('left')} />}
             <ChoiceGroup label="Neurology (from the examination)" layout="stack" value={form.neuro} options={neuroOptions} onChange={set('neuro')} />
-            {(form.neuro === 'N3' || (!subaxial && form.neuro !== 'unknown')) && <ChoiceGroup label="Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />}
+            {form.neuro !== 'unknown' && <ChoiceGroup label="Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />}
             {modifierOptions.map(([m, text]) => (
               <ChoiceGroup key={`${form.region}-${m}`} label={`${m}: ${text}?`} layout="row" value={form.modifiers.includes(m) ? 'yes' : 'no'} options={yesNo} onChange={toggleModifier(m)} />
             ))}
@@ -146,7 +146,7 @@ export function AoSpinePage() {
               <p className={`result-strip-value tone-${morphology ? (morphology.type === 'A0' ? 'good' : 'warn') : 'neutral'}`}>{full ? aoCode(full) : 'No type'}</p>
             </div>
             <p className="result-strip-summary">
-              {morphology ? `${capitalise(aoGroup(morphology.type))}: ${aoDescriptions[morphology.type]}${morphology.body ? `, with a type ${morphology.body} vertebral body fracture` : ''}.` : 'No injury entered: mark a fracture or a tension band injury.'}
+              {morphology ? `${capitalise(aoGroup(morphology.type))}: ${aoDescriptions[morphology.type]}${morphology.body ? `, with a type ${morphology.body} vertebral body fracture` : ''}.` : (facet ? 'Facet injury only, with no type A, B or C injury: written facets first.' : 'No injury entered: mark a fracture or a tension band injury.')}
             </p>
           </div>
           {full && <CopyBlock label="Impression" text={aoSentence(full)} />}
@@ -168,17 +168,17 @@ export function AoSpinePage() {
             </tbody>
           </table>
         </div>
-        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. For the thoracolumbar spine this page writes the code as the AO Spine poster does, the main type with the secondary injury, neurology and modifiers in brackets: C (A3; N3; M2). The subaxial code keeps this site's own notation, B2 (A3); F4 BL; N1, until its paper is checked. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images.</p>
+        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. This page writes the code as the AO Spine posters do: the main type, then the secondary injury, neurology and modifiers in brackets. The thoracolumbar poster separates them with semicolons, C (A3; N3; M2); the subaxial poster with commas, with the facets after the type A injury, B2 (A1, F4 BL, N2, M3). A subaxial injury with only facet injuries is written facets first. If one facet has more than one injury, only the highest is classified. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images.</p>
       </section>
 
       <section className="info-card">
-        <h3>AO Spine thoracolumbar poster</h3>
-        <p>AO Spine's one-page summary of the thoracolumbar system: the types with drawings, the decision algorithm, neurology, modifiers and how to write the code.</p>
-        <p><a href="/references/aospine-thoracolumbar-poster.pdf" target="_blank" rel="noopener">Open the poster (PDF, 3 MB)</a>. Needs an internet connection.</p>
-        <p className="source-note">AO Spine Thoracolumbar Injury Classification System. © 2020 AO Foundation, AO Spine. Shared unchanged under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 licence</a>. Further information: <a href="https://www.aospine.org/classification" target="_blank" rel="noopener">aospine.org/classification</a>.</p>
+        <h3>AO Spine posters</h3>
+        <p>AO Spine's one-page summaries of each system: the types with drawings, the decision algorithm, facet injuries (neck), neurology, modifiers and how to write the code.</p>
+        <p><a href="/references/aospine-subaxial-poster.pdf" target="_blank" rel="noopener">Subaxial cervical poster (PDF, 2.5 MB)</a> · <a href="/references/aospine-thoracolumbar-poster.pdf" target="_blank" rel="noopener">Thoracolumbar poster (PDF, 3 MB)</a>. Need an internet connection.</p>
+        <p className="source-note">AO Spine Subaxial Injury Classification System and AO Spine Thoracolumbar Injury Classification System. © 2020 AO Foundation, AO Spine. Shared unchanged under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 licence</a>. Further information: <a href="https://www.aospine.org/classification" target="_blank" rel="noopener">aospine.org/classification</a>.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the thoracolumbar wording is checked against AO Spine's poster, the subaxial wording only where the abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the wording is checked against AO Spine's posters for both systems." />
     </div>
   )
 }

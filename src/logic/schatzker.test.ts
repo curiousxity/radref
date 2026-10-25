@@ -4,8 +4,7 @@ import { schatzker, schatzkerSentence } from './schatzker'
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-knee-mri-sources.md.
  * Schatzker et al. (Clin Orthop Relat Res 1979) has no abstract on PubMed, so the types are
- * checked against the abstract of Markhardt et al. (Radiographics 2009), quoted per case. How
- * type IV is broken (SZ-4) is still unchecked.
+ * checked against Markhardt et al. (Radiographics 2009), quoted per case.
  */
 
 const type = (input: Parameters<typeof schatzker>[0]) => schatzker(input)?.type
@@ -33,7 +32,8 @@ describe('Schatzker types (unchecked)', () => {
   })
 
   test('medial plateau is type IV, whatever the pattern', () => {
-    // SZ-4: "medial plateau fracture (type IV)" (Markhardt).
+    // SZ-4: "A Schatzker type IV fracture is a medial tibial plateau fracture with a split or
+    // depressed component" (Markhardt, full text).
     expect(type({ plateau: 'medial', dissociation: false })).toBe('IV')
     expect(type({ plateau: 'medial', pattern: 'depression', dissociation: false })).toBe('IV')
   })
