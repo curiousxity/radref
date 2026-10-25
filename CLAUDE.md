@@ -388,7 +388,7 @@ citations were from memory. The claims are listed in
 to deploy them before that check (2026-10-23), so they are live with the "Unchecked draft"
 note. The foot, diabetic
 foot and spine drafts followed later the same day and were deployed the same way. The pelvis
-drafts followed after that and are on the branch only until the author says to merge them.
+drafts followed after that and were deployed on 2026-10-24, after their sources check.
 
 The check was done on 2026-10-23 on a computer, for all of these drafts. Every reference was
 matched on PubMed and Crossref, citation errors were fixed, and the DOIs and `<Cite>` links
