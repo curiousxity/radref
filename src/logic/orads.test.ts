@@ -12,6 +12,7 @@ const us: OradsForm = {
   menopausal: 'postmenopausal',
   sizeCm: '5',
   cystType: 'simple',
+  classicType: 'hemorrhagic',
   solidComponent: false,
   papillaryProjections: 0,
   locules: 1,
@@ -163,5 +164,69 @@ describe('O-RADS US v2022: branches added with the v2022 corrections', () => {
     ['irregular solid lesion, CS 4', { cystType: 'solid' as const, colorScore: '4' as const, smoothContour: false }, 'O-RADS 5'],
   ])('%s is %s', (_label, over, expected) => {
     expect(cat(over)).toBe(expected)
+  })
+})
+
+/*
+ * Management from the O-RADS US v2022 Assessment Categories chart. The calculator used to say
+ * only "Management depends on size and menopausal status" (2) and "Follow-up imaging may be
+ * appropriate" (3). The author's decision (2026-10-25): the guideline's follow-up intervals go in
+ * the calculators, so each category now carries the chart's management.
+ * - Simple cyst: ">3 cm to 5 cm: None [pre] / Follow-up US in 12 months [post]"; ">5 cm but <10 cm:
+ *   Follow-up US in 12 months".
+ * - Unilocular smooth non-simple cyst: "≤3 cm: None [pre] / Follow-up US in 12 months [post]";
+ *   ">3 cm but <10 cm: Follow-up US in 6 months".
+ * - 3: "If not surgically excised, consider follow-up US within 6 months"; "If solid, may consider
+ *   US specialist (if available) or MRI"; 4: "US specialist (if available) or MRI ... or Per
+ *   gyn-oncologist protocol"; 5: "Imaging: Per gyn-oncologist protocol. Clinical: Gyn-oncologist".
+ * - Classic benign lesions: hemorrhagic cyst premenopausal "≤5 cm: None; >5 cm but <10 cm:
+ *   Follow-up US in 2–3 months"; dermoid "≤3 cm: May consider follow-up US in 12 months"; typical
+ *   paraovarian cyst "Imaging: None"; "Typical benign extraovarian lesion ... Any size" is 2.
+ */
+describe('O-RADS US v2022 management', () => {
+  const rec = (over: Partial<OradsForm>) => calculateOrads({ ...us, ...over }).recommendation
+
+  it.each([
+    ['simple cyst 4 cm, premenopausal', { menopausal: 'premenopausal' as const, sizeCm: '4' }, 'No imaging follow-up'],
+    ['simple cyst 4 cm, postmenopausal', { sizeCm: '4' }, 'Follow-up US in 12 months'],
+    ['simple cyst 3 cm, postmenopausal', { sizeCm: '3' }, 'No imaging follow-up'],
+    ['simple cyst 6 cm, premenopausal', { menopausal: 'premenopausal' as const, sizeCm: '6' }, 'Follow-up US in 12 months'],
+    ['nonsimple cyst 3 cm, premenopausal', { cystType: 'nonsimple' as const, menopausal: 'premenopausal' as const, sizeCm: '3' }, 'No imaging follow-up'],
+    ['nonsimple cyst 3 cm, postmenopausal', { cystType: 'nonsimple' as const, sizeCm: '3' }, 'Follow-up US in 12 months'],
+    ['nonsimple cyst 4 cm', { cystType: 'nonsimple' as const, sizeCm: '4' }, 'Follow-up US in 6 months'],
+  ])('%s: %s', (_label, over, expected) => {
+    expect(rec(over)).toContain(expected)
+  })
+
+  it('a category 2 follow-up says what to do after it', () => {
+    expect(rec({ sizeCm: '6' })).toContain('if stable, follow-up US at 24 months from the initial exam')
+  })
+
+  it('asks for the size before giving a category 2 interval', () => {
+    expect(rec({ cystType: 'nonsimple', sizeCm: '' })).toBe('Enter the size: the O-RADS US follow-up depends on it.')
+  })
+
+  it('categories 3 to 5 carry the chart management', () => {
+    expect(rec({ sizeCm: '10' })).toContain('consider follow-up US within 6 months')
+    expect(rec({ cystType: 'solid', colorScore: '1' })).toContain('MRI with an O-RADS MRI score may be considered')
+    expect(rec({ cystType: 'solid', colorScore: '2' })).toContain('gyn-oncologist consultation')
+    expect(rec({ ascites: true })).toContain("Imaging per the gyn-oncologist's protocol")
+  })
+
+  it.each([
+    ['hemorrhagic cyst 5 cm, premenopausal', { classicType: 'hemorrhagic' as const, menopausal: 'premenopausal' as const, sizeCm: '5' }, 'No imaging follow-up'],
+    ['hemorrhagic cyst 6 cm, premenopausal', { classicType: 'hemorrhagic' as const, menopausal: 'premenopausal' as const, sizeCm: '6' }, 'Follow-up US in 2-3 months'],
+    ['hemorrhagic cyst, postmenopausal', { classicType: 'hemorrhagic' as const }, 'should not occur'],
+    ['dermoid 3 cm', { classicType: 'dermoid' as const, sizeCm: '3' }, 'May consider follow-up US in 12 months'],
+    ['dermoid 4 cm', { classicType: 'dermoid' as const, sizeCm: '4' }, 'If not surgically excised, follow-up US in 12 months'],
+    ['endometrioma, postmenopausal', { classicType: 'endometrioma' as const }, 'follow-up US in 2-3 months'],
+    ['paraovarian cyst', { classicType: 'paraovarian' as const }, 'No imaging follow-up'],
+  ])('classic benign: %s', (_label, over, expected) => {
+    expect(rec({ cystType: 'classicBenign', ...over })).toContain(expected)
+  })
+
+  it('a classic benign extraovarian lesion stays O-RADS 2 at 10 cm or more', () => {
+    expect(cat({ cystType: 'classicBenign', classicType: 'hydrosalpinx', sizeCm: '12' })).toBe('O-RADS 2')
+    expect(cat({ cystType: 'classicBenign', classicType: 'dermoid', sizeCm: '12' })).toBe('O-RADS 3')
   })
 })

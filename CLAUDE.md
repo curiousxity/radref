@@ -212,15 +212,20 @@ standard report sections, correctly capitalised and punctuated:
 - The pancreatic cyst calculator and the incidental findings page's pancreatic cyst tool use the
   ACR 2017 intervals from the pancreatic cysts study's lesson (`acrSurveillance` in
   `src/logic/pancreaticCyst.ts`), shared with that study.
-- Follow-up intervals still to check against the guidelines' full text are tracked in
-  `docs/REMAINING_TASKS.md`.
+- Every calculator's follow-up intervals were checked against the guidelines' full text on
+  2026-10-25 (`docs/REMAINING_TASKS.md`, "Calculator follow-up intervals", which also lists the
+  questions still open for the author). The early pregnancy loss rules
+  (`src/logic/earlyPregnancyLoss.ts`) and the incidental adrenal and renal tools
+  (`src/logic/incidentalAdrenal.ts`, `src/logic/incidentalRenal.ts`, rebuilt from the ACR white
+  papers' flowcharts) live in `src/logic/` with tests. O-RADS US gives the v2022 chart's management
+  for every category, with a classic benign lesion type.
 
 ## Current calculators
 
 - TI-RADS
 - LI-RADS
 - O-RADS
-- Incidental findings (adrenal, pancreatic cyst, renal mass)
+- Incidental findings (adrenal, pancreatic cyst, renal mass; ACR white paper flowcharts)
 - Lung-RADS
 - Fleischner 2017 (incidental pulmonary nodule follow-up; Lung-RADS covers screening LDCT)
 - Bosniak 2019

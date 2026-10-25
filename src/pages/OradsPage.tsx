@@ -10,6 +10,7 @@ const initialForm: OradsForm = {
   menopausal: 'premenopausal',
   sizeCm: '',
   cystType: 'simple',
+  classicType: 'hemorrhagic',
   solidComponent: false,
   papillaryProjections: 0,
   locules: 1,
@@ -63,6 +64,12 @@ export function OradsPage() {
               <span className="term">Morphology<Definition text="The lesion's overall ultrasound/MRI structure — for example a simple cyst, a unilocular cyst with a solid or papillary component, a multilocular cyst, or a solid mass — which drives the O-RADS risk category." /></span>
               <select value={form.cystType} onChange={(e) => updateField('cystType', e.target.value as OradsForm['cystType'])}><option value="simple">Simple cyst</option><option value="nonsimple">Nonsimple unilocular cyst</option><option value="solid">Solid lesion</option><option value="classicBenign">Classic benign lesion</option><option value="multilocular">Multilocular lesion</option><option value="indeterminate">Indeterminate lesion</option></select>
             </label>
+            {isUs && form.cystType === 'classicBenign' && (
+              <label>
+                <span className="term">Classic benign lesion<Definition text="The O-RADS US Classic Benign Lesions table: each lesion has its own follow-up. Paraovarian cysts, peritoneal inclusion cysts and hydrosalpinx are extraovarian, so they stay O-RADS 2 at any size." /></span>
+                <select value={form.classicType} onChange={(e) => updateField('classicType', e.target.value as OradsForm['classicType'])}><option value="hemorrhagic">Hemorrhagic cyst</option><option value="dermoid">Dermoid cyst</option><option value="endometrioma">Endometrioma</option><option value="paraovarian">Paraovarian cyst</option><option value="inclusion">Peritoneal inclusion cyst</option><option value="hydrosalpinx">Hydrosalpinx</option></select>
+              </label>
+            )}
             {isUs && (
               <label>
                 <span className="term">Color score<Definition text="Color Doppler score reflecting the amount of blood flow within solid or papillary components; higher scores indicate more vascularity." /></span>

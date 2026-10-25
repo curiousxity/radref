@@ -343,38 +343,48 @@ every claim read before it went in; the table is
 
 The author asked (2026-10-25) for every calculator's copy boxes to be the standard report sections
 (done: see CLAUDE.md, "Copy boxes") and for every guideline follow-up interval to be in the
-calculators, checked against the guideline. The guidelines' full text is paywalled or on hosts
-this environment cannot reach, so the check is still to do. Tested 2026-10-25 after the author
-allowed www.acr.org, pubs.rsna.org, www.jacr.org, escholarship.org and spiral.imperial.ac.uk:
-acr.org's pages load, but its PDFs are served from `edge.sitecorecloud.io` and `files.acr.org`,
-which the environment still blocks (those two would unlock TI-RADS, Lung-RADS, LI-RADS and
-O-RADS US). pubs.rsna.org and jacr.org answer with a Cloudflare bot check and escholarship.org
-with a CloudFront 403, so Fleischner, Bosniak, the SRU adnexal paper, Doubilet (NEJM) and the
-three JACR white papers need the author's PDFs. Bosniak 2019 is in PubMed Central
-(PMC6677285), but efetch gives only the abstract and the PMC page shows a reCAPTCHA. Done so far: the pancreatic cyst calculator
-and the incidental page's pancreatic cyst tool now use the pancreatic cysts study's ACR 2017
-intervals, and LI-RADS and O-RADS now show their recommendation in a copy box.
+calculators, checked against the guideline. Checked on 2026-10-25 against the full texts: the ACR
+PDFs (once `edge.sitecorecloud.io` was allowed) and the author's PDFs of MacMahon 2017, Silverman
+2019, Levine 2019, Doubilet 2013, Mayo-Smith 2017, Herts 2018 and Megibow 2017 (pubs.rsna.org,
+jacr.org and escholarship.org refuse automated requests even when allowed).
 
-- [ ] TI-RADS (Tessler 2017): FNA thresholds and follow-up at 1, 3, 5 years (TR3), 1, 2, 3, 5
-  (TR4), yearly to 5 years (TR5). Check against the white paper.
-- [ ] Lung-RADS v2022: 12-month, 6-month, 3-month, 1-3 month LDCT. Check against the ACR table.
-- [ ] Fleischner 2017: the intervals in `src/logic/fleischner.ts`. Check against MacMahon 2017.
-- [ ] Bosniak 2019: IIF at 6 months, 12 months, then yearly for 5 years. Check against Silverman 2019.
-- [ ] LI-RADS v2018: LR-1 and LR-2 surveillance in 6 months, LR-3 3-6 months, LR-NC 3 months or
-  less. Check against the v2018 core.
-- [ ] SRU simple adnexal cysts 2019: the intervals in the page's table. Check against Levine 2019.
-  The abstract (PMID 31549945) matches the page's thresholds (postmenopausal: report over 1 cm,
-  follow up over 3-5 cm; premenopausal: 3 cm and over 5-7 cm) and the 2-year follow-up for a
-  cyst stable at first follow-up; the 3-6 and 6-12 month intervals need the full text.
-- [ ] Early pregnancy loss: the page says follow-up ultrasound in 7 to 14 days for suspicious
-  findings; Doubilet 2013 may say 7 to 10 days. Check against the paper before changing.
-- [ ] O-RADS US 2020: categories 2 and 3 say only "depends on size and menopausal status" and
-  "follow-up imaging may be appropriate"; the guideline gives intervals by size and menopausal
-  status. Add them from Andreotti 2020.
-- [ ] Incidental adrenal mass (Mayo-Smith 2017) and incidental renal mass (Herts 2018): the page
-  gives no intervals. Add the white papers' intervals.
-- [ ] ACR 2017 pancreatic cysts: the study's intervals (now shared with the calculators) come from
-  the author's lesson; check them against Megibow 2017's charts.
+- [x] TI-RADS: matches the ACR TI-RADS reporting template (TR3 1.5-2.4 cm at 1, 3 and 5 years; TR4
+  1-1.4 cm at 1, 2, 3 and 5 years; TR5 0.5-0.9 cm every year for 5 years).
+- [x] Lung-RADS v2022: matches the ACR table.
+- [x] Fleischner 2017: matches MacMahon 2017, Table 1.
+- [x] Bosniak 2019: IIF changed to Table 4's "then annually for a total of 5 years" (it said
+  "annually for 5 years").
+- [x] LI-RADS v2018: matches the v2018 core management chart.
+- [x] SRU simple adnexal cysts: matches Levine 2019, Tables 1 and 2.
+- [x] Early pregnancy loss: changed to Doubilet's 7 to 10 days (Table 3 footnote); the page said 7
+  to 14. The logic moved to `src/logic/earlyPregnancyLoss.ts` so it could be tested.
+- [x] O-RADS US: every category now carries the v2022 chart's management, including the Classic
+  Benign Lesions table (new lesion-type choice); extraovarian classic lesions stay O-RADS 2 at any
+  size.
+- [x] Incidental adrenal and renal masses: rebuilt from the white papers' flowcharts in
+  `src/logic/incidentalAdrenal.ts` and `src/logic/incidentalRenal.ts`, with their intervals.
+- [x] ACR 2017 pancreatic cysts: Charts 1, 2A, 2B and 4 (2.5 cm or less) match Megibow's figures.
+
+Questions for the author, found in the check and not changed:
+
+- [ ] Pancreatic cysts, Chart 3 (over 2.5 cm, low risk): the paper gives "reimage every 6 months x 4;
+  if stable over the first 2 years, yearly x 2, then every 2 years x 3; stop if stable over 10
+  years". The lesson, and so the study and the calculator, say only "careful follow-up". Add it?
+- [ ] Pancreatic cysts, Chart 4 (80 or older, over 2.5 cm, low risk): the paper gives "reimage every 2
+  years x 2, stop if stable"; the lesson gives no interval. Add it?
+- [ ] Pancreatic cysts, Chart 1 at 65-79: the chart says "STOP if stable over 10 years"; the lesson
+  says "stop if still under 1.5 cm over 10 years" (the chart's wording after growth).
+- [ ] TI-RADS: the calculator adds follow-up advice for nodules at the FNA size ("If observed instead,
+  follow-up ultrasound is typically at 1, 2, 3, and 5 years"; TR3 "Ultrasound follow-up may also be
+  considered"; TR5 "If observed, annual follow-up for up to 5 years"). The ACR template gives
+  follow-up only for the size band below the FNA threshold. Keep or remove?
+- [ ] Bosniak III and IV: the calculator says "Urologic consultation and individualized management
+  should be considered" and "Urologic referral and definitive management should be considered";
+  Silverman's Table 4 says "If not already obtained, consider urology consultation." Match it?
+- [ ] O-RADS US classification (not intervals): a smooth bilocular cyst under 10 cm without a solid
+  component is O-RADS 2 in v2022, but the calculator's multilocular branch makes it 3; and a
+  unilocular cyst with an irregular inner wall is O-RADS 3 at any size, but the calculator has no
+  input for it. Fix both?
 
 ## Housekeeping
 

@@ -1,18 +1,14 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { classifyAdrenal, initialAdrenalForm } from '../logic/incidentalAdrenal'
+import type { AdrenalPrior, IncidentalResult } from '../logic/incidentalAdrenal'
 import { classifyPancreaticCyst } from '../logic/pancreaticCyst'
 import type { AgeBand, DuctCommunication } from '../logic/pancreaticCyst'
+import { classifyRenal, initialRenalForm } from '../logic/incidentalRenal'
+import type { RenalAppearance, RenalCharacterized, RenalExam } from '../logic/incidentalRenal'
 
 type Tool = 'adrenal' | 'pancreas' | 'renal'
-
-type AdrenalForm = {
-  sizeCm: string
-  densityHu: string
-  benignFeatures: boolean
-  priorStable: boolean
-  cancerHistory: boolean
-}
 
 type PancreasForm = {
   sizeCm: string
@@ -23,75 +19,10 @@ type PancreasForm = {
   growth: boolean
 }
 
-type RenalForm = {
-  sizeCm: string
-  simpleCyst: boolean
-  macroscopicFat: boolean
-  enhancement: boolean
-  homogeneousHyperdense: boolean
-}
-
-const initialAdrenal: AdrenalForm = { sizeCm: '', densityHu: '', benignFeatures: false, priorStable: false, cancerHistory: false }
 const initialPancreas: PancreasForm = { sizeCm: '', ageBand: '65-79', ductCommunication: 'indeterminate', highRisk: false, worrisome: false, growth: false }
-const initialRenal: RenalForm = { sizeCm: '', simpleCyst: false, macroscopicFat: false, enhancement: false, homogeneousHyperdense: false }
-
-function num(v: string) {
-  const n = Number(v)
-  return Number.isFinite(n) ? n : 0
-}
-
-function adrenalLogic(form: AdrenalForm) {
-  const size = num(form.sizeCm)
-  const hu = num(form.densityHu)
-
-  if (size < 1) {
-    return {
-      category: 'Benign',
-      reason: 'Adrenal masses smaller than 1 cm generally do not require further evaluation.',
-      rec: 'No additional imaging is usually required.',
-      impression: 'Subcentimeter incidental adrenal nodule without specific suspicious features.',
-    }
-  }
-
-  if (form.benignFeatures || form.priorStable) {
-    return {
-      category: 'Benign',
-      reason: 'Diagnostic benign imaging features or prior stability support benignity.',
-      rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental adrenal lesion with benign imaging features or documented stability.',
-    }
-  }
-
-  if (!form.cancerHistory && size <= 4 && hu <= 10) {
-    return {
-      category: 'Likely adenoma',
-      reason: 'Small lesion with low attenuation is compatible with a lipid-rich adenoma.',
-      rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental adrenal lesion is low attenuation and compatible with benign adenoma.',
-    }
-  }
-
-  if (size > 4) {
-    return {
-      category: 'Concerning',
-      reason: 'Lesions larger than 4 cm are more concerning and often need dedicated evaluation or resection consideration.',
-      rec: 'Dedicated adrenal protocol imaging and surgical or endocrine evaluation should be considered.',
-      impression: 'Incidental adrenal mass larger than 4 cm.',
-    }
-  }
-
-  return {
-    category: 'Indeterminate',
-    reason: 'Indeterminate adrenal lesion based on size, attenuation, or clinical history.',
-    rec: form.cancerHistory
-      ? 'Dedicated adrenal imaging, PET-CT, or biopsy may be appropriate depending on the clinical setting.'
-      : 'Dedicated adrenal CT or MRI should be considered for further characterization.',
-    impression: 'Indeterminate incidental adrenal lesion.',
-  }
-}
 
 /** The pancreatic cyst tool is the pancreatic cyst calculator's logic, with its ACR intervals. */
-function pancreasLogic(form: PancreasForm) {
+function pancreasLogic(form: PancreasForm): IncidentalResult {
   const result = classifyPancreaticCyst({
     sizeCm: form.sizeCm,
     ageBand: form.ageBand,
@@ -102,63 +33,8 @@ function pancreasLogic(form: PancreasForm) {
     alternativeDiagnosis: 'none',
     symptomsOrPancreatitis: false,
   })
-  return { category: result.category, reason: result.reason, rec: result.management, impression: result.impression }
-}
-
-function renalLogic(form: RenalForm) {
-  const size = num(form.sizeCm)
-
-  if (form.simpleCyst) {
-    return {
-      category: 'Benign cyst',
-      reason: 'Simple cystic features are benign.',
-      rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental renal lesion has simple cyst features.',
-    }
-  }
-
-  if (form.macroscopicFat) {
-    return {
-      category: 'AML pattern',
-      reason: 'Macroscopic fat strongly suggests angiomyolipoma.',
-      rec: 'Management depends on size and symptoms, but malignancy is unlikely.',
-      impression: 'Incidental renal lesion contains macroscopic fat, compatible with angiomyolipoma.',
-    }
-  }
-
-  if (!form.enhancement && form.homogeneousHyperdense) {
-    return {
-      category: 'Likely benign',
-      reason: 'Nonenhancing homogeneous hyperdense lesion may be a benign hyperdense cyst.',
-      rec: 'Further characterization may be unnecessary if fully characterized; otherwise consider protocol imaging.',
-      impression: 'Incidental renal lesion is nonenhancing and homogeneous, favoring a benign hyperdense cyst if adequately characterized.',
-    }
-  }
-
-  if (form.enhancement) {
-    return {
-      category: 'Enhancing mass',
-      reason: 'Enhancement raises concern for neoplasm.',
-      rec: 'Dedicated renal mass protocol CT or MRI and urologic evaluation should be considered.',
-      impression: 'Enhancing incidental renal mass.',
-    }
-  }
-
-  return {
-    category: 'Indeterminate',
-    reason: 'Lesion is not fully characterized.',
-    rec: size < 1.5
-      ? 'MRI is often preferred for smaller indeterminate renal masses.'
-      : 'Dedicated renal mass protocol CT or MRI should be considered.',
-    impression: 'Indeterminate incidental renal lesion.',
-  }
-}
-
-function toneForCategory(category: string): 'good' | 'warn' | 'accent' {
-  const lower = category.toLowerCase()
-  if (lower.includes('benign') || lower.includes('adenoma') || lower.includes('aml')) return 'good'
-  if (lower.includes('concerning') || lower.includes('high') || lower.includes('enhancing')) return 'warn'
-  return 'accent'
+  const tone = result.category === 'High risk' || result.category === 'Worrisome' ? 'warn' : result.category === 'Awaiting size' ? 'neutral' : 'accent'
+  return { category: result.category, tone, reason: result.reason, recommendation: result.management, impression: result.impression }
 }
 
 const sourceLinks: Record<Tool, { href: string; label: string }> = {
@@ -188,6 +64,32 @@ const ductCommunicationOptions: { value: DuctCommunication; label: string }[] = 
   { value: 'indeterminate', label: 'Indeterminate' },
 ]
 
+const priorOptions: { value: AdrenalPrior; label: string }[] = [
+  { value: 'none', label: 'No prior imaging' },
+  { value: 'stable', label: 'Stable 1 year or more' },
+  { value: 'growing', label: 'New or enlarging' },
+]
+
+const examOptions: { value: RenalExam; label: string }[] = [
+  { value: 'unenhanced', label: 'Unenhanced CT only' },
+  { value: 'enhanced', label: 'Contrast-enhanced CT only' },
+  { value: 'protocol', label: 'CT or MRI without and with contrast' },
+]
+
+const appearanceOptions: { value: RenalAppearance; label: string }[] = [
+  { value: 'homogeneous', label: 'Homogeneous' },
+  { value: 'heterogeneous', label: 'Heterogeneous' },
+  { value: 'tstc', label: 'Too small to characterize' },
+]
+
+const characterizedOptions: { value: RenalCharacterized; label: string }[] = [
+  { value: 'solid', label: 'Solid' },
+  { value: 'bosniakI-II', label: 'Bosniak I or II' },
+  { value: 'bosniakIIF', label: 'Bosniak IIF' },
+  { value: 'bosniakIII-IV', label: 'Bosniak III or IV' },
+  { value: 'tstc', label: 'Too small to characterize' },
+]
+
 const toolOptions: { value: Tool; label: string }[] = [
   { value: 'adrenal', label: 'Adrenal incidentaloma' },
   { value: 'pancreas', label: 'Pancreatic cyst' },
@@ -196,20 +98,20 @@ const toolOptions: { value: Tool; label: string }[] = [
 
 export function IncidentalPage() {
   const [tool, setTool] = useState<Tool>('adrenal')
-  const [adrenal, setAdrenal] = useState(initialAdrenal)
+  const [adrenal, setAdrenal] = useState(initialAdrenalForm)
   const [pancreas, setPancreas] = useState(initialPancreas)
-  const [renal, setRenal] = useState(initialRenal)
+  const [renal, setRenal] = useState(initialRenalForm)
 
   const result = useMemo(() => {
-    if (tool === 'adrenal') return adrenalLogic(adrenal)
+    if (tool === 'adrenal') return classifyAdrenal(adrenal)
     if (tool === 'pancreas') return pancreasLogic(pancreas)
-    return renalLogic(renal)
+    return classifyRenal(renal)
   }, [tool, adrenal, pancreas, renal])
 
   function handleReset() {
-    setAdrenal(initialAdrenal)
+    setAdrenal(initialAdrenalForm)
     setPancreas(initialPancreas)
-    setRenal(initialRenal)
+    setRenal(initialRenalForm)
   }
 
   return (
@@ -240,15 +142,12 @@ export function IncidentalPage() {
                 </label>
                 <label className="check-row">
                   <input type="checkbox" checked={adrenal.benignFeatures} onChange={(e) => setAdrenal({ ...adrenal, benignFeatures: e.target.checked })} />
-                  Diagnostic benign features
+                  Diagnostic benign features (myelolipoma, no enhancement, benign calcified mass)
                 </label>
-                <label className="check-row">
-                  <input type="checkbox" checked={adrenal.priorStable} onChange={(e) => setAdrenal({ ...adrenal, priorStable: e.target.checked })} />
-                  Prior stability
-                </label>
+                <ChoiceGroup label="Prior imaging" layout="stack" value={adrenal.prior} options={priorOptions} onChange={(value) => setAdrenal({ ...adrenal, prior: value })} />
                 <label className="check-row">
                   <input type="checkbox" checked={adrenal.cancerHistory} onChange={(e) => setAdrenal({ ...adrenal, cancerHistory: e.target.checked })} />
-                  History of extra-adrenal malignancy
+                  History of cancer, with no other metastatic disease
                 </label>
               </>
             )}
@@ -279,25 +178,52 @@ export function IncidentalPage() {
             {tool === 'renal' && (
               <>
                 <label>
-                  <span>Lesion size (cm)</span>
+                  <span>Size, largest diameter (cm)</span>
                   <input type="number" step="0.1" inputMode="decimal" value={renal.sizeCm} onChange={(e) => setRenal({ ...renal, sizeCm: e.target.value })} />
                 </label>
                 <label className="check-row">
-                  <input type="checkbox" checked={renal.simpleCyst} onChange={(e) => setRenal({ ...renal, simpleCyst: e.target.checked })} />
-                  Simple cyst features
+                  <input type="checkbox" checked={renal.fat} onChange={(e) => setRenal({ ...renal, fat: e.target.checked })} />
+                  Contains fat (a region of interest below -10 HU)
                 </label>
-                <label className="check-row">
-                  <input type="checkbox" checked={renal.macroscopicFat} onChange={(e) => setRenal({ ...renal, macroscopicFat: e.target.checked })} />
-                  Macroscopic fat
-                </label>
-                <label className="check-row">
-                  <input type="checkbox" checked={renal.enhancement} onChange={(e) => setRenal({ ...renal, enhancement: e.target.checked })} />
-                  Enhancement present
-                </label>
-                <label className="check-row">
-                  <input type="checkbox" checked={renal.homogeneousHyperdense} onChange={(e) => setRenal({ ...renal, homogeneousHyperdense: e.target.checked })} />
-                  Homogeneous hyperdense nonenhancing lesion
-                </label>
+                {renal.fat ? (
+                  <>
+                    <label className="check-row">
+                      <input type="checkbox" checked={renal.fatCalcification} onChange={(e) => setRenal({ ...renal, fatCalcification: e.target.checked })} />
+                      Also contains calcification
+                    </label>
+                    <label className="check-row">
+                      <input type="checkbox" checked={renal.fatMultipleOrGrowing} onChange={(e) => setRenal({ ...renal, fatMultipleOrGrowing: e.target.checked })} />
+                      Multiple, or growing on old studies
+                    </label>
+                    <label className="check-row">
+                      <input type="checkbox" checked={renal.fatSymptoms} onChange={(e) => setRenal({ ...renal, fatSymptoms: e.target.checked })} />
+                      Symptoms (hematuria, flank pain, spontaneous bleeding)
+                    </label>
+                  </>
+                ) : (
+                  <>
+                    <ChoiceGroup label="Examination" layout="stack" value={renal.exam} options={examOptions} onChange={(value) => setRenal({ ...renal, exam: value })} />
+                    {renal.exam === 'protocol'
+                      ? <ChoiceGroup label="Mass" layout="stack" value={renal.characterized} options={characterizedOptions} onChange={(value) => setRenal({ ...renal, characterized: value })} />
+                      : <ChoiceGroup label="Appearance" layout="stack" value={renal.appearance} options={appearanceOptions} onChange={(value) => setRenal({ ...renal, appearance: value })} />}
+                    {renal.exam !== 'protocol' && renal.appearance === 'homogeneous' && (
+                      <label>
+                        <span>Density (HU)</span>
+                        <input type="number" step="1" inputMode="decimal" value={renal.densityHu} onChange={(e) => setRenal({ ...renal, densityHu: e.target.value })} />
+                      </label>
+                    )}
+                    {(renal.exam === 'protocol' ? renal.characterized === 'tstc' : renal.appearance === 'tstc') && (
+                      <label className="check-row">
+                        <input type="checkbox" checked={renal.tstcBenignLooking} onChange={(e) => setRenal({ ...renal, tstcBenignLooking: e.target.checked })} />
+                        Well circumscribed, homogeneous, and visually much lower (or, unenhanced, much higher) than the renal parenchyma
+                      </label>
+                    )}
+                    <label className="check-row">
+                      <input type="checkbox" checked={renal.stableFiveYears} onChange={(e) => setRenal({ ...renal, stableFiveYears: e.target.checked })} />
+                      Unchanged for 5 years or more, growing 3 mm a year or less
+                    </label>
+                  </>
+                )}
               </>
             )}
           </div>
@@ -307,12 +233,12 @@ export function IncidentalPage() {
           <h3 className="sr-only">Result</h3>
           <div className="result-strip">
             <div className="result-strip-head">
-              <p className={`result-strip-value result-strip-value--phrase tone-${toneForCategory(result.category)}`}>{result.category}</p>
+              <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.category}</p>
             </div>
             <p className="result-strip-summary">{result.reason}</p>
           </div>
           {result.impression && <CopyBlock label="Impression" text={result.impression} />}
-          {result.rec && <CopyBlock label="Recommendation" text={result.rec} />}
+          {result.recommendation && <CopyBlock label="Recommendation" text={result.recommendation} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

@@ -105,11 +105,14 @@ describe('Bosniak 2019: class IV', () => {
 
 // The author's decision (2026-10-25): the recommendation is its own report section, so the IIF
 // impression names the class and the follow-up schedule sits in `management` (the page's
-// Recommendation box).
+// Recommendation box). Silverman 2019, Table 4: "Generally, Bosniak IIF masses are followed by
+// imaging at 6 months and 12 months, then annually for a total of 5 years to assess for
+// morphologic change." The old text said "then annually for 5 years", which reads as five more
+// years after the first 12 months.
 describe('Bosniak 2019: impression and recommendation are separate', () => {
   it('IIF', () => {
     const r = classify({ ...initialBosniakForm, ...enh, wallThickness: 'minimallyThick' })
     expect(r.impression).toBe('Cystic renal mass is compatible with Bosniak IIF.')
-    expect(r.management).toBe('Follow-up imaging is generally recommended at 6 months, 12 months, then annually for 5 years.')
+    expect(r.management).toBe('Bosniak IIF masses are generally followed by imaging at 6 months and 12 months, then annually for a total of 5 years, to assess for morphologic change, per Bosniak v2019.')
   })
 })

@@ -1,6 +1,8 @@
 export type OradsModality = 'us' | 'mri'
 export type OradsMenopausal = 'premenopausal' | 'postmenopausal'
 export type OradsCystType = 'simple' | 'nonsimple' | 'solid' | 'classicBenign' | 'multilocular' | 'indeterminate'
+/** The O-RADS US v2022 "Classic Benign Lesions" table; the last three are extraovarian. */
+export type OradsClassicType = 'hemorrhagic' | 'dermoid' | 'endometrioma' | 'paraovarian' | 'inclusion' | 'hydrosalpinx'
 /** O-RADS US colour score: 1 is no flow, 4 is very strong flow. */
 export type OradsColorScore = '1' | '2' | '3' | '4'
 export type OradsEnhancement = 'none' | 'minimal' | 'moderate' | 'marked'
@@ -9,6 +11,8 @@ export type OradsForm = {
   menopausal: OradsMenopausal
   sizeCm: string
   cystType: OradsCystType
+  /** Which classic benign lesion, when `cystType` is 'classicBenign'. */
+  classicType: OradsClassicType
   solidComponent: boolean
   papillaryProjections: number
   locules: number
