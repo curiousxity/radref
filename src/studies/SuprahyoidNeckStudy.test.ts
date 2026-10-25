@@ -7,9 +7,10 @@ const study = studyOf(SuprahyoidNeckStudyPage)
 
 /*
  * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). None has been
- * checked against its paper yet (PubMed was unreachable), so when the check is done a case may
- * have to change; say in that commit why the old expectation was wrong.
+ * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). The references
+ * are matched, but only the claims marked verified there were read in their papers; when the
+ * rest are checked a case may have to change; say in that commit why the old expectation was
+ * wrong.
  */
 
 describe('suprahyoid neck lesson', () => {
@@ -17,11 +18,16 @@ describe('suprahyoid neck lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'lesion', 'spread', 'nodes', 'impression'])
   })
 
-  // Pins the unchecked state so it cannot be lost by accident.
-  test('is marked as an unchecked draft, with no DOI on any reference yet', () => {
+  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // unchecked, so the note keeps saying so. Estrera 1983 and Russo 1997 are the exceptions:
+  // neither PubMed nor Crossref has a DOI for them.
+  test('is still marked as an unchecked draft, with a DOI on every reference but Estrera and Russo', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(14)
-    for (const ref of study.references) expect(ref.doi, ref.citation).toBeUndefined()
+    for (const ref of study.references) {
+      if (/^(Estrera|Russo) /.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
+      else expect(ref.doi, ref.citation).toMatch(/^10\./)
+    }
   })
 })
 
@@ -179,55 +185,81 @@ describe('suprahyoid neck rules (unchecked)', () => {
     expect(sign(['prevertebral'])['Prevertebral muscles']).toBe('Points to the perivertebral space')
   })
 
-  // N2-8: "Flow voids in a paraganglioma give a salt-and-pepper look on MRI."
+  // N2-8, Olsen: 'This "salt-and-pepper" pattern was seen in all lesions greater than 2 cm in
+  // maximal dimension.'
   test('flow voids are asked on MRI only', () => {
-    expect(chips(study, 'lesion', { ...mass, 'flow-voids': 'yes' })['Flow voids']).toBe('Salt and pepper: suggests a paraganglioma')
+    expect(chips(study, 'lesion', { ...mass, 'flow-voids': 'yes' })['Flow voids']).toBe('Salt and pepper: seen in every paraganglioma over 2 cm')
     expect(chips(study, 'lesion', { ...mass, exam: 'ct', 'flow-voids': 'yes' })['Flow voids']).toBeUndefined()
   })
 
-  // N2-9, N2-10: the rim and the retropharyngeal pattern.
-  test('collections', () => {
+  // N2-10, Freling: "The positive predictive value (PPV) for the presence of an abscess was 82%
+  // (53/65) ... The PPV was 67% (8/12) for fluid collections without rim enhancement. Air within
+  // or adjacent to a fluid collection or excessive free air between the fascias indicated an
+  // abscess in all cases."
+  test('how often each CT sign meant an abscess', () => {
+    const infection = { ...normalInfection, 'collection-spaces': ['pps'] }
+    expect(chips(study, 'lesion', { ...infection, collection: 'rim' }).Rim).toBe("An abscess in 82% in Freling's series")
+    expect(chips(study, 'lesion', { ...infection, collection: 'fluid' })['No rim']).toBe("An abscess in 67% in Freling's series")
+    expect(chips(study, 'lesion', { ...infection, collection: 'rim', gas: 'yes' }).Gas).toBe("Meant an abscess in every case in Freling's series")
+    expect(chips(study, 'lesion', { ...infection, collection: 'phlegmon' }).Rim).toBeUndefined()
+  })
+
+  // N2-9: the retropharyngeal pattern.
+  test('retropharyngeal edema against abscess', () => {
     const infection = { ...normalInfection, 'collection-spaces': ['rps'] }
-    expect(chips(study, 'lesion', { ...infection, collection: 'rim' }).Rim).toBe('Does not prove pus: CT predicted pus imperfectly')
     expect(chips(study, 'lesion', { ...infection, collection: 'fluid', 'rp-pattern': 'edema' }).Retropharyngeal).toBe('Edema rather than abscess')
     expect(report(study, { ...infection, collection: 'rim', 'rp-pattern': 'edema' }).warnings)
       .toEqual(['Retropharyngeal edema has no enhancing wall, but a rim-enhancing collection is entered: look again at the wall.'])
   })
 
-  // N2-11, N2-12: dental sources.
+  // N2-12: the mylohyoid line. N2-11, Schuknecht: "Medial masticator space abscesses exhibited
+  // extra-spatial spread only. Extension affected the parapharyngeal space and/or soft palate in
+  // 7 of 13 ... The sub-masseteric space served as a previously underestimated pathway for
+  // intra-spatial propagation of lateral masticator abscesses."
   test('the mylohyoid line and the masticator space', () => {
     const dental = { ...normalInfection, collection: 'rim', source: ['dental'] }
     expect(chips(study, 'lesion', { ...dental, tooth: 'back' })['Mylohyoid line']).toBe('Roots below it: spreads to the submandibular space')
     expect(chips(study, 'lesion', { ...dental, tooth: 'front' })['Mylohyoid line']).toBe('Roots above it: spreads to the sublingual space')
-    expect(chips(study, 'lesion', { ...dental, 'collection-spaces': ['ms'] })['Masticator space']).toBe('Can climb above the zygomatic arch: check the temporal fossa')
+    expect(chips(study, 'lesion', { ...dental, 'collection-spaces': ['ms'] })['Masticator space'])
+      .toBe('Medial pterygoid: spreads out to the parapharyngeal space or soft palate; lateral: spreads within, under the masseter')
     expect(chips(study, 'lesion', { ...dental, 'collection-spaces': ['sms'] })['Masticator space']).toBeUndefined()
   })
 
-  // N3-1, N3-2, N3-3, N3-4: spread.
+  // N3-1, N3-2, N3-3: spread. N3-4, Russo: "Relatively recently occurring denervation results in
+  // abnormal contrast enhancement and edemalike signal changes ... may help to distinguish
+  // denervation from similar-appearing processes, such as infection or neoplasia."
   test('spread chips', () => {
     expect(chips(study, 'spread', { ...mass, perineural: 'suspected', 'mass-space': 'ms' })['Perineural spread']).toBe('Follow V3 through the foramen ovale to the skull base')
     expect(chips(study, 'spread', { ...mass, perineural: 'suspected' })['Perineural spread']).toBe('Follow the nerve to its foramen and the skull base')
-    expect(chips(study, 'spread', { ...mass, denervation: 'acute' }).Denervation).toBe('Acute or subacute: can mimic tumour')
+    expect(chips(study, 'spread', { ...mass, denervation: 'acute' }).Denervation).toBe('Recent: can mimic infection or tumour')
+    expect(chips(study, 'spread', { ...mass, denervation: 'chronic' }).Denervation).toBe('Long-standing: fatty replacement')
     const infection = { ...normalInfection, collection: 'rim', ijv: 'thrombosed' }
     expect(chips(study, 'spread', { ...infection, source: ['tonsil'] })['Jugular vein']).toBe('Thrombosis after an oropharyngeal infection: Lemierre syndrome')
     expect(chips(study, 'spread', { ...infection, source: ['dental'] })['Jugular vein']).toBe('Thrombosed')
     expect(chips(study, 'spread', { ...normalInfection, mediastinum: 'yes' }).Mediastinum).toBe('Descending necrotizing mediastinitis pattern')
   })
 
-  // N4-1: "A minimal axial diameter of 11 mm in level II and 10 mm elsewhere."
+  // N4-1, van den Brekel: "A minimal axial diameter of 10 mm was determined to be the most
+  // effective size criterion. The size criterion for lymph nodes in the subdigastric region was
+  // 1 mm larger (11 mm)." The draft applied 11 mm to all of level II; the paper gives it to the
+  // subdigastric node only, and the author chose to match the paper (2026-10-25).
   test('node size at the cut-off', () => {
     const size = (level: string, mm: string) => chips(study, 'nodes', { ...normalMass, nodes: 'abnormal', 'node-level': level, 'node-size': mm }).Size
-    expect(size('II', '10')).toBe('Under 11 mm for level II')
-    expect(size('II', '11')).toBe('At or over 11 mm for level II')
+    expect(size('IIsd', '10')).toBe('Under 11 mm for level II (subdigastric)')
+    expect(size('IIsd', '11')).toBe('At or over 11 mm for level II (subdigastric)')
+    expect(size('II', '9')).toBe('Under 10 mm for level II')
+    expect(size('II', '10')).toBe('At or over 10 mm for level II')
     expect(size('III', '9')).toBe('Under 10 mm for level III')
     expect(size('III', '10')).toBe('At or over 10 mm for level III')
     expect(size('RP', '20')).toBeUndefined()
   })
 
-  // N4-2: "Central necrosis is the most reliable sign of a metastatic node."
+  // N4-2, van den Brekel: "Radiologically detectable necrosis (3 mm or larger) was found only in
+  // tumorous nodes." The draft cited Som for "the most reliable sign", which Som's abstract does
+  // not state; the author chose van den Brekel's wording (2026-10-25).
   test('necrosis with a mass history only', () => {
     const node = { nodes: 'abnormal', 'node-features': ['necrosis'] }
-    expect(chips(study, 'nodes', { ...normalMass, ...node }).Necrosis).toBe('The most reliable sign of a metastatic node')
+    expect(chips(study, 'nodes', { ...normalMass, ...node }).Necrosis).toBe('3 mm or more was found only in nodes with tumour')
     expect(chips(study, 'nodes', { ...normalInfection, ...node }).Necrosis).toBeUndefined()
   })
 })

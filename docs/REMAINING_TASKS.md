@@ -298,21 +298,24 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
 ### Suprahyoid neck CT and MRI
 
 Drafted 2026-10-25 as an unchecked draft (`/studies/suprahyoid-neck`). Every paper and claim is
-in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`, marked "to check".
+in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`.
 
-- [ ] Match references N-R1 to N-R14 on PubMed and Crossref. Mardini 2018 and Ginsberg 1999 are
-  the least certain.
-- [ ] The fat-shift directions and the usual lesions of each space (N2-2 to N2-4, Harnsberger
-  and Osborn 1991): these drive the space chip and its warning, so check them first.
-- [ ] Deep-lobe parotid signs (N2-5); carotid space and carotid body (N2-6, N2-7); flow voids
-  and whether Olsen ties them to size (N2-8).
-- [ ] Retropharyngeal edema against abscess (N2-9); the rim and pus (N2-10, Freling: the
-  figures); the masticator space above the arch (N2-11); the mylohyoid line (N2-12).
-- [ ] Lemierre (N3-1), descending mediastinitis (N3-2), perineural spread (N3-3), denervation
-  (N3-4).
-- [ ] Node size: 11 mm in level II, 10 mm elsewhere, "or more"? (N4-1); necrosis (N4-2).
-- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
-  and update the tests that pin the unchecked state.
+- [x] Match references N-R1 to N-R14 on PubMed and Crossref (2026-10-25). All found; Shin's
+  author list corrected; DOIs and `<Cite>` links added (Estrera 1983 and Russo 1997 have no
+  DOI; Lemierre 1936 is on Crossref only).
+- [x] Verified from abstracts: N2-8, N2-10, N2-11, N3-2, N3-4, N4-1, N4-2; N2-7 and N3-3 in part.
+- [x] Matched to the papers by the author's choice (2026-10-25): flow voids "in every
+  paraganglioma over 2 cm" (Olsen); a rim-enhancing collection was an abscess in 82%, fluid
+  without a rim in 67%, and gas meant an abscess every time (Freling, replacing "a rim does not
+  prove pus"); masticator abscesses spread by where they sit (Schuknecht, replacing "above the
+  zygomatic arch"); 11 mm for the subdigastric node only, 10 mm for the rest of level II, and
+  necrosis of 3 mm or more only in nodes with tumour (van den Brekel, replacing Som's "most
+  reliable sign").
+- [ ] Still unchecked, because the papers have no abstract or the abstract does not touch the
+  claim: the fat-shift directions and usual lesions (N2-1 to N2-4, N2-6, Harnsberger and Osborn),
+  the deep parotid signs (N2-5, Shin), carotid splaying (N2-7), retropharyngeal edema against
+  abscess (N2-9, Hoang), the mylohyoid line (N2-12, Mardini), Lemierre (N3-1) and V3 through the
+  foramen ovale (N3-3). Kept with the "Unchecked draft" note. They need the full text.
 
 ## Housekeeping
 

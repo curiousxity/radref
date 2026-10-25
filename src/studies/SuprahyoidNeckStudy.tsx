@@ -1,46 +1,61 @@
+import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. PubMed and Crossref could not be reached when this was written, so every
- * citation below is from memory and every claim is waiting to be checked against its paper.
- * The claims table is docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims).
- * Rule chips and warnings carry their claim IDs. Until the check, citations are plain text
- * rather than <Cite> links, and the references have no DOI.
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-25), but
+ * several papers have no abstract or are paywalled, so only claims whose wording is in an
+ * abstract are verified. The claims table, with each claim's status, is
+ * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). Rule chips and
+ * warnings carry their claim IDs.
  */
 
-const HARNSBERGER = 'Harnsberger and Osborn, AJR 1991'
-const SHIN = 'Shin et al., AJR 2001'
-const RAO = 'Rao et al., RadioGraphics 1999'
-const OLSEN = 'Olsen et al., AJR 1987'
-const HOANG = 'Hoang et al., AJR 2011'
-const FRELING = 'Freling et al., Laryngoscope 2009'
-const SCHUKNECHT = 'Schuknecht et al., Eur Radiol 2008'
-const MARDINI = 'Mardini and Gohel, Radiol Clin North Am 2018'
-const LEMIERRE = 'Lemierre, Lancet 1936'
+const HARNSBERGER_DOI = '10.2214/ajr.157.1.2048510'
+const SHIN_DOI = '10.2214/ajr.177.6.1771465'
+const RAO_DOI = '10.1148/radiographics.19.6.g99no251605'
+const OLSEN_DOI = '10.2214/ajr.148.1.201'
+const HOANG_DOI = '10.2214/AJR.10.5116'
+const FRELING_DOI = '10.1002/lary.20606'
+const SCHUKNECHT_DOI = '10.1007/s00330-008-0946-5'
+const MARDINI_DOI = '10.1016/j.rcl.2017.08.003'
+const LEMIERRE_DOI = '10.1016/s0140-6736(00)57035-4'
+const GINSBERG_DOI = '10.1016/s0887-2171(99)90018-5'
+const VAN_DEN_BREKEL_DOI = '10.1148/radiology.177.2.2217772'
+const SOM_DOI = '10.2214/ajr.158.5.1566697'
+
+const HARNSBERGER = <Cite doi={HARNSBERGER_DOI}>Harnsberger and Osborn, AJR 1991</Cite>
+const SHIN = <Cite doi={SHIN_DOI}>Shin et al., AJR 2001</Cite>
+const RAO = <Cite doi={RAO_DOI}>Rao et al., RadioGraphics 1999</Cite>
+const OLSEN = <Cite doi={OLSEN_DOI}>Olsen et al., AJR 1987</Cite>
+const HOANG = <Cite doi={HOANG_DOI}>Hoang et al., AJR 2011</Cite>
+const FRELING = <Cite doi={FRELING_DOI}>Freling et al., Laryngoscope 2009</Cite>
+const SCHUKNECHT = <Cite doi={SCHUKNECHT_DOI}>Schuknecht et al., Eur Radiol 2008</Cite>
+const MARDINI = <Cite doi={MARDINI_DOI}>Mardini and Gohel, Radiol Clin North Am 2018</Cite>
+const LEMIERRE = <Cite doi={LEMIERRE_DOI}>Lemierre, Lancet 1936</Cite>
+/** Estrera 1983 and Russo 1997 have no DOI (none on PubMed or Crossref), so they are cited in plain text. */
 const ESTRERA = 'Estrera et al., Surg Gynecol Obstet 1983'
-const GINSBERG = 'Ginsberg, Semin Ultrasound CT MR 1999'
+const GINSBERG = <Cite doi={GINSBERG_DOI}>Ginsberg, Semin Ultrasound CT MR 1999</Cite>
 const RUSSO = 'Russo et al., AJNR 1997'
-const VAN_DEN_BREKEL = 'van den Brekel et al., Radiology 1990'
-const SOM = 'Som, AJR 1992'
+const VAN_DEN_BREKEL = <Cite doi={VAN_DEN_BREKEL_DOI}>van den Brekel et al., Radiology 1990</Cite>
+const SOM = <Cite doi={SOM_DOI}>Som, AJR 1992</Cite>
 
 const references: LessonReference[] = [
-  { citation: 'Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR Am J Roentgenol. 1991;157(1):147-154.' },
-  { citation: 'Shin JH, Lee HK, Kim SY, Choi CG, Suh DC, Lee DH, Kim SJ. Imaging of parapharyngeal space lesions: focus on the prestyloid compartment. AJR Am J Roentgenol. 2001;177(6):1465-1470.' },
-  { citation: 'Rao AB, Koeller KK, Adair CF. From the archives of the AFIP. Paragangliomas of the head and neck: radiologic-pathologic correlation. RadioGraphics. 1999;19(6):1605-1632.' },
-  { citation: 'Olsen WL, Dillon WP, Kelly WM, Norman D, Brant-Zawadzki M, Newton TH. MR imaging of paragangliomas. AJR Am J Roentgenol. 1987;148(1):201-204.' },
-  { citation: 'Hoang JK, Branstetter BF 4th, Eastwood JD, Glastonbury CM. Multiplanar CT and MRI of collections in the retropharyngeal space: is it an abscess? AJR Am J Roentgenol. 2011;196(4):W426-W432.' },
-  { citation: 'Freling N, Roele E, Schaefer-Prokop C, Fokkens W. Prediction of deep neck abscesses by contrast-enhanced computerized tomography in 76 clinically suspect consecutive patients. Laryngoscope. 2009;119(9):1745-1752.' },
-  { citation: 'Schuknecht B, Stergiou G, Graetz K. Masticator space abscess derived from odontogenic infection: imaging manifestation and pathways of extension depicted by CT and MR in 30 patients. Eur Radiol. 2008;18(9):1972-1979.' },
-  { citation: 'Mardini S, Gohel A. Imaging of odontogenic infections. Radiol Clin North Am. 2018;56(1):31-44.' },
-  { citation: 'Lemierre A. On certain septicaemias due to anaerobic organisms. Lancet. 1936;227(5874):701-703.' },
+  { citation: 'Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR Am J Roentgenol. 1991;157(1):147-154.', doi: HARNSBERGER_DOI },
+  { citation: 'Shin JH, Lee HK, Kim SY, Choi CG, Suh DC. Imaging of parapharyngeal space lesions: focus on the prestyloid compartment. AJR Am J Roentgenol. 2001;177(6):1465-1470.', doi: SHIN_DOI },
+  { citation: 'Rao AB, Koeller KK, Adair CF. From the archives of the AFIP. Paragangliomas of the head and neck: radiologic-pathologic correlation. RadioGraphics. 1999;19(6):1605-1632.', doi: RAO_DOI },
+  { citation: 'Olsen WL, Dillon WP, Kelly WM, Norman D, Brant-Zawadzki M, Newton TH. MR imaging of paragangliomas. AJR Am J Roentgenol. 1987;148(1):201-204.', doi: OLSEN_DOI },
+  { citation: 'Hoang JK, Branstetter BF 4th, Eastwood JD, Glastonbury CM. Multiplanar CT and MRI of collections in the retropharyngeal space: is it an abscess? AJR Am J Roentgenol. 2011;196(4):W426-W432.', doi: HOANG_DOI },
+  { citation: 'Freling N, Roele E, Schaefer-Prokop C, Fokkens W. Prediction of deep neck abscesses by contrast-enhanced computerized tomography in 76 clinically suspect consecutive patients. Laryngoscope. 2009;119(9):1745-1752.', doi: FRELING_DOI },
+  { citation: 'Schuknecht B, Stergiou G, Graetz K. Masticator space abscess derived from odontogenic infection: imaging manifestation and pathways of extension depicted by CT and MR in 30 patients. Eur Radiol. 2008;18(9):1972-1979.', doi: SCHUKNECHT_DOI },
+  { citation: 'Mardini S, Gohel A. Imaging of odontogenic infections. Radiol Clin North Am. 2018;56(1):31-44.', doi: MARDINI_DOI },
+  { citation: 'Lemierre A. On certain septicaemias due to anaerobic organisms. Lancet. 1936;227(5874):701-703.', doi: LEMIERRE_DOI },
   { citation: 'Estrera AS, Landay MJ, Grisham JM, Sinn DP, Platt MR. Descending necrotizing mediastinitis. Surg Gynecol Obstet. 1983;157(6):545-552.' },
-  { citation: 'Ginsberg LE. Imaging of perineural tumor spread in head and neck cancer. Semin Ultrasound CT MR. 1999;20(3):175-186.' },
+  { citation: 'Ginsberg LE. Imaging of perineural tumor spread in head and neck cancer. Semin Ultrasound CT MR. 1999;20(3):175-186.', doi: GINSBERG_DOI },
   { citation: 'Russo CP, Smoker WR, Weissman JL. MR appearance of trigeminal and hypoglossal motor denervation. AJNR Am J Neuroradiol. 1997;18(7):1375-1383.' },
-  { citation: 'van den Brekel MW, Stel HV, Castelijns JA, Nauta JJ, van der Waal I, Valk J, Meyer CJ, Snow GB. Cervical lymph node metastasis: assessment of radiologic criteria. Radiology. 1990;177(2):379-384.' },
-  { citation: 'Som PM. Detection of metastasis in cervical lymph nodes: CT and MR criteria and differential diagnosis. AJR Am J Roentgenol. 1992;158(5):961-969.' },
+  { citation: 'van den Brekel MW, Stel HV, Castelijns JA, Nauta JJ, van der Waal I, Valk J, Meyer CJ, Snow GB. Cervical lymph node metastasis: assessment of radiologic criteria. Radiology. 1990;177(2):379-384.', doi: VAN_DEN_BREKEL_DOI },
+  { citation: 'Som PM. Detection of metastasis in cervical lymph nodes: CT and MR criteria and differential diagnosis. AJR Am J Roentgenol. 1992;158(5):961-969.', doi: SOM_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -106,8 +121,12 @@ const shiftTable = (
   </div>
 )
 
-/** N4-1: van den Brekel's minimal axial diameter, in mm. */
-const nodeCutoff = (level: string) => (level === 'II' ? 11 : 10)
+/** N4-1: van den Brekel's minimal axial diameter, in mm: 10 mm, 1 mm larger for the subdigastric node. */
+const nodeCutoff = (level: string) => (level === 'IIsd' ? 11 : 10)
+
+/** How a node level reads in the report and the chips. */
+const LEVEL_WORDS: Record<string, string> = { IIsd: 'level II (subdigastric)', RP: 'retropharyngeal' }
+const levelWords = (level: string) => LEVEL_WORDS[level] ?? `level ${level}`
 
 const learn: LearnSection[] = [
   {
@@ -130,12 +149,12 @@ const learn: LearnSection[] = [
         {shiftTable}
         <p>Two more spaces lie behind the pharynx. A retropharyngeal mass lies in front of the prevertebral muscles; a perivertebral mass lifts them forward ({HARNSBERGER}).</p>
         <p>A tumour of the deep lobe of the parotid passes through the stylomandibular tunnel, between the mandible and the styloid process, and widens it. There is no fat plane between it and the parotid. A true prestyloid parapharyngeal mass, most often a pleomorphic adenoma from a minor salivary rest, has fat around it ({SHIN}).</p>
-        <p>A carotid space mass pushes the internal carotid artery forward ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, flow voids in a paraganglioma give it a salt-and-pepper look ({OLSEN}).</p>
+        <p>A carotid space mass pushes the internal carotid artery forward ({HARNSBERGER}). A carotid body paraganglioma sits in the bifurcation and splays the internal and external carotid arteries apart ({RAO}). On MRI, serpiginous flow voids among areas of high signal give a paraganglioma a salt-and-pepper look; Olsen saw it in every paraganglioma over 2 cm ({OLSEN}).</p>
         <h3>An infection: the collection and its source</h3>
         <p>Name the collection, the spaces it fills and, where it can be seen, its source: a tooth, the tonsil, a salivary stone or a suppurative node. Note gas. These fields are this site's own.</p>
-        <p>A rim-enhancing collection is not proof of pus. In Freling's series of patients thought clinically to have an abscess, contrast CT predicted pus at surgery imperfectly ({FRELING}).</p>
+        <p>In Freling's series of 76 patients thought clinically to have a deep neck abscess, a fluid collection with complete or partial rim enhancement was an abscess in 82% (53 of 65), and fluid without rim enhancement in 67% (8 of 12). Gas in or beside a collection, or much free gas between the fascias, meant an abscess in every case ({FRELING}).</p>
         <p>In the retropharyngeal space, tell edema from an abscess. Edema fills the space from side to side, with no enhancing wall and no mass effect. An abscess has an enhancing wall and mass effect ({HOANG}).</p>
-        <p>The mylohyoid line on the inside of the mandible decides where a dental infection goes. The roots of the second and third molars lie below it, so their infections reach the submandibular space; those of the premolars and the first molar lie above it and reach the sublingual space ({MARDINI}). An odontogenic abscess in the masticator space can climb above the zygomatic arch into the temporal fossa, so follow it up off the jaw ({SCHUKNECHT}).</p>
+        <p>The mylohyoid line on the inside of the mandible decides where a dental infection goes. The roots of the second and third molars lie below it, so their infections reach the submandibular space; those of the premolars and the first molar lie above it and reach the sublingual space ({MARDINI}). An odontogenic abscess in the masticator space spreads by where it sits. In Schuknecht's 30 patients, abscesses in the medial pterygoid spread out of the space, to the parapharyngeal space or soft palate in 7 of 13; those in the lateral (masseter and pterygoid) part spread within the space, often through the sub-masseteric space ({SCHUKNECHT}).</p>
       </>
     ),
   },
@@ -145,8 +164,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>With a mass, look for perineural spread: a tumour can follow a nerve towards its foramen and the skull base. Masticator space tumours spread along V3 through the foramen ovale ({GINSBERG}). Look for an enlarged, enhancing nerve and a widened foramen.</p>
-        <p>Denervated muscle changes with time. In the acute and subacute phase it is bright on T2 and enhances, which can be mistaken for tumour; in the chronic phase it shrinks and turns to fat. Denervation of the muscles of mastication points to V3 ({RUSSO}).</p>
-        <p>With an infection, look at the airway, the internal jugular vein and the mediastinum. Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}). A deep neck infection can track down into the mediastinum, descending necrotizing mediastinitis ({ESTRERA}). With either history, look for bone erosion of the mandible and the skull base.</p>
+        <p>Denervated muscle changes with time. Recent denervation gives edema-like signal and abnormal enhancement, sometimes with a larger muscle, which can be mistaken for infection or tumour; long-standing denervation gives fatty replacement and a smaller muscle. Denervation of the muscles of mastication points to V3 ({RUSSO}).</p>
+        <p>With an infection, look at the airway, the internal jugular vein and the mediastinum. Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}). An oropharyngeal infection can track down into the mediastinum, descending necrotizing mediastinitis. In Estrera's series it most often began in the mandibular molars, and CT was the most important tool for early diagnosis ({ESTRERA}). With either history, look for bone erosion of the mandible and the skull base.</p>
       </>
     ),
   },
@@ -155,7 +174,7 @@ const learn: LearnSection[] = [
     title: 'Step 4. Lymph nodes',
     body: (
       <>
-        <p>Give each abnormal node its level and its short-axis size. In van den Brekel's study the best size criterion was a minimal axial diameter of 11 mm in level II and 10 mm elsewhere ({VAN_DEN_BREKEL}). Size alone misses small metastases: central necrosis is the most reliable CT and MR sign of a metastatic node, whatever its size ({SOM}).</p>
+        <p>Read each node for size, shape, grouping, necrosis and spread beyond the node ({SOM}). Give each abnormal node its level and its short-axis size. In van den Brekel's study the minimal axial diameter was the most accurate size measure, and 10 mm the most effective cut-off, 1 mm larger (11 mm) for the subdigastric node at the top of level II. Necrosis of 3 mm or more was found only in nodes that held tumour ({VAN_DEN_BREKEL}).</p>
       </>
     ),
   },
@@ -283,8 +302,8 @@ const fields = {
   perineuralText: { id: 'perineural-text', kind: 'text', label: 'Nerve and foramen', placeholder: 'e.g. V3, widened foramen ovale', showIf: (v) => massPresent(v) && str(v, 'perineural') === 'suspected' },
   denervation: { id: 'denervation', kind: 'choice', label: 'Denervated muscle', showIf: massPresent, options: [
     { value: 'none', label: 'None' },
-    { value: 'acute', label: 'Acute or subacute: T2 bright, enhancing' },
-    { value: 'chronic', label: 'Chronic: fatty atrophy' },
+    { value: 'acute', label: 'Recent: edema-like signal, enhancing' },
+    { value: 'chronic', label: 'Long-standing: fatty replacement, smaller' },
   ] },
   denervationText: { id: 'denervation-text', kind: 'text', label: 'Which muscles', placeholder: 'e.g. right masticator muscles', showIf: (v) => massPresent(v) && ['acute', 'chronic'].includes(str(v, 'denervation')) },
   bone: { id: 'bone', kind: 'choice', label: 'Bone erosion', showIf: (v) => massPresent(v) || isInfection(v), options: [
@@ -319,14 +338,15 @@ const fields = {
   ] },
   nodeLevel: { id: 'node-level', kind: 'choice', label: 'Level (the largest node)', showIf: nodesAbnormal, options: [
     { value: 'I', label: 'Level I' },
-    { value: 'II', label: 'Level II' },
+    { value: 'IIsd', label: 'Level II, subdigastric (jugulodigastric)' },
+    { value: 'II', label: 'Level II, other' },
     { value: 'III', label: 'Level III' },
     { value: 'IV', label: 'Level IV' },
     { value: 'V', label: 'Level V' },
     { value: 'VI', label: 'Level VI' },
     { value: 'RP', label: 'Retropharyngeal' },
   ] },
-  nodeSize: { id: 'node-size', kind: 'number', label: 'Short axis', unit: 'mm', min: 0, max: 100, step: 1, showIf: nodesAbnormal },
+  nodeSize: { id: 'node-size', kind: 'number', label: 'Short axis (minimal axial diameter)', unit: 'mm', min: 0, max: 100, step: 1, showIf: nodesAbnormal },
   nodeFeatures: { id: 'node-features', kind: 'multi', label: 'Also', showIf: nodesAbnormal, options: [
     { value: 'necrosis', label: 'Central necrosis' },
     { value: 'ene', label: 'Ill-defined margin (extranodal extension)' },
@@ -373,16 +393,18 @@ function deriveLesion(values: Values): Derived[] {
     else if (signs.includes('ica-forward')) out.push({ label: 'Carotid', value: 'Points to the carotid space' })
     // N2-3: perivertebral.
     if (signs.includes('prevertebral')) out.push({ label: 'Prevertebral muscles', value: 'Points to the perivertebral space' })
-    // N2-8: flow voids on MRI.
-    if (str(values, 'flow-voids') === 'yes') out.push({ label: 'Flow voids', value: 'Salt and pepper: suggests a paraganglioma', tone: 'warn' })
+    // N2-8: flow voids on MRI, seen in every paraganglioma over 2 cm.
+    if (str(values, 'flow-voids') === 'yes') out.push({ label: 'Flow voids', value: 'Salt and pepper: seen in every paraganglioma over 2 cm', tone: 'warn' })
     // N2-4: the usual lesions of the space entered.
     const space = massSpace(values)
     if (space && USUAL_LESIONS[space]) out.push({ label: 'Usual lesions', value: upperFirst(USUAL_LESIONS[space] as string) })
   }
 
   if (hasCollection(values)) {
-    // N2-10: a rim does not prove pus.
-    if (str(values, 'collection') === 'rim') out.push({ label: 'Rim', value: 'Does not prove pus: CT predicted pus imperfectly', tone: 'warn' })
+    // N2-10: how often each CT sign meant an abscess in Freling's series.
+    if (str(values, 'collection') === 'rim') out.push({ label: 'Rim', value: 'An abscess in 82% in Freling\'s series', tone: 'warn' })
+    if (str(values, 'collection') === 'fluid') out.push({ label: 'No rim', value: 'An abscess in 67% in Freling\'s series', tone: 'warn' })
+    if (str(values, 'gas') === 'yes') out.push({ label: 'Gas', value: 'Meant an abscess in every case in Freling\'s series', tone: 'warn' })
     // N2-9: retropharyngeal edema against abscess.
     const rp = str(values, 'rp-pattern')
     if (rp === 'edema') out.push({ label: 'Retropharyngeal', value: 'Edema rather than abscess' })
@@ -391,9 +413,9 @@ function deriveLesion(values: Values): Derived[] {
     const tooth = str(values, 'tooth')
     if (tooth === 'back') out.push({ label: 'Mylohyoid line', value: 'Roots below it: spreads to the submandibular space' })
     if (tooth === 'front') out.push({ label: 'Mylohyoid line', value: 'Roots above it: spreads to the sublingual space' })
-    // N2-11: an odontogenic masticator abscess climbs above the zygomatic arch.
+    // N2-11: how an odontogenic masticator abscess spreads, by where it sits.
     if (list(values, 'source').includes('dental') && collectionSpaces(values).includes('ms')) {
-      out.push({ label: 'Masticator space', value: 'Can climb above the zygomatic arch: check the temporal fossa', tone: 'warn' })
+      out.push({ label: 'Masticator space', value: 'Medial pterygoid: spreads out to the parapharyngeal space or soft palate; lateral: spreads within, under the masseter', tone: 'warn' })
     }
   }
   return out
@@ -407,8 +429,8 @@ function deriveSpread(values: Values): Derived[] {
   }
   // N3-4: denervation by phase.
   const denervation = massPresent(values) ? str(values, 'denervation') : ''
-  if (denervation === 'acute') out.push({ label: 'Denervation', value: 'Acute or subacute: can mimic tumour', tone: 'warn' })
-  if (denervation === 'chronic') out.push({ label: 'Denervation', value: 'Chronic: fatty atrophy' })
+  if (denervation === 'acute') out.push({ label: 'Denervation', value: 'Recent: can mimic infection or tumour', tone: 'warn' })
+  if (denervation === 'chronic') out.push({ label: 'Denervation', value: 'Long-standing: fatty replacement' })
   if (isInfection(values)) {
     // The site's own order: a narrowed airway goes first.
     if (str(values, 'airway') === 'narrowed') out.push({ label: 'Airway', value: 'Narrowed: goes first in the impression', tone: 'warn' })
@@ -430,11 +452,11 @@ function deriveNodes(values: Values): Derived[] {
   if (size !== undefined && level && level !== 'RP') {
     const cutoff = nodeCutoff(level)
     out.push(size >= cutoff
-      ? { label: 'Size', value: `At or over ${cutoff} mm for level ${level}`, tone: 'warn' }
-      : { label: 'Size', value: `Under ${cutoff} mm for level ${level}` })
+      ? { label: 'Size', value: `At or over ${cutoff} mm for ${levelWords(level)}`, tone: 'warn' }
+      : { label: 'Size', value: `Under ${cutoff} mm for ${levelWords(level)}` })
   }
-  // N4-2: central necrosis, with a mass history.
-  if (isMass(values) && list(values, 'node-features').includes('necrosis')) out.push({ label: 'Necrosis', value: 'The most reliable sign of a metastatic node', tone: 'warn' })
+  // N4-2: necrosis of 3 mm or more was found only in nodes with tumour; with a mass history.
+  if (isMass(values) && list(values, 'node-features').includes('necrosis')) out.push({ label: 'Necrosis', value: '3 mm or more was found only in nodes with tumour', tone: 'warn' })
   return out
 }
 
@@ -516,7 +538,7 @@ function nodeLines(values: Values): (string | false)[] {
     nodes === 'none' && 'Lymph nodes: no abnormal nodes',
     nodes === 'abnormal' && `Lymph nodes: ${join([
       lowerFirst(str(values, 'node-side')),
-      level && (level === 'RP' ? 'retropharyngeal' : `level ${level}`),
+      level && levelWords(level),
       size !== undefined && `${size} mm short axis`,
       ...chosen(values, fields.nodeFeatures),
     ], ', ') || 'abnormal node'}`,
@@ -585,7 +607,7 @@ function nodeFindings(values: Values): string[] {
   const level = str(values, 'node-level')
   const size = num(values, 'node-size')
   const features = list(values, 'node-features')
-  const where = level === 'RP' ? 'retropharyngeal lymph node' : level ? `level ${level} lymph node` : 'abnormal lymph node'
+  const where = level ? `${levelWords(level)} lymph node` : 'abnormal lymph node'
   const extras = join([size !== undefined && `${size} mm`, features.includes('necrosis') && 'necrotic', features.includes('ene') && 'with an ill-defined margin'], ', ')
   return [`${sided(sideWord(values, 'node-side'), where)}${extras ? `, ${extras}` : ''}.`]
 }
@@ -663,7 +685,7 @@ const steps: ReportStep[] = [
       <>
         <p>A mass pushes the parapharyngeal fat away from the space it starts in; a mass with fat all round it is parapharyngeal ({HARNSBERGER}). A widened stylomandibular tunnel points to the deep parotid ({SHIN}); a splayed carotid bifurcation to a carotid body paraganglioma ({RAO}).</p>
         {shiftTable}
-        <p>With an infection, a rim does not prove pus ({FRELING}); retropharyngeal edema has no wall and no mass effect ({HOANG}); the mylohyoid line decides where a dental infection goes ({MARDINI}).</p>
+        <p>With an infection, a rim-enhancing collection was an abscess in 82%, and gas meant an abscess every time ({FRELING}); retropharyngeal edema has no wall and no mass effect ({HOANG}); the mylohyoid line decides where a dental infection goes ({MARDINI}).</p>
       </>
     ),
     fields: [
@@ -676,7 +698,7 @@ const steps: ReportStep[] = [
     id: 'spread',
     title: 'Step 3. Spread: nerves, bone, airway and vessels',
     learn: 'spread',
-    teach: <p>Perineural spread follows the nerve to the skull base, V3 from the masticator space ({GINSBERG}); acute denervation can mimic tumour ({RUSSO}). With an infection: the airway, jugular vein thrombosis (Lemierre, {LEMIERRE}) and the mediastinum ({ESTRERA}).</p>,
+    teach: <p>Perineural spread follows the nerve to the skull base, V3 from the masticator space ({GINSBERG}); recent denervation can mimic infection or tumour ({RUSSO}). With an infection: the airway, jugular vein thrombosis (Lemierre, {LEMIERRE}) and the mediastinum ({ESTRERA}).</p>,
     fields: [fields.perineural, fields.perineuralText, fields.denervation, fields.denervationText, fields.bone, fields.boneText, fields.airway, fields.airwayText, fields.ijv, fields.ijvSide, fields.mediastinum],
     derive: deriveSpread,
   },
@@ -684,7 +706,7 @@ const steps: ReportStep[] = [
     id: 'nodes',
     title: 'Step 4. Lymph nodes',
     learn: 'nodes',
-    teach: <p>Short axis 11 mm in level II, 10 mm elsewhere ({VAN_DEN_BREKEL}); central necrosis is the most reliable sign of a metastatic node ({SOM}).</p>,
+    teach: <p>Minimal axial diameter 10 mm, 11 mm for the subdigastric node; necrosis of 3 mm or more was found only in nodes with tumour ({VAN_DEN_BREKEL}).</p>,
     fields: [fields.nodes, fields.nodeSide, fields.nodeLevel, fields.nodeSize, fields.nodeFeatures],
     derive: deriveNodes,
   },
@@ -701,7 +723,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: written while PubMed could not be reached, so no citation or claim on this page has been checked against its paper yet. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the fat-shift directions and the usual lesions of each space, the deep parotid and carotid bifurcation signs, retropharyngeal edema against abscess, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -752,11 +774,11 @@ const study: StudyDefinition = {
       explanation: <p>Edema fills the space side to side without a wall or mass effect; an abscess has an enhancing wall and mass effect ({HOANG}).</p>,
     },
     {
-      id: 'rim',
-      question: 'Contrast CT shows a rim-enhancing collection in the neck. What does the lesson say about it?',
-      options: ['It is always pus', 'A rim does not prove pus', 'It is always a phlegmon', 'It rules out an abscess'],
-      answer: 1,
-      explanation: <p>In Freling's series, contrast CT predicted pus at surgery imperfectly ({FRELING}).</p>,
+      id: 'gas',
+      question: 'In Freling\'s series of suspected deep neck abscesses, which CT sign meant an abscess in every case?',
+      options: ['Rim enhancement', 'Fluid without a rim', 'Gas in or beside a collection', 'Fat stranding'],
+      answer: 2,
+      explanation: <p>Gas in or beside a collection meant an abscess in every case; a rim-enhancing collection was an abscess in 82%, and fluid without a rim in 67% ({FRELING}).</p>,
     },
     {
       id: 'mylohyoid',
@@ -777,14 +799,14 @@ const study: StudyDefinition = {
       question: 'The muscles of mastication on one side are bright on T2 and enhance. What should you look for?',
       options: ['A parotid stone', 'Disease along V3, such as perineural spread', 'A carotid body tumour', 'Retropharyngeal edema'],
       answer: 1,
-      explanation: <p>Acute or subacute denervation makes muscle bright on T2 and enhancing; in the masticator muscles it points to V3 ({RUSSO}), the nerve masticator space tumours spread along ({GINSBERG}).</p>,
+      explanation: <p>Recent denervation gives edema-like signal and enhancement; in the masticator muscles it points to V3 ({RUSSO}), the nerve masticator space tumours spread along ({GINSBERG}).</p>,
     },
     {
       id: 'necrosis',
       question: 'An 8 mm level III node in a patient with a neck mass has central necrosis. What does it mean?',
-      options: ['Benign, since it is under 10 mm', 'Likely metastatic: necrosis is the most reliable sign', 'Reactive', 'Nothing without a biopsy'],
+      options: ['Benign, since it is under 10 mm', 'Likely metastatic: necrosis of 3 mm or more was found only in nodes with tumour', 'Reactive', 'Nothing without a biopsy'],
       answer: 1,
-      explanation: <p>Central necrosis is the most reliable sign of a metastatic node, whatever its size ({SOM}).</p>,
+      explanation: <p>In van den Brekel's study, radiologically visible necrosis (3 mm or more) was found only in nodes that held tumour, whatever their size ({VAN_DEN_BREKEL}).</p>,
     },
   ],
 }

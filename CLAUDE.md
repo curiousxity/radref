@@ -402,10 +402,15 @@ unchecked is tracked in `docs/REMAINING_TASKS.md`; it needs the full text.
 Head and neck: the author decided (2026-10-25) that the head and neck viewers get a study each
 and no calculator, one study per region covering several exams and histories, chosen in step
 1. The suprahyoid neck study (`/studies/suprahyoid-neck`: CT or MRI for a mass, CT for
-infection) was written on 2026-10-25, again without PubMed, so it is in the first state above:
-no DOIs, plain-text citations, a source note starting "Unchecked draft", pinned by its tests,
-with its claims in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. It is on
-the branch only until the author says to merge. The larynx and skull base studies follow.
+infection) was written on 2026-10-25 without PubMed, then checked the same day once the
+environment allowed PubMed, Crossref and Europe PMC (`eutils.ncbi.nlm.nih.gov`,
+`api.crossref.org`, `www.ebi.ac.uk`). It is in the second state above: DOIs and `<Cite>` links
+(Estrera 1983 and Russo 1997 have none), claims that differed matched to their papers by the
+author's choice, and a source note still starting "Unchecked draft" for the claims no abstract
+states. Its claims, with verdicts and quoted evidence, are in
+`docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. It is on the branch only
+until the author says to merge. The larynx and skull base studies follow, checked as they are
+written now that the paper databases are reachable.
 
 How it is built:
 
