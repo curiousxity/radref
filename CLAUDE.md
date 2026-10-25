@@ -367,7 +367,7 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT. Drafted from the guidelines (ankle MRI from the published
+FESS, temporal bone CT, suprahyoid neck CT and MRI (unchecked draft, below). Drafted from the guidelines (ankle MRI from the published
 papers in its reference list) rather than from the site author's
 notes, and labelled as unreviewed drafts in their source note until the author signs
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
@@ -398,6 +398,14 @@ Most papers are paywalled, so claims that no abstract or open full text states a
 by the author's choice, with a source note that still starts "Unchecked draft" and names
 them; the tests pin a DOI on every reference and the note's first words. What is still
 unchecked is tracked in `docs/REMAINING_TASKS.md`; it needs the full text.
+
+Head and neck: the author decided (2026-10-25) that the head and neck viewers get a study each
+and no calculator, one study per region covering several exams and histories, chosen in step
+1. The suprahyoid neck study (`/studies/suprahyoid-neck`: CT or MRI for a mass, CT for
+infection) was written on 2026-10-25, again without PubMed, so it is in the first state above:
+no DOIs, plain-text citations, a source note starting "Unchecked draft", pinned by its tests,
+with its claims in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. It is on
+the branch only until the author says to merge. The larynx and skull base studies follow.
 
 How it is built:
 

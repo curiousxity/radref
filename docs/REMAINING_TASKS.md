@@ -67,9 +67,18 @@ region at a time, end to end, following the ankle pilot
   (pelvic ring) and Letournel (acetabulum). Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-pelvis-ct-study-design.md`. Deployed before the check.
   Done once the sources check passes and the author signs it off.
-- [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
-  ossicular chain, TMJ, skull base, suprahyoid neck, larynx, brachial plexus.
-  TMJ: skipped for now (2026-10-23); it already has a 3D model.
+- [x] Head and neck: decided 2026-10-25. Each viewer gets a study and no calculator, one study
+  per region covering several exams and histories, picked in step 1. The otic capsule and
+  ossicular chain already have the temporal bone CT study; TMJ is skipped for now (2026-10-23).
+- [ ] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
+  unchecked draft (`/studies/suprahyoid-neck`); spec
+  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. On the branch only until
+  the author says to merge. Done once the sources check passes and the author signs it off.
+- [ ] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
+  choice, 2026-10-25). Not started.
+- [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
+  mass (the author's choice, 2026-10-25). Not started.
+- [ ] Decide whether the brachial plexus viewer gets a study.
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
@@ -285,6 +294,25 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   radiographs underestimate anterior but overestimate medial displacement (Edmonds).
 - [ ] Still unchecked: everything cited to Iyer (its abstract states none of it), the Gartland,
   O'Brien and Judet types (no abstracts), Jakob's stages, PE2-3, PE3-1, PE4-3, PE5-1, PE5-2.
+
+### Suprahyoid neck CT and MRI
+
+Drafted 2026-10-25 as an unchecked draft (`/studies/suprahyoid-neck`). Every paper and claim is
+in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`, marked "to check".
+
+- [ ] Match references N-R1 to N-R14 on PubMed and Crossref. Mardini 2018 and Ginsberg 1999 are
+  the least certain.
+- [ ] The fat-shift directions and the usual lesions of each space (N2-2 to N2-4, Harnsberger
+  and Osborn 1991): these drive the space chip and its warning, so check them first.
+- [ ] Deep-lobe parotid signs (N2-5); carotid space and carotid body (N2-6, N2-7); flow voids
+  and whether Olsen ties them to size (N2-8).
+- [ ] Retropharyngeal edema against abscess (N2-9); the rim and pus (N2-10, Freling: the
+  figures); the masticator space above the arch (N2-11); the mylohyoid line (N2-12).
+- [ ] Lemierre (N3-1), descending mediastinitis (N3-2), perineural spread (N3-3), denervation
+  (N3-4).
+- [ ] Node size: 11 mm in level II, 10 mm elsewhere, "or more"? (N4-1); necrosis (N4-2).
+- [ ] Then: add DOIs, switch plain-text citations to `<Cite>` links, reword the source note,
+  and update the tests that pin the unchecked state.
 
 ## Housekeeping
 
