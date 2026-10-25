@@ -13,8 +13,8 @@ scrolled sideways. It found one bug, now fixed: above phone width the categories
 the header grows to 91–138px, while sticky panels and study tabs assumed 57px and slid under
 it. `App.tsx` now measures the header into `--header-h`.
 
-- Design question for the author: between 641 and 700px the header takes three rows
-  (138px). A phone-style menu button up to ~900px would keep it to one row.
+Between 641 and 700px the header takes three rows (138px). A phone-style menu button up
+to ~900px would keep it to one row; the author chose to leave it as it is (2026-10-25).
 
 ## Author review
 
