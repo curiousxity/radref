@@ -212,4 +212,4 @@ it says only that a traumatic cartilage lesion's "description should include the
 depth of the lesion and the presence or absence of associated chondral fragments", and that a defect
 "should prompt careful inspection of the joint for a displaced intraarticular chondral body". That
 sentence is now in the cartilage step, cited to Recht. K10-1 (the under-half / half-or-more split)
-still has no source: for the author.
+still has no source. The author chose to keep the four grades as they are (2026-10-25).

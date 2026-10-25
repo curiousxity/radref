@@ -182,5 +182,5 @@ Received ones are ticked; the rest are **pending** and carried into the third ba
 ## Not a paper problem
 
 - Knee cartilage grades (K10-1): the four depth grades come from the modified Noyes and Outerbridge
-  scales, which the knee study does not cite yet. Outerbridge (third batch) turned out to be arthroscopic, not these MRI grades; Recht 2005 (fourth batch) does not give them either; the author to decide.
+  scales, which the knee study does not cite yet. Outerbridge (third batch) turned out to be arthroscopic, not these MRI grades; Recht 2005 (fourth batch) does not give them either. The author chose to keep the grades as they are.
 - ~~Lichtman stage IIIC~~: settled by Kennedy and Abrams 2019; IIIC is now in the calculator.

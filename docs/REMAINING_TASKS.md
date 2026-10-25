@@ -419,8 +419,8 @@ document. Where the site differed, the author chose the newer source, and these 
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
 - [ ] Still pending: Broberg and Morrey 1987, Khurana 2014, Rao 1999, Spence 1970 (`docs/PAPERS_NEEDED.md`).
-- [ ] Knee cartilage depth grades (under half / half or more): neither Outerbridge nor Recht gives them.
-  For the author: name a source, or drop the half split.
+- [x] Knee cartilage depth grades (under half / half or more): neither Outerbridge nor Recht gives them.
+  The author chose (2026-10-25) to keep the four grades as they are, with no source named.
 
 Fourth batch, the same day: Neer review, AO Surgery Reference's Herbert page, Recht, Shin, Hoang,
 Anderson and D'Alonzo ("Fifth check" sections). Changed: Herbert gains B5 (comminuted); Neer's
