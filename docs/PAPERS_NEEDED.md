@@ -18,12 +18,12 @@ review papers in "Next batch" below stand in for most of the pending ones.
 - [ ] **Pending.** Mayfield JK, Johnson RP, Kilcoyne RK. J Hand Surg Am. 1980;5(3):226-241. doi:10.1016/s0363-5023(80)80007-4 (the zip sent held letters from the same issue, not the paper; checked meanwhile against Kennedy and Allan, Clin Orthop Relat Res 2012, doi:10.1007/s11999-012-2275-x, received)
 - [ ] **Pending.** Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468
 - [ ] **Pending.** Palmer AK. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3
-- [ ] **Pending.** Lichtman DM, et al. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011
-- [ ] **Pending.** Lichtman DM, et al. J Hand Surg Am. 1982;7(4):343-347. doi:10.1016/s0363-5023(82)80142-1
+- [ ] **Pending** (stages checked against Kennedy and Abrams 2019). Lichtman DM, et al. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011
+- [x] ~~Lichtman DM, et al. J Hand Surg Am. 1982;7(4):343-347.~~ Not needed: Kennedy and Abrams 2019 shows stage III was split in 1993 (Lichtman and Degnan, Hand Clin), not 1982
 - [ ] **Pending.** Schatzker J, McBroom R, Bruce D. Clin Orthop Relat Res. 1979;(138):94-104. PMID 445923 (checked meanwhile against Zeltser and Leopold, Clin Orthop Relat Res 2013, doi:10.1007/s11999-012-2451-z, received)
 - [ ] **Pending.** Markhardt BK, Gross JM, Monu JU. Radiographics. 2009;29(2):585-597. doi:10.1148/rg.292085078
-- [ ] **Pending.** Hawkins LG. J Bone Joint Surg Am. 1970;52(5):991-1002. doi:10.2106/00004623-197052050-00013
-- [ ] **Pending.** Canale ST, Kelly FB Jr. J Bone Joint Surg Am. 1978;60(2):143-156. doi:10.2106/00004623-197860020-00001
+- [ ] **Pending** (checked against Alton et al. 2015). Hawkins LG. J Bone Joint Surg Am. 1970;52(5):991-1002. doi:10.2106/00004623-197052050-00013
+- [ ] **Pending** (checked against Alton et al. 2015). Canale ST, Kelly FB Jr. J Bone Joint Surg Am. 1978;60(2):143-156. doi:10.2106/00004623-197860020-00001
 - [ ] **Pending.** Sanders R, et al. Clin Orthop Relat Res. 1993;(290):87-95. doi:10.1097/00003086-199305000-00012 (checked meanwhile against Jiménez-Almonte et al., Clin Orthop Relat Res 2019, doi:10.1097/CORR.0000000000000539, received)
 - [ ] **Pending.** Myerson MS, et al. Foot Ankle. 1986;6(5):225-242. doi:10.1177/107110078600600504
 - [ ] **Pending.** Vaccaro AR, et al. AOSpine thoracolumbar spine injury classification system. Spine. 2013;38(23):2028-2037. doi:10.1097/BRS.0b013e3182a8a381 (checked meanwhile against AO Spine's own thoracolumbar poster, received and now hosted on the site)
@@ -34,26 +34,39 @@ review papers in "Next batch" below stand in for most of the pending ones.
 - [x] Durkee NJ, et al. AJR. 2006;187(4):915-925. doi:10.2214/AJR.05.1269 (received)
 - [ ] **Pending.** Scheinfeld MH, et al. RadioGraphics. 2015;35(2):555-577. doi:10.1148/rg.352140098
 
-## Next batch (asked for 2026-10-25)
+## Second batch (asked for 2026-10-25)
 
-Mostly short "Classifications in Brief" reviews from Clin Orthop Relat Res, the same series as the
-ones that came in the first batch, which describe the original papers that could not be found.
-All DOIs checked on Crossref.
+Received ones are ticked; the rest are **pending** and carried into the third batch.
 
-- [ ] AO Spine Subaxial Cervical Spine Injury Classification System poster (free on aospine.org/classification, the companion to the thoracolumbar one)
-- [ ] Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (the Mason 2 mm and 30%)
+- [ ] **Pending.** AO Spine Subaxial Cervical Spine Injury Classification System poster (free on aospine.org/classification)
+- [ ] **Pending.** Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (the Mason 2 mm and 30%)
+- [ ] **Pending.** Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
+- [x] Kennedy C, Abrams R. Lichtman. Clin Orthop Relat Res. 2019;477(6):1516-1520. doi:10.1097/corr.0000000000000595 (settled IIIC and the 1993 split)
+- [x] Alton T, Patton DJ, Gee AO. Hawkins. Clin Orthop Relat Res. 2015;473(9):3046-3049. doi:10.1007/s11999-015-4136-x
+- [x] Scolaro J, Ahn J, Mehta S. Lisfranc. Clin Orthop Relat Res. 2011;469(7):2078-2080. doi:10.1007/s11999-010-1586-z (does not describe the Myerson types)
+- [x] Alton TB, Gee AO. Letournel. Clin Orthop Relat Res. 2014;472(1):35-38. doi:10.1007/s11999-013-3375-y
+- [x] Vu C, Gendelberg D. AO thoracolumbar. Clin Orthop Relat Res. 2020;478(2):434-440. doi:10.1097/corr.0000000000001086
+- [x] Alton TB, Werner SE, Gee AO. Gartland. Clin Orthop Relat Res. 2015;473(2):738-741. doi:10.1007/s11999-014-4033-8
+- [x] Somerson JS, Hsu JE, Gorbaty JD, Gee AO. Goutallier. Clin Orthop Relat Res. 2016;474(5):1328-1332. doi:10.1007/s11999-015-4630-1
+- [x] Bi AS, Verma NN. Ellman and Snyder (partial cuff tears). Clin Orthop Relat Res. 2025;483(3):411-414. doi:10.1097/corr.0000000000003297
+- [x] Rizkalla JM, Lines T, Nimmons S. Denis. Clin Orthop Relat Res. 2019;477(9):2178-2181. doi:10.1097/corr.0000000000000861
+
+## Third batch (asked for 2026-10-25)
+
+The three pending from the second batch, two more short reviews, and the four papers that the
+most unchecked claims rest on. All DOIs checked on Crossref.
+
+- [ ] AO Spine Subaxial Cervical Spine Injury Classification System poster (aospine.org/classification)
+- [ ] Broberg MA, Morrey BF. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (Mason 2 mm and 30%)
 - [ ] Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
-- [ ] Kennedy C, Abrams R. In brief: the Lichtman classification for Kienböck disease. Clin Orthop Relat Res. 2019;477(6):1516-1520. doi:10.1097/corr.0000000000000595 (may also settle Lichtman IIIC)
-- [ ] Alton T, Patton DJ, Gee AO. Classifications in brief: the Hawkins classification for talus fractures. Clin Orthop Relat Res. 2015;473(9):3046-3049. doi:10.1007/s11999-015-4136-x
-- [ ] Scolaro J, Ahn J, Mehta S. In brief: Lisfranc fracture dislocations. Clin Orthop Relat Res. 2011;469(7):2078-2080. doi:10.1007/s11999-010-1586-z
-- [ ] Alton TB, Gee AO. Classifications in brief: Letournel classification for acetabular fractures. Clin Orthop Relat Res. 2014;472(1):35-38. doi:10.1007/s11999-013-3375-y
-- [ ] Vu C, Gendelberg D. Classifications in brief: AO thoracolumbar classification system. Clin Orthop Relat Res. 2020;478(2):434-440. doi:10.1097/corr.0000000000001086
-- [ ] Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741. doi:10.1007/s11999-014-4033-8 (paediatric elbow study)
-- [ ] Somerson JS, Hsu JE, Gorbaty JD, Gee AO. Classifications in brief: Goutallier classification of fatty infiltration of the rotator cuff musculature. Clin Orthop Relat Res. 2016;474(5):1328-1332. doi:10.1007/s11999-015-4630-1 (shoulder study)
-- [ ] Bi AS, Verma NN. Classifications in brief: the Ellman and Snyder classifications of partial-thickness rotator cuff tears. Clin Orthop Relat Res. 2025;483(3):411-414. doi:10.1097/corr.0000000000003297 (shoulder study)
-- [ ] Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181. doi:10.1097/corr.0000000000000861 (pelvis study)
+- [ ] Tysver T, Jawa A. In brief: fractures in brief: scaphoid fractures. Clin Orthop Relat Res. 2010;468(9):2553-2555. doi:10.1007/s11999-010-1261-4 (may cover Herbert)
+- [ ] Slattery C, Kweon CY. Classifications in brief: Outerbridge classification of chondral lesions. Clin Orthop Relat Res. 2018;476(10):2101-2104. doi:10.1007/s11999.0000000000000255 (a source for the knee cartilage grades)
+- [ ] Iyer RS, Thapa MM, Khanna PC, Chew FS. AJR. 2012;198(5):1053-1068. doi:10.2214/AJR.10.7314 (six paediatric elbow claims)
+- [ ] Harnsberger HR, Osborn AG. AJR. 1991;157(1):147-154. doi:10.2214/ajr.157.1.2048510 (five suprahyoid neck claims)
+- [ ] Markhardt BK, Gross JM, Monu JU. RadioGraphics. 2009;29(2):585-597. doi:10.1148/rg.292085078 (Schatzker IIIA and IIIB)
+- [ ] Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113 (pelvis: L5 transverse process, ring breaking twice)
 
-Herbert and Palmer have no review in this series; they stay pending above.
+Palmer, Herbert's own paper and Myerson have no review in the Clin Orthop Relat Res series.
 
 ## 2. Paediatric elbow study
 
@@ -161,5 +174,5 @@ Herbert and Palmer have no review in this series; they stay pending above.
 ## Not a paper problem
 
 - Knee cartilage grades (K10-1): the four depth grades come from the modified Noyes and Outerbridge
-  scales, which the knee study does not cite yet. A source for them needs choosing first.
-- Lichtman stage IIIC: no source found at all (the Lichtman review in the next batch may settle it).
+  scales, which the knee study does not cite yet. The Outerbridge review in the third batch could be that source.
+- ~~Lichtman stage IIIC~~: settled by Kennedy and Abrams 2019; IIIC is now in the calculator.

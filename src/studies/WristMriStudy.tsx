@@ -26,6 +26,8 @@ const MAYFIELD_DOI = '10.1016/s0363-5023(80)80007-4'
 const HERBERT_DOI = '10.1302/0301-620X.66B1.6693468'
 const PALMER_DOI = '10.1016/0363-5023(89)90174-3'
 const LICHTMAN_DOI = '10.2106/00004623-197759070-00011'
+const KENNEDY_ABRAMS_DOI = '10.1097/CORR.0000000000000595'
+const KENNEDY_ALLAN_DOI = '10.1007/s11999-012-2275-x'
 const GAEBLER_DOI = '10.1097/00005373-199607000-00011'
 const IMAEDA_DOI = '10.1148/radiology.201.2.8888248'
 const CEREZAL_DOI = '10.1148/radiographics.22.1.g02ja01105'
@@ -45,6 +47,8 @@ const MAYFIELD = <Cite doi={MAYFIELD_DOI}>Mayfield et al., J Hand Surg Am 1980</
 const HERBERT = <Cite doi={HERBERT_DOI}>Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>
 const PALMER = <Cite doi={PALMER_DOI}>Palmer, J Hand Surg Am 1989</Cite>
 const LICHTMAN = <Cite doi={LICHTMAN_DOI}>Lichtman et al., J Bone Joint Surg Am 1977</Cite>
+const KENNEDY_ABRAMS = <Cite doi={KENNEDY_ABRAMS_DOI}>Kennedy and Abrams, Clin Orthop Relat Res 2019</Cite>
+const KENNEDY_ALLAN = <Cite doi={KENNEDY_ALLAN_DOI}>Kennedy and Allan, Clin Orthop Relat Res 2012</Cite>
 const GAEBLER = <Cite doi={GAEBLER_DOI}>Gaebler et al., J Trauma 1996</Cite>
 const IMAEDA = <Cite doi={IMAEDA_DOI}>Imaeda et al., Radiology 1996</Cite>
 const CEREZAL = <Cite doi={CEREZAL_DOI}>Cerezal et al., Radiographics 2002</Cite>
@@ -65,6 +69,8 @@ const references: LessonReference[] = [
   { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: HERBERT_DOI },
   { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.', doi: PALMER_DOI },
   { citation: 'Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck\'s disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908.', doi: LICHTMAN_DOI },
+  { citation: 'Kennedy C, Abrams R. In brief: the Lichtman classification for Kienböck disease. Clin Orthop Relat Res. 2019;477(6):1516-1520.', doi: KENNEDY_ABRAMS_DOI },
+  { citation: 'Kennedy SA, Allan CH. In brief: Mayfield et al. classification: carpal dislocations and progressive perilunar instability. Clin Orthop Relat Res. 2012;470(4):1243-1245.', doi: KENNEDY_ALLAN_DOI },
   { citation: 'Gaebler C, Kukla C, Breitenseher M, Trattnig S, Mittlboeck M, Vécsei V. Magnetic resonance imaging of occult scaphoid fractures. J Trauma. 1996;41(1):73-76.', doi: GAEBLER_DOI },
   { citation: 'Imaeda T, Nakamura R, Shionoya K, Makino N. Ulnar impaction syndrome: MR imaging findings. Radiology. 1996;201(2):495-500.', doi: IMAEDA_DOI },
   { citation: 'Cerezal L, del Piñal F, Abascal F, García-Valtuille R, Pereda T, Canga A. Imaging findings in ulnar-sided wrist impaction syndromes. Radiographics. 2002;22(1):105-121.', doi: CEREZAL_DOI },
@@ -131,7 +137,7 @@ const learn: LearnSection[] = [
         <p>Look along every carpal bone, including the hook of the hamate and the dorsal surface of the triquetrum, and at the distal radius.</p>
         <h4>The lunate: Kienböck disease or ulnar impaction</h4>
         <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar aspect of the lunate, sometimes also in the radial aspects of the triquetrum and the ulnar head ({IMAEDA}), and goes with positive ulnar variance ({CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}).</p>
-        <p>Stage Kienböck disease by Lichtman, whose four stages are clinical and radiographic ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. Stage I has normal radiographs.</p>
+        <p>Stage Kienböck disease by Lichtman, whose four stages are clinical and radiographic ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. Stage I has normal radiographs, and since 1993 decreased T1 signal on MRI. Stage III was split in 1993 by fixed scaphoid rotation (a radioscaphoid angle over 60° is IIIB), and IIIC, a coronal fracture of the lunate, was added later ({KENNEDY_ABRAMS}).</p>
         {lichtmanTable}
       </>
     ),
@@ -160,7 +166,7 @@ const learn: LearnSection[] = [
     title: 'Step 5. Perilunate injury',
     body: (
       <>
-        <p>Mayfield and colleagues described perilunar instability as a progression around the lunate, radial to ulnar ({MAYFIELD}). The stages build on each other, so a later stage includes the injuries of the earlier ones. The Mayfield calculator on this site applies the same rules.</p>
+        <p>Mayfield and colleagues described perilunar instability as a progression around the lunate, radial to ulnar ({MAYFIELD}; {KENNEDY_ALLAN}). Stage III is the perilunate dislocation. The stages build on each other, so a later stage includes the injuries of the earlier ones. The Mayfield calculator on this site applies the same rules.</p>
         {mayfieldTable}
         <p>The sequence starts at the scapholunate ligament, unless the injury passes through the scaphoid instead (a greater-arc injury). So a stage III or IV injury with an intact scapholunate ligament and no scaphoid fracture deserves a second look ({MAYFIELD}).</p>
         <p>This site gives a Mayfield stage only when you mark a perilunate injury, so an isolated scapholunate tear from another cause is not called stage I.</p>
@@ -882,7 +888,7 @@ const study: StudyDefinition = {
   slug: 'wrist-mri',
   name: 'Wrist MRI',
   lede: 'Read a wrist MRI for pain or injury: a fixed search pattern through the scaphoid and lunate, the intrinsic ligaments and perilunate ring, the TFCC, tendons, tunnels and ganglia, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Mayfield, Herbert, Palmer and Lichtman wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Herbert and Palmer wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,
@@ -909,7 +915,7 @@ const study: StudyDefinition = {
       question: 'Which Lichtman stage of Kienböck disease has normal radiographs?',
       options: ['Stage I', 'Stage II', 'Stage IIIA', 'Stage IV'],
       answer: 0,
-      explanation: <p>Lichtman stage I has normal radiographs; sclerosis of the lunate is stage II ({LICHTMAN}).</p>,
+      explanation: <p>Lichtman stage I has normal radiographs; increased density of the lunate is stage II ({LICHTMAN}; {KENNEDY_ABRAMS}).</p>,
     },
     {
       id: 'sl-strongest',

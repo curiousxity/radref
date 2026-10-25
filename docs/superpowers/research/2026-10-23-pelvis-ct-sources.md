@@ -64,3 +64,13 @@ Not sourced, and labelled as the site's own on the page: the order of the steps,
 checklist, the pointers from the history, the acetabular descriptors (femoral head,
 fragments, impaction, gap), the bleeding, hematoma and bladder checklist, and putting active
 bleeding first in the impression.
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of
+sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181. doi:10.1097/CORR.0000000000000861.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| P3-1 | yes | "neurologic injuries occurred in 5.9% of fractures lateral to the sacral foramina (Zone 1). In transforaminal fractures (Zone 2), 28.4% ... central fractures (Zone 3) ... (56.7%)". |
+| P3-2 | partly | "These fractures can adopt a U- or H-shaped morphologic pattern and may reflect a loss of continuity between the pelvis and the spine, or 'lumbopelvic dissociation' ... their omission from the original Denis classification overlooks a clinically important sacral fracture pattern." The study now uses "lumbopelvic dissociation". Whether Roy-Camille used the U or H shape is still unchecked. |

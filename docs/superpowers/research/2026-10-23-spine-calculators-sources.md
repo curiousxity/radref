@@ -77,3 +77,19 @@ are unchanged and unchecked.
 | AO-8 (TL) | yes, reworded | "N2 Radicular symptoms", "N3 Incomplete spinal cord injury or any degree of cauda equina injury". |
 | AO-9 (TL) | partly, changed | "+ Continued spinal cord compression", listed with the grades and not tied to N3. Thoracolumbar now allows "+" with any grade. |
 | AO-10 (TL) | partly, changed | M1 "an indeterminate injury to the tension band based on spinal imaging with or without MRI" (was "on imaging or examination"); M2 "a patient-specific comorbidity ... Examples ... ankylosing spondylitis or burns affecting the skin overlying the injured spine" (was "ankylosing spondylitis or DISH"). |
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Vu C, Gendelberg D. Classifications in brief: AO thoracolumbar classification system.
+Clin Orthop Relat Res. 2020;478(2):434-440. doi:10.1097/CORR.0000000000001086. It agrees with the
+poster on the types, the order, N0 to NX and "+" ("a '+' is designated for continued spinal cord
+compression", not tied to N3). Two small differences, kept as the poster has them, since the poster
+is AO Spine's own and the two are the same age:
+
+- M1: "indeterminate injuries to tension bands based on imaging or a physical examination" (the
+  poster says imaging, with or without MRI).
+- Notation: "each injury can be classified separately, with the more severe injury written first ...
+  T5–T6 B2; T6 A1" (the poster puts the secondary injury in brackets: "C (T9: A3; N3; M2)").
+
+M2 examples in the review: "ankylosing spondylitis, skin injuries overlying a fracture, or
+rheumatologic conditions"; table: "rheumatoid arthritis, osteoporosis, or ankylosing spondylitis".

@@ -20,6 +20,8 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
 const CANALE_DOI = '10.2106/00004623-197860020-00001'
+const ALTON_HAWKINS_DOI = '10.1007/s11999-015-4136-x'
+const JIMENEZ_DOI = '10.1097/CORR.0000000000000539'
 const SANDERS_DOI = '10.1097/00003086-199305000-00012'
 const MYERSON_DOI = '10.1177/107110078600600504'
 const CASTRO_DOI = '10.2214/AJR.10.4674'
@@ -35,6 +37,8 @@ const SOBEL_DOI = '10.1177/107110079401500306'
 
 const HAWKINS = <Cite doi={HAWKINS_DOI}>Hawkins, J Bone Joint Surg Am 1970</Cite>
 const CANALE = <Cite doi={CANALE_DOI}>Canale and Kelly, J Bone Joint Surg Am 1978</Cite>
+const ALTON_HAWKINS = <Cite doi={ALTON_HAWKINS_DOI}>Alton et al., Clin Orthop Relat Res 2015</Cite>
+const JIMENEZ = <Cite doi={JIMENEZ_DOI}>Jiménez-Almonte et al., Clin Orthop Relat Res 2019</Cite>
 const SANDERS = <Cite doi={SANDERS_DOI}>Sanders et al., Clin Orthop Relat Res 1993</Cite>
 const MYERSON = <Cite doi={MYERSON_DOI}>Myerson et al., Foot Ankle 1986</Cite>
 const CASTRO = <Cite doi={CASTRO_DOI}>Castro et al., AJR 2010</Cite>
@@ -51,6 +55,8 @@ const SOBEL = <Cite doi={SOBEL_DOI}>Sobel et al., Foot Ankle Int 1994</Cite>
 const references: LessonReference[] = [
   { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.', doi: HAWKINS_DOI },
   { citation: 'Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156.', doi: CANALE_DOI },
+  { citation: 'Alton T, Patton DJ, Gee AO. Classifications in brief: the Hawkins classification for talus fractures. Clin Orthop Relat Res. 2015;473(9):3046-3049.', doi: ALTON_HAWKINS_DOI },
+  { citation: 'Jiménez-Almonte JH, King JD, Luo TD, Aneja A, Moghadamian E. Classifications in brief: Sanders classification of intraarticular fractures of the calcaneus. Clin Orthop Relat Res. 2019;477(2):467-471.', doi: JIMENEZ_DOI },
   { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.', doi: SANDERS_DOI },
   { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.', doi: MYERSON_DOI },
   { citation: 'Castro M, Melão L, Canella C, Weber M, Negrão P, Trudell D, Resnick D. Lisfranc joint ligamentous complex: MRI with anatomic correlation in cadavers. AJR Am J Roentgenol. 2010;195(6):W447-W455.', doi: CASTRO_DOI },
@@ -112,9 +118,9 @@ const learn: LearnSection[] = [
         <h4>Talus</h4>
         <p>Give a talar neck fracture its Hawkins type ({HAWKINS}); Canale and Kelly added type IV ({CANALE}). The Hawkins calculator on this site applies the same rules.</p>
         {hawkinsTable}
-        <p>The risk of osteonecrosis of the talar body rises with the type ({HAWKINS}; {CANALE}). On follow-up radiographs some 6 to 8 weeks after the injury, a band of subchondral lucency under the talar dome (the Hawkins sign) shows that the body is revascularising, so osteonecrosis is unlikely ({HAWKINS}).</p>
+        <p>The risk of osteonecrosis of the talar body rises with the type ({HAWKINS}; {CANALE}). On follow-up radiographs some 6 to 8 weeks after the injury, a band of subchondral lucency under the talar dome on the AP view (the Hawkins sign) shows that the body is revascularising, so osteonecrosis is unlikely; its absence does not reliably predict osteonecrosis ({HAWKINS}; {ALTON_HAWKINS}).</p>
         <h4>Calcaneus</h4>
-        <p>An intra-articular calcaneal fracture is typed by Sanders on the coronal CT image where the undersurface of the posterior facet is widest ({SANDERS}). MRI shows the fracture, but the type belongs to CT; give it from CT when there is one. The Sanders calculator on this site applies the same rules.</p>
+        <p>An intra-articular calcaneal fracture is typed by Sanders on the coronal CT image where the undersurface of the posterior facet is widest ({SANDERS}; {JIMENEZ}). MRI shows the fracture, but the type belongs to CT; give it from CT when there is one. The Sanders calculator on this site applies the same rules.</p>
         {sandersTable}
         <h4>Navicular and the other tarsal bones</h4>
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
@@ -898,7 +904,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them Hawkins type IV and the Hawkins sign, the Sanders lines and subtypes, the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

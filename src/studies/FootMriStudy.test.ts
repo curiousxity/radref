@@ -29,7 +29,8 @@ describe('foot MRI lesson', () => {
   // unchecked, so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(14)
+    // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added.
+    expect(study.references).toHaveLength(16)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

@@ -132,3 +132,16 @@ doi:10.1007/s11999-012-2275-x, which reproduces Mayfield's table. Mayfield 1980 
 | MF-3 | no, changed | "The third stage of progression is perilunate dislocation ... The lunotriquetral joint is now also disrupted. Radiographically, the capitate is dislocated dorsally". Stage III now carries the name perilunate dislocation. |
 | MF-4 | yes, detail added | "the radiolunate joint is disrupted and the lunate is dislocated volarly from the lunate fossa". |
 | MF-5 | yes | "four distinct stages ... The progressive ligamentous injury around the lunate was referred to as progressive perilunar instability". |
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Kennedy C, Abrams R. In brief: the Lichtman classification for Kienböck disease. Clin
+Orthop Relat Res. 2019;477(6):1516-1520. doi:10.1097/CORR.0000000000000595. Where it differed, the
+author's rule (the newer source) applied.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| LI-1 | yes, reworded | Stage I "normal architecture and lunate density but may show a linear or compression fracture"; II "increased density in the lunate on plain radiographs without a change in the shape, size, or relationship to other carpal bones"; III "collapse of the lunate with proximal migration of the capitate"; IV "pancarpal arthritis, including radiocarpal arthritis" (KDAC). IV said "radiocarpal or midcarpal"; now the review's words. |
+| LI-2 | yes, reworded | "Stages IIIA (without fixed scaphoid rotation) and IIIB (with fixed scaphoid rotation)"; "radioscaphoid angle < 60° classified as Stage IIIA and ... > 60° classified as Stage IIIB"; IIIB "often seen with a cortical 'ring sign'". |
+| LI-3 | settled | "Stage III was modified in 1993 and divided into two stages, IIIA and IIB" (Lichtman and Degnan, Hand Clin 1993), not in the 1982 update. "Stage IIIC representing a coronal fracture of the lunate" was added later (Lichtman 2010, 2016). IIIC is now a stage in the calculator and the study. |
+| LI-4 | yes | "The original classification was later modified in 1993 ... with Stage I including decreased T1 signal on MRI". Stage I has its MRI finding back, credited to 1993. Stage 0 (2010) is mentioned on the page only. |

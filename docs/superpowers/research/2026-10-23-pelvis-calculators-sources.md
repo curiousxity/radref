@@ -103,3 +103,11 @@ still unread.
 | LT-5 | yes, wording changed | Spur sign: "posterior displacement of the sciatic buttress ... a shard of bone extending posteriorly at the level of the superior acetabulum" on radiographs and CT. The page no longer ties it to the obturator oblique view. |
 | LT-6 | yes | "Sparing of the obturator ring commonly indicates transverse, transverse with posterior wall, or isolated posterior wall fracture." |
 | LT-7 | partly, added | T-shaped: "a transverse acetabular fracture with extension inferiorly into the obturator ring"; "the superior extension of the fracture does not involve the iliac wing, which allows differentiation from the both-column fracture". The iliac wing hint is added to the page and study. ACPHT is not in Durkee (five types only). |
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Alton TB, Gee AO. Classifications in brief: Letournel classification for acetabular
+fractures. Clin Orthop Relat Res. 2014;472(1):35-38. doi:10.1007/s11999-013-3375-y. It names the ten
+types (LT-1, yes) and says the 2009 algorithm of Prevezas et al. reads the ilioischial and
+iliopectineal lines first, then the obturator foramen and the spur sign, as the calculator does. It
+does not describe each type, so LT-2, LT-3 and LT-7 beyond Durkee stay unchecked.

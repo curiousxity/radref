@@ -19,6 +19,7 @@ const SKAGGS_DOI = '10.2106/00004623-199910000-00007'
 const ROGERS_DOI = '10.1148/128.1.145'
 const HERMAN_DOI = '10.2106/JBJS.H.01316'
 const LEITCH_DOI = '10.2106/JBJS.D.02956'
+const ALTON_GARTLAND_DOI = '10.1007/s11999-014-4033-8'
 const WEISS_DOI = '10.1097/BPO.0b013e3181b2842c'
 const JAKOB_DOI = '10.1302/0301-620X.57B4.430'
 const EDMONDS_DOI = '10.2106/JBJS.I.01637'
@@ -31,6 +32,7 @@ const ROGERS = <Cite doi={ROGERS_DOI}>Rogers et al., Radiology 1978</Cite>
 const HERMAN = <Cite doi={HERMAN_DOI}>Herman et al., J Bone Joint Surg Am 2009</Cite>
 const GARTLAND = 'Gartland, Surg Gynecol Obstet 1959'
 const LEITCH = <Cite doi={LEITCH_DOI}>Leitch et al., J Bone Joint Surg Am 2006</Cite>
+const ALTON_GARTLAND = <Cite doi={ALTON_GARTLAND_DOI}>Alton et al., Clin Orthop Relat Res 2015</Cite>
 const WEISS = <Cite doi={WEISS_DOI}>Weiss et al., J Pediatr Orthop 2009</Cite>
 const JAKOB = <Cite doi={JAKOB_DOI}>Jakob et al., J Bone Joint Surg Br 1975</Cite>
 const EDMONDS = <Cite doi={EDMONDS_DOI}>Edmonds, J Bone Joint Surg Am 2010</Cite>
@@ -45,6 +47,7 @@ const references: LessonReference[] = [
   { citation: 'Herman MJ, Boardman MJ, Hoover JR, Chafetz RS. Relationship of the anterior humeral line to the capitellar ossific nucleus: variability with age. J Bone Joint Surg Am. 2009;91(9):2188-2193.', doi: HERMAN_DOI },
   { citation: 'Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154.' },
   { citation: 'Leitch KK, Kay RM, Femino JD, Tolo VT, Storer SK, Skaggs DL. Treatment of multidirectionally unstable supracondylar humeral fractures in children. A modified Gartland type-IV fracture. J Bone Joint Surg Am. 2006;88(5):980-985.', doi: LEITCH_DOI },
+  { citation: 'Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741.', doi: ALTON_GARTLAND_DOI },
   { citation: 'Weiss JM, Graves S, Yang S, Mendelsohn E, Kay RM, Skaggs DL. A new classification system predictive of complications in surgically treated pediatric humeral lateral condyle fractures. J Pediatr Orthop. 2009;29(6):602-605.', doi: WEISS_DOI },
   { citation: 'Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436.', doi: JAKOB_DOI },
   { citation: 'Edmonds EW. How displaced are "nondisplaced" fractures of the medial humeral epicondyle in children? Results of a three-dimensional computed tomography analysis. J Bone Joint Surg Am. 2010;92(17):2785-2791.', doi: EDMONDS_DOI },
@@ -105,7 +108,7 @@ const gradingTable = (
         </tr>
       </thead>
       <tbody>
-        <tr><td className="vessel-name">Supracondylar</td><td>Gartland I undisplaced; II displaced, posterior cortex intact (hinged); III completely displaced, no cortical contact</td></tr>
+        <tr><td className="vessel-name">Supracondylar</td><td>Modified Gartland I undisplaced; II displaced, posterior cortex intact (hinged); III completely displaced, no cortical contact</td></tr>
         <tr><td className="vessel-name">Lateral condyle</td><td>Weiss I under 2 mm; II 2 mm or more, articular surface intact; III 2 mm or more, articular surface disrupted</td></tr>
         <tr><td className="vessel-name">Medial epicondyle</td><td>Displacement (descriptive) and whether the fragment is entrapped in the joint</td></tr>
         <tr><td className="vessel-name">Radial neck</td><td>O'Brien I under 30°; II 30° to 60°; III over 60° of angulation</td></tr>
@@ -167,10 +170,10 @@ const learn: LearnSection[] = [
     title: 'Step 5. Supracondylar fracture',
     body: (
       <>
-        <p>The supracondylar fracture is the commonest elbow fracture in children ({IYER}). Gartland's types ({GARTLAND}):</p>
+        <p>The supracondylar fracture is the commonest elbow fracture in children ({IYER}). Gartland graded extension fractures as undisplaced, moderately displaced and severely displaced ({GARTLAND}); the types in use today are Wilkins's modification, which adds posterior cortical contact ({ALTON_GARTLAND}):</p>
         <ul className="plain-list">
           <li><strong>Type I:</strong> undisplaced.</li>
-          <li><strong>Type II:</strong> displaced, with the posterior cortex intact (a hinge).</li>
+          <li><strong>Type II:</strong> displaced, with the posterior cortex intact (a hinge); the anterior humeral line passes in front of the capitellum. Wilkins split it into IIA, without rotation or translation of the fragment, and IIB, with them.</li>
           <li><strong>Type III:</strong> completely displaced, with no cortical contact.</li>
         </ul>
         <p>A "type IV" fracture is unstable in both flexion and extension because the periosteal hinge is lost in front and behind; it is recognised under anaesthesia rather than on the first radiographs ({LEITCH}), so this report does not offer it.</p>
@@ -313,7 +316,7 @@ const fields = {
   ] },
 
   supracondylar: { id: 'supracondylar', kind: 'choice', label: 'Supracondylar fracture', required: true, options: nonePresent },
-  gartland: { id: 'gartland', kind: 'choice', label: 'Displacement', showIf: present('supracondylar'), help: 'Gartland types.', options: [
+  gartland: { id: 'gartland', kind: 'choice', label: 'Displacement', showIf: present('supracondylar'), help: 'Modified Gartland (Wilkins) types.', options: [
     { value: 'i', label: 'Undisplaced' },
     { value: 'ii', label: 'Displaced, posterior cortex intact (hinged)' },
     { value: 'iii', label: 'Completely displaced, no cortical contact' },
@@ -751,7 +754,7 @@ const steps: ReportStep[] = [
     learn: 'supracondylar',
     teach: (
       <>
-        <p>Gartland I undisplaced; II displaced, posterior cortex intact; III completely displaced ({GARTLAND}).</p>
+        <p>Modified Gartland (Wilkins): I undisplaced; II displaced, posterior cortex intact; III completely displaced ({GARTLAND}; {ALTON_GARTLAND}).</p>
         {gradingTable}
       </>
     ),
@@ -802,7 +805,7 @@ const study: StudyDefinition = {
   slug: 'pediatric-elbow',
   name: 'Pediatric elbow radiographs',
   lede: 'Read an injured child\'s elbow radiographs by age: which ossification centres to expect, the fat pads, the alignment lines, and the common fractures with their gradings.',
-  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them everything cited to the Iyer review: the fat pads as a sign of effusion, the radiocapitellar line, the entrapped medial epicondyle and the commonest fracture; the Gartland, O'Brien and Judet types; and Jakob's stages) have still not been checked against their papers. Not yet reviewed by the site author.",
+  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them everything cited to the Iyer review: the fat pads as a sign of effusion, the radiocapitellar line, the entrapped medial epicondyle and the commonest fracture; Gartland's original wording, the O'Brien and Judet types; and Jakob's stages) have still not been checked against their papers. Not yet reviewed by the site author.",
   references,
   report: {
     steps,
@@ -864,7 +867,7 @@ const study: StudyDefinition = {
       question: 'A supracondylar fracture is displaced, but the posterior cortex is intact. Which Gartland type?',
       options: ['Type I', 'Type II', 'Type III', 'Type IV'],
       answer: 1,
-      explanation: <p>Gartland type II is displaced with the posterior cortex intact (a hinge); type III is completely displaced without cortical contact ({GARTLAND}).</p>,
+      explanation: <p>Gartland type II is displaced with the posterior cortex intact (a hinge); type III is completely displaced without cortical contact. The cortical contact is Wilkins's modification of Gartland's types ({ALTON_GARTLAND}).</p>,
     },
     {
       id: 'weiss',

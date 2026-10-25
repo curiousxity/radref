@@ -81,17 +81,23 @@ describe('Palmer (unchecked)', () => {
   })
 })
 
-describe('Lichtman (unchecked)', () => {
+describe('Lichtman', () => {
+  // Quotes from Kennedy and Abrams, Clin Orthop Relat Res 2019.
   test('stages from the findings', () => {
-    // LI-1: "Stage I: normal radiographs." (Unchecked; the 1977 abstract says only "Four
-    // clinical and roentgenographic stages were identified".)
+    // LI-1: "Stage I was described as having normal architecture and lunate density".
     expect(lichtman({ abnormal: true })).toBe('I')
-    // LI-1: "Stage II: sclerosis without collapse."
+    // LI-1: "Stage II shows increased density in the lunate on plain radiographs without a
+    // change in the shape, size, or relationship to other carpal bones."
     expect(lichtman({ abnormal: true, sclerosis: true })).toBe('II')
-    // LI-2: "IIIA: collapse with carpal height maintained; IIIB: with carpal collapse."
+    // LI-2: "Stages IIIA (without fixed scaphoid rotation) and IIIB (with fixed scaphoid rotation)".
     expect(lichtman({ sclerosis: true, collapse: true, carpalCollapse: false })).toBe('IIIA')
     expect(lichtman({ sclerosis: true, collapse: true, carpalCollapse: true })).toBe('IIIB')
-    // LI-1: "Stage IV: degenerative changes of the radiocarpal or midcarpal joint."
+    // LI-3: "the addition of Stage IIIC representing a coronal fracture of the lunate". The
+    // calculator left IIIC out while it had no source.
+    expect(lichtman({ collapse: true, coronalFracture: true })).toBe('IIIC')
+    expect(lichtman({ collapse: true, carpalCollapse: true, coronalFracture: true })).toBe('IIIC')
+    expect(lichtman({ coronalFracture: true })).toBeUndefined()
+    // LI-1: "Stage IV includes pancarpal arthritis, including radiocarpal arthritis."
     expect(lichtman({ collapse: true, carpalCollapse: true, arthritis: true })).toBe('IV')
   })
 
@@ -101,11 +107,11 @@ describe('Lichtman (unchecked)', () => {
     expect(lichtman({ collapse: true })).toBeUndefined()
   })
 
-  // LI-1, LI-4: the 1977 paper predates clinical MRI, so it cannot be the source for "abnormal
-  // only on MRI", and no other listed paper states it; stage I now says only what the stage
-  // wording claims, normal radiographs.
-  test('stage I does not claim MRI from the 1977 paper', () => {
-    expect(lichtmanSentence('I')).toBe('Kienböck disease, Lichtman stage I: normal radiographs.')
+  // LI-1, LI-4: stage I said only "normal radiographs", since the 1977 paper predates clinical
+  // MRI. The review: "The original classification was later modified in 1993 ... with Stage I
+  // including decreased T1 signal on MRI", so the MRI finding is back, credited to 1993.
+  test('stage I: normal radiographs, decreased T1 signal on MRI', () => {
+    expect(lichtmanSentence('I')).toBe('Kienböck disease, Lichtman stage I: normal lunate architecture and density on radiographs (a linear or compression fracture may show), with decreased T1 signal on MRI.')
   })
 
   test('report sentence for every stage', () => {

@@ -418,7 +418,21 @@ document. Where the site differed, the author chose the newer source, and these 
 - [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
-- [ ] The next batch is listed in `docs/PAPERS_NEEDED.md`.
+- [ ] The third batch is listed in `docs/PAPERS_NEEDED.md`.
+
+Second batch, the same day: reviews of Lichtman, Hawkins, Lisfranc, Letournel, AO thoracolumbar,
+Gartland, Goutallier, Ellman and Denis ("Third check" sections in the sources documents). Changed:
+
+- Lichtman: stage wording from the review; stage IIIC (coronal fracture of the lunate) added; stage I
+  has its MRI finding back (decreased T1 signal, from the 1993 modification); IIIA and IIIB by
+  radioscaphoid angle 60°; IV is pancarpal arthritis. The split was 1993, not 1982.
+- Hawkins: type I is "undisplaced or minimally displaced"; the Hawkins sign is on the AP view, and its
+  absence does not reliably predict osteonecrosis; IIA and IIB named.
+- Paediatric elbow: the cortical-contact types are Wilkins's modification of Gartland, credited so.
+- Pelvis CT: Denis rates confirmed; the U- or H-shaped fracture is "lumbopelvic dissociation".
+- Shoulder: Goutallier and Ellman wording confirmed; the reviews are cited.
+- AO thoracolumbar review agrees with the poster except M1 ("imaging or a physical examination") and
+  the notation; the poster's versions are kept (see the spine sources document).
 
 ## Housekeeping
 

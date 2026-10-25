@@ -21,6 +21,9 @@ const RICHARDS_DOI = '10.1148/radiology.190.3.8115607'
 const ELLMAN_DOI = '10.1097/00003086-199005000-00010'
 const PATTE_DOI = '10.1097/00003086-199005000-00012'
 const GOUTALLIER_DOI = '10.1097/00003086-199407000-00014'
+const KILCOYNE_DOI = '10.2214/ajr.154.5.2108538'
+const BI_VERMA_DOI = '10.1097/CORR.0000000000003297'
+const SOMERSON_DOI = '10.1007/s11999-015-4630-1'
 const FUCHS_DOI = '10.1016/s1058-2746(99)90097-6'
 const WALCH_DOI = '10.1016/s1058-2746(98)90218-x'
 const SNYDER_DOI = '10.1016/0749-8063(90)90056-j'
@@ -44,6 +47,9 @@ const RICHARDS = <Cite doi={RICHARDS_DOI}>Richards et al., Radiology 1994</Cite>
 const ELLMAN = <Cite doi={ELLMAN_DOI}>Ellman, Clin Orthop Relat Res 1990</Cite>
 const PATTE = <Cite doi={PATTE_DOI}>Patte, Clin Orthop Relat Res 1990</Cite>
 const GOUTALLIER = <Cite doi={GOUTALLIER_DOI}>Goutallier et al., Clin Orthop Relat Res 1994</Cite>
+const KILCOYNE = <Cite doi={KILCOYNE_DOI}>Kilcoyne et al., AJR 1990</Cite>
+const BI_VERMA = <Cite doi={BI_VERMA_DOI}>Bi and Verma, Clin Orthop Relat Res 2025</Cite>
+const SOMERSON = <Cite doi={SOMERSON_DOI}>Somerson et al., Clin Orthop Relat Res 2016</Cite>
 const FUCHS = <Cite doi={FUCHS_DOI}>Fuchs et al., J Shoulder Elbow Surg 1999</Cite>
 const WALCH = <Cite doi={WALCH_DOI}>Walch et al., J Shoulder Elbow Surg 1998</Cite>
 const SNYDER = <Cite doi={SNYDER_DOI}>Snyder et al., Arthroscopy 1990</Cite>
@@ -68,6 +74,9 @@ const references: LessonReference[] = [
   { citation: 'Ellman H. Diagnosis and treatment of incomplete rotator cuff tears. Clin Orthop Relat Res. 1990;(254):64-74.', doi: ELLMAN_DOI },
   { citation: 'Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;(254):81-86.', doi: PATTE_DOI },
   { citation: 'Goutallier D, Postel JM, Bernageau J, Lavau L, Voisin MC. Fatty muscle degeneration in cuff ruptures. Pre- and postoperative evaluation by CT scan. Clin Orthop Relat Res. 1994;(304):78-83.', doi: GOUTALLIER_DOI },
+  { citation: 'Kilcoyne RF, Shuman WP, Matsen FA 3rd, Morris M, Rockwood CA. The Neer classification of displaced proximal humeral fractures: spectrum of findings on plain radiographs and CT scans. AJR Am J Roentgenol. 1990;154(5):1029-1033.', doi: KILCOYNE_DOI },
+  { citation: 'Bi AS, Verma NN. Classifications in brief: the Ellman and Snyder classifications of partial-thickness rotator cuff tears. Clin Orthop Relat Res. 2025;483(3):411-414.', doi: BI_VERMA_DOI },
+  { citation: 'Somerson JS, Hsu JE, Gorbaty JD, Gee AO. Classifications in brief: Goutallier classification of fatty infiltration of the rotator cuff musculature. Clin Orthop Relat Res. 2016;474(5):1328-1332.', doi: SOMERSON_DOI },
   { citation: 'Fuchs B, Weishaupt D, Zanetti M, Hodler J, Gerber C. Fatty degeneration of the muscles of the rotator cuff: assessment by computed tomography versus magnetic resonance imaging. J Shoulder Elbow Surg. 1999;8(6):599-605.', doi: FUCHS_DOI },
   { citation: 'Walch G, Nové-Josserand L, Boileau P, Levigne C. Subluxations and dislocations of the tendon of the long head of the biceps. J Shoulder Elbow Surg. 1998;7(2):100-108.', doi: WALCH_DOI },
   { citation: 'Snyder SJ, Karzel RP, Del Pizzo W, Ferkel RD, Friedman MJ. SLAP lesions of the shoulder. Arthroscopy. 1990;6(4):274-279.', doi: SNYDER_DOI },
@@ -157,7 +166,7 @@ const learn: LearnSection[] = [
           <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process ({RICHARDS}).</p>
         </div>
         <h4>Proximal humerus fracture: Neer</h4>
-        <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}).</p>
+        <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}).</p>
         <p>The Neer calculator on this site applies the same rules, and the report step below uses the same code.</p>
       </>
     ),
@@ -168,11 +177,11 @@ const learn: LearnSection[] = [
     body: (
       <>
         <h4>Partial-thickness tears</h4>
-        <p>Ellman described incomplete tears at arthroscopy by side, articular (A), bursal (B) or interstitial (C), and by depth: grade 1 less than 3 mm deep, grade 2 3 to 6 mm, and grade 3 more than 6 mm ({ELLMAN}). These are arthroscopic grades; measuring the depth on MRI is an approximation.</p>
+        <p>Ellman described incomplete tears at arthroscopy by side, articular (A), bursal (B) or interstitial (C), and by depth: grade 1 less than 3 mm deep, grade 2 3 to 6 mm, and grade 3 more than 6 mm ({ELLMAN}; {BI_VERMA}). These are arthroscopic grades; measuring the depth on MRI is an approximation.</p>
         <h4>Full-thickness tears</h4>
         <p>Measure the tear from front to back and its retraction. Patte staged retraction in the frontal plane by where the tendon stump lies: stage 1 near the bony insertion, stage 2 at the level of the humeral head, and stage 3 at the level of the glenoid ({PATTE}).</p>
         <h4>Fatty infiltration of the muscles</h4>
-        <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}):</p>
+        <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}; {SOMERSON}):</p>
         {goutallierTable}
         <p>Fuchs and colleagues applied the same grades to MRI and compared them with CT: each method was reproducible between observers, but the correlation between MRI and CT grades was only fair to moderate, even on a simplified 3-grade scale ({FUCHS}). Grade the supraspinatus, infraspinatus and subscapularis on oblique sagittal T1-weighted images.</p>
       </>
@@ -1055,7 +1064,7 @@ const study: StudyDefinition = {
   slug: 'shoulder-mri',
   name: 'Shoulder MRI',
   lede: 'Read a shoulder MRI with no history beyond pain: a fixed search pattern through the bones, rotator cuff, biceps, labrum, ligaments, nerves and a repaired cuff, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Neer segments and displacement thresholds, the Ellman depth grades, the Patte stages, the Goutallier and Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Neer segments, the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

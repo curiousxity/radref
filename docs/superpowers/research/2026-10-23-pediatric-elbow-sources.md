@@ -186,3 +186,14 @@ the references are matched and names what is still unchecked, and
   measure medial displacement; the lateral view underestimated anterior displacement (0.9
   against 8.8 mm) and the AP view overestimated medial displacement (3.5 against 0.3 mm); an
   internal oblique view came closer. No rule changed (there was no threshold).
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of
+supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741.
+doi:10.1007/s11999-014-4033-8.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| PE5-2 | yes, credit changed | Gartland's own types were "type I, nondisplaced; type II, moderately displaced; and type III, severely displaced". The cortical wording is Wilkins's: "type II injuries were displaced anteriorly (anterior humeral line anterior to capitellum) but had posterior humeral cortical contact; and type III fractures were displaced with no cortical contact"; IIA "no rotational abnormality or fragment translation", IIB with them. The study now calls them the modified Gartland (Wilkins) types. |
+| PE5-3 | yes | Leitch's type IV: "multiplanar instability, identified intraoperatively, from no intact periosteal hinge". |

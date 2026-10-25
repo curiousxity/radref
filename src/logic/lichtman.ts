@@ -1,25 +1,33 @@
 /**
  * Lichtman staging of Kienböck disease (lunate osteonecrosis), first published by Lichtman
- * and colleagues (J Bone Joint Surg Am 1977), with stage III later split into IIIA and IIIB.
- * Shared by the Kienböck calculator and the wrist MRI study.
+ * and colleagues (J Bone Joint Surg Am 1977), with stage III split into IIIA and IIIB in 1993 and
+ * IIIC added later. Shared by the Kienböck calculator and the wrist MRI study.
  *
- * Unchecked draft: the 1977 paper is matched on PubMed, but its abstract says only that four
- * clinical and radiographic stages were identified, so the stage wording, and who split stage
- * III, have not yet been checked (claims LI-1 to LI-4 in
- * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md). The 1977 paper predates
- * clinical MRI, so stage I no longer says MRI shows it (LI-1, LI-4).
+ * The 1977 paper is paywalled; the stage wording follows Kennedy and Abrams's review (Clin Orthop
+ * Relat Res 2019), which describes the original stages and their later changes (claims LI-1 to
+ * LI-4 in docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
  */
 
-export type LichtmanStage = 'I' | 'II' | 'IIIA' | 'IIIB' | 'IV'
+export type LichtmanStage = 'I' | 'II' | 'IIIA' | 'IIIB' | 'IIIC' | 'IV'
 
-export const lichtmanStages: LichtmanStage[] = ['I', 'II', 'IIIA', 'IIIB', 'IV']
+export const lichtmanStages: LichtmanStage[] = ['I', 'II', 'IIIA', 'IIIB', 'IIIC', 'IV']
 
+/** Kennedy and Abrams 2019, quoted in src/logic/wristClassifications.test.ts. */
 export const lichtmanDescriptions: Record<LichtmanStage, string> = {
-  I: 'normal radiographs', // LI-1
-  II: 'sclerosis of the lunate without collapse', // LI-1
-  IIIA: 'collapse of the lunate with carpal alignment and height maintained', // LI-2
-  IIIB: 'collapse of the lunate with carpal collapse (fixed scaphoid rotation)', // LI-2
-  IV: 'collapse of the lunate with degenerative changes of the radiocarpal or midcarpal joint', // LI-1
+  // LI-1, LI-4: "Stage I was described as having normal architecture and lunate density but may
+  // show a linear or compression fracture", and since 1993 "Stage I including decreased T1 signal on MRI".
+  I: 'normal lunate architecture and density on radiographs (a linear or compression fracture may show), with decreased T1 signal on MRI',
+  // LI-1: "increased density in the lunate on plain radiographs without a change in the shape,
+  // size, or relationship to other carpal bones".
+  II: 'increased density of the lunate without change in its shape, size or relation to the other carpal bones',
+  // LI-2: IIIA "without fixed scaphoid rotation", radioscaphoid angle < 60°; IIIB "with fixed
+  // scaphoid rotation", > 60°, "often seen with a cortical 'ring sign'".
+  IIIA: 'collapse of the lunate without fixed scaphoid rotation (radioscaphoid angle under 60°)',
+  IIIB: 'collapse of the lunate with fixed scaphoid rotation (radioscaphoid angle over 60°, often a cortical ring sign)',
+  // LI-3: "Stage IIIC representing a coronal fracture of the lunate".
+  IIIC: 'collapse of the lunate with a coronal fracture of the lunate',
+  // LI-1: "Stage IV includes pancarpal arthritis, including radiocarpal arthritis".
+  IV: 'pancarpal arthritis, the radiocarpal joint included (Kienböck disease advanced collapse)',
 }
 
 export type LichtmanInput = {
@@ -27,8 +35,10 @@ export type LichtmanInput = {
   abnormal?: boolean
   sclerosis?: boolean
   collapse?: boolean
-  /** Fixed rotation of the scaphoid, with loss of carpal height. */
+  /** Fixed rotation of the scaphoid (radioscaphoid angle over 60°). */
   carpalCollapse?: boolean
+  /** A coronal fracture of the collapsed lunate (IIIC). */
+  coronalFracture?: boolean
   arthritis?: boolean
 }
 
@@ -36,6 +46,7 @@ export type LichtmanInput = {
 export function lichtman(input: LichtmanInput): LichtmanStage | undefined {
   if (input.arthritis) return 'IV'
   if (input.collapse) {
+    if (input.coronalFracture) return 'IIIC'
     if (input.carpalCollapse === undefined) return undefined
     return input.carpalCollapse ? 'IIIB' : 'IIIA'
   }

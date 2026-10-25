@@ -26,7 +26,8 @@ describe('pediatric elbow lesson', () => {
   // (Ann Chir 1962) have no DOI on PubMed or Crossref.
   test('is still marked as an unchecked draft, with a DOI on every reference but Gartland and Judet', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(12)
+    // 13 since the Gartland review (Alton et al. 2015) was added.
+    expect(study.references).toHaveLength(13)
     for (const ref of study.references) {
       if (/^(Gartland JJ\.|Judet J, Judet R)/.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)

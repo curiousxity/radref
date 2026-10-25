@@ -117,3 +117,21 @@ Sanders classification of intraarticular fractures of the calcaneus. Clin Orthop
 | SA-3 | partly, changed | "Type I fractures include all minimally displaced (≤ 2 mm) articular fractures, regardless of the number of fracture lines and fragments present. The original publication by Sanders et al. did not specify the degree of articular incongruity but did recommend surgical management in patients with ≥ 3 mm". The site read 2 mm as displaced; now displaced means more than 2 mm, and type I is "minimally displaced (2 mm or less)" (the author chose the newer source). |
 | SA-4 | yes, detail changed | Type II "one primary fracture line"; type III "two primary fracture lines commonly accompanied by a central area of depression"; type IV "three or more primary fracture lines, resulting in four or more articular fragments". The comminution question said "more than four articular parts"; now "four or more articular fragments". |
 | SA-5 | yes | "IIA, IIB, and IIC, with the letter corresponding to the location of the primary fracture line"; "IIIAB, IIIAC, and IIIBC". |
+
+## Third check, 2026-10-25: second batch from the author
+
+Read in full: Alton T, Patton DJ, Gee AO. Classifications in brief: the Hawkins classification for
+talus fractures. Clin Orthop Relat Res. 2015;473(9):3046-3049. doi:10.1007/s11999-015-4136-x; and
+Scolaro J, Ahn J, Mehta S. In brief: Lisfranc fracture dislocations. Clin Orthop Relat Res.
+2011;469(7):2078-2080. doi:10.1007/s11999-010-1586-z.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| HK-1 | yes, reworded | "vertical fractures of the neck of the talus with a minimally displaced fracture line ... The talus retains its anatomic position in the ankle and the subtalar joint remains reduced". Was "undisplaced"; now "undisplaced or minimally displaced", both joints in place. |
+| HK-2 | yes | "vertical, displaced, with the subtalar joint subluxated or dislocated, but the talus remains reduced in the ankle mortise". |
+| HK-3 | yes | "similar ... to Type II, with the addition of a dislocation of the ankle (tibiotalar articulation)". |
+| HK-4 | yes | Canale and Kelly's type IV: "dislocation of the body from the ankle or subtalar joint with additional dislocation or subluxation of the head of the talus from the talonavicular joint". |
+| HK-6 | yes | Vallier et al. split type II into IIA (subtalar subluxated) and IIB (dislocated). Now named on the page. |
+| HK-7 | yes | AVN 5.7% type I, 18.4% II, 44.7% III, 12.1% IV in a pooled series. |
+| HK-8 | yes, detail added | "subchondral atrophy on the AP radiograph between 6 and 8 weeks after injury (known as the Hawkins sign)", "a positive prognostic indicator"; "the absence of subchondral atrophy was not a universally reliable indicator of the development of AVN" (Canale and Kelly). |
+| MY-* | no | Scolaro does not describe the Myerson types: "Hardcastle et al. further categorized Lisfranc injuries into Type A, B, or C based on displacement and incongruity ... Myerson followed with modifications to this system based on direction of dislocation". Myerson stays unchecked. |

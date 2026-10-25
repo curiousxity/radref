@@ -12,7 +12,8 @@ import { sanders, sandersDescription, sandersGroup, sandersSentence, sandersType
 
 describe('Hawkins (unchecked)', () => {
   test('each type from its joints', () => {
-    // HK-1: "Type I: undisplaced fracture of the talar neck."
+    // HK-1: "Type I injuries include vertical fractures of the neck of the talus with a minimally
+    // displaced fracture line" (Alton et al. 2015)."
     expect(hawkins({ displaced: false })).toBe('I')
     expect(hawkins({})).toBe('I')
     // HK-2: "Type II: displaced, with subluxation or dislocation of the subtalar joint."
@@ -44,7 +45,8 @@ describe('Hawkins (unchecked)', () => {
 
   test('every type has a description and a sentence', () => {
     for (const type of hawkinsTypes) expect(hawkinsDescriptions[type]).toBeTruthy()
-    expect(hawkinsSentence('I')).toBe('Talar neck fracture, Hawkins type I: undisplaced fracture of the talar neck.')
+    // Was "undisplaced"; the review says "minimally displaced", with both joints reduced.
+    expect(hawkinsSentence('I')).toBe('Talar neck fracture, Hawkins type I: undisplaced or minimally displaced fracture of the talar neck, with the subtalar and ankle joints in place.')
   })
 })
 

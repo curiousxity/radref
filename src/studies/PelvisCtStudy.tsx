@@ -23,6 +23,7 @@ const DALAL_DOI = '10.1097/00005373-198907000-00012'
 const KHURANA_DOI = '10.1148/rg.345135113'
 const ALTON_DOI = '10.1007/s11999-014-3693-8'
 const DENIS_DOI = '10.1097/00003086-198802000-00010'
+const RIZKALLA_DOI = '10.1097/CORR.0000000000000861'
 const ROY_CAMILLE_DOI = '10.1097/00007632-198511000-00011'
 const LYDERS_DOI = '10.3174/ajnr.A1666'
 const JUDET_DOI = '10.2106/00004623-196446080-00001'
@@ -37,6 +38,7 @@ const DALAL = <Cite doi={DALAL_DOI}>Dalal et al., J Trauma 1989</Cite>
 const KHURANA = <Cite doi={KHURANA_DOI}>Khurana et al., RadioGraphics 2014</Cite>
 const ALTON = <Cite doi={ALTON_DOI}>Alton and Gee, Clin Orthop Relat Res 2014</Cite>
 const DENIS = <Cite doi={DENIS_DOI}>Denis et al., Clin Orthop Relat Res 1988</Cite>
+const RIZKALLA = <Cite doi={RIZKALLA_DOI}>Rizkalla et al., Clin Orthop Relat Res 2019</Cite>
 const ROY_CAMILLE = <Cite doi={ROY_CAMILLE_DOI}>Roy-Camille et al., Spine 1985</Cite>
 const LYDERS = <Cite doi={LYDERS_DOI}>Lyders et al., AJNR 2010</Cite>
 const JUDET = <Cite doi={JUDET_DOI}>Judet et al., J Bone Joint Surg Am 1964</Cite>
@@ -52,6 +54,7 @@ const references: LessonReference[] = [
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: KHURANA_DOI },
   { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: ALTON_DOI },
   { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.', doi: DENIS_DOI },
+  { citation: 'Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181.', doi: RIZKALLA_DOI },
   { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.', doi: ROY_CAMILLE_DOI },
   { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.', doi: LYDERS_DOI },
   { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: JUDET_DOI },
@@ -128,8 +131,8 @@ const learn: LearnSection[] = [
     title: 'Step 3. Sacrum and insufficiency fractures',
     body: (
       <>
-        <p>Give a sacral fracture its Denis zone ({DENIS}): zone 1 lateral to the sacral foramina, zone 2 through the foramina, zone 3 medial to them, into the central canal. Neurological deficit rose with the zone, from about 6% in zone 1 to about 28% in zone 2 and about 57% in zone 3.</p>
-        <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}).</p>
+        <p>Give a sacral fracture its Denis zone ({DENIS}): zone 1 lateral to the sacral foramina, zone 2 through the foramina, zone 3 medial to them, into the central canal. Neurological deficit rose with the zone, from about 6% in zone 1 to about 28% in zone 2 and about 57% in zone 3 (5.9%, 28.4% and 56.7%; {RIZKALLA}).</p>
+        <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}). This lumbopelvic dissociation is highly unstable, and Denis's zones leave it out ({RIZKALLA}).</p>
         <p>Insufficiency fractures of the sacrum run vertically through the sacral ala, parallel to the sacroiliac joints, on one side or both about equally often, sometimes with a horizontal component through the sacral bodies. On CT they show as sclerosis or fracture lines, and they often come with insufficiency fractures of the pubic rami ({LYDERS}).</p>
       </>
     ),
@@ -607,7 +610,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Young-Burgess and Letournel type wording, the 2.5 cm diastasis, the L5 transverse process and the Denis deficit rates) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover and the L5 transverse process) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

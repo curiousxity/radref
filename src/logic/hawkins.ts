@@ -3,11 +3,10 @@
  * type IV added by Canale and Kelly (J Bone Joint Surg Am 1978). Shared by the Hawkins
  * calculator and the foot MRI study.
  *
- * Unchecked draft: both papers are matched on PubMed (PMIDs 5479485, 417084) but paywalled,
- * and Hawkins' has no abstract. Canale and Kelly's abstract names the first three groups
- * (non-displaced; subtalar subluxation or dislocation; complete dislocation of the body) and
- * the rising rate of osteonecrosis; type IV, the joint wording and the Hawkins sign are still
- * unchecked (claims HK-1 to HK-8 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * Both papers are matched on PubMed (PMIDs 5479485, 417084) but paywalled. The four types, the
+ * joints and the Hawkins sign are checked against Alton, Patton and Gee's review (Clin Orthop
+ * Relat Res 2015; claims HK-1 to HK-8 in
+ * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 
 /** Whether the fracture is displaced, and which joints around the talus are subluxed or dislocated. */
@@ -23,7 +22,9 @@ export type HawkinsType = 'I' | 'II' | 'III' | 'IV'
 export const hawkinsTypes: HawkinsType[] = ['I', 'II', 'III', 'IV']
 
 export const hawkinsDescriptions: Record<HawkinsType, string> = {
-  I: 'undisplaced fracture of the talar neck', // HK-1
+  // HK-1, Alton: "a minimally displaced fracture line ... The talus retains its anatomic position
+  // in the ankle and the subtalar joint remains reduced". Canale and Kelly's abstract: "non-displaced".
+  I: 'undisplaced or minimally displaced fracture of the talar neck, with the subtalar and ankle joints in place',
   II: 'displaced fracture with subluxation or dislocation of the subtalar joint; the ankle joint is in place', // HK-2
   III: 'displaced fracture with the talar body dislocated from both the subtalar and the ankle joint', // HK-3
   IV: 'as type III, with subluxation or dislocation of the talar head at the talonavicular joint', // HK-4

@@ -261,7 +261,7 @@ standard report sections, correctly capitalised and punctuated:
 - Mayfield (perilunate injury stages I-IV; logic shared in `src/logic/mayfield.ts`; unchecked draft)
 - Scaphoid fracture, Herbert (types A1-D2; logic shared in `src/logic/herbert.ts`; unchecked draft)
 - Palmer TFCC (traumatic 1A-1D, degenerative 2A-2E; logic shared in `src/logic/palmer.ts`; unchecked draft)
-- Kienböck, Lichtman (stages I-IV with IIIA/IIIB; logic shared in `src/logic/lichtman.ts`; unchecked draft)
+- Kienböck, Lichtman (stages I-IV with IIIA, IIIB and IIIC; logic shared in `src/logic/lichtman.ts`; unchecked draft)
 - Hawkins (talar neck fracture types I-IV with Canale-Kelly type IV; logic shared in `src/logic/hawkins.ts`; unchecked draft)
 - Sanders (intra-articular calcaneal fracture types I-IV from the posterior facet lines on CT; logic shared in `src/logic/sanders.ts`; unchecked draft)
 - Lisfranc, Myerson (tarsometatarsal fracture-dislocation types A-C2; logic shared in `src/logic/myerson.ts`; unchecked draft)
@@ -436,8 +436,9 @@ unchecked is tracked in `docs/REMAINING_TASKS.md`; it needs the full text.
 
 The author is supplying the full texts in batches (`docs/PAPERS_NEEDED.md`). The first batch, on
 2026-10-25, checked the Neer, Mason, Mayfield, Schatzker, Sanders, Young-Burgess, Letournel and
-thoracolumbar AO Spine wording, mostly against Clin Orthop Relat Res "Classifications in Brief"
-reviews of the original papers; where the site differed, the author chose the newer source
+thoracolumbar AO Spine wording, and the second the Lichtman, Hawkins, Gartland, Goutallier, Ellman and
+Denis wording, mostly against Clin Orthop Relat Res "Classifications in Brief" reviews of the
+original papers; where the site differed, the author chose the newer source
 (`docs/REMAINING_TASKS.md`, "Calculator papers from the author"). The verdicts are in a "Second
 check" section at the end of each sources document.
 
