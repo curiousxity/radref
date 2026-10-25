@@ -452,18 +452,18 @@ environment allowed PubMed, Crossref and Europe PMC (`eutils.ncbi.nlm.nih.gov`,
 (Estrera 1983 and Russo 1997 have none), claims that differed matched to their papers by the
 author's choice, and a source note still starting "Unchecked draft" for the claims no abstract
 states. Its claims, with verdicts and quoted evidence, are in
-`docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. It is on the branch only
-until the author says to merge. The larynx study (`/studies/larynx`: CT or MRI for a known
+`docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. The author had it merged and
+deployed on 2026-10-25 with the larynx and skull base studies. The larynx study (`/studies/larynx`: CT or MRI for a known
 cancer, CT for hoarseness) was written the same day with the databases reachable, every claim
 read in an abstract or open full text before it went in
 (`docs/superpowers/research/2026-10-25-larynx-sources.md`); the T4a cartilage wording was checked
 later that day against Joshi's AJCC table, which differed for subglottic tumours (matched to the
 paper by the author's choice). Its source note still starts "Unchecked draft" only because the
-author has not reviewed it. Also on the branch only. The skull base study (`/studies/skull-base`:
+author has not reviewed it. The skull base study (`/studies/skull-base`:
 MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base mass) was written
 the same way the same day (`docs/superpowers/research/2026-10-25-skull-base-sources.md`); Russo
 1997, Nemzek 1998 and Eldevik 2000 have no DOI. Its note starts "Unchecked draft" only because the
-author has not reviewed it. Also on the branch only. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+author has not reviewed it. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
 `doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
 and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
 Europe PMC API on `www.ebi.ac.uk`.
