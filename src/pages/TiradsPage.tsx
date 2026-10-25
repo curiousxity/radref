@@ -98,8 +98,10 @@ export function TiradsPage() {
             </div>
             <p className="result-strip-summary">{result.recommendation}</p>
           </div>
-          <CopyBlock label="Nodule description" text={result.description} disabledReason={copyDisabledReason} />
+          <CopyBlock label="Findings" text={result.description} disabledReason={copyDisabledReason} />
           <CopyBlock label="Impression" text={result.impression} disabledReason={copyDisabledReason} />
+          {/* Until a size is entered the recommendation is a prompt to the user, not report text. */}
+          {!result.sizeMissing && <CopyBlock label="Recommendation" text={result.recommendation} disabledReason={copyDisabledReason} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

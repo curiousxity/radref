@@ -143,9 +143,9 @@ export function calculateTirads(form: TiradsForm): TiradsResult {
   const sizeText = sizeMissing ? 'of unstated size' : `measuring ${sizeCm.toFixed(1)} cm`
   const description = `${location ? `${location} ` : ''}thyroid nodule ${sizeText}, ${compositionLabels[form.composition]}, ${echogenicityLabels[form.echogenicity]}, ${shapeLabels[form.shape]}, with ${marginLabels[form.margin]} and ${focusText}.`
   const management = getRecommendation(category, sizeCm)
-  // The management sentence is a prompt to the user until a size is entered, so it is
-  // kept out of the report text and shown only in the result summary.
-  const impression = `${location ? `${location} ` : ''}thyroid nodule is classified as ACR TI-RADS ${category} (${points} points).${sizeMissing ? '' : ` ${management.recommendation}`}`
+  // The recommendation is its own report section (the page's Recommendation box), so the
+  // impression gives the category only.
+  const impression = `${location ? `${location} ` : ''}thyroid nodule is classified as ACR TI-RADS ${category} (${points} points).`
 
   return { category, points, recommendation: management.recommendation, sizeMissing, description, impression, followUp: management.followUp, fna: management.fna }
 }

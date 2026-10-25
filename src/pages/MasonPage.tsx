@@ -100,7 +100,7 @@ export function MasonPage() {
                     : 'Broberg-Morrey thresholds: not decided (2 mm or more of displacement needs 30% or more of the head for type II).'}
                 </p>
               )}
-              <CopyBlock label="Report text" text={masonSentence(result)} />
+              <CopyBlock label="Impression" text={masonSentence(result)} />
             </>
           )}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>

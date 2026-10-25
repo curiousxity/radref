@@ -233,7 +233,7 @@ const followUpRows: ScenarioRow[] = [
     status: 'pre',
     scenario: 'Follow-up evaluation (simple cyst initially >5 cm), similar in size',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter, and indicate similar size.',
-    impression: 'Benign simple cyst. A simple cyst with stability over 12 or more months is most likely nonneoplastic or a very slow growing benign neoplasm; one further imaging test to document stability may be helpful. If no growth, then no further follow-up will be needed.',
+    impression: 'Benign simple cyst. A simple cyst with stability over 12 or more months is most likely nonneoplastic or a very slow growing benign neoplasm.',
     recommendation: 'Follow up at 2 years after initial study to understand growth rate.',
     consensus: 'Moderate consensus (evidence C; clinical-experience support B)',
   },
@@ -242,7 +242,7 @@ const followUpRows: ScenarioRow[] = [
     status: 'pre',
     scenario: 'Follow-up evaluation (simple cyst initially >5 cm), increased in size',
     report: 'Describe in report, giving all simple cyst diameters, but making recommendation from largest cyst diameter.',
-    impression: 'An enlarging simple cyst is most likely a benign neoplasm; follow-up imaging strategy is based on clinical management.',
+    impression: 'An enlarging simple cyst is most likely a benign neoplasm.',
     recommendation: 'Suggest one further follow-up in 1 year to assess any further changes in size.',
     consensus: 'Strong consensus (evidence C; clinical-experience support A)',
   },
@@ -281,7 +281,7 @@ const specialRows: ScenarioRow[] = [
     status: 'pre',
     scenario: 'Adnexal cyst likely simple but not satisfactorily characterized at US',
     report: 'Describe in report giving all cyst diameters, indicating any reasons limiting characterization.',
-    impression: 'Probably simple cyst is not optimally characterized; short-interval follow-up US or second-opinion US, or MRI might improve cyst characterization.',
+    impression: 'Probably simple cyst is not optimally characterized.',
     recommendation: 'Consider short-interval follow-up US, second-opinion US, or MRI (any of these in <3 months).',
     consensus: 'Strong consensus (evidence C; clinical-experience support A)',
   },
@@ -664,7 +664,8 @@ export function AdnexalCystPage() {
           )}
           {result.report && result.impression && result.recommendation && (
             <>
-              <CopyBlock label="Report" text={result.report} />
+              {/* The SRU table's "Report" column says what to describe; it is guidance, not report text. */}
+              <p className="result-strip-summary">{result.report}</p>
               <CopyBlock label="Impression" text={result.impression} />
               <CopyBlock label="Recommendation" text={result.recommendation} />
             </>

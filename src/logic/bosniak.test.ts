@@ -102,3 +102,14 @@ describe('Bosniak 2019: class IV', () => {
     expect(cat(over)).toBe('Bosniak IV')
   })
 })
+
+// The author's decision (2026-10-25): the recommendation is its own report section, so the IIF
+// impression names the class and the follow-up schedule sits in `management` (the page's
+// Recommendation box).
+describe('Bosniak 2019: impression and recommendation are separate', () => {
+  it('IIF', () => {
+    const r = classify({ ...initialBosniakForm, ...enh, wallThickness: 'minimallyThick' })
+    expect(r.impression).toBe('Cystic renal mass is compatible with Bosniak IIF.')
+    expect(r.management).toBe('Follow-up imaging is generally recommended at 6 months, 12 months, then annually for 5 years.')
+  })
+})

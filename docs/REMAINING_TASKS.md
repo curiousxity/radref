@@ -339,6 +339,34 @@ every claim read before it went in; the table is
   tumour invading the cricoid or the thyroid cartilage (inner cortex included) is now T4a.
 - [ ] The author's review. The source note still starts "Unchecked draft" until then.
 
+## Calculator follow-up intervals
+
+The author asked (2026-10-25) for every calculator's copy boxes to be the standard report sections
+(done: see CLAUDE.md, "Copy boxes") and for every guideline follow-up interval to be in the
+calculators, checked against the guideline. The guidelines' full text is paywalled or on hosts
+this environment cannot reach (acr.org, pubs.rsna.org, jacr.org, escholarship.org,
+spiral.imperial.ac.uk), so the check is still to do. Done so far: the pancreatic cyst calculator
+and the incidental page's pancreatic cyst tool now use the pancreatic cysts study's ACR 2017
+intervals, and LI-RADS and O-RADS now show their recommendation in a copy box.
+
+- [ ] TI-RADS (Tessler 2017): FNA thresholds and follow-up at 1, 3, 5 years (TR3), 1, 2, 3, 5
+  (TR4), yearly to 5 years (TR5). Check against the white paper.
+- [ ] Lung-RADS v2022: 12-month, 6-month, 3-month, 1-3 month LDCT. Check against the ACR table.
+- [ ] Fleischner 2017: the intervals in `src/logic/fleischner.ts`. Check against MacMahon 2017.
+- [ ] Bosniak 2019: IIF at 6 months, 12 months, then yearly for 5 years. Check against Silverman 2019.
+- [ ] LI-RADS v2018: LR-1 and LR-2 surveillance in 6 months, LR-3 3-6 months, LR-NC 3 months or
+  less. Check against the v2018 core.
+- [ ] SRU simple adnexal cysts 2019: the intervals in the page's table. Check against Levine 2019.
+- [ ] Early pregnancy loss: the page says follow-up ultrasound in 7 to 14 days for suspicious
+  findings; Doubilet 2013 may say 7 to 10 days. Check against the paper before changing.
+- [ ] O-RADS US 2020: categories 2 and 3 say only "depends on size and menopausal status" and
+  "follow-up imaging may be appropriate"; the guideline gives intervals by size and menopausal
+  status. Add them from Andreotti 2020.
+- [ ] Incidental adrenal mass (Mayo-Smith 2017) and incidental renal mass (Herts 2018): the page
+  gives no intervals. Add the white papers' intervals.
+- [ ] ACR 2017 pancreatic cysts: the study's intervals (now shared with the calculators) come from
+  the author's lesson; check them against Megibow 2017's charts.
+
 ## Housekeeping
 
 - Delete the `design-update` branch and the `radref-design` worktree

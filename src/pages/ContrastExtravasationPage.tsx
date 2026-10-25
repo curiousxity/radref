@@ -117,7 +117,7 @@ export function ContrastExtravasationPage() {
             </div>
             <p className="result-strip-summary">{result.management}</p>
           </div>
-          <CopyBlock label="Documentation / report text" text={result.impression} />
+          <CopyBlock label="Chart note" text={result.impression} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

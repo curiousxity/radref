@@ -66,7 +66,7 @@ export function MyersonPage() {
               {type ? `${capitalise(myersonGroup(type))}: ${myersonDescriptions[type]}.` : empty ? 'Mark the displaced metatarsals.' : 'Myerson named no type for this pattern. Check the images and describe the displacement.'}
             </p>
           </div>
-          {type && <CopyBlock label="Report text" text={myersonSentence(type)} />}
+          {type && <CopyBlock label="Impression" text={myersonSentence(type)} />}
           <button type="button" className="reset-button" onClick={reset}>Reset</button>
         </article>
       </section>

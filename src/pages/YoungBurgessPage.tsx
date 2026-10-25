@@ -113,7 +113,7 @@ export function YoungBurgessPage() {
               <p className="result-strip-summary">A diastasis over 2.5 cm usually means APC II or worse: look again at the front of the sacroiliac joints.</p>
             )}
           </div>
-          {type && <CopyBlock label="Report text" text={ybSentence(type)} />}
+          {type && <CopyBlock label="Impression" text={ybSentence(type)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

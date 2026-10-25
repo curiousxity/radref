@@ -65,7 +65,7 @@ export function PalmerPage() {
             </div>
             <p className="result-strip-summary">{capitalise(palmerKind(selected))}: {palmerDescriptions[selected]}.</p>
           </div>
-          <CopyBlock label="Report text" text={palmerSentence(selected)} />
+          <CopyBlock label="Impression" text={palmerSentence(selected)} />
           <button type="button" className="reset-button" onClick={reset}>Reset</button>
         </article>
       </section>

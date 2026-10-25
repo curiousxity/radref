@@ -394,7 +394,8 @@ function impression(values: Values): string {
     dominant && `Management follows the most suspicious nodule: ${dominant}.`,
     atypicalLymphNode(values) && 'Perifissural nodule with a spiculated border or displaced fissure: follow-up CT at 6–12 months should be considered.',
   ]
-  return `Impression: ${lines(result.impression, ...extras)}`
+  // The study's impression keeps the guideline's advice after the finding, as one paragraph.
+  return `Impression: ${lines(join([result.impression, result.recommendation ?? undefined], ' '), ...extras)}`
 }
 
 function warnings(values: Values): string[] {

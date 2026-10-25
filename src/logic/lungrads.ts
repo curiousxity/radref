@@ -34,6 +34,7 @@ export const initialLungRadsForm: LungRadsForm = {
   priorCategory: 'none',
 }
 
+/** `impression` gives the finding and category; `management` is the Recommendation section. */
 export type LungRadsResult = { category: string; reason: string; management: string; impression: string }
 
 function num(v: string) {
@@ -48,19 +49,19 @@ const THREE_MONTH_PET = '3-month LDCT is recommended; PET/CT may be considered, 
 const FOUR_B = 'Diagnostic chest CT with or without contrast; PET/CT may be considered if there is a solid nodule or solid component of 8 mm or more; tissue sampling; and/or referral for further clinical evaluation. Management depends on clinical evaluation, patient preference, and probability of malignancy.'
 
 function r2(reason: string, impression: string): LungRadsResult {
-  return { category: 'Lung-RADS 2', reason, management: ANNUAL, impression: `${impression} Lung-RADS 2. Continue annual screening LDCT in 12 months.` }
+  return { category: 'Lung-RADS 2', reason, management: ANNUAL, impression: `${impression} Lung-RADS 2.` }
 }
 
 function r3(reason: string, impression: string): LungRadsResult {
-  return { category: 'Lung-RADS 3', reason, management: SIX_MONTH, impression: `${impression} Lung-RADS 3. Recommend 6-month low-dose chest CT follow-up.` }
+  return { category: 'Lung-RADS 3', reason, management: SIX_MONTH, impression: `${impression} Lung-RADS 3.` }
 }
 
 function r4a(reason: string, impression: string, pet = false): LungRadsResult {
-  return { category: 'Lung-RADS 4A', reason, management: pet ? THREE_MONTH_PET : THREE_MONTH, impression: `${impression} Lung-RADS 4A. Recommend 3-month low-dose chest CT follow-up.` }
+  return { category: 'Lung-RADS 4A', reason, management: pet ? THREE_MONTH_PET : THREE_MONTH, impression: `${impression} Lung-RADS 4A.` }
 }
 
 function r4b(reason: string, impression: string, management = FOUR_B): LungRadsResult {
-  return { category: 'Lung-RADS 4B', reason, management, impression: `${impression} Lung-RADS 4B. Recommend diagnostic evaluation.` }
+  return { category: 'Lung-RADS 4B', reason, management, impression: `${impression} Lung-RADS 4B.` }
 }
 
 /** Stepped management for a stable or decreased solid or part-solid nodule. */
@@ -90,7 +91,7 @@ function base(form: LungRadsForm): LungRadsResult {
       category: 'Lung-RADS 0',
       reason: 'Findings suggestive of an infectious or inflammatory process are category 0.',
       management: '1-3 month LDCT.',
-      impression: 'Findings suggestive of an infectious or inflammatory process. Lung-RADS 0. Recommend 1-3 month low-dose chest CT follow-up.',
+      impression: 'Findings suggestive of an infectious or inflammatory process. Lung-RADS 0.',
     }
   }
 
@@ -175,6 +176,6 @@ export function lungRads(form: LungRadsForm): LungRadsResult {
     category: 'Lung-RADS 4X',
     reason: `${result.reason} Additional features that increase the suspicion for lung cancer make a category 3 or 4 nodule 4X.`,
     management: FOUR_B,
-    impression: result.impression.replace(/Lung-RADS (3|4A|4B)\. Recommend .*$/, 'Lung-RADS 4X. Recommend diagnostic evaluation.'),
+    impression: result.impression.replace(/Lung-RADS (3|4A|4B)\.$/, 'Lung-RADS 4X.'),
   }
 }

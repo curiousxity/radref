@@ -211,7 +211,7 @@ export function IrAnticoagulationPage() {
               <p className="result-summary"><strong>Before the procedure.</strong> {result.withhold}</p>
               <p className="result-summary"><strong>Reinitiation.</strong> {result.restart}</p>
               {result.note ? <p className="result-summary">{result.note}</p> : null}
-              <CopyBlock label="Pre-procedure note" text={result.impression} />
+              <CopyBlock label="Chart note" text={result.impression} />
             </>
           ) : (
             <p className="result-summary">Select the procedure bleeding risk and the agent to see hold and restart guidance.</p>

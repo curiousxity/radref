@@ -139,7 +139,7 @@ export function LetournelPage() {
                 : pending}
             </p>
           </div>
-          {type && <CopyBlock label="Report text" text={ltSentence(type, wall, form.side)} />}
+          {type && <CopyBlock label="Impression" text={ltSentence(type, wall, form.side)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

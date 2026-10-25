@@ -66,7 +66,7 @@ export function HerbertPage() {
             </div>
             <p className="result-strip-summary">{capitalise(group)}: {herbertDescriptions[type]}.</p>
           </div>
-          <CopyBlock label="Report text" text={herbertSentence(type)} />
+          <CopyBlock label="Impression" text={herbertSentence(type)} />
           <button type="button" className="reset-button" onClick={reset}>Reset</button>
         </article>
       </section>

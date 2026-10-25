@@ -145,7 +145,7 @@ export function AoSpinePage() {
               {morphology ? `${capitalise(aoGroup(morphology.type))}: ${aoDescriptions[morphology.type]}${morphology.body ? `, with a type ${morphology.body} vertebral body fracture` : ''}.` : 'A posterior wall fracture needs at least one endplate fractured to have a type.'}
             </p>
           </div>
-          {full && <CopyBlock label="Report text" text={aoSentence(full)} />}
+          {full && <CopyBlock label="Impression" text={aoSentence(full)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

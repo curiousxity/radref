@@ -36,7 +36,7 @@ export function CalculatorPage({ name, description }: CalculatorPageProps) {
             Use this section for category output, explanation, management guidance, and report-ready text.
           </p>
           <CopyBlock
-            label="Sample impression"
+            label="Impression"
             text={`${name} impression output will appear here once the calculator logic is connected.`}
           />
         </article>

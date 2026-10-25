@@ -44,7 +44,10 @@ export type FleischnerResult = {
   tone: Tone
   summary: string
   management: string
+  /** The finding, for the report's Impression section; null until the inputs are complete. */
   impression: string | null
+  /** The guideline's follow-up advice, for the Recommendation section. */
+  recommendation: string | null
 }
 
 type Outcome = {
@@ -75,7 +78,7 @@ export function roundMm(value: number) {
 }
 
 function pending(summary: string): FleischnerResult {
-  return { category: 'Awaiting input', tone: 'neutral', summary, management: '', impression: null }
+  return { category: 'Awaiting input', tone: 'neutral', summary, management: '', impression: null, recommendation: null }
 }
 
 function classify(form: FleischnerForm, size: number, solid: number | null): Outcome | null {
@@ -250,7 +253,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'neutral',
       summary: 'Fleischner 2017 does not apply to nodules found on lung cancer screening CT.',
       management: 'Assign a Lung-RADS category instead of a Fleischner recommendation.',
-      impression: 'Pulmonary nodule detected on lung cancer screening CT. Managed with Lung-RADS rather than the Fleischner Society incidental nodule guideline.',
+      impression: 'Pulmonary nodule detected on lung cancer screening CT.',
+      recommendation: 'Managed with Lung-RADS rather than the Fleischner Society incidental nodule guideline.',
     }
   }
 
@@ -260,7 +264,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'neutral',
       summary: 'Fleischner 2017 applies to patients 35 years and older: lung cancer is rare in younger patients, and infection is more likely than cancer.',
       management: 'Decide case by case. Infectious causes are more likely than cancer, and use of serial CT should be minimized.',
-      impression: 'Incidental pulmonary nodule in a patient younger than 35 years, outside the scope of the Fleischner Society 2017 guideline. Management should be decided case by case; infection is more likely than cancer, and use of serial CT should be minimized.',
+      impression: 'Incidental pulmonary nodule in a patient younger than 35 years, outside the scope of the Fleischner Society 2017 guideline.',
+      recommendation: 'Management should be decided case by case; infection is more likely than cancer, and use of serial CT should be minimized.',
     }
   }
 
@@ -270,7 +275,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'neutral',
       summary: 'Fleischner 2017 excludes immunosuppressed patients, in whom nodules are more likely to be infectious.',
       management: 'Manage according to the specific clinical situation. Active infection should be considered, and short-term follow-up may be appropriate.',
-      impression: 'Incidental pulmonary nodule in an immunosuppressed patient, outside the scope of the Fleischner Society 2017 guideline. Active infection should be considered; management depends on the specific clinical situation, and short-term follow-up may be appropriate.',
+      impression: 'Incidental pulmonary nodule in an immunosuppressed patient, outside the scope of the Fleischner Society 2017 guideline.',
+      recommendation: 'Active infection should be considered; management depends on the specific clinical situation, and short-term follow-up may be appropriate.',
     }
   }
 
@@ -280,7 +286,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'neutral',
       summary: 'Fleischner 2017 excludes patients with a known primary cancer, where nodules are assessed as potential metastases.',
       management: 'Manage according to the specific clinical situation.',
-      impression: 'Pulmonary nodule in a patient with a known primary malignancy, who is at risk for metastases; outside the scope of the Fleischner Society 2017 guideline. Management depends on the specific clinical situation.',
+      impression: 'Pulmonary nodule in a patient with a known primary malignancy, who is at risk for metastases; outside the scope of the Fleischner Society 2017 guideline.',
+      recommendation: 'Management depends on the specific clinical situation.',
     }
   }
 
@@ -290,7 +297,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'good',
       summary: 'A benign calcification pattern or macroscopic fat identifies the nodule as benign.',
       management: 'No imaging follow-up is required for this nodule.',
-      impression: 'Pulmonary nodule with benign features (benign calcification pattern or macroscopic fat). No imaging follow-up is required.',
+      impression: 'Pulmonary nodule with benign features (benign calcification pattern or macroscopic fat).',
+      recommendation: 'No imaging follow-up is required.',
     }
   }
 
@@ -300,7 +308,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
       tone: 'good',
       summary: 'A solid perifissural nodule with typical intrapulmonary lymph node morphology does not require follow-up.',
       management: 'No imaging follow-up is required for this nodule.',
-      impression: 'Perifissural pulmonary nodule with morphology typical of an intrapulmonary lymph node. No imaging follow-up is required.',
+      impression: 'Perifissural pulmonary nodule with morphology typical of an intrapulmonary lymph node.',
+      recommendation: 'No imaging follow-up is required.',
     }
   }
 
@@ -343,7 +352,8 @@ export function assessFleischner(form: FleischnerForm): FleischnerResult {
     tone: outcome.tone,
     summary: outcome.summary,
     management: outcome.management,
-    impression: `${lead} Per Fleischner Society 2017 recommendations, ${outcome.recommendation}`,
+    impression: lead,
+    recommendation: `Per Fleischner Society 2017 recommendations, ${outcome.recommendation}`,
   }
 }
 

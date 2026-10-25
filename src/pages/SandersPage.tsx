@@ -72,7 +72,7 @@ export function SandersPage() {
             </div>
             <p className="result-strip-summary">{type ? `${capitalise(sandersDescription(type))}.` : 'Mark the fracture lines through the posterior facet.'}</p>
           </div>
-          {type && <CopyBlock label="Report text" text={sandersSentence(type)} />}
+          {type && <CopyBlock label="Impression" text={sandersSentence(type)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

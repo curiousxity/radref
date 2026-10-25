@@ -136,9 +136,9 @@ export function OradsPage() {
             </div>
             <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No suspicious features selected.'} />
-          <CopyBlock label="O-RADS impression" text={result.impression} />
-          <p className="copy-status">{result.recommendation}</p>
+          <CopyBlock label="Findings" text={result.features.length ? result.features.join(', ') : 'No suspicious features selected.'} />
+          <CopyBlock label="Impression" text={result.impression} />
+          <CopyBlock label="Recommendation" text={result.recommendation} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

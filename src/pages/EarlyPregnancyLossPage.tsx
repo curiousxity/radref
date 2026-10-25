@@ -118,7 +118,7 @@ function classify(form: Form) {
   } else if (suspicious.length > 0) {
     category = 'Suspicious for early pregnancy loss'
     tone = 'accent'
-    reportLine = 'Findings are suspicious for early pregnancy loss; follow-up ultrasound in 7 to 14 days is recommended.'
+    reportLine = 'Findings are suspicious for early pregnancy loss.'
     management = 'Follow-up transvaginal ultrasound in 7 to 14 days is recommended to reassess viability; avoid intervention based on suspicious findings alone.'
   } else {
     category = 'No diagnostic or suspicious findings'
@@ -290,7 +290,7 @@ export function EarlyPregnancyLossPage() {
             <p className="result-strip-summary">{result.summary}</p>
           </div>
           <CopyBlock label="Impression" text={result.impression} />
-          <CopyBlock label="Management" text={result.management} />
+          <CopyBlock label="Recommendation" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

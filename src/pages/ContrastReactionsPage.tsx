@@ -162,7 +162,7 @@ export function ContrastReactionsPage() {
             </ul>
           )}
 
-          <CopyBlock label="Chart / report text" text={result.impression} />
+          <CopyBlock label="Chart note" text={result.impression} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

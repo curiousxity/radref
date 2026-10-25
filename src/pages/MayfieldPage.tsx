@@ -72,7 +72,7 @@ export function MayfieldPage() {
               <p className="result-strip-summary">The stages are progressive, so stage {result?.stage} normally includes the injuries of stage {gaps.join(' and ')}, which are not marked. Check the images.</p>
             )}
           </div>
-          {result && <CopyBlock label="Report text" text={mayfieldSentence(result)} />}
+          {result && <CopyBlock label="Impression" text={mayfieldSentence(result)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

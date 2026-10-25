@@ -65,7 +65,7 @@ export function LichtmanPage() {
             </div>
             <p className="result-strip-summary">{stage ? `${capitalise(lichtmanDescriptions[stage])}.` : 'Mark the lunate findings.'}</p>
           </div>
-          {stage && <CopyBlock label="Report text" text={lichtmanSentence(stage)} />}
+          {stage && <CopyBlock label="Impression" text={lichtmanSentence(stage)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

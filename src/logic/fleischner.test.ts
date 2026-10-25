@@ -104,3 +104,20 @@ describe('Fleischner 2017: scope and benign features', () => {
     expect(cat({})).toBe('Awaiting input')
   })
 })
+
+// The author's decision (2026-10-25): the recommendation is its own report section, so the
+// impression gives the finding and `recommendation` the guideline's advice. The incidental lung
+// nodule study joins the two back into one impression paragraph.
+describe('Fleischner: impression and recommendation are separate', () => {
+  it('splits the finding from the advice', () => {
+    const r = assessFleischner({ ...initialFleischnerForm, noduleType: 'solid', count: 'single', risk: 'low', sizeMm: '7' })
+    expect(r.impression).toBe('Incidental solid pulmonary nodule measuring 7 mm in a patient at low risk for lung cancer.')
+    expect(r.recommendation).toBe('Per Fleischner Society 2017 recommendations, follow-up CT at 6-12 months, then consider CT at 18-24 months.')
+  })
+
+  it('splits the benign and out-of-scope answers too', () => {
+    const benign = assessFleischner({ ...initialFleischnerForm, benignFeatures: true })
+    expect(benign.impression).toBe('Pulmonary nodule with benign features (benign calcification pattern or macroscopic fat).')
+    expect(benign.recommendation).toBe('No imaging follow-up is required.')
+  })
+})

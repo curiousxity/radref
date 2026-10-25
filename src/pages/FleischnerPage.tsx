@@ -231,7 +231,7 @@ export function FleischnerPage() {
           {result.impression && (
             <>
               <CopyBlock label="Impression" text={result.impression} />
-              <CopyBlock label="Management" text={result.management} />
+              {result.recommendation && <CopyBlock label="Recommendation" text={result.recommendation} />}
             </>
           )}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>

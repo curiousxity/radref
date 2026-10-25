@@ -106,7 +106,7 @@ export function SchatzkerPage() {
                 </div>
                 <p className="result-strip-summary">{result.description.charAt(0).toUpperCase() + result.description.slice(1)}.</p>
               </div>
-              <CopyBlock label="Report text" text={schatzkerSentence(result, depressionMm)} />
+              <CopyBlock label="Impression" text={schatzkerSentence(result, depressionMm)} />
             </>
           )}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>

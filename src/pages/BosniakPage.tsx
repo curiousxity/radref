@@ -109,7 +109,7 @@ export function BosniakPage() {
             <p className="result-strip-summary">{result.reason}</p>
           </div>
           <CopyBlock label="Impression" text={result.impression} />
-          <CopyBlock label="Management" text={result.management} />
+          <CopyBlock label="Recommendation" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

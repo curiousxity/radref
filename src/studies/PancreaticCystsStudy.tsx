@@ -1,4 +1,5 @@
 import { CopyBlock } from '../components/CopyBlock'
+import { PER_ACR, acrSurveillance } from '../logic/pancreaticCyst'
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
@@ -262,8 +263,6 @@ function acrChart(v: Values): string | undefined {
   return 'Chart 3 (over 2.5 cm)'
 }
 
-const PER_ACR = 'per ACR 2017 incidental pancreatic cyst recommendations'
-const IMAGING = 'Contrast-enhanced MRI or pancreas-protocol CT'
 
 /** Confident SCA: no surveillance for malignancy; over 4 cm or symptomatic may need resection. */
 function scaRecommendation(v: Values): string {
@@ -299,34 +298,28 @@ function acrRecommendation(v: Values, f: Features, warnings: string[]): string {
     return `Pancreas-protocol CT or MRI with pancreatic phase, and EUS, advised${surgicalCandidate} because of an abrupt caliber change with upstream atrophy (worrisome feature; possible concomitant adenocarcinoma).`
   }
 
+  // The surveillance intervals themselves are shared with the calculator (src/logic/pancreaticCyst.ts).
+  const communication = str(v, 'comm') === 'present' ? 'present' : 'absentOrUnknown'
   if (age !== undefined && age >= 80) {
-    if (size !== undefined && size < 5) return `White-dot cyst in a patient 80 or older: follow-up only if the patient would be a surgical candidate, and then a single follow-up at 2 years at most, ${PER_ACR}.`
-    return size !== undefined && size <= 25
-      ? `Follow-up or EUS/FNA only if the patient is a surgical candidate; if so, imaging every 2 years twice, stopping if stable, ${PER_ACR} (Chart 4).`
-      : `Follow-up or EUS/FNA advised only if the patient is a surgical candidate, ${PER_ACR} (Chart 4).`
+    // An unstated size takes Chart 4's general sentence, as for a cyst over 2.5 cm.
+    return acrSurveillance(size ?? 26, '80plus', communication)
   }
   if (size === undefined) return ''
 
   if (size < 15) {
     if (g?.meets) return `Growth by the ACR definition: increase imaging frequency to yearly or EUS/FNA, ${PER_ACR} (Chart 1).`
-    if (size < 5) return `Single follow-up at 2 years; stop if stable, ${PER_ACR} (Chart 1, white-dot cyst).`
+    if (size < 5) return acrSurveillance(size, '65to79', communication)
     if (age === undefined) {
       warnings.push('State the patient age: the ACR Chart 1 interval depends on it (under 65, 65–79, 80 or older).')
       return ''
     }
-    if (age < 65) return `${IMAGING} yearly for 5 years, then every 2 years for 2 more; stop if stable over a minimum of 9 years, ${PER_ACR} (Chart 1).`
-    return `${IMAGING} every 2 years for 5 rounds; stop if still under 1.5 cm over 10 years, ${PER_ACR} (Chart 1).`
+    return acrSurveillance(size, age < 65 ? 'under65' : '65to79', communication)
   }
 
   if (size <= 25) {
     if (g?.meets && (prior === undefined || prior < 20)) warnings.push('Growth by the ACR definition (20%) in a Chart 2 cyst: the lesson gives EUS/FNA only for a cyst of 2 cm or more with definable growth; decide the next step.')
     if (g?.meets && prior !== undefined && prior >= 20) return `EUS/FNA advised because of definable growth in a cyst of 2 cm or more, ${PER_ACR} (Chart 2).`
-    if (str(v, 'comm') === 'present') {
-      return size < 20
-        ? `${IMAGING} yearly for 5 years, then every 2 years for 4 years, ${PER_ACR} (Chart 2A); EUS/FNA at detection is an acceptable alternative.`
-        : `${IMAGING} every 6 months for 2 years, yearly for 2, then every 2 years for 6, ${PER_ACR} (Chart 2A); EUS/FNA at detection is an acceptable alternative.`
-    }
-    return `${IMAGING} every 6 months for 2 years, then yearly for 2, then every 2 years for 3 rounds, or EUS/FNA to establish whether it is mucinous, ${PER_ACR} (Chart 2B).`
+    return acrSurveillance(size, age !== undefined && age < 65 ? 'under65' : '65to79', communication)
   }
 
   // Chart 3: low-risk only when every low-risk item is actually stated.
@@ -341,7 +334,7 @@ function acrRecommendation(v: Values, f: Features, warnings: string[]): string {
     return `Low-risk by imaging (no mural nodule, no wall thickening, normal-caliber duct, no peripheral calcification): careful follow-up, or EUS/FNA at detection, ${PER_ACR} (Chart 3).`
   }
   warnings.push(`ACR Chart 3 risk not established (${unknown.join(', ')}): low-risk needs no mural nodule, no wall thickening, a normal-caliber duct and no peripheral calcification.`)
-  return `Cyst over 2.5 cm: low-risk cysts can be carefully followed and high-risk cysts go to EUS/FNA and surgical evaluation; EUS/FNA at detection is an option, ${PER_ACR} (Chart 3).`
+  return acrSurveillance(size, age !== undefined && age < 65 ? 'under65' : '65to79', communication)
 }
 
 function kyotoRecommendation(v: Values, f: Features, warnings: string[]): string {

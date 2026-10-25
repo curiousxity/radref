@@ -1,25 +1,31 @@
 import { useState } from 'react'
+import { formatReportText } from './reportText'
+import type { ReportSection } from './reportText'
 
 export function CopyBlock({
   label,
   text,
   disabledReason,
 }: {
-  label: string
+  /** The report section this box holds; see `ReportSection`. */
+  label: ReportSection
   text: string
   /** When set, copying is blocked and this explains what is still needed. */
   disabledReason?: string
 }) {
   const [status, setStatus] = useState('')
   const isDisabled = Boolean(disabledReason)
+  // A study's report and template keep their own layout and placeholders; every calculator
+  // section is tidied.
+  const shown = label === 'Report' || label === 'Report template' ? text : formatReportText(text)
 
   async function handleCopy() {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text)
+        await navigator.clipboard.writeText(shown)
       } else {
         const textArea = document.createElement('textarea')
-        textArea.value = text
+        textArea.value = shown
         textArea.style.position = 'fixed'
         textArea.style.left = '-9999px'
         document.body.appendChild(textArea)
@@ -44,7 +50,7 @@ export function CopyBlock({
         </button>
       </div>
       <div className="copy-text" role="textbox" aria-label={label}>
-        {text}
+        {shown}
       </div>
       <p className="copy-status" aria-live="polite">{disabledReason ?? status}</p>
     </div>

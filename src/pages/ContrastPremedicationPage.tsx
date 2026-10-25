@@ -151,7 +151,7 @@ export function ContrastPremedicationPage() {
               <p className={`result-strip-value result-strip-value--phrase tone-${result.tone}`}>{result.badgeLabel}</p>
             </div>
           </div>
-          <CopyBlock label="Premedication plan" text={result.plan} />
+          <CopyBlock label="Chart note" text={result.plan} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

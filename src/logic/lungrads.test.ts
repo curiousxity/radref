@@ -117,3 +117,19 @@ describe('Lung-RADS v2022: category 0 and 4X', () => {
     expect(lungRads({ ...initialLungRadsForm, meanDiameterMm: '8' }).management).toContain('PET/CT')
   })
 })
+
+// The author's decision (2026-10-25): the recommendation is its own report section (the page's
+// Recommendation box shows `management`), so the impression ends at the category.
+describe('Lung-RADS: impression and recommendation are separate', () => {
+  it.each([
+    [{ meanDiameterMm: '5' }, 'Lung-RADS 2.', '12-month screening LDCT.'],
+    [{ meanDiameterMm: '7' }, 'Lung-RADS 3.', '6-month LDCT is recommended.'],
+    [{ meanDiameterMm: '10' }, 'Lung-RADS 4A.', '3-month LDCT is recommended; PET/CT may be considered'],
+    [{ meanDiameterMm: '10', verySuspicious: true }, 'Lung-RADS 4X.', 'Diagnostic chest CT'],
+  ] as const)('%o', (over, ending, management) => {
+    const r = lungRads({ ...initialLungRadsForm, noduleType: 'solid', ...over })
+    expect(r.impression.endsWith(ending)).toBe(true)
+    expect(r.impression).not.toMatch(/Recommend|Continue/)
+    expect(r.management.startsWith(management)).toBe(true)
+  })
+})

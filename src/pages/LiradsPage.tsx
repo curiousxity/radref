@@ -109,9 +109,10 @@ export function LiradsPage() {
             </div>
             <p className="result-strip-summary">{result.categoryReason}</p>
           </div>
-          <CopyBlock label="Features summary" text={result.features.length ? result.features.join(', ') : 'No major features selected.'} />
-          <CopyBlock label="LI-RADS impression" text={result.impression} />
-          <p className="copy-status">{result.recommendation}</p>
+          <CopyBlock label="Findings" text={result.features.length ? result.features.join(', ') : 'No major features selected.'} />
+          <CopyBlock label="Impression" text={result.impression} />
+          {/* Until a category is assigned the recommendation is a prompt to the user, not report text. */}
+          {result.category === 'N/A' ? <p className="copy-status">{result.recommendation}</p> : <CopyBlock label="Recommendation" text={result.recommendation} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

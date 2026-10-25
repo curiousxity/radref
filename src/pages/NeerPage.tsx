@@ -120,7 +120,7 @@ export function NeerPage() {
               <p className="result-strip-summary">No measurement entered for the {unmeasured.map((line) => lineNames[line]).join(', ')}, so {unmeasured.length === 1 ? 'it is' : 'they are'} counted as not displaced.</p>
             )}
           </div>
-          {result.report && <CopyBlock label="Report text" text={result.report} />}
+          {result.report && <CopyBlock label="Impression" text={result.report} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

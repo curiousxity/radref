@@ -113,6 +113,15 @@ describe('ACR TI-RADS: FNA and follow-up thresholds', () => {
     expect(r.recommendation).toMatch(/^Enter the maximum size/)
     expect(r.impression).not.toContain('Enter the maximum size')
   })
+
+  // The author's decision (2026-10-25): the recommendation is its own report section, so the
+  // impression gives the category and points only, and the page shows the recommendation in
+  // a Recommendation box.
+  it('keeps the recommendation out of the impression', () => {
+    const r = run({ ...TR5, sizeCm: '1.2' })
+    expect(r.impression).toBe('thyroid nodule is classified as ACR TI-RADS TR5 (7 points).')
+    expect(r.recommendation).toMatch(/^FNA is recommended/)
+  })
 })
 
 // The points tables are exported so the page can show each option's points beside its label.

@@ -74,7 +74,7 @@ export function HawkinsPage() {
               <p className="result-strip-summary">Each type includes the joint injuries of the types before it, so type {type} normally includes those of type {gaps.join(' and ')}, which are not marked. Check the images.</p>
             )}
           </div>
-          {type && <CopyBlock label="Report text" text={hawkinsSentence(type)} />}
+          {type && <CopyBlock label="Impression" text={hawkinsSentence(type)} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
       </section>

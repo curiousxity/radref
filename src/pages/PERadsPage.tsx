@@ -86,7 +86,7 @@ function classify(form: Form) {
       summary: 'Central pulmonary arteries cannot be confidently evaluated, so acute pulmonary embolism at the main or lobar level cannot be excluded.',
       modifiers: [] as string[],
       impression:
-        'Nondiagnostic examination for acute pulmonary embolism; acute PE at the main or lobar level cannot be excluded. Correlate clinically and consider repeat or alternative imaging as appropriate.',
+        'Nondiagnostic examination for acute pulmonary embolism; acute PE at the main or lobar level cannot be excluded.',
       management: buildManagement(form, 'PE-RADS N'),
     }
   }
@@ -237,7 +237,7 @@ export function PERadsPage() {
             <p className="result-strip-summary">{result.summary}</p>
           </div>
           <CopyBlock label="Impression" text={result.impression} />
-          <CopyBlock label="Management considerations" text={result.management} />
+          <CopyBlock label="Recommendation" text={result.management} />
           {result.modifiers.length > 0 && <p className="copy-status">Applied modifiers: {result.modifiers.join(', ')}</p>}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>

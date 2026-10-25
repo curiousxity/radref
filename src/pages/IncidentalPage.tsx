@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { classifyPancreaticCyst } from '../logic/pancreaticCyst'
+import type { AgeBand, DuctCommunication } from '../logic/pancreaticCyst'
 
 type Tool = 'adrenal' | 'pancreas' | 'renal'
 
@@ -14,6 +16,8 @@ type AdrenalForm = {
 
 type PancreasForm = {
   sizeCm: string
+  ageBand: AgeBand
+  ductCommunication: DuctCommunication
   highRisk: boolean
   worrisome: boolean
   growth: boolean
@@ -28,7 +32,7 @@ type RenalForm = {
 }
 
 const initialAdrenal: AdrenalForm = { sizeCm: '', densityHu: '', benignFeatures: false, priorStable: false, cancerHistory: false }
-const initialPancreas: PancreasForm = { sizeCm: '', highRisk: false, worrisome: false, growth: false }
+const initialPancreas: PancreasForm = { sizeCm: '', ageBand: '65-79', ductCommunication: 'indeterminate', highRisk: false, worrisome: false, growth: false }
 const initialRenal: RenalForm = { sizeCm: '', simpleCyst: false, macroscopicFat: false, enhancement: false, homogeneousHyperdense: false }
 
 function num(v: string) {
@@ -45,7 +49,7 @@ function adrenalLogic(form: AdrenalForm) {
       category: 'Benign',
       reason: 'Adrenal masses smaller than 1 cm generally do not require further evaluation.',
       rec: 'No additional imaging is usually required.',
-      impression: 'Subcentimeter incidental adrenal nodule without specific suspicious features. No additional imaging follow-up is usually required.',
+      impression: 'Subcentimeter incidental adrenal nodule without specific suspicious features.',
     }
   }
 
@@ -54,7 +58,7 @@ function adrenalLogic(form: AdrenalForm) {
       category: 'Benign',
       reason: 'Diagnostic benign imaging features or prior stability support benignity.',
       rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental adrenal lesion with benign imaging features or documented stability. No additional imaging follow-up is usually required.',
+      impression: 'Incidental adrenal lesion with benign imaging features or documented stability.',
     }
   }
 
@@ -63,7 +67,7 @@ function adrenalLogic(form: AdrenalForm) {
       category: 'Likely adenoma',
       reason: 'Small lesion with low attenuation is compatible with a lipid-rich adenoma.',
       rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental adrenal lesion is low attenuation and compatible with benign adenoma. No additional imaging follow-up is usually required.',
+      impression: 'Incidental adrenal lesion is low attenuation and compatible with benign adenoma.',
     }
   }
 
@@ -72,7 +76,7 @@ function adrenalLogic(form: AdrenalForm) {
       category: 'Concerning',
       reason: 'Lesions larger than 4 cm are more concerning and often need dedicated evaluation or resection consideration.',
       rec: 'Dedicated adrenal protocol imaging and surgical or endocrine evaluation should be considered.',
-      impression: 'Incidental adrenal mass larger than 4 cm. Dedicated adrenal evaluation and surgical or endocrine consultation should be considered.',
+      impression: 'Incidental adrenal mass larger than 4 cm.',
     }
   }
 
@@ -82,64 +86,23 @@ function adrenalLogic(form: AdrenalForm) {
     rec: form.cancerHistory
       ? 'Dedicated adrenal imaging, PET-CT, or biopsy may be appropriate depending on the clinical setting.'
       : 'Dedicated adrenal CT or MRI should be considered for further characterization.',
-    impression: 'Indeterminate incidental adrenal lesion. Further characterization with dedicated adrenal imaging should be considered.',
+    impression: 'Indeterminate incidental adrenal lesion.',
   }
 }
 
+/** The pancreatic cyst tool is the pancreatic cyst calculator's logic, with its ACR intervals. */
 function pancreasLogic(form: PancreasForm) {
-  const size = num(form.sizeCm)
-
-  if (form.highRisk) {
-    return {
-      category: 'High risk',
-      reason: 'High-risk stigmata warrant more aggressive evaluation.',
-      rec: 'EUS/FNA and surgical consultation should be considered.',
-      impression: 'Incidental pancreatic cyst with high-risk features. EUS/FNA and surgical consultation should be considered.',
-    }
-  }
-
-  if (form.worrisome || form.growth) {
-    return {
-      category: 'Worrisome',
-      reason: 'Growth or worrisome features increase concern.',
-      rec: 'Closer imaging follow-up and consideration of EUS/FNA are appropriate.',
-      impression: 'Incidental pancreatic cyst with growth or worrisome features. Closer follow-up and consideration of EUS/FNA are appropriate.',
-    }
-  }
-
-  if (size < 0.5) {
-    return {
-      category: 'Tiny cyst',
-      reason: 'Very small cysts may only need limited follow-up.',
-      rec: 'Single follow-up at about 2 years may be sufficient in many patients.',
-      impression: 'Tiny incidental pancreatic cyst without worrisome features. Limited interval follow-up may be sufficient.',
-    }
-  }
-
-  if (size < 1.5) {
-    return {
-      category: 'Small cyst',
-      reason: 'Small presumed mucinous cysts are typically followed over time.',
-      rec: 'Periodic MRI or CT surveillance is recommended.',
-      impression: 'Small incidental pancreatic cyst without high-risk features. Imaging surveillance is recommended.',
-    }
-  }
-
-  if (size <= 2.5) {
-    return {
-      category: 'Intermediate cyst',
-      reason: 'Intermediate-size cysts generally need closer surveillance.',
-      rec: 'More frequent imaging follow-up and possible EUS depending on interval change should be considered.',
-      impression: 'Intermediate-size incidental pancreatic cyst. Closer imaging surveillance should be considered.',
-    }
-  }
-
-  return {
-    category: 'Large cyst',
-    reason: 'Larger cysts are more likely to need EUS-based evaluation.',
-    rec: 'EUS/FNA and specialist evaluation should be considered.',
-    impression: 'Larger incidental pancreatic cyst. EUS/FNA and specialist evaluation should be considered.',
-  }
+  const result = classifyPancreaticCyst({
+    sizeCm: form.sizeCm,
+    ageBand: form.ageBand,
+    ductCommunication: form.ductCommunication,
+    growth: form.growth,
+    worrisomeFeatures: form.worrisome,
+    highRiskStigmata: form.highRisk,
+    alternativeDiagnosis: 'none',
+    symptomsOrPancreatitis: false,
+  })
+  return { category: result.category, reason: result.reason, rec: result.management, impression: result.impression }
 }
 
 function renalLogic(form: RenalForm) {
@@ -150,7 +113,7 @@ function renalLogic(form: RenalForm) {
       category: 'Benign cyst',
       reason: 'Simple cystic features are benign.',
       rec: 'No additional imaging follow-up is usually required.',
-      impression: 'Incidental renal lesion has simple cyst features. No additional imaging follow-up is usually required.',
+      impression: 'Incidental renal lesion has simple cyst features.',
     }
   }
 
@@ -177,7 +140,7 @@ function renalLogic(form: RenalForm) {
       category: 'Enhancing mass',
       reason: 'Enhancement raises concern for neoplasm.',
       rec: 'Dedicated renal mass protocol CT or MRI and urologic evaluation should be considered.',
-      impression: 'Enhancing incidental renal mass. Dedicated renal mass evaluation and urologic referral should be considered.',
+      impression: 'Enhancing incidental renal mass.',
     }
   }
 
@@ -187,7 +150,7 @@ function renalLogic(form: RenalForm) {
     rec: size < 1.5
       ? 'MRI is often preferred for smaller indeterminate renal masses.'
       : 'Dedicated renal mass protocol CT or MRI should be considered.',
-    impression: 'Indeterminate incidental renal lesion. Further dedicated renal mass imaging should be considered.',
+    impression: 'Indeterminate incidental renal lesion.',
   }
 }
 
@@ -212,6 +175,18 @@ const sourceLinks: Record<Tool, { href: string; label: string }> = {
     label: 'Management of the Incidental Renal Mass on CT: A White Paper of the ACR Incidental Findings Committee, JACR 2018',
   },
 }
+
+const ageBandOptions: { value: AgeBand; label: string }[] = [
+  { value: '<65', label: '<65' },
+  { value: '65-79', label: '65-79' },
+  { value: '80+', label: '80+' },
+]
+
+const ductCommunicationOptions: { value: DuctCommunication; label: string }[] = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' },
+  { value: 'indeterminate', label: 'Indeterminate' },
+]
 
 const toolOptions: { value: Tool; label: string }[] = [
   { value: 'adrenal', label: 'Adrenal incidentaloma' },
@@ -284,6 +259,8 @@ export function IncidentalPage() {
                   <span>Cyst size (cm)</span>
                   <input type="number" step="0.1" inputMode="decimal" value={pancreas.sizeCm} onChange={(e) => setPancreas({ ...pancreas, sizeCm: e.target.value })} />
                 </label>
+                <ChoiceGroup label="Age band" layout="row" value={pancreas.ageBand} options={ageBandOptions} onChange={(value) => setPancreas({ ...pancreas, ageBand: value })} />
+                <ChoiceGroup label="Main pancreatic duct communication" layout="row" value={pancreas.ductCommunication} options={ductCommunicationOptions} onChange={(value) => setPancreas({ ...pancreas, ductCommunication: value })} />
                 <label className="check-row">
                   <input type="checkbox" checked={pancreas.highRisk} onChange={(e) => setPancreas({ ...pancreas, highRisk: e.target.checked })} />
                   High-risk stigmata
@@ -334,8 +311,8 @@ export function IncidentalPage() {
             </div>
             <p className="result-strip-summary">{result.reason}</p>
           </div>
-          <CopyBlock label="Impression" text={result.impression} />
-          <CopyBlock label="Recommendation" text={result.rec} />
+          {result.impression && <CopyBlock label="Impression" text={result.impression} />}
+          {result.rec && <CopyBlock label="Recommendation" text={result.rec} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
       </section>

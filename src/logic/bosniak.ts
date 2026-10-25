@@ -69,7 +69,7 @@ export function classify(form: BosniakForm): BosniakResult {
       category: 'Bosniak IIF',
       reason: 'Smooth minimal thickening, many thin enhancing septa, or heterogeneously hyperintense appearance on unenhanced fat-saturated T1 can qualify as IIF.',
       management: 'Follow-up imaging is generally recommended at 6 months, 12 months, then annually for 5 years.',
-      impression: 'Cystic renal mass is compatible with Bosniak IIF. Imaging follow-up is recommended.',
+      impression: 'Cystic renal mass is compatible with Bosniak IIF.',
     }
   }
 

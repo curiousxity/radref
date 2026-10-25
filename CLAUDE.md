@@ -194,6 +194,27 @@ The intended use is fast, phone-friendly access to radiology decision support an
 - guideline-based logic for each calculator
 - lightweight static hosting with minimal operational overhead
 
+## Copy boxes: report sections
+
+The author decided (2026-10-25) that every calculator's copy-and-paste text is split into the
+standard report sections, correctly capitalised and punctuated:
+
+- `CopyBlock`'s `label` is a `ReportSection` (`src/components/reportText.ts`): **Findings** (what
+  was measured or seen), **Impression** (the category or diagnosis, with no follow-up advice in
+  it) and **Recommendation** (follow-up and management, with the guideline's interval). The
+  contrast and IR anticoagulation pages write a **Chart note**. Studies keep **Report** and
+  **Report template**. `src/components/reportText.test.ts` fails if a page uses any other label.
+- `formatReportText` tidies every calculator section before it is shown and copied: a capital
+  letter at the start of each line (words like eGFR are left alone) and a full stop at the end.
+  Study reports and templates are left as written.
+- Logic that a study shares keeps the study's output: the Fleischner result has `impression` and
+  `recommendation`, and the incidental lung nodule study joins them back into one paragraph.
+- The pancreatic cyst calculator and the incidental findings page's pancreatic cyst tool use the
+  ACR 2017 intervals from the pancreatic cysts study's lesson (`acrSurveillance` in
+  `src/logic/pancreaticCyst.ts`), shared with that study.
+- Follow-up intervals still to check against the guidelines' full text are tracked in
+  `docs/REMAINING_TASKS.md`.
+
 ## Current calculators
 
 - TI-RADS
