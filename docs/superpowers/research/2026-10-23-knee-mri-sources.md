@@ -179,3 +179,14 @@ descriptive, with no cited rule.
 Discoid lateral meniscus (K4-1), bipartite patella and fabella each get their own
 impression line. Bipartite patella and fabella have no cited rule; they are recorded as
 present or absent.
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Zeltser DW, Leopold SS. Classifications in brief: Schatzker classification of tibial
+plateau fractures. Clin Orthop Relat Res. 2013;471(2):371-374. doi:10.1007/s11999-012-2451-z.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| SZ-1, SZ-2, SZ-5, SZ-6 | yes | "split fracture of the lateral tibial plateau (Type I), split depression of the lateral tibial plateau (Type II), ... bicondylar tibial plateau fracture (Type V), and dissociation between the metaphysis and diaphysis (Type VI)". |
+| SZ-3 | yes | "central depression of the lateral plateau (Type III)". |
+| SZ-4 | partly | "split of the medial tibial plateau (Type IV)". The site still counts any medial plateau fracture as IV, as Markhardt's "medial plateau fracture" does; the page now says the review calls it a split. For the author. |

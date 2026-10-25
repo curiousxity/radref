@@ -14,6 +14,7 @@ type Form = {
   lines: LtLines
   wall: YesNo
   anteriorPart: 'wall' | 'column' | Unset
+  posteriorColumn: YesNo | Unset
   obturator: YesNo | Unset
   onIlium: YesNo | Unset
   pattern: 'stem' | 'hemitransverse' | Unset
@@ -24,6 +25,7 @@ const initialForm: Form = {
   lines: 'neither',
   wall: 'no',
   anteriorPart: '',
+  posteriorColumn: '',
   obturator: '',
   onIlium: '',
   pattern: '',
@@ -92,6 +94,7 @@ export function LetournelPage() {
     lines: form.lines,
     posteriorWall: wall,
     ...(form.anteriorPart ? { anteriorPart: form.anteriorPart } : {}),
+    ...(form.posteriorColumn ? { posteriorColumn: form.posteriorColumn === 'yes' } : {}),
     ...(form.obturator ? { obturatorBroken: form.obturator === 'yes' } : {}),
     ...(form.onIlium ? { articularOnIlium: form.onIlium === 'yes' } : {}),
     ...(form.pattern ? { pattern: form.pattern } : {}),
@@ -100,6 +103,8 @@ export function LetournelPage() {
   let pending = 'Nothing entered shows an acetabular fracture.'
   if (form.lines === 'anterior' && wall) pending = 'An anterior column or wall fracture with a posterior wall fragment is not one of the ten Letournel types: describe it.'
   else if (form.lines === 'anterior') pending = 'Say whether the anterior fracture is the wall or the whole column.'
+  else if (form.lines === 'posterior' && wall) pending = 'Say whether the posterior column itself is separated, or the ilioischial line is broken only by the wall fragment.'
+  else if (both && form.obturator === 'yes') pending = 'Answer the questions about the ilium to name the type. A both-column fracture runs up into the iliac wing; a T-shaped fracture does not.'
   else if (both) pending = 'Answer the questions about the obturator ring and the ilium to name the type.'
 
   return (
@@ -110,7 +115,7 @@ export function LetournelPage() {
           <span className="calc-tag">Acetabulum</span>
         </div>
         <p>Name an acetabular fracture from a few questions about the column lines, the posterior wall, the obturator ring and the ilium, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, and the ten type names are checked against Scheinfeld 2015, but the papers are paywalled, so the wording of each type, the column lines and the CT questions have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, the ten type names are checked against Scheinfeld 2015, and the column lines, the obturator ring and iliac wing questions, the isolated posterior wall and the spur sign against <Cite doi="10.2214/AJR.05.1269">Durkee et al., AJR 2006</Cite>. The wording of the other types is not yet checked. Not yet reviewed by the site author. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -120,6 +125,7 @@ export function LetournelPage() {
             <ChoiceGroup label="Side" layout="row" value={form.side} options={sideOptions} onChange={set('side')} />
             <ChoiceGroup label="Which column lines are broken?" layout="stack" value={form.lines} options={lineOptions} onChange={set('lines')} />
             <ChoiceGroup label="Separate posterior wall fragment?" layout="row" value={form.wall} options={yesNo} onChange={set('wall')} />
+            {form.lines === 'posterior' && wall && <ChoiceGroup label="Is the posterior column itself separated (not just the line broken by the wall fragment)?" layout="row" value={form.posteriorColumn} options={yesNo} onChange={set('posteriorColumn')} />}
             {form.lines === 'anterior' && <ChoiceGroup label="The anterior fracture" layout="stack" value={form.anteriorPart} options={anteriorOptions} onChange={set('anteriorPart')} />}
             {both && <ChoiceGroup label="Is the obturator ring broken?" layout="row" value={form.obturator} options={yesNo} onChange={set('obturator')} />}
             {both && form.obturator === 'yes' && <ChoiceGroup label="Is any joint surface still attached to the intact ilium?" layout="row" value={form.onIlium} options={yesNo} onChange={set('onIlium')} />}
@@ -149,10 +155,10 @@ export function LetournelPage() {
         <TypeTable types={ltElementary} />
         <h3>Associated types</h3>
         <TypeTable types={ltAssociated} />
-        <p>The iliopectineal line belongs to the anterior column and the ilioischial line to the posterior column. With both lines broken, an intact obturator ring means a transverse fracture. A both-column fracture leaves no joint surface on the intact ilium, and the spike of ilium left behind is the spur sign on the obturator oblique view.</p>
+        <p>The iliopectineal line belongs to the anterior column and the ilioischial line to the posterior column. With both lines broken, an intact obturator ring means a transverse fracture. With the obturator ring broken as well, a fracture running up into the iliac wing is both-column and one that does not is T-shaped. A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof on radiographs and CT. An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Most of these papers are paywalled, so the type wording has been checked only where an abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Durkee is read in full; the other papers are paywalled, so their wording is checked only where an abstract states it." />
     </div>
   )
 }

@@ -48,8 +48,9 @@ export default defineConfig({
         navigateFallback: '/index.html',
         // The anatomy viewers are standalone HTML pages, and an iframe load counts as a
         // navigation, so without this the service worker would serve the React shell
-        // inside the frame instead of the viewer.
-        navigateFallbackDenylist: [/^\/anatomy\//],
+        // inside the frame instead of the viewer. Opening a reference PDF is a navigation
+        // too, so /references/ is left to the network the same way.
+        navigateFallbackDenylist: [/^\/anatomy\//, /^\/references\//],
         globPatterns: ['**/*.{js,css,html,svg,png,jpg,ico,woff2}'],
         // Online-only viewers: together they would add ~8 MB to every install, so
         // they load from the network and are not available offline.

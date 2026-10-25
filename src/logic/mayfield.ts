@@ -2,9 +2,10 @@
  * Mayfield stages of progressive perilunate instability (Mayfield et al., J Hand Surg Am
  * 1980). Shared by the Mayfield calculator and the wrist MRI study.
  *
- * Unchecked draft: the paper is matched on PubMed, and stages I and IV and the sequential
- * progression are checked against its abstract, but stages II and III have not yet been
- * checked (claims MF-1 to MF-5 in docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
+ * The paper itself is paywalled. Stages I and IV and the sequential progression are checked
+ * against its abstract, and all four stages against Kennedy and Allan's review, which reproduces
+ * Mayfield's table (Clin Orthop Relat Res 2012; claims MF-1 to MF-5 in
+ * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
  */
 
 /** Which structures around the lunate are disrupted. */
@@ -23,9 +24,14 @@ export const mayfieldStages: MayfieldStage[] = ['I', 'II', 'III', 'IV']
 
 export const mayfieldDescriptions: Record<MayfieldStage, string> = {
   I: 'scapholunate disruption (scapholunate dissociation)', // MF-1
-  II: 'scapholunate and capitolunate disruption, with the capitate dislocated from the lunate (perilunate dislocation)', // MF-2
-  III: 'disruption around the lunate extending through the lunotriquetral joint (lunotriquetral dissociation)', // MF-3
-  IV: 'dislocation of the lunate from the radius (lunate dislocation)', // MF-4
+  // MF-2, Kennedy and Allan: "capitolunate joint disruption in addition to the scapholunate
+  // injury ... Radiographs may show capitate subluxation or dislocation."
+  II: 'scapholunate and capitolunate disruption, with the capitate subluxed or dislocated',
+  // MF-3: "The third stage of progression is perilunate dislocation ... The lunotriquetral joint
+  // is now also disrupted. Radiographically, the capitate is dislocated dorsally".
+  III: 'perilunate dislocation: the disruption extends through the lunotriquetral joint, with the capitate dislocated dorsally',
+  // MF-4: "the radiolunate joint is disrupted and the lunate is dislocated volarly from the lunate fossa".
+  IV: 'lunate dislocation: the radiolunate joint is disrupted and the lunate dislocates volarly from the lunate fossa',
 }
 
 const structureOf: Record<MayfieldStage, keyof MayfieldInput> = {

@@ -932,7 +932,7 @@ const study: StudyDefinition = {
       question: 'The posterior facet has three fracture lines, but no fragment is displaced. What is the Sanders type?',
       options: ['Type I', 'Type II', 'Type III', 'Type IV'],
       answer: 0,
-      explanation: <p>Type I covers every undisplaced articular fracture, whatever the number of fracture lines ({SANDERS}).</p>,
+      explanation: <p>Type I covers every minimally displaced articular fracture (2 mm or less), whatever the number of fracture lines ({SANDERS}).</p>,
     },
     {
       id: 'lisfranc-strongest',

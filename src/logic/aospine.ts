@@ -4,9 +4,12 @@
  * morphology; the subaxial system adds facet injuries. Shared by the AO Spine calculator and
  * the spine trauma CT study.
  *
- * Unchecked draft: both papers are matched on PubMed, but their abstracts give only the A, B
- * and C types, so the rest of the wording has not yet been checked against them (claims AO-1
- * to AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * Unchecked draft: both papers are matched on PubMed but paywalled. The thoracolumbar types,
+ * order, neurology, modifiers and notation are checked against AO Spine's own thoracolumbar
+ * poster (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged at
+ * public/references/aospine-thoracolumbar-poster.pdf). The subaxial facets, neurology and
+ * modifiers are still unchecked (claims AO-1 to AO-12 in
+ * docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
  */
 
 export type AoRegion = 'subaxial' | 'thoracolumbar'
@@ -17,16 +20,24 @@ export type AoType = AoBody | 'B1' | 'B2' | 'B3' | 'C'
 export const aoTypes: AoType[] = ['A0', 'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'C']
 export const aoBodies: AoBody[] = ['A0', 'A1', 'A2', 'A3', 'A4']
 
+/** AO-1 to AO-3, worded after the thoracolumbar poster. */
 export const aoDescriptions: Record<AoType, string> = {
-  A0: 'no vertebral body fracture, or a minor fracture that does not affect stability (spinous or transverse process, lamina)', // AO-1
-  A1: 'wedge-compression fracture of a single endplate, posterior wall intact', // AO-1
-  A2: 'split or pincer fracture of both endplates, posterior wall intact', // AO-1
-  A3: 'incomplete burst fracture, through a single endplate and the posterior wall', // AO-1
-  A4: 'complete burst fracture, through both endplates and the posterior wall', // AO-1
-  B1: 'posterior tension band failure through bone only (transosseous, Chance)', // AO-2
-  B2: 'posterior tension band failure through the ligaments, with or without bone', // AO-2
-  B3: 'anterior tension band failure (hyperextension)', // AO-2
-  C: 'translation or displacement in any direction', // AO-3
+  // "Minor, nonstructural fractures, which do not compromise the structural integrity of the
+  // spinal column such as transverse process or spinous process fractures." It said "no vertebral
+  // body fracture, or ..."; the poster's algorithm gives no fracture at all as "No injury".
+  A0: 'minor, non-structural fracture such as a transverse or spinous process fracture',
+  A1: 'wedge-compression fracture of a single endplate, posterior wall intact',
+  A2: 'split or pincer fracture of both endplates, posterior wall intact',
+  A3: 'incomplete burst fracture, through a single endplate and the posterior wall',
+  A4: 'complete burst fracture, through both endplates and the posterior wall',
+  // "Monosegmental pure osseous failure of the posterior tension band. The classical Chance fracture."
+  B1: 'monosegmental failure of the posterior tension band through bone only (the classic Chance fracture)',
+  // "Bony and/or ligamentary failure of the posterior tension band together with a Type A fracture."
+  B2: 'posterior tension band failure through the ligaments, or through bone and ligament',
+  // "Anterior structures, especially the ALL are ruptured but there is a posterior hinge".
+  B3: 'anterior tension band failure (hyperextension), the anterior longitudinal ligament torn with a posterior hinge',
+  // "Displacement or dislocation ... Can be combined with subtypes of A or B."
+  C: 'displacement or dislocation (translation)',
 }
 
 export type PosteriorTensionBand = 'intact' | 'bony' | 'ligamentous'
@@ -36,15 +47,21 @@ export type AoInput = {
   translation?: boolean
   anteriorTensionBand?: boolean
   posteriorTensionBand?: PosteriorTensionBand
+  /** With no vertebral body fracture: a transverse or spinous process fracture (A0). */
+  processFracture?: boolean
   /** Number of vertebral body endplates fractured. */
   endplates?: 0 | 1 | 2
   posteriorWall?: boolean
 }
 
-/** AO-1: the vertebral body type from the endplates and the posterior wall. */
-export function aoBody(input: Pick<AoInput, 'endplates' | 'posteriorWall'>): AoBody | undefined {
+/**
+ * AO-1: the vertebral body type from the endplates and the posterior wall. With no body fracture
+ * it is A0 only when a process is fractured; otherwise there is no type A injury (the poster's
+ * "No injury").
+ */
+export function aoBody(input: Pick<AoInput, 'endplates' | 'posteriorWall' | 'processFracture'>): AoBody | undefined {
   const endplates = input.endplates ?? 0
-  if (endplates === 0) return input.posteriorWall ? undefined : 'A0'
+  if (endplates === 0) return !input.posteriorWall && input.processFracture ? 'A0' : undefined
   if (endplates === 1) return input.posteriorWall ? 'A3' : 'A1'
   return input.posteriorWall ? 'A4' : 'A2'
 }
@@ -101,8 +118,8 @@ export function aoNeuroDescription(neuro: AoNeuro, region: AoRegion): string {
   return {
     N0: 'neurologically intact',
     N1: 'transient deficit, now resolved',
-    N2: 'radiculopathy',
-    N3: region === 'thoracolumbar' ? 'incomplete spinal cord or cauda equina injury' : 'incomplete spinal cord injury',
+    N2: region === 'thoracolumbar' ? 'radicular symptoms' : 'radiculopathy',
+    N3: region === 'thoracolumbar' ? 'incomplete spinal cord injury or any degree of cauda equina injury' : 'incomplete spinal cord injury',
     N4: 'complete spinal cord injury',
     NX: 'cannot be examined',
   }[neuro]
@@ -116,8 +133,8 @@ export const aoModifiers: Record<AoRegion, Record<string, string>> = {
     M4: 'vertebral artery abnormality',
   },
   thoracolumbar: {
-    M1: 'indeterminate injury to the tension band, on imaging or examination',
-    M2: 'patient-specific comorbidity (such as ankylosing spondylitis or DISH)',
+    M1: 'indeterminate injury to the tension band on imaging, with or without MRI',
+    M2: 'patient-specific comorbidity that may argue for or against surgery (such as ankylosing spondylitis, or burns over the injured spine)',
   },
 }
 
@@ -126,13 +143,24 @@ export type AoFull = {
   morphology: { type: AoType; body?: AoBody }
   facet?: string
   neuro?: AoNeuro
-  /** AO-9: ongoing cord compression with an incomplete deficit. */
+  /**
+   * AO-9: continued spinal cord compression. The thoracolumbar poster lists "+" with the
+   * neurology grades without tying it to one; the subaxial "+" is kept with N3 only (unchecked).
+   */
   compression?: boolean
   modifiers?: string[]
 }
 
-/** The code, e.g. "B2 (A1); F4 BL; N3+; M3". The vertebral body type in brackets is the site's notation. */
-export function aoCode({ morphology, facet, neuro, compression, modifiers = [] }: AoFull): string {
+/**
+ * The code. Thoracolumbar follows the poster's nomenclature, the primary type then the secondary
+ * injury, neurology and modifiers in brackets: "C (A3; N3; M2)", "A4 (N0; M1)". Subaxial keeps
+ * the site's own notation, e.g. "B2 (A1); F4 BL; N3+; M3", until its paper is checked.
+ */
+export function aoCode({ region, morphology, facet, neuro, compression, modifiers = [] }: AoFull): string {
+  if (region === 'thoracolumbar') {
+    const inside = [morphology.body, neuro && `${neuro}${compression ? '+' : ''}`, ...modifiers].filter(Boolean)
+    return `${morphology.type}${inside.length > 0 ? ` (${inside.join('; ')})` : ''}`
+  }
   return [
     `${morphology.type}${morphology.body ? ` (${morphology.body})` : ''}`,
     facet,

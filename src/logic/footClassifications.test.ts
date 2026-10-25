@@ -49,7 +49,9 @@ describe('Hawkins (unchecked)', () => {
 })
 
 describe('Sanders (unchecked)', () => {
-  // SA-3: "Type I: all undisplaced articular fractures, whatever the number of fracture lines."
+  // SA-3: "Type I fractures include all minimally displaced (≤ 2 mm) articular fractures,
+  // regardless of the number of fracture lines and fragments present" (Jiménez-Almonte 2019).
+  // The description said "undisplaced"; the review's wording is "minimally displaced (≤ 2 mm)".
   test('undisplaced is type I, however many lines', () => {
     expect(sanders({ displaced: false, lines: ['A'] })).toBe('I')
     expect(sanders({ displaced: false, lines: ['A', 'B', 'C'] })).toBe('I')
@@ -81,6 +83,7 @@ describe('Sanders (unchecked)', () => {
     // or more comminuted", from memory; the paper names type III "split depression".
     expect(sandersDescription('IIIAC')).toBe('three-part or split depression fracture of the posterior facet (lines A and C)')
     expect(sandersDescription('IV')).toBe('four-part or highly comminuted fracture of the posterior facet')
+    expect(sandersDescription('I')).toBe('minimally displaced (2 mm or less) articular fracture, whatever the number of fracture lines')
     expect(sandersSentence('IIB')).toBe('Intra-articular calcaneal fracture, Sanders type IIB: two-part or split fracture of the posterior facet (line B).')
   })
 })

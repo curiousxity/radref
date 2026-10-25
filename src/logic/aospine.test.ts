@@ -12,8 +12,11 @@ describe('AO Spine morphology (unchecked)', () => {
   // AO-1: "A1 wedge (one endplate), A2 split or pincer (both), A3 incomplete burst (one endplate
   // and the posterior wall), A4 complete burst (both and the wall)."
   test('the vertebral body type from the endplates and posterior wall', () => {
-    expect(aoBody({ endplates: 0 })).toBe('A0')
-    expect(aoBody({})).toBe('A0')
+    // A0 was given for no fracture at all. The thoracolumbar poster's algorithm: no body
+    // fracture and "Vertebral process fracture" YES → "A0 Insignificant injury"; NO → "No injury".
+    expect(aoBody({ endplates: 0 })).toBeUndefined()
+    expect(aoBody({})).toBeUndefined()
+    expect(aoBody({ endplates: 0, processFracture: true })).toBe('A0')
     expect(aoBody({ endplates: 1 })).toBe('A1')
     expect(aoBody({ endplates: 2 })).toBe('A2')
     expect(aoBody({ endplates: 1, posteriorWall: true })).toBe('A3')
@@ -30,6 +33,8 @@ describe('AO Spine morphology (unchecked)', () => {
     expect(aoSpine({ anteriorTensionBand: true, posteriorTensionBand: 'ligamentous' })).toEqual({ type: 'B3' })
     expect(aoSpine({ translation: true, anteriorTensionBand: true, endplates: 2, posteriorWall: true })).toEqual({ type: 'C', body: 'A4' })
     expect(aoSpine({ posteriorWall: true })).toBeUndefined()
+    expect(aoSpine({ processFracture: true })).toEqual({ type: 'A0' })
+    expect(aoSpine({ posteriorTensionBand: 'bony', processFracture: true })).toEqual({ type: 'B1' })
   })
 })
 
@@ -54,16 +59,26 @@ describe('AO Spine subaxial facets (unchecked)', () => {
 describe('AO Spine code and sentence (unchecked)', () => {
   // AO-8: N3 covers the cauda equina in the thoracolumbar system. AO-9: "+" for ongoing compression.
   test('neurology', () => {
-    expect(aoNeuroDescription('N3', 'thoracolumbar')).toBe('incomplete spinal cord or cauda equina injury')
+    // The poster: "N3 Incomplete spinal cord injury or any degree of cauda equina injury".
+    expect(aoNeuroDescription('N3', 'thoracolumbar')).toBe('incomplete spinal cord injury or any degree of cauda equina injury')
     expect(aoNeuroDescription('N3', 'subaxial')).toBe('incomplete spinal cord injury')
     expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N3', compression: true })).toBe('C; N3+')
     expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C; N4')
+    // The thoracolumbar poster lists "+ Continued spinal cord compression" without tying it to N3.
+    expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
+  })
+
+  // The thoracolumbar poster's nomenclature examples: "T8-T9: C (T9: A3; N3; M2)" and "L1: A4 (N0; M1)".
+  test('thoracolumbar code follows the poster', () => {
+    expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'C', body: 'A3' }, neuro: 'N3', modifiers: ['M2'] })).toBe('C (A3; N3; M2)')
+    expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'A4' }, neuro: 'N0', modifiers: ['M1'] })).toBe('A4 (N0; M1)')
+    expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'A1' } })).toBe('A1')
   })
 
   test('the full code and sentence', () => {
     const full = { region: 'subaxial' as const, morphology: { type: 'B2' as const, body: 'A1' as const }, facet: 'F4 BL', neuro: 'N1' as const, modifiers: ['M3'] }
     expect(aoCode(full)).toBe('B2 (A1); F4 BL; N1; M3')
-    expect(aoSentence(full, 'C5–C6')).toBe('C5–C6: AO Spine subaxial cervical B2 (A1); F4 BL; N1; M3: posterior tension band failure through the ligaments, with or without bone, with a type A1 vertebral body fracture.')
+    expect(aoSentence(full, 'C5–C6')).toBe('C5–C6: AO Spine subaxial cervical B2 (A1); F4 BL; N1; M3: posterior tension band failure through the ligaments, or through bone and ligament, with a type A1 vertebral body fracture.')
     expect(aoSentence({ region: 'thoracolumbar', morphology: { type: 'A3' } })).toBe('AO Spine thoracolumbar A3: incomplete burst fracture, through a single endplate and the posterior wall.')
   })
 })

@@ -19,7 +19,7 @@ const yesNo: { value: YesNo; label: string }[] = [
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 const tableRows: [string, string][] = [
-  ['I', 'Undisplaced articular fracture (under 2 mm), whatever the number of fracture lines'],
+  ['I', 'Minimally displaced articular fracture (2 mm or less), whatever the number of fracture lines'],
   // SA-4, the abstract's wording: "two-part or split", "three-part or split depression",
   // "four-part or highly comminuted articular fractures".
   ['II (IIA, IIB, IIC)', 'Two-part or split fracture of the posterior facet; the letter names the line'],
@@ -29,6 +29,7 @@ const tableRows: [string, string][] = [
 
 const references: LessonReference[] = [
   { citation: 'Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Results using a prognostic computed tomography scan classification. Clin Orthop Relat Res. 1993;(290):87-95.', doi: '10.1097/00003086-199305000-00012' },
+  { citation: 'Jiménez-Almonte JH, King JD, Luo TD, Aneja A, Moghadamian E. Classifications in brief: Sanders classification of intraarticular fractures of the calcaneus. Clin Orthop Relat Res. 2019;477(2):467-471.', doi: '10.1097/CORR.0000000000000539' },
 ]
 
 export function SandersPage() {
@@ -49,7 +50,7 @@ export function SandersPage() {
           <span className="calc-tag">Calcaneus</span>
         </div>
         <p>Type an intra-articular calcaneal fracture from the fracture lines through the posterior facet on coronal CT, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the reference is matched on PubMed, and the four types are worded as in its abstract, but the paper is paywalled, so the widest-facet image, the A, B and C lines, the subtype letters and the 2 mm have not yet been checked against it. Not yet reviewed by the site author. Source: <Cite doi="10.1097/00003086-199305000-00012">Sanders et al., Clin Orthop Relat Res 1993</Cite>.</p>
+        <p className="source-note">Unchecked draft: the paper is paywalled, so the four types are worded as in its abstract, and the widest-facet image, the A, B and C lines, the subtype letters and the 2 mm are checked against a later review (<Cite doi="10.1097/CORR.0000000000000539">Jiménez-Almonte et al., Clin Orthop Relat Res 2019</Cite>). Not yet reviewed by the site author. Source: <Cite doi="10.1097/00003086-199305000-00012">Sanders et al., Clin Orthop Relat Res 1993</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -59,8 +60,8 @@ export function SandersPage() {
             {sandersLines.map((line) => (
               <ChoiceGroup key={line} label={`Fracture line ${line} (${sandersLineDescriptions[line]})?`} layout="row" value={form[line]} options={yesNo} onChange={set(line)} />
             ))}
-            <ChoiceGroup label="Comminuted, more than four articular parts?" layout="row" value={form.comminuted} options={yesNo} onChange={set('comminuted')} />
-            <ChoiceGroup label="Any articular fragment displaced 2 mm or more?" layout="row" value={form.displaced} options={yesNo} onChange={set('displaced')} />
+            <ChoiceGroup label="Comminuted, four or more articular fragments?" layout="row" value={form.comminuted} options={yesNo} onChange={set('comminuted')} />
+            <ChoiceGroup label="Any articular fragment displaced more than 2 mm?" layout="row" value={form.displaced} options={yesNo} onChange={set('displaced')} />
           </div>
         </article>
 
@@ -92,10 +93,11 @@ export function SandersPage() {
           </table>
         </div>
         <p>Sanders read the coronal CT image where the undersurface of the posterior facet is widest. Three lines, A, B and C from lateral to medial, split the facet into lateral, central and medial columns, with the sustentaculum medial to line C. The type counts the parts; the letters say where the lines run.</p>
+        <p>The 1993 paper gave no displacement figure for type I; it advised surgery from 3 mm of articular displacement. The 2 mm used here is the later review's: type I is displaced 2 mm or less.</p>
         <p>Sanders found that the outcome after surgery worsened as the type rose: excellent or good results in 73% of type II, 70% of type III and 9% of type IV fractures.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the type wording has been checked only where its abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1993 paper is paywalled; what its abstract does not state is checked against the 2019 review." />
     </div>
   )
 }

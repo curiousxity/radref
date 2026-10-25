@@ -3,10 +3,11 @@
  * Relat Res 1993), read on the coronal CT image where the posterior facet is widest. Shared
  * by the Sanders calculator and the foot MRI study.
  *
- * Unchecked draft: the paper is matched on PubMed (PMID 8472475) but paywalled. Its abstract
- * states the four types (SA-4, worded as there) and that type I is nondisplaced (SA-3); the
- * widest-facet image, the A-B-C lines, the subtype letters and the 2 mm are still unchecked
- * (claims SA-1 to SA-6 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * The paper is matched on PubMed (PMID 8472475) but paywalled. Its abstract states the four
+ * types (SA-4, worded as there); the widest-facet image, the A-B-C lines, the subtype letters
+ * and the 2 mm are checked against Jiménez-Almonte et al.'s review (Clin Orthop Relat Res 2019),
+ * which says the 1993 paper itself gave no displacement figure (claims SA-1 to SA-6 in
+ * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 
 /** Fracture lines through the posterior facet, lateral (A) to medial (C). */
@@ -21,10 +22,13 @@ export const sandersLineDescriptions: Record<SandersLine, string> = {
 }
 
 export type SandersInput = {
-  /** Any articular fragment displaced 2 mm or more (SA-3). */
+  /**
+   * Any articular fragment displaced more than 2 mm (SA-3). Jiménez-Almonte: "Type I fractures
+   * include all minimally displaced (≤ 2 mm) articular fractures".
+   */
   displaced?: boolean
   lines?: SandersLine[]
-  /** More than four articular parts. */
+  /** Four or more articular fragments (SA-4: "three or more primary fracture lines, resulting in four or more articular fragments"). */
   comminuted?: boolean
 }
 
@@ -33,7 +37,7 @@ export type SandersType = 'I' | 'IIA' | 'IIB' | 'IIC' | 'IIIAB' | 'IIIAC' | 'III
 export const sandersTypes: SandersType[] = ['I', 'IIA', 'IIB', 'IIC', 'IIIAB', 'IIIAC', 'IIIBC', 'IV']
 
 const groupDescriptions: Record<'I' | 'II' | 'III' | 'IV', string> = {
-  I: 'undisplaced articular fracture, whatever the number of fracture lines', // SA-3
+  I: 'minimally displaced (2 mm or less) articular fracture, whatever the number of fracture lines', // SA-3
   // SA-4, the abstract's wording: "Type II were two-part or split fractures; Type III were
   // three-part or split depression fractures; and Type IV were four-part or highly comminuted
   // articular fractures."

@@ -12,7 +12,9 @@ function input(lines: Partial<Record<NeerLine, LineStatus>>, extra: Partial<Neer
 }
 
 describe('Neer: displacement criterion', () => {
-  // N2 (to check): a segment is displaced when it is "more than 1 cm" displaced or angulated
+  // N2: "According to Neer, displacement of a fracture fragment by more than a centimeter or
+  // angulation of more than 45° is considered significant" (Kilcoyne et al., AJR 1990).
+  // A segment is displaced when it is "more than 1 cm" displaced or angulated
   // "more than 45 degrees".
   test.each([
     [1, 0, false],

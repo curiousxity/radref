@@ -45,6 +45,7 @@ const MARKHARDT_DOI = '10.1148/rg.292085078'
 /** Matched on PubMed. Schatzker 1979 has no DOI on Crossref, so it has none here. */
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
+  { citation: 'Zeltser DW, Leopold SS. Classifications in brief: Schatzker classification of tibial plateau fractures. Clin Orthop Relat Res. 2013;471(2):371-374.', doi: '10.1007/s11999-012-2451-z' },
   { citation: 'Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597.', doi: MARKHARDT_DOI },
 ]
 
@@ -74,7 +75,7 @@ export function SchatzkerPage() {
           <span className="calc-tag">Tibial plateau</span>
         </div>
         <p>Type a tibial plateau fracture from a few questions, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, and the types are checked against Markhardt 2009's abstract, since Schatzker's 1979 paper has none; how type IV is broken has not yet been checked against the original. Not yet reviewed by the site author. Sources: Schatzker et al., Clin Orthop Relat Res 1979; <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>.</p>
+        <p className="source-note">Unchecked draft: Schatzker's 1979 paper has no abstract and is paywalled, so the types are checked against Markhardt 2009's abstract and a later review (<Cite doi="10.1007/s11999-012-2451-z">Zeltser and Leopold, Clin Orthop Relat Res 2013</Cite>). Not yet reviewed by the site author. Sources: Schatzker et al., Clin Orthop Relat Res 1979; <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -133,11 +134,11 @@ export function SchatzkerPage() {
             </tbody>
           </table>
         </div>
-        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. Sources word type IV differently (a medial split, a medial depression, or either), so this page uses only "fracture of the medial plateau" until the original wording is checked.</p>
+        <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. Zeltser and Leopold's review gives type IV as a split of the medial plateau; this page counts any medial plateau fracture as type IV, as Markhardt's "medial plateau fracture" does.</p>
         <p>CT and MRI are more accurate than radiographs for Schatzker typing, and surgical plans made from radiographs were changed after CT or MRI (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>).</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Schatzker's 1979 paper has no abstract or DOI, so the types are checked against Markhardt's abstract." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Schatzker's 1979 paper has no abstract or DOI, so the types are checked against Markhardt's abstract and Zeltser and Leopold's review." />
     </div>
   )
 }

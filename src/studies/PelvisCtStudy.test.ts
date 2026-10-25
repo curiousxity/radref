@@ -25,7 +25,8 @@ describe('pelvis CT lesson', () => {
   // unchecked, so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(12)
+    // 13 since Alton and Gee 2014 (Young-Burgess review) was added.
+    expect(study.references).toHaveLength(13)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

@@ -12,9 +12,13 @@ import { diastasisOver, ybDescriptions, ybGroup, ybSentence, ybStability, ybType
 describe('Young-Burgess (unchecked)', () => {
   // YB-1: "LC I sacral compression and transverse rami fractures on the side of impact; LC II
   // adds an iliac wing (crescent) fracture; LC III adds an open book of the other side."
+  // LC II was the crescent fracture only. Alton and Gee 2014: "The resulting posterior pelvic
+  // injury in LC II patterns may be a sacral fracture, sacroiliac ligament and joint disruption,
+  // or crescent fracture-dislocation of the ilium", so a sacroiliac disruption is LC II too.
   test('lateral compression grades', () => {
     expect(youngBurgess({ lateral: 'sacral' })).toBe('LC I')
     expect(youngBurgess({ lateral: 'crescent' })).toBe('LC II')
+    expect(youngBurgess({ lateral: 'sacroiliac' })).toBe('LC II')
     expect(youngBurgess({ lateral: 'sacral', otherSideOpen: true })).toBe('LC III')
     expect(youngBurgess({ lateral: 'crescent', otherSideOpen: true })).toBe('LC III')
   })
@@ -29,11 +33,14 @@ describe('Young-Burgess (unchecked)', () => {
     expect(youngBurgess({ symphysisWidened: true, sacroiliac: 'complete' })).toBe('APC III')
   })
 
-  // YB-3, YB-4: vertical displacement is vertical shear, or a combined mechanism with lateral compression.
+  // YB-3, YB-4: vertical displacement is vertical shear, or a combined mechanism with lateral
+  // compression. CMI said "most often lateral compression with vertical shear"; Alton and Gee:
+  // most "resulted from LC injuries being combined with AP or VS patterns".
   test('vertical displacement wins', () => {
     expect(youngBurgess({ vertical: true })).toBe('VS')
     expect(youngBurgess({ vertical: true, symphysisWidened: true, sacroiliac: 'complete' })).toBe('VS')
     expect(youngBurgess({ vertical: true, lateral: 'sacral' })).toBe('CMI')
+    expect(ybDescriptions.CMI).toBe('combined mechanism, most often lateral compression with AP compression or vertical shear')
   })
 
   test('no disruption entered is no type', () => {
@@ -41,7 +48,9 @@ describe('Young-Burgess (unchecked)', () => {
     expect(youngBurgess({ sacroiliac: 'intact' })).toBeUndefined()
   })
 
-  // YB-6: "A symphyseal diastasis over 2.5 cm points to APC II or worse." Exactly 2.5 cm is not over.
+  // YB-6: "In the original description by Young et al., a 2.5-cm diastasis at the symphysis pubis
+  // was the criterion to differentiate APC I from APC II injuries" (Alton and Gee 2014). Exactly
+  // 2.5 cm is not over.
   test('diastasis at 2.5 cm', () => {
     expect(diastasisOver(25)).toBe(false)
     expect(diastasisOver(26)).toBe(true)
@@ -72,7 +81,12 @@ describe('Letournel (unchecked)', () => {
   test('one column line', () => {
     expect(letournel({ lines: 'neither', posteriorWall: true })).toBe('PW')
     expect(letournel({ lines: 'posterior' })).toBe('PC')
-    expect(letournel({ lines: 'posterior', posteriorWall: true })).toBe('PCPW')
+    // A broken ilioischial line with a wall fragment was always PCPW. Durkee: in an isolated
+    // posterior wall fracture "disruption of the ilioischial line may or may not be present as an
+    // extension of the comminuted posterior wall component", so the column is asked about.
+    expect(letournel({ lines: 'posterior', posteriorWall: true })).toBeUndefined()
+    expect(letournel({ lines: 'posterior', posteriorWall: true, posteriorColumn: true })).toBe('PCPW')
+    expect(letournel({ lines: 'posterior', posteriorWall: true, posteriorColumn: false })).toBe('PW')
     expect(letournel({ lines: 'anterior', anteriorPart: 'wall' })).toBe('AW')
     expect(letournel({ lines: 'anterior', anteriorPart: 'column' })).toBe('AC')
   })

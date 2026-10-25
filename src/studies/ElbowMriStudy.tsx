@@ -15,7 +15,7 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  */
 
 const MASON_DOI = '10.1002/bjs.18004217203'
-const BROBERG_DOI = '10.2106/00004623-198668050-00005'
+const BROBERG_DOI = '10.1097/00003086-198703000-00017'
 const REGAN_DOI = '10.2106/00004623-198971090-00011'
 const RING_DOI = '10.2106/00004623-200204000-00006'
 const ODRISCOLL_PLRI_DOI = '10.2106/00004623-199173030-00015'
@@ -34,7 +34,7 @@ const ROSENBERG_TUNNEL_DOI = '10.2214/ajr.164.2.7839980'
 
 const MASON = <Cite doi={MASON_DOI}>Mason, Br J Surg 1954</Cite>
 const JOHNSTON = 'Johnston, Ulster Med J 1962'
-const BROBERG = <Cite doi={BROBERG_DOI}>Broberg and Morrey, J Bone Joint Surg Am 1986</Cite>
+const BROBERG = <Cite doi={BROBERG_DOI}>Broberg and Morrey, Clin Orthop Relat Res 1987</Cite>
 const REGAN = <Cite doi={REGAN_DOI}>Regan and Morrey, J Bone Joint Surg Am 1989</Cite>
 const RING = <Cite doi={RING_DOI}>Ring et al., J Bone Joint Surg Am 2002</Cite>
 const ODRISCOLL_PLRI = <Cite doi={ODRISCOLL_PLRI_DOI}>O'Driscoll et al., J Bone Joint Surg Am 1991</Cite>
@@ -54,7 +54,7 @@ const ROSENBERG_TUNNEL = <Cite doi={ROSENBERG_TUNNEL_DOI}>Rosenberg et al., AJR 
 const references: LessonReference[] = [
   { citation: 'Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132.', doi: MASON_DOI },
   { citation: 'Johnston GW. A follow-up of one hundred cases of fracture of the head of the radius with a review of the literature. Ulster Med J. 1962;31(1):51-56.' },
-  { citation: 'Broberg MA, Morrey BF. Results of delayed excision of the radial head after fracture. J Bone Joint Surg Am. 1986;68(5):669-674.', doi: BROBERG_DOI },
+  { citation: 'Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119.', doi: BROBERG_DOI },
   { citation: 'Regan W, Morrey B. Fractures of the coronoid process of the ulna. J Bone Joint Surg Am. 1989;71(9):1348-1354.', doi: REGAN_DOI },
   { citation: 'Ring D, Jupiter JB, Zilberfarb J. Posterior dislocation of the elbow with fractures of the radial head and coronoid. J Bone Joint Surg Am. 2002;84(4):547-551.', doi: RING_DOI },
   { citation: "O'Driscoll SW, Bell DF, Morrey BF. Posterolateral rotatory instability of the elbow. J Bone Joint Surg Am. 1991;73(3):440-446.", doi: ODRISCOLL_PLRI_DOI },
@@ -817,7 +817,7 @@ const study: StudyDefinition = {
   slug: 'elbow-mri',
   name: 'Elbow MRI',
   lede: 'Read an elbow MRI for pain or after an injury: a fixed search pattern through the bones, collateral ligaments, tendons, nerves and bursae, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Mason and Johnston type wording, the Broberg-Morrey 2 mm and 30% thresholds, the structures failing at each stage after a dislocation, the anterior bundle as the main valgus restraint, the nerve signs and the anconeus epitrochlearis) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Broberg-Morrey 2 mm and 30% thresholds, the structures failing at each stage after a dislocation, the anterior bundle as the main valgus restraint, the nerve signs and the anconeus epitrochlearis) have still not been checked against their papers. Not yet reviewed by the site author.',
   references,
   report: {
     steps,

@@ -21,6 +21,7 @@ const YOUNG_DOI = '10.1148/radiology.160.2.3726125'
 const BURGESS_DOI = '10.1097/00005373-199007000-00015'
 const DALAL_DOI = '10.1097/00005373-198907000-00012'
 const KHURANA_DOI = '10.1148/rg.345135113'
+const ALTON_DOI = '10.1007/s11999-014-3693-8'
 const DENIS_DOI = '10.1097/00003086-198802000-00010'
 const ROY_CAMILLE_DOI = '10.1097/00007632-198511000-00011'
 const LYDERS_DOI = '10.3174/ajnr.A1666'
@@ -34,6 +35,7 @@ const YOUNG = <Cite doi={YOUNG_DOI}>Young et al., Radiology 1986</Cite>
 const BURGESS = <Cite doi={BURGESS_DOI}>Burgess et al., J Trauma 1990</Cite>
 const DALAL = <Cite doi={DALAL_DOI}>Dalal et al., J Trauma 1989</Cite>
 const KHURANA = <Cite doi={KHURANA_DOI}>Khurana et al., RadioGraphics 2014</Cite>
+const ALTON = <Cite doi={ALTON_DOI}>Alton and Gee, Clin Orthop Relat Res 2014</Cite>
 const DENIS = <Cite doi={DENIS_DOI}>Denis et al., Clin Orthop Relat Res 1988</Cite>
 const ROY_CAMILLE = <Cite doi={ROY_CAMILLE_DOI}>Roy-Camille et al., Spine 1985</Cite>
 const LYDERS = <Cite doi={LYDERS_DOI}>Lyders et al., AJNR 2010</Cite>
@@ -48,6 +50,7 @@ const references: LessonReference[] = [
   { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: BURGESS_DOI },
   { citation: 'Dalal SA, Burgess AR, Siegel JH, Young JW, Brumback RJ, Poka A, Dunham CM, Gens D, Bathon H. Pelvic fracture in multiple trauma: classification by mechanism is key to pattern of organ injury, resuscitative requirements, and outcome. J Trauma. 1989;29(7):981-1002.', doi: DALAL_DOI },
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: KHURANA_DOI },
+  { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: ALTON_DOI },
   { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.', doi: DENIS_DOI },
   { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.', doi: ROY_CAMILLE_DOI },
   { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.', doi: LYDERS_DOI },
@@ -65,7 +68,7 @@ const ybTable = (
   <div className="table-wrap">
     <table className="ref-table">
       <thead>
-        <tr><th>Type</th><th>Injury</th><th>Usually</th></tr>
+        <tr><th>Type</th><th>Injury</th><th>Usually taught as</th></tr>
       </thead>
       <tbody>
         {ybTypes.map((t) => (
@@ -114,7 +117,8 @@ const learn: LearnSection[] = [
         <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear pushes one hemipelvis upwards. The Young-Burgess calculator on this site applies the same rules.</p>
         {ybTable}
         <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}).</p>
-        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse. A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}).</p>
+        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}).</p>
+        <p>Stability is not part of the Young-Burgess system itself; the last column is how the types are usually taught alongside it ({ALTON}).</p>
         <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: needs rose with the grade of AP compression, and APC III needed the most fluid in the first 24 hours ({DALAL}).</p>
       </>
     ),
@@ -139,7 +143,7 @@ const learn: LearnSection[] = [
         {ltTable(ltElementary)}
         <p>and five associated types, made of two or more elementary ones:</p>
         {ltTable(ltAssociated)}
-        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}). With both lines broken and the obturator ring intact, the fracture is transverse. A both-column fracture leaves no joint surface on the intact ilium; the spike of ilium left behind is the spur sign. The Letournel calculator on this site asks the same questions.</p>
+        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}). With both lines broken and the obturator ring intact, the fracture is transverse; with the ring broken too, a fracture running up into the iliac wing is both-column and one that does not is T-shaped ({DURKEE}). A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof ({DURKEE}). An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line ({DURKEE}). The Letournel calculator on this site asks the same questions.</p>
         <p>Then describe the femoral head (concentric, subluxed or dislocated), intra-articular fragments, marginal impaction and the articular gap or step. These descriptors are this site's checklist.</p>
       </>
     ),
@@ -616,7 +620,7 @@ const study: StudyDefinition = {
       question: 'A pelvic CT after a side impact shows compression of the right sacral ala and horizontal fractures of the right pubic rami. What is the Young-Burgess type?',
       options: ['LC I', 'LC II', 'APC I', 'Vertical shear'],
       answer: 0,
-      explanation: <p>LC I is sacral compression on the side of impact with transverse (horizontal) pubic rami fractures; LC II adds an iliac wing fracture ({YOUNG}).</p>,
+      explanation: <p>LC I is sacral compression on the side of impact with transverse (horizontal) pubic rami fractures; LC II breaks the posterior ring on that side through the ilium (a crescent fracture-dislocation) or the sacroiliac joint ({YOUNG}; {ALTON}).</p>,
     },
     {
       id: 'lc3',
@@ -637,7 +641,7 @@ const study: StudyDefinition = {
       question: 'What symphyseal diastasis usually means the pelvic floor ligaments are torn (APC II or worse)?',
       options: ['Over 1 cm', 'Over 2.5 cm', 'Over 5 cm', 'Any widening'],
       answer: 1,
-      explanation: <p>A diastasis over 2.5 cm usually means APC II or worse ({KHURANA}).</p>,
+      explanation: <p>A diastasis over 2.5 cm usually means APC II or worse; 2.5 cm separated APC I from APC II in Young's original description ({ALTON}; {KHURANA}).</p>,
     },
     {
       id: 'l5',

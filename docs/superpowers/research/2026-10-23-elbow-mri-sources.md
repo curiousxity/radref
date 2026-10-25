@@ -212,3 +212,18 @@ Bursae, loose bodies and synovium (step 10) are descriptive, with no cited rule.
   surgery and histology (E10); the MRI definition of lateral epicondylitis, increased signal in
   the extensor tendons near the lateral epicondyle, is cited to Bredella (E11), which states it.
   No rule changed.
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Johnston 1962 (E2, the author's PDF of the PMC scan), Broberg and Morrey 1986 (E3),
+and Iannuzzi NP, Leopold SS. In brief: the Mason classification of radial head fractures. Clin
+Orthop Relat Res. 2012;470(6):1799-1802. doi:10.1007/s11999-012-2319-2 (reproduces Mason's Table 1).
+Mason 1954 itself is still unread.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| MA-1 | yes, against Mason's table as reproduced | "Type 1 Fissure or marginal fractures without displacement". Johnston: "Fissure fracture or marginal sector fracture without displacement." |
+| MA-2 | yes | "Type 2 Marginal sector fractures with displacement (Segment of the lateral border of the radial head is separated from the other quadrants, is impacted and depressed, or is tilted out of line)". |
+| MA-3 | yes | "Type 3 Comminuted fractures involving the whole head of the radius". |
+| MA-4 | yes, against Johnston | "Type IV. Fracture of the radial head associated with dislocation of the elbow." Iannuzzi: under the modified scheme "any dislocation of the elbow with a concomitant fracture of the radial head, regardless of ... the original Mason classification ... is considered a Type IV injury". |
+| MA-5, MA-6 | no: wrong paper cited | The 1986 paper (read in full) does not state 2 mm or 30%; it only uses Mason types and calls a fracture with dislocation "a type-IV fracture by Johnston". Iannuzzi credits the modification to Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017. By the author's choice the thresholds are kept, now cited to the 1987 paper, still unchecked; that paper is on the next list. |

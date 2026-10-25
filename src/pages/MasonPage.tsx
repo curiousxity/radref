@@ -32,7 +32,8 @@ const types: MasonType[] = ['I', 'II', 'III', 'IV']
 const references: LessonReference[] = [
   { citation: 'Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132.', doi: '10.1002/bjs.18004217203' },
   { citation: 'Johnston GW. A follow-up of one hundred cases of fracture of the head of the radius with a review of the literature. Ulster Med J. 1962;31(1):51-56.' },
-  { citation: 'Broberg MA, Morrey BF. Results of delayed excision of the radial head after fracture. J Bone Joint Surg Am. 1986;68(5):669-674.', doi: '10.2106/00004623-198668050-00005' },
+  { citation: 'Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119.', doi: '10.1097/00003086-198703000-00017' },
+  { citation: 'Iannuzzi NP, Leopold SS. In brief: the Mason classification of radial head fractures. Clin Orthop Relat Res. 2012;470(6):1799-1802.', doi: '10.1007/s11999-012-2319-2' },
 ]
 
 /** The value as a number, or undefined if empty or not a number. */
@@ -60,7 +61,7 @@ export function MasonPage() {
           <span className="calc-tag">Radial head</span>
         </div>
         <p>Type a radial head fracture from two questions, with copyable report text. Types I to III are Mason's own; type IV is Johnston's later addition.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, but Mason's and Johnston's papers have no abstract and Broberg and Morrey's abstract does not state the 2 mm and 30% thresholds, so the type wording and the thresholds have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
+        <p className="source-note">Unchecked draft: types I to III are checked against Mason's table as a review reproduces it (<Cite doi="10.1007/s11999-012-2319-2">Iannuzzi and Leopold, Clin Orthop Relat Res 2012</Cite>) and type IV against Johnston's own paper. The 2 mm and 30% thresholds are not yet checked: they are not in Broberg and Morrey's 1986 paper, and the review credits their 1987 paper, which is paywalled. Not yet reviewed by the site author. Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
       </section>
 
       <section className="calculator-grid">
@@ -129,10 +130,10 @@ export function MasonPage() {
             </tbody>
           </table>
         </div>
-        <p>A dislocation makes the fracture type IV, whatever the pattern. Broberg and Morrey later put numbers on types I and II: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head (<Cite doi="10.2106/00004623-198668050-00005">Broberg and Morrey, J Bone Joint Surg Am 1986</Cite>; unchecked). A fragment displaced 2 mm or more but smaller than 30% of the head falls outside those numbers.</p>
+        <p>A dislocation makes the fracture type IV, whatever the pattern. Broberg and Morrey later put numbers on types I and II: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head (<Cite doi="10.1097/00003086-198703000-00017">Broberg and Morrey, Clin Orthop Relat Res 1987</Cite>; unchecked). A fragment displaced 2 mm or more but smaller than 30% of the head falls outside those numbers.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Mason and Johnston have no abstract and the papers are paywalled, so the type wording has not yet been checked against them." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Johnston is read in full and Mason's types in the 2012 review's reproduction of his table; Broberg and Morrey 1987 is paywalled." />
     </div>
   )
 }

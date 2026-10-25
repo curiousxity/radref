@@ -392,6 +392,34 @@ Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page give
 - [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
 - [ ] No open image for a burr hole or osteomyelitis yet; both have drawings only.
 
+## Calculator papers from the author (first batch)
+
+On 2026-10-25 the author sent the first batch from `docs/PAPERS_NEEDED.md`: Johnston 1962, Broberg
+and Morrey 1986, Durkee 2006, AO Spine's thoracolumbar poster and five review papers (Kilcoyne 1990
+for Neer; the Clin Orthop Relat Res "In Brief" reviews of Mason, Mayfield, Schatzker, Young-Burgess
+and Sanders). The verdicts and quotes are in a "Second check" section at the end of each sources
+document. Where the site differed, the author chose the newer source, and these changed:
+
+- Mayfield: "perilunate dislocation" is stage III, not II; stage II is capitolunate disruption with
+  the capitate subluxed or dislocated; stage IV says the lunate dislocates volarly.
+- Sanders: displaced now means more than 2 mm (type I is 2 mm or less); comminution is four or more
+  fragments. The 1993 paper itself gave no figure.
+- Young-Burgess: LC II also covers a sacroiliac disruption (new option); combined mechanism is most
+  often LC with APC or VS; APC I is under 2.5 cm with no posterior instability. Stability stays, as
+  "usually taught as", with the review's sentence that it is not part of the system.
+- Letournel: a broken ilioischial line with a wall fragment is no longer always PCPW; the calculator
+  asks whether the column itself is separated. The iliac wing tells both-column from T-shaped.
+- AO Spine (thoracolumbar): A0 needs a process fracture; B1, B2, B3, C, N2, N3, "+", M1 and M2
+  reworded to the poster; the thoracolumbar code is written the poster's way, "C (A3; N3; M2)". The
+  poster is hosted unchanged in `public/references/` (CC BY-NC-ND 4.0) and linked from the page.
+- Mason: the 2 mm and 30% are not in the 1986 paper; they are now cited to Broberg and Morrey 1987,
+  still unchecked.
+
+- [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
+  counts any medial plateau fracture as IV. For the author.
+- [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
+- [ ] The next batch is listed in `docs/PAPERS_NEEDED.md`.
+
 ## Housekeeping
 
 - Delete the `design-update` branch and the `radref-design` worktree

@@ -7,31 +7,53 @@ file names don't matter. Tick each one off when it has been read.
 
 ## 1. Classification papers behind the calculators (most important)
 
-These define the categories the calculators give, and most have no abstract, so nothing in a
-calculator's own rules has been checked against them yet.
+These define the categories the calculators give. First batch sent 2026-10-25: what came is
+ticked, with what was checked in its place; what could not be found is marked **pending**. The
+review papers in "Next batch" below stand in for most of the pending ones.
 
-- [ ] Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089. doi:10.2106/00004623-197052060-00001 (Neer calculator)
-- [ ] Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132. doi:10.1002/bjs.18004217203 (Mason calculator)
-- [ ] Johnston GW. A follow-up of one hundred cases of fracture of the head of the radius with a review of the literature. Ulster Med J. 1962;31(1):51-56. Free scan on PubMed Central, PMC2384652 (Mason type IV)
-- [ ] Broberg MA, Morrey BF. Results of delayed excision of the radial head after fracture. J Bone Joint Surg Am. 1986;68(5):669-674. doi:10.2106/00004623-198668050-00005 (Mason: 2 mm and 30%)
-- [ ] Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241. doi:10.1016/s0363-5023(80)80007-4 (Mayfield calculator, wrist study)
-- [ ] Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468 (Herbert calculator)
-- [ ] Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3 (Palmer calculator)
-- [ ] Lichtman DM, Mack GR, MacDonald RI, Gunther SF, Wilson JN. Kienböck's disease: the role of silicone replacement arthroplasty. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011 (Lichtman calculator)
-- [ ] Lichtman DM, Alexander AH, Mack GR, Gunther SF. Kienböck's disease: update on silicone replacement arthroplasty. J Hand Surg Am. 1982;7(4):343-347. doi:10.1016/s0363-5023(82)80142-1 (who split stage III into IIIA and IIIB)
-- [ ] Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104. PMID 445923, no DOI (Schatzker calculator)
-- [ ] Markhardt BK, Gross JM, Monu JU. Schatzker classification of tibial plateau fractures: use of CT and MR imaging improves assessment. Radiographics. 2009;29(2):585-597. doi:10.1148/rg.292085078 (Schatzker IIIA and IIIB)
-- [ ] Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002. doi:10.2106/00004623-197052050-00013 (Hawkins calculator, Hawkins sign)
-- [ ] Canale ST, Kelly FB Jr. Fractures of the neck of the talus. Long-term evaluation of seventy-one cases. J Bone Joint Surg Am. 1978;60(2):143-156. doi:10.2106/00004623-197860020-00001 (Hawkins type IV)
-- [ ] Sanders R, Fortin P, DiPasquale T, Walling A. Operative treatment in 120 displaced intraarticular calcaneal fractures. Clin Orthop Relat Res. 1993;(290):87-95. doi:10.1097/00003086-199305000-00012 (Sanders calculator)
-- [ ] Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242. doi:10.1177/107110078600600504 (Lisfranc calculator)
-- [ ] Vaccaro AR, Oner C, Kepler CK, et al. AOSpine thoracolumbar spine injury classification system. Spine. 2013;38(23):2028-2037. doi:10.1097/BRS.0b013e3182a8a381 (AO Spine calculator)
-- [ ] Vaccaro AR, Koerner JD, Radcliff KE, et al. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184. doi:10.1007/s00586-015-3831-3 (AO Spine calculator)
-- [ ] Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451. doi:10.1148/radiology.160.2.3726125 (Young-Burgess calculator)
-- [ ] Burgess AR, Eastridge BJ, Young JW, et al. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856. doi:10.1097/00005373-199007000-00015 (Young-Burgess stability)
-- [ ] Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113 (Young-Burgess, pelvis study)
-- [ ] Durkee NJ, Jacobson J, Jamadar D, et al. Classification of common acetabular fractures: radiographic and CT appearances. AJR. 2006;187(4):915-925. doi:10.2214/AJR.05.1269 (Letournel calculator)
-- [ ] Scheinfeld MH, Dym AA, Spektor M, et al. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577. doi:10.1148/rg.352140098 (Letournel calculator)
+- [ ] **Pending.** Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089. doi:10.2106/00004623-197052060-00001 (checked meanwhile against Kilcoyne et al., AJR 1990, doi:10.2214/ajr.154.5.2108538, received)
+- [ ] **Pending.** Mason ML. Br J Surg. 1954;42(172):123-132. doi:10.1002/bjs.18004217203 (types checked meanwhile against Iannuzzi and Leopold, Clin Orthop Relat Res 2012, doi:10.1007/s11999-012-2319-2, received, which reproduces his table)
+- [x] Johnston GW. Ulster Med J. 1962;31(1):51-56. PMC2384652 (received; type IV confirmed)
+- [x] Broberg MA, Morrey BF. J Bone Joint Surg Am. 1986;68(5):669-674. doi:10.2106/00004623-198668050-00005 (received; it does **not** state 2 mm and 30%, see the next batch)
+- [ ] **Pending.** Mayfield JK, Johnson RP, Kilcoyne RK. J Hand Surg Am. 1980;5(3):226-241. doi:10.1016/s0363-5023(80)80007-4 (the zip sent held letters from the same issue, not the paper; checked meanwhile against Kennedy and Allan, Clin Orthop Relat Res 2012, doi:10.1007/s11999-012-2275-x, received)
+- [ ] **Pending.** Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468
+- [ ] **Pending.** Palmer AK. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3
+- [ ] **Pending.** Lichtman DM, et al. J Bone Joint Surg Am. 1977;59(7):899-908. doi:10.2106/00004623-197759070-00011
+- [ ] **Pending.** Lichtman DM, et al. J Hand Surg Am. 1982;7(4):343-347. doi:10.1016/s0363-5023(82)80142-1
+- [ ] **Pending.** Schatzker J, McBroom R, Bruce D. Clin Orthop Relat Res. 1979;(138):94-104. PMID 445923 (checked meanwhile against Zeltser and Leopold, Clin Orthop Relat Res 2013, doi:10.1007/s11999-012-2451-z, received)
+- [ ] **Pending.** Markhardt BK, Gross JM, Monu JU. Radiographics. 2009;29(2):585-597. doi:10.1148/rg.292085078
+- [ ] **Pending.** Hawkins LG. J Bone Joint Surg Am. 1970;52(5):991-1002. doi:10.2106/00004623-197052050-00013
+- [ ] **Pending.** Canale ST, Kelly FB Jr. J Bone Joint Surg Am. 1978;60(2):143-156. doi:10.2106/00004623-197860020-00001
+- [ ] **Pending.** Sanders R, et al. Clin Orthop Relat Res. 1993;(290):87-95. doi:10.1097/00003086-199305000-00012 (checked meanwhile against Jiménez-Almonte et al., Clin Orthop Relat Res 2019, doi:10.1097/CORR.0000000000000539, received)
+- [ ] **Pending.** Myerson MS, et al. Foot Ankle. 1986;6(5):225-242. doi:10.1177/107110078600600504
+- [ ] **Pending.** Vaccaro AR, et al. AOSpine thoracolumbar spine injury classification system. Spine. 2013;38(23):2028-2037. doi:10.1097/BRS.0b013e3182a8a381 (checked meanwhile against AO Spine's own thoracolumbar poster, received and now hosted on the site)
+- [ ] **Pending.** Vaccaro AR, et al. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184. doi:10.1007/s00586-015-3831-3
+- [ ] **Pending.** Young JW, et al. Radiology. 1986;160(2):445-451. doi:10.1148/radiology.160.2.3726125 (checked meanwhile against Alton and Gee, Clin Orthop Relat Res 2014, doi:10.1007/s11999-014-3693-8, received)
+- [ ] **Pending.** Burgess AR, et al. J Trauma. 1990;30(7):848-856. doi:10.1097/00005373-199007000-00015
+- [ ] **Pending.** Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113
+- [x] Durkee NJ, et al. AJR. 2006;187(4):915-925. doi:10.2214/AJR.05.1269 (received)
+- [ ] **Pending.** Scheinfeld MH, et al. RadioGraphics. 2015;35(2):555-577. doi:10.1148/rg.352140098
+
+## Next batch (asked for 2026-10-25)
+
+Mostly short "Classifications in Brief" reviews from Clin Orthop Relat Res, the same series as the
+ones that came in the first batch, which describe the original papers that could not be found.
+All DOIs checked on Crossref.
+
+- [ ] AO Spine Subaxial Cervical Spine Injury Classification System poster (free on aospine.org/classification, the companion to the thoracolumbar one)
+- [ ] Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017 (the Mason 2 mm and 30%)
+- [ ] Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-012-2454-9
+- [ ] Kennedy C, Abrams R. In brief: the Lichtman classification for Kienböck disease. Clin Orthop Relat Res. 2019;477(6):1516-1520. doi:10.1097/corr.0000000000000595 (may also settle Lichtman IIIC)
+- [ ] Alton T, Patton DJ, Gee AO. Classifications in brief: the Hawkins classification for talus fractures. Clin Orthop Relat Res. 2015;473(9):3046-3049. doi:10.1007/s11999-015-4136-x
+- [ ] Scolaro J, Ahn J, Mehta S. In brief: Lisfranc fracture dislocations. Clin Orthop Relat Res. 2011;469(7):2078-2080. doi:10.1007/s11999-010-1586-z
+- [ ] Alton TB, Gee AO. Classifications in brief: Letournel classification for acetabular fractures. Clin Orthop Relat Res. 2014;472(1):35-38. doi:10.1007/s11999-013-3375-y
+- [ ] Vu C, Gendelberg D. Classifications in brief: AO thoracolumbar classification system. Clin Orthop Relat Res. 2020;478(2):434-440. doi:10.1097/corr.0000000000001086
+- [ ] Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741. doi:10.1007/s11999-014-4033-8 (paediatric elbow study)
+- [ ] Somerson JS, Hsu JE, Gorbaty JD, Gee AO. Classifications in brief: Goutallier classification of fatty infiltration of the rotator cuff musculature. Clin Orthop Relat Res. 2016;474(5):1328-1332. doi:10.1007/s11999-015-4630-1 (shoulder study)
+- [ ] Bi AS, Verma NN. Classifications in brief: the Ellman and Snyder classifications of partial-thickness rotator cuff tears. Clin Orthop Relat Res. 2025;483(3):411-414. doi:10.1097/corr.0000000000003297 (shoulder study)
+- [ ] Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181. doi:10.1097/corr.0000000000000861 (pelvis study)
+
+Herbert and Palmer have no review in this series; they stay pending above.
 
 ## 2. Paediatric elbow study
 
@@ -140,4 +162,4 @@ calculator's own rules has been checked against them yet.
 
 - Knee cartilage grades (K10-1): the four depth grades come from the modified Noyes and Outerbridge
   scales, which the knee study does not cite yet. A source for them needs choosing first.
-- Lichtman stage IIIC: no source found at all.
+- Lichtman stage IIIC: no source found at all (the Lichtman review in the next batch may settle it).

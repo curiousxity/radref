@@ -1,12 +1,13 @@
 /**
  * Mason classification of radial head fractures (Mason, Br J Surg 1954), with Johnston's
  * type IV (Ulster Med J 1962), and the quantitative Broberg-Morrey thresholds for types I and II
- * (J Bone Joint Surg Am 1986). Shared by the Mason calculator and the elbow MRI study's bones
+ * (Clin Orthop Relat Res 1987). Shared by the Mason calculator and the elbow MRI study's bones
  * step.
  *
- * Unchecked draft: the papers are matched on PubMed, but Mason and Johnston have no abstract and
- * Broberg and Morrey's abstract does not state the thresholds, so the wording has not yet been
- * checked against them (claims MA-1 to MA-6 in
+ * Types I to III are checked against Mason's table as Iannuzzi and Leopold reproduce it (Clin
+ * Orthop Relat Res 2012) and type IV against Johnston's paper. The 2 mm and 30% thresholds are
+ * still unchecked: they are not in Broberg and Morrey's 1986 paper, which this used to cite, and
+ * the 1987 paper is paywalled (claims MA-1 to MA-6 in
  * docs/superpowers/research/2026-10-23-elbow-mri-sources.md).
  */
 

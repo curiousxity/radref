@@ -15,9 +15,11 @@ describe('Mayfield (unchecked)', () => {
   test('each stage from its structure', () => {
     // MF-1: "Stage I perilunar instability (scapholunate diastasis)" (Mayfield 1980, abstract).
     expect(mayfield({ scapholunate: true })?.stage).toBe('I')
-    // MF-2: "Stage II: the capitate dislocates from the lunate (perilunate dislocation)."
+    // MF-2: "The second stage of progression involves capitolunate joint disruption in addition
+    // to the scapholunate injury" (Kennedy and Allan 2012, reproducing Mayfield's table).
     expect(mayfield({ scapholunate: true, capitolunate: true })?.stage).toBe('II')
-    // MF-3: "Stage III: the injury extends through the lunotriquetral joint."
+    // MF-3: "The third stage of progression is perilunate dislocation ... The lunotriquetral
+    // joint is now also disrupted" (Kennedy and Allan 2012).
     expect(mayfield({ scapholunate: true, capitolunate: true, lunotriquetral: true })?.stage).toBe('III')
     // MF-4: "Lunate dislocations (stage IV PLI)" (Mayfield 1980, abstract).
     expect(mayfield({ scapholunate: true, capitolunate: true, lunotriquetral: true, lunateDislocated: true })?.stage).toBe('IV')
@@ -40,6 +42,14 @@ describe('Mayfield (unchecked)', () => {
 
   test('report sentence', () => {
     expect(mayfieldSentence(mayfield({ scapholunate: true })!)).toBe('Perilunate injury, Mayfield stage I: scapholunate disruption (scapholunate dissociation).')
+  })
+
+  // The old wording called stage II the perilunate dislocation. Kennedy and Allan's reproduction
+  // of Mayfield's table gives that name to stage III: "The third stage of progression is
+  // perilunate dislocation".
+  test('perilunate dislocation is stage III, not stage II', () => {
+    expect(mayfield({ scapholunate: true, capitolunate: true })?.description).not.toContain('perilunate dislocation')
+    expect(mayfield({ scapholunate: true, capitolunate: true, lunotriquetral: true })?.description).toMatch(/^perilunate dislocation/)
   })
 })
 

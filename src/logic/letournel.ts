@@ -5,8 +5,10 @@
  * Scheinfeld et al., RadioGraphics 2015). Shared by the Letournel calculator and the pelvis CT
  * study.
  *
- * Unchecked draft: the wording has not yet been checked against the papers (claims LT-1 to
- * LT-9 in docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md).
+ * Unchecked draft: the column lines, the transverse and T-shaped questions, the isolated
+ * posterior wall and the spur sign are checked against Durkee's full text; the rest of the
+ * wording is not yet (claims LT-1 to LT-9 in
+ * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md).
  */
 
 export type LtType = 'PW' | 'PC' | 'AW' | 'AC' | 'T' | 'PCPW' | 'TPW' | 'TS' | 'ACPHT' | 'BC'
@@ -29,7 +31,10 @@ export const ltNames: Record<LtType, string> = {
 }
 
 export const ltDescriptions: Record<LtType, string> = {
-  PW: 'a fragment of the posterior rim, with both columns intact', // LT-2
+  // LT-2, Durkee: "the iliopectineal line is not disrupted ... However, disruption of the
+  // ilioischial line may or may not be present as an extension of the comminuted posterior wall
+  // component." It said "with both columns intact".
+  PW: 'a fragment of the posterior rim, with the iliopectineal line intact; the ilioischial line may be broken by the wall fragment',
   PC: 'the ischium separated from the ilium through the greater sciatic notch, breaking the ilioischial line and the obturator ring', // LT-2
   AW: 'a fragment of the anterior rim, breaking the middle of the iliopectineal line', // LT-2
   AC: 'the anterior column separated, from the iliac crest or the anterior border down through the pubic ramus, breaking the iliopectineal line', // LT-2
@@ -51,6 +56,11 @@ export type LtLines = 'neither' | 'anterior' | 'posterior' | 'both'
 export type LtInput = {
   lines?: LtLines
   posteriorWall?: boolean
+  /**
+   * With the ilioischial line only and a posterior wall fragment: is the posterior column itself
+   * separated, or is the line broken only by the wall fragment (Durkee's isolated posterior wall)?
+   */
+  posteriorColumn?: boolean
   /** With the iliopectineal line only: the anterior wall alone, or the whole anterior column. */
   anteriorPart?: 'wall' | 'column'
   /** With both lines broken: the obturator ring broken. */
@@ -72,7 +82,9 @@ export function letournel(input: LtInput): LtType | undefined {
     case 'neither':
       return wall ? 'PW' : undefined
     case 'posterior':
-      return wall ? 'PCPW' : 'PC'
+      if (!wall) return 'PC'
+      if (input.posteriorColumn === undefined) return undefined
+      return input.posteriorColumn ? 'PCPW' : 'PW'
     case 'anterior':
       if (wall || !input.anteriorPart) return undefined
       return input.anteriorPart === 'wall' ? 'AW' : 'AC'

@@ -176,3 +176,18 @@ uses a claim, its ID is in a comment next to the chip, warning or test.
 
 1. Keep the "Unchecked draft" notes while any claim the pages use is unverified (N1-N6,
    S2-1, S3-2, and the unread parts of S2-3, S3-1, S3-3, S6-1, S10-2, S11-1 and S12-1).
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Kilcoyne RF, Shuman WP, Matsen FA 3rd, Morris M, Rockwood CA. The Neer classification
+of displaced proximal humeral fractures: spectrum of findings on plain radiographs and CT scans. AJR.
+1990;154(5):1029-1033. doi:10.2214/ajr.154.5.2108538. Neer 1970 itself is still unread.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| N1 | partly | "one fragment or part is the humeral shaft, so the simplest displaced fracture is called a 'two-part' fracture"; the figures name the anatomic neck, surgical neck and both tuberosities. The four segments are not listed as such. |
+| N2 | yes | "According to Neer, displacement of a fracture fragment by more than a centimeter or angulation of more than 45° is considered significant." |
+| N3 | partly | "Neer estimated that over 85% of proximal fractures are not displaced"; "one-part" is not named. |
+| N4 | yes | Two-part surgical neck, anatomic neck, greater and lesser tuberosity (Figs. 1-4); three-part surgical neck with greater or lesser tuberosity (Figs. 5, 6); four-part surgical neck and both tuberosities (Fig. 7). |
+| N5 | yes | "fracture-dislocations, including head-splitting fractures (Fig. 8)"; impression fractures named among the cases where plain films underestimate displacement. |
+| N6 | unchanged | The review names no other pattern; still the author's decision. |

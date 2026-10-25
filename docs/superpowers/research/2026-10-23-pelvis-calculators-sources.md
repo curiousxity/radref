@@ -81,3 +81,25 @@ What the abstracts do say:
 | LT-7 | With both lines and the obturator ring broken and joint surface on the ilium: a vertical stem through the ischiopubic part is T-shaped; an anterior fracture with a posterior hemitransverse is ACPHT (PC6, PC7). | — | no: as LT-6. Kept, unchecked. |
 | LT-8 | A posterior wall fragment beside a T-shaped, hemitransverse or both-column fracture is written as an addition, not a new type (the site's notation). | — | the site's notation; no paper to check. Kept. |
 | LT-9 | An anterior column or wall fracture with a posterior wall fragment is not one of the ten types. | no type | not checkable from the abstracts; PC7 lists the ten types and this is not one of them. Kept. |
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic
+ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342. doi:10.1007/s11999-014-3693-8 (describes
+Young 1986), and Durkee 2006 (PC6). Young 1986, Burgess 1990, Khurana 2014 and Scheinfeld 2015 are
+still unread.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| YB-1 | partly, changed | LC I: "a lateral force delivered over the posterior aspect of the pelvis ... Sacral injury severity ranges from an incomplete anterior buckle fracture to complete sacral fracture"; rami "more horizontal or coronal". LC II: "may be a sacral fracture, sacroiliac ligament and joint disruption, or crescent fracture-dislocation of the ilium". LC III: "injury to the contralateral hemipelvis in the form of anterior sacroiliac ligament disruption and sacrospinous and sacrotuberous ligament injury". Answer to the open question: LC II does cover a sacroiliac disruption; the calculator now has that option. |
+| YB-2 | yes, APC I reworded | "APC I injuries show less than 2.5 cm of symphyseal widening and have no posterior instability"; APC II "instability of the posterior pelvis resulting from disruption of the anterior sacroiliac complex"; APC III "complete posterior ligamentous disruption". |
+| YB-3 | partly | "The sacrum is driven down, relative to the iliac wing, resulting in complete ligamentous injury ... Fracture of the pelvic ring may be present instead of ligamentous injury." |
+| YB-4 | no, changed | "The majority of the complex injury patterns originally described by Young et al. resulted from LC injuries being combined with AP or VS patterns." Was "most often lateral compression with vertical shear". |
+| YB-6 | yes | "In the original description by Young et al., a 2.5-cm diastasis at the symphysis pubis was the criterion to differentiate APC I from APC II injuries". |
+| YB-8 | no: not part of the system | "The concept of stability, central to the AO/OTA classification system, is not a part of the Young and Burgess classification." By the author's choice the column stays, labelled "Usually taught as", with that sentence on the page. |
+| LT-2 (PW) | no, changed | Durkee: "the iliopectineal line is not disrupted ... However, disruption of the ilioischial line may or may not be present as an extension of the comminuted posterior wall component." The calculator gave a broken ilioischial line with a wall fragment as PCPW; it now asks whether the posterior column itself is separated. |
+| LT-2 (T) | yes | "limited to the acetabulum, without involvement of the obturator ring ... the iliopectineal and ilioischial lines are disrupted". |
+| LT-4 | yes | "the iliopectineal (or iliopubic) line represents the border of the anterior column, and the ilioischial line represents the posterior column". |
+| LT-5 | yes, wording changed | Spur sign: "posterior displacement of the sciatic buttress ... a shard of bone extending posteriorly at the level of the superior acetabulum" on radiographs and CT. The page no longer ties it to the obturator oblique view. |
+| LT-6 | yes | "Sparing of the obturator ring commonly indicates transverse, transverse with posterior wall, or isolated posterior wall fracture." |
+| LT-7 | partly, added | T-shaped: "a transverse acetabular fracture with extension inferiorly into the obturator ring"; "the superior extension of the fracture does not involve the iliac wing, which allows differentiation from the both-column fracture". The iliac wing hint is added to the page and study. ACPHT is not in Durkee (five types only). |

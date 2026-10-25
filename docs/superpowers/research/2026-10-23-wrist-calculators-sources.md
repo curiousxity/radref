@@ -117,3 +117,18 @@ is in W2 cannot be told from the abstract; unchecked.
 
 Not included: stage IIIC (coronal fracture of the lunate), from a later modification. The
 page says so. Not checked (no paper cited for it).
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Kennedy SA, Allan CH. In brief: Mayfield et al. classification: carpal dislocations
+and progressive perilunar instability. Clin Orthop Relat Res. 2012;470(4):1243-1245.
+doi:10.1007/s11999-012-2275-x, which reproduces Mayfield's table. Mayfield 1980 itself is still unread
+(the zip supplied held letters from the same J Hand Surg issue, not the paper).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| MF-1 | yes | "In the first stage of this classification, the scapholunate articulation is disrupted". |
+| MF-2 | no, changed | "The second stage of progression involves capitolunate joint disruption in addition to the scapholunate injury ... Radiographs may show capitate subluxation or dislocation." The site called stage II the perilunate dislocation; now "scapholunate and capitolunate disruption, with the capitate subluxed or dislocated" (the author chose the newer source). |
+| MF-3 | no, changed | "The third stage of progression is perilunate dislocation ... The lunotriquetral joint is now also disrupted. Radiographically, the capitate is dislocated dorsally". Stage III now carries the name perilunate dislocation. |
+| MF-4 | yes, detail added | "the radiolunate joint is disrupted and the lunate is dislocated volarly from the lunate fossa". |
+| MF-5 | yes | "four distinct stages ... The progressive ligamentous injury around the lunate was referred to as progressive perilunar instability". |

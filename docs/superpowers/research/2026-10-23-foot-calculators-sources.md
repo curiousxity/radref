@@ -103,3 +103,17 @@ results was identified as the quality of the initial reduction"); it does not gi
 - HK-6: nothing changed in code; Vallier's IIA/IIB split is not used on any page.
 - Unchanged and still unchecked: HK-1 to HK-6 and HK-8 beyond what the Canale and Kelly abstract
   states, SA-1 to SA-3 and SA-5 (including the 2 mm), MY-1 to MY-6.
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: Jiménez-Almonte JH, King JD, Luo TD, Aneja A, Moghadamian E. Classifications in brief:
+Sanders classification of intraarticular fractures of the calcaneus. Clin Orthop Relat Res.
+2019;477(2):467-471. doi:10.1097/CORR.0000000000000539. Sanders 1993 itself is still unread.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| SA-1 | yes | "based on coronal and axial CT cross-sections with the widest undersurface of the posterior facet of the talus". |
+| SA-2 | yes | Lines A and B divide the facet, "A third fracture line (line C) represents the medial edge of the posterior facet. Together, the three lines (A, B, and C from lateral to medial) divide the posterior facet into four potential fracture fragments: lateral, central, medial, and sustentaculum fragments". |
+| SA-3 | partly, changed | "Type I fractures include all minimally displaced (≤ 2 mm) articular fractures, regardless of the number of fracture lines and fragments present. The original publication by Sanders et al. did not specify the degree of articular incongruity but did recommend surgical management in patients with ≥ 3 mm". The site read 2 mm as displaced; now displaced means more than 2 mm, and type I is "minimally displaced (2 mm or less)" (the author chose the newer source). |
+| SA-4 | yes, detail changed | Type II "one primary fracture line"; type III "two primary fracture lines commonly accompanied by a central area of depression"; type IV "three or more primary fracture lines, resulting in four or more articular fragments". The comminution question said "more than four articular parts"; now "four or more articular fragments". |
+| SA-5 | yes | "IIA, IIB, and IIC, with the letter corresponding to the location of the primary fracture line"; "IIIAB, IIIAC, and IIIBC". |

@@ -114,6 +114,11 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
 - Each calculator page is a separate chunk, loaded on first navigation to its route (`lazyPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every chunk is precached and offline navigation still works.
 - Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, kept but no longer rendered: the header now draws a CSS "RR" mark). Regenerate all of them, the PNG included, together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
 - No backend calls exist anywhere in the app, so full offline precaching is safe with no stale-data concerns.
+- `public/references/` holds reference PDFs shared unchanged under their licence (so far AO
+  Spine's thoracolumbar poster, CC BY-NC-ND 4.0, linked from the AO Spine page). `pdf` is not in
+  `globPatterns`, so they need a connection, and `/^\/references\//` is in
+  `navigateFallbackDenylist`: opening one is a navigation, which the service worker would otherwise
+  answer with the React shell.
 - `jpg` is in `globPatterns` so the calvarial lesions page's scans (about 210 KB in all, in
   `public/calvarium/`) work offline; keep any new photo small and greyscale.
 - The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
@@ -428,6 +433,13 @@ Most papers are paywalled, so claims that no abstract or open full text states a
 by the author's choice, with a source note that still starts "Unchecked draft" and names
 them; the tests pin a DOI on every reference and the note's first words. What is still
 unchecked is tracked in `docs/REMAINING_TASKS.md`; it needs the full text.
+
+The author is supplying the full texts in batches (`docs/PAPERS_NEEDED.md`). The first batch, on
+2026-10-25, checked the Neer, Mason, Mayfield, Schatzker, Sanders, Young-Burgess, Letournel and
+thoracolumbar AO Spine wording, mostly against Clin Orthop Relat Res "Classifications in Brief"
+reviews of the original papers; where the site differed, the author chose the newer source
+(`docs/REMAINING_TASKS.md`, "Calculator papers from the author"). The verdicts are in a "Second
+check" section at the end of each sources document.
 
 Head and neck: the author decided (2026-10-25) that the head and neck viewers get a study each
 and no calculator, one study per region covering several exams and histories, chosen in step

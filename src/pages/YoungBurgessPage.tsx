@@ -34,7 +34,8 @@ const yesNo: { value: YesNo; label: string }[] = [
 const lateralOptions: { value: YbLateral; label: string }[] = [
   { value: 'none', label: 'None' },
   { value: 'sacral', label: 'Sacral compression or horizontal pubic rami fractures' },
-  { value: 'crescent', label: 'As above, with an iliac wing (crescent) fracture' },
+  { value: 'crescent', label: 'As above, with an iliac wing (crescent) fracture-dislocation' },
+  { value: 'sacroiliac', label: 'As above, with the sacroiliac joint disrupted on that side' },
 ]
 
 const symphysisOptions: { value: Form['symphysis']; label: string }[] = [
@@ -53,6 +54,7 @@ const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 const references: LessonReference[] = [
   { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: '10.1148/radiology.160.2.3726125' },
   { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: '10.1097/00005373-199007000-00015' },
+  { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: '10.1007/s11999-014-3693-8' },
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: '10.1148/rg.345135113' },
 ]
 
@@ -79,7 +81,7 @@ export function YoungBurgessPage() {
           <span className="calc-tag">Pelvic ring</span>
         </div>
         <p>Type a pelvic ring injury by the force that caused it, from what CT shows at the sacrum, the sacroiliac joints and the symphysis, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, but the papers are paywalled and their abstracts name only the four force patterns and the three grades, so the wording of each type, the 2.5 cm diastasis and the stability column have not yet been checked against them. Not yet reviewed by the site author. Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
+        <p className="source-note">Unchecked draft: the original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>). Not yet reviewed by the site author. Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -123,7 +125,7 @@ export function YoungBurgessPage() {
         <div className="table-wrap">
           <table className="ref-table">
             <thead>
-              <tr><th>Type</th><th>Injury</th><th>Usually</th></tr>
+              <tr><th>Type</th><th>Injury</th><th>Usually taught as</th></tr>
             </thead>
             <tbody>
               {ybTypes.map((t) => (
@@ -132,10 +134,10 @@ export function YoungBurgessPage() {
             </tbody>
           </table>
         </div>
-        <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. A symphyseal diastasis over 2.5 cm usually goes with torn pelvic floor ligaments, APC II or worse. The stability column is as usually taught with the classification; the posterior ring decides it.</p>
+        <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. In Young's original description, a symphyseal diastasis of 2.5 cm was what separated APC I from APC II. Stability is not part of the Young-Burgess system itself (Alton and Gee); the stability column is how the types are usually taught alongside it, and the posterior ring decides it.</p>
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Most of these papers are paywalled, so the type wording has been checked only where an abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review." />
     </div>
   )
 }

@@ -58,3 +58,22 @@ Notes on the set:
 | AO-10 | Subaxial modifiers: M1 posterior capsuloligamentous complex injury without complete disruption; M2 critical disc herniation; M3 stiffening or metabolic bone disease (DISH, AS, OPLL); M4 vertebral artery abnormality. Thoracolumbar modifiers: M1 indeterminate tension band injury; M2 patient-specific comorbidity. | — | partly. S1 abstract: "description of relevant patient-specific modifiers"; S2 abstract: "patient-specific modifiers". The M1–M4 definitions are not in either abstract; unchecked. |
 | AO-11 | Neurology comes from the examination, not the images (the page says so). | — | no: not in either abstract. Kept, unchecked. |
 | AO-12 | Upper cervical (C0–C2) injuries have their own AO Spine system and are not covered here. | — | no: neither abstract mentions the upper cervical spine. Kept, unchecked. |
+
+## Second check, 2026-10-25: papers supplied by the author
+
+Read in full: AO Spine Thoracolumbar Injury Classification System poster. © 2020 AO Foundation, AO
+Spine, CC BY-NC-ND 4.0 (citing Vaccaro 2013 and Kepler 2015). By the author's choice it is hosted
+unchanged at `public/references/aospine-thoracolumbar-poster.pdf` and linked from the AO Spine page.
+It covers the thoracolumbar system only; the subaxial claims (AO-6, AO-7, the subaxial AO-8 to AO-10)
+are unchanged and unchecked.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| AO-1 | yes, A0 changed | A0 "Minor, nonstructural fractures, which do not compromise the structural integrity of the spinal column such as transverse process or spinous process fractures"; the algorithm gives no fracture as "No injury". The calculator gave A0 for no fracture at all; it now asks about a process fracture. A1-A4 match ("Fracture of a single endplate without involvement of the posterior wall", etc.). |
+| AO-2 | partly, changed | B1 "Monosegmental pure osseous failure of the posterior tension band. The classical Chance fracture." B2 "Bony and/or ligamentary failure of the posterior tension band together with a Type A fracture. Type A fracture should be classified separately." B3: "Anterior structures, especially the ALL are ruptured but there is a posterior hinge". Wording updated. |
+| AO-3 | yes, reworded | "Displacement or dislocation ... Can be combined with subtypes of A or B." |
+| AO-4 | yes | The algorithm asks displacement first (C), then anterior tension band (B3), then posterior osseoligamentous (B2), then monosegmental osseous (B1), then the body. |
+| AO-5 | yes, notation changed | "Type A fracture should be classified separately"; nomenclature examples "T8-T9: C (T9: A3; N3; M2)" and "L1: A4 (N0; M1)". The thoracolumbar code now follows that form; subaxial keeps the site's own. |
+| AO-8 (TL) | yes, reworded | "N2 Radicular symptoms", "N3 Incomplete spinal cord injury or any degree of cauda equina injury". |
+| AO-9 (TL) | partly, changed | "+ Continued spinal cord compression", listed with the grades and not tied to N3. Thoracolumbar now allows "+" with any grade. |
+| AO-10 (TL) | partly, changed | M1 "an indeterminate injury to the tension band based on spinal imaging with or without MRI" (was "on imaging or examination"); M2 "a patient-specific comorbidity ... Examples ... ankylosing spondylitis or burns affecting the skin overlying the injured spine" (was "ankylosing spondylitis or DISH"). |

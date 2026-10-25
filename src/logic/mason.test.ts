@@ -3,26 +3,28 @@ import { brobergMorrey, mason, masonSentence } from './mason'
 
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-elbow-mri-sources.md.
- * The papers are matched on PubMed, but none of these claims could be checked against Mason (Br
- * J Surg 1954) or Johnston (Ulster Med J 1962), which have no abstract, or Broberg and Morrey
- * (J Bone Joint Surg Am 1986), whose abstract does not state the thresholds: the wording is
- * still from memory.
+ * Types I to III are checked against Mason's table as Iannuzzi and Leopold reproduce it (Clin
+ * Orthop Relat Res 2012), type IV against Johnston (Ulster Med J 1962). The thresholds are still
+ * unchecked: the 1986 Broberg and Morrey paper, read in full, does not state them; the review
+ * credits their 1987 paper (Clin Orthop Relat Res 1987;216:109-119).
  */
 
 const type = (input: Parameters<typeof mason>[0]) => mason(input)?.type
 
-describe('Mason types (unchecked)', () => {
+describe('Mason types', () => {
   test("Mason's three original types", () => {
-    // MA-1: "Type I is a fissure or marginal fracture without displacement."
+    // MA-1: "Type 1 Fissure or marginal fractures without displacement" (Mason's table, as
+    // Iannuzzi and Leopold 2012 reproduce it).
     expect(type({ pattern: 'undisplaced', dislocation: false })).toBe('I')
-    // MA-2: "Type II is a marginal sector fracture with displacement."
+    // MA-2: "Type 2 Marginal sector fractures with displacement".
     expect(type({ pattern: 'displaced', dislocation: false })).toBe('II')
-    // MA-3: "Type III is a comminuted fracture involving the whole head."
+    // MA-3: "Type 3 Comminuted fractures involving the whole head of the radius".
     expect(type({ pattern: 'comminuted', dislocation: false })).toBe('III')
   })
 
   test("Johnston's type IV: any radial head fracture with an elbow dislocation", () => {
-    // MA-4: "Johnston added type IV, a radial head fracture with dislocation of the elbow."
+    // MA-4: "Type IV. Fracture of the radial head associated with dislocation of the elbow"
+    // (Johnston 1962).
     for (const pattern of ['undisplaced', 'displaced', 'comminuted'] as const) {
       expect(type({ pattern, dislocation: true })).toBe('IV')
     }
