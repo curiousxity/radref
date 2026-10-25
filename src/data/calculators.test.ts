@@ -85,6 +85,11 @@ describe('registry', () => {
     expect(relatedTo('/studies/suprahyoid-neck').map((item) => item.path)).toContain('/suprahyoid-spaces')
   })
 
+  test('the larynx study links to the 3D larynx, both ways', () => {
+    expect(relatedTo('/larynx').map((item) => item.path)).toContain('/studies/larynx')
+    expect(relatedTo('/studies/larynx').map((item) => item.path)).toContain('/larynx')
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')

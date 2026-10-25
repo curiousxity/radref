@@ -367,7 +367,8 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT, suprahyoid neck CT and MRI (unchecked draft, below). Drafted from the guidelines (ankle MRI from the published
+FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI (both unchecked drafts,
+below). Drafted from the guidelines (ankle MRI from the published
 papers in its reference list) rather than from the site author's
 notes, and labelled as unreviewed drafts in their source note until the author signs
 them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
@@ -409,8 +410,12 @@ environment allowed PubMed, Crossref and Europe PMC (`eutils.ncbi.nlm.nih.gov`,
 author's choice, and a source note still starting "Unchecked draft" for the claims no abstract
 states. Its claims, with verdicts and quoted evidence, are in
 `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`. It is on the branch only
-until the author says to merge. The larynx and skull base studies follow, checked as they are
-written now that the paper databases are reachable.
+until the author says to merge. The larynx study (`/studies/larynx`: CT or MRI for a known
+cancer, CT for hoarseness) was written the same day with the databases reachable, every claim
+read in an abstract or open full text before it went in
+(`docs/superpowers/research/2026-10-25-larynx-sources.md`); its source note still starts
+"Unchecked draft" only for the AJCC eighth edition wording of the T4a cartilage criterion. Also
+on the branch only. The skull base study follows, written the same way.
 
 How it is built:
 

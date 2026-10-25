@@ -75,7 +75,11 @@ region at a time, end to end, following the ankle pilot
   `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. On the branch only until
   the author says to merge. Done once the sources check passes and the author signs it off.
 - [ ] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
-  choice, 2026-10-25). Not started.
+  choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
+  an abstract or open full text (`/studies/larynx`); spec
+  `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. On the branch only until the author
+  says to merge. Done once the T4a cartilage wording is checked against the AJCC eighth edition
+  and the author signs it off.
 - [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
   mass (the author's choice, 2026-10-25). Not started.
 - [ ] Decide whether the brachial plexus viewer gets a study.
@@ -316,6 +320,17 @@ in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`.
   the deep parotid signs (N2-5, Shin), carotid splaying (N2-7), retropharyngeal edema against
   abscess (N2-9, Hoang), the mylohyoid line (N2-12, Mardini), Lemierre (N3-1) and V3 through the
   foramen ovale (N3-3). Kept with the "Unchecked draft" note. They need the full text.
+
+### Larynx CT and MRI
+
+Written 2026-10-25 (`/studies/larynx`). Every reference was matched on PubMed and Crossref and
+every claim read before it went in; the table is
+`docs/superpowers/research/2026-10-25-larynx-sources.md`.
+
+- [ ] The T4a cartilage criterion (L2-1): Connor 2007 quotes the AJCC sixth edition ("tissues
+  beyond the larynx and/or laryngeal cartilage"); check the seventh and eighth edition wording
+  ("through the outer cortex of the thyroid cartilage"?) in the manual, then reword the source
+  note and the test that pins it.
 
 ## Housekeeping
 
