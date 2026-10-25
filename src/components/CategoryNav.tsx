@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { calculators, groupItems, matchesQuery } from '../data/calculators'
 import type { CalculatorCategory } from '../data/calculators'
@@ -17,6 +17,7 @@ export function CategoryNav({
   onNavigate: () => void
 }) {
   const location = useLocation()
+  const navRef = useRef<HTMLElement>(null)
   const [query, setQuery] = useState('')
   const trimmedQuery = query.trim()
 
@@ -30,6 +31,13 @@ export function CategoryNav({
     setQuery('')
   }, [location.pathname])
 
+  // The nav sits before the menu button in the DOM (desktop order), so on phones the opened
+  // drawer would come before the button in tab order. Move focus into it instead (WCAG 2.4.3).
+  // The nav itself takes focus, not the search box, so the phone keyboard stays closed.
+  useEffect(() => {
+    if (isOpen) navRef.current?.focus()
+  }, [isOpen])
+
   useEffect(() => {
     function handleDocumentClick(event: MouseEvent) {
       document.querySelectorAll('details.nav-dropdown[open]').forEach((el) => {
@@ -41,7 +49,13 @@ export function CategoryNav({
   }, [])
 
   return (
-    <nav id="primary-nav" className={isOpen ? 'top-nav is-open' : 'top-nav'} aria-label="Primary">
+    <nav
+      id="primary-nav"
+      ref={navRef}
+      tabIndex={-1}
+      className={isOpen ? 'top-nav is-open' : 'top-nav'}
+      aria-label="Primary"
+    >
       <div className="nav-search">
         <label className="search-field">
           <span className="metric-label">Search</span>

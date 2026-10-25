@@ -6,10 +6,6 @@ paywalled full text could confirm kept as unchecked, all by the author's choice.
 
 ## Fix soon
 
-- **Phone menu focus order (WCAG 2.4.3).** The redesign's final fix moved `CategoryNav`
-  before `.header-actions` in `src/App.tsx`, so on phones the menu drawer comes before
-  the menu button in tab order. Fix by reverting that DOM reorder and using a desktop-only
-  CSS `order` instead, or by moving focus into the drawer when it opens.
 - **Browser check of both themes**, which has not been done yet. Check light and dark on:
   home, TI-RADS, Doppler indices, one older study, ankle MRI, fifth metatarsal, one
   embedded viewer, one full-screen viewer, at 320px wide, and the header between 641 and
@@ -64,8 +60,8 @@ region at a time, end to end, following the ankle pilot
   Deployed before the check; done once it passes and the author signs it off.
 - [ ] Pelvis: pelvis CT study ("pain or injury" history) plus two calculators, Young-Burgess
   (pelvic ring) and Letournel (acetabulum). Drafted 2026-10-23 as an unchecked draft; spec
-  `docs/superpowers/specs/2026-10-23-pelvis-ct-study-design.md`. On the branch only until the
-  author says to merge. Done once the sources check passes and the author signs it off.
+  `docs/superpowers/specs/2026-10-23-pelvis-ct-study-design.md`. Deployed before the check.
+  Done once the sources check passes and the author signs it off.
 - [ ] Decide whether the head-and-neck and plexus viewers are included: otic capsule,
   ossicular chain, TMJ, skull base, suprahyoid neck, larynx, brachial plexus.
   TMJ: skipped for now (2026-10-23); it already has a 3D model.
