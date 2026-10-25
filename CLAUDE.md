@@ -413,9 +413,14 @@ states. Its claims, with verdicts and quoted evidence, are in
 until the author says to merge. The larynx study (`/studies/larynx`: CT or MRI for a known
 cancer, CT for hoarseness) was written the same day with the databases reachable, every claim
 read in an abstract or open full text before it went in
-(`docs/superpowers/research/2026-10-25-larynx-sources.md`); its source note still starts
-"Unchecked draft" only for the AJCC eighth edition wording of the T4a cartilage criterion. Also
-on the branch only. The skull base study follows, written the same way.
+(`docs/superpowers/research/2026-10-25-larynx-sources.md`); the T4a cartilage wording was checked
+later that day against Joshi's AJCC table, which differed for subglottic tumours (matched to the
+paper by the author's choice). Its source note still starts "Unchecked draft" only because the
+author has not reviewed it. Also on the branch only. The skull base study follows, written the
+same way. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+`doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
+and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
+Europe PMC API on `www.ebi.ac.uk`.
 
 How it is built:
 

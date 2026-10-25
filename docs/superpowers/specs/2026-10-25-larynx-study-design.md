@@ -43,8 +43,10 @@ The second head and neck study, after the suprahyoid neck. The author chose (202
 - The imaging T category follows Connor's AJCC tables subsite by subsite. A subglottic tumour
   gets T3 from nothing imaging shows (its T3 is cord fixation), so its paraglottic fat and inner
   cortex do not set T3.
-- Through the thyroid cartilage is T4a, as the T4a row's "laryngeal cartilage" in Connor's table
-  is read; the eighth edition's exact cartilage wording is still to check.
+- Through the thyroid cartilage is T4a for a supraglottic or glottic tumour. For a subglottic
+  tumour, any invasion of the cricoid or thyroid cartilage is T4a, as Joshi's AJCC seventh edition
+  table says (checked 2026-10-25; the author chose to match it). A cricoid question shows for
+  subglottic tumours only.
 - Cartilage signs are entered for the one cartilage most involved.
 - Node size reuses van den Brekel's rule from the suprahyoid neck study (11 mm subdigastric,
   10 mm elsewhere).

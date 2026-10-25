@@ -78,8 +78,10 @@ const tTable = (
       <tbody>
         <tr><td>Pre-epiglottic fat or postcricoid region</td><td className="vessel-name">T3</td><td>Not listed</td><td>Not listed</td></tr>
         <tr><td>Paraglottic fat</td><td className="vessel-name">T3</td><td className="vessel-name">T3</td><td>Not listed</td></tr>
-        <tr><td>Minor thyroid cartilage erosion (inner cortex)</td><td className="vessel-name">T3</td><td className="vessel-name">T3</td><td>Not listed</td></tr>
-        <tr><td>Through the cartilage, or tissues beyond the larynx (trachea, deep tongue muscles, strap muscles, thyroid, oesophagus)</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td></tr>
+        <tr><td>Minor thyroid cartilage erosion (inner cortex)</td><td className="vessel-name">T3</td><td className="vessel-name">T3</td><td className="vessel-name">T4a</td></tr>
+        <tr><td>Through the thyroid cartilage</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td></tr>
+        <tr><td>Cricoid cartilage invaded</td><td>Not listed</td><td>Not listed</td><td className="vessel-name">T4a</td></tr>
+        <tr><td>Tissues beyond the larynx (trachea, deep tongue muscles, strap muscles, thyroid, oesophagus)</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td><td className="vessel-name">T4a</td></tr>
         <tr><td>Prevertebral space, carotid artery encased, mediastinal structures</td><td className="vessel-name">T4b</td><td className="vessel-name">T4b</td><td className="vessel-name">T4b</td></tr>
       </tbody>
     </table>
@@ -119,7 +121,7 @@ const learn: LearnSection[] = [
     title: 'Step 3. Cartilage and spread beyond the larynx',
     body: (
       <>
-        <p>Imaging sets the T category through the spaces, the cartilage and the tissues around the larynx. The table gives the categories for each subsite as the AJCC tables quoted by Connor give them ({CONNOR}); the eighth edition changed the T categories of the oral cavity, skin and nasopharynx, not the larynx ({LYDIATT}). T1 and T2, and T3 from a fixed cord, rest on endoscopy.</p>
+        <p>Imaging sets the T category through the spaces, the cartilage and the tissues around the larynx. The table gives the categories for each subsite as the AJCC tables quoted by Connor ({CONNOR}) and Joshi ({JOSHI}) give them. For a supraglottic or glottic tumour, T4a needs tumour through the thyroid cartilage; for a subglottic tumour, invasion of the cricoid or thyroid cartilage is enough ({JOSHI}). The eighth edition changed the T categories of the oral cavity, skin and nasopharynx, not the larynx ({LYDIATT}). T1 and T2, and T3 from a fixed cord, rest on endoscopy.</p>
         {tTable}
         <p>On CT, Becker tested eight signs of cartilage invasion against the resected larynx. Sclerosis was the most sensitive in every cartilage but in the thyroid cartilage it was often reactive inflammation. Extralaryngeal tumour and erosion or lysis were the most specific. Tumour against non-ossified cartilage, a serpiginous contour and an obliterated marrow space were specific, though not sensitive, in the arytenoid and cricoid cartilages, and not specific in the thyroid cartilage. Blowout and bowing were not useful ({BECKER_1997}).</p>
         <p>Normal non-ossified thyroid cartilage can look like invasion: a lucent band where ossified and non-ossified cartilage meet, ossification of only one cortex, and non-ossified cartilage at the anterior commissure ({DADFAR}). On dual-energy CT, adding iodine overlay images raised the specificity for thyroid cartilage invasion from 70% to 96% with no loss of sensitivity ({KUNO_2012}).</p>
@@ -283,6 +285,10 @@ const fields = {
     { value: 'inner', label: 'Inner cortex only' },
     { value: 'through', label: 'Through the cartilage' },
   ] },
+  cricoid: { id: 'cricoid', kind: 'choice', label: 'Cricoid cartilage', showIf: (v) => subsite(v) === 'subglottic', options: [
+    { value: 'none', label: 'Not invaded' },
+    { value: 'invaded', label: 'Invaded' },
+  ] },
   beyond: { id: 'beyond', kind: 'multi', label: 'Beyond the larynx', showIf: tumourShown, options: [
     { value: 'strap', label: 'Strap muscles' },
     { value: 'thyroid-gland', label: 'Thyroid gland' },
@@ -340,10 +346,16 @@ function imagingT(values: Values): { category: 'T4b' | 'T4a' | 'T3'; because: st
   if (!tumourShown(values)) return undefined
   const t4b = chosen(values, fields.t4b)
   if (t4b.length > 0) return { category: 'T4b', because: t4b }
-  const beyond = chosen(values, fields.beyond)
-  const through = str(values, 'thyroid-depth') === 'through'
-  if (beyond.length > 0 || through) return { category: 'T4a', because: [through && 'through the thyroid cartilage', ...beyond].filter((s): s is string => Boolean(s)) }
   const site = subsite(values)
+  const beyond = chosen(values, fields.beyond)
+  const depth = str(values, 'thyroid-depth')
+  // Joshi's AJCC table: a subglottic tumour is T4a when it invades the cricoid or thyroid
+  // cartilage at all; the other subsites need tumour through the thyroid cartilage.
+  const cartilage = site === 'subglottic'
+    ? [depth === 'through' ? 'through the thyroid cartilage' : depth === 'inner' && 'thyroid cartilage', str(values, 'cricoid') === 'invaded' && 'cricoid cartilage']
+    : [depth === 'through' && 'through the thyroid cartilage']
+  const t4a = [...cartilage, ...beyond].filter((s): s is string => Boolean(s))
+  if (t4a.length > 0) return { category: 'T4a', because: t4a }
   const spaces = list(values, 'spaces')
   const because: string[] = []
   if (site === 'supraglottic' && spaces.includes('pes')) because.push('pre-epiglottic fat')
@@ -481,6 +493,7 @@ function tumourLines(values: Values): (string | false)[] {
     signal && `signal ${picked(values, fields.mriSignal)}`,
   ], ', ')}` : '')
   if (str(values, 'thyroid-depth')) out.push(`Thyroid cartilage: ${picked(values, fields.thyroidDepth)}`)
+  if (subsite(values) === 'subglottic' && str(values, 'cricoid')) out.push(`Cricoid cartilage: ${picked(values, fields.cricoid)}`)
   const beyond = [...chosen(values, fields.beyond), ...chosen(values, fields.t4b)]
   if (beyond.length > 0) out.push(`Beyond the larynx: ${beyond.join(', ')}`)
   return out
@@ -527,7 +540,7 @@ function findings(values: Values): string[] {
     out.push(`${head}${extras ? `, ${extras}` : ''}${spaces.length > 0 ? `; involving ${spaces.join(', ')}` : ''}.`)
     const t = imagingT(values)
     if (t) out.push(`Imaging features of ${t.category === 'T3' ? 'at least T3' : t.category}: ${t.because.join(', ')}.`)
-    else if (str(values, 'cartilage') === 'none' && str(values, 'thyroid-depth') === 'none') out.push('No cartilage invasion or spread beyond the larynx on imaging.')
+    else if (str(values, 'cartilage') === 'none' && str(values, 'thyroid-depth') === 'none' && str(values, 'cricoid') !== 'invaded') out.push('No cartilage invasion or spread beyond the larynx on imaging.')
     if (isMri(values) && str(values, 'mri-signal') === 'brighter' && !t) out.push('Cartilage signal brighter than the tumour, favouring inflammation over invasion.')
   }
   if (nodesAbnormal(values)) {
@@ -569,7 +582,7 @@ function warnings(values: Values): string[] {
   const out: string[] = []
   const negatives = list(values, 'impression-negatives')
   const t = imagingT(values)
-  const invaded = tumourShown(values) && (['inner', 'through'].includes(str(values, 'thyroid-depth')) || (isMri(values) && str(values, 'mri-signal') === 'like-tumour'))
+  const invaded = tumourShown(values) && (['inner', 'through'].includes(str(values, 'thyroid-depth')) || (subsite(values) === 'subglottic' && str(values, 'cricoid') === 'invaded') || (isMri(values) && str(values, 'mri-signal') === 'like-tumour'))
   if (negatives.includes('no-cartilage') && invaded) out.push('Impression says no cartilage invasion, but cartilage invasion is entered.')
   if (negatives.includes('no-extralaryngeal') && t && t.category !== 'T3') out.push('Impression says no spread beyond the larynx, but spread beyond the larynx is entered.')
   if (negatives.includes('no-nodes') && nodesAbnormal(values)) out.push('Impression says no abnormal lymph nodes, but an abnormal node is entered.')
@@ -630,7 +643,7 @@ const steps: ReportStep[] = [
         {tTable}
       </>
     ),
-    fields: [fields.cartilage, fields.ctSigns, fields.mriSignal, fields.thyroidDepth, fields.beyond, fields.t4b],
+    fields: [fields.cartilage, fields.ctSigns, fields.mriSignal, fields.thyroidDepth, fields.cricoid, fields.beyond, fields.t4b],
     derive: deriveCartilage,
   },
   {
@@ -654,7 +667,7 @@ const study: StudyDefinition = {
   slug: 'larynx',
   name: 'Larynx CT and MRI',
   lede: 'Read a CT or MRI of the larynx for a known cancer or for hoarseness: the subsite and the fat spaces, cartilage invasion on CT and MRI, the T category imaging can set, the signs of a paralysed cord and where to look for its cause, the nodes, and the report.',
-  sourceNote: 'Unchecked draft: every reference was matched on PubMed and Crossref as it was cited, and each claim was read in an abstract or open full text, but the AJCC tables come from a review quoting the sixth edition, so the exact wording of the cartilage criteria for T4a is still to check against the eighth edition manual. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference was matched on PubMed and Crossref as it was cited, and each claim was read in an abstract or open full text, the T categories in the AJCC seventh edition table in Joshi\'s review (the eighth edition did not change them). Not yet reviewed by the site author.',
   references,
   report: {
     steps,

@@ -78,8 +78,8 @@ region at a time, end to end, following the ankle pilot
   choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
   an abstract or open full text (`/studies/larynx`); spec
   `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. On the branch only until the author
-  says to merge. Done once the T4a cartilage wording is checked against the AJCC eighth edition
-  and the author signs it off.
+  says to merge. Every claim is now checked (the T4a wording on 2026-10-25, from Joshi's AJCC
+  table); done once the author signs it off.
 - [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
   mass (the author's choice, 2026-10-25). Not started.
 - [ ] Decide whether the brachial plexus viewer gets a study.
@@ -327,10 +327,13 @@ Written 2026-10-25 (`/studies/larynx`). Every reference was matched on PubMed an
 every claim read before it went in; the table is
 `docs/superpowers/research/2026-10-25-larynx-sources.md`.
 
-- [ ] The T4a cartilage criterion (L2-1): Connor 2007 quotes the AJCC sixth edition ("tissues
-  beyond the larynx and/or laryngeal cartilage"); check the seventh and eighth edition wording
-  ("through the outer cortex of the thyroid cartilage"?) in the manual, then reword the source
-  note and the test that pins it.
+- [x] The T4a cartilage criterion (L2-1), checked 2026-10-25 against Joshi's AJCC seventh edition
+  table (Table 2, read once the environment allowed `cdn.ncbi.nlm.nih.gov`; Lydiatt: the eighth
+  edition did not change the larynx T categories). Supraglottic and glottic T4a is "through the
+  thyroid cartilage", as the study had it. Subglottic T4a is "invading cricoids and/or thyroid
+  cartilage", which the study did not have; the author chose to match the paper, so a subglottic
+  tumour invading the cricoid or the thyroid cartilage (inner cortex included) is now T4a.
+- [ ] The author's review. The source note still starts "Unchecked draft" until then.
 
 ## Housekeeping
 

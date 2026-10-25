@@ -16,8 +16,8 @@ describe('larynx lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'tumour', 'cartilage', 'nodes', 'impression'])
   })
 
-  // Every reference is matched (each has a DOI), but the T4a cartilage wording rests on a review
-  // quoting the AJCC sixth edition, so the note still says "Unchecked draft".
+  // Every reference is matched (each has a DOI) and every claim read, but the site author has not
+  // reviewed the study yet, so the note still says "Unchecked draft".
   test('is marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.references).toHaveLength(15)
@@ -109,6 +109,14 @@ describe('larynx report: whole cases', () => {
     expect(impressionOf({ ...hoarse, cords: 'mass', 'tumour-side': 'Right' })).toBe('Right laryngeal mass.')
   })
 
+  test('a subglottic tumour invading the cricoid is T4a', () => {
+    const values = { ...subglottic, cartilage: 'cricoid', cricoid: 'invaded', 'thyroid-depth': 'none' }
+    expect(report(study, values).text).toContain('Cricoid cartilage: invaded')
+    expect(impressionOf(values)).toBe('Subglottic tumour.\nImaging features of T4a: cricoid cartilage.')
+    expect(report(study, { ...values, 'impression-negatives': ['no-cartilage'] }).warnings)
+      .toContain('Impression says no cartilage invasion, but cartilage invasion is entered.')
+  })
+
   test('a tumour with no cartilage or spread says so', () => {
     expect(impressionOf({ ...glottic, cartilage: 'none', 'thyroid-depth': 'none' })).toBe('Left glottic tumour.\nNo cartilage invasion or spread beyond the larynx on imaging.')
   })
@@ -125,7 +133,11 @@ describe('larynx rules', () => {
   // paraglottic space and/or minor thyroid cartilage erosion (e.g. inner cortex)"; glottic T3
   // "invades paraglottic space, and/or minor thyroid cartilage erosion"; subglottic T3 "vocal cord
   // fixation" only; T4a "tissues beyond the larynx"; T4b "prevertebral space, encases carotid
-  // artery or invades mediastinal structures".
+  // artery or invades mediastinal structures". Joshi's AJCC seventh edition table (Table 2):
+  // supraglottic and glottic T4a "Tumor invading through the thyroid cartilage"; subglottic T4a
+  // "Tumor invading cricoids and/or thyroid cartilage". The subglottic inner-cortex case used to
+  // expect no category, from Connor's table alone; Joshi's table makes it T4a (author's choice,
+  // 2026-10-25: match the paper).
   test('the T category imaging sets, by subsite', () => {
     const t = (values: Values) => chips(study, 'cartilage', values)['Imaging T']
     expect(t({ ...supraglottic, spaces: ['pes'] })).toBe('At least T3')
@@ -133,7 +145,12 @@ describe('larynx rules', () => {
     expect(t({ ...glottic, spaces: ['pes'] })).toBeUndefined()
     expect(t({ ...glottic, spaces: ['pgs'] })).toBe('At least T3')
     expect(t({ ...glottic, 'thyroid-depth': 'inner' })).toBe('At least T3')
-    expect(t({ ...subglottic, spaces: ['pgs'], 'thyroid-depth': 'inner' })).toBeUndefined()
+    expect(t({ ...subglottic, spaces: ['pgs'] })).toBeUndefined()
+    expect(t({ ...subglottic, 'thyroid-depth': 'inner' })).toBe('T4a')
+    expect(t({ ...subglottic, cricoid: 'invaded' })).toBe('T4a')
+    expect(t({ ...subglottic, cricoid: 'none', 'thyroid-depth': 'none' })).toBeUndefined()
+    // The cricoid question is for a subglottic tumour only; a hidden answer sets nothing.
+    expect(t({ ...glottic, cricoid: 'invaded' })).toBeUndefined()
     expect(t({ ...subglottic, 'thyroid-depth': 'through' })).toBe('T4a')
     expect(t({ ...glottic, beyond: ['trachea'] })).toBe('T4a')
     expect(t({ ...glottic, beyond: ['trachea'], t4b: ['carotid'] })).toBe('T4b')
