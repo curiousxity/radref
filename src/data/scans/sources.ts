@@ -46,4 +46,7 @@ export const SCAN_SOURCES = {
   revel2025: { short: 'Revel et al. 2025', doi: '10.1007/s00330-025-11910-9', licence: 'CC BY 4.0' },
   baratella2025: { short: 'Baratella et al. 2025', doi: '10.3390/tomography11030028', licence: 'CC BY 4.0' },
   teishikata2026: { short: 'Teishikata et al. 2026', doi: '10.1186/s44215-026-00280-3', licence: 'CC BY 4.0' },
+  // PI-RADS (Cannella 2026 is above, under TI-RADS)
+  zurowska2023: { short: 'Żurowska et al. 2023', doi: '10.3390/cancers15143682', licence: 'CC BY 4.0' },
+  agrotis2026: { short: 'Agrotis et al. 2026', doi: '10.1186/s13244-026-02346-w', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

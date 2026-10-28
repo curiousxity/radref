@@ -123,3 +123,14 @@ gave the clearest graded examples.
 
 Not used: Revel Fig. 2A (burned-in volumetry readouts); Revel Fig. 3C ("multilocular cyst") did not
 read clearly as a cyst once cropped.
+
+## PI-RADS calculator and prostate MRI study (`src/data/scans/pirads.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| pzT2, pzAdc, pzDce | Cannella R et al. Insights Imaging 2026;17:9 (PMC12796044) | Figs. 10A, 10B, 10D | CC BY 4.0 / by/4.0 | one PI-RADS 5 PZ lesion on three sequences |
+| tzErasedCharcoal, bphNodule | Żurowska A et al. Cancers 2023;15:3682 (PMC10378330) | Figs. 10a, 8A (panel a) | CC BY (by/4.0) / by/4.0 | panel labels below the images cropped off |
+| extraprostaticExtension | Agrotis G et al. Insights Imaging 2026;17:182 (PMC13350576) | Fig. 3A | CC BY 4.0 / by/4.0 | no arrow in the source; the caption describes the finding |
+
+No seminal vesicle invasion yet: Agrotis Fig. 5 has localiser lines across the T2 panel and did not
+show the finding clearly when cropped. Sonkaya 2026 Fig. 2 is covered in ROI overlays.
