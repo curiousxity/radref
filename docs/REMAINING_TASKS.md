@@ -392,6 +392,21 @@ Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page give
 - [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
 - [ ] No open image for a burr hole or osteomyelitis yet; both have drawings only.
 
+## Hearing loss CT page
+
+Drafted on 2026-10-28 (`/hearing-loss-ct`) in a cloud session that could not reach PubMed, PMC,
+Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
+`docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`.
+
+- [x] The four Purohit 2014 panels (CC BY 2.0, per Crossref) and eight more CC BY 4.0 panels are in
+      `public/hearing-loss/` (2026-10-28); figures and licences are listed in the sources doc.
+- [ ] No open CC BY figure with a stated licence version for the labyrinthine fistula yet.
+- [x] Claims checked on PubMed, Crossref and the open full texts (2026-10-28); the ACR Hearing Loss
+      and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
+- [ ] Five questions for the author at the end of the sources doc ("For the author"): where claims
+      differ from their papers or have no source. Nothing was reworded.
+- [ ] The author's review; then change the source note away from "Unchecked draft".
+
 ## Calculator papers from the author (first batch)
 
 On 2026-10-25 the author sent the first batch from `docs/PAPERS_NEEDED.md`: Johnston 1962, Broberg
