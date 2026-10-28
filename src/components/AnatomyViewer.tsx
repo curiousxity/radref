@@ -1,5 +1,5 @@
 /**
- * Frames one of the standalone 3D viewers in `public/anatomy/`.
+ * Frames one of the standalone 3D viewers in `public/members/anatomy/`.
  *
  * The viewers are self-contained HTML documents with their own dark palette and
  * their own renderer, so they are embedded rather than ported. `navigateFallbackDenylist`
@@ -32,7 +32,7 @@ export function AnatomyViewer({
   hint,
   emphasiseFullScreen = false,
 }: {
-  /** File name under `/anatomy/`. */
+  /** File name under `/members/anatomy/`. */
   file: string
   /** Accessible name for the frame. */
   title: string
@@ -41,8 +41,9 @@ export function AnatomyViewer({
   /** Set for viewers that scroll internally, where the embed is the worse phone experience. */
   emphasiseFullScreen?: boolean
 }) {
-  const src = `/anatomy/${file}`
-  // `anatomy/online/` is left out of the Workbox precache (vite.config.ts `globIgnores`).
+  const src = `/members/anatomy/${file}`
+  // Members files are not precached: the others are kept once opened while signed in, but
+  // `online/` is never stored (vite.config.ts `runtimeCaching`).
   const needsNetwork = file.startsWith('online/')
   const online = useOnline()
   // Offline, the frame would show the browser's own error page, so say why instead.

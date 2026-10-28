@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 import { calculators, matchesQuery, movedPaths, regionForSlug, regionGroups, regionPath, regionSlug, regions, relatedTo } from './calculators'
 
@@ -149,5 +150,30 @@ describe('registry', () => {
   test('companion calculators share a region', () => {
     const regionOf = (path: string) => calculators.find((item) => item.path === path)?.region
     expect(regionOf('/adrenal-chemical-shift')).toBe(regionOf('/adrenal-washout'))
+  })
+})
+
+describe('members pages', () => {
+  // vite.config.ts builds every membersPage import into /members/assets/, which Cloudflare Access
+  // guards. The author's decision (2026-10-28): calculators and classifications stay public.
+  const source = readFileSync(new URL('./calculators.ts', import.meta.url), 'utf8')
+
+  test('studies, 3D anatomy and protocols load as members pages; the rest stay public', () => {
+    for (const item of calculators) {
+      const line = source.split('\n').find((l) => l.includes(`path: '${item.path}'`))
+      expect(line, item.path).toBeDefined()
+      const locked = ['study', 'anatomy', 'protocol'].includes(item.kind)
+      expect(line?.includes('component: membersPage('), item.path).toBe(locked)
+      expect(line?.includes('component: lazyPage('), item.path).toBe(!locked)
+    }
+  })
+
+  test('the sign-in page only returns to a path on this site', () => {
+    const html = readFileSync(new URL('../../public/members/signin/index.html', import.meta.url), 'utf8')
+    const pattern = html.match(/if \(!(\/.+\/)\.test\(to\)\)/)?.[1]
+    expect(pattern).toBeDefined()
+    const safe = new RegExp(pattern!.slice(1, -1))
+    for (const ok of ['/', '/studies/knee-mri', '/studies/knee-mri?tab=report']) expect(safe.test(ok), ok).toBe(true)
+    for (const bad of ['//evil.example', '/\\evil.example', 'https://evil.example', 'javascript:alert(1)', '']) expect(safe.test(bad), bad).toBe(false)
   })
 })

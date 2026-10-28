@@ -89,7 +89,7 @@ Summary of the theme plumbing (details in Colour and Anatomy section):
 - Key `radref-theme` in `localStorage`, values `light` | `dark`; absent key = follow system (`prefers-color-scheme`). Every access, including the remove, is in try/catch.
 - `index.html` sets `data-theme` and the `theme-color` metas before first paint; `src/lib/theme.ts` owns it afterwards, and `src/components/ThemeToggle.tsx` is the header button.
 - The toggle has three states and cycles System → Light → Dark → System (`nextThemeChoice`). System removes the key (`clearStoredTheme`) and follows `prefers-color-scheme` live; Light and Dark store the key. Its icon shows the current choice (half-filled circle, sun, moon) and its label says the choice and what a tap does ("Theme: system. Switch to light"). It also listens for `storage` events, so another tab or a viewer changing or removing the key is followed.
-- Anatomy viewers are separate documents: each inlines the pre-paint snippet from `public/anatomy/shared/radref.css` and links that stylesheet. The embedded frame follows the site's theme.
+- Anatomy viewers are separate documents: each inlines the pre-paint snippet from `public/members/anatomy/shared/radref.css` and links that stylesheet. The embedded frame follows the site's theme.
 - The 3D viewport (`--color-viewport` and in-canvas overlays) stays dark in both themes.
 
 ## Version
@@ -101,11 +101,12 @@ anyone can tell which build a phone (or an offline install) is running.
   `package.json`, and the patch number is the count of commits on main's first-parent history
   (`appVersion` in `src/lib/version.ts`, fed by `gitCommitCount` in `vite.config.ts`), so each merge
   or push to main shows a higher number. Bump major or minor by hand when a release is worth naming,
-  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. Two builders
-  deploy main: the GitHub Action (full history, `fetch-depth: 0`) and Cloudflare's own Git build,
-  which clones shallow, so a shallow build runs `git fetch --unshallow` first. Without history, or
-  outside git, it falls back to the `package.json` version (seen live on 2026-10-28 as "1.0.0" after
-  the shallow Cloudflare build overwrote the Action's "1.0.158").
+  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. Only the
+  GitHub Action deploys main (full history, `fetch-depth: 0`). Cloudflare's own Git build, which
+  cloned shallow, was disabled on 2026-10-28 (Worker radref → Settings → Builds → "Disable builds",
+  repo still connected); a shallow build still runs `git fetch --unshallow` first. Without history,
+  or outside git, it falls back to the `package.json` version (seen live on 2026-10-28 as "1.0.0"
+  after the shallow Cloudflare build overwrote the Action's "1.0.158").
 - The build day (UTC) and short git commit are stamped in at build time by `define` in
   `vite.config.ts` (`__APP_VERSION__`, `__BUILD_DATE__`, `__BUILD_COMMIT__`, declared in
   `src/buildInfo.d.ts`). Outside a git checkout the commit falls back to `GITHUB_SHA`, then
@@ -113,12 +114,38 @@ anyone can tell which build a phone (or an offline install) is running.
 - `versionLine` in `src/lib/version.ts` formats the line; `src/lib/version.test.ts` pins it
   and checks that `package.json` carries a real number.
 
+## Members pages (Cloudflare Access)
+
+Studies, 3D anatomy and protocols are for signed-in members; calculators and classifications stay
+public (the author's decision, 2026-10-28). Everything members-only lives under `/members/`, the one
+path Cloudflare Access guards:
+
+- In the registry, those pages load with `membersPage(...)`, the rest with `lazyPage(...)`;
+  `src/data/calculators.test.ts` pins which kind uses which. A new study, anatomy or protocol page
+  must use `membersPage`.
+- `vite.config.ts` builds each `membersPage` import, and every module only members pages reach
+  (found by walking the module graph from the entry), into `dist/members/assets/`. The
+  `radref-members-split` plugin fails the build if members-only code lands in a public chunk or a
+  public chunk imports a members chunk.
+- Members static files: `public/members/anatomy/` (the viewers) and `public/members/calvarium/`.
+  The example scans in `public/scans/` stay public: several are shared with classification pages,
+  and all are open-access CC BY figures.
+- Without a session the chunk fetch is redirected to the Access login and fails, so `membersPage`
+  renders `MembersOnly` (`src/components/MembersOnly.tsx`) with a "Sign in" link to
+  `/members/signin/?to=<page>`. Access asks for the sign-in there, then
+  `public/members/signin/index.html` returns the reader to the page; it accepts only a same-site
+  path (pinned in `calculators.test.ts`).
+- Until an Access application covers `radref.hash.immo/members/*`, `/members/` is open and the site
+  behaves as before. Access is set up in the Cloudflare dashboard (Zero Trust → Access →
+  Applications → self-hosted, path `members/*`, an Allow policy with the members' emails, one-time
+  PIN login), not in this repo.
+
 ## Offline / PWA
 
 The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it can be installed to a phone home screen and used with no network connection after the first visit.
 
 - Service worker precaches all built assets (`registerType: 'autoUpdate'`) and falls back to `index.html` for client-side routes when offline.
-- Each calculator page is a separate chunk, loaded on first navigation to its route (`lazyPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every chunk is precached and offline navigation still works.
+- Each page is a separate chunk, loaded on first navigation to its route (`lazyPage` and `membersPage` in `src/data/calculators.ts`). The Workbox `globPatterns` include `**/*.js`, so every public chunk is precached and offline navigation still works. `members/**` is in `globIgnores`, since without a session those files are an Access redirect; a `runtimeCaching` rule (network first, 200s only) keeps each members file once it has been fetched while signed in, so a members page opened once works offline after that. `/members/anatomy/online/` and `/members/signin/` are left out of that rule.
 - Manifest icons live in `public/` (`pwa-192.png`, `pwa-512.png`, `maskable-512.png`, `apple-touch-icon.png`, `favicon-32.png`, `favicon-48.png`) and are generated from the "RR" logo mark (`public/logo-mark.png`, transparent cutout; `public/logo-mark-header.png`, kept but no longer rendered: the header now draws a CSS "RR" mark). Regenerate all of them, the PNG included, together if the logo changes, keeping the maskable icon's content inside the safe zone (~50% of canvas, since it also carries background padding).
 - No backend calls exist anywhere in the app, so full offline precaching is safe with no stale-data concerns.
 - `public/references/` holds reference PDFs shared unchanged under their licence (AO Spine's
@@ -126,19 +153,20 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   `globPatterns`, so they need a connection, and `/^\/references\//` is in
   `navigateFallbackDenylist`: opening one is a navigation, which the service worker would otherwise
   answer with the React shell.
-- `jpg` is in `globPatterns` so the calvarial lesions page's scans (about 210 KB, in
-  `public/calvarium/`) work offline; keep any new photo small and greyscale.
-  The example scans on the other pages (`public/scans/<page>/`, below) are precached the same way;
+- The calvarial lesions page's scans (about 210 KB, in `public/members/calvarium/`) are members
+  files, so they work offline once the page has been opened signed in; keep any new photo small and
+  greyscale.
+  The example scans on the other pages (`public/scans/<page>/`, below) are precached (`jpg` is in `globPatterns`);
   each page's set is 100 to 260 KB, about 1660 KB in all (2026-10-28). Use about 340 px for
   ultrasound, whose speckle compresses poorly.
-- The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
-  through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
-  patterns change. `woff2` is still in `globPatterns`, but no font ships any more, so it
+- The anatomy viewers' shared stylesheet, `public/members/anatomy/shared/radref.css`, is a members
+  file, cached with the first viewer opened. `woff2` is still in `globPatterns`, but no font ships any more, so it
   matches nothing; a self-hosted font added later would be precached without a config change.
-- `navigateFallbackDenylist: [/^\/anatomy\//]` is required in the Workbox config. An
+- `navigateFallbackDenylist: [/^\/members\//, ...]` is required in the Workbox config. An
   iframe load counts as a navigation, so without it the service worker answers the
   anatomy frame's request with the React shell and the viewer renders the whole app
-  inside itself. Any future standalone HTML page needs the same treatment.
+  inside itself; the sign-in page must also reach the network so Access can step in. Any future
+  standalone HTML page needs the same treatment.
 
 ## Deployment notes
 
@@ -260,7 +288,7 @@ standard report sections, correctly capitalised and punctuated:
 - PI-RADS v2.1 (zonal assessment, single lesion; logic shared in `src/logic/pirads.ts`)
 - AAST 2018 organ injury grading (spleen, liver, kidney)
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
-- Calvarial lesions (teaching page, a study in the Neuro region, at `/studies/calvarium`; `/calvarium` redirects: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
+- Calvarial lesions (teaching page, a study in the Neuro region, at `/studies/calvarium`; `/calvarium` redirects: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/members/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
 - Hearing loss on temporal bone CT (teaching page, a study in the Head and neck region, at `/studies/hearing-loss-ct`; `/hearing-loss-ct` redirects: adult SNHL findings drawn on one inner ear cutaway (`src/components/InnerEarAnatomy.tsx`, shapes in `innerEarShapes.ts`, colours `--color-ear-*`), report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
@@ -294,13 +322,13 @@ The `kind: 'anatomy'` items are interactive 3D references rather than calculator
 - Wrist (carpus, TFCC, intrinsic ligaments, extensor compartments, carpal tunnel)
 - Ankle (mortise and hindfoot, lateral/deltoid/syndesmotic ligaments, tendons)
 
-Online-only (in `public/anatomy/online/`, see below):
+Online-only (in `public/members/anatomy/online/`, see below):
 
 - TMJ, skull base foramina and cranial nerves, suprahyoid neck spaces, larynx
 - Cervical spine trauma, brachial plexus, lumbar spine, pelvis and SI joints
 - Elbow, foot
 
-All are standalone HTML documents in `public/anatomy/`, kept as their own documents rather
+All are standalone HTML documents in `public/members/anatomy/`, kept as their own documents rather
 than ported to React: each carries its own structure colours and its own renderer (all but
 the ossicular chain use three.js; that one has a hand-written software renderer on a 2D
 canvas). The React pages under `src/pages/` are thin wrappers that declare their
@@ -312,20 +340,20 @@ scrolling documents, where the embed is the worse phone experience, so
 `AnatomyViewer` promotes the full-screen link and appends the sentence saying so.
 
 All their dependencies are vendored so the PWA still works offline: three.js r128 sits
-in `public/anatomy/vendor/` with its MIT licence, and they use system fonts only (every
+in `public/members/anatomy/vendor/` with its MIT licence, and they use system fonts only (every
 Google Fonts link was removed). Keep it that way - no CDN or webfont URLs belong in
 these files. Geometry is inlined in each document; none of them fetch
 anything at runtime. The musculoskeletal bone meshes come from BodyParts3D (Database
 Center for Life Science, CC BY-SA 2.1 JP), attributed in each document.
 
-The precached anatomy files come to roughly 2.4 MB (the ankle alone is ~1 MB, still
-under Workbox's 2 MiB per-file default). Put new large viewers in `online/` (below)
-rather than growing the precache.
+The cached anatomy files come to roughly 2.4 MB (the ankle alone is ~1 MB). Since the
+members split they are not precached but kept once opened (Offline / PWA, above). Put new
+large viewers in `online/` (below), which is never stored.
 
 ### Shared style and theme
 
 Every viewer's chrome (header, panels, controls, notes) comes from one stylesheet,
-`public/anatomy/shared/radref.css`, linked as `shared/radref.css` from the top level and
+`public/members/anatomy/shared/radref.css`, linked as `shared/radref.css` from the top level and
 `../shared/radref.css` from `online/`. It holds the site palette as `--rr-*` tokens (the
 same values as the `--color-*` tokens in `src/styles.css`; change them together), the
 system sans and mono stacks, and `:where()` base styles that give buttons, selects and
@@ -352,22 +380,21 @@ sliders a 44px hit area.
   `CHROME` list may change. Where one variable served both UI and scene, the scene half
   kept the old value under a `-scene` name (e.g. `--accent-scene`), pinned in the same
   test. A new viewer must be added to `FILES` and `CHROME` in `src/anatomy.test.ts`, and to
-  the snapshot with `npm run snapshot:anatomy -- <path under public/anatomy/>`
+  the snapshot with `npm run snapshot:anatomy -- <path under public/members/anatomy/>`
   (`scripts/snapshot-anatomy-colours.mjs`), run before the viewer is restyled. The script
   only adds new files; it refuses to regenerate an existing entry, since those are the
   pre-restyle baseline.
 
 ### Online-only anatomy
 
-`public/anatomy/online/` holds viewers that are deliberately left out of the offline
-precache (`globIgnores: ['anatomy/online/**']` in `vite.config.ts`): together they are
-~8 MB, too much to push to every install. They still use the vendored three.js
+`public/members/anatomy/online/` holds viewers that are deliberately never stored for offline use (left out of the members
+`runtimeCaching` rule in `vite.config.ts`): together they are ~8 MB. They still use the vendored three.js
 (`../vendor/three.min.js`) and follow the same rules otherwise. `AnatomyViewer`
 detects the `online/` prefix on `file`: it adds a "needs an internet connection"
 sentence to the hint, and while `navigator.onLine` is false it shows an offline notice in
 place of the iframe, which would otherwise show the browser's own error page. To make one available offline again, move it up a directory
 and drop the prefix from its page's `file`. They still fall under
-`navigateFallbackDenylist`, since the pattern covers all of `/anatomy/`.
+`navigateFallbackDenylist`, since the pattern covers all of `/members/`.
 
 ## Example scans
 

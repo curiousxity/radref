@@ -92,11 +92,11 @@ describe('site stylesheet', () => {
   })
 })
 
-// public/anatomy/shared/radref.css repeats the site palette as --rr-* tokens for the anatomy
+// public/members/anatomy/shared/radref.css repeats the site palette as --rr-* tokens for the anatomy
 // viewers (its header comment says to change them together). Light is on :root, dark on
 // [data-theme="dark"], as here.
 describe('anatomy stylesheet tokens', () => {
-  const rr = readFileSync(new URL('../public/anatomy/shared/radref.css', import.meta.url), 'utf8')
+  const rr = readFileSync(new URL('../public/members/anatomy/shared/radref.css', import.meta.url), 'utf8')
   const RR_ROOT = /:root\s*\{[^}]*\}/
   const RR_DARK = /\[data-theme="dark"\]\s*\{[^}]*\}/
 

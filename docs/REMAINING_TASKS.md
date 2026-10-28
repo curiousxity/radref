@@ -8,11 +8,12 @@ by the author's choice).
 
 ## Pending (recorded 2026-10-28)
 
-- **One Cloudflare builder too many.** Every push to main is built twice: by the GitHub
-  Action (`.github/workflows/deploy.yml`: lint, test, build, deploy) and by Cloudflare's own
-  Git build ("Workers Builds: radref"). Keep the Action; disconnect Git in the Cloudflare
-  dashboard under Workers → radref → Settings → Build. Needs the author signed in to
-  Cloudflare.
+- **Members sign-in: Cloudflare Access still to set up.** The code puts studies, 3D anatomy and
+  protocols under `/members/` (see CLAUDE.md, "Members pages"); until an Access application
+  guards `radref.hash.immo/members/*` they stay open. The Worker's Access tab says Zero Trust must
+  be set up for the account first; that is the author's to do.
+- Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
+  "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
 - **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by
   region since 2026-10-28. Choices made without the author:
   - a 13th region, "General", for pages with no body part (contrast pages, IR

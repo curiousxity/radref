@@ -2,7 +2,7 @@ import { AnatomyViewer } from './AnatomyViewer'
 
 /**
  * The shell every Anatomy reference shares: a header, one framed viewer from
- * `public/anatomy/`, and a short note on what the model is worth turning over
+ * `public/members/anatomy/`, and a short note on what the model is worth turning over
  * for. The pages carry no logic of their own, so they declare their content
  * here rather than each repeating the markup.
  */
@@ -23,7 +23,7 @@ export function AnatomyReferencePage({
   intro: string
   /** Provenance and the limits of the geometry. */
   sourceNote: string
-  /** File name under `/anatomy/`. */
+  /** File name under `/members/anatomy/`. */
   file: string
   /** Accessible name for the frame. */
   viewerTitle: string

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Signing in · Rad Ref</title>
+    <!--
+      Cloudflare Access guards /members/*, so a reader only reaches this page once signed in.
+      It sends them back to the page they came from (?to=), which now loads. Only a same-site
+      path is accepted, so the link cannot be used to redirect anywhere else.
+    -->
+    <script>
+      var to = new URLSearchParams(location.search).get('to') || '/'
+      if (!/^\/(?![\/\\])[^\\]*$/.test(to)) to = '/'
+      location.replace(to)
+    </script>
+    <style>
+      body { margin: 0; padding: 2rem 1rem; font-family: system-ui, sans-serif; background: #fbfbfa; color: #111415; }
+      @media (prefers-color-scheme: dark) { body { background: #0b0d0e; color: #e6e8e9; } }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <p>Signed in. <a href="/">Back to Rad Ref</a></p>
+  </body>
+</html>
