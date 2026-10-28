@@ -97,8 +97,13 @@ Summary of the theme plumbing (details in Colour and Anatomy section):
 Every page ends with a footer line such as "Version 1.0.0 · built 2026-10-23 · 9cc2037", so
 anyone can tell which build a phone (or an offline install) is running.
 
-- The number is `version` in `package.json` (and `package-lock.json`); bump it by hand when a
-  release is worth naming, with `npm version <x.y.z> --no-git-tag-version`.
+- The number goes up by itself with every deploy: major and minor come from `version` in
+  `package.json`, and the patch number is the count of commits on main's first-parent history
+  (`appVersion` in `src/lib/version.ts`, fed by `gitCommitCount` in `vite.config.ts`), so each merge
+  or push to main shows a higher number. Bump major or minor by hand when a release is worth naming,
+  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. The deploy
+  checks out the full history (`fetch-depth: 0`); a shallow clone or a build outside git falls back to
+  the `package.json` version.
 - The build day (UTC) and short git commit are stamped in at build time by `define` in
   `vite.config.ts` (`__APP_VERSION__`, `__BUILD_DATE__`, `__BUILD_COMMIT__`, declared in
   `src/buildInfo.d.ts`). Outside a git checkout the commit falls back to `GITHUB_SHA`, then
