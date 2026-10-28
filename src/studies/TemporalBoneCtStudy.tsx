@@ -1,5 +1,8 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { hearingLossScans } from '../data/scans/hearingLoss'
+import { temporalBoneScans } from '../data/scans/temporalBone'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -1038,6 +1041,7 @@ const learn: LearnSection[] = [
         <div className="lesson-step">
           <h4>Step 1. External auditory canal (EAC)</h4>
           <p>Patent? Soft tissue? Bone erosion of the canal walls (think necrotizing otitis externa or EAC cholesteatoma)? Congenital narrowing or atresia?</p>
+          <ScanFigures images={[temporalBoneScans.exostoses]} />
         </div>
 
         <div className="lesson-step">
@@ -1117,12 +1121,14 @@ const learn: LearnSection[] = [
           <li><strong>Congenital cholesteatoma:</strong> a smooth round mass behind an intact eardrum in a child, typically anterior mesotympanum, no history of otitis.</li>
         </ul>
         <p>Report extent, each ossicle, and every FLOATS item. When CT is uncertain (opacified postoperative ear, or an opaque middle ear without erosion), the answer is <strong>non-echo-planar diffusion-weighted MRI</strong>: cholesteatoma is bright on DWI. In the meta-analysis by Lingam and Bassett (Otol Neurotol 2017), pooled sensitivity was 0.91 and specificity 0.92 across 26 studies, and it is now widely used instead of second-look surgery. The Baráth AJNR review covers the MRI protocol.</p>
+        <ScanFigures images={[temporalBoneScans.atticCholesteatoma, temporalBoneScans.lateralCanalFistula, temporalBoneScans.cholesteatomaDwi]} />
 
         <h4>Chronic otitis media without cholesteatoma</h4>
         <p>Mucosal thickening, fluid, tympanosclerosis (calcified plaques in the eardrum or around the ossicles, which fix them), and ossicular erosion can all occur without cholesteatoma. If there is no mass-like tissue and no scutum erosion, say "no CT evidence of cholesteatoma; DWI MRI if clinically suspected."</p>
 
         <h4>Acute mastoiditis and its complications</h4>
         <p>Fluid in the mastoid alone is common and often meaningless (it is present in many head CTs). Mastoiditis becomes surgical when the air-cell <strong>septa dissolve</strong> (coalescent mastoiditis). Then look outward for: subperiosteal abscess (lateral), Bezold abscess (through the mastoid tip into the neck), sigmoid sinus thrombosis and epidural abscess (posterior, needs contrast), and labyrinthitis or petrous apicitis (medial). Say "recommend contrast-enhanced CT or MRI" when you see coalescence.</p>
+        <ScanFigures images={[temporalBoneScans.coalescentMastoiditis]} />
 
         <h4>Otosclerosis</h4>
         <p>Abnormal spongy bone replacing the normally dense otic capsule. Two patterns:</p>
@@ -1131,16 +1137,20 @@ const learn: LearnSection[] = [
           <li><strong>Retrofenestral (cochlear):</strong> a lucent halo around the cochlea ("double ring"). Causes sensorineural loss.</li>
         </ul>
         <p>The Symons/Fanning grading, validated by Lee et al. (AJNR 2009) with excellent reader agreement: grade 1 fenestral only; grade 2 patchy cochlear disease (2A basal turn, 2B middle/apical turns, 2C both); grade 3 diffuse confluent cochlear involvement. Grade matters because cochlear disease affects surgical options.</p>
+        <ScanFigures images={[hearingLossScans.fenestral, hearingLossScans.cochlear]} />
 
         <h4>Superior semicircular canal dehiscence (SSCD)</h4>
         <p>Missing bone over the top of the superior canal, so sound and pressure move the inner ear fluid abnormally (vertigo with loud sounds, hearing your own eyeballs move). Call it only on thin-section Pöschl and Stenvers reformats, for the reason explained above. Report length of the gap and whether it is under the arcuate eminence or at the superior petrosal sinus.</p>
+        <ScanFigures images={[hearingLossScans.scd]} />
 
         <h4>Congenital inner ear malformations (pediatric sensorineural loss, cochlear implant work-up)</h4>
         <p>Use the Sennaroglu classification, because surgeons use it. From most to least severe: Michel (no inner ear), cochlear aplasia, common cavity (cochlea and vestibule are one cyst), incomplete partition type I (cochlea and vestibule both cystic, no modiolus, no enlarged aqueduct), cochlear hypoplasia, incomplete partition type II (the classic Mondini: 1.5 turns with a cystic apex, mildly dilated vestibule, <strong>enlarged vestibular aqueduct</strong>).</p>
         <p>Enlarged vestibular aqueduct is the most common CT-visible cause of pediatric sensorineural loss. Vijayasekaran et al. (AJNR 2007) measured normal children and set the cutoff: midpoint width ≥1.0 mm or opercular width ≥2.0 mm is enlarged. Also report the IAC (a defective fundus or absent canal means a possible absent cochlear nerve, which needs MRI). The Joshi RadioGraphics article walks through all of this with pictures.</p>
+        <ScanFigures images={[hearingLossScans.eva, temporalBoneScans.incompletePartition2]} />
 
         <h4>Trauma</h4>
         <p>Stop using "longitudinal vs transverse" as the main descriptor. Two independent studies showed it predicts complications poorly: Ishman and Friedland (Laryngoscope 2004) found CSF leak was 9.8 times more common when the fracture involved the petrous bone, and Little and Kesser (Arch Otolaryngol 2006) found otic capsule–violating fractures carried 5× the facial nerve injury, 25× the sensorineural loss and 8× the CSF otorrhea of otic capsule–sparing fractures. So the first line of your report is: <strong>otic capsule sparing or violating.</strong> Then: fracture through the facial canal (which segment), ossicular dislocation (incudostapedial is most common; incudomalleolar separation looks like the ice cream fallen off the cone), carotid canal involvement (recommend CTA), tegmen breach (CSF leak risk), hemotympanum, and any pneumocephalus or pneumolabyrinth (air inside the inner ear means a window fracture or otic capsule fracture).</p>
+        <ScanFigures images={[hearingLossScans.fracture, hearingLossScans.pneumolabyrinth]} />
 
         <h4>Vascular variants and "do not biopsy" masses</h4>
         <ul className="plain-list">
@@ -1149,9 +1159,11 @@ const learn: LearnSection[] = [
           <li><strong>Persistent stapedial artery:</strong> absent foramen spinosum plus an enlarged tympanic facial canal.</li>
           <li><strong>Paraganglioma (glomus tympanicum):</strong> a soft-tissue mass on the promontory with an intact jugular plate. If the bone between jugular foramen and middle ear is eroded with a moth-eaten (permeative) margin, it is a glomus jugulotympanicum; recommend MRI.</li>
         </ul>
+        <ScanFigures images={[temporalBoneScans.jugularBulb, temporalBoneScans.aberrantCarotid]} />
 
         <h4>Petrous apex</h4>
         <p>Razek and Huang (RadioGraphics 2012) organize it well. The commonest "lesion" is not a lesion: asymmetric pneumatization (fatty marrow on one side looks bright on T1 MRI) or trapped fluid in an aerated apex. Real lesions: cholesterol granuloma (expansile, smooth margins, T1 and T2 bright on MRI), epidermoid/cholesteatoma (expansile, DWI bright), petrous apicitis (air cells opacified with erosive margins, in a septic patient), and tumors (chondrosarcoma, chordoma, metastasis).</p>
+        <ScanFigures images={[temporalBoneScans.cholesterolGranuloma]} />
 
         <h4>Necrotizing (malignant) otitis externa</h4>
         <p>Soft tissue in the EAC that erodes the canal floor and spreads to the skull base in an elderly diabetic or immunocompromised patient. On CT, look for bone erosion around the EAC, the stylomastoid foramen and the temporomandibular joint region. Say so and recommend MRI to map the skull base marrow.</p>
@@ -1163,6 +1175,7 @@ const learn: LearnSection[] = [
           <li><strong>Ossicular prostheses</strong> (PORP, TORP): bright metal or ceramic. Report whether it is in line between the eardrum/malleus and the stapes or oval window, or displaced.</li>
           <li><strong>Cochlear implant:</strong> electrode should spiral inside the cochlea in the basal turn onward. Report tip fold-over (electrode curls back on itself, seen on axial) or extracochlear position.</li>
         </ul>
+        <ScanFigures images={[temporalBoneScans.canalWallDown]} />
       </>
     ),
   },

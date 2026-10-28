@@ -3,11 +3,13 @@ import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonCaveat, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { CC_BY, HEARING_LOSS_SOURCES, hearingLossImages } from '../data/hearingLossImages'
-import type { HearingLossImage } from '../data/hearingLossImages'
+import { ScanFigures } from '../components/ScanFigures'
+import { hearingLossScans } from '../data/scans/hearingLoss'
+import { SCAN_SOURCES } from '../data/scans/sources'
+import type { ScanImage } from '../data/scans/types'
 
 const DOI = {
-  purohit: HEARING_LOSS_SOURCES.purohit.doi,
+  purohit: SCAN_SOURCES.purohit2014.doi,
   verbist: '10.1007/s13244-011-0134-z',
   lee: '10.3174/ajnr.A1558',
   vijay: '10.3174/ajnr.A0495',
@@ -261,7 +263,7 @@ type Finding = {
   aka?: string
   badge: { label: string; tone: 'good' | 'accent' | 'warn' }
   figure: ReactNode
-  images?: HearingLossImage[]
+  images?: ScanImage[]
   look: ReactNode
   report: ReactNode
 }
@@ -276,7 +278,7 @@ const bone: Finding[] = [
     name: 'Fenestral otosclerosis',
     badge: COMMON,
     figure: <FenestralFigure />,
-    images: [hearingLossImages.fenestral],
+    images: [hearingLossScans.fenestral],
     look: <>A lucent spot in the bone just in front of the oval window, at the fissula ante fenestram. Foci as small as 1 mm can be seen on thin-section CT. Look at both ears: otosclerosis is bilateral in about 85% (<Cite doi={DOI.purohit}>Purohit</Cite>).</>,
     report: <>Fenestral only is grade 1 (<Cite doi={DOI.lee}>Lee et al.</Cite>). Say whether the oval or round window is narrowed or closed.</>,
   },
@@ -285,7 +287,7 @@ const bone: Finding[] = [
     aka: 'retrofenestral otosclerosis',
     badge: COMMON,
     figure: <CochlearFigure />,
-    images: [hearingLossImages.cochlear],
+    images: [hearingLossScans.cochlear],
     look: <>A lucent ring around the cochlea inside its dense capsule, the "double ring". It rarely happens without a fenestral focus, so check the oval window too. It is often symmetric on both sides (<Cite doi={DOI.purohit}>Purohit</Cite>).</>,
     report: <>This is the form that causes the sensorineural part of the loss. Grade it: 2A basal turn, 2B middle or apical turns, 2C both, 3 diffuse confluent (<Cite doi={DOI.lee}>Lee et al.</Cite>). CT can miss it in the late sclerotic phase, when the bone outline looks normal (<Cite doi={DOI.purohit}>Purohit</Cite>).</>,
   },
@@ -293,7 +295,7 @@ const bone: Finding[] = [
     name: 'Cochlear cleft',
     badge: VARIANT,
     figure: <CleftFigure />,
-    images: [hearingLossImages.cochlearCleft],
+    images: [hearingLossScans.cochlearCleft],
     look: <>A thin curved lucency beside the cochlea. It is seen mainly in children and becomes less common with age (<Cite doi={DOI.purohit}>Purohit</Cite>).</>,
     report: <>Do not call it otosclerosis. A cleft is thin and curved; an otosclerotic focus is a rounder spot or a ring.</>,
   },
@@ -301,7 +303,7 @@ const bone: Finding[] = [
     name: 'Paget disease',
     badge: OTHER,
     figure: <PagetFigure />,
-    images: [hearingLossImages.paget],
+    images: [hearingLossScans.paget],
     look: <>Older adults. It can demineralise the otic capsule and, rarely, mimic cochlear otosclerosis (<Cite doi={DOI.purohit}>Purohit</Cite>).</>,
     report: <>Look at the rest of the skull: Paget disease involves other bones, which tells it apart. Osteogenesis imperfecta is the other mimic, also with other bones involved.</>,
   },
@@ -309,7 +311,7 @@ const bone: Finding[] = [
     name: 'Fibrous dysplasia',
     badge: OTHER,
     figure: <FibrousDysplasiaFigure />,
-    images: [hearingLossImages.fibrousDysplasia],
+    images: [hearingLossScans.fibrousDysplasia],
     look: <>Expanded bone with a smooth "ground-glass" look in the temporal bone. The otic capsule itself is usually spared.</>,
     report: <>Say whether it narrows the external or internal auditory canal (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
   },
@@ -320,7 +322,7 @@ const inside: Finding[] = [
     name: 'Labyrinthitis ossificans',
     badge: URGENT,
     figure: <OssificansFigure />,
-    images: [hearingLossImages.labyrinthitisOssificans],
+    images: [hearingLossScans.labyrinthitisOssificans],
     look: <>The normally fluid-filled cochlea or canals fill with new bone, partly or completely, usually after meningitis or other inner ear infection (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
     report: <>Say which turns are filled and whether the <strong>basal turn</strong> is open. This decides whether a cochlear implant can go in normally. If the CT looks normal but this is suspected, early fibrous change shows on MRI as loss of the normal fluid signal (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
   },
@@ -328,7 +330,7 @@ const inside: Finding[] = [
     name: 'Pneumolabyrinth',
     badge: URGENT,
     figure: <PneumolabyrinthFigure />,
-    images: [hearingLossImages.pneumolabyrinth],
+    images: [hearingLossScans.pneumolabyrinth],
     look: <>Dots of air inside the vestibule or cochlea, where there should only be fluid. Usually after trauma or ear surgery.</>,
     report: <>It means the inner ear has been opened (a perilymph leak). Tell the clinician directly (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
   },
@@ -336,7 +338,7 @@ const inside: Finding[] = [
     name: 'Enlarged vestibular aqueduct',
     badge: OTHER,
     figure: <EvaFigure />,
-    images: [hearingLossImages.eva],
+    images: [hearingLossScans.eva],
     look: <>The channel running back from the vestibule is wide. It is enlarged if the midpoint is 1.0 mm or more, or the opening (operculum) is 2.0 mm or more (<Cite doi={DOI.vijay}>Vijayasekaran</Cite>).</>,
     report: <>Mostly found in children, but it is worth measuring in adults too. Give both measurements.</>,
   },
@@ -347,7 +349,7 @@ const erosion: Finding[] = [
     name: 'Otic capsule–violating fracture',
     badge: URGENT,
     figure: <FractureFigure />,
-    images: [hearingLossImages.fracture],
+    images: [hearingLossScans.fracture],
     look: <>A fracture line that crosses the cochlea, vestibule or canals rather than going around them.</>,
     report: <>Lead with "otic capsule sparing" or "violating". Violating fractures had 25 times the sensorineural hearing loss, 5 times the facial nerve injury and 8 times the CSF leak of sparing ones (<Cite doi={DOI.little}>Little and Kesser</Cite>).</>,
   },
@@ -363,7 +365,7 @@ const erosion: Finding[] = [
     name: 'Endolymphatic sac tumour',
     badge: URGENT,
     figure: <ElstFigure />,
-    images: [hearingLossImages.elst],
+    images: [hearingLossScans.elst],
     look: <>A destructive mass behind the internal auditory canal (retrolabyrinthine), with calcified specks inside on CT (<Cite doi={DOI.mukherji}>Mukherji et al.</Cite>).</>,
     report: <>Recommend MRI. Think of von Hippel–Lindau disease, especially if it is on both sides.</>,
   },
@@ -374,7 +376,7 @@ const canal: Finding[] = [
     name: 'Widened internal auditory canal',
     badge: URGENT,
     figure: <WideIacFigure />,
-    images: [hearingLossImages.iac],
+    images: [hearingLossScans.iac],
     look: <>One canal clearly wider or more flared than the other. Always compare the two sides.</>,
     report: <>Suggests a mass in the canal, most often a vestibular schwannoma. Recommend MRI with contrast, which is the test for this (<Cite doi={DOI.verbist}>Verbist</Cite>). A normal CT does not exclude a small schwannoma.</>,
   },
@@ -382,7 +384,7 @@ const canal: Finding[] = [
     name: 'Superior canal dehiscence',
     badge: OTHER,
     figure: <DehiscenceFigure />,
-    images: [hearingLossImages.scd],
+    images: [hearingLossScans.scd],
     look: <>No bone covering the top of the superior semicircular canal. Check on coronal or Pöschl reformats (<Cite doi={DOI.belden}>Belden et al.</Cite>).</>,
     report: <>It typically gives sound- or pressure-induced vertigo and a conductive-type loss rather than pure sensorineural loss. Mention it if you see it.</>,
   },
@@ -420,24 +422,10 @@ const ossificansFindings = 'Bony obliteration of the [basal / middle / apical] t
 
 const ossificansImpression = 'Labyrinthitis ossificans, [right / left]. The basal turn is [patent / partly obstructed / obstructed], which is relevant to cochlear implant planning'
 
-function Photo({ image }: { image: HearingLossImage }) {
-  const source = HEARING_LOSS_SOURCES[image.source]
-  if (!image.src) return null
-  return (
-    <figure className="cv-photo">
-      <img src={image.src} alt={image.alt} loading="lazy" />
-      <figcaption>
-        {image.caption} From <Cite doi={source.doi}>{source.short}</Cite>, {image.figure}, cropped ({source.licence}).
-      </figcaption>
-    </figure>
-  )
-}
-
 function FindingCards({ findings }: { findings: Finding[] }) {
   return (
     <div className="fm-cards">
       {findings.map((finding) => {
-        const ready = (finding.images ?? []).filter((image) => image.src)
         return (
           <article key={finding.name} className="fm-card">
             <figure className="fm-figure">{finding.figure}</figure>
@@ -452,11 +440,7 @@ function FindingCards({ findings }: { findings: Finding[] }) {
               <dt>Report it</dt>
               <dd>{finding.report}</dd>
             </dl>
-            {ready.length > 0 && (
-              <div className="cv-photos">
-                {ready.map((image) => <Photo key={image.src} image={image} />)}
-              </div>
-            )}
+            {finding.images && <ScanFigures images={finding.images} />}
           </article>
         )
       })}
@@ -478,7 +462,7 @@ export function HearingLossCtPage() {
           </p>
           <p className="source-note">
             Unchecked draft, written on 2026-10-28 without access to PubMed, and not yet reviewed by the site author. The drawings are schematics,
-            not to scale. The scans are panels from open-access figures published under {CC_BY} licences, credited under each card.
+            not to scale. The scans are panels from open-access figures published under CC BY licences, credited under each card.
           </p>
         </div>
       </section>

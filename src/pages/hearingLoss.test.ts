@@ -1,41 +1,7 @@
-import { existsSync, readFileSync, statSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
-import { HEARING_LOSS_SOURCES, hearingLossImages } from '../data/hearingLossImages'
-import type { HearingLossImage } from '../data/hearingLossImages'
 
-const publicDir = new URL('../../public/', import.meta.url)
-const images: HearingLossImage[] = Object.values(hearingLossImages)
-
-// The scans are cropped from open-access figures published under CC BY, which allows reuse and
-// adaptation with credit; non-commercial or no-derivatives licences would not. An entry without
-// `src` is a planned slot the page skips.
-describe('hearing loss CT page images', () => {
-  const ready = images.filter((image) => image.src)
-
-  test.each(ready.map((image) => [image.src, image] as const))('%s exists and is small', (src) => {
-    const file = new URL(String(src).slice(1), publicDir)
-    expect(existsSync(file)).toBe(true)
-    expect(statSync(file).size).toBeLessThan(40_000)
-  })
-
-  test('every image, planned or added, credits a CC BY source figure', () => {
-    for (const image of images) {
-      expect(Object.keys(HEARING_LOSS_SOURCES)).toContain(image.source)
-      expect(HEARING_LOSS_SOURCES[image.source].licence).toMatch(/^CC BY \d\.\d$/)
-      expect(image.figure).toMatch(/^Fig\. \d+[a-zA-Z]?$/)
-      expect(image.alt.length).toBeGreaterThan(20)
-      if (image.src) expect(image.src).toMatch(/^\/hearing-loss\/[a-z0-9-]+\.jpg$/)
-    }
-  })
-
-  test('the page uses each image and shows the CC BY notice', () => {
-    const page = readFileSync(new URL('./HearingLossCtPage.tsx', import.meta.url), 'utf8')
-    for (const key of Object.keys(hearingLossImages)) expect(page).toContain(`hearingLossImages.${key}`)
-    expect(page).toContain('{CC_BY}')
-    expect(page).toContain('cropped ({source.licence})')
-  })
-})
-
+// The scans are checked with every other page's in src/data/scans/scans.test.ts.
 describe('hearing loss CT page rules', () => {
   const page = readFileSync(new URL('./HearingLossCtPage.tsx', import.meta.url), 'utf8')
 
