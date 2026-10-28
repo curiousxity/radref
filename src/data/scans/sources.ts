@@ -33,4 +33,9 @@ export const SCAN_SOURCES = {
   // TI-RADS. Pires's licence statement gives no version; its licence URL and Crossref give 4.0.
   pires2022: { short: 'Pires et al. 2022', doi: '10.1590/0100-3984.2020.0141', licence: 'CC BY 4.0' },
   cannella2026: { short: 'Cannella et al. 2026', doi: '10.1186/s13244-025-02154-8', licence: 'CC BY 4.0' },
+  // Schatzker
+  ristow2025: { short: 'Ristow et al. 2025', doi: '10.1007/s00330-025-11522-3', licence: 'CC BY 4.0' },
+  deng2021a: { short: 'Deng et al. 2021a', doi: '10.1186/s13018-021-02265-0', licence: 'CC BY 4.0' },
+  biz2025: { short: 'Biz et al. 2025', doi: '10.3390/diagnostics15111304', licence: 'CC BY 4.0' },
+  deng2021b: { short: 'Deng et al. 2021b', doi: '10.1186/s13018-021-02660-7', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

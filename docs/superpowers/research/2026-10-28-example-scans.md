@@ -85,3 +85,18 @@ inline graphics, so a figure's own image is its `<graphic>`, not the first `xlin
 
 No spongiform example with ACR scoring: Sereke 2021 and de Macedo 2018 label theirs "TI-RADS 2" under
 other systems.
+
+## Schatzker page (`src/data/scans/schatzker.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| type1 | Ristow I et al. Eur Radiol 2025;35:5418-5426 (PMC12350421) | Fig. 2E (CT column) | CC BY 4.0 / by/4.0 | nondisplaced; small CT tile |
+| type2 | Deng X et al. J Orthop Surg Res 2021;16:117 (PMC7868009) | Fig. 2c | CC BY 4.0 / by/4.0 | trimmed to leave out a burned-in protocol label |
+| type5 | Biz C et al. Diagnostics 2025;15:1304 (PMC12155256) | Fig. 3E | CC BY (by/4.0) / by/4.0 | |
+| type6 | Deng X et al. J Orthop Surg Res 2021;16:502 (PMC8365966) | Fig. 2 (AP) | CC BY 4.0 / by/4.0 | cropped to the knee |
+| type6Ct | Ristow 2025 | Fig. 3E (CT column) | as above | |
+
+No types III or IV yet. Ristow Fig. 2D is labelled type III but is nondisplaced, which would mislead
+for a type defined by depression; Pizzoli 2023 Fig. 5 and Liu 2023 Fig. 3 show radiographs and 3D
+renders that do not show the type clearly; PlaTiF (Sci Data 2026) Fig. 4 has one radiograph per type
+but each is about 100 px wide.
