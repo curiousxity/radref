@@ -8,10 +8,9 @@ by the author's choice).
 
 ## Pending (recorded 2026-10-28)
 
-- **Members sign-in: Cloudflare Access still to set up.** The code puts studies, 3D anatomy and
-  protocols under `/members/` (see CLAUDE.md, "Members pages"); until an Access application
-  guards `radref.hash.immo/members/*` they stay open. The Worker's Access tab says Zero Trust must
-  be set up for the account first; that is the author's to do.
+- Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
+  email is on the "Rad Ref members" policy so far; add each member's email there (Zero Trust →
+  Access controls → Policies), or switch to "Emails ending in" for a whole domain.
 - Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
   "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
 - **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by

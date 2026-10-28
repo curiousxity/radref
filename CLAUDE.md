@@ -135,10 +135,11 @@ path Cloudflare Access guards:
   `/members/signin/?to=<page>`. Access asks for the sign-in there, then
   `public/members/signin/index.html` returns the reader to the page; it accepts only a same-site
   path (pinned in `calculators.test.ts`).
-- Until an Access application covers `radref.hash.immo/members/*`, `/members/` is open and the site
-  behaves as before. Access is set up in the Cloudflare dashboard (Zero Trust → Access →
-  Applications → self-hosted, path `members/*`, an Allow policy with the members' emails, one-time
-  PIN login), not in this repo.
+- Access is set up in the Cloudflare dashboard, not in this repo (2026-10-28): Zero Trust Free,
+  team `nameless-smoke-e0f8`; self-hosted application "radref" on `radref.hash.immo/members/*`;
+  Allow policy "Rad Ref members" listing members' emails; login by email one-time PIN (or a
+  Cloudflare account). To add a member, add their email to that policy. Without an Access
+  application `/members/` would be open.
 
 ## Offline / PWA
 
