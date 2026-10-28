@@ -18,10 +18,11 @@ const DOI = {
   barath: '10.3174/ajnr.A2052',
   mukherji: '10.1148/radiology.202.3.9051037',
   young: '10.1148/rg.345130083',
+  acr: '10.1016/j.jacr.2018.09.020',
 }
 
 const references: LessonReference[] = [
-  { citation: 'Purohit B, Hermans R, Op de beeck K. Imaging in otosclerosis: a pictorial review. Insights Imaging. 2014;5(2):245-252. Open access (CC BY).', doi: DOI.purohit },
+  { citation: 'Purohit B, Hermans R, Op de beeck K. Imaging in otosclerosis: a pictorial review. Insights Imaging. 2014;5(2):245-252. Open access (CC BY 2.0).', doi: DOI.purohit },
   { citation: 'Verbist BM. Imaging of sensorineural hearing loss: a pattern-based approach to diseases of the inner ear and cerebellopontine angle. Insights Imaging. 2012;3(2):139-153. Open access.', doi: DOI.verbist },
   { citation: 'Lee TC, Aviv RI, Chen JM, Nedzelski JM, Fox AJ, Symons SP. CT grading of otosclerosis. AJNR Am J Neuroradiol. 2009;30(7):1435-1439.', doi: DOI.lee },
   { citation: 'Vijayasekaran S, Halsted MJ, Boston M, et al. When is the vestibular aqueduct enlarged? A statistical analysis of the normative distribution of vestibular aqueduct size. AJNR Am J Neuroradiol. 2007;28(6):1133-1138.', doi: DOI.vijay },
@@ -32,6 +33,7 @@ const references: LessonReference[] = [
   { citation: 'Mukherji SK, Albernaz VS, Lo WW, et al. Papillary endolymphatic sac tumors: CT, MR imaging, and angiographic findings in 20 patients. Radiology. 1997;202(3):801-808.', doi: DOI.mukherji },
   { citation: 'Belden CJ, Weg N, Minor LB, Zinreich SJ. CT evaluation of bone dehiscence of the superior semicircular canal as a cause of sound- and/or pressure-induced vertigo. Radiology. 2003;226(2):337-343.', doi: DOI.belden },
   { citation: 'Young JY, Ryan ME, Young NM. Preoperative imaging of sensorineural hearing loss in pediatric candidates for cochlear implantation. RadioGraphics. 2014;34(5):E133-E149.', doi: DOI.young },
+  { citation: 'Expert Panel on Neurologic Imaging: Sharma A, Kirsch CFE, Aulino JM, et al. ACR Appropriateness Criteria Hearing Loss and/or Vertigo. J Am Coll Radiol. 2018;15(11S):S321-S331.', doi: DOI.acr },
 ]
 
 /*
@@ -307,6 +309,7 @@ const bone: Finding[] = [
     name: 'Fibrous dysplasia',
     badge: OTHER,
     figure: <FibrousDysplasiaFigure />,
+    images: [hearingLossImages.fibrousDysplasia],
     look: <>Expanded bone with a smooth "ground-glass" look in the temporal bone. The otic capsule itself is usually spared.</>,
     report: <>Say whether it narrows the external or internal auditory canal (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
   },
@@ -317,6 +320,7 @@ const inside: Finding[] = [
     name: 'Labyrinthitis ossificans',
     badge: URGENT,
     figure: <OssificansFigure />,
+    images: [hearingLossImages.labyrinthitisOssificans],
     look: <>The normally fluid-filled cochlea or canals fill with new bone, partly or completely, usually after meningitis or other inner ear infection (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
     report: <>Say which turns are filled and whether the <strong>basal turn</strong> is open. This decides whether a cochlear implant can go in normally. If the CT looks normal but this is suspected, early fibrous change shows on MRI as loss of the normal fluid signal (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
   },
@@ -324,6 +328,7 @@ const inside: Finding[] = [
     name: 'Pneumolabyrinth',
     badge: URGENT,
     figure: <PneumolabyrinthFigure />,
+    images: [hearingLossImages.pneumolabyrinth],
     look: <>Dots of air inside the vestibule or cochlea, where there should only be fluid. Usually after trauma or ear surgery.</>,
     report: <>It means the inner ear has been opened (a perilymph leak). Tell the clinician directly (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
   },
@@ -331,6 +336,7 @@ const inside: Finding[] = [
     name: 'Enlarged vestibular aqueduct',
     badge: OTHER,
     figure: <EvaFigure />,
+    images: [hearingLossImages.eva],
     look: <>The channel running back from the vestibule is wide. It is enlarged if the midpoint is 1.0 mm or more, or the opening (operculum) is 2.0 mm or more (<Cite doi={DOI.vijay}>Vijayasekaran</Cite>).</>,
     report: <>Mostly found in children, but it is worth measuring in adults too. Give both measurements.</>,
   },
@@ -341,6 +347,7 @@ const erosion: Finding[] = [
     name: 'Otic capsule–violating fracture',
     badge: URGENT,
     figure: <FractureFigure />,
+    images: [hearingLossImages.fracture],
     look: <>A fracture line that crosses the cochlea, vestibule or canals rather than going around them.</>,
     report: <>Lead with "otic capsule sparing" or "violating". Violating fractures had 25 times the sensorineural hearing loss, 5 times the facial nerve injury and 8 times the CSF leak of sparing ones (<Cite doi={DOI.little}>Little and Kesser</Cite>).</>,
   },
@@ -356,6 +363,7 @@ const erosion: Finding[] = [
     name: 'Endolymphatic sac tumour',
     badge: URGENT,
     figure: <ElstFigure />,
+    images: [hearingLossImages.elst],
     look: <>A destructive mass behind the internal auditory canal (retrolabyrinthine), with calcified specks inside on CT (<Cite doi={DOI.mukherji}>Mukherji et al.</Cite>).</>,
     report: <>Recommend MRI. Think of von Hippel–Lindau disease, especially if it is on both sides.</>,
   },
@@ -366,6 +374,7 @@ const canal: Finding[] = [
     name: 'Widened internal auditory canal',
     badge: URGENT,
     figure: <WideIacFigure />,
+    images: [hearingLossImages.iac],
     look: <>One canal clearly wider or more flared than the other. Always compare the two sides.</>,
     report: <>Suggests a mass in the canal, most often a vestibular schwannoma. Recommend MRI with contrast, which is the test for this (<Cite doi={DOI.verbist}>Verbist</Cite>). A normal CT does not exclude a small schwannoma.</>,
   },
@@ -373,6 +382,7 @@ const canal: Finding[] = [
     name: 'Superior canal dehiscence',
     badge: OTHER,
     figure: <DehiscenceFigure />,
+    images: [hearingLossImages.scd],
     look: <>No bone covering the top of the superior semicircular canal. Check on coronal or Pöschl reformats (<Cite doi={DOI.belden}>Belden et al.</Cite>).</>,
     report: <>It typically gives sound- or pressure-induced vertigo and a conductive-type loss rather than pure sensorineural loss. Mention it if you see it.</>,
   },
@@ -417,7 +427,7 @@ function Photo({ image }: { image: HearingLossImage }) {
     <figure className="cv-photo">
       <img src={image.src} alt={image.alt} loading="lazy" />
       <figcaption>
-        {image.caption} From <Cite doi={source.doi}>{source.short}</Cite>, {image.figure}, cropped ({CC_BY}).
+        {image.caption} From <Cite doi={source.doi}>{source.short}</Cite>, {image.figure}, cropped ({source.licence}).
       </figcaption>
     </figure>
   )
@@ -463,12 +473,12 @@ export function HearingLossCtPage() {
           <h2>Hearing loss on temporal bone CT</h2>
           <p>
             Adult sensorineural hearing loss: what to look for. In adults the cause is usually acquired, not congenital. MRI with contrast is the
-            usual first test for one-sided loss, to look for a vestibular schwannoma. CT is mostly asked for to look for otosclerosis, after trauma,
-            for bone disease, or to plan a cochlear implant.
+            usual first test for one-sided loss, to look for a vestibular schwannoma (<Cite doi={DOI.acr}>ACR</Cite>). CT is mostly asked for to look
+            for otosclerosis, after trauma, for bone disease, or to plan a cochlear implant.
           </p>
           <p className="source-note">
             Unchecked draft, written on 2026-10-28 without access to PubMed, and not yet reviewed by the site author. The drawings are schematics,
-            not to scale. Scans from open-access figures published under {CC_BY} will be added under each card, credited to their source.
+            not to scale. The scans are panels from open-access figures published under {CC_BY} licences, credited under each card.
           </p>
         </div>
       </section>

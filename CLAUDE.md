@@ -119,8 +119,8 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   `globPatterns`, so they need a connection, and `/^\/references\//` is in
   `navigateFallbackDenylist`: opening one is a navigation, which the service worker would otherwise
   answer with the React shell.
-- `jpg` is in `globPatterns` so the calvarial lesions page's scans (about 210 KB in all, in
-  `public/calvarium/`) work offline; keep any new photo small and greyscale.
+- `jpg` is in `globPatterns` so the calvarial lesions and hearing loss pages' scans (about 210 KB and 230 KB, in
+  `public/calvarium/` and `public/hearing-loss/`) work offline; keep any new photo small and greyscale.
 - The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
   through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
   patterns change. `woff2` is still in `globPatterns`, but no font ships any more, so it
@@ -251,7 +251,7 @@ standard report sections, correctly capitalised and punctuated:
 - AAST 2018 organ injury grading (spleen, liver, kidney)
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
 - Calvarial lesions (quick reference in the Neuro category: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
-- Hearing loss on temporal bone CT (quick reference in the Neuro category: adult SNHL findings with schematic inline SVG axial views, report wording, cochlear implant checklist; scan slots in `src/data/hearingLossImages.ts` filled only once the CC BY files are in `public/hearing-loss/`, checked by `src/pages/hearingLoss.test.ts`; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
+- Hearing loss on temporal bone CT (quick reference in the Neuro category: adult SNHL findings with schematic inline SVG axial views, report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/hearingLossImages.ts`, files in `public/hearing-loss/`, checked by `src/pages/hearingLoss.test.ts`; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)

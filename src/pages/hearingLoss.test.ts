@@ -6,9 +6,9 @@ import type { HearingLossImage } from '../data/hearingLossImages'
 const publicDir = new URL('../../public/', import.meta.url)
 const images: HearingLossImage[] = Object.values(hearingLossImages)
 
-// The scans are to be cropped from open-access figures published under CC BY (Purohit et al.,
-// Insights Imaging 2014), which allows reuse with credit. None was downloadable from the cloud
-// session that drafted the page, so an entry without `src` is a planned slot the page skips.
+// The scans are cropped from open-access figures published under CC BY, which allows reuse and
+// adaptation with credit; non-commercial or no-derivatives licences would not. An entry without
+// `src` is a planned slot the page skips.
 describe('hearing loss CT page images', () => {
   const ready = images.filter((image) => image.src)
 
@@ -21,8 +21,8 @@ describe('hearing loss CT page images', () => {
   test('every image, planned or added, credits a CC BY source figure', () => {
     for (const image of images) {
       expect(Object.keys(HEARING_LOSS_SOURCES)).toContain(image.source)
-      expect(HEARING_LOSS_SOURCES[image.source].licence).toMatch(/^CC BY/)
-      expect(image.figure).toMatch(/^Fig\. \d+[a-z]?$/)
+      expect(HEARING_LOSS_SOURCES[image.source].licence).toMatch(/^CC BY \d\.\d$/)
+      expect(image.figure).toMatch(/^Fig\. \d+[a-zA-Z]?$/)
       expect(image.alt.length).toBeGreaterThan(20)
       if (image.src) expect(image.src).toMatch(/^\/hearing-loss\/[a-z0-9-]+\.jpg$/)
     }
@@ -32,6 +32,7 @@ describe('hearing loss CT page images', () => {
     const page = readFileSync(new URL('./HearingLossCtPage.tsx', import.meta.url), 'utf8')
     for (const key of Object.keys(hearingLossImages)) expect(page).toContain(`hearingLossImages.${key}`)
     expect(page).toContain('{CC_BY}')
+    expect(page).toContain('cropped ({source.licence})')
   })
 })
 

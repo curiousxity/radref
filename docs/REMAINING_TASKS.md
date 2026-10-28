@@ -398,14 +398,13 @@ Drafted on 2026-10-28 (`/hearing-loss-ct`) in a cloud session that could not rea
 Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
 `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`.
 
-- [ ] Download the four Purohit 2014 panels named in the sources doc (Europe PMC
-      supplementary-files API, as for the calvarium), confirm the CC BY version, crop one panel
-      each, greyscale, under 40 KB, save to `public/hearing-loss/<slot>.jpg`, and set `src` and
-      the panel letter in `src/data/hearingLossImages.ts`. Update `HEARING_LOSS_SOURCES.purohit`
-      licence to the exact version.
-- [ ] Find CC BY scans for the other slots listed at the end of the sources doc.
-- [ ] Check every claim marked unchecked or part on PubMed; fix or cite (the ACR hearing loss
-      criteria for the header; Young 2014 or another paper for the implant checklist).
+- [x] The four Purohit 2014 panels (CC BY 2.0, per Crossref) and eight more CC BY 4.0 panels are in
+      `public/hearing-loss/` (2026-10-28); figures and licences are listed in the sources doc.
+- [ ] No open CC BY figure with a stated licence version for the labyrinthine fistula yet.
+- [x] Claims checked on PubMed, Crossref and the open full texts (2026-10-28); the ACR Hearing Loss
+      and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
+- [ ] Five questions for the author at the end of the sources doc ("For the author"): where claims
+      differ from their papers or have no source. Nothing was reworded.
 - [ ] The author's review; then change the source note away from "Unchecked draft".
 
 ## Calculator papers from the author (first batch)
