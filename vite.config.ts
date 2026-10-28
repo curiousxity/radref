@@ -3,8 +3,24 @@ import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { appVersion } from './src/lib/version.ts'
 
 const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }
+
+/**
+ * Commits on HEAD's first-parent history: one per merge or push to main. Null outside a git
+ * checkout. A shallow clone would undercount, so it also returns null there; the deploy checks out
+ * the full history (fetch-depth: 0 in .github/workflows/deploy.yml).
+ */
+function gitCommitCount(): number | null {
+  try {
+    const run = (cmd: string) => execSync(cmd, { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+    if (run('git rev-parse --is-shallow-repository') === 'true') return null
+    return Number(run('git rev-list --count --first-parent HEAD'))
+  } catch {
+    return null
+  }
+}
 
 /** Short commit for the footer; empty outside a git checkout rather than failing the build. */
 function gitCommit(): string {
@@ -19,7 +35,7 @@ function gitCommit(): string {
 export default defineConfig({
   // The footer's version line (src/lib/version.ts); declared in src/buildInfo.d.ts.
   define: {
-    __APP_VERSION__: JSON.stringify(version),
+    __APP_VERSION__: JSON.stringify(appVersion(version, gitCommitCount())),
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
     __BUILD_COMMIT__: JSON.stringify(gitCommit()),
   },
