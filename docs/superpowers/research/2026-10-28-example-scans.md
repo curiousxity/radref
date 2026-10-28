@@ -32,3 +32,21 @@ How each image is chosen and made:
 Not used: Wintges 2024 Fig. 2 (radiocapitellar lines told apart only by colour, and inverted);
 Topalis 2021 (Cureus, no licence version in the article or Crossref); Li and Zhang 2025
 ("reproduced with permission from Elsevier").
+
+## Renal mass study and Bosniak page (`src/data/scans/renalMass.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| bosniak1 | Ćulap S et al. Diagnostics 2025;15:1326 (PMC12154464) | Fig. 2B | CC BY (by/4.0) / by/4.0 | the paper's case later turned malignant; the caption says so |
+| bosniak2 | Dev R et al. Cureus 2024;16:e59956 (PMC11161908) | Fig. 2C | "CC-BY 4.0" / none | |
+| bosniak2f | Dev 2024 | Fig. 3C | as above | |
+| bosniak4 | Xu Z et al. Front Oncol 2026;16:1755717 (PMC13318590) | Fig. 2B | CC BY, license_ref by/4.0 / by/4.0 | coronal, nodule arrowed |
+| angiomyolipoma | Ahmed A et al. Cureus 2024;16:e55410 (PMC10985555) | Fig. 1B | "CC-BY 4.0" / none | |
+| clearCell | Bellin M et al. Cancers 2024;16:1926 (PMC11120239) | Fig. 5A | CC BY (by/4.0) / by/4.0 | T2-weighted MRI |
+| papillary | Comune R et al. Diagnostics 2025;15:906 (PMC11988733) | Fig. 5b | CC BY (by/4.0) / by/4.0 | arterial phase, ROI labels are the authors' |
+| oncocytoma | Qu J et al. BMC Med Imaging 2023;23:16 (PMC9881251) | Fig. 1a | "Creative Commons Attribution 4.0 International License" / by/4.0 | stellate central area |
+
+No Bosniak III example yet. Dev 2024 Fig. 5 is captioned "Bosniak III" but describes an enhancing
+nodule, which v2019 may call IV; Sebastià 2026 Fig. 5 shows thick septa but its authors class it IV;
+Bertolotto 2026 Fig. 7b is probably CEUS. Dev 2024 Fig. 1 (Bosniak I) shows polycystic kidneys and
+was not used; Dev Fig. 4 calls an angiomyolipoma "Bosniak III" and was not used.
