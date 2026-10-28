@@ -50,3 +50,15 @@ No Bosniak III example yet. Dev 2024 Fig. 5 is captioned "Bosniak III" but descr
 nodule, which v2019 may call IV; Sebastià 2026 Fig. 5 shows thick septa but its authors class it IV;
 Bertolotto 2026 Fig. 7b is probably CEUS. Dev 2024 Fig. 1 (Bosniak I) shows polycystic kidneys and
 was not used; Dev Fig. 4 calls an angiomyolipoma "Bosniak III" and was not used.
+
+## LI-RADS study and calculator (`src/data/scans/liverLirads.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| aphe, washout, capsule | Prajapati T et al. Cureus 2026;18:e113706 (PMC13526276) | Fig. 5A, 5B, 5D | "CC-BY 4.0" / none | one LR-5 observation in three phases; the authors' coloured arrows are grey |
+| tumourInVein | Prajapati 2026 | Fig. 3A | as above | |
+| lrM | Schima W, Heiken J. Cancer Imaging 2018;18:14 (PMC5978995) | Fig. 13a | "Creative Commons Attribution 4.0 International License" / by/4.0 | small in the source (188 px) |
+| lr1Cyst | Schima 2018 | Fig. 4b | as above | |
+| lr2Haemangioma | Schima 2018 | Fig. 5a | as above | |
+
+No CC BY flash-filling haemangioma was found.
