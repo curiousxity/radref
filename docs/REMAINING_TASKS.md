@@ -1,8 +1,53 @@
 # Remaining tasks
 
-Last updated 2026-10-24, after the sources check of every October draft: references matched
-and DOIs added, claims that differed matched to their papers, and claims that only the
-paywalled full text could confirm kept as unchecked, all by the author's choice.
+Last updated 2026-10-28, when the site was organised by body region (PR #9) and the
+pending items below were recorded. Before that, 2026-10-24: the sources check of every
+October draft (references matched and DOIs added, claims that differed matched to their
+papers, and claims that only the paywalled full text could confirm kept as unchecked, all
+by the author's choice).
+
+## Pending (recorded 2026-10-28)
+
+- **One Cloudflare builder too many.** Every push to main is built twice: by the GitHub
+  Action (`.github/workflows/deploy.yml`: lint, test, build, deploy) and by Cloudflare's own
+  Git build ("Workers Builds: radref"). Keep the Action; disconnect Git in the Cloudflare
+  dashboard under Workers → radref → Settings → Build. Needs the author signed in to
+  Cloudflare.
+- **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by
+  region since 2026-10-28. Choices made without the author:
+  - a 13th region, "General", for pages with no body part (contrast pages, IR
+    anticoagulation, vessel diameters, ellipsoid volume, Doppler indices);
+  - Hip has only Letournel of its own, so the pelvis CT study and the pelvis 3D model are also
+    listed under Hip (`alsoIn`);
+  - the skull base pages and carotid stenosis are also under Neuro, the brachial plexus also
+    under Shoulder; rectal, prostate and adnexal MRI are under Pelvis;
+  - the home tabs and the Studies blurb ("How to read each study, step by step.") are gone.
+- **Elbow OCD sentence (E2-6), the author to decide.** The elbow study says MRI judges
+  capitellar OCD stability from the fragment-bone interface and the overlying cartilage.
+  Kijowski and De Smet 2005, read in full, supports the interface (a high-T2 rim or cyst
+  means unstable) but says cartilage "was not assessed"; the cartilage signs come from knee
+  and talus studies. Trim to the interface, or keep it with another citation? Unchanged until
+  then; details in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, "Third check".
+- **PDFs needed from the author** (`docs/PAPERS_NEEDED.md`): Herbert and Fisher 1984 (Bone &
+  Joint asks for sign-in), Vaccaro 2016 (the Utrecht record has no file), the ten shoulder
+  papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
+  Fritz 1992, Sugaya 2005, Tuite 1996, Smith 1996; none has a free copy), and section 1.
+- **Example scans still to add**, in this order: the fracture classifications Mason,
+  Mayfield, Herbert, Palmer and fifth metatarsal; then the MSK MRI studies (ankle, foot,
+  diabetic foot, knee, shoulder, elbow, wrist). CC BY only, licence version stated; no
+  CC BY-NC and nothing without a clear licence. PMC candidates found but not yet vetted:
+  - Mason: PMC12565371 (J Clin Med 2025), PMC12766341 (Cureus review), PMC13337401,
+    PMC12127406.
+  - Mayfield (perilunate): PMC13426297 (Cureus, 16 cases), PMC12974986, PMC12717834,
+    PMC13631426, PMC12272136.
+  - Herbert (scaphoid): PMC13710594 (Eur Radiol consensus), PMC13653879, PMC13694059.
+  - Palmer (TFCC): PMC13652943 (Skeletal Radiol), PMC13447642 (Insights Imaging),
+    PMC10381215, PMC13294428.
+  - Fifth metatarsal: PMC13502435 (KSSTA), PMC12551980 (Cureus review), PMC12875555,
+    PMC11446485.
+- **Hearing loss CT:** the five "For the author" questions (see its section below).
+- **Calvarium and hearing loss** moved into Studies on 2026-10-28 but are single pages;
+  Report, Learn and Quiz tabs like the other studies are optional.
 
 ## Fix soon
 
