@@ -251,6 +251,7 @@ standard report sections, correctly capitalised and punctuated:
 - AAST 2018 organ injury grading (spleen, liver, kidney)
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
 - Calvarial lesions (quick reference in the Neuro category: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
+- Hearing loss on temporal bone CT (quick reference in the Neuro category: adult SNHL findings with schematic inline SVG axial views, report wording, cochlear implant checklist; scan slots in `src/data/hearingLossImages.ts` filled only once the CC BY files are in `public/hearing-loss/`, checked by `src/pages/hearingLoss.test.ts`; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)

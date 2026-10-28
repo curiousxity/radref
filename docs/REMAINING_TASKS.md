@@ -392,6 +392,22 @@ Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page give
 - [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
 - [ ] No open image for a burr hole or osteomyelitis yet; both have drawings only.
 
+## Hearing loss CT page
+
+Drafted on 2026-10-28 (`/hearing-loss-ct`) in a cloud session that could not reach PubMed, PMC,
+Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
+`docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`.
+
+- [ ] Download the four Purohit 2014 panels named in the sources doc (Europe PMC
+      supplementary-files API, as for the calvarium), confirm the CC BY version, crop one panel
+      each, greyscale, under 40 KB, save to `public/hearing-loss/<slot>.jpg`, and set `src` and
+      the panel letter in `src/data/hearingLossImages.ts`. Update `HEARING_LOSS_SOURCES.purohit`
+      licence to the exact version.
+- [ ] Find CC BY scans for the other slots listed at the end of the sources doc.
+- [ ] Check every claim marked unchecked or part on PubMed; fix or cite (the ACR hearing loss
+      criteria for the header; Young 2014 or another paper for the implant checklist).
+- [ ] The author's review; then change the source note away from "Unchecked draft".
+
 ## Calculator papers from the author (first batch)
 
 On 2026-10-25 the author sent the first batch from `docs/PAPERS_NEEDED.md`: Johnston 1962, Broberg
