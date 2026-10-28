@@ -227,3 +227,16 @@ Mason 1954 itself is still unread.
 | MA-3 | yes | "Type 3 Comminuted fractures involving the whole head of the radius". |
 | MA-4 | yes, against Johnston | "Type IV. Fracture of the radial head associated with dislocation of the elbow." Iannuzzi: under the modified scheme "any dislocation of the elbow with a concomitant fracture of the radial head, regardless of ... the original Mason classification ... is considered a Type IV injury". |
 | MA-5, MA-6 | no: wrong paper cited | The 1986 paper (read in full) does not state 2 mm or 30%; it only uses Mason types and calls a fracture with dislocation "a type-IV fracture by Johnston". Iannuzzi credits the modification to Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017. By the author's choice the thresholds are kept, now cited to the 1987 paper, still unchecked; that paper is on the next list. |
+
+## Third check, 2026-10-28: E16 read in full
+
+E16 (Kijowski and De Smet, AJR 2005) was read in full on the AJR site.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| E2-6 | partly; **for the author** | The interface half is stated: unstable lesions had "a peripheral ring of high signal intensity" (3 of 4) or "an underlying cyst" (1 of 4) on T2-weighted images; the six stable lesions "had low signal intensity peripherally". The cartilage half is not this paper's finding: "the integrity of the articular cartilage overlying the capitellar osteochondritis dissecans lesions was not assessed", as the thin capitellar cartilage "was poorly visualized". The two cartilage signs (a high-signal line through the cartilage and subchondral plate, a focal articular defect) are quoted from knee and talar dome studies (its refs 14-16), not seen at the capitellum here. The page sentence is unchanged until the author decides. |
+
+Also in E16, not yet on the page: all ten lesions were anterolateral in the capitellum (useful
+against the posterior pseudodefect, E2-5), and all six stable lesions had loose bodies at surgery,
+so "the elbow joint should be carefully inspected for the presence of an associated
+intraarticular loose body".

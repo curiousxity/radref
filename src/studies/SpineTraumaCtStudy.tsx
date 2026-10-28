@@ -1,4 +1,6 @@
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { spineTraumaScans } from '../data/scans/spineTrauma'
 import type { LessonReference } from '../components/LessonPage'
 import { aoBodies, aoCode, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoSentence, aoTypes } from '../logic/aospine'
 import type { AoBody, AoFacet, AoFull, AoRegion, AoType } from '../logic/aospine'
@@ -104,6 +106,7 @@ const learn: LearnSection[] = [
         <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm, which the authors propose as normal values ({ROJAS}). Values of 8.5 mm and 2 mm or more raise the question of craniocervical or atlantoaxial injury.</p>
         <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). It is an old rule from open-mouth radiographs, not a validated CT test: use it as a pointer to a ligament injury, and do not take a smaller total as proof the ligament is intact, since the rule misses ruptures that MRI shows directly ({DICKMAN}).</p>
         <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I an oblique fracture through the upper part of the dens, type II at the junction of the dens with the body of C2, type III through the body of C2. In their series type II fractures were the most prone to non-union. Then look at the rest of C2, including the pars interarticularis.</p>
+        <ScanFigures images={[spineTraumaScans.jefferson, spineTraumaScans.odontoid, spineTraumaScans.hangman]} />
       </>
     ),
   },
@@ -117,6 +120,7 @@ const learn: LearnSection[] = [
         <p>Then each facet joint, right and left ({VACCARO_CX}):</p>
         {facetTable}
         <p>The AO Spine code also carries neurology and modifiers. Neurology comes from the examination, so the report leaves it out; an ankylosed spine is modifier M3 ({VACCARO_CX}).</p>
+        <ScanFigures images={[spineTraumaScans.jumpedFacet]} />
       </>
     ),
   },
@@ -126,6 +130,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Classify each injured level by AO Spine in the same way ({VACCARO_TL}). A burst fracture breaks the posterior wall (A3, A4), a B injury breaks a tension band, and a C injury is displaced. In the thoracolumbar system an ankylosed spine is modifier M2 ({VACCARO_TL}).</p>
+        <ScanFigures images={[spineTraumaScans.a1, spineTraumaScans.a4, spineTraumaScans.chance, spineTraumaScans.dishExtension, spineTraumaScans.translation]} />
       </>
     ),
   },

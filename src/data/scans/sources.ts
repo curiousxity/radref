@@ -78,4 +78,23 @@ export const SCAN_SOURCES = {
   saat2021: { short: 'Saat et al. 2021', doi: '10.1007/s00062-020-00931-0', licence: 'CC BY 4.0' },
   chow2026: { short: 'Chow et al. 2026', doi: '10.1007/s00234-026-04055-z', licence: 'CC BY 4.0' },
   kloth2023: { short: 'Kloth et al. 2023', doi: '10.3390/tomography9060170', licence: 'CC BY 4.0' },
+  // Spine trauma. Utz's licence statement gives no version; its Crossref record gives 2.0. Yoshihara
+  // gives 2.0 in its licence link; Crossref has none. Zhang and Song (Frontiers) give 4.0 in Crossref.
+  zhangJ2023: { short: 'Zhang et al. 2023', doi: '10.3389/fendo.2023.1132725', licence: 'CC BY 4.0' },
+  galluzzo2026: { short: 'Galluzzo et al. 2026', doi: '10.1093/bjrcr/uaag015', licence: 'CC BY 4.0' },
+  yoshihara2011: { short: 'Yoshihara et al. 2011', doi: '10.1186/1754-9493-5-25', licence: 'CC BY 2.0' },
+  song2026: { short: 'Song et al. 2026', doi: '10.3389/fsurg.2025.1704439', licence: 'CC BY 4.0' },
+  utz2014: { short: 'Utz et al. 2014', doi: '10.1007/s13244-013-0304-2', licence: 'CC BY 2.0' },
+  // Neer
+  lian2022: { short: 'Lian et al. 2022', doi: '10.1186/s12891-022-05931-4', licence: 'CC BY 4.0' },
+  chenC2020: { short: 'Chen et al. 2020', doi: '10.1186/s13018-020-01846-9', licence: 'CC BY 4.0' },
+  zhou2025: { short: 'Zhou and Cheng 2025', doi: '10.3390/jcm14186660', licence: 'CC BY 4.0' },
+  catelas2024: { short: 'Nóbrega Catelas et al. 2024', doi: '10.1007/s00590-024-03969-9', licence: 'CC BY 4.0' },
+  // Lichtman. Singh (Cureus) states "CC-BY 4.0"; Crossref has none.
+  singhA2024: { short: 'Singh and Reese 2024', doi: '10.7759/cureus.59467', licence: 'CC BY 4.0' },
+  afshar2025: { short: 'Afshar et al. 2025', doi: '10.1016/j.tcr.2025.101138', licence: 'CC BY 4.0' },
+  chojnowski2022: { short: 'Chojnowski et al. 2022', doi: '10.3390/jcm11030664', licence: 'CC BY 4.0' },
+  // Pancreatic cysts
+  danti2026: { short: 'Danti et al. 2026', doi: '10.3390/jcm15020585', licence: 'CC BY 4.0' },
+  khristenko2024: { short: 'Khristenko et al. 2024', doi: '10.1016/j.ejro.2024.100576', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

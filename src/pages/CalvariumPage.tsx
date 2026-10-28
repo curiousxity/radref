@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
-import { Cite, LessonCaveat, LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { CALVARIUM_SOURCES, CC_BY, calvariumImages } from '../data/calvariumImages'
 import type { CalvariumImage } from '../data/calvariumImages'
@@ -533,7 +533,7 @@ export function CalvariumPage() {
     <div className="page">
       <section className="section-block calculator-header">
         <div>
-          <p className="eyebrow">Quick reference</p>
+          <p className="eyebrow">Study</p>
           <h2>Calvarial lesions</h2>
           <p>
             Most skull vault lesions are found by chance, and most are benign. Which table is involved, what the edge looks like, what is inside, how
@@ -654,7 +654,6 @@ export function CalvariumPage() {
       </section>
 
       <LessonReferences references={references} />
-      <LessonCaveat />
     </div>
   )
 }

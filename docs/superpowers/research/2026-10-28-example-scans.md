@@ -169,3 +169,26 @@ CT study shows six of them (otosclerosis, SCD, EVA, fracture, pneumolabyrinth) a
 
 Not used: Zhong 2023 glomus tympanicum (the CT panel is a whole-skull slice with the small mass
 unmarked); Arias Rodríguez 2025 malignant otitis externa (small panel, red arrow lost in grey).
+
+## Spine trauma, AO Spine, Neer, Lichtman and pancreatic cysts (2026-10-28)
+
+| List | Source (PMCID) | Figures | Licence: article / Crossref |
+|---|---|---|---|
+| spineTrauma.a1, a4 | Zhang J et al. Front Endocrinol 2023;14:1132725 (PMC10083489) | 1A, 1D | CC BY (no version) / by/4.0 |
+| spineTrauma.chance | Galluzzo A et al. BJR Case Rep 2026;12:uaag015 (PMC13117600) | 1a | by/4.0 / by/4.0 |
+| spineTrauma.dishExtension | Yoshihara H et al. Patient Saf Surg 2011;5:25 (PMC3212916) | 1 | by/2.0 in the licence link / none |
+| spineTrauma.translation | Song A et al. Front Surg 2026;12:1704439 (PMC12979509) | 2B | CC BY (no version) / by/4.0 |
+| spineTrauma.jefferson, hangman, odontoid, jumpedFacet | Utz M et al. Insights Imaging 2014;5:67-75 (PMC3948906) | 6a, 7b, 9b, 14a | CC BY (no version) / by/2.0 |
+| neer.twoPart | Lian Y et al. BMC Musculoskelet Disord 2022;23:957 (PMC9636662) | 1A | 4.0 / 4.0 |
+| neer.threePart | Chen C et al. J Orthop Surg Res 2020;15:364 (PMC7456013) | 1b | 4.0 / 4.0 |
+| neer.fourPartValgus | Zhou H, Cheng L. J Clin Med 2025;14:6660 (PMC12470890) | 2A | 4.0 / 4.0 |
+| neer.greaterTuberosity | Nóbrega Catelas D et al. Eur J Orthop Surg Traumatol 2024;34:2541-2547 (PMC11291518) | 2A | 4.0 / 4.0 |
+| lichtman.stage1 | Singh A, Reese R. Cureus 2024 (PMC11142385) | 1 | "CC-BY 4.0" / none |
+| lichtman.stage2, stage4 | Afshar A et al. Trauma Case Rep 2025;56:101138 (PMC11874712) | 1, 2 (AP) | by/4.0 / by/4.0 |
+| lichtman.stage3a, stage3b | Chojnowski K et al. J Clin Med 2022;11:664 (PMC8836398) | 2a, 3a | 4.0 / 4.0 |
+| pancreaticCysts (four) | Danti G et al. J Clin Med 2026;15:585 (PMC12841895) | 3, 5b, 8a, 1b | 4.0 / 4.0 |
+| pancreaticCysts.spn | Khristenko E et al. Eur J Radiol Open 2024;12:100576 (PMC11176946) | 2A | by/4.0 / by/4.0 |
+
+Not used: Dhaliwal 2023 burst (too dark); Chang 2019 atlanto-occipital dissociation (burned-in
+text); Park 2025 main-duct IPMN (panels too small); Danti Fig. 8b mural nodule (unreadable when
+cropped). No Kienböck ring sign or A2 split fracture found.

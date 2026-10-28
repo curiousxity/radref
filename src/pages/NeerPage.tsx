@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { neerScans } from '../data/scans/neer'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
 import { classifyNeer, emptyNeerInput, isDisplaced, lineNames, NEER_LINES } from '../logic/neer'
@@ -123,6 +125,11 @@ export function NeerPage() {
           {result.report && <CopyBlock label="Impression" text={result.report} />}
           <button type="button" className="reset-button" onClick={() => setForm(initialForm)}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[neerScans.twoPart, neerScans.threePart, neerScans.fourPartValgus, neerScans.greaterTuberosity]} />
       </section>
     </div>
   )

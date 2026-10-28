@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { calculators, relatedTo } from './calculators'
+import { calculators, matchesQuery, movedPaths, regionForSlug, regionGroups, regionPath, regionSlug, regions, relatedTo } from './calculators'
 
 describe('registry', () => {
   test('tags are short', () => {
@@ -21,14 +21,47 @@ describe('registry', () => {
     expect(byPath('/tirads')?.tag).toBe('ACR 2017')
   })
 
-  // The author's decision (2026-10-23): bone and joint calculators have their own category,
-  // ordered from shoulder to foot, rather than sitting under Trauma. The spine comes first, and
-  // the pelvis sits between the wrist and the knee.
-  test('the musculoskeletal calculators sit in their own category, spine, then shoulder to foot', () => {
-    expect(calculators.filter((item) => item.category === 'Musculoskeletal').map((item) => item.path)).toEqual([
-      '/ao-spine', '/neer', '/mason', '/mayfield', '/herbert', '/palmer', '/lichtman', '/young-burgess', '/letournel', '/schatzker', '/hawkins', '/sanders', '/myerson', '/fifth-metatarsal',
+  // The author's decision (2026-10-28): body region is the main way in, and each region page lists
+  // everything for that area under a heading per kind. The wrist was the worked example.
+  test('the wrist region holds the study, the four classifications and the 3D wrist', () => {
+    expect(regionGroups('Wrist and hand').map(({ kind, items }) => [kind, items.map((item) => item.path)])).toEqual([
+      ['study', ['/studies/wrist-mri']],
+      ['classification', ['/mayfield', '/herbert', '/palmer', '/lichtman']],
+      ['anatomy', ['/wrist']],
     ])
-    expect(calculators.filter((item) => item.category === 'Trauma').map((item) => item.path)).toEqual(['/aast-organ-injury'])
+  })
+
+  test('each fracture classification sits in its joint\'s region', () => {
+    const regionOf = (path: string) => calculators.find((item) => item.path === path)?.region
+    expect(regionOf('/ao-spine')).toBe('Spine')
+    expect(regionOf('/neer')).toBe('Shoulder')
+    expect(regionOf('/mason')).toBe('Elbow')
+    expect(regionOf('/young-burgess')).toBe('Pelvis')
+    expect(regionOf('/letournel')).toBe('Hip')
+    expect(regionOf('/schatzker')).toBe('Knee')
+    for (const path of ['/hawkins', '/sanders', '/myerson', '/fifth-metatarsal']) expect(regionOf(path), path).toBe('Ankle and foot')
+  })
+
+  test('every region lists something, and its address leads back to it', () => {
+    for (const region of regions) {
+      expect(regionGroups(region).length, region).toBeGreaterThan(0)
+      expect(regionForSlug(regionSlug(region))).toBe(region)
+      expect(regionPath(region)).toMatch(/^\/regions\/[a-z-]+$/)
+    }
+    expect(regionForSlug('nowhere')).toBeUndefined()
+  })
+
+  test('a page shared with a second region is listed in both', () => {
+    const paths = (region: (typeof regions)[number]) => regionGroups(region).flatMap(({ items }) => items.map((item) => item.path))
+    expect(paths('Pelvis')).toContain('/studies/pelvis-ct')
+    expect(paths('Hip')).toEqual(expect.arrayContaining(['/studies/pelvis-ct', '/letournel', '/pelvis-si']))
+    for (const item of calculators) expect(item.alsoIn ?? [], item.path).not.toContain(item.region)
+  })
+
+  test('search matches the region and the kind of page', () => {
+    const find = (query: string) => calculators.filter((item) => matchesQuery(item, query)).map((item) => item.path)
+    expect(find('wrist classification')).toEqual(['/mayfield', '/herbert', '/palmer', '/lichtman'])
+    expect(find('studies')).toContain('/studies/knee-mri')
   })
 
   test('the ankle MRI study links to the 3D ankle, both ways', () => {
@@ -101,5 +134,20 @@ describe('registry', () => {
     expect(elbow).toContain('/studies/pediatric-elbow')
     expect(elbow).toContain('/mason')
     expect(relatedTo('/mason').map((item) => item.path)).toContain('/studies/elbow-mri')
+  })
+  // The calvarial lesions and hearing loss pages are teaching pages, not calculators: they are
+  // studies, and their old addresses still lead to them.
+  test('reference pages are studies and their old paths redirect', () => {
+    for (const path of ['/studies/calvarium', '/studies/hearing-loss-ct']) {
+      expect(calculators.find((item) => item.path === path)?.kind, path).toBe('study')
+    }
+    expect(movedPaths['/calvarium']).toBe('/studies/calvarium')
+    expect(movedPaths['/hearing-loss-ct']).toBe('/studies/hearing-loss-ct')
+    for (const to of Object.values(movedPaths)) expect(calculators.some((item) => item.path === to), to).toBe(true)
+  })
+
+  test('companion calculators share a region', () => {
+    const regionOf = (path: string) => calculators.find((item) => item.path === path)?.region
+    expect(regionOf('/adrenal-chemical-shift')).toBe(regionOf('/adrenal-washout'))
   })
 })

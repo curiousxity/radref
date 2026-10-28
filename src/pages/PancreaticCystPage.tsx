@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { pancreaticCystsScans } from '../data/scans/pancreaticCysts'
 import { CopyBlock } from '../components/CopyBlock'
 import { classifyPancreaticCyst } from '../logic/pancreaticCyst'
 import type { AgeBand, AlternativeDiagnosis, DuctCommunication, PancreaticCystForm as Form } from '../logic/pancreaticCyst'
@@ -112,6 +114,11 @@ export function PancreaticCystPage() {
           {result.management && <CopyBlock label="Recommendation" text={result.management} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[pancreaticCystsScans.serousCystadenoma, pancreaticCystsScans.branchDuctIpmn, pancreaticCystsScans.mucinousCystic, pancreaticCystsScans.spn, pancreaticCystsScans.pseudocyst]} />
       </section>
     </div>
   )

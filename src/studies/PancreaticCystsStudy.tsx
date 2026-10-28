@@ -1,6 +1,8 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { CHART3_LOW_RISK, PER_ACR, acrSurveillance } from '../logic/pancreaticCyst'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { pancreaticCystsScans } from '../data/scans/pancreaticCysts'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -834,6 +836,7 @@ const learn: LearnSection[] = [
           <p>Two memory hooks: central calcification points to SCA; peripheral calcification points to MCN, and peripheral calcification in an MCN is more strongly linked with frank malignancy. Also: MCNs live in the tail; branch-duct IPMNs are most often in the head and uncinate.</p>
           <p>Rarer ones worth knowing: solid pseudopapillary neoplasm (young women, mixed solid-cystic with blood products), cystic neuroendocrine tumor (thick enhancing rim, often hypervascular), lymphoepithelial cyst, simple epithelial cyst. Solid pseudopapillary neoplasm and cystic NET usually have features that suggest the specific diagnosis and generally go to surgery.</p>
           <p>Be realistic about your limits: cysts under 10 mm are difficult or impossible to characterize, and 1–3 cm cysts are often indeterminate unless you can prove duct communication. "Indeterminate, presumed mucinous" is an acceptable answer.</p>
+          <ScanFigures images={[pancreaticCystsScans.serousCystadenoma, pancreaticCystsScans.mucinousCystic, pancreaticCystsScans.spn, pancreaticCystsScans.pseudocyst]} />
         </div>
 
         <div className="lesson-step">
@@ -841,6 +844,7 @@ const learn: LearnSection[] = [
           <p>This is the single most useful thing you can establish, because it converts "indeterminate cyst" into "branch-duct IPMN." CT with 3D reformats and MRI/MRCP are excellent for this and equivalent to EUS. Scroll the thin MRCP source images, not just the MIP. Look for a thin neck connecting the cyst to the duct.</p>
           <p>Definitions to use in your report, from Kyoto: a cyst larger than 5 mm that communicates with the main duct is a BD-IPMN (rule out pseudocyst if there is a pancreatitis or trauma history); main-duct IPMN is segmental or diffuse dilation of the main duct over 5 mm without another cause; mixed type meets both criteria.</p>
           <p>Then measure the main duct. For any BD-IPMN, record the widest main duct diameter even if it's away from the cyst, because a dilated main duct is a suspicious feature that should be investigated promptly. One trap: the duct can show a small fusiform bulge right where the cyst neck inserts in a pure branch-duct IPMN; that local bump is not main-duct involvement.</p>
+          <ScanFigures images={[pancreaticCystsScans.branchDuctIpmn]} />
         </div>
 
         <div className="lesson-step">

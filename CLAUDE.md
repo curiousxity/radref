@@ -101,9 +101,11 @@ anyone can tell which build a phone (or an offline install) is running.
   `package.json`, and the patch number is the count of commits on main's first-parent history
   (`appVersion` in `src/lib/version.ts`, fed by `gitCommitCount` in `vite.config.ts`), so each merge
   or push to main shows a higher number. Bump major or minor by hand when a release is worth naming,
-  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. The deploy
-  checks out the full history (`fetch-depth: 0`); a shallow clone or a build outside git falls back to
-  the `package.json` version.
+  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. Two builders
+  deploy main: the GitHub Action (full history, `fetch-depth: 0`) and Cloudflare's own Git build,
+  which clones shallow, so a shallow build runs `git fetch --unshallow` first. Without history, or
+  outside git, it falls back to the `package.json` version (seen live on 2026-10-28 as "1.0.0" after
+  the shallow Cloudflare build overwrote the Action's "1.0.158").
 - The build day (UTC) and short git commit are stamped in at build time by `define` in
   `vite.config.ts` (`__APP_VERSION__`, `__BUILD_DATE__`, `__BUILD_COMMIT__`, declared in
   `src/buildInfo.d.ts`). Outside a git checkout the commit falls back to `GITHUB_SHA`, then
@@ -258,8 +260,8 @@ standard report sections, correctly capitalised and punctuated:
 - PI-RADS v2.1 (zonal assessment, single lesion; logic shared in `src/logic/pirads.ts`)
 - AAST 2018 organ injury grading (spleen, liver, kidney)
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
-- Calvarial lesions (quick reference in the Neuro category: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
-- Hearing loss on temporal bone CT (quick reference in the Neuro category: adult SNHL findings with schematic inline SVG axial views, report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
+- Calvarial lesions (teaching page, a study in the Neuro region, at `/studies/calvarium`; `/calvarium` redirects: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
+- Hearing loss on temporal bone CT (teaching page, a study in the Head and neck region, at `/studies/hearing-loss-ct`; `/hearing-loss-ct` redirects: adult SNHL findings drawn on one inner ear cutaway (`src/components/InnerEarAnatomy.tsx`, shapes in `innerEarShapes.ts`, colours `--color-ear-*`), report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)
@@ -283,7 +285,7 @@ with it when adding a calculator.
 
 ## Anatomy section
 
-The Anatomy category holds interactive 3D references rather than calculators:
+The `kind: 'anatomy'` items are interactive 3D references rather than calculators:
 
 - Otic capsule (temporal bone labyrinth, middle ear, facial nerve canal)
 - Ossicular chain (malleus/incus/stapes, with a slice reconstructed through the model)
@@ -383,22 +385,28 @@ Lessons and quick references show real example scans through `ScanFigures`
   `docs/superpowers/research/2026-10-28-example-scans.md`. Only CC BY with a stated version is
   used (no NC or ND); one panel per file, cropped, greyscale.
 
-## Registry: groups and related links
+## Registry: regions, kinds and related links
 
-`src/data/calculators.ts` is the single registry for routes, the menu, search and the
-home page.
+`src/data/calculators.ts` is the single registry for routes, the menu, search, the home page
+and the region pages.
 
-- Categories may set `itemLabel` (Anatomy uses `'reference'`, Studies `'study'`), so the
-  home-page count reads "16 references" rather than "16 calculators". They may also set a
-  `blurb`, shown under the category heading.
-- Bone and joint calculators (AO Spine, Neer, Mason, the wrist four, Young-Burgess, Letournel,
-  Schatzker, the foot three, fifth metatarsal) sit in the Musculoskeletal category, spine first,
-  then shoulder to foot, with the pelvis between the wrist and the knee; Trauma keeps organ injury
-  grading. A new one goes in Musculoskeletal at its place in that order (a test pins it).
-- Items may set `group`, which becomes a subheading on the home page and a label in the
-  menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
-  pelvis and limbs), and Studies by body area. `groupItems` groups consecutive items, so
-  keep each group's items together in the list.
+- Body region is the main way in (the author's decision, 2026-10-28). Every item sets a `region`
+  from `regions` (Neuro, Head and neck, Chest, Abdomen, Pelvis, Spine, Shoulder, Elbow, Wrist and
+  hand, Hip, Knee, Ankle and foot, General) and a `kind` (study, classification, calculator,
+  anatomy, protocol). The home page lists the regions; each has a page at `/regions/<slug>`
+  (`RegionPage`) and a menu dropdown listing its items under a heading per kind, in `kinds`
+  order. The kind is a label (search results, related cards), not a section of its own.
+- `alsoIn` lists the item under further regions too (the pelvis CT study and Letournel under
+  both Pelvis and Hip; the skull base pages and carotid stenosis under Neuro as well as Head and
+  neck; the brachial plexus under Shoulder as well as Spine). General holds what belongs to no
+  one region: contrast safety, IR anticoagulation, vessel diameters and the formulas.
+- The list is ordered by region, then kind; within a kind, list order is the order shown. Bone
+  and joint classifications go in their joint's region, and a test pins where they sit.
+- Teaching pages that are not built on `StudyPage` are still `kind: 'study'` (the calvarial
+  lesions and hearing loss pages, moved under `/studies/` 2026-10-28). A page that moves keeps
+  its old path working through `movedPaths` in `src/data/calculators.ts`, which `App.tsx` turns
+  into redirects. Companion calculators share a region (adrenal washout and chemical shift under
+  Abdomen); a test pins it.
 - Items may set `related`, a list of paths. `RelatedLinks` shows those items as cards
   under the page, in both directions, so declare each link on one side only (usually on
   the lesson, e.g. the prostate lesson lists `/pi-rads`). `App.tsx` renders it after every
@@ -410,7 +418,7 @@ when adding a new kind of content.
 
 ## Studies section
 
-The Studies category (first on the home page and in the menu) has one page per exam
+The studies (`kind: 'study'`, first under each region) have one page per exam
 type, each with three tabs:
 
 - **Report**: a form that walks the lesson's own search pattern step by step. Each step
@@ -507,7 +515,7 @@ How it is built:
 - Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
   `/lessons/<slug>` redirects there; the pages were briefly called lessons.
 - Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds
-  the shared reference list and caveat).
+  the shared reference list).
 
 In September 2026 every citation was checked against PubMed. DOIs were added or
 corrected, citation text was fixed to match the real papers, and plain-text citations

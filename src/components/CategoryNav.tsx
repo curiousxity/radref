@@ -1,18 +1,16 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { calculators, groupItems, matchesQuery } from '../data/calculators'
-import type { CalculatorCategory } from '../data/calculators'
+import { calculators, kindLabel, matchesQuery, regionGroups, regionPath, regions } from '../data/calculators'
 
 function closeAllDropdowns() {
   document.querySelectorAll('details.nav-dropdown[open]').forEach((el) => el.removeAttribute('open'))
 }
 
+/** The header menu: one dropdown per body region, each opening with a link to the region's page. */
 export function CategoryNav({
-  categories,
   isOpen,
   onNavigate,
 }: {
-  categories: CalculatorCategory[]
   isOpen: boolean
   onNavigate: () => void
 }) {
@@ -82,15 +80,25 @@ export function CategoryNav({
           )}
         </div>
       ) : (
-        categories.map((category) => {
-          const isActiveCategory = category.items.some((item) => item.path === location.pathname)
+        regions.map((region) => {
+          const groups = regionGroups(region)
+          const isActiveRegion =
+            location.pathname === regionPath(region) || groups.some((group) => group.items.some((item) => item.path === location.pathname))
           return (
-            <details key={category.name} className="nav-dropdown" name="primary-nav">
-              <summary className={isActiveCategory ? 'nav-link active' : 'nav-link'}>{category.name}</summary>
+            <details key={region} className="nav-dropdown" name="primary-nav">
+              <summary className={isActiveRegion ? 'nav-link active' : 'nav-link'}>{region}</summary>
               <div className="nav-dropdown-menu">
-                {groupItems(category.items).map((group) => (
-                  <Fragment key={group.name ?? ''}>
-                    {group.name && <p className="nav-group-label">{group.name}</p>}
+                <NavLink
+                  to={regionPath(region)}
+                  end
+                  className={({ isActive }) => (isActive ? 'nav-dropdown-link nav-region-link active' : 'nav-dropdown-link nav-region-link')}
+                  onClick={onNavigate}
+                >
+                  All of {region.toLowerCase()}
+                </NavLink>
+                {groups.map((group) => (
+                  <Fragment key={group.kind}>
+                    <p className="nav-group-label">{kindLabel(group.kind, true)}</p>
                     {group.items.map((item) => (
                       <NavLink
                         key={item.path}

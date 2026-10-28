@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom'
-import { itemLabelFor, relatedTo } from '../data/calculators'
-
-function capitalise(word: string) {
-  return word.charAt(0).toUpperCase() + word.slice(1)
-}
+import { kindLabel, relatedTo } from '../data/calculators'
 
 /**
  * Cross-links under a page, e.g. from a lesson to the calculator that applies it.
@@ -20,7 +16,7 @@ export function RelatedLinks({ path }: { path: string }) {
         {items.map((item) => (
           <Link key={item.path} to={item.path} className="tool-card">
             <div>
-              <p className="tool-category">{capitalise(itemLabelFor(item.category))}</p>
+              <p className="tool-category">{kindLabel(item.kind)}</p>
               <h3>{item.name}</h3>
               <p>{item.description}</p>
             </div>
