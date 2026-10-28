@@ -101,9 +101,11 @@ anyone can tell which build a phone (or an offline install) is running.
   `package.json`, and the patch number is the count of commits on main's first-parent history
   (`appVersion` in `src/lib/version.ts`, fed by `gitCommitCount` in `vite.config.ts`), so each merge
   or push to main shows a higher number. Bump major or minor by hand when a release is worth naming,
-  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. The deploy
-  checks out the full history (`fetch-depth: 0`); a shallow clone or a build outside git falls back to
-  the `package.json` version.
+  with `npm version <x.y.0> --no-git-tag-version`; the patch in `package.json` is ignored. Two builders
+  deploy main: the GitHub Action (full history, `fetch-depth: 0`) and Cloudflare's own Git build,
+  which clones shallow, so a shallow build runs `git fetch --unshallow` first. Without history, or
+  outside git, it falls back to the `package.json` version (seen live on 2026-10-28 as "1.0.0" after
+  the shallow Cloudflare build overwrote the Action's "1.0.158").
 - The build day (UTC) and short git commit are stamped in at build time by `define` in
   `vite.config.ts` (`__APP_VERSION__`, `__BUILD_DATE__`, `__BUILD_COMMIT__`, declared in
   `src/buildInfo.d.ts`). Outside a git checkout the commit falls back to `GITHUB_SHA`, then
@@ -507,7 +509,7 @@ How it is built:
 - Routes live under `/studies/<slug>`, and the tab is in the query string (`?tab=learn`).
   `/lessons/<slug>` redirects there; the pages were briefly called lessons.
 - Cite inline with `<Cite doi="...">` (`src/components/LessonPage.tsx`, which also holds
-  the shared reference list and caveat).
+  the shared reference list).
 
 In September 2026 every citation was checked against PubMed. DOIs were added or
 corrected, citation text was fixed to match the real papers, and plain-text citations

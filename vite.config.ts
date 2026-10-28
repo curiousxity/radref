@@ -8,14 +8,22 @@ import { appVersion } from './src/lib/version.ts'
 const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }
 
 /**
- * Commits on HEAD's first-parent history: one per merge or push to main. Null outside a git
- * checkout. A shallow clone would undercount, so it also returns null there; the deploy checks out
- * the full history (fetch-depth: 0 in .github/workflows/deploy.yml).
+ * Commits on HEAD's first-parent history: one per merge or push to main. Two builders deploy main:
+ * the GitHub Action (full history, fetch-depth: 0) and Cloudflare's own Git build, which clones
+ * shallow. A shallow clone would undercount, so it first fetches the rest of the history; if that
+ * fails, or outside a git checkout, it returns null and the version falls back to package.json.
  */
 function gitCommitCount(): number | null {
+  const run = (cmd: string) => execSync(cmd, { stdio: ['ignore', 'pipe', 'ignore'], timeout: 60_000 }).toString().trim()
   try {
-    const run = (cmd: string) => execSync(cmd, { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
-    if (run('git rev-parse --is-shallow-repository') === 'true') return null
+    if (run('git rev-parse --is-shallow-repository') === 'true') {
+      try {
+        run('git fetch --unshallow --quiet')
+      } catch {
+        return null
+      }
+      if (run('git rev-parse --is-shallow-repository') === 'true') return null
+    }
     return Number(run('git rev-list --count --first-parent HEAD'))
   } catch {
     return null
