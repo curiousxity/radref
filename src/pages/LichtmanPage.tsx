@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { lichtmanScans } from '../data/scans/lichtman'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -90,6 +92,11 @@ export function LichtmanPage() {
           </table>
         </div>
         <p>The 1977 paper had stages I to IV. In 1993 stage III was split into IIIA and IIIB by fixed scaphoid rotation, measured as a radioscaphoid angle under or over 60° on a true lateral radiograph; stage I then gained decreased T1 signal on MRI. Stage IIIC, a coronal fracture of the lunate, was added later, because Lichtman found these patients had a poorer prognosis. In 2010 Lichtman also proposed a stage 0: pain on exertion with normal radiographs and MRI. Stage IV is Kienböck disease advanced collapse (KDAC).</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[lichtmanScans.stage1, lichtmanScans.stage2, lichtmanScans.stage3a, lichtmanScans.stage3b, lichtmanScans.stage4]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1977 paper is paywalled; the stage wording follows Kennedy and Abrams's 2019 review." />

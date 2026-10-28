@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { spineTraumaScans } from '../data/scans/spineTrauma'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -176,6 +178,11 @@ export function AoSpinePage() {
         <p>AO Spine's one-page summaries of each system: the types with drawings, the decision algorithm, facet injuries (neck), neurology, modifiers and how to write the code.</p>
         <p><a href="/references/aospine-subaxial-poster.pdf" target="_blank" rel="noopener">Subaxial cervical poster (PDF, 2.5 MB)</a> · <a href="/references/aospine-thoracolumbar-poster.pdf" target="_blank" rel="noopener">Thoracolumbar poster (PDF, 3 MB)</a>. Need an internet connection.</p>
         <p className="source-note">AO Spine Subaxial Injury Classification System and AO Spine Thoracolumbar Injury Classification System. © 2020 AO Foundation, AO Spine. Shared unchanged under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 licence</a>. Further information: <a href="https://www.aospine.org/classification" target="_blank" rel="noopener">aospine.org/classification</a>.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[spineTraumaScans.a1, spineTraumaScans.a4, spineTraumaScans.chance, spineTraumaScans.dishExtension, spineTraumaScans.translation, spineTraumaScans.jumpedFacet]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the wording is checked against AO Spine's posters for both systems." />
