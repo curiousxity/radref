@@ -18,14 +18,13 @@ Asked for before and still missing; each settles a specific rule on the live sit
 - [ ] Spence KF Jr, et al. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013. The 6.9 mm atlas rule.
 - [ ] Rao AB, et al. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605. Paraganglioma signs in the suprahyoid neck study.
 
-## 2. Free, but blocked from here
+## 2. Thought to be free, but not
 
-Quick to download yourself:
+Checked 2026-10-28 in a browser: Kijowski 2005 and Bencardino 2000 (AJR) were read in full and are
+done. These two still need a PDF:
 
-- [ ] Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468 (free at Bone & Joint; the Herbert types, now checked against AO Surgery Reference).
-- [ ] Vaccaro AR, et al. AOSpine subaxial cervical classification. Eur Spine J. 2016;25(7):2173-2184. doi:10.1007/s00586-015-3831-3 (free in the Utrecht repository; the poster covers most of it).
-- [ ] Kijowski R, De Smet AA. AJR. 2005;185(6):1453-1459. doi:10.2214/AJR.04.1570 (free on AJR; elbow study).
-- [ ] Bencardino J, et al. AJR. 2000;175(3):649-653. doi:10.2214/ajr.175.3.1750649 (free on AJR; foot study).
+- [ ] Herbert TJ, Fisher WE. J Bone Joint Surg Br. 1984;66(1):114-123. doi:10.1302/0301-620X.66B1.6693468 (Bone & Joint asks for a sign-in; the Herbert types, now checked against AO Surgery Reference).
+- [ ] Vaccaro AR, et al. AOSpine subaxial cervical classification. Eur Spine J. 2016;25(7):2173-2184. doi:10.1007/s00586-015-3831-3 (the Utrecht repository record has no file attached; the poster covers most of it).
 
 ## 3. Papers behind the remaining study claims
 

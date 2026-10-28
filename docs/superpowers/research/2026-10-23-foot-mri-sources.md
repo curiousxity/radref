@@ -182,3 +182,18 @@ By the author's decision above, in `src/studies/FootMriStudy.tsx` and its test:
   became "in a symptomatic accessory navicular this indicates chronic stress or osteonecrosis".
 - Unchanged and still unchecked: F2-1 (Hawkins sign, type IV), F3-1, F3-4, F4-1, F4-2, F5-1 to
   F5-3, and the "can look like a Morton neuroma" half of F6-2 (its warning stays).
+
+## Third check, 2026-10-28: R11 read in full
+
+R11 (Bencardino et al., AJR 2000) was read in full on the AJR site.
+
+- F7-1: yes for the parts cited to R11. Methods: neuromas were diagnosed as "a soft-tissue mass
+  within the intermetatarsal space that had low to intermediate signal intensity on T1-weighted
+  MR images and a more variable but usually low to intermediate signal intensity on T2-weighted
+  MR images". The site order is in R11 too: "the third and second spaces were the most commonly
+  involved sites" (19 third, 12 second, 2 first in the symptomatic group). The nerve's course
+  under the intermetatarsal ligament is in R11's Fig. 1 legend; the page keeps that part with
+  Ashman (R9). No change to the page.
+- F7-4 (already moved to Zanetti, R10): R11's discussion agrees: Zanetti "established a threshold
+  of 5 mm (in transverse diameter) beyond which the lesion is most likely symptomatic", while R11
+  itself found "significant overlap" (mean 5.3 mm symptomatic, 4.1 mm silent, p = 0.05).
