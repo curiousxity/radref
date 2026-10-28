@@ -27,6 +27,17 @@
   --color-figure-bg: #eceeef;
   --color-figure-context: #f6f7f7;
   --color-figure-bone: #ffffff;
+  /* Inner ear anatomy figure (hearing loss page): bone, middle ear, labyrinth fill and edge, canal
+     lumen, IAC fill and edge, oval window. */
+  --color-ear-bone: #efeae0;
+  --color-ear-bone-edge: #c3baaa;
+  --color-ear-middle: #f4f7f8;
+  --color-ear-labyrinth: #c9e2df;
+  --color-ear-labyrinth-edge: #527f7b;
+  --color-ear-lumen: #d9ebe7;
+  --color-ear-iac: #dde7ed;
+  --color-ear-iac-edge: #7e9aa9;
+  --color-ear-window: #c58b4d;
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace;
   --radius: 3px;
@@ -69,6 +80,15 @@
   --color-figure-bg: #101315;
   --color-figure-context: #1c2124;
   --color-figure-bone: #2b3236;
+  --color-ear-bone: #262c2f;
+  --color-ear-bone-edge: #4a5459;
+  --color-ear-middle: #171b1d;
+  --color-ear-labyrinth: #26413e;
+  --color-ear-labyrinth-edge: #6fa9a3;
+  --color-ear-lumen: #1b2f2c;
+  --color-ear-iac: #1f2b32;
+  --color-ear-iac-edge: #6f8a99;
+  --color-ear-window: #d9a066;
 }
 
 * { box-sizing: border-box; }
@@ -343,6 +363,37 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .fm-figure figcaption { margin-top: 0.5rem; font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.5; }
 .fm-figure figcaption a, .fm-lead a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
 .fm-svg { display: block; width: 100%; height: auto; background: var(--color-figure-bg); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); }
+.ear-anatomy { display: block; width: 100%; height: auto; background: var(--color-figure-bg); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); }
+.ear-anatomy .ear-bone { fill: var(--color-ear-bone); stroke: var(--color-ear-bone-edge); stroke-width: 2; }
+.ear-anatomy .ear-bone-line { fill: none; stroke: var(--color-ear-bone-edge); stroke-width: 4; stroke-linecap: round; }
+.ear-anatomy .ear-middle { fill: var(--color-ear-middle); stroke: var(--color-hairline); stroke-width: 2; }
+.ear-anatomy .ear-iac { fill: var(--color-ear-iac); stroke: var(--color-ear-iac-edge); stroke-width: 2.5; }
+.ear-anatomy .ear-labyrinth { fill: var(--color-ear-labyrinth); stroke: var(--color-ear-labyrinth-edge); stroke-width: 3; }
+.ear-anatomy .ear-canal-edge { fill: none; stroke: var(--color-ear-labyrinth-edge); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
+.ear-anatomy .ear-canal-lumen { fill: none; stroke: var(--color-ear-lumen); stroke-width: 19; stroke-linecap: round; stroke-linejoin: round; }
+.ear-anatomy .ear-duct-edge { fill: none; stroke: var(--color-ear-labyrinth-edge); stroke-width: 12; stroke-linecap: round; }
+.ear-anatomy .ear-duct-lumen { fill: none; stroke: var(--color-ear-lumen); stroke-width: 6; stroke-linecap: round; }
+.ear-anatomy .ear-spiral-edge { fill: none; stroke: var(--color-ear-labyrinth-edge); stroke-width: 13; stroke-linecap: round; }
+.ear-anatomy .ear-spiral-lumen { fill: none; stroke: var(--color-ear-lumen); stroke-width: 6; stroke-linecap: round; }
+.ear-anatomy .ear-window { fill: none; stroke: var(--color-ear-window); stroke-width: 9; stroke-linecap: round; }
+.ear-anatomy .ear-leader { fill: none; stroke: var(--color-text-muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ear-anatomy .ear-anchor { fill: var(--color-text-muted); }
+.ear-anatomy .ear-label { font-family: var(--font-sans); font-size: 21px; font-weight: 500; fill: var(--color-text); }
+.ear-anatomy .ear-tag { font-family: var(--font-sans); font-size: 34px; font-weight: 600; fill: var(--color-text); }
+.ear-anatomy .ear-lucent { fill: var(--color-text-muted); fill-opacity: 0.45; stroke: var(--color-text-muted); stroke-width: 2; }
+.ear-anatomy .ear-halo { fill: none; stroke: var(--color-text-muted); stroke-opacity: 0.4; stroke-width: 26; }
+.ear-anatomy .ear-cleft { fill: none; stroke: var(--color-text-muted); stroke-opacity: 0.75; stroke-width: 8; stroke-linecap: round; }
+.ear-anatomy .ear-mottle { fill: var(--color-text-muted); fill-opacity: 0.28; }
+.ear-anatomy .ear-ground { fill: var(--color-text-muted); fill-opacity: 0.22; }
+.ear-anatomy .ear-capsule { fill: var(--color-ear-bone); }
+.ear-anatomy .ear-ossified { fill: none; stroke: var(--color-ear-bone); stroke-width: 15; stroke-linecap: round; }
+.ear-anatomy .ear-air { fill: var(--color-viewport); stroke: var(--color-text-muted); stroke-width: 2; }
+.ear-anatomy .ear-duct-wide-edge { fill: none; stroke: var(--color-ear-labyrinth-edge); stroke-width: 34; stroke-linecap: round; }
+.ear-anatomy .ear-duct-wide-lumen { fill: none; stroke: var(--color-ear-lumen); stroke-width: 26; stroke-linecap: round; }
+.ear-anatomy .ear-fracture { fill: none; stroke: var(--color-warn); stroke-width: 6; stroke-linejoin: round; stroke-linecap: round; }
+.ear-anatomy .ear-mass { fill: var(--color-warn-soft); stroke: var(--color-warn); stroke-width: 3; }
+.ear-anatomy .ear-speck { fill: var(--color-ear-bone-edge); }
+.ear-anatomy .ear-gap { fill: var(--color-figure-bg); stroke: var(--color-ear-bone-edge); stroke-width: 2; }
 .fm-context { fill: var(--color-figure-context); stroke: var(--color-text-muted); stroke-width: 1.5; }
 .fm-bone { fill: var(--color-figure-bone); }
 .fm-outline { fill: none; stroke: var(--color-text); stroke-width: 2; }
@@ -426,14 +477,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .cv-photo figcaption { margin-top: 0.4rem; font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.45; }
 .cv-photo figcaption a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
 /* Hearing loss CT page: the inner-ear schematic reuses the cv- classes, plus these. */
-.hl-canal { fill: none; stroke: var(--color-primary); stroke-opacity: 0.45; stroke-width: 7; }
-.hl-spiral { fill: none; stroke: var(--color-text-muted); stroke-width: 1.4; }
-.hl-aqueduct { stroke: var(--color-primary); stroke-opacity: 0.5; stroke-width: 3; stroke-linecap: round; }
-.hl-aqueduct-wide { stroke: var(--color-primary); stroke-opacity: 0.5; stroke-width: 10; stroke-linecap: round; }
-.hl-lucent { fill: var(--color-text-muted); fill-opacity: 0.35; stroke: var(--color-text-muted); stroke-width: 1; }
-.hl-halo { fill: none; stroke: var(--color-text-muted); stroke-opacity: 0.35; stroke-width: 8; }
-.hl-cleft { fill: none; stroke: var(--color-text-muted); stroke-opacity: 0.6; stroke-width: 3; stroke-linecap: round; }
-.hl-air { fill: var(--color-text); }
 
 .header-actions { display: flex; align-items: center; gap: 0.4rem; }
 .nav-toggle { display: none; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; cursor: pointer; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: transparent; color: var(--color-text); }

@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
+import { EarScene, EarTag, InnerEarAnatomy } from '../components/InnerEarAnatomy'
+import { EAR } from '../components/innerEarShapes'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { ScanFigures } from '../components/ScanFigures'
@@ -38,223 +40,145 @@ const references: LessonReference[] = [
   { citation: 'Expert Panel on Neurologic Imaging: Sharma A, Kirsch CFE, Aulino JM, et al. ACR Appropriateness Criteria Hearing Loss and/or Vertigo. J Am Coll Radiol. 2018;15(11S):S321-S331.', doi: DOI.acr },
 ]
 
-/*
- * Schematic axial view of a left inner ear: lateral to the left, anterior at the top. The middle
- * ear, then the otic capsule holding the cochlea (front), the vestibule behind it with the oval
- * window on its outer side, the lateral semicircular canal behind that, the internal auditory
- * canal running medially and the vestibular aqueduct running back from the vestibule. Not to
- * scale; every figure draws on the same layout so a finding's position reads the same from card
- * to card.
- */
-const COCHLEA = { x: 115, y: 50, r: 30 }
-const VESTIBULE = { x: 110, y: 112 }
-const CANAL = { x: 118, y: 162, r: 15 }
-const IAC = { y: 74, h: 24 }
-
-type EarProps = {
-  id: string
-  title: string
-  /** Leave out a normal structure that the finding redraws. */
-  hide?: Array<'aqueduct' | 'iac'>
-  children?: ReactNode
-}
-
-function Ear({ id, title, hide = [], children }: EarProps) {
-  return (
-    <svg className="cv-svg" viewBox="0 0 320 190" role="img" aria-labelledby={`${id}-title`}>
-      <title id={`${id}-title`}>{title}</title>
-      <rect x="0" y="0" width="70" height="190" className="cv-soft" />
-      <rect x="70" y="0" width="250" height="190" className="cv-bone" />
-      <line x1="70" y1="0" x2="70" y2="190" className="cv-edge" />
-      <rect x="66" y="107" width="24" height="10" className="cv-soft" />
-      {!hide.includes('iac') && <rect x="150" y={IAC.y} width="170" height={IAC.h} className="cv-csf cv-thin" />}
-      {!hide.includes('aqueduct') && <line x1="128" y1="122" x2="232" y2="178" className="hl-aqueduct" />}
-      <circle cx={CANAL.x} cy={CANAL.y} r={CANAL.r} className="hl-canal" />
-      <ellipse cx={VESTIBULE.x} cy={VESTIBULE.y} rx="22" ry="15" className="cv-fluid cv-thin" />
-      <circle cx={COCHLEA.x} cy={COCHLEA.y} r={COCHLEA.r} className="cv-fluid cv-thin" />
-      <path d={`M${COCHLEA.x} ${COCHLEA.y} m-4 0 a4 4 0 1 1 8 0 a10 10 0 1 1 -18 2 a17 17 0 1 1 32 -6`} className="hl-spiral" />
-      {children}
-    </svg>
-  )
-}
-
-/**
- * A leader line from the point (x1, y1) to (x2, y2), with the text starting just past (x2, y2).
- * Mono 13px is about 7.8 units a character; labels are kept short enough to stay inside the
- * 320-wide drawing.
- */
-function Label({ x1, y1, x2, y2, children }: { x1: number; y1: number; x2: number; y2: number; children: string }) {
-  return (
-    <>
-      <line x1={x1} y1={y1} x2={x2} y2={y2} className="cv-leader" />
-      <text x={x2 + 3} y={y2 + 4} className="cv-label">{children}</text>
-    </>
-  )
-}
-
-/** A two-line label set in the narrow middle ear strip, with a leader to the right. */
-function SideLabel({ x1, y1, y, lines }: { x1: number; y1: number; y: number; lines: [string, string] }) {
-  return (
-    <>
-      <line x1={x1} y1={y1} x2={60} y2={y + 2} className="cv-leader" />
-      <text x="6" y={y} className="cv-label">{lines[0]}</text>
-      <text x="6" y={y + 14} className="cv-label">{lines[1]}</text>
-    </>
-  )
-}
-
 /** The fenestral focus: just in front of the oval window. */
-const FENESTRAL = { x: 82, y: 94 }
-
-function NormalFigure() {
-  return (
-    <Ear id="hl-normal" title="Schematic axial view of the left inner ear, lateral on the left and anterior at the top: middle ear, cochlea, vestibule and oval window, lateral canal, internal auditory canal and vestibular aqueduct">
-      <text x="35" y="16" className="cv-label cv-center">middle</text>
-      <text x="35" y="30" className="cv-label cv-center">ear</text>
-      <Label x1={145} y1={40} x2={168} y2={28}>cochlea</Label>
-      <text x="314" y={IAC.y + 16} className="cv-label cv-end">IAC</text>
-      <Label x1={132} y1={110} x2={150} y2={114}>vestibule</Label>
-      <SideLabel x1={68} y1={112} y={96} lines={['oval', 'window']} />
-      <SideLabel x1={103} y1={164} y={150} lines={['lateral', 'canal']} />
-      <Label x1={214} y1={168} x2={232} y2={156}>aqueduct</Label>
-    </Ear>
-  )
-}
+const FENESTRAL = { cx: 500, cy: 446 }
 
 function FenestralFigure() {
   return (
-    <Ear id="hl-fen" title="Fenestral otosclerosis: a small lucency in the bone just in front of the oval window">
-      <circle cx={FENESTRAL.x} cy={FENESTRAL.y} r="7" className="hl-lucent" />
-      <Label x1={88} y1={90} x2={150} y2={56}>lucency in front</Label>
-    </Ear>
+    <EarScene id="hl-fen" title="Fenestral otosclerosis: a small lucency in the bone just in front of the oval window">
+      <circle cx={FENESTRAL.cx} cy={FENESTRAL.cy} r={16} className="ear-lucent" />
+      <EarTag x1={490} y1={458} x2={300} y2={640} anchor="middle">lucency at the window</EarTag>
+    </EarScene>
   )
 }
 
 function CochlearFigure() {
   return (
-    <Ear id="hl-coch" title="Cochlear otosclerosis: a lucent ring around the cochlea, usually with a fenestral focus as well">
-      <circle cx={COCHLEA.x} cy={COCHLEA.y} r={COCHLEA.r + 8} className="hl-halo" />
-      <circle cx={FENESTRAL.x} cy={FENESTRAL.y} r="7" className="hl-lucent" />
-      <Label x1={152} y1={38} x2={170} y2={26}>double ring</Label>
-    </Ear>
+    <EarScene id="hl-coch" title="Cochlear otosclerosis: a lucent ring around the cochlea, usually with a fenestral focus as well">
+      <path d={EAR.cochlea} className="ear-halo" />
+      <circle cx={FENESTRAL.cx} cy={FENESTRAL.cy} r={16} className="ear-lucent" />
+      <EarTag x1={340} y1={600} x2={230} y2={640} anchor="middle">double ring</EarTag>
+    </EarScene>
   )
 }
 
 function CleftFigure() {
   return (
-    <Ear id="hl-cleft" title="Cochlear cleft: a thin curved lucency beside the cochlea in a normal ear">
-      <path d="M80 30 Q74 50 82 72" className="hl-cleft" />
-      <SideLabel x1={76} y1={48} y={40} lines={['thin', 'cleft']} />
-    </Ear>
+    <EarScene id="hl-cleft" title="Cochlear cleft: a thin curved lucency beside the cochlea in a normal ear">
+      <path d="M 332 488 Q 312 540, 336 598" className="ear-cleft" />
+      <EarTag x1={322} y1={560} x2={210} y2={630} anchor="middle">thin cleft</EarTag>
+    </EarScene>
   )
 }
 
 function PagetFigure() {
-  const blobs = [[180, 30], [230, 50], [285, 22], [196, 130], [250, 120], [295, 150], [160, 175], [270, 182], [88, 140]]
+  const blobs = [[310, 230], [400, 165], [660, 185], [790, 250], [940, 300], [280, 470], [330, 590], [580, 600], [700, 560], [880, 470], [640, 330]]
   return (
-    <Ear id="hl-paget" title="Paget disease: thick, mottled bone that can surround and demineralise the otic capsule">
-      {blobs.map(([cx, cy]) => (
-        <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx="13" ry="9" className="cv-cotton" />
-      ))}
-      <text x="235" y="14" className="cv-label cv-center">mottled bone</text>
-    </Ear>
+    <EarScene
+      id="hl-paget"
+      title="Paget disease: thick, mottled bone that can surround and demineralise the otic capsule"
+      under={blobs.map(([cx, cy]) => <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx={38} ry={26} className="ear-mottle" />)}
+    >
+      <EarTag x1={940} y1={300} x2={940} y2={200} anchor="middle">mottled bone</EarTag>
+    </EarScene>
   )
 }
 
 function FibrousDysplasiaFigure() {
   return (
-    <Ear id="hl-fd" title="Fibrous dysplasia: ground-glass bone around the labyrinth, with the otic capsule itself usually spared">
-      <path d="M70 0 H320 V190 H70 Z M125 4 A62 92 0 1 0 125.1 4 Z" fillRule="evenodd" className="cv-ground" />
-      <text x="250" y="40" className="cv-label cv-center">ground glass</text>
-      <text x="250" y="150" className="cv-label cv-center">capsule spared</text>
-    </Ear>
+    <EarScene
+      id="hl-fd"
+      title="Fibrous dysplasia: ground-glass bone around the labyrinth, with the otic capsule itself usually spared"
+      under={
+        <>
+          <path d={EAR.bone} className="ear-ground" />
+          <ellipse cx={520} cy={420} rx={215} ry={215} className="ear-capsule" />
+        </>
+      }
+    >
+      <EarTag x1={900} y1={420} x2={900} y2={560} anchor="middle">ground glass</EarTag>
+      <EarTag x1={330} y1={250} x2={250} y2={170} anchor="middle">capsule spared</EarTag>
+    </EarScene>
   )
 }
 
 function OssificansFigure() {
   return (
-    <Ear id="hl-lo" title="Labyrinthitis ossificans: new bone filling the cochlea, here the basal turn">
-      <path d={`M${COCHLEA.x - COCHLEA.r} ${COCHLEA.y} A${COCHLEA.r} ${COCHLEA.r} 0 0 0 ${COCHLEA.x + COCHLEA.r} ${COCHLEA.y} Z`} className="cv-dense" />
-      <Label x1={145} y1={56} x2={168} y2={28}>bone in the turn</Label>
-    </Ear>
+    <EarScene id="hl-lo" title="Labyrinthitis ossificans: new bone filling the cochlea, here the basal turn">
+      <path d={EAR.basalTurn} className="ear-ossified" />
+      <EarTag x1={372} y1={540} x2={240} y2={630} anchor="middle">bone in the turn</EarTag>
+    </EarScene>
   )
 }
 
 function PneumolabyrinthFigure() {
   return (
-    <Ear id="hl-air" title="Pneumolabyrinth: dots of air inside the vestibule">
-      {[[102, 110, 3.5], [114, 116, 3], [120, 106, 2.5]].map(([cx, cy, r]) => (
-        <circle key={cx} cx={cx} cy={cy} r={r} className="hl-air" />
+    <EarScene id="hl-air" title="Pneumolabyrinth: dots of air inside the vestibule">
+      {[[555, 392, 14], [590, 418, 11], [552, 428, 9]].map(([cx, cy, r]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} className="ear-air" />
       ))}
-      <Label x1={124} y1={108} x2={150} y2={120}>air inside</Label>
-    </Ear>
+      <EarTag x1={600} y1={430} x2={820} y2={560} anchor="middle">air inside</EarTag>
+    </EarScene>
   )
 }
 
 function EvaFigure() {
   return (
-    <Ear id="hl-eva" hide={['aqueduct']} title="Enlarged vestibular aqueduct: the channel running back from the vestibule is wide">
-      <line x1="128" y1="122" x2="232" y2="178" className="hl-aqueduct-wide" />
-      <Label x1={214} y1={164} x2={236} y2={150}>wide</Label>
-    </Ear>
+    <EarScene id="hl-eva" hide={['aqueduct']} title="Enlarged vestibular aqueduct: the channel running back from the vestibule is wide">
+      <path d={EAR.aqueduct} className="ear-duct-wide-edge" />
+      <path d={EAR.aqueduct} className="ear-duct-wide-lumen" />
+      <EarTag x1={740} y1={540} x2={900} y2={590} anchor="middle">wide aqueduct</EarTag>
+    </EarScene>
   )
 }
 
 function FractureFigure() {
   return (
-    <Ear id="hl-fx" title="Otic capsule-violating fracture: the fracture line crosses the vestibule and cochlea">
-      <path d="M40 190 L96 136 L106 104 L122 62 L150 0" className="fm-fracture" />
-      <Label x1={126} y1={52} x2={168} y2={28}>through labyrinth</Label>
-    </Ear>
+    <EarScene id="hl-fx" title="Otic capsule-violating fracture: the fracture line crosses the vestibule and cochlea">
+      <path d="M 330 150 L 470 300 L 560 400 L 470 520 L 430 660" className="ear-fracture" />
+      <EarTag x1={470} y1={300} x2={760} y2={170} anchor="middle">through the labyrinth</EarTag>
+    </EarScene>
   )
 }
 
 function FistulaFigure() {
   return (
-    <Ear id="hl-fist" title="Labyrinthine fistula: middle ear soft tissue has eroded the bone over the lateral canal">
-      <path d={`M70 144 L106 154 L106 170 L70 180 Z`} className="cv-soft-mass cv-thin" />
-      <ellipse cx="38" cy="162" rx="32" ry="22" className="cv-soft-mass cv-thin" />
-      <SideLabel x1={104} y1={154} y={112} lines={['canal', 'eroded']} />
-    </Ear>
+    <EarScene id="hl-fist" title="Labyrinthine fistula: middle ear soft tissue has eroded the bone over the lateral canal">
+      <path d="M 150 340 C 200 320, 300 335, 372 360 C 384 380, 380 410, 360 420 C 300 430, 200 440, 150 420 Z" className="ear-mass" />
+      <EarTag x1={250} y1={420} x2={240} y2={560} anchor="middle">canal eroded</EarTag>
+    </EarScene>
   )
 }
 
 function ElstFigure() {
   return (
-    <Ear id="hl-elst" hide={['aqueduct']} title="Endolymphatic sac tumour: a destructive mass behind the internal auditory canal, with bony specks inside">
-      <line x1="128" y1="122" x2="190" y2="155" className="hl-aqueduct" />
-      <path d="M186 130 L202 122 L220 128 L240 120 L262 130 L274 148 L264 166 L242 176 L216 174 L194 164 L184 148 Z" className="cv-enhance cv-thin" />
-      {[[212, 142], [232, 154], [248, 140], [220, 162]].map(([cx, cy]) => (
-        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="3" className="cv-dense" />
+    <EarScene id="hl-elst" hide={['aqueduct']} title="Endolymphatic sac tumour: a destructive mass behind the internal auditory canal, with bony specks inside">
+      <path d="M 600 421 C 640 446, 668 474, 690 494" className="ear-duct-edge" />
+      <path d="M 600 421 C 640 446, 668 474, 690 494" className="ear-duct-lumen" />
+      <path d="M 690 480 L 730 466 L 780 476 L 820 470 L 856 492 L 862 532 L 836 566 L 790 584 L 740 580 L 702 562 L 684 528 Z" className="ear-mass" />
+      {[[740, 510], [790, 540], [820, 505], [756, 556]].map(([cx, cy]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={8} className="ear-speck" />
       ))}
-      <text x="230" y="188" className="cv-label cv-center">destructive</text>
-    </Ear>
+      <EarTag x1={856} y1={540} x2={1060} y2={620} anchor="end">destructive mass</EarTag>
+    </EarScene>
   )
 }
 
 function WideIacFigure() {
   return (
-    <Ear id="hl-iac" hide={['iac']} title="Widened internal auditory canal: the canal flares toward the brainstem end">
-      <path d={`M150 ${IAC.y} L230 ${IAC.y} L320 ${IAC.y - 28} L320 ${IAC.y + IAC.h + 28} L230 ${IAC.y + IAC.h} L150 ${IAC.y + IAC.h} Z`} className="cv-csf cv-thin" />
-      <text x="304" y={IAC.y + 16} className="cv-label cv-end">wide IAC</text>
-    </Ear>
+    <EarScene id="hl-iac" hide={['iac']} title="Widened internal auditory canal: the canal flares toward the brainstem end">
+      <path d="M 677 388 C 758 357, 858 320, 1043 290 L 1043 504 C 876 474, 777 444, 677 451 Q 648 422, 677 388 Z" className="ear-iac" />
+      <EarTag x1={960} y1={330} x2={960} y2={200} anchor="middle">wide IAC</EarTag>
+    </EarScene>
   )
 }
 
-/** A schematic coronal view: middle cranial fossa above, the superior canal arching beneath it. */
 function DehiscenceFigure() {
   return (
-    <svg className="cv-svg" viewBox="0 0 320 190" role="img" aria-labelledby="hl-scd-title">
-      <title id="hl-scd-title">Superior canal dehiscence: no bone covers the top of the superior semicircular canal, so it opens onto the middle cranial fossa</title>
-      <rect x="0" y="0" width="320" height="60" className="cv-brain" />
-      <rect x="0" y="60" width="320" height="130" className="cv-bone" />
-      <line x1="0" y1="60" x2="320" y2="60" className="cv-edge" />
-      <path d="M110 160 A50 50 0 0 1 210 160" className="hl-canal" />
-      <rect x="148" y="58" width="24" height="56" className="cv-brain" />
-      <text x="160" y="34" className="cv-label cv-center">middle cranial fossa</text>
-      <Label x1={172} y1={92} x2={214} y2={110}>no bone roof</Label>
-      <text x="160" y="182" className="cv-label cv-center">superior canal (coronal)</text>
-    </svg>
+    <EarScene id="hl-scd" title="Superior canal dehiscence: no bone covers the top of the superior semicircular canal, so it opens onto the middle cranial fossa">
+      <path d="M 496 178 L 500 118 L 552 118 L 556 182 Z" className="ear-gap" />
+      <EarTag x1={556} y1={150} x2={760} y2={160} anchor="start">no bone roof</EarTag>
+    </EarScene>
   )
 }
 
@@ -470,8 +394,8 @@ export function HearingLossCtPage() {
       <section className="info-card">
         <h3>How to read it</h3>
         <figure className="fm-figure">
-          <NormalFigure />
-          <figcaption>Every drawing below is this schematic axial view of the left ear: lateral on the left, front at the top.</figcaption>
+          <InnerEarAnatomy />
+          <figcaption>Inner ear anatomy: a conceptual cutaway, not a CT plane, with shapes, scale and relationships simplified. Every drawing below marks its finding on this layout.</figcaption>
         </figure>
         <ul className="plain-list">
           <li><strong>Compare the two sides</strong> on every structure. Most findings are easier to see as a difference.</li>
