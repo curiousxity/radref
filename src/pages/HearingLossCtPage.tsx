@@ -377,7 +377,7 @@ export function HearingLossCtPage() {
     <div className="page">
       <section className="section-block calculator-header">
         <div>
-          <p className="eyebrow">Quick reference</p>
+          <p className="eyebrow">Study</p>
           <h2>Hearing loss on temporal bone CT</h2>
           <p>
             Adult sensorineural hearing loss: what to look for. In adults the cause is usually acquired, not congenital. MRI with contrast is the

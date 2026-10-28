@@ -533,7 +533,7 @@ export function CalvariumPage() {
     <div className="page">
       <section className="section-block calculator-header">
         <div>
-          <p className="eyebrow">Quick reference</p>
+          <p className="eyebrow">Study</p>
           <h2>Calvarial lesions</h2>
           <p>
             Most skull vault lesions are found by chance, and most are benign. Which table is involved, what the edge looks like, what is inside, how

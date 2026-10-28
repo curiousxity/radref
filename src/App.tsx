@@ -4,7 +4,7 @@ import { CategoryNav } from './components/CategoryNav'
 import { ThemeToggle } from './components/ThemeToggle'
 import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
-import { calculators, categories } from './data/calculators'
+import { calculators, categories, movedPaths } from './data/calculators'
 import { pushRecent, readRecent, writeRecent } from './lib/recent'
 import { versionLine } from './lib/version'
 import { HomePage } from './pages/HomePage'
@@ -92,6 +92,9 @@ export default function App() {
               />
             ))}
             <Route path="/lessons/:slug" element={<LessonRedirect />} />
+            {Object.entries(movedPaths).map(([from, to]) => (
+              <Route key={from} path={from} element={<Navigate to={to} replace />} />
+            ))}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

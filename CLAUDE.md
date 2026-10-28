@@ -260,8 +260,8 @@ standard report sections, correctly capitalised and punctuated:
 - PI-RADS v2.1 (zonal assessment, single lesion; logic shared in `src/logic/pirads.ts`)
 - AAST 2018 organ injury grading (spleen, liver, kidney)
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures)
-- Calvarial lesions (quick reference in the Neuro category: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
-- Hearing loss on temporal bone CT (quick reference in the Neuro category: adult SNHL findings drawn on one inner ear cutaway (`src/components/InnerEarAnatomy.tsx`, shapes in `innerEarShapes.ts`, colours `--color-ear-*`), report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
+- Calvarial lesions (teaching page in the Studies category, Neuro group, at `/studies/calvarium`; `/calvarium` redirects: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews, credited per image; image list in `src/data/calvariumImages.ts`, files in `public/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
+- Hearing loss on temporal bone CT (teaching page in the Studies category, Head and neck group, at `/studies/hearing-loss-ct`; `/hearing-loss-ct` redirects: adult SNHL findings drawn on one inner ear cutaway (`src/components/InnerEarAnatomy.tsx`, shapes in `innerEarShapes.ts`, colours `--color-ear-*`), report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)
@@ -401,6 +401,11 @@ home page.
   menu dropdown. Anatomy is grouped by region (head and neck, spine and brachial plexus,
   pelvis and limbs), and Studies by body area. `groupItems` groups consecutive items, so
   keep each group's items together in the list.
+- Teaching pages that are not calculators live in Studies even when they are not built on
+  `StudyPage` (the calvarial lesions and hearing loss pages, moved there 2026-10-28). A page that
+  moves keeps its old path working through `movedPaths` in `src/data/calculators.ts`, which
+  `App.tsx` turns into redirects. Companion calculators share a category (adrenal washout and
+  chemical shift under Abdomen; carotid stenosis under Vascular); a test pins both rules.
 - Items may set `related`, a list of paths. `RelatedLinks` shows those items as cards
   under the page, in both directions, so declare each link on one side only (usually on
   the lesson, e.g. the prostate lesson lists `/pi-rads`). `App.tsx` renders it after every

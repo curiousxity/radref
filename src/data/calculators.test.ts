@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { calculators, relatedTo } from './calculators'
+import { calculators, categories, movedPaths, relatedTo } from './calculators'
 
 describe('registry', () => {
   test('tags are short', () => {
@@ -101,5 +101,21 @@ describe('registry', () => {
     expect(elbow).toContain('/studies/pediatric-elbow')
     expect(elbow).toContain('/mason')
     expect(relatedTo('/mason').map((item) => item.path)).toContain('/studies/elbow-mri')
+  })
+  // The calvarial lesions and hearing loss pages are teaching pages, not calculators: they sit with
+  // the studies, and their old addresses still lead to them.
+  test('reference pages sit in Studies and their old paths redirect', () => {
+    const studies = calculators.filter((item) => item.category === 'Studies').map((item) => item.path)
+    expect(studies).toEqual(expect.arrayContaining(['/studies/calvarium', '/studies/hearing-loss-ct']))
+    expect(movedPaths['/calvarium']).toBe('/studies/calvarium')
+    expect(movedPaths['/hearing-loss-ct']).toBe('/studies/hearing-loss-ct')
+    for (const to of Object.values(movedPaths)) expect(calculators.some((item) => item.path === to), to).toBe(true)
+    expect(categories.map((category) => category.name)).not.toContain('Neuro')
+  })
+
+  test('companion calculators share a category', () => {
+    const categoryOf = (path: string) => calculators.find((item) => item.path === path)?.category
+    expect(categoryOf('/adrenal-chemical-shift')).toBe(categoryOf('/adrenal-washout'))
+    expect(categoryOf('/carotid-stenosis')).toBe('Vascular')
   })
 })
