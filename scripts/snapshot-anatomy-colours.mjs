@@ -3,7 +3,7 @@
 //
 //   npm run snapshot:anatomy -- online/new-viewer.html [more.html ...]
 //
-// Paths are relative to public/anatomy/. Run it once, when the viewer is first added and
+// Paths are relative to public/members/anatomy/. Run it once, when the viewer is first added and
 // before any restyle, so the snapshot records its original structure and scene colours.
 // It refuses to touch a file that already has an entry: the existing entries are the
 // pre-restyle baseline, and regenerating them from the restyled files would bake the new
@@ -60,7 +60,7 @@ function scriptColours(html) {
 
 const files = process.argv.slice(2)
 if (files.length === 0) {
-  console.error('Usage: npm run snapshot:anatomy -- <viewer.html relative to public/anatomy/> ...')
+  console.error('Usage: npm run snapshot:anatomy -- <viewer.html relative to public/members/anatomy/> ...')
   process.exit(1)
 }
 
@@ -72,7 +72,7 @@ for (const file of files) {
   }
 }
 for (const file of files) {
-  const html = readFileSync(new URL(`../public/anatomy/${file}`, import.meta.url), 'utf8')
+  const html = readFileSync(new URL(`../public/members/anatomy/${file}`, import.meta.url), 'utf8')
   snapshot[file] = { css: cssColours(html), script: scriptColours(html) }
   console.log(`${file}: ${Object.keys(snapshot[file].css).length} CSS colours, ${snapshot[file].script.length} script colours`)
 }

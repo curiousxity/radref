@@ -4,8 +4,8 @@ import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 import snapshot from './anatomy-colours.json'
 
-// Guards the 16 standalone anatomy viewers in public/anatomy/ (see CLAUDE.md, Anatomy). Every
-// one is on public/anatomy/shared/radref.css; FILES must list every viewer on disk.
+// Guards the 16 standalone anatomy viewers in public/members/anatomy/ (see CLAUDE.md, Anatomy). Every
+// one is on public/members/anatomy/shared/radref.css; FILES must list every viewer on disk.
 // anatomy-colours.json is a snapshot, taken before any viewer was restyled, of each file's
 // colours in two parts:
 // - `css`: every custom property in a <style> rule block whose value is a hex or
@@ -179,7 +179,7 @@ const CHROME: Record<File, string[]> = {
 const colours = snapshot as Record<File, { css: Record<string, string>; script: string[] }>
 
 function read(file: File): string {
-  return readFileSync(new URL(`../public/anatomy/${file}`, import.meta.url), 'utf8')
+  return readFileSync(new URL(`../public/members/anatomy/${file}`, import.meta.url), 'utf8')
 }
 
 const COLOUR = /^(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))$/
@@ -235,10 +235,10 @@ function exempt(file: File, key: string): boolean {
 
 describe('anatomy viewers', () => {
   test('FILES lists every viewer on disk', () => {
-    // public/anatomy/ and its online/ folder; shared/ and vendor/ hold no viewers.
+    // public/members/anatomy/ and its online/ folder; shared/ and vendor/ hold no viewers.
     const onDisk = [
-      ...readdirSync(new URL('../public/anatomy/', import.meta.url)),
-      ...readdirSync(new URL('../public/anatomy/online/', import.meta.url)).map((n) => `online/${n}`),
+      ...readdirSync(new URL('../public/members/anatomy/', import.meta.url)),
+      ...readdirSync(new URL('../public/members/anatomy/online/', import.meta.url)).map((n) => `online/${n}`),
     ].filter((n) => n.endsWith('.html'))
     expect(onDisk.sort()).toEqual([...FILES].sort())
   })
@@ -279,7 +279,7 @@ describe('anatomy viewers', () => {
   // <head>; a copy that drifts would theme that viewer differently from the rest.
   test('inlined pre-paint snippet is identical to the one in radref.css', () => {
     const snippet = /<script>\n\(function \(\) \{\n {2}var KEY = 'radref-theme'[\s\S]*?<\/script>/
-    const css = readFileSync(new URL('../public/anatomy/shared/radref.css', import.meta.url), 'utf8')
+    const css = readFileSync(new URL('../public/members/anatomy/shared/radref.css', import.meta.url), 'utf8')
     const reference = css.match(snippet)?.[0]
     expect(reference).toBeDefined()
     for (const file of FILES) expect(read(file).match(snippet)?.[0], file).toBe(reference)
