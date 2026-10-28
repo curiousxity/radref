@@ -111,3 +111,15 @@ but each is about 100 px wide.
 
 Most adult CC BY trauma figures found were case reports with coloured arrows; the paediatric review
 gave the clearest graded examples.
+
+## Lung-RADS, Fleischner and the lung screening study (`src/data/scans/lungNodules.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| solid, perifissural, cysticNodule | Cannella R et al. Insights Imaging 2026;17:9 (PMC12796044) | Figs. 6C, 6B, 6D | CC BY 4.0 / by/4.0 | low-dose CT, Lung-RADS categories in the caption |
+| partSolid, groundGlass, groundGlassLater | Revel MP et al. ESR Essentials. Eur Radiol 2025;36:2064-2073 (PMC12963080) | Figs. 3A, 4C, 4D | CC BY 4.0 / by/4.0 | |
+| popcorn, spiculated | Baratella E et al. Tomography 2025;11:28 (PMC11946818) | Figs. 2a, 9c | CC BY (by/4.0) / by/4.0 | Figs. 8 and 10 of this paper are "courtesy of" others and were not used |
+| endobronchial | Teishikata T et al. Gen Thorac Cardiovasc Surg Cases 2026;5:44 (PMC13637399) | Fig. 1A | CC BY 4.0 / by/4.0 | |
+
+Not used: Revel Fig. 2A (burned-in volumetry readouts); Revel Fig. 3C ("multilocular cyst") did not
+read clearly as a cyst once cropped.
