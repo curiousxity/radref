@@ -100,3 +100,14 @@ No types III or IV yet. Ristow Fig. 2D is labelled type III but is nondisplaced,
 for a type defined by depression; Pizzoli 2023 Fig. 5 and Liu 2023 Fig. 3 show radiographs and 3D
 renders that do not show the type clearly; PlaTiF (Sci Data 2026) Fig. 4 has one radiograph per type
 but each is about 100 px wide.
+
+## AAST organ injury page (`src/data/scans/aast.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| liverGrade2, liverGrade5, spleenGrade3, kidneyInfarct, kidneyDevascularised | Mohammad SA et al. Pediatr Radiol 2025;55:2018-2036 (PMC12513975) | Figs. 4a, 4d, 9a, 13a, 14 | CC BY 4.0 / by/4.0 | children; ages are in the captions |
+| spleenPseudoaneurysm | Crone A et al. Emerg Radiol 2025;33:305-310 (PMC13079506) | Fig. 2A | CC BY 4.0 / by/4.0 | adult |
+| kidneyUrineLeak | Berday Y et al. Cureus 2025;17:e96501 (PMC12696761) | Fig. 3B | "CC-BY 4.0" / none | adult, delayed phase |
+
+Most adult CC BY trauma figures found were case reports with coloured arrows; the paediatric review
+gave the clearest graded examples.

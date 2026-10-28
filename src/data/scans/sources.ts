@@ -38,4 +38,8 @@ export const SCAN_SOURCES = {
   deng2021a: { short: 'Deng et al. 2021a', doi: '10.1186/s13018-021-02265-0', licence: 'CC BY 4.0' },
   biz2025: { short: 'Biz et al. 2025', doi: '10.3390/diagnostics15111304', licence: 'CC BY 4.0' },
   deng2021b: { short: 'Deng et al. 2021b', doi: '10.1186/s13018-021-02660-7', licence: 'CC BY 4.0' },
+  // AAST. Berday (Cureus) states "CC-BY 4.0"; Crossref has no licence for it.
+  mohammad2025: { short: 'Mohammad et al. 2025', doi: '10.1007/s00247-025-06321-3', licence: 'CC BY 4.0' },
+  crone2025: { short: 'Crone et al. 2025', doi: '10.1007/s10140-025-02421-7', licence: 'CC BY 4.0' },
+  berday2025: { short: 'Berday et al. 2025', doi: '10.7759/cureus.96501', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { aastScans } from '../data/scans/aast'
 
 type GradeRow = {
   grade: string
@@ -223,6 +225,16 @@ export function AastOrganInjuryPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <h4 className="fm-subhead">Liver</h4>
+        <ScanFigures images={[aastScans.liverGrade2, aastScans.liverGrade5]} />
+        <h4 className="fm-subhead">Spleen</h4>
+        <ScanFigures images={[aastScans.spleenGrade3, aastScans.spleenPseudoaneurysm]} />
+        <h4 className="fm-subhead">Kidney</h4>
+        <ScanFigures images={[aastScans.kidneyUrineLeak, aastScans.kidneyInfarct, aastScans.kidneyDevascularised]} />
       </section>
 
       <section className="info-card">
