@@ -151,3 +151,21 @@ show the finding clearly when cropped. Sonkaya 2026 Fig. 2 is covered in ROI ove
 Not found or not used: a clean vertical shear pelvis (only a composite with surgical photographs);
 Hawkins types I and II; Biz 2019's Hawkins IV radiograph is about 170 px; the PLOS One T-shaped
 acetabulum panels are too small to crop.
+
+## Hearing loss CT page and temporal bone CT study (`hearingLoss.ts`, `temporalBone.ts`)
+
+The hearing loss page's twelve scans moved here from `src/data/hearingLossImages.ts` on 2026-10-28;
+their sources and licence evidence are in `2026-10-28-hearing-loss-ct-sources.md`. The temporal bone
+CT study shows six of them (otosclerosis, SCD, EVA, fracture, pneumolabyrinth) and these:
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| atticCholesteatoma, cholesteatomaDwi, canalWallDown | Touska P, Connor SEJ. ESR Essentials: imaging of middle ear cholesteatoma. Eur Radiol 2025;35:2053-2064 (PMC11913933) | Figs. 1D, 4B, 2B | CC BY 4.0 / by/4.0 | |
+| lateralCanalFistula | Gulati M et al. Insights Imaging 2019;10:92 (PMC6775179) | Fig. 11 | CC BY 4.0 / by/4.0 | |
+| coalescentMastoiditis | Saat R et al. Clin Neuroradiol 2021;31:589-597 (PMC8463380) | Fig. 3d | CC BY 4.0 / by/4.0 | |
+| incompletePartition2 | Chow TH et al. Neuroradiology 2026;68:2087-2102 (PMC13407937) | Fig. 12 | CC BY 4.0 / by/4.0 | |
+| jugularBulb, aberrantCarotid | Ostrander BT et al. Front Radiol 2026;6:1784554 (PMC13230221) | Figs. 9A, 9B | CC BY (by/4.0) / by/4.0 | text labels, no arrows |
+| exostoses, cholesterolGranuloma | Kloth C et al. Tomography 2023;9:2190-2210 (PMC10747582) | Figs. 5A, 17A | CC BY (by/4.0) / by/4.0 | |
+
+Not used: Zhong 2023 glomus tympanicum (the CT panel is a whole-skull slice with the small mass
+unmarked); Arias Rodríguez 2025 malignant otitis externa (small panel, red arrow lost in grey).

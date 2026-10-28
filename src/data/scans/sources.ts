@@ -72,4 +72,10 @@ export const SCAN_SOURCES = {
   dorner2024: { short: 'Dörner et al. 2024', doi: '10.1007/s10143-024-02419-8', licence: 'CC BY 4.0' },
   vlachodimitropoulos2026: { short: 'Vlachodimitropoulos et al. 2026', doi: '10.4102/sajr.v30i1.3278', licence: 'CC BY 4.0' },
   pontesMadruga2022: { short: 'Pontes-Madruga et al. 2022', doi: '10.1016/j.bjorl.2020.05.027', licence: 'CC BY 4.0' },
+  // Temporal bone CT study
+  touska2025: { short: 'Touska and Connor 2025', doi: '10.1007/s00330-024-11021-x', licence: 'CC BY 4.0' },
+  gulati2019: { short: 'Gulati et al. 2019', doi: '10.1186/s13244-019-0782-y', licence: 'CC BY 4.0' },
+  saat2021: { short: 'Saat et al. 2021', doi: '10.1007/s00062-020-00931-0', licence: 'CC BY 4.0' },
+  chow2026: { short: 'Chow et al. 2026', doi: '10.1007/s00234-026-04055-z', licence: 'CC BY 4.0' },
+  kloth2023: { short: 'Kloth et al. 2023', doi: '10.3390/tomography9060170', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>
