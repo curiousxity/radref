@@ -4,11 +4,12 @@ import { CategoryNav } from './components/CategoryNav'
 import { ThemeToggle } from './components/ThemeToggle'
 import { RelatedLinks } from './components/RelatedLinks'
 import { ScrollToTop } from './components/ScrollToTop'
-import { calculators, categories, movedPaths } from './data/calculators'
+import { calculators, movedPaths } from './data/calculators'
 import { pushRecent, readRecent, writeRecent } from './lib/recent'
 import { versionLine } from './lib/version'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { RegionPage } from './pages/RegionPage'
 
 /** The studies were briefly published as lessons under /lessons/; keep those links working. */
 function LessonRedirect() {
@@ -56,7 +57,7 @@ export default function App() {
             <span className="brand-logo" aria-hidden="true">RR</span>
             <span className="brand-title">Rad Ref</span>
           </Link>
-          <CategoryNav categories={categories} isOpen={menuOpen} onNavigate={() => setMenuOpen(false)} />
+          <CategoryNav isOpen={menuOpen} onNavigate={() => setMenuOpen(false)} />
           <div className="header-actions">
             <ThemeToggle />
             <button
@@ -78,7 +79,8 @@ export default function App() {
       <main id="main-content" className="container main-content">
         <Suspense fallback={<p className="route-loading">Loading…</p>}>
           <Routes>
-            <Route path="/" element={<HomePage categories={categories} />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/regions/:slug" element={<RegionPage />} />
             {calculators.map((item) => (
               <Route
                 key={item.path}

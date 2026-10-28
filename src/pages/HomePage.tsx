@@ -1,101 +1,34 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import type { KeyboardEvent as ReactKeyboardEvent } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { IndexRows } from '../components/IndexRows'
 import { InstallButton } from '../components/InstallButton'
-import { calculators, groupItems, matchesQuery } from '../data/calculators'
-import type { CalculatorCategory } from '../data/calculators'
+import { calculators, kindLabel, matchesQuery, regionPath, regionSummary, regions } from '../data/calculators'
 import { readRecent, recentItems } from '../lib/recent'
-import { HOME_TABS, categoriesForTab, homePanel, isSearchShortcut, parseHomeTab, queryAfterTabSelect, selectedTab, tabIndexForKey } from './homeTabs'
-import type { HomeTab } from './homeTabs'
+import { isSearchShortcut } from './homeSearch'
 
-/** "3 calculators", or "2 references" for a category that names its items differently. */
-function countLabel(category: CalculatorCategory) {
-  const noun = category.itemLabel ?? 'calculator'
-  if (category.items.length === 1) return `1 ${noun}`
-  return `${category.items.length} ${noun.endsWith('y') ? `${noun.slice(0, -1)}ies` : `${noun}s`}`
-}
-
-type Row = { path: string; name: string; tag?: string }
-
-/** Hairline index rows: name on the left, a short mono tag on the right. */
-function IndexRows({ rows }: { rows: Row[] }) {
-  return (
-    <ul className="index-rows">
-      {rows.map((row) => (
-        <li key={row.path}>
-          <Link to={row.path} className="index-row">
-            <span className="index-name">{row.name}</span>
-            {row.tag && <span className="index-tag">{row.tag}</span>}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-/**
- * Calculators lists each category under its name; Studies and Anatomy are one category
- * each, so their items sit under the category's own `group` subheadings instead.
- */
-function CategoryList({ category, byGroup }: { category: CalculatorCategory; byGroup: boolean }) {
-  const headingId = `home-${category.name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`
-  return (
-    <section className="index-section" aria-labelledby={headingId}>
-      <div className="index-label-row">
-        <h2 className="index-label" id={headingId}>{category.name}</h2>
-        <span className="index-count">{countLabel(category)}</span>
-      </div>
-      {category.blurb && <p className="section-blurb">{category.blurb}</p>}
-      {byGroup ? (
-        groupItems(category.items).map((group) => (
-          <div key={group.name ?? ''} className="index-group">
-            {group.name && <h3 className="index-label">{group.name}</h3>}
-            <IndexRows rows={group.items} />
-          </div>
-        ))
-      ) : (
-        <IndexRows rows={category.items} />
-      )}
-    </section>
-  )
-}
-
-/** The last few pages this viewer opened, newest first; read from storage only while shown. */
+/** The last few pages this viewer opened, newest first; hidden until there is one. */
 function RecentList() {
   const items = recentItems(readRecent())
-  if (items.length === 0) {
-    return (
-      <div className="empty-state">
-        <p>Pages you open appear here.</p>
-      </div>
-    )
-  }
+  if (items.length === 0) return null
   return (
     <section className="index-section" aria-labelledby="home-recent">
       <h2 className="index-label" id="home-recent">Recently opened</h2>
-      <IndexRows rows={items} />
+      <IndexRows rows={items.map((item) => ({ path: item.path, name: item.name, tag: kindLabel(item.kind) }))} />
     </section>
   )
 }
 
-export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
-  const [params, setParams] = useSearchParams()
-  const tab = parseHomeTab(params.get('tab'))
+export function HomePage() {
   const [query, setQuery] = useState('')
   const searchRef = useRef<HTMLInputElement>(null)
   const trimmedQuery = query.trim()
-  const panel = homePanel(tab, query)
-  const isSearching = panel === 'search'
-  // No tab is selected while search results fill the panel; the shown tab keeps the tab stop.
-  const selected = selectedTab(tab, panel)
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const isSearching = trimmedQuery !== ''
 
   const results = useMemo(
     () => (isSearching ? calculators.filter((item) => matchesQuery(item, trimmedQuery)) : []),
     [isSearching, trimmedQuery],
   )
 
-  const totalCalculators = categories.reduce((count, category) => count + category.items.length, 0)
+  const totalCalculators = calculators.length
 
   // `/` jumps to the search field, unless the viewer is already typing somewhere.
   useEffect(() => {
@@ -107,21 +40,6 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
-
-  function selectTab(next: HomeTab) {
-    setQuery(queryAfterTabSelect())
-    // Replace, so Back leaves the home page rather than stepping back through tabs.
-    setParams(next === 'calculators' ? {} : { tab: next }, { replace: true })
-  }
-
-  /** Arrows, Home and End move focus and selection along the tab row. */
-  function onTabKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>, index: number) {
-    const next = tabIndexForKey(event.key, index, HOME_TABS.length)
-    if (next === null) return
-    event.preventDefault()
-    selectTab(HOME_TABS[next].id)
-    tabRefs.current[next]?.focus()
-  }
 
   return (
     <div className="page home-page">
@@ -149,55 +67,30 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
         </p>
       </search>
 
-      <div className="home-index">
-        <div className="home-tabs" role="tablist" aria-label="Home sections">
-          {HOME_TABS.map((item, index) => (
-            <button
-              key={item.id}
-              ref={(el) => { tabRefs.current[index] = el }}
-              type="button"
-              role="tab"
-              id={`home-tab-${item.id}`}
-              aria-selected={selected === item.id}
-              aria-controls="home-panel"
-              tabIndex={tab === item.id ? 0 : -1}
-              className={selected === item.id ? 'home-tab active' : 'home-tab'}
-              onClick={() => selectTab(item.id)}
-              onKeyDown={(event) => onTabKeyDown(event, index)}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <div
-          role="tabpanel"
-          id="home-panel"
-          aria-labelledby={isSearching ? 'home-results' : `home-tab-${tab}`}
-          className="home-panel"
-        >
-          {panel === 'search' ? (
-            <section className="index-section" aria-labelledby="home-results">
-              <h2 className="index-label" id="home-results">Results for "{trimmedQuery}"</h2>
-              {results.length > 0 ? (
-                <IndexRows rows={results.map((item) => ({ path: item.path, name: item.name, tag: item.category }))} />
-              ) : (
-                <div className="empty-state">
-                  <p>Nothing matches that search yet.</p>
-                  <button type="button" className="secondary-button" onClick={() => setQuery('')}>
-                    Clear search
-                  </button>
-                </div>
-              )}
-            </section>
-          ) : panel === 'recent' ? (
+      <div className="home-panel">
+        {isSearching ? (
+          <section className="index-section" aria-labelledby="home-results">
+            <h2 className="index-label" id="home-results">Results for "{trimmedQuery}"</h2>
+            {results.length > 0 ? (
+              <IndexRows rows={results.map((item) => ({ path: item.path, name: item.name, tag: kindLabel(item.kind) }))} />
+            ) : (
+              <div className="empty-state">
+                <p>Nothing matches that search yet.</p>
+                <button type="button" className="secondary-button" onClick={() => setQuery('')}>
+                  Clear search
+                </button>
+              </div>
+            )}
+          </section>
+        ) : (
+          <>
             <RecentList />
-          ) : (
-            categoriesForTab(panel, categories).map((category) => (
-              <CategoryList key={category.name} category={category} byGroup={panel !== 'calculators'} />
-            ))
-          )}
-        </div>
+            <section className="index-section" aria-labelledby="home-regions">
+              <h2 className="index-label" id="home-regions">By region</h2>
+              <IndexRows rows={regions.map((region) => ({ path: regionPath(region), name: region, note: regionSummary(region) }))} />
+            </section>
+          </>
+        )}
       </div>
 
       <section className="home-install" aria-label="Install">

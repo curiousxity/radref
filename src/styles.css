@@ -138,6 +138,7 @@ button, input, select, textarea { font: inherit; }
 .nav-dropdown-link { display: flex; align-items: center; min-height: 44px; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--color-hairline); font-size: 0.86rem; color: var(--color-text); white-space: nowrap; }
 .nav-dropdown-link:last-child { border-bottom: 0; }
 .nav-dropdown-link:hover { background: var(--color-surface-2); }
+.nav-region-link { font-weight: 600; }
 .nav-dropdown-link.active { color: var(--color-primary); font-weight: 600; box-shadow: inset 2px 0 0 var(--color-primary); }
 /* 44px icon button (sun/moon). */
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: transparent; color: var(--color-text-muted); cursor: pointer; }
@@ -289,7 +290,6 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .copy-button:disabled { background: transparent; border-color: var(--color-border); color: var(--color-text-muted); cursor: not-allowed; }
 .plain-list { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.55rem; }
 .plain-list li { line-height: 1.55; }
-.section-blurb { margin: 0; max-width: 48rem; color: var(--color-text-muted); line-height: 1.55; }
 .lesson-body p { margin: 0 0 0.85rem; line-height: 1.6; max-width: 72ch; }
 .lesson-body > :last-child, .lesson-step > :last-child { margin-bottom: 0; }
 .lesson-body a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
@@ -331,26 +331,14 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
   .home-search .search-field:focus-within .search-hint,
   .home-search .search-field:has(input:not(:placeholder-shown)) .search-hint { display: none; }
 }
-.home-index { display: grid; gap: 0; }
-/* The bottom rule is an inset shadow, not a border, so the active tab's underline can sit on it
-   without overflowing the strip; a 1px overflow made browsers draw a vertical scroll bar. The strip
-   still scrolls sideways on a narrow phone, with its scroll bar hidden. */
-.home-tabs { display: flex; gap: 0.25rem; box-shadow: inset 0 -1px 0 var(--color-hairline); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
-.home-tabs::-webkit-scrollbar { display: none; }
-.home-tab { min-height: 44px; padding: 0 0.9rem; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; font-size: 0.92rem; font-weight: 550; color: var(--color-text-muted); white-space: nowrap; cursor: pointer; }
-.home-tab:hover { color: var(--color-text); }
-.home-tab.active { color: var(--color-text); border-bottom-color: var(--color-accent); }
-.home-tab:focus-visible { outline-offset: -2px; }
-.home-panel { display: grid; gap: 1.75rem; padding-top: 1.25rem; }
+.home-panel { display: grid; gap: 1.75rem; }
 .index-section { display: grid; gap: 0.4rem; }
-.index-label-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .index-label { margin: 0; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.6875rem; font-weight: 600; color: var(--color-text-muted); }
-.index-count { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-text-muted); }
-.index-section > .section-blurb { font-size: 0.86rem; }
-.index-group { display: grid; gap: 0.4rem; margin-top: 0.85rem; }
 .index-rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-hairline); }
 .index-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 48px; padding: 0.55rem 0; border-bottom: 1px solid var(--color-hairline); }
+.index-text { display: grid; gap: 0.15rem; min-width: 0; }
 .index-name { font-size: 1rem; color: var(--color-text); }
+.index-note { font-size: 0.82rem; line-height: 1.4; color: var(--color-text-muted); }
 .index-tag { flex-shrink: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted); text-align: right; }
 .index-row:hover .index-name { color: var(--color-primary); }
 .index-row:focus-visible { outline-offset: -2px; }

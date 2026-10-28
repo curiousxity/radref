@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { categories } from '../data/calculators'
+import { regionGroups, regionPath, regions } from '../data/calculators'
 
 export function NotFoundPage() {
   const location = useLocation()
@@ -20,11 +20,11 @@ export function NotFoundPage() {
         </div>
       </section>
 
-      {categories.map((category) => (
-        <section key={category.name} className="info-card">
-          <h3>{category.name}</h3>
+      {regions.map((region) => (
+        <section key={region} className="info-card">
+          <h3><Link to={regionPath(region)}>{region}</Link></h3>
           <ul className="plain-list link-list">
-            {category.items.map((item) => (
+            {regionGroups(region).flatMap((group) => group.items).map((item) => (
               <li key={item.path}>
                 <Link to={item.path}>{item.name}</Link>
               </li>
