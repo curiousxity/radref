@@ -160,3 +160,12 @@ Ulnar variance is reported as a descriptor (positive, neutral, negative), not as
 line. A bifid median nerve and a persistent median artery are offered as variants without a
 cited rule. (R14's abstract lists "a persistent median artery" among the findings related to
 the cause of carpal tunnel syndrome, but the page does not cite it there.)
+
+## Second check, 2026-10-28: R13 read in full
+
+R13 (Costa, Morrison and Carrino, AJR 2003) was read in full on the AJR site, in a browser. The
+open-access indexes (Unpaywall, OpenAlex, Semantic Scholar) list it as closed.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| W8-2 | yes | "The most important finding is the presence of peritendinous edema concentrically surrounding the second and the first extensor compartments, beginning at the point of crossover, 4–8 cm proximal to the Lister tubercle and extending proximally." In the three cases the edema "began at the crossover point and extended proximally for an average of 3.5 cm". |

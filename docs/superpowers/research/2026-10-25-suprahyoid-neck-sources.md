@@ -89,3 +89,12 @@ Read in full: Shin 2001 (N-R2) and Hoang 2011 (N-R5).
 | N2-5 | yes | Shin: "a dumbbell shape is seen with the waist formation by the narrow stylomandibular tunnel in the deep lobe parotid tumors. The loss of the fat line between the mass and the parotid gland suggests a deep lobe parotid origin"; "Preservation of the fat plane between the mass and the parotid gland strongly suggests an extraparotid origin"; pleomorphic adenomas "are the most common neoplasms to originate in the prestyloid parapharyngeal space". |
 | N2-6 | yes, restored | Shin: "In tumors arising from the poststyloid parapharyngeal space, anteromedial displacement of the carotid sheath structures is frequent because the vagus nerve and sympathetic chain are posterior to the internal carotid artery, whereas posterolateral displacement ... is frequent in tumors arising from the prestyloid parapharyngeal space". The forward sign removed in the fourth check is back, now as "forward and inward → carotid space (poststyloid)", cited to Shin; "back and out" points to a prestyloid mass or a lateral retropharyngeal node (Shin; Harnsberger). |
 | N2-9 | yes, changed | Hoang's table: edema "Fills the retropharyngeal space from side to side", smooth ovoid, rectangular or bow-tie, tapered, "only mild mass effect", "no wall thickening or enhancement"; suppurative node "Unilateral", rounded, may have a thin rim; abscess "oval or rounded", "moderate-to-marked mass effect", "usually has a thick enhancing wall"; "The sign of rim enhancement and a low-density center is less than 57% specificity for purulent material at surgery". The site said edema had "no mass effect" and an abscess "has" a wall; now "only mild" and "usually", and the suppurative node is a third option. As the author noted, no single sign settles it. |
+
+## Sixth check, 2026-10-28: N-R3 figure legends
+
+N-R3 (Rao, Koeller and Adair, RadioGraphics 1999) is paywalled, but the RSNA page shows the
+figure legends.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| N2-7 | yes | Two carotid body tumours: "The ECA (short arrow) is splayed from the ICA (long arrow)" (Fig. 4a), and a mass "that splays the ECA (short arrow) from the ICA (long arrow)" (Fig. 8a; Fig. 8b shows the same at angiography). Vagal paragangliomas instead displace "both the ECA and ICA anteriorly" (Fig. 10b). |

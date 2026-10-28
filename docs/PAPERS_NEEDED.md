@@ -7,6 +7,13 @@ against a review the author accepted instead (Neer, Mason 1954, Mayfield, Lichtm
 1979, Hawkins, Canale-Kelly, Sanders 1993, Young, Burgess, the AO thoracolumbar paper), are no longer
 listed; what each settled is in the "check" sections of `docs/superpowers/research/*-sources.md`.
 
+Searched again on 2026-10-28 by other routes: OpenAlex, Semantic Scholar and the Internet Archive's
+scholar index (fatcat) for every DOI below, then the publisher pages in a browser. The indexes found
+no new free copy. In the browser, AJR serves full text even where the indexes say "closed" (all
+five AJR papers here are now read); RSNA (Radiology, RadioGraphics) shows the abstract and every
+figure legend but not the body, which settled two papers' claims; Bone & Joint, Oxford (JBMR) and the
+others ask for a sign-in or purchase.
+
 ## 1. Still open on a calculator or study rule
 
 Asked for before and still missing; each settles a specific rule on the live site.
@@ -16,7 +23,7 @@ Asked for before and still missing; each settles a specific rule on the live sit
 - [ ] Myerson MS, et al. Foot Ankle. 1986;6(5):225-242. doi:10.1177/107110078600600504. The Lisfranc types; the Scolaro review sent does not describe them.
 - [ ] Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113. Pelvic ring wording.
 - [ ] Spence KF Jr, et al. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013. The 6.9 mm atlas rule.
-- [ ] Rao AB, et al. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605. Paraganglioma signs in the suprahyoid neck study.
+- [x] Rao AB, et al. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605. Paraganglioma signs in the suprahyoid neck study. Settled from the figure legends (2026-10-28).
 
 ## 2. Thought to be free, but not
 
@@ -66,10 +73,10 @@ Lower priority: each settles one or two claims in a study that still carries "Un
 
 ### Knee MRI study
 
-- [ ] Sanders TG 2000, Radiographics. doi:10.1148/radiographics.20.suppl_1.g00oc19s135
+- [x] Sanders TG 2000, Radiographics. doi:10.1148/radiographics.20.suppl_1.g00oc19s135 (figure legends, 2026-10-28; one point for the author)
 - [ ] Campos JC 2001, Radiology. doi:10.1148/radiology.219.2.r01ma23381
 - [ ] Kijowski R 2008, Radiology. doi:10.1148/radiol.2482071234
-- [ ] Costa CR 2004, AJR. doi:10.2214/ajr.183.1.1830017
+- [x] Costa CR 2004, AJR. doi:10.2214/ajr.183.1.1830017 (read, 2026-10-28)
 - [ ] Bencardino JT 2009, Radiographics. doi:10.1148/rg.297095036
 - [ ] Schweitzer ME 1995, Radiology. doi:10.1148/radiology.194.3.7862987
 - [ ] Elias DA 2002, Radiology. doi:10.1148/radiol.2253011578
@@ -83,7 +90,7 @@ Lower priority: each settles one or two claims in a study that still carries "Un
 - [ ] Kijowski R 2005, Skeletal Radiol. doi:10.1007/s00256-004-0854-y
 - [ ] Timmerman LA 1994, Am J Sports Med. doi:10.1177/036354659402200105
 - [ ] Potter HG 1995, Radiology. doi:10.1148/radiology.196.1.7784585
-- [ ] Rosenberg ZS 1995, AJR. doi:10.2214/ajr.164.2.7839980
+- [x] Rosenberg ZS 1995, AJR. doi:10.2214/ajr.164.2.7839980 (read, 2026-10-28; the claim it is cited for is not in it, for the author)
 
 ### Wrist MRI study
 
@@ -93,12 +100,12 @@ Lower priority: each settles one or two claims in a study that still carries "Un
 - [ ] Cerezal L 2002, Radiographics. doi:10.1148/radiographics.22.1.g02ja01105
 - [ ] Berger RA 1996, J Hand Surg Am. doi:10.1016/S0363-5023(96)80096-7
 - [ ] Glajchen N 1996, Skeletal Radiol. doi:10.1007/s002560050033
-- [ ] Costa CR 2003, AJR. doi:10.2214/ajr.181.5.1811245
+- [x] Costa CR 2003, AJR. doi:10.2214/ajr.181.5.1811245 (read, 2026-10-28)
 
 ### Foot MRI study
 
 - [ ] Newman JS 2000, Radiographics. doi:10.1148/radiographics.20.2.g00mc03321
-- [ ] Castro M 2010, AJR. doi:10.2214/AJR.10.4674
+- [x] Castro M 2010, AJR. doi:10.2214/AJR.10.4674 (read, 2026-10-28)
 - [ ] Ashman CJ 2001, Radiographics. doi:10.1148/radiographics.21.6.g01nv071425
 - [ ] Sanders TG 2008, Radiol Clin North Am. doi:10.1016/j.rcl.2008.09.001
 - [ ] Umans H 2014, Skeletal Radiol. doi:10.1007/s00256-014-1920-8
@@ -108,7 +115,7 @@ Lower priority: each settles one or two claims in a study that still carries "Un
 ### Diabetic foot MRI study
 
 - [ ] Ledermann HP 2002, Radiology. doi:10.1148/radiol.2233011279
-- [ ] Johnson PW 2009, AJR. doi:10.2214/AJR.08.1376
+- [x] Johnson PW 2009, AJR. doi:10.2214/AJR.08.1376 (read, 2026-10-28)
 - [ ] Donovan A 2010, RadioGraphics. doi:10.1148/rg.303095111
 - [ ] Ledermann HP 2005, Semin Musculoskelet Radiol. doi:10.1055/s-2005-921945
 - [ ] Chantelau E 2005, Diabet Med. doi:10.1111/j.1464-5491.2005.01677.x

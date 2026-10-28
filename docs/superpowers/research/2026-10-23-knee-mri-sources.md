@@ -213,3 +213,19 @@ depth of the lesion and the presence or absence of associated chondral fragments
 "should prompt careful inspection of the joint for a displaced intraarticular chondral body". That
 sentence is now in the cartilage step, cited to Recht. K10-1 (the under-half / half-or-more split)
 still has no source. The author chose to keep the four grades as they are (2026-10-25).
+
+## Sixth check, 2026-10-28: K5 in full, K7 figure legends
+
+K5 (Costa, Morrison and Carrino, AJR 2004) was opened in full on the AJR site: Table 2 compares
+"Major (> 3mm) and Minor (≤ 3mm)" extrusion, and the discussion says "Tears involving the meniscal
+root ... are also significantly related to the severity of meniscal extrusion". K3-3 stands.
+
+K7 (Sanders et al., RadioGraphics 2000) is paywalled, but the RSNA page shows every figure legend.
+These are from the legends, not the body text:
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| K2-1 | ACL: yes. "Near the terminal sulcus": partly; **for the author** | Fig. 1b: valgus and femoral internal rotation cause "disruption of the ACL", then the tibia subluxes anteriorly and the lateral femoral condyle impacts the posterolateral plateau. But "The degree of flexion of the knee at injury determines the exact location of the lateral femoral condyle contusion": posterior with moderate flexion (Fig. 3a, b), "more anteriorly" with minimal flexion, where the lateral femoral sulcus deepens (Fig. 3c). The abstract says "midportion". The page's "near the terminal sulcus" fits only the minimal-flexion case. |
+| K2-2 | yes | Fig. 6a: the dashboard injury "is the most common mechanism of injury resulting in disruption of the PCL"; Fig. 6b: the PCL "is usually tight when the knee is in 90° of flexion and is, therefore, at risk"; the ACL "usually remains intact". |
+| K2-3 | ACL and PCL: yes. Posterolateral corner: partly | Fig. 9b: "Depending on the amount of force applied during hyperextension, tears of the ACL, PCL, or both may occur." Figs. 11 and 12 show posterior capsule disruption after severe hyperextension, the "posterior lateral joint capsule" in 12a, and a thrombosed popliteal artery in 11b. The legends do not name the posterolateral corner as such. |
+| K2-4 | yes | Fig. 13b: the larger contusion is from direct force to the lateral femoral condyle; "A smaller area of edema ... may occur within the medial femoral condyle or the medial tibial plateau due to an avulsive injury of the MCL"; "Stretching or disruption of the MCL ... can occur". (In Fig. 14 the small medial femoral edema is "likely secondary to impaction" instead.) |

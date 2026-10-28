@@ -78,3 +78,11 @@ Notes on the set:
 
 Not sourced, and labelled as the site's own on the page: the order of the steps, the protocol
 checklist (T1 without fat suppression in two planes, fat-suppressed PD or T2).
+
+## Second check, 2026-10-28: D3 read in full
+
+D3 (Johnson, Collins and Wenger, AJR 2009) was read in full on the AJR site, in a browser.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| D3-1 | yes, as reworded on 2026-10-23 | "None of the cases of osteomyelitis in our series had a limited subcortical distribution or hazy reticulated pattern"; confluent medullary low T1 signal: sensitivity 95%, specificity 91%, NPV 98%. "Only the T1-weighted sequences, however, were reviewed", so the dropped clause about bright fluid-sensitive images was rightly dropped; the authors only add, from experience, that "T2-weighted MRI may be overly sensitive". The hazy reticulated pattern "likely correlates with" noninfectious reactive marrow edema. |

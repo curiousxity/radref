@@ -28,6 +28,12 @@ by the author's choice).
   means unstable) but says cartilage "was not assessed"; the cartilage signs come from knee
   and talus studies. Trim to the interface, or keep it with another citation? Unchanged until
   then; details in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, "Third check".
+- **Two more for the author, from the 2026-10-28 re-search** (details in the sources docs):
+  - Elbow E11-1: the page cites Rosenberg, AJR 1995 for the anconeus epitrochlearis compressing
+    the ulnar nerve (four places), but the paper, read in full, never mentions it.
+  - Knee K2-1: the pivot-shift femoral contusion is "near the terminal sulcus" on the page;
+    Sanders 2000's legends say its position depends on knee flexion (posterior with moderate
+    flexion, anterior near the sulcus with minimal), and the abstract says "midportion".
 - **PDFs needed from the author** (`docs/PAPERS_NEEDED.md`): Herbert and Fisher 1984 (Bone &
   Joint asks for sign-in), Vaccaro 2016 (the Utrecht record has no file), the ten shoulder
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,

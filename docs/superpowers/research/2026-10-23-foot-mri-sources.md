@@ -197,3 +197,12 @@ R11 (Bencardino et al., AJR 2000) was read in full on the AJR site.
 - F7-4 (already moved to Zanetti, R10): R11's discussion agrees: Zanetti "established a threshold
   of 5 mm (in transverse diameter) beyond which the lesion is most likely symptomatic", while R11
   itself found "significant overlap" (mean 5.3 mm symptomatic, 4.1 mm silent, p = 0.05).
+
+## Fourth check, 2026-10-28: R5 read in full
+
+R5 (Castro et al., AJR 2010) was read in full on the AJR site, in a browser.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| F3-1 | yes | The ligaments are grouped "into three groups: dorsal, interosseous, and plantar"; "The Lisfranc ligament is the medial (first) interosseous ligament, C1-M2, and the largest of the three interosseous ligaments"; biomechanically "the Lisfranc ligament is stronger and stiffer than the plantar Lisfranc ligament and ... the dorsal ligament is significantly weaker than the Lisfranc/plantar complex". |
+| F3-2 | yes | "The second plantar ligament, C1-M2,3, was designated the plantar Lisfranc ligament"; it arises from C1 and splits into "a superficial component that inserts on the base of M3 and a deeper band that attaches at the base of M2". The page's citation of Castro for this is now backed by Castro itself. |
