@@ -43,7 +43,6 @@ export function InstallButton() {
       >
         Add to Home Screen
       </button>
-      <p>Works with no signal once it is on your home screen.</p>
       {showSteps ? <p className="install-steps">{isIosDevice() ? iosSteps : genericSteps}</p> : null}
     </div>
   )

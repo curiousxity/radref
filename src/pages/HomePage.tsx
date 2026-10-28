@@ -145,7 +145,7 @@ export function HomePage({ categories }: { categories: CalculatorCategory[] }) {
         <p className="search-status" id="search-count" aria-live="polite">
           {isSearching
             ? `${results.length} of ${totalCalculators} ${results.length === 1 ? 'match' : 'matches'}`
-            : `Search all ${totalCalculators} by name, organ, or criteria`}
+            : ''}
         </p>
       </search>
 

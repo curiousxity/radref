@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
-import { Cite, LessonCaveat, LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { CALVARIUM_SOURCES, CC_BY, calvariumImages } from '../data/calvariumImages'
 import type { CalvariumImage } from '../data/calvariumImages'
@@ -654,7 +654,6 @@ export function CalvariumPage() {
       </section>
 
       <LessonReferences references={references} />
-      <LessonCaveat />
     </div>
   )
 }

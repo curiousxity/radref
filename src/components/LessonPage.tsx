@@ -38,12 +38,3 @@ export function LessonReferences({ references, note }: { references: LessonRefer
     </section>
   )
 }
-
-/** The standing caveat that these are teaching notes rather than a guideline. */
-export function LessonCaveat() {
-  return (
-    <p className="source-note lesson-caveat">
-      Personal teaching notes compiled from the cited literature. Check the current guideline before applying to a patient.
-    </p>
-  )
-}

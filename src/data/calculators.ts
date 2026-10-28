@@ -42,7 +42,6 @@ export const categories: CalculatorCategory[] = [
   {
     name: 'Studies',
     itemLabel: 'study',
-    blurb: 'One page per exam: build the report step by step, learn the method with the papers behind each rule, then test yourself. Personal teaching notes compiled from the cited literature. Check the current guideline before applying to a patient.',
     items: [
       { path: '/studies/rectal-mri', name: 'Rectal MRI', group: 'Abdomen and pelvis', description: 'Staging a new rectal cancer: MRF, T stage, EMVI, nodes, low tumors, and a structured report.', keywords: ['rectum', 'rectal cancer', 'colorectal', 'mri', 'staging', 'mesorectal fascia', 'mrf', 'crm', 'emvi', 'tumor deposit', 'lateral lymph node', 'esgar', 'mercury', 'lesson', 'teaching', 'report', 'template', 'quiz'], component: lazyPage(() => import('../studies/RectalMriStudy'), 'RectalMriStudyPage') },
       { path: '/studies/prostate-mri', name: 'Prostate MRI', group: 'Abdomen and pelvis', related: ['/pi-rads', '/ellipsoid-volume'], description: 'Zonal anatomy, what each sequence answers, PZ and TZ scoring, EPE grading, mimics.', keywords: ['prostate', 'pi-rads', 'pirads', 'mri', 'peripheral zone', 'transition zone', 'extraprostatic extension', 'epe', 'lesson', 'teaching', 'report', 'template', 'quiz'], component: lazyPage(() => import('../studies/ProstateMriStudy'), 'ProstateMriStudyPage') },

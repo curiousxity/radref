@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { LessonCaveat, LessonReferences } from '../components/LessonPage'
+import { LessonReferences } from '../components/LessonPage'
 import { QuizPanel } from './QuizPanel'
 import { ReportBuilder } from './ReportBuilder'
 import type { StudyDefinition } from './types'
@@ -97,8 +97,6 @@ export function StudyPage({ study }: { study: StudyDefinition }) {
 
         {tab === 'quiz' && <QuizPanel slug={study.slug} questions={study.quiz} />}
       </div>
-
-      <LessonCaveat />
     </div>
   )
 }

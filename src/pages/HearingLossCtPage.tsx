@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
 import { CopyBlock } from '../components/CopyBlock'
-import { Cite, LessonCaveat, LessonReferences } from '../components/LessonPage'
+import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { ScanFigures } from '../components/ScanFigures'
 import { hearingLossScans } from '../data/scans/hearingLoss'
@@ -528,7 +528,6 @@ export function HearingLossCtPage() {
       </section>
 
       <LessonReferences references={references} />
-      <LessonCaveat />
     </div>
   )
 }
