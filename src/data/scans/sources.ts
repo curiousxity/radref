@@ -58,4 +58,18 @@ export const SCAN_SOURCES = {
   meunier2021: { short: 'Meunier et al. 2021', doi: '10.1080/17453674.2021.1915017', licence: 'CC BY 4.0' },
   chukwuma2026: { short: 'Chukwuma et al. 2026', doi: '10.7759/cureus.101889', licence: 'CC BY 4.0' },
   crone2026: { short: 'Crone et al. 2026', doi: '10.1007/s00256-026-05188-1', licence: 'CC BY 4.0' },
+  // Hearing loss CT.
+  // The article says "Creative Commons Attribution License"; the publisher's Crossref record gives
+  // the version (creativecommons.org/licenses/by/2.0).
+  purohit2014: { short: 'Purohit et al. 2014', doi: '10.1007/s13244-014-0313-9', licence: 'CC BY 2.0' },
+  // The rest state CC BY 4.0 in the article's licence statement and in Crossref, except Salata,
+  // whose article says only "Creative Commons Attribution License"; Crossref gives 4.0.
+  ostrander2026: { short: 'Ostrander et al. 2026', doi: '10.3389/fradi.2026.1784554', licence: 'CC BY 4.0' },
+  kohler2024: { short: 'Kohler et al. 2024', doi: '10.3390/tomography10050056', licence: 'CC BY 4.0' },
+  maillot2016: { short: 'Maillot et al. 2016', doi: '10.1007/s13244-016-0490-9', licence: 'CC BY 4.0' },
+  salata2019: { short: 'Salata et al. 2019', doi: '10.1590/0100-3984.2016.0213', licence: 'CC BY 4.0' },
+  ge2020: { short: 'Ge et al. 2020', doi: '10.1186/s41016-020-00191-4', licence: 'CC BY 4.0' },
+  dorner2024: { short: 'Dörner et al. 2024', doi: '10.1007/s10143-024-02419-8', licence: 'CC BY 4.0' },
+  vlachodimitropoulos2026: { short: 'Vlachodimitropoulos et al. 2026', doi: '10.4102/sajr.v30i1.3278', licence: 'CC BY 4.0' },
+  pontesMadruga2022: { short: 'Pontes-Madruga et al. 2022', doi: '10.1016/j.bjorl.2020.05.027', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>
