@@ -436,7 +436,9 @@ the PMC pages show a reCAPTCHA and Springer's image host is blocked), each credi
 Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page gives both.
 
 - [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
-- [ ] No open image for a burr hole or osteomyelitis yet; both have drawings only.
+- [x] Burr hole and osteomyelitis now have CT panels from CC BY 4.0 case reports (2026-10-28):
+  Sanjabi 2026 Fig. 1 and Li 2026 Fig. 2D (burr hole), Manzoor 2026 Fig. 2 (frontal osteomyelitis).
+- [ ] The "Read the vault in layers" drawing has no real scan beside it yet.
 
 ## Hearing loss CT page
 

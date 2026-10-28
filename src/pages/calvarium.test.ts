@@ -5,8 +5,9 @@ import { CALVARIUM_SOURCES, calvariumImages } from '../data/calvariumImages'
 const publicDir = new URL('../../public/', import.meta.url)
 
 // The scans are cropped from open-access figures published under CC BY 4.0 (Gomez et al., Insights
-// Imaging 2018; Pons Escoda et al., Insights Imaging 2020), which allows reuse with credit. Each
-// must exist, stay small (they are precached for offline use), and name its source figure.
+// Imaging 2018; Pons Escoda et al., Insights Imaging 2020; three case reports), which allows reuse
+// with credit. Each must exist, stay small (they are cached for offline use), and name its source
+// figure.
 describe('calvarial lesions page images', () => {
   const images = Object.values(calvariumImages)
 
@@ -19,7 +20,7 @@ describe('calvarial lesions page images', () => {
   test('every image credits a CC BY source figure', () => {
     for (const image of images) {
       expect(Object.keys(CALVARIUM_SOURCES)).toContain(image.source)
-      expect(image.figure).toMatch(/^Fig\. \d+[a-z]$/)
+      expect(image.figure).toMatch(/^Fig\. \d+[a-zA-Z]?$/)
       expect(image.alt.length).toBeGreaterThan(20)
     }
   })
