@@ -75,3 +75,13 @@ No O-RADS MRI score 5 example yet: Nougaret Fig. 16 has garbled panel letters an
 only by colour. Sayasneh 2015 (Int J Oncol) looks CC BY 3.0 in its licence URL but its text says
 Attribution-NonCommercial, so it was not used. Note for the helper script: IOTA captions embed tiny
 inline graphics, so a figure's own image is its `<graphic>`, not the first `xlink:href`.
+
+## TI-RADS calculator and thyroid ultrasound study (`src/data/scans/tirads.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| cystic, mixed, hyperechoic, hypoechoic, veryHypoechoic, tallerThanWide, lobulated, irregular, extrathyroidal, punctateFoci, macrocalcification, peripheralCalcification, tr5 | Pires AT et al. The 2017 ACR TI-RADS: pictorial essay. Radiol Bras 2022;55:47-53 (PMC8864691) | Figs. 1, 2, 4, 6, 8, 9, 10, 11, 12, 14, 15, 16, 21 | "Creative Commons Attribution License" (no version), license_ref by/4.0 / by/4.0 | whole images, scanner calipers and settings only; 340 px wide to keep the set near 230 KB |
+| cometTail | Cannella R et al. RADS ALPHABET. Insights Imaging 2026;17:9 (PMC12796044) | Fig. 11A | CC BY 4.0 / by/4.0 | |
+
+No spongiform example with ACR scoring: Sereke 2021 and de Macedo 2018 label theirs "TI-RADS 2" under
+other systems.

@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { tiradsScans } from '../data/scans/tirads'
 import type { LessonReference } from '../components/LessonPage'
 import { calculateTirads } from '../logic/tirads'
 import { StudyPage } from '../study/StudyPage'
@@ -756,16 +758,19 @@ const learn = [
             <li>Mixed cystic and solid: 1. Score the other features on the solid part. Solid material that is eccentric with an acute angle to the wall is suspicious, as is solid material that is hypoechoic, lobulated or has punctate echogenic foci.</li>
             <li>Solid or almost completely solid: 2. If shadowing calcification hides the inside, assume solid (2) and give 1 point for echogenicity.</li>
           </ul>
+          <ScanFigures images={[tiradsScans.cystic, tiradsScans.mixed]} />
         </div>
 
         <div className="lesson-step">
           <h4>Step 4. Echogenicity</h4>
           <p>Anechoic 0 (only for cystic or almost completely cystic nodules, which would otherwise score 3 for looking very hypoechoic); hyperechoic or isoechoic 1; hypoechoic 2; very hypoechoic (darker than the strap muscles) 3. If you cannot tell, give 1.</p>
+          <ScanFigures images={[tiradsScans.hyperechoic, tiradsScans.hypoechoic, tiradsScans.veryHypoechoic]} />
         </div>
 
         <div className="lesson-step">
           <h4>Step 5. Shape</h4>
           <p>Taller-than-wide on a transverse image scores 3. It is an insensitive but highly specific sign of malignancy.</p>
+          <ScanFigures images={[tiradsScans.tallerThanWide]} />
         </div>
 
         <div className="lesson-step">
@@ -775,6 +780,7 @@ const learn = [
             <li>Lobulated or irregular 2: a spiculated or jagged edge, with or without protrusions into the thyroid around it.</li>
             <li>Extrathyroidal extension 3. Frank invasion of soft tissue or vessels is a highly reliable sign of malignancy. Minimal extension (abutment, contour bulge, lost echogenic border) is controversial: be cautious reporting it, especially in an otherwise benign-looking nodule.</li>
           </ul>
+          <ScanFigures images={[tiradsScans.lobulated, tiradsScans.irregular, tiradsScans.extrathyroidal]} />
         </div>
 
         <div className="lesson-step">
@@ -785,11 +791,13 @@ const learn = [
             <li>Peripheral (rim) calcifications, complete or incomplete: 2. Interrupted rim calcification with soft tissue pushing out counts as a lobulated margin, for another 2 points.</li>
             <li>Punctate echogenic foci (smaller, non-shadowing, may have small comet tails in solid parts): 3. In a spongiform nodule they are the back walls of tiny cysts and add nothing.</li>
           </ul>
+          <ScanFigures images={[tiradsScans.cometTail, tiradsScans.macrocalcification, tiradsScans.peripheralCalcification, tiradsScans.punctateFoci]} />
         </div>
 
         <div className="lesson-step">
           <h4>Step 8. Add the points, then apply the size</h4>
           <p>0 points is TR1, 2 is TR2, 3 is TR3, 4 to 6 is TR4, 7 or more is TR5. Then compare the maximum diameter with that level's FNA and follow-up sizes (see Categories and management).</p>
+          <ScanFigures images={[tiradsScans.tr5]} />
         </div>
 
         <div className="lesson-step">
