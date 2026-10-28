@@ -58,6 +58,14 @@ export const SCAN_SOURCES = {
   meunier2021: { short: 'Meunier et al. 2021', doi: '10.1080/17453674.2021.1915017', licence: 'CC BY 4.0' },
   chukwuma2026: { short: 'Chukwuma et al. 2026', doi: '10.7759/cureus.101889', licence: 'CC BY 4.0' },
   crone2026: { short: 'Crone et al. 2026', doi: '10.1007/s00256-026-05188-1', licence: 'CC BY 4.0' },
+  // Fifth metatarsal. Al Zayer (Cureus) states "CC-BY 4.0" (no Crossref licence). Sauer's licence
+  // statement gives no version; its licence link and Crossref give 4.0.
+  rikken2020: { short: 'Rikken et al. 2020', doi: '10.1007/s00167-020-06072-8', licence: 'CC BY 4.0' },
+  alZayer2025: { short: 'Al Zayer et al. 2025', doi: '10.7759/cureus.97610', licence: 'CC BY 4.0' },
+  hoshino2019: { short: 'Hoshino et al. 2019', doi: '10.1155/2019/9051327', licence: 'CC BY 4.0' },
+  sauer2017: { short: 'Sauer 2017', doi: '10.1055/s-0037-1599833', licence: 'CC BY 4.0' },
+  ziegner2025: { short: 'Ziegner et al. 2025', doi: '10.1007/s00330-025-11554-9', licence: 'CC BY 4.0' },
+  aparisiGomez2019: { short: 'Aparisi Gómez et al. 2019', doi: '10.1186/s13244-019-0747-1', licence: 'CC BY 4.0' },
   // Hearing loss CT.
   // The article says "Creative Commons Attribution License"; the publisher's Crossref record gives
   // the version (creativecommons.org/licenses/by/2.0).
