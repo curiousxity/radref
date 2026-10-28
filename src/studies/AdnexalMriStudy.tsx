@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { oradsScans } from '../data/scans/orads'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -657,6 +659,7 @@ const learn = [
           <li><em>Hydrosalpinx.</em> Tubular, serpentine, "cogwheel" folds on cross-section, separate ovary. Score 2 if simple.</li>
           <li><em>Peritoneal inclusion cyst.</em> Fluid that takes the shape of the pelvis, with a normal ovary sitting inside it like a spider in a web. Almost always a post-surgical or post-inflammatory pelvis. Per rule 5, you can simply name it.</li>
         </ul>
+        <ScanFigures images={[oradsScans.endometriomaMri, oradsScans.dermoidMriT1, oradsScans.dermoidMriFatSat, oradsScans.fibroma]} />
 
         <h4>Score 3: the "probably fine but someone should look" group</h4>
         <ul className="plain-list">

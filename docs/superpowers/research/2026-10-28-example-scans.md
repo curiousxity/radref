@@ -62,3 +62,16 @@ was not used; Dev Fig. 4 calls an angiomyolipoma "Bosniak III" and was not used.
 | lr2Haemangioma | Schima 2018 | Fig. 5a | as above | |
 
 No CC BY flash-filling haemangioma was found.
+
+## O-RADS calculator and adnexal mass MRI study (`src/data/scans/orads.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| haemorrhagicCyst, endometriomaUs, dermoidUs, multilocularCyst, papillaryProjection | Timmerman D et al. (IOTA) Ultrasound Obstet Gynecol 2026;67:702-724 (PMC13136064) | Figs. 11n, 3b, 13e, 18b, 4b | "open access article under the terms of the http://creativecommons.org/licenses/by/4.0/ License" / by/4.0 | greyscale panels of schematic/greyscale/Doppler triplets; small (about 230 px) in the source |
+| endometriomaMri, dermoidMriT1, dermoidMriFatSat | Nikolić O et al. (ESUR) Insights Imaging 2026;17:51 (PMC12909720) | Figs. 3F, 3L, 3M | CC BY 4.0 / by/4.0 | burned-in scan date and time cropped off L and M |
+| fibroma | Nougaret S et al. Insights Imaging 2024;15:45 (PMC10866854) | Fig. 7a | CC BY 4.0 / by/4.0 | |
+
+No O-RADS MRI score 5 example yet: Nougaret Fig. 16 has garbled panel letters and curves told apart
+only by colour. Sayasneh 2015 (Int J Oncol) looks CC BY 3.0 in its licence URL but its text says
+Attribution-NonCommercial, so it was not used. Note for the helper script: IOTA captions embed tiny
+inline graphics, so a figure's own image is its `<graphic>`, not the first `xlink:href`.

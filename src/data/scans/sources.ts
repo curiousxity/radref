@@ -26,4 +26,8 @@ export const SCAN_SOURCES = {
   // LI-RADS. Prajapati (Cureus) states "CC-BY 4.0"; Crossref has no licence for it.
   schima2018: { short: 'Schima and Heiken 2018', doi: '10.1186/s40644-018-0149-5', licence: 'CC BY 4.0' },
   prajapati2026: { short: 'Prajapati et al. 2026', doi: '10.7759/cureus.113706', licence: 'CC BY 4.0' },
+  // O-RADS US and MRI. The IOTA paper's licence statement gives the version only in its URL.
+  timmerman2026: { short: 'Timmerman et al. (IOTA) 2026', doi: '10.1002/uog.70191', licence: 'CC BY 4.0' },
+  nougaret2024: { short: 'Nougaret et al. 2024', doi: '10.1186/s13244-023-01577-5', licence: 'CC BY 4.0' },
+  nikolic2026: { short: 'Nikolić et al. (ESUR) 2026', doi: '10.1186/s13244-025-02174-4', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>
