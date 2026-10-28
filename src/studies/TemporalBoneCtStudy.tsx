@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { hearingLossScans } from '../data/scans/hearingLoss'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -1131,16 +1133,20 @@ const learn: LearnSection[] = [
           <li><strong>Retrofenestral (cochlear):</strong> a lucent halo around the cochlea ("double ring"). Causes sensorineural loss.</li>
         </ul>
         <p>The Symons/Fanning grading, validated by Lee et al. (AJNR 2009) with excellent reader agreement: grade 1 fenestral only; grade 2 patchy cochlear disease (2A basal turn, 2B middle/apical turns, 2C both); grade 3 diffuse confluent cochlear involvement. Grade matters because cochlear disease affects surgical options.</p>
+        <ScanFigures images={[hearingLossScans.fenestral, hearingLossScans.cochlear]} />
 
         <h4>Superior semicircular canal dehiscence (SSCD)</h4>
         <p>Missing bone over the top of the superior canal, so sound and pressure move the inner ear fluid abnormally (vertigo with loud sounds, hearing your own eyeballs move). Call it only on thin-section Pöschl and Stenvers reformats, for the reason explained above. Report length of the gap and whether it is under the arcuate eminence or at the superior petrosal sinus.</p>
+        <ScanFigures images={[hearingLossScans.scd]} />
 
         <h4>Congenital inner ear malformations (pediatric sensorineural loss, cochlear implant work-up)</h4>
         <p>Use the Sennaroglu classification, because surgeons use it. From most to least severe: Michel (no inner ear), cochlear aplasia, common cavity (cochlea and vestibule are one cyst), incomplete partition type I (cochlea and vestibule both cystic, no modiolus, no enlarged aqueduct), cochlear hypoplasia, incomplete partition type II (the classic Mondini: 1.5 turns with a cystic apex, mildly dilated vestibule, <strong>enlarged vestibular aqueduct</strong>).</p>
         <p>Enlarged vestibular aqueduct is the most common CT-visible cause of pediatric sensorineural loss. Vijayasekaran et al. (AJNR 2007) measured normal children and set the cutoff: midpoint width ≥1.0 mm or opercular width ≥2.0 mm is enlarged. Also report the IAC (a defective fundus or absent canal means a possible absent cochlear nerve, which needs MRI). The Joshi RadioGraphics article walks through all of this with pictures.</p>
+        <ScanFigures images={[hearingLossScans.eva]} />
 
         <h4>Trauma</h4>
         <p>Stop using "longitudinal vs transverse" as the main descriptor. Two independent studies showed it predicts complications poorly: Ishman and Friedland (Laryngoscope 2004) found CSF leak was 9.8 times more common when the fracture involved the petrous bone, and Little and Kesser (Arch Otolaryngol 2006) found otic capsule–violating fractures carried 5× the facial nerve injury, 25× the sensorineural loss and 8× the CSF otorrhea of otic capsule–sparing fractures. So the first line of your report is: <strong>otic capsule sparing or violating.</strong> Then: fracture through the facial canal (which segment), ossicular dislocation (incudostapedial is most common; incudomalleolar separation looks like the ice cream fallen off the cone), carotid canal involvement (recommend CTA), tegmen breach (CSF leak risk), hemotympanum, and any pneumocephalus or pneumolabyrinth (air inside the inner ear means a window fracture or otic capsule fracture).</p>
+        <ScanFigures images={[hearingLossScans.fracture, hearingLossScans.pneumolabyrinth]} />
 
         <h4>Vascular variants and "do not biopsy" masses</h4>
         <ul className="plain-list">
