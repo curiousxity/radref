@@ -134,3 +134,20 @@ read clearly as a cyst once cropped.
 
 No seminal vesicle invasion yet: Agrotis Fig. 5 has localiser lines across the T2 panel and did not
 show the finding clearly when cropped. Sonkaya 2026 Fig. 2 is covered in ROI overlays.
+
+## Pelvic and foot fracture pages (`youngBurgess.ts`, `letournel.ts`, `sanders.ts`, `hawkins.ts`, `lisfranc.ts`)
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| youngBurgess.apc | Algaith A et al. J Clin Med 2026;15:1729 (PMC12986503) | Fig. 2A | CC BY (by/4.0) / by/4.0 | |
+| youngBurgess.lc | Leite-Moreira JP et al. Cureus 2026;18:e111097 (PMC13380300) | Fig. 1 | "CC-BY 4.0" / none | LC III; coloured arrows now grey |
+| letournel.bothColumnSpur | Zhang R et al. Sci Rep 2017;7:8044 (PMC5556078) | Fig. 2B | CC BY 4.0 / by/4.0 | |
+| letournel.posteriorWall | Singh NS et al. Cureus 2026;18:e114457 (PMC13570461) | Fig. 9a | "CC-BY 4.0" / none | 3D CT |
+| sanders.type2-4 | Luo G et al. Int Orthop 2026;50:1787-1797 (PMC13407454) | Fig. 1 A2, B2, C2 | CC BY 4.0 / by/4.0 | figure label kept as 1A/1B/1C, the sub-panel named in the caption |
+| hawkins.type2b, type3 | Meunier A et al. Acta Orthop 2021;92:455-460 (PMC8381918) | Fig. 2A, 2B | CC BY (by/4.0) / by/4.0 | one of two 3D views each |
+| lisfranc.fleck | Chukwuma E et al. Cureus 2026;18:e101889 (PMC12917927) | Fig. 2A | "CC-BY 4.0" / none | |
+| lisfranc.diastasis | Crone AM et al. Skeletal Radiol 2026;55:1487-1511 (PMC13198512) | Fig. 19 | CC BY 4.0 / by/4.0 | weightbearing |
+
+Not found or not used: a clean vertical shear pelvis (only a composite with surgical photographs);
+Hawkins types I and II; Biz 2019's Hawkins IV radiograph is about 170 px; the PLOS One T-shaped
+acetabulum panels are too small to crop.

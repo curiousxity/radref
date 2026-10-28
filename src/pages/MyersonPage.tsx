@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { lisfrancScans } from '../data/scans/lisfranc'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -86,6 +88,11 @@ export function MyersonPage() {
           </table>
         </div>
         <p>The types describe fracture-dislocations. A subtle ligament injury without displacement has no Myerson type; describe the ligaments and the alignment instead.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[lisfrancScans.fleck, lisfrancScans.diastasis]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, and its abstract does not give the types." />

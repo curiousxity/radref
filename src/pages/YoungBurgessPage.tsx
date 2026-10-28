@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { youngBurgessScans } from '../data/scans/youngBurgess'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -135,6 +137,11 @@ export function YoungBurgessPage() {
           </table>
         </div>
         <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. In Young's original description, a symphyseal diastasis of 2.5 cm was what separated APC I from APC II. Stability is not part of the Young-Burgess system itself (Alton and Gee); the stability column is how the types are usually taught alongside it, and the posterior ring decides it.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[youngBurgessScans.apc, youngBurgessScans.lc]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review." />

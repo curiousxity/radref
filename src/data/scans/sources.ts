@@ -49,4 +49,13 @@ export const SCAN_SOURCES = {
   // PI-RADS (Cannella 2026 is above, under TI-RADS)
   zurowska2023: { short: 'Żurowska et al. 2023', doi: '10.3390/cancers15143682', licence: 'CC BY 4.0' },
   agrotis2026: { short: 'Agrotis et al. 2026', doi: '10.1186/s13244-026-02346-w', licence: 'CC BY 4.0' },
+  // Pelvic and foot fractures. Cureus articles state "CC-BY 4.0" (no Crossref licence).
+  algaith2026: { short: 'Algaith et al. 2026', doi: '10.3390/jcm15051729', licence: 'CC BY 4.0' },
+  leiteMoreira2026: { short: 'Leite-Moreira et al. 2026', doi: '10.7759/cureus.111097', licence: 'CC BY 4.0' },
+  zhang2017: { short: 'Zhang et al. 2017', doi: '10.1038/s41598-017-08724-1', licence: 'CC BY 4.0' },
+  singh2026: { short: 'Singh et al. 2026', doi: '10.7759/cureus.114457', licence: 'CC BY 4.0' },
+  luo2026: { short: 'Luo et al. 2026', doi: '10.1007/s00264-026-06927-8', licence: 'CC BY 4.0' },
+  meunier2021: { short: 'Meunier et al. 2021', doi: '10.1080/17453674.2021.1915017', licence: 'CC BY 4.0' },
+  chukwuma2026: { short: 'Chukwuma et al. 2026', doi: '10.7759/cureus.101889', licence: 'CC BY 4.0' },
+  crone2026: { short: 'Crone et al. 2026', doi: '10.1007/s00256-026-05188-1', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

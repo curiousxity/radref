@@ -122,7 +122,8 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
 - `jpg` is in `globPatterns` so the calvarial lesions page's scans (about 210 KB in all, in
   `public/calvarium/`) work offline; keep any new photo small and greyscale.
   The example scans on the other pages (`public/scans/<page>/`, below) are precached the same way;
-  each page's set is about 200 KB.
+  each page's set is 100 to 260 KB, about 1660 KB in all (2026-10-28). Use about 340 px for
+  ultrasound, whose speckle compresses poorly.
 - The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
   through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
   patterns change. `woff2` is still in `globPatterns`, but no font ships any more, so it
