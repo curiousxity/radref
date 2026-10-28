@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { ScanFigures } from '../components/ScanFigures'
+import { renalMassScans } from '../data/scans/renalMass'
 import { classify, initialBosniakForm } from '../logic/bosniak'
 import type { BosniakForm } from '../logic/bosniak'
 
@@ -112,6 +114,11 @@ export function BosniakPage() {
           <CopyBlock label="Recommendation" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[renalMassScans.bosniak1, renalMassScans.bosniak2, renalMassScans.bosniak2f, renalMassScans.bosniak4]} />
       </section>
     </div>
   )

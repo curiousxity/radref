@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
+import { ScanFigures } from '../components/ScanFigures'
+import { liverLiradsScans } from '../data/scans/liverLirads'
 import { calculateLirads } from '../logic/lirads'
 import type { LiradsForm } from '../types/lirads'
 
@@ -115,6 +117,11 @@ export function LiradsPage() {
           {result.category === 'N/A' ? <p className="copy-status">{result.recommendation}</p> : <CopyBlock label="Recommendation" text={result.recommendation} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[liverLiradsScans.aphe, liverLiradsScans.washout, liverLiradsScans.capsule, liverLiradsScans.lrM, liverLiradsScans.tumourInVein]} />
       </section>
     </div>
   )

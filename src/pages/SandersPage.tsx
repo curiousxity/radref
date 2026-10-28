@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { sandersScans } from '../data/scans/sanders'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -93,6 +95,11 @@ export function SandersPage() {
         <p>Sanders read the coronal CT image where the undersurface of the posterior facet is widest. Three lines, A, B and C from lateral to medial, split the facet into lateral, central and medial columns, with the sustentaculum medial to line C. The type counts the parts; the letters say where the lines run.</p>
         <p>The 1993 paper gave no displacement figure for type I; it advised surgery from 3 mm of articular displacement. The 2 mm used here is the later review's: type I is displaced 2 mm or less.</p>
         <p>Sanders found that the outcome after surgery worsened as the type rose: excellent or good results in 73% of type II, 70% of type III and 9% of type IV fractures.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[sandersScans.type2, sandersScans.type3, sandersScans.type4]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1993 paper is paywalled; what its abstract does not state is checked against the 2019 review." />

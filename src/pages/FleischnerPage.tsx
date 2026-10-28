@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
+import { ScanFigures } from '../components/ScanFigures'
+import { lungNodulesScans } from '../data/scans/lungNodules'
 import { assessFleischner, initialFleischnerForm } from '../logic/fleischner'
 import type { Count, FleischnerForm, NoduleType, Risk } from '../logic/fleischner'
 
@@ -298,6 +300,11 @@ export function FleischnerPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[lungNodulesScans.solid, lungNodulesScans.partSolid, lungNodulesScans.groundGlass, lungNodulesScans.groundGlassLater, lungNodulesScans.perifissural, lungNodulesScans.spiculated]} />
       </section>
     </div>
   )

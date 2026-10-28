@@ -1,4 +1,6 @@
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { pediatricElbowScans } from '../data/scans/pediatricElbow'
 import type { LessonReference } from '../components/LessonPage'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
@@ -139,6 +141,7 @@ const learn: LearnSection[] = [
         <div className="lesson-key">
           <p>The order matters more than the ages. The medial epicondyle ossifies before the trochlea ({CHENG}), so an ossified trochlea with no medial epicondyle in its place should make you think of an avulsed medial epicondyle displaced into the joint, where it can look like the trochlear centre ({IYER}).</p>
         </div>
+        <ScanFigures images={[pediatricElbowScans.ossificationCentres]} />
       </>
     ),
   },
@@ -149,6 +152,7 @@ const learn: LearnSection[] = [
       <>
         <p>On a true lateral, an elevated anterior fat pad (the "sail" sign) and a visible posterior fat pad mean a joint effusion ({IYER}). The posterior fat pad is normally hidden in the olecranon fossa.</p>
         <p>In children with a visible posterior fat pad after trauma and no fracture on the first films, follow-up radiographs showed a fracture in most, 76% in Skaggs and Mirzayan's series ({SKAGGS}). So a visible posterior fat pad with no fracture seen means an occult fracture is likely.</p>
+        <ScanFigures images={[pediatricElbowScans.fatPads]} />
       </>
     ),
   },
@@ -162,6 +166,7 @@ const learn: LearnSection[] = [
         <p>In young children the line may pass through the anterior third of the capitellum because the ossification centre is small: Rogers and colleagues put this under 2½ years ({ROGERS}), and Herman and colleagues found that under 4 years it passed nearly equally through the anterior or the middle third ({HERMAN}). Read the line with the age.</p>
         <h4>Radiocapitellar line</h4>
         <p>A line along the radial neck passes through the capitellum in every view. If it does not, the radial head is dislocated, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}).</p>
+        <ScanFigures images={[pediatricElbowScans.anteriorHumeralLine, pediatricElbowScans.monteggia]} />
       </>
     ),
   },
@@ -177,6 +182,7 @@ const learn: LearnSection[] = [
           <li><strong>Type III:</strong> completely displaced, with no cortical contact.</li>
         </ul>
         <p>A "type IV" fracture is unstable in both flexion and extension because the periosteal hinge is lost in front and behind; it is recognised under anaesthesia rather than on the first radiographs ({LEITCH}), so this report does not offer it.</p>
+        <ScanFigures images={[pediatricElbowScans.supracondylarType1, pediatricElbowScans.supracondylarType2, pediatricElbowScans.supracondylarType3]} />
       </>
     ),
   },
@@ -193,6 +199,7 @@ const learn: LearnSection[] = [
         </ul>
         <p>Whether the articular cartilage is intact often cannot be judged on radiographs alone; arthrography or MRI shows it ({WEISS}). When it is not judged, a fracture displaced 2 mm or more is type II or III.</p>
         <p>The older Jakob stages describe the same spectrum: stage I undisplaced with the articular surface intact, stage II complete with moderate displacement, stage III completely displaced and rotated ({JAKOB}).</p>
+        <ScanFigures images={[pediatricElbowScans.lateralCondyle]} />
       </>
     ),
   },
@@ -203,6 +210,7 @@ const learn: LearnSection[] = [
       <>
         <p>An avulsed medial epicondyle can become entrapped in the joint, notably with an elbow dislocation, and an entrapped fragment must be named ({IYER}). Remember step 2: an ossified trochlea with no medial epicondyle in place may be that fragment.</p>
         <p>Measure the displacement, but know that standard radiographs are not sufficient to measure anterior displacement nor accurate enough to measure medial displacement. Against three-dimensional CT, the lateral view underestimated anterior displacement (a mean of 0.9 mm against 8.8 mm) and the AP view overestimated medial displacement (3.5 mm against 0.3 mm); an internal oblique view came closer to the true anterior displacement ({EDMONDS}). This report records the number without a threshold.</p>
+        <ScanFigures images={[pediatricElbowScans.medialEpicondyleEntrapped]} />
       </>
     ),
   },
@@ -218,6 +226,7 @@ const learn: LearnSection[] = [
           <li><strong>Type III:</strong> over 60°.</li>
         </ul>
         <p>Judet's classification grades the same fracture by displacement and angulation, in types I to IV ({JUDET}).</p>
+        <ScanFigures images={[pediatricElbowScans.radialNeck]} />
       </>
     ),
   },
@@ -228,6 +237,7 @@ const learn: LearnSection[] = [
       <>
         <p>Record an elbow dislocation and its direction, and an olecranon fracture. After a dislocation, look again for the medial epicondyle (step 7).</p>
         <p>Record a supracondylar process when you see one; this site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
+        <ScanFigures images={[pediatricElbowScans.dislocation]} />
       </>
     ),
   },

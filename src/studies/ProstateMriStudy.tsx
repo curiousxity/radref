@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { piradsScans } from '../data/scans/pirads'
 import type { LessonReference } from '../components/LessonPage'
 import { classify } from '../logic/pirads'
 import type { Score } from '../logic/pirads'
@@ -164,6 +166,7 @@ const learn: StudyDefinition['learn'] = [
           <li><strong>4</strong>: focal, <em>markedly</em> dark ADC and <em>markedly</em> bright high-b, <strong>&lt; 1.5 cm</strong>.</li>
           <li><strong>5</strong>: same as 4 but <strong>≥ 1.5 cm</strong>, OR definite extraprostatic extension.</li>
         </ul>
+        <ScanFigures images={[piradsScans.pzT2, piradsScans.pzAdc, piradsScans.pzDce]} />
         <h4>Transition zone (T2 drives it)</h4>
         <ul className="plain-list">
           <li><strong>1</strong>: normal, or a completely encapsulated round nodule (classic BPH).</li>
@@ -172,6 +175,7 @@ const learn: StudyDefinition['learn'] = [
           <li><strong>4</strong>: lens-shaped or ill-defined, homogeneously moderately dark ("erased charcoal"), <strong>&lt; 1.5 cm</strong>.</li>
           <li><strong>5</strong>: same but <strong>≥ 1.5 cm</strong>, or definite EPE.</li>
         </ul>
+        <ScanFigures images={[piradsScans.tzErasedCharcoal, piradsScans.bphNodule]} />
         <p>What the numbers mean for the urologist (pooled meta-analysis figures, approximate): PI-RADS 3 lesions harbor significant cancer in roughly 1 in 6, PI-RADS 4 in about half or more, PI-RADS 5 in the large majority (<Cite doi="10.1038/s41391-021-00417-1">Oerther et al., Prostate Cancer Prostatic Dis 2022;25:256</Cite>). Lesions scored 4 or 5 go to targeted biopsy; PI-RADS 3 remains equivocal and gets further risk stratification, with PSA density cutoffs of 0.15–0.20 ng/mL/cc helping refine the biopsy decision.</p>
         <p><strong>Housekeeping rules:</strong> report up to <strong>4</strong> lesions, name the <strong>index lesion</strong> (highest score; if tied, the one with EPE, then the largest), measure each on the sequence that drives its score (ADC for PZ, T2 for TZ), and give the largest dimension.</p>
       </>
@@ -189,6 +193,7 @@ const learn: StudyDefinition['learn'] = [
           <li><strong>Grade 2</strong>: both of those.</li>
           <li><strong>Grade 3</strong>: tumor clearly outside the gland, or invading the seminal vesicle / neurovascular bundle.</li>
         </ul>
+        <ScanFigures images={[piradsScans.extraprostaticExtension]} />
         <p>An independent validation found the Mehralivand grading performs similarly to a five-point Likert assessment, so if your group uses "low/intermediate/high suspicion for EPE" instead, that's acceptable, but state your criteria.</p>
         <p><strong>Seminal vesicle invasion:</strong> normally bright fluid-filled tubules on T2. Invasion = dark tumor signal filling the lumen, wall thickening, or a dark tumor tracking up from the base along the ejaculatory ducts, usually with restricted diffusion. Look at the coronal.</p>
         <p>Also comment on: bladder neck, rectum (rarely), neurovascular bundle asymmetry, and the distance from the tumor to the apex (matters for nerve-sparing and margins).</p>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { letournelScans } from '../data/scans/letournel'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -156,6 +158,11 @@ export function LetournelPage() {
         <h3>Associated types</h3>
         <TypeTable types={ltAssociated} />
         <p>The iliopectineal line belongs to the anterior column and the ilioischial line to the posterior column. With both lines broken, an intact obturator ring means a transverse fracture. With the obturator ring broken as well, a fracture running up into the iliac wing is both-column and one that does not is T-shaped. A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof on radiographs and CT. An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[letournelScans.bothColumnSpur, letournelScans.posteriorWall]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. Durkee is read in full; the other papers are paywalled, so their wording is checked only where an abstract states it." />

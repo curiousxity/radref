@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
+import { ScanFigures } from '../components/ScanFigures'
+import { hawkinsScans } from '../data/scans/hawkins'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
@@ -96,6 +98,11 @@ export function HawkinsPage() {
         </div>
         <p>Hawkins described types I to III; Canale and Kelly added type IV. The risk of osteonecrosis of the talar body rises with the type.</p>
         <p>The Hawkins sign is a band of subchondral lucency (atrophy) under the talar dome on the AP radiograph 6 to 8 weeks after the injury. It shows that the body still has a blood supply, so osteonecrosis is unlikely; Canale and Kelly found that its absence does not reliably predict osteonecrosis. A later split of type II into IIA (subtalar joint subluxed) and IIB (dislocated) tracks the osteonecrosis risk more closely.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[hawkinsScans.type2b, hawkinsScans.type3]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the type wording is checked against Alton et al.'s 2015 review." />

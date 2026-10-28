@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { schatzkerScans } from '../data/scans/schatzker'
 import type { LessonReference } from '../components/LessonPage'
 import { schatzker, schatzkerDescriptions, schatzkerSentence, schatzkerTypes } from '../logic/schatzker'
 import type { DepressionSite, LateralPattern, Plateau } from '../logic/schatzker'
@@ -134,6 +136,7 @@ export function SchatzkerPage() {
             </tbody>
           </table>
         </div>
+        <ScanFigures images={[schatzkerScans.type1, schatzkerScans.type2, schatzkerScans.type5, schatzkerScans.type6, schatzkerScans.type6Ct]} />
         <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. Type IV is any fracture of the medial plateau alone, "with a split or depressed component" (Markhardt); short summaries that call it a split describe the commonest pattern. Schatzker defined depression as more than 4 mm: a lateral split with 4 mm or less is type I (Markhardt).</p>
         <p>CT and MRI are more accurate than radiographs for Schatzker typing, and surgical plans made from radiographs were changed after CT or MRI (<Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>).</p>
       </section>

@@ -121,6 +121,9 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   answer with the React shell.
 - `jpg` is in `globPatterns` so the calvarial lesions and hearing loss pages' scans (about 210 KB and 230 KB, in
   `public/calvarium/` and `public/hearing-loss/`) work offline; keep any new photo small and greyscale.
+  The example scans on the other pages (`public/scans/<page>/`, below) are precached the same way;
+  each page's set is 100 to 260 KB, about 1660 KB in all (2026-10-28). Use about 340 px for
+  ultrasound, whose speckle compresses poorly.
 - The anatomy viewers' shared stylesheet, `public/anatomy/shared/radref.css`, is precached
   through the `css` in `globPatterns`; check that `dist/sw.js` lists it after a build if the
   patterns change. `woff2` is still in `globPatterns`, but no font ships any more, so it
@@ -358,6 +361,22 @@ sentence to the hint, and while `navigator.onLine` is false it shows an offline 
 place of the iframe, which would otherwise show the browser's own error page. To make one available offline again, move it up a directory
 and drop the prefix from its page's `file`. They still fall under
 `navigateFallbackDenylist`, since the pattern covers all of `/anatomy/`.
+
+## Example scans
+
+Lessons and quick references show real example scans through `ScanFigures`
+(`src/components/ScanFigures.tsx`), which renders a list of `ScanImage`s with their credit.
+
+- Each page has a list in `src/data/scans/<page>.ts`, exported as `<page>Scans`, and its files in
+  `public/scans/<page-in-kebab-case>/`. The papers are in `src/data/scans/sources.ts`, each with
+  its exact CC BY version.
+- `src/data/scans/scans.test.ts` checks every list: the file exists, is under 40 KB, sits in the
+  page's folder, and names a CC BY version, a DOI and a figure; and some page uses every image
+  as `<page>Scans.<key>` (so import the list under its own name, not an alias).
+- Studies put them in a Learn section's `body`; no framework change is needed.
+- Sources, licence evidence and crop notes are in
+  `docs/superpowers/research/2026-10-28-example-scans.md`. Only CC BY with a stated version is
+  used (no NC or ND); one panel per file, cropped, greyscale.
 
 ## Registry: groups and related links
 

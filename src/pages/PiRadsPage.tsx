@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { ScanFigures } from '../components/ScanFigures'
+import { piradsScans } from '../data/scans/pirads'
 import { classify } from '../logic/pirads'
 import type { PiradsForm as Form, Score, Zone } from '../logic/pirads'
 
@@ -153,6 +155,11 @@ export function PiRadsPage() {
             </a>
           </li>
         </ol>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[piradsScans.pzT2, piradsScans.pzAdc, piradsScans.pzDce, piradsScans.tzErasedCharcoal, piradsScans.bphNodule, piradsScans.extraprostaticExtension]} />
       </section>
     </div>
   )

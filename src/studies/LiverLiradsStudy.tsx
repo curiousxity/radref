@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { liverLiradsScans } from '../data/scans/liverLirads'
 import type { LessonReference } from '../components/LessonPage'
 import { LIRADS_MANAGEMENT, liradsTableCategory } from '../logic/lirads'
 import { StudyPage } from '../study/StudyPage'
@@ -810,18 +812,21 @@ const learn = [
           <h4>Step 3. Tumor in vein</h4>
           <p><strong>Unequivocal enhancing soft tissue in a vein</strong>, whether or not you can see a parenchymal mass, is LR-TIV. An occluded vein with ill-defined walls or restricted diffusion, or one next to a malignant mass, or heterogeneous vein enhancement suggests it but does not prove it; look harder for enhancing tissue. If unsure, do not call LR-TIV.</p>
           <p>Say what probably caused it: "may be due to non-HCC malignancy" if it touches an LR-M mass, "definitely due to HCC" if it touches an LR-5 mass, otherwise "probably due to HCC." In North America, tumor in vein is a relative contraindication to resection and an absolute contraindication to transplantation outside investigational protocols (<Cite doi="10.1002/jmri.26027">Kielar et al., 2018</Cite>). It used to be called LR-5V; it was renamed because cholangiocarcinoma and other cancers can grow into veins too.</p>
+          <ScanFigures images={[liverLiradsScans.tumourInVein]} />
         </div>
 
         <div className="lesson-step">
           <h4>Step 4. Definitely or probably benign?</h4>
           <p>LR-1 and LR-2 are judgment calls, not table cells. Typical entities: cyst, hemangioma, perfusion alteration such as an arterioportal shunt, focal fat or fat sparing, hypertrophic pseudomass, confluent fibrosis or focal scar. Definite ones are LR-1, probable ones LR-2. Spontaneous disappearance is LR-1.</p>
           <p>A <strong>distinctive solid nodule under 20 mm</strong> with no major feature, no LR-M feature and no ancillary feature of malignancy (for example T1 hyperintense, T2 hypointense, siderotic or hepatobiliary-phase hyperintense) is LR-2. At 20 mm or more, the same nodule is LR-3 or higher. Nodules that look like FNH or adenoma are usually LR-3, cautiously LR-2, never LR-1: those are diagnoses of exclusion in these patients (v2018 core).</p>
+          <ScanFigures images={[liverLiradsScans.lr1Cyst, liverLiradsScans.lr2Haemangioma]} />
         </div>
 
         <div className="lesson-step">
           <h4>Step 5. LR-M features (is it targetoid?)</h4>
           <p>A <strong>targetoid</strong> mass has concentric layers, usually a cellular rim around fibrosis or ischemia. On dynamic phases that means rim APHE, peripheral "washout", or delayed central enhancement; on DWI, targetoid restriction; on transitional or hepatobiliary phase, a targetoid appearance. Any targetoid mass is LR-M.</p>
           <p>A <strong>nontargetoid</strong> mass is LR-M if it has an infiltrative appearance, marked diffusion restriction, necrosis or severe ischemia, or another feature you think suggests a non-HCC cancer, but only if it does not meet LR-5 criteria (v2018 core). LR-M exists to keep LR-5 specific for HCC without losing sensitivity for cancer (<Cite doi="10.1007/s00261-017-1196-2">Fowler et al., Abdom Radiol 2018</Cite>).</p>
+          <ScanFigures images={[liverLiradsScans.lrM]} />
         </div>
 
         <div className="lesson-step">
@@ -832,6 +837,7 @@ const learn = [
             <li><strong>Enhancing "capsule"</strong>: a smooth, uniform, sharp rim around most or all of the observation, thicker or more conspicuous than the fibrosis around background nodules, enhancing in the portal venous, delayed or transitional phase.</li>
             <li><strong>Threshold growth</strong>: size increase of a mass by 50% or more in 6 months or less. Only for something unequivocally a mass (not a possible perfusion alteration), only against a prior CT or MRI (not US or CEUS), measured on the same phase, sequence and plane.</li>
           </ul>
+          <ScanFigures images={[liverLiradsScans.aphe, liverLiradsScans.washout, liverLiradsScans.capsule]} />
           <p>Count the additional features (washout, capsule, threshold growth) and read the table below. <strong>If unsure whether a major feature is there, call it absent.</strong></p>
         </div>
 

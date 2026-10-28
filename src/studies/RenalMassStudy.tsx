@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { renalMassScans } from '../data/scans/renalMass'
 import type { LessonReference } from '../components/LessonPage'
 import { classify, initialBosniakForm } from '../logic/bosniak'
 import type { BosniakForm } from '../logic/bosniak'
@@ -590,6 +592,7 @@ const learnReading = (
         <li>If fat is present and there is <strong>no calcification</strong>, it is essentially an angiomyolipoma (AML).</li>
         <li>Fat <em>plus</em> calcification is a warning sign. Rarely, RCC can engulf fat.</li>
       </ul>
+      <ScanFigures images={[renalMassScans.angiomyolipoma]} />
     </div>
     <div className="lesson-step">
       <h4>Step 2. Cystic or solid?</h4>
@@ -638,6 +641,7 @@ const learnBosniak = (
         </tbody>
       </table>
     </div>
+    <ScanFigures images={[renalMassScans.bosniak1, renalMassScans.bosniak2, renalMassScans.bosniak2f, renalMassScans.bosniak4]} />
     <p><strong>How often each class is actually cancer.</strong> A 2025 meta-analysis pooled 975 cystic masses (<Cite doi="10.2214/AJR.24.32342">McGrath et al., AJR 2025</Cite>): class I 0%, class II ~9%, class IIF ~26%, class III ~80%, class IV ~88%.</p>
     <p>The IIF number depends heavily on how "truth" was defined. It was about 41% when the reference was surgery, but only about 2% when it was imaging follow-up. Surgical series only include the suspicious-looking IIF masses that someone chose to resect, so they overstate the risk.</p>
     <p><strong>Evidence for the new class II homogeneous lesions.</strong> A systematic review found 0 cancers among 1,454 homogeneous lesions measuring 9–20 HU unenhanced, 0 among 454 lesions at 21–30 HU portal venous, and 0 among 32 hyperdense (≥70 HU) lesions. The "too small to characterize" category has no supporting data and rests on expert opinion (<Cite doi="10.1007/s00261-021-03180-y">McGrath et al., Abdom Radiol 2021</Cite>).</p>
@@ -670,6 +674,7 @@ const learnCcls = (
         <li><strong>Oncocytoma/chromophobe:</strong> intermediate T2, segmental enhancement inversion.</li>
       </ul>
     </div>
+    <ScanFigures images={[renalMassScans.clearCell, renalMassScans.papillary, renalMassScans.oncocytoma]} />
     <p><strong>How well it works.</strong> In a 5-center study of 250 solid small renal masses (<Cite doi="10.1148/radiol.211680">Schieda et al., Radiology 2022</Cite>), a score of ≥4 had about 75% sensitivity and 78% specificity for clear cell RCC; a score of ≤2 had an 88% negative predictive value; agreement between readers was moderate (κ 0.58). In plain terms: ccLS is useful, but it does not replace biopsy when the answer would change management.</p>
   </>
 )

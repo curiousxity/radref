@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { ScanFigures } from '../components/ScanFigures'
+import { lungNodulesScans } from '../data/scans/lungNodules'
 import { initialLungRadsForm as initialForm, lungRads as calc } from '../logic/lungrads'
 import type { LungRadsForm as Form, NoduleType, PriorCategory, Timepoint } from '../logic/lungrads'
 
@@ -131,6 +133,11 @@ export function LungRadsPage() {
           <CopyBlock label="Recommendation" text={result.management} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[lungNodulesScans.solid, lungNodulesScans.partSolid, lungNodulesScans.groundGlass, lungNodulesScans.perifissural, lungNodulesScans.popcorn, lungNodulesScans.cysticNodule, lungNodulesScans.endobronchial, lungNodulesScans.spiculated]} />
       </section>
     </div>
   )

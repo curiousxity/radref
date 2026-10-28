@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
+import { ScanFigures } from '../components/ScanFigures'
+import { tiradsScans } from '../data/scans/tirads'
 import { calculateTirads, tiradsPoints } from '../logic/tirads'
 import type { Composition, EchogenicFocus, Echogenicity, Margin, Shape, TiradsForm } from '../types/tirads'
 import { pointsDetail, withPoints } from './tiradsOptions'
@@ -104,6 +106,16 @@ export function TiradsPage() {
           {!result.sizeMissing && <CopyBlock label="Recommendation" text={result.recommendation} disabledReason={copyDisabledReason} />}
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <h4 className="fm-subhead">Composition and echogenicity</h4>
+        <ScanFigures images={[tiradsScans.cystic, tiradsScans.mixed, tiradsScans.hyperechoic, tiradsScans.hypoechoic, tiradsScans.veryHypoechoic]} />
+        <h4 className="fm-subhead">Shape and margin</h4>
+        <ScanFigures images={[tiradsScans.tallerThanWide, tiradsScans.lobulated, tiradsScans.irregular, tiradsScans.extrathyroidal]} />
+        <h4 className="fm-subhead">Echogenic foci</h4>
+        <ScanFigures images={[tiradsScans.cometTail, tiradsScans.macrocalcification, tiradsScans.peripheralCalcification, tiradsScans.punctateFoci]} />
       </section>
     </div>
   )

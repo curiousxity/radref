@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { ChoiceGroup } from '../components/ChoiceGroup'
 import { CopyBlock } from '../components/CopyBlock'
 import { Definition } from '../components/Definition'
+import { ScanFigures } from '../components/ScanFigures'
+import { oradsScans } from '../data/scans/orads'
 import { calculateOrads } from '../logic/orads'
 import type { OradsForm } from '../types/orads'
 
@@ -155,6 +157,14 @@ export function OradsPage() {
           <CopyBlock label="Recommendation" text={result.recommendation} />
           <button type="button" className="reset-button" onClick={handleReset}>Reset</button>
         </article>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <h4 className="fm-subhead">Ultrasound</h4>
+        <ScanFigures images={[oradsScans.haemorrhagicCyst, oradsScans.endometriomaUs, oradsScans.dermoidUs, oradsScans.multilocularCyst, oradsScans.papillaryProjection]} />
+        <h4 className="fm-subhead">MRI</h4>
+        <ScanFigures images={[oradsScans.endometriomaMri, oradsScans.dermoidMriT1, oradsScans.dermoidMriFatSat, oradsScans.fibroma]} />
       </section>
     </div>
   )

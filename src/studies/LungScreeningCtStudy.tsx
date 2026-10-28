@@ -1,5 +1,7 @@
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { lungNodulesScans } from '../data/scans/lungNodules'
 import type { LessonReference } from '../components/LessonPage'
 import { initialLungRadsForm, lungRads } from '../logic/lungrads'
 import type { LungRadsForm, NoduleType, PriorCategory, Timepoint } from '../logic/lungrads'
@@ -613,6 +615,7 @@ const learn: StudyDefinition['learn'] = [
             <li><strong>Airway nodules</strong>: subsegmental ones are category 2; segmental or more proximal ones are 4A at baseline or when new, and 4B if they persist at 3-month follow-up (note 11). Air inside a segmental abnormality favors secretions: with no soft-tissue nodule under it, it may be category 2 (note 11c).</li>
             <li><strong>Cysts</strong>: a thin-walled unilocular cyst (uniform wall under 2 mm) is benign and not classified. A thick-walled (2 mm or more) or multilocular cyst is an atypical cyst, managed by its own rules (note 12). A cavitary nodule, where the wall is the dominant feature, is measured and managed as a solid nodule.</li>
           </ul>
+          <ScanFigures images={[lungNodulesScans.solid, lungNodulesScans.partSolid, lungNodulesScans.groundGlass, lungNodulesScans.perifissural, lungNodulesScans.popcorn, lungNodulesScans.endobronchial]} />
         </div>
 
         <div className="lesson-step">
@@ -628,6 +631,7 @@ const learn: StudyDefinition['learn'] = [
             <li>A solid or part-solid nodule that grows over several screens but never by more than 1.5 mm in any 12 months is suspicious and may be 4B. It may not be PET-avid, so biopsy or surgical evaluation may be best (note 8). A ground-glass nodule growing that slowly may stay category 2 until it develops a solid component (note 7).</li>
             <li><strong>Stepped management</strong>: a category 3 lesion stable or smaller at the 6-month CT becomes category 2; a 4A lesion stable or smaller at the 3-month CT becomes category 3 (airway nodules excepted). A 4B lesion proven benign after workup becomes category 2.</li>
           </ul>
+          <ScanFigures images={[lungNodulesScans.groundGlass, lungNodulesScans.groundGlassLater]} />
         </div>
 
         <div className="lesson-step">
@@ -637,6 +641,7 @@ const learn: StudyDefinition['learn'] = [
             <li>Add the <strong>S modifier</strong> to categories 0–4 for a clinically significant or potentially significant finding unrelated to lung cancer. Findings already known and under evaluation do not need it (note 15).</li>
             <li>Time the follow-up from the date of the exam you are reading (note 2).</li>
           </ul>
+          <ScanFigures images={[lungNodulesScans.spiculated, lungNodulesScans.cysticNodule]} />
         </div>
       </>
     ),
