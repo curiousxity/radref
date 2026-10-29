@@ -161,7 +161,7 @@ const learn: LearnSection[] = [
 
         <h4>Variants</h4>
         <p>Record a bipartite patella or a fabella when you see one; this site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
-        <ScanFigures images={[kneeMriScans.pivotShiftBruise]} />
+        <ScanFigures images={[kneeMriScans.pivotShiftBruise, kneeMriScans.segondFracture]} />
       </>
     ),
   },
@@ -204,7 +204,7 @@ const learn: LearnSection[] = [
         <p>Call the ACL intact, partially torn or completely torn from its fibres. Indirect signs support a tear: a lateral compartment bone contusion, anterior translation of the tibia, uncovering of the posterior horn of the lateral meniscus, and buckling of the PCL ({GENTILI}). Remember the pivot-shift bruise pattern from step 2 ({SANDERS}) and a Segond fracture ({CAMPOS}).</p>
         <h4>Reconstructed ACL</h4>
         <p>After reconstruction, describe the graft (intact, partial tear, complete tear) and look for the complications: arthrofibrosis, including the localised "cyclops" lesion in front of the graft; tunnel widening and tunnel cysts; and graft impingement ({BENCARDINO}).</p>
-        <ScanFigures images={[kneeMriScans.aclTear]} />
+        <ScanFigures images={[kneeMriScans.aclTear, kneeMriScans.cyclopsLesion]} />
       </>
     ),
   },
@@ -214,6 +214,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Call the PCL intact, partially torn or completely torn. An anterior tibial contusion (the dashboard pattern) points to PCL injury ({SANDERS}). The cited papers give no MRI grading of PCL tears, so this step is descriptive.</p>
+        <ScanFigures images={[kneeMriScans.pclTear]} />
       </>
     ),
   },
@@ -234,6 +235,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>The lateral stabilising structures are the lateral collateral ligament, the biceps femoris tendon, the popliteus tendon and the iliotibial tract, with the other posterolateral corner structures ({RECONDO}). Check each by name. The hyperextension bruise pattern puts the posterolateral corner at risk ({SANDERS}).</p>
+        <ScanFigures images={[kneeMriScans.lclTear, kneeMriScans.posterolateralCorner]} />
       </>
     ),
   },
@@ -267,7 +269,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Look for a popliteal (Baker) cyst and say whether it has ruptured. A parameniscal cyst is usually associated with a meniscal tear ({CAMPBELL}), so a cyst beside a meniscus called intact sends you back to that meniscus. Then note synovitis and the Hoffa fat pad.</p>
-        <ScanFigures images={[kneeMriScans.bakerCyst]} />
+        <ScanFigures images={[kneeMriScans.bakerCyst, kneeMriScans.parameniscalCyst]} />
       </>
     ),
   },

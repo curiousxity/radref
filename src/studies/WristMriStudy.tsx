@@ -162,6 +162,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Look at the lunotriquetral ligament in the same way. Its disruption goes with VISI ({LINSCHEID}).</p>
+        <ScanFigures images={[wristMriScans.lunotriquetralTear]} />
       </>
     ),
   },
@@ -197,6 +198,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>The dorsal and volar extrinsic ligaments can be identified on MR arthrography ({THEUMANN}). On routine MRI, look for edema, thickening or discontinuity in each group.</p>
+        <ScanFigures images={[wristMriScans.radioscaphocapitateTear]} />
       </>
     ),
   },
@@ -249,6 +251,7 @@ const learn: LearnSection[] = [
       <>
         <p>A type II lunate has a medial facet that articulates with the hamate ({VIEGAS}). A carpal boss is a bony prominence at the base of the second and third metacarpals, sometimes an os styloideum ({CONWAY}). Accessory muscles occur in and around the Guyon canal ({ZEISS}). A bifid median nerve and a persistent median artery can also be seen in the carpal tunnel.</p>
         <p>This site gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
+        <ScanFigures images={[wristMriScans.bifidMedianNerve, wristMriScans.osStyloideum]} />
       </>
     ),
   },

@@ -301,7 +301,7 @@ unchanged. Two captions drop a sentence of the source's that would confuse here 
 | guyonGanglion | guyon | Saran S, Reddy PS, Shirodkar K, Shah AB, Agarwal A, Shah A, Iyengar KP, Botchu R. Diagnostics (Basel). 2025;15(5):592 (PMC11899079) | Fig. 7a | CC BY 4.0 | grey from the red channel |
 | dorsalGanglion | ganglia | Ferreira Branco D, Botti P, Bouvet C, Abs B, Buzzi M, Beaulieu JY, Poletti PA, Bouredoucen H, Boudabbous S. Eur Radiol. 2024;34(12):7856-7863 (PMC11557617) | Fig. 2b | CC BY 4.0 | publisher's full-size figure |
 
-No image yet:
+No image yet (many filled on 2026-10-29; see "Filling the gaps" below):
 
 - Ankle: technique, anterior and impression (spares: Huuskonen 2023 Fig. 5d effusion, Szaro 2020
   Fig. 19 anterior impingement). Sawant, Davda, Kimura and Walther, cited in the study, are CC BY-NC
@@ -376,7 +376,7 @@ licence and crop rules as above. Several figures are the publisher's full-size c
 | class1c | 1C | Zhao X, Yu A, Zhao H, Qiu Y. Diagnostic value of MRI in traumatic triangular fibrocartilage complex injuries: a retrospective study. BMC Musculoskelet Disord. 2024;25:63 (PMC10787402) | Fig. 1E | CC BY 4.0 | Fig. 1 caption: 'MRI images of the traumatic TFCC injuries according to Palmer's classification.' Panel E is labelled 'IC' in the image; Table 6 lists 'IC 1 (1)' (one arthroscopy-confirmed Palmer 1C case). |
 | class1d | 1D | Zhao X, Yu A, Zhao H, Qiu Y. Diagnostic value of MRI in traumatic triangular fibrocartilage complex injuries: a retrospective study. BMC Musculoskelet Disord. 2024;25:63 (PMC10787402) | Fig. 1F | CC BY 4.0 | Fig. 1 caption: 'MRI images of the traumatic TFCC injuries according to Palmer's classification.' Panel F is labelled 'ID' in the image; Table 6 lists 'ID 4 (2)'. |
 
-Not found, and mismatches:
+Not found, and mismatches (Herbert B5 and Palmer 2D filled on 2026-10-29; see below):
 
 - Mason: no subtle type I seen only as a fat pad sign. Not used because they contradict the page:
   Laun 2015 calls a fracture with posterior dislocation "type III" (the page's IV); Liu 2018 and
@@ -394,3 +394,121 @@ Not found, and mismatches:
 - Palmer: no class 2 (degenerative). von Borstel 2017 has captioned 1A, 1B, 1C+2A and 2D figures
   but is CC BY-NC-ND; Cerezal 2026's Palmer schematics are "used with permission". Zhao 2024's 1A,
   1C and 1D are named by the authors' labels in the panels, not in the caption.
+
+## Filling the gaps (2026-10-29)
+
+A second pass over the sections and types above that had no image. Same licence and crop rules;
+every crop was viewed. Images join the section's existing row, or the classification page's
+Examples card.
+
+### Ankle MRI (`src/data/scans/ankleMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| anteriorImpingementOsteophytes | anterior | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97. (PMC7431516) | Fig. 19 | CC BY 4.0 | grey from the red channel |
+| anteriorFibrousBandImpingement | anterior | Soualili A, Arfi A, Retal H, Khabet MK, Kadi R. Web Impingement Syndrome of the Ankle: A Rare Cause of Persistent Post-traumatic Pain. Cureus. 2025;17(11):e97012. (PMC12709089) | Fig. 3b | CC BY 4.0 | grey from the red channel |
+
+### Diabetic foot MRI (`src/data/scans/diabeticFootMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| activeCharcotStir | charcot | Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial review. Insights Imaging. 2019;10:77. (PMC6682845) | Fig. 14b | CC BY 4.0 | publisher's full-size figure |
+
+### Knee MRI (`src/data/scans/kneeMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| pclTear | pcl | Gensior TJ, Mester B, Achtnich A, Winkler PW, Henkelmann R, Hepp P, Glaab R, Krause M, Frosch KH, Zellner J, Schoepp C. Anatomic repair and ligament bracing as an alternative treatment option for acute combined PCL injuries involving the posteromedial or posterolateral corner—results of a multicentre study. Arch Orthop Trauma Surg. 2023;143(12):7123-7132. (PMC10635947) | Fig. 1a | CC BY 4.0 | publisher's full-size figure |
+| lclTear | lateral-side | Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee—practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599. (PMC11399221) | Fig. 2D | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+| posterolateralCorner | lateral-side | Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee—practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599. (PMC11399221) | Fig. 2E | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+| segondFracture | bones | Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee—practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599. (PMC11399221) | Fig. 2C | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+| cyclopsLesion | acl | Tsukamoto J, Fujisaki A, Futatsuya K, Koreeda Y, Kajio K, Inoue S, Hayashida Y, Sakai A, Hisaoka M, Oda Y, Aoki T. Imaging findings of intra-articular tumor/tumor-like lesions based on pathologic correlation. Jpn J Radiol. 2026;44(5):866-881. (PMC13144220) | Fig. 17a | CC BY 4.0 | publisher's full-size figure |
+| parameniscalCyst | synovium | Vanhoenacker F, De Vos N, Van Dyck P. Common Mistakes and Pitfalls in Magnetic Resonance Imaging of the Knee. J Belg Soc Radiol. 2016;100(1):99. (PMC6100447) | Fig. 29 | CC BY 4.0 |  |
+
+### Shoulder MRI (`src/data/scans/shoulderMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| subacromialBursitis | subacromial | Albano D, Gitto S, Messina C, Rizzo A, Giorgino R, Perfetti C, Albano GD, Abdelmaguid KIA, Arodia SI, Ambrogi F, Vanzulli A, Sconfienza LM. Can we use MRI for timing estimation of rotator cuff tears? Radiol Med. 2026;131(10):1867-1876. (PMC13668910) | Fig. 1c | CC BY 4.0 | publisher's full-size figure |
+| acJointOsteoarthritis | subacromial | Gulati A, Adler B, Belair JA. Involvement of the acromion in cases of distal clavicular osteolysis. Skeletal Radiol. 2026;55(1):215-222. (PMC12627108) | Fig. 6d | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+| supraspinatusPartialArticular | cuff | Yubran AP, Pesquera LC, Juan ELS, Saralegui FI, Canga AC, Camara AC, Valdivieso GM, Pisanti Lopez C. Rotator cuff tear patterns: MRI appearance and its surgical relevance. Insights Imaging. 2024;15:61. (PMC10899560) | Fig. 6b | CC BY 4.0 | publisher's full-size figure |
+| patteStage3 | cuff | Albano D, Gitto S, Messina C, Rizzo A, Giorgino R, Perfetti C, Albano GD, Abdelmaguid KIA, Arodia SI, Ambrogi F, Vanzulli A, Sconfienza LM. Can we use MRI for timing estimation of rotator cuff tears? Radiol Med. 2026;131(10):1867-1876. (PMC13668910) | Fig. 1b | CC BY 4.0 | publisher's full-size figure |
+| sugayaType4Retear | repair | Focsa LC, Adi F, Rousseau MA, Boyer P. The use of a suture bridge technique for arthroscopic rotator cuff repair in patients under 40 years of age resulted in successful tendon healing, pain relief, improved shoulder function, and high patient satisfaction at a minimum of 5-year follow-up. Arthrosc Sports Med Rehabil. 2025;7(1):101009. (PMC11873479) | Fig. 4b | CC BY 4.0 | publisher's full-size figure |
+| sugayaType1Healed | repair | Focsa LC, Adi F, Rousseau MA, Boyer P. The use of a suture bridge technique for arthroscopic rotator cuff repair in patients under 40 years of age resulted in successful tendon healing, pain relief, improved shoulder function, and high patient satisfaction at a minimum of 5-year follow-up. Arthrosc Sports Med Rehabil. 2025;7(1):101009. (PMC11873479) | Fig. 3b | CC BY 4.0 | publisher's full-size figure |
+| bufordComplex | variants | Pouliart N, Doering S, Shahabpour M. What can the radiologist do to help the surgeon manage shoulder instability? J Belg Soc Radiol. 2016;100(1):105. (PMC6100640) | Fig. 3a | CC BY 4.0 | grey from the red channel |
+| sublabralForamen | variants | Mercouris P, Mercouris M. Superior labrum anterior to posterior lesions: Part 1 - Imaging and anatomy with arthroscopic classification. S Afr J Radiol. 2023;27(1):2706. (PMC10623653) | Fig. 12a | CC BY 4.0 |  |
+| glenoidChondralLesion | cartilage | Gonçalves DVC, Ratti MAS, Guimarães JB, Ormond Filho AG, Ribas LHBV. Glenohumeral cartilage lesions: reviewing diagnostic imaging strategies and preoperative evaluation. Radiol Bras. 2026;59:e20250132. (PMC13563660) | Fig. 3a | CC BY 4.0 |  |
+
+### Elbow MRI (`src/data/scans/elbowMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| tricepsAvulsion | triceps-brachialis | Froom RJ, Wang Y, Martin B, Hackett TR. Traumatic Triceps and Medial Ulnar Collateral Ligament Rupture in an Adolescent Mogul Skier: A Case Report. Cureus. 2024;16(5):e61026. (PMC11194329) | Fig. 2b | CC BY 4.0 | grey from the red channel |
+| olecranonBursitis | bursae | Tsukamoto J, Fujisaki A, Futatsuya K, Koreeda Y, Kajio K, Inoue S, Hayashida Y, Sakai A, Hisaoka M, Oda Y, Aoki T. Imaging findings of intra-articular tumor/tumor-like lesions based on pathologic correlation. Jpn J Radiol. 2026;44(5):866-881. (PMC13144220) | Fig. 3c | CC BY 4.0 | publisher's full-size figure |
+| anconeusEpitrochlearis | variants | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. The elbow: review of anatomy and common collateral ligament complex pathology using MRI. Insights Imaging. 2019;10(1):43. (PMC6447645) | Fig. 6b | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+
+### Wrist MRI (`src/data/scans/wristMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| lunotriquetralTear | lunotriquetral | Dallaudière B, Moreau-Durieux MH, Larbi A, Perozziello A, Huot P, Meyer P, Pesquer L. Effects of Axial Traction during Direct MR-Arthrography of the Wrist in Sports Injuries. J Belg Soc Radiol. 2016;100(1):72. (PMC5854454) | Fig. 3b | CC BY 4.0 |  |
+| radioscaphocapitateTear | extrinsic | Shahabpour M, Abid W, Van Overstraeten L, De Maeseneer M. Wrist Trauma: More Than Bones. J Belg Soc Radiol. 2021;105(1):90. (PMC8719475) | Fig. 2c | CC BY 4.0 | publisher's full-size figure |
+| bifidMedianNerve | variants | Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the upper limb: a pictorial review. Insights Imaging. 2022;13(1):166. (PMC9556688) | Fig. 11b | CC BY 4.0 | publisher's full-size figure |
+| osStyloideum | variants | Nevalainen MT, Roedl JB, Morrison WB, Zoga AC. MRI of a painful carpal boss: variations at the extensor carpi radialis brevis insertion and imaging findings in regional traumatic and overuse injuries. Skeletal Radiol. 2019;48(7):1079-1085. (PMC6525668) | Fig. 1c | CC BY 4.0 | publisher's full-size figure |
+
+### Herbert (`src/data/scans/herbert.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| typeB5 | B5 | Marzella L, Filistad S, Lazzerini A, Cannella A, Sassara G, Caruso L, De Vitis R. Volar locking and angular stability plate for treatment of comminuted scaphoid fractures: a case series of 44 cases. Eur J Orthop Surg Traumatol. 2024;34(8):4001-4008. (PMC11519103) | Fig. 2 | CC BY 4.0 | publisher's full-size figure |
+
+### Palmer (`src/data/scans/palmer.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| class2d | 2D | Wu WT, Chang KV, Mezian K, Naňka O, Yang YC, Hsu YC, Hsu PC, Özçakar L. Ulnar Wrist Pain Revisited: Ultrasound Diagnosis and Guided Injection for Triangular Fibrocartilage Complex Injuries. J Clin Med. 2019;8(10):1540. (PMC6832410) | Fig. 16C | CC BY 4.0 | ultrasound |
+
+Still without an image:
+
+- Ankle: technique, impression. Huuskonen 2023 Fig. 5d (effusion only) was not needed.
+- Foot: accessory navicular (Soltanolkotabi 2022 Fig. 8a names "mild edema" at the synchondrosis,
+  but the oedema can't be seen, so it was not used; Akdemir 2026 Fig. 2E has no arrows), turf toe
+  (Limaye 2024 Fig. 1 is a blurred arthrogram with no arrow), fascia and variants (the text names
+  nothing to show; os trigonum MRIs found would suit the ankle's posterior section instead).
+- Knee: lipohemarthrosis (taught only in technique). Spares: Ghosh 2026 Fig. 6A (grade III PCL
+  tear, small), Dhanda 2010 Fig. 1A (cyclops, CC BY 2.0).
+- Shoulder: a true GLAD lesion (Pouliart Fig. 8 is 400 px and its blue arrows vanish in grey; the
+  cartilage step shows a glenoid chondral lesion instead), os acromiale (Kadi Fig. 9 is CT
+  arthrography; You 2019's captions cite other papers; Vaz 2018 has no Crossref licence and swaps its
+  panel labels). Kadi's Buford and sublabral foramen figures say "Courtesy of", so were not used.
+- Elbow: the UCL T-sign (Acosta Batlle 2019, Powell 2021 and Folco 2024 describe it in the text
+  but have no figure of it; the rest are NC or ND), brachialis.
+- Wrist: de Quervain and intersection syndrome (Zhari 2015 is blurred, unmarked, and has its
+  CC BY 2.0 only in the licence URL), perilunate on MRI. Okoro 2023 Fig. 30b (a lunate dislocation
+  radiograph) would fit but is not MRI and is already the Mayfield stage IV example.
+- Mason: type I seen only as a fat pad sign (two "Mason type I" papers in Acta Orthop are CC BY-NC).
+- Mayfield: stage II (every captioned figure found was stage III or IV).
+- Herbert: C, D1 (Wang 2020 has D1 patients but only graphs; PMC13307208 uses a D1–D4 scheme whose
+  D2 differs from the page's).
+- Palmer: 2A, 2B, 2C, 2E (Wang and Ding 2026's 2C image is arthroscopic; Cerezal 2026 is "used with
+  permission"; von Borstel 2017 is CC BY-NC-ND).
+
+Notes and mismatches:
+
+- Wu 2019 (Palmer 2D) is ultrasound and uses a grading "modified from" Palmer's; its 2A–2E match the
+  page, its class 1 does not (1C radial, 1D horizontal, plus a 1E), so it is used only for 2D. Its
+  Fig. 16A labels a peripheral tear "Class 2B", against the page's 2B (wear, no perforation).
+- Herbert B5 (Marzella 2024): the text says the comminuted fractures "should be classified like
+  Type B5 of Herbert (Figs. 1 and 2)"; the source has no arrows.
+- Mayfield stage IV is used loosely elsewhere: PMC13451638 for a perilunate fracture-dislocation,
+  PMC13631426 for a volar transradial injury. Okoro 2023 Fig. 28 calls the perilunate dislocation
+  stage II (the site's III). PMC6661091 calls a fracture displaced under 2 mm Mason I (the page's I
+  is undisplaced). None of these was used.
+- Segond fracture: the knee study says the fragment is pulled off by the iliotibial tract or the
+  anterior oblique band of the LCL; Parkar's text names the iliotibial band and the anterolateral
+  capsule. The figure caption names neither, so the image caption doesn't conflict.
+- Parameniscal cyst sits under synovium, the only section that mentions it.
+- Tsukamoto 2026 Fig. 3 (olecranon bursitis) calls panel c axial, but it is sagittal; the caption
+  names no plane. Focsa 2025 and Albano 2026 say "Sugaya stage" and "Patte 3"; the study says type
+  and stage.
+- Gensior 2023 Fig. 1a (PCL) has no arrows; its legend names an intraligamentous tear.

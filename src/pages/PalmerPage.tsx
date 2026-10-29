@@ -91,7 +91,7 @@ export function PalmerPage() {
 
       <section className="info-card">
         <h3>Examples</h3>
-        <ScanFigures images={[palmerScans.class1a, palmerScans.class1b, palmerScans.class1c, palmerScans.class1d]} />
+        <ScanFigures images={[palmerScans.class1a, palmerScans.class1b, palmerScans.class1c, palmerScans.class1d, palmerScans.class2d]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the class wording has been checked only where the abstract states it." />

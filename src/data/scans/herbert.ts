@@ -52,4 +52,11 @@ export const herbertScans = {
     source: S.okoro2023,
     figure: 'Fig. 6b',
   },
+  typeB5: {
+    src: '/scans/herbert/type-b5.jpg',
+    alt: 'Coronal CT of the wrist cropped to the carpus, showing the scaphoid above the distal radius broken into several pieces, with small separate fragments along its radial border.',
+    caption: 'Herbert type B5: preoperative coronal CT of a comminuted fracture of the scaphoid body, which the authors classify as Herbert type B5. The fragments are not marked in the source.',
+    source: S.marzella2024,
+    figure: 'Fig. 2',
+  },
 } satisfies Record<string, ScanImage>

@@ -266,6 +266,7 @@ const learn: LearnSection[] = [
         <div className="lesson-key">
           <p>MRI is variable for soft-tissue impingement, with reported sensitivities of 42% to 89% and specificities of 75% to 100% (<Cite doi={LAVERY}>Lavery et al., J Orthop Surg Res 2016</Cite>).</p>
         </div>
+        <ScanFigures images={[ankleMriScans.anteriorImpingementOsteophytes, ankleMriScans.anteriorFibrousBandImpingement]} />
       </>
     ),
   },

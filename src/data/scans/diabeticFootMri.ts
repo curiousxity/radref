@@ -52,4 +52,11 @@ export const diabeticFootMriScans = {
     source: S.rosskopf2019,
     figure: 'Fig. 21c',
   },
+  activeCharcotStir: {
+    src: '/scans/diabetic-foot-mri/active-charcot-stir.jpg',
+    alt: 'Sagittal STIR MRI of the whole foot with bright bone marrow edema in the midfoot bones, marked by black asterisks, and bright soft tissue and muscle edema on the dorsum and sole, marked by white arrows; the arch is not collapsed',
+    caption: 'Sagittal STIR image of an early active Charcot foot: classic bone marrow edema in the midfoot (black asterisks) and soft tissue and muscle edema in the midfoot (white arrows). The lateral weight-bearing radiograph of the same foot (Fig. 14a, not shown) showed no abnormalities; the authors cite this case as Eichenholtz stage 0.',
+    source: S.rosskopf2019,
+    figure: 'Fig. 14b',
+  },
 } satisfies Record<string, ScanImage>

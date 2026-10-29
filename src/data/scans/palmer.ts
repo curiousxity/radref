@@ -31,4 +31,11 @@ export const palmerScans = {
     source: S.zhao2024,
     figure: 'Fig. 1F',
   },
+  class2d: {
+    src: '/scans/palmer/class2d.jpg',
+    alt: 'Ultrasound of the ulnar side of the wrist with the ulna, radius, lunate, triquetrum and ECU tendon labelled, showing a gap in a thin articular disc (arrowhead) and a disrupted lunotriquetral ligament (arrow).',
+    caption: 'Palmer class 2D: ultrasound showing a large central tear of a thin articular disc (arrowhead) and rupture of the lunotriquetral ligament (arrow). The source, using an ultrasound grading modified from Palmer\'s, calls this a class 2D TFCC injury.',
+    source: S.wu2019,
+    figure: 'Fig. 16C',
+  },
 } satisfies Record<string, ScanImage>

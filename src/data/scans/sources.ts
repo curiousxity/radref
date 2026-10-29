@@ -112,6 +112,12 @@ export const SCAN_SOURCES = {
   pouliart2016: { short: 'Pouliart et al. 2016', doi: '10.5334/jbr-btr.1227', licence: 'CC BY 4.0' },
   mercouris2023: { short: 'Mercouris and Mercouris 2023', doi: '10.4102/sajr.v27i1.2707', licence: 'CC BY 4.0' },
   mangi2022: { short: 'Mangi et al. 2022', doi: '10.1186/s13244-022-01305-5', licence: 'CC BY 4.0' },
+  albano2026: { short: 'Albano et al. 2026', doi: '10.1007/s11547-026-02248-3', licence: 'CC BY 4.0' },
+  gulati2026: { short: 'Gulati et al. 2026', doi: '10.1007/s00256-025-05014-0', licence: 'CC BY 4.0' },
+  focsa2025: { short: 'Focsa et al. 2025', doi: '10.1016/j.asmr.2024.101009', licence: 'CC BY 4.0' },
+  // Mercouris Part 1; mercouris2023 above is Part 2.
+  mercouris2023b: { short: 'Mercouris and Mercouris 2023', doi: '10.4102/sajr.v27i1.2706', licence: 'CC BY 4.0' },
+  goncalves2026: { short: 'Gonçalves et al. 2026', doi: '10.1590/0100-3984.2025.0132', licence: 'CC BY 4.0' },
   // Ankle MRI
   szaro2020: { short: 'Szaro et al. 2020', doi: '10.1186/s13244-020-00900-8', licence: 'CC BY 4.0' },
   gonzalezGutierrez2025: { short: 'González-Gutiérrez et al. 2025', doi: '10.7759/cureus.93882', licence: 'CC BY 4.0' },
@@ -120,6 +126,7 @@ export const SCAN_SOURCES = {
   ortiz2026: { short: 'Ortiz and Diaz 2026', doi: '10.7759/cureus.118122', licence: 'CC BY 4.0' },
   dong2012: { short: 'Dong et al. 2012', doi: '10.1155/2012/230679', licence: 'CC BY 3.0' },
   kothari2023: { short: 'Kothari et al. 2023', doi: '10.7759/cureus.34228', licence: 'CC BY 3.0' },
+  soualili2025: { short: 'Soualili et al. 2025', doi: '10.7759/cureus.97012', licence: 'CC BY 4.0' },
   // Foot MRI
   palka2025: { short: 'Palka et al. 2025', doi: '10.1186/s13244-025-01945-3', licence: 'CC BY 4.0' },
   liu2025: { short: 'Liu et al. 2025', doi: '10.1186/s12893-025-03377-8', licence: 'CC BY 4.0' },
@@ -137,11 +144,14 @@ export const SCAN_SOURCES = {
   cristiani2024: { short: 'Cristiani et al. 2024', doi: '10.1007/s00256-024-04665-9', licence: 'CC BY 4.0' },
   jibri2019: { short: 'Jibri et al. 2019', doi: '10.1186/s13244-019-0755-1', licence: 'CC BY 4.0' },
   vanhoenacker2016: { short: 'Vanhoenacker et al. 2016', doi: '10.5334/jbr-btr.1206', licence: 'CC BY 4.0' },
+  gensior2023: { short: 'Gensior et al. 2023', doi: '10.1007/s00402-023-05015-5', licence: 'CC BY 4.0' },
+  tsukamoto2026: { short: 'Tsukamoto et al. 2026', doi: '10.1007/s11604-025-01928-w', licence: 'CC BY 4.0' },
   // Elbow MRI
   matkovic2024: { short: 'Matković et al. 2024', doi: '10.3390/diagnostics14090916', licence: 'CC BY 4.0' },
   acosta2019: { short: 'Acosta Batlle et al. 2019', doi: '10.1186/s13244-019-0725-7', licence: 'CC BY 4.0' },
   nayyar2011: { short: 'Nayyar et al. 2011', doi: '10.1155/2011/515912', licence: 'CC BY 3.0' },
   metikala2022: { short: 'Metikala et al. 2022', doi: '10.7759/cureus.25172', licence: 'CC BY 3.0' },
+  froom2024: { short: 'Froom et al. 2024', doi: '10.7759/cureus.61026', licence: 'CC BY 4.0' },
   // Wrist MRI
   dietrich2026: { short: 'Dietrich et al. 2026', doi: '10.1007/s00330-026-12629-x', licence: 'CC BY 4.0' },
   thomas2025: { short: 'Thomas et al. 2025', doi: '10.7759/cureus.82322', licence: 'CC BY 4.0' },
@@ -149,9 +159,14 @@ export const SCAN_SOURCES = {
   nevalainen2023: { short: 'Nevalainen et al. 2023', doi: '10.1007/s00330-023-09446-x', licence: 'CC BY 4.0' },
   saran2025: { short: 'Saran et al. 2025', doi: '10.3390/diagnostics15050592', licence: 'CC BY 4.0' },
   ferreiraBranco2024: { short: 'Ferreira Branco et al. 2024', doi: '10.1007/s00330-024-10831-3', licence: 'CC BY 4.0' },
+  dallaudiere2016: { short: 'Dallaudière et al. 2016', doi: '10.5334/jbr-btr.918', licence: 'CC BY 4.0' },
+  // Shahabpour states CC BY 4.0 in the article; Crossref has no licence for it.
+  shahabpour2021: { short: 'Shahabpour et al. 2021', doi: '10.5334/jbsr.2709', licence: 'CC BY 4.0' },
+  nevalainen2019: { short: 'Nevalainen et al. 2019', doi: '10.1007/s00256-018-3136-9', licence: 'CC BY 4.0' },
   // Palmer
   zhao2024: { short: 'Zhao et al. 2024', doi: '10.1186/s12891-023-07140-z', licence: 'CC BY 4.0' },
   wang2026: { short: 'Wang et al. 2026', doi: '10.3389/fmed.2026.1842984', licence: 'CC BY 4.0' },
+  wu2019: { short: 'Wu et al. 2019', doi: '10.3390/jcm8101540', licence: 'CC BY 4.0' },
   // Mason
   nietschke2018: { short: 'Nietschke et al. 2018', doi: '10.1007/s11678-018-0456-2', licence: 'CC BY 4.0' },
   muller2023: { short: 'Müller et al. 2023', doi: '10.3390/jcm12185870', licence: 'CC BY 4.0' },
@@ -164,4 +179,5 @@ export const SCAN_SOURCES = {
   rachunekMedved2025: { short: 'Rachunek-Medved et al. 2025', doi: '10.1007/s00402-024-05744-1', licence: 'CC BY 4.0' },
   // Herbert
   neubauer2026: { short: 'Neubauer et al. 2026', doi: '10.1007/s10140-026-02481-3', licence: 'CC BY 4.0' },
+  marzella2024: { short: 'Marzella et al. 2024', doi: '10.1007/s00590-024-04095-2', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

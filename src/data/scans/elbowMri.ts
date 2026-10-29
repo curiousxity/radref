@@ -59,4 +59,25 @@ export const elbowMriScans = {
     source: S.acosta2019,
     figure: 'Fig. 11a',
   },
+  tricepsAvulsion: {
+    src: '/scans/elbow-mri/triceps-avulsion.jpg',
+    alt: 'Sagittal MRI of the elbow with an arrow at the posterior tip of the olecranon, where the triceps tendon is pulled away from its insertion.',
+    caption: 'Acute full-thickness avulsion of the distal triceps tendon at its olecranon enthesis on sagittal MRI (arrow).',
+    source: S.froom2024,
+    figure: 'Fig. 2b',
+  },
+  olecranonBursitis: {
+    src: '/scans/elbow-mri/olecranon-bursitis.jpg',
+    alt: 'Sagittal MRI of the elbow with a flat, bright fluid collection under the skin behind the olecranon, marked by two arrowheads.',
+    caption: 'Olecranon bursitis on T2-weighted MRI: a flat-shaped cystic mass (arrowheads) between the skin and the underlying olecranon.',
+    source: S.tsukamoto2026,
+    figure: 'Fig. 3c',
+  },
+  anconeusEpitrochlearis: {
+    src: '/scans/elbow-mri/anconeus-epitrochlearis.jpg',
+    alt: 'Axial fat-suppressed MRI of the elbow at the cubital tunnel, labelled ME and OP, with two asterisks over the ulnar nerve and an accessory muscle behind it, and an arrow at the posterior bundle of the medial collateral ligament.',
+    caption: 'Anconeus epitrochlearis (lower asterisk), an accessory muscle over the cubital tunnel, on axial fat-suppressed PD-weighted MRI of a healthy volunteer; the upper asterisk marks the ulnar nerve and the arrow the intact posterior bundle of the medial collateral ligament. ME, medial epicondyle; OP, olecranon process.',
+    source: S.acosta2019,
+    figure: 'Fig. 6b',
+  },
 } satisfies Record<string, ScanImage>
