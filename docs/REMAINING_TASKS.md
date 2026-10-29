@@ -550,7 +550,8 @@ Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
 
 - [x] The four Purohit 2014 panels (CC BY 2.0, per Crossref) and eight more CC BY 4.0 panels are in
       `public/scans/hearing-loss/` (2026-10-28); figures and licences are listed in the sources doc.
-- [ ] No open CC BY figure with a stated licence version for the labyrinthine fistula yet.
+- [x] Labyrinthine fistula: two CC BY 4.0 CTs added 2026-10-29 (Miwa 2026 Fig. 1c, coronal;
+      Thangavelu 2022 Fig. 5, axial).
 - [x] Claims checked on PubMed, Crossref and the open full texts (2026-10-28); the ACR Hearing Loss
       and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
 - [x] The five questions decided by the author 2026-10-29 (the sources doc, "The author's

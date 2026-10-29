@@ -87,4 +87,18 @@ export const hearingLossScans = {
     source: S.vlachodimitropoulos2026,
     figure: 'Fig. 1a',
   },
+  labyrinthineFistula: {
+    src: '/scans/hearing-loss/labyrinthine-fistula.jpg',
+    alt: 'Coronal CT of one temporal bone: soft tissue in the attic against the lateral semicircular canal, whose bony wall is partly missing (arrow)',
+    caption: 'Labyrinthine fistula: cholesteatoma has destroyed part of the lateral semicircular canal, leaving a bony defect (arrow) with soft tissue around it.',
+    source: S.miwa2026,
+    figure: 'Fig. 1c',
+  },
+  labyrinthineFistulaAxial: {
+    src: '/scans/hearing-loss/labyrinthine-fistula-axial.jpg',
+    alt: 'Axial CT of one temporal bone: the lateral semicircular canal surrounded by soft tissue in an opacified middle ear and mastoid, with an arrow at the canal',
+    caption: 'Labyrinthine fistula from cholesteatoma: erosion of the lateral semicircular canal (arrow) on preoperative CT.',
+    source: S.thangavelu2022,
+    figure: 'Fig. 5',
+  },
 } satisfies Record<string, ScanImage>

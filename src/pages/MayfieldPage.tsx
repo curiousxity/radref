@@ -107,7 +107,7 @@ export function MayfieldPage() {
 
       <section className="info-card">
         <h3>Examples</h3>
-        <ScanFigures images={[mayfieldScans.stage1, mayfieldScans.stage1Mri, mayfieldScans.stage3, mayfieldScans.stage4, mayfieldScans.greaterArc]} />
+        <ScanFigures images={[mayfieldScans.stage1, mayfieldScans.stage1Mri, mayfieldScans.stage2, mayfieldScans.stage3, mayfieldScans.stage4, mayfieldScans.greaterArc]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1980 paper is paywalled; the stage wording follows Kennedy and Allan's reproduction of its table, with the dorsal capitate in stage II from Dvorsky and colleagues and Sharma and colleagues." />

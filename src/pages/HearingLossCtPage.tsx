@@ -310,6 +310,7 @@ const erosion: Finding[] = [
     aka: 'from cholesteatoma',
     badge: URGENT,
     figure: <FistulaFigure />,
+    images: [hearingLossScans.labyrinthineFistula, hearingLossScans.labyrinthineFistulaAxial],
     look: <>Soft tissue in the middle ear that has worn away the thin bone over the lateral semicircular canal, the usual site (<Cite doi={DOI.barath}>Baráth et al.</Cite>).</>,
     report: <>Name the canal and say the fistula is present; the surgeon needs to know before operating.</>,
   },
