@@ -23,19 +23,12 @@ by the author's choice).
   - the skull base pages and carotid stenosis are also under Neuro, the brachial plexus also
     under Shoulder; rectal, prostate and adnexal MRI are under Pelvis;
   - the home tabs and the Studies blurb ("How to read each study, step by step.") are gone.
-- **Elbow OCD sentence (E2-6), the author to decide.** The elbow study says MRI judges
-  capitellar OCD stability from the fragment-bone interface and the overlying cartilage.
-  Kijowski and De Smet 2005, read in full, supports the interface (a high-T2 rim or cyst
-  means unstable) but says cartilage "was not assessed"; the cartilage signs come from knee
-  and talus studies. Trim to the interface, or keep it with another citation? Unchanged until
-  then; details in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, "Third check".
-  Open sources that do state cartilage signs at the capitellum (2026-10-29): Kohyama 2018, Kostyun
-  2024 (a Delphi consensus) and Powell 2021; see the "Fifth check".
+- Decided 2026-10-29: the elbow OCD sentence keeps the cartilage signs (E2-6), now cited to Kostyun
+  2024 and Kohyama 2018 beside Kijowski and De Smet; see the elbow sources doc.
 - **Two more for the author, from the 2026-10-28 re-search** (details in the sources docs):
-  - Elbow E11-1: the page cites Rosenberg, AJR 1995 for the anconeus epitrochlearis compressing
-    the ulnar nerve (four places), but the paper, read in full, never mentions it.
-    Candidate replacement (2026-10-29): Sampath et al., Sports Health 2013, already cited on the
-    page, says it "may cause static or dynamic compression of the ulnar nerve within the tunnel".
+  - Elbow E11-1: decided 2026-10-29. The anconeus epitrochlearis now cites Sampath 2013 ("may cause
+    static or dynamic compression"), with Kim 2019 for its being usually incidental; Rosenberg AJR
+    1995 is gone from the references.
   - Knee K2-1: decided 2026-10-29. "Near the terminal sulcus" stays as the typical location; the
     table now says the exact spot varies with knee flexion at injury (Sanders 2000).
 - **PDFs needed from the author** (`docs/PAPERS_NEEDED.md`): Herbert and Fisher 1984 (Bone &
@@ -97,7 +90,7 @@ region at a time, end to end, following the ankle pilot
   plus a Neer calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-shoulder-mri-study-design.md`. Done once the sources
   check in "To do when on a computer" passes.
-- [ ] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
+- [x] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
   2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-elbow-mri-study-design.md`.
 - [x] Pediatric elbow: radiograph study by age (CRITOE centres, fat pads, lines, Gartland,
@@ -221,10 +214,13 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`.
 - [x] Open sources (2026-10-29, "Fifth check" in the elbow sources doc): the Broberg-Morrey 2 mm and 30%
   (van der Windt 2024), E1-1's LUCL-first, E3-1, E8-1 and E9-1 are now cited beside the originals;
   MA-1 to MA-4 were already settled. The Mason page no longer says "Unchecked draft".
-- [ ] Still unchecked: the stage 2 capsule (E1-1; reviews say anterior, or anterior and/or
-  posterior), "fragmentation of the whole capitellum" in Panner's (E2-4), E2-6 and E11-1 (both for
-  the author; candidate sources found, see the top of this file). For the author too: the
-  Broberg-Morrey gap (2 mm or more but under 30%), which van der Windt's wording makes type I.
+- [x] Decided by the author 2026-10-29 (the elbow sources doc, "The author's decisions"): stage 2 is
+  the anterior and posterior capsule with a perched dislocation (Acosta Batlle 2019); Panner's is
+  diffuse involvement of the whole capitellum with variable fragmentation (Dwek 2012, Claessen
+  2015); a UCL with edema around intact fibres is a low-grade sprain (Powell 2021); the OCD signs
+  and the anconeus as above; Mason under the Broberg-Morrey modification makes 2 mm or more but
+  under 30% type I, and records displacement, surface and a mechanical block separately. Every
+  claim is read, so the elbow study no longer says "Unchecked draft".
 
 ### Wrist MRI study
 

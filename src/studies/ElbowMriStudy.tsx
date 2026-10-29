@@ -9,14 +9,17 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
- * papers are paywalled, so claims are verified against abstracts, the papers that were read in
- * full (Johnston, Kijowski and De Smet's AJR paper, Rosenberg's AJR paper) and open reviews,
- * which are cited beside the original (van der Windt for the Broberg-Morrey thresholds; Lombardi
- * and Sampath for the anterior bundle, the first stage after a dislocation, the triceps and
- * brachialis, and the nerve signs; 2026-10-29). The claims table, with each claim's status, is
- * docs/superpowers/research/2026-10-23-elbow-mri-sources.md; rule chips and warnings carry its
- * claim IDs. Johnston (Ulster Med J 1962) has no DOI, so its citation stays plain text.
+ * Every reference has been matched on PubMed and Crossref (2026-10-23). Most of the original
+ * papers are paywalled, so claims are verified against abstracts, the papers read in full
+ * (Johnston, Kijowski and De Smet's AJR paper, Rosenberg's AJR paper) and open papers cited beside
+ * the original: van der Windt for the Broberg-Morrey modification; Lombardi, Sampath and Acosta
+ * Batlle for the anterior bundle, the stages after a dislocation, the triceps and brachialis, the
+ * nerve signs and the anconeus epitrochlearis; Kohyama and Kostyun for the cartilage signs of an
+ * unstable osteochondritis dissecans; Dwek and Claessen for Panner's disease; Powell for the
+ * low-grade UCL sprain (2026-10-29, by the author's decisions). The claims table, with each
+ * claim's status, is docs/superpowers/research/2026-10-23-elbow-mri-sources.md; rule chips and
+ * warnings carry its claim IDs. Johnston (Ulster Med J 1962) has no DOI, so its citation stays
+ * plain text.
  */
 
 const MASON_DOI = '10.1002/bjs.18004217203'
@@ -35,10 +38,16 @@ const FALCHOOK_DOI = '10.1148/radiology.190.3.8115606'
 const KOBAYASHI_DOI = '10.5435/00124635-200407000-00005'
 const ROSENBERG_PSEUDO_DOI = '10.1148/radiology.191.3.8184072'
 const KIJOWSKI_OCD_DOI = '10.2214/AJR.04.1570'
-const ROSENBERG_TUNNEL_DOI = '10.2214/ajr.164.2.7839980'
 const VAN_DER_WINDT_DOI = '10.1530/EOR-24-0035'
 const LOMBARDI_DOI = '10.5114/pjr.2020.98691'
 const SAMPATH_DOI = '10.1177/1941738112467941'
+const ACOSTA_BATLLE_DOI = '10.1186/s13244-019-0725-7'
+const KOHYAMA_DOI = '10.1177/2325967118794620'
+const KOSTYUN_DOI = '10.1177/23259671241252813'
+const POWELL_DOI = '10.1007/s12178-021-09702-x'
+const DWEK_DOI = '10.1177/1941738112448733'
+const CLAESSEN_DOI = '10.1007/s11832-015-0635-2'
+const KIM_DOI = '10.1177/1558944718762566'
 
 const MASON = <Cite doi={MASON_DOI}>Mason, Br J Surg 1954</Cite>
 const JOHNSTON = 'Johnston, Ulster Med J 1962'
@@ -57,10 +66,16 @@ const FALCHOOK = <Cite doi={FALCHOOK_DOI}>Falchook et al., Radiology 1994</Cite>
 const KOBAYASHI = <Cite doi={KOBAYASHI_DOI}>Kobayashi et al., J Am Acad Orthop Surg 2004</Cite>
 const ROSENBERG_PSEUDO = <Cite doi={ROSENBERG_PSEUDO_DOI}>Rosenberg et al., Radiology 1994</Cite>
 const KIJOWSKI_OCD = <Cite doi={KIJOWSKI_OCD_DOI}>Kijowski and De Smet, AJR 2005</Cite>
-const ROSENBERG_TUNNEL = <Cite doi={ROSENBERG_TUNNEL_DOI}>Rosenberg et al., AJR 1995</Cite>
 const VAN_DER_WINDT = <Cite doi={VAN_DER_WINDT_DOI}>van der Windt et al., EFORT Open Rev 2024</Cite>
 const LOMBARDI = <Cite doi={LOMBARDI_DOI}>Lombardi et al., Pol J Radiol 2020</Cite>
 const SAMPATH = <Cite doi={SAMPATH_DOI}>Sampath et al., Sports Health 2013</Cite>
+const ACOSTA_BATLLE = <Cite doi={ACOSTA_BATLLE_DOI}>Acosta Batlle et al., Insights Imaging 2019</Cite>
+const KOHYAMA = <Cite doi={KOHYAMA_DOI}>Kohyama et al., Orthop J Sports Med 2018</Cite>
+const KOSTYUN = <Cite doi={KOSTYUN_DOI}>Kostyun et al., Orthop J Sports Med 2024</Cite>
+const POWELL = <Cite doi={POWELL_DOI}>Powell et al., Curr Rev Musculoskelet Med 2021</Cite>
+const DWEK = <Cite doi={DWEK_DOI}>Dwek, Sports Health 2012</Cite>
+const CLAESSEN = <Cite doi={CLAESSEN_DOI}>Claessen et al., J Child Orthop 2015</Cite>
+const KIM = <Cite doi={KIM_DOI}>Kim et al., Hand (N Y) 2019</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Mason ML. Some observations on fractures of the head of the radius with a review of one hundred cases. Br J Surg. 1954;42(172):123-132.', doi: MASON_DOI },
@@ -80,10 +95,16 @@ const references: LessonReference[] = [
   { citation: "Kobayashi K, Burton KJ, Rodner C, Smith B, Caputo AE. Lateral compression injuries in the pediatric elbow: Panner's disease and osteochondritis dissecans of the capitellum. J Am Acad Orthop Surg. 2004;12(4):246-254.", doi: KOBAYASHI_DOI },
   { citation: 'Rosenberg ZS, Beltran J, Cheung YY. Pseudodefect of the capitellum: potential MR imaging pitfall. Radiology. 1994;191(3):821-823.', doi: ROSENBERG_PSEUDO_DOI },
   { citation: 'Kijowski R, De Smet AA. MRI findings of osteochondritis dissecans of the capitellum with surgical correlation. AJR Am J Roentgenol. 2005;185(6):1453-1459.', doi: KIJOWSKI_OCD_DOI },
-  { citation: 'Rosenberg ZS, Beltran J, Cheung Y, Broker M. MR imaging of the elbow: normal variant and potential diagnostic pitfalls of the trochlear groove and cubital tunnel. AJR Am J Roentgenol. 1995;164(2):415-418.', doi: ROSENBERG_TUNNEL_DOI },
   { citation: 'van der Windt AE, Langenberg LC, Colaris JW, Eygendaal D. Which radial head fractures are best treated surgically? EFORT Open Rev. 2024;9(5):413-421.', doi: VAN_DER_WINDT_DOI },
   { citation: 'Lombardi A, Ashir A, Gorbachova T, Taljanovic MS, Chang EY. Magnetic resonance imaging of the elbow. Pol J Radiol. 2020;85:440-460.', doi: LOMBARDI_DOI },
   { citation: 'Sampath SC, Sampath SC, Bredella MA. Magnetic resonance imaging of the elbow: a structured approach. Sports Health. 2013;5(1):34-49.', doi: SAMPATH_DOI },
+  { citation: 'Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. The elbow: review of anatomy and common collateral ligament complex pathology using MRI. Insights Imaging. 2019;10(1):43.', doi: ACOSTA_BATLLE_DOI },
+  { citation: 'Kohyama S, Ogawa T, Mamizuka N, Hara Y, Yamazaki M. A magnetic resonance imaging-based staging system for osteochondritis dissecans of the elbow: a validation study against the International Cartilage Repair Society classification. Orthop J Sports Med. 2018;6(9):2325967118794620.', doi: KOHYAMA_DOI },
+  { citation: 'Kostyun RO, Nguyen JC, Chhabra B, Lawrence JTR, Polousky JD, Saper M, Uquillas C, Nissen CW; ROCKET Group. MRI features that contribute to decision-making for treatment of capitellar OCD lesions: an expert consensus using the Delphi method. Orthop J Sports Med. 2024;12(6):23259671241252813.', doi: KOSTYUN_DOI },
+  { citation: "Powell GM, Murthy NS, Johnson AC. Radiographic and MRI assessment of the thrower's elbow. Curr Rev Musculoskelet Med. 2021;14(3):214-223.", doi: POWELL_DOI },
+  { citation: 'Dwek JR. A segmental approach to imaging of sports-related injuries of the pediatric elbow. Sports Health. 2012;4(5):442-452.', doi: DWEK_DOI },
+  { citation: "Claessen FM, Louwerens JK, Doornberg JN, van Dijk CN, Eygendaal D, van den Bekerom MP. Panner's disease: literature review and treatment recommendations. J Child Orthop. 2015;9(1):9-17.", doi: CLAESSEN_DOI },
+  { citation: 'Kim N, Stehr R, Matloub HS, Sanger JR. Anconeus epitrochlearis muscle associated with cubital tunnel syndrome: a case series. Hand (N Y). 2019;14(4):477-482.', doi: KIM_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -140,7 +161,7 @@ const learn: LearnSection[] = [
         <p>This lesson is for the elbow MRI that arrives with pain, sometimes after an injury. It walks a fixed search pattern through every structure, and uses the injury, when there is one, to decide where to look hardest. The order, and the protocol checklist below, are this site's own; none of the papers below prescribes them.</p>
         <p>Check that the study has all three planes, fat-suppressed fluid-sensitive imaging (proton density or T2) for edema and tears, and a T1-weighted sequence for anatomy and marrow. Note any effusion and any bone marrow edema.</p>
         <h4>After a dislocation: the Horii circle</h4>
-        <p>O'Driscoll and colleagues describe elbow subluxation and dislocation as three sequential stages of instability from posterolateral rotation, with the soft-tissue disruption progressing from lateral to medial, and dislocation as the final stage ({ODRISCOLL_SPECTRUM}). As usually taught from that paper, the lateral ulnar collateral ligament fails first (posterolateral subluxation), then the rest of the lateral side with the anterior and posterior capsule. In their specimens, though, the elbows dislocated with the anterior band of the medial collateral ligament still intact, so a dislocation does not mean the anterior bundle of the UCL is torn. After a dislocation, read the lateral ligaments first, and expect a medial tear only when the lateral side is torn too.</p>
+        <p>O'Driscoll and colleagues describe elbow subluxation and dislocation as three sequential stages of instability from posterolateral rotation, with the soft-tissue disruption progressing from lateral to medial, and dislocation as the final stage ({ODRISCOLL_SPECTRUM}). At stage 1 the lateral ulnar collateral ligament fails and the elbow subluxes posterolaterally ({ODRISCOLL_SPECTRUM}; {LOMBARDI}). At stage 2 the failure extends to the radial collateral ligament and into the capsule, both the anterior and the posterior capsule, and the elbow dislocates incompletely, the coronoid perched under the trochlea ({ODRISCOLL_SPECTRUM}; {ACOSTA_BATLLE}). In their specimens, though, the elbows dislocated with the anterior band of the medial collateral ligament still intact, so a dislocation does not mean the anterior bundle of the UCL is torn. After a dislocation, read the lateral ligaments first, and expect a medial tear only when the lateral side is torn too.</p>
       </>
     ),
   },
@@ -152,14 +173,15 @@ const learn: LearnSection[] = [
         <h4>Radial head: Mason</h4>
         <p>Mason sorted radial head fractures into three types: an undisplaced fissure or marginal fracture, a displaced marginal sector fracture, and a comminuted fracture of the whole head ({MASON}). Johnston later added a fourth: a radial head fracture with dislocation of the elbow ({JOHNSTON}). The four-type scheme in common use is that modified version, so say "Mason type IV (Johnston)" when you use it. The Mason calculator on this site applies the same rules.</p>
         {masonTable}
-        <p>Broberg and Morrey put numbers on the first two types: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head ({BROBERG}; {VAN_DER_WINDT}).</p>
+        <p>Under the Broberg-Morrey modification, a partial fracture counts as displaced, type II, only when it is displaced at least 2 mm and involves at least 30% of the articular surface; anything less is type I, so a smaller fragment is type I under this scheme even when it is displaced 2 mm or more ({BROBERG}; {VAN_DER_WINDT}). Other versions of Mason word type II differently, so name the modification when you use the numbers.</p>
         <h4>Coronoid: Regan and Morrey</h4>
         <p>Regan and Morrey typed coronoid fractures by fragment size ({REGAN}):</p>
         {reganTable}
         <h4>The terrible triad</h4>
         <p>Posterior dislocation of the elbow with fractures of both the radial head and the coronoid is the combination Ring and colleagues reported on ({RING}), known as the terrible triad. When the history is a dislocation and both fractures are present, say so in the impression.</p>
         <h4>Capitellum: osteochondritis dissecans, Panner, and the pseudodefect</h4>
-        <p>Panner's disease is fragmentation of the whole capitellum in children younger than about 10; osteochondritis dissecans is a focal lesion of the capitellum in adolescents, typically throwers and gymnasts ({KOBAYASHI}). On MRI, judge whether an osteochondritis dissecans fragment is stable by looking at the interface between the fragment and the bone and at the overlying cartilage ({KIJOWSKI_OCD}).</p>
+        <p>Panner's disease is an osteochondrosis of the capitellum in children younger than about 10 ({KOBAYASHI}). It typically involves the entire ossification centre of the capitellum ({DWEK}), with variable sclerosis, flattening, irregularity and fragmentation: fragmentation is not required, and a review of the published cases found it in only six of the case reports (27%) ({CLAESSEN}). Osteochondritis dissecans is a focal lesion of the capitellum in adolescents, typically throwers and gymnasts ({KOBAYASHI}; {SAMPATH}).</p>
+        <p>On MRI, findings that suggest an unstable osteochondritis dissecans lesion are fluid undermining the fragment, seen as a rim of high T2 signal at the fragment-bone interface or a cyst beneath it ({KIJOWSKI_OCD}; {POWELL}), disruption of the overlying articular cartilage or the subchondral bone plate, a displaced fragment, and loose bodies ({KOSTYUN}). That list is an expert consensus. Kohyama and colleagues instead staged lesions by the shape of the capitellum and the articular cartilage, an irregular capitellum with discontinuous cartilage, or a dislocated lesion with a cartilage defect, counting as unstable, and tested the staging against the grade found at surgery ({KOHYAMA}).</p>
         <p>Do not call the pseudodefect a lesion: at the junction of the capitellum and the lateral epicondyle, a groove and the overhanging lateral edges of the capitellum can simulate an osteochondral lesion on axial and coronal images ({ROSENBERG_PSEUDO}).</p>
         <ScanFigures images={[elbowMriScans.capitellarOcd]} />
       </>
@@ -170,7 +192,7 @@ const learn: LearnSection[] = [
     title: 'Step 3. Ulnar (medial) collateral ligament',
     body: (
       <>
-        <p>The anterior bundle of the ulnar collateral ligament is the one that matters for valgus stability; describe it as intact, with edema around intact fibres, partially torn or completely torn ({KIJOWSKI_PART2}; {LOMBARDI}).</p>
+        <p>The anterior bundle of the ulnar collateral ligament is the one that matters for valgus stability ({KIJOWSKI_PART2}; {LOMBARDI}); describe it as intact, sprained, partially torn or completely torn. Edema around otherwise intact ligament fibres is a low-grade sprain in the appropriate clinical setting, not a tear ({POWELL}). A partial tear shows focal partial discontinuity of the fibres, with fluid signal extending partly through the ligament ({ACOSTA_BATLLE}; {POWELL}).</p>
         <p>In throwers, look at the deep surface of the anterior bundle where it attaches to bone. Timmerman and Andrews described an undersurface tear of the deep capsular layer of the anterior bundle: the ligament intact externally, but its undersurface detached at the ulna or the humerus ({TIMMERMAN_ANDREWS}). It is hard to see on MRI: six of their seven patients had a normal MRI. On CT arthrography it gives the "T-sign", contrast leaking around the detachment from bone but contained within the intact superficial layer and capsule, and that was the arthrogram's main advantage over MRI ({TIMMERMAN}).</p>
         <ScanFigures images={[elbowMriScans.uclTear]} />
       </>
@@ -234,7 +256,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Follow the ulnar nerve through the cubital tunnel, the radial nerve and its posterior interosseous branch past the supinator, and the median nerve. An abnormal nerve is enlarged with increased T2 signal, and muscles it supplies may show denervation edema ({KIJOWSKI_PART2}; {SAMPATH}; {LOMBARDI}).</p>
-        <p>An anconeus epitrochlearis, an accessory muscle over the cubital tunnel, can compress the ulnar nerve ({ROSENBERG_TUNNEL}); it is recorded in the variants step.</p>
+        <p>In about 10% to 20% of people the cubital tunnel retinaculum is replaced by an accessory muscle, the anconeus epitrochlearis, which may cause static or dynamic compression of the ulnar nerve within the tunnel ({SAMPATH}). It is usually an incidental finding ({KIM}), so its presence alone does not explain an ulnar neuropathy. It is recorded in the variants step.</p>
         <ScanFigures images={[elbowMriScans.ulnarNeuritis]} />
       </>
     ),
@@ -254,7 +276,7 @@ const learn: LearnSection[] = [
     title: 'Step 11. Variants',
     body: (
       <>
-        <p>Record a supracondylar process, an anconeus epitrochlearis ({ROSENBERG_TUNNEL}) or an os supratrochleare dorsale when you see one. This site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
+        <p>Record a supracondylar process, an anconeus epitrochlearis ({SAMPATH}) or an os supratrochleare dorsale when you see one. This site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
         <ScanFigures images={[elbowMriScans.anconeusEpitrochlearis]} />
       </>
     ),
@@ -289,6 +311,13 @@ function chosen(values: Values, field: { id: string; options: Option[] }): strin
 const ligamentOptions: Option[] = [
   { value: 'intact', label: 'Intact' },
   { value: 'edema', label: 'Edema around intact fibres' },
+  { value: 'partial', label: 'Partial tear' },
+  { value: 'complete', label: 'Complete tear' },
+]
+/** E3-1: the UCL's own set, which names edema around intact fibres as a low-grade sprain (Powell 2021). */
+const uclOptions: Option[] = [
+  { value: 'intact', label: 'Intact' },
+  { value: 'edema', label: 'Low-grade sprain (edema around intact fibres)' },
   { value: 'partial', label: 'Partial tear' },
   { value: 'complete', label: 'Complete tear' },
 ]
@@ -351,8 +380,8 @@ const fields = {
     { value: 'no', label: 'No' },
     { value: 'yes', label: 'Yes' },
   ] },
-  radialHeadDisplacement: { id: 'radial-head-displacement', kind: 'number', label: 'Radial head displacement', unit: 'mm', min: 0, step: 0.5, showIf: radialHeadPresent, help: 'Broberg-Morrey: under 2 mm is type I; 2 mm or more with 30% or more of the head is type II.' },
-  radialHeadPercent: { id: 'radial-head-percent', kind: 'number', label: 'Share of the head involved', unit: '%', min: 0, max: 100, step: 5, showIf: radialHeadPresent },
+  radialHeadDisplacement: { id: 'radial-head-displacement', kind: 'number', label: 'Radial head displacement', unit: 'mm', min: 0, step: 0.5, showIf: radialHeadPresent, help: 'Broberg-Morrey modification: type II needs 2 mm or more and 30% or more of the articular surface; anything less is type I.' },
+  radialHeadPercent: { id: 'radial-head-percent', kind: 'number', label: 'Share of the articular surface involved', unit: '%', min: 0, max: 100, step: 5, showIf: radialHeadPresent },
   coronoid: { id: 'coronoid', kind: 'choice', label: 'Coronoid fracture', required: true, options: [
     { value: 'none', label: 'None' },
     { value: 'tip', label: 'Tip avulsion' },
@@ -365,7 +394,7 @@ const fields = {
   capitellum: { id: 'capitellum', kind: 'choice', label: 'Capitellum', required: true, options: [
     { value: 'normal', label: 'Normal' },
     { value: 'ocd', label: 'Focal osteochondral lesion (osteochondritis dissecans)' },
-    { value: 'panner', label: 'Fragmentation of the whole capitellum (Panner)' },
+    { value: 'panner', label: 'Diffuse involvement of the whole capitellum (Panner)' },
   ] },
   ocdSite: { id: 'ocd-site', kind: 'choice', label: 'Lesion site on the capitellum', showIf: (v) => str(v, 'capitellum') === 'ocd', options: [
     { value: 'anterior', label: 'Anterior or anterolateral' },
@@ -376,10 +405,11 @@ const fields = {
     { value: 'rim', label: 'High T2 signal at the fragment-bone interface' },
     { value: 'cyst', label: 'Cyst beneath the fragment' },
     { value: 'cartilage', label: 'Breach in the overlying cartilage' },
+    { value: 'subchondral', label: 'Subchondral bone plate disrupted' },
     { value: 'displaced', label: 'Fragment displaced' },
   ] },
 
-  ucl: { id: 'ucl', kind: 'choice', label: 'UCL (anterior bundle)', required: true, options: ligamentOptions },
+  ucl: { id: 'ucl', kind: 'choice', label: 'UCL (anterior bundle)', required: true, options: uclOptions },
   uclPartialType: { id: 'ucl-partial-type', kind: 'choice', label: 'UCL partial tear', showIf: (v) => str(v, 'ucl') === 'partial', options: [
     { value: 'undersurface', label: 'Undersurface tear, deep layer detached from bone, superficial layer intact' },
     { value: 'other', label: 'Other partial tear' },
@@ -475,7 +505,7 @@ function deriveBones(values: Values): Derived[] {
   if (radialHeadPresent(values) && num(values, 'radial-head-displacement') !== undefined) {
     // MA-5, MA-6.
     const type = brobergMorrey(num(values, 'radial-head-displacement'), num(values, 'radial-head-percent'))
-    out.push({ label: 'Broberg-Morrey', value: type ? `Type ${type}` : 'Not decided by the 2 mm and 30% thresholds' })
+    out.push({ label: 'Broberg-Morrey', value: type ? `Type ${type}` : 'Enter the share of the articular surface' })
   }
   // E2-2: Regan and Morrey coronoid types.
   const regan = reganType[str(values, 'coronoid')] as string | undefined
@@ -484,7 +514,7 @@ function deriveBones(values: Values): Derived[] {
   // E2-4: Panner's disease against osteochondritis dissecans.
   const capitellum = str(values, 'capitellum')
   if (capitellum === 'ocd') out.push({ label: 'Osteochondritis dissecans', value: 'Typically adolescents; a focal lesion' })
-  if (capitellum === 'panner') out.push({ label: "Panner's disease", value: 'Typically under 10 years; the whole capitellum' })
+  if (capitellum === 'panner') out.push({ label: "Panner's disease", value: 'Typically under 10 years; usually the whole ossification centre' })
   return out
 }
 
@@ -543,7 +573,7 @@ function boneLines(values: Values): (string | false)[] {
     radialHead === 'present' && `Radial head: ${join([
       result ? masonSentence(result).replace(/\.$/, '').replace(/^Radial/, 'radial') : 'fracture',
       displacement !== undefined && `displaced ${displacement} mm`,
-      percent !== undefined && `${percent}% of the head`,
+      percent !== undefined && `${percent}% of the articular surface`,
     ])}`,
     coronoid === 'none' && 'Coronoid: no fracture',
     coronoid && coronoid !== 'none' && `Coronoid: ${picked(values, fields.coronoid)} (Regan-Morrey type ${reganType[coronoid]})`,
@@ -551,7 +581,7 @@ function boneLines(values: Values): (string | false)[] {
     fracture === 'none' && 'Other fracture: none',
     fracture === 'present' && `Other fracture: ${str(values, 'fracture-site') || 'present'}`,
     capitellum === 'normal' && 'Capitellum: normal',
-    capitellum === 'panner' && 'Capitellum: fragmentation of the whole capitellum (Panner)',
+    capitellum === 'panner' && 'Capitellum: diffuse involvement of the whole capitellum (Panner)',
     capitellum === 'ocd' && `Capitellum: ${join(['osteochondritis dissecans', picked(values, fields.ocdSite), ocdSigns.length > 0 && ocdSigns.join(', ')])}`,
   ]
 }
@@ -596,10 +626,10 @@ function findings(values: Values): string[] {
   }
   const capitellum = str(values, 'capitellum')
   if (capitellum === 'ocd') out.push('Osteochondritis dissecans of the capitellum.')
-  if (capitellum === 'panner') out.push('Fragmentation of the whole capitellum, as in Panner\'s disease.')
+  if (capitellum === 'panner') out.push('Diffuse involvement of the whole capitellum, as in Panner\'s disease.')
 
   const ucl = str(values, 'ucl')
-  if (ucl === 'edema') out.push('Edema around an intact UCL.')
+  if (ucl === 'edema') out.push('Low-grade sprain of the UCL: edema around otherwise intact fibres.')
   if (ucl === 'partial' || ucl === 'complete') {
     const undersurface = ucl === 'partial' && str(values, 'ucl-partial-type') === 'undersurface'
     out.push(`${upperFirst(ucl)} tear of the UCL${undersurface ? ', undersurface (deep layer)' : ''}.`)
@@ -670,9 +700,13 @@ function warnings(values: Values): string[] {
     str(values, 'olecranon') === 'present' && 'olecranon fracture',
     str(values, 'fracture') === 'present' && 'fracture',
   ].filter((item): item is string => Boolean(item))
-  const ligaments = ([['ucl', 'UCL'], ['lucl', 'LUCL'], ['rcl', 'radial collateral ligament']] as const)
-    .filter(([id]) => torn(values, id))
-    .map(([id, name]) => `${name} ${str(values, id)} tear`)
+  const ligaments = [
+    // E3-1: a low-grade sprain is a ligament injury, though not a tear.
+    str(values, 'ucl') === 'edema' && 'UCL low-grade sprain',
+    ...([['ucl', 'UCL'], ['lucl', 'LUCL'], ['rcl', 'radial collateral ligament']] as const)
+      .filter(([id]) => torn(values, id))
+      .map(([id, name]) => `${name} ${str(values, id)} tear`),
+  ].filter((item): item is string => Boolean(item))
   const tendons = ([['flexor', 'common flexor origin'], ['extensor', 'common extensor origin'], ['biceps', 'distal biceps'], ['triceps', 'triceps']] as const)
     .filter(([id]) => torn(values, id))
     .map(([id, name]) => `${name} ${str(values, id)} tear`)
@@ -825,7 +859,7 @@ const steps: ReportStep[] = [
     id: 'variants',
     title: 'Step 11. Variants',
     learn: 'variants',
-    teach: <p>An anconeus epitrochlearis over the cubital tunnel can compress the ulnar nerve ({ROSENBERG_TUNNEL}). Each variant gets its own impression line.</p>,
+    teach: <p>An anconeus epitrochlearis may cause static or dynamic compression of the ulnar nerve within the cubital tunnel ({SAMPATH}), but it is usually an incidental finding ({KIM}). Each variant gets its own impression line.</p>,
     fields: [fields.variants],
   },
   {
@@ -841,7 +875,7 @@ const study: StudyDefinition = {
   slug: 'elbow-mri',
   name: 'Elbow MRI',
   lede: 'Read an elbow MRI for pain or after an injury: a fixed search pattern through the bones, collateral ligaments, tendons, nerves and bursae, and the report.',
-  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so claims are checked against abstracts, the papers that are open and open reviews. Still unchecked: the anconeus epitrochlearis (the paper cited for it does not mention it), the cartilage signs of an unstable osteochondritis dissecans, which capsule fails at the second stage after a dislocation, and Panner's disease as fragmentation of the whole capitellum.",
+  sourceNote: 'Every reference was matched on PubMed and Crossref. Most of the original papers are paywalled, so claims are checked against their abstracts, the papers that are open, and open reviews and studies cited beside the original.',
   references,
   report: {
     steps,
@@ -865,10 +899,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'broberg',
-      question: 'By Broberg and Morrey\'s thresholds, what makes a radial head fracture type II?',
-      options: ['Any displacement', 'Displacement of 2 mm or more, involving 30% or more of the head', 'Displacement of 5 mm or more', 'Involvement of more than half the head'],
+      question: 'Under the Broberg-Morrey modification, what makes a partial radial head fracture type II?',
+      options: ['Any displacement', 'Displacement of 2 mm or more and 30% or more of the articular surface', 'Displacement of 5 mm or more', 'Involvement of more than half the head'],
       answer: 1,
-      explanation: <p>Broberg and Morrey put type I at less than 2 mm of displacement and type II at 2 mm or more involving 30% or more of the head ({BROBERG}; {VAN_DER_WINDT}).</p>,
+      explanation: <p>Under the Broberg-Morrey modification, type II needs both at least 2 mm of displacement and at least 30% of the articular surface; anything less, including a smaller fragment displaced 2 mm or more, is type I ({BROBERG}; {VAN_DER_WINDT}).</p>,
     },
     {
       id: 'regan-iii',
@@ -914,17 +948,17 @@ const study: StudyDefinition = {
     },
     {
       id: 'panner',
-      question: 'The whole capitellum is fragmented in an 8-year-old. Which diagnosis fits best?',
+      question: 'An 8-year-old has diffuse involvement of the whole capitellum. Which diagnosis fits best?',
       options: ["Panner's disease", 'Osteochondritis dissecans', 'Mason type III fracture', 'The pseudodefect'],
       answer: 0,
-      explanation: <p>Panner's disease is fragmentation of the whole capitellum in children younger than about 10; osteochondritis dissecans is a focal lesion in adolescents ({KOBAYASHI}).</p>,
+      explanation: <p>Panner's disease is an osteochondrosis of the capitellum in children younger than about 10 ({KOBAYASHI}) that typically involves the entire ossification centre ({DWEK}); fragmentation may or may not be present ({CLAESSEN}). Osteochondritis dissecans is a focal lesion in adolescents ({KOBAYASHI}; {SAMPATH}).</p>,
     },
     {
       id: 'anconeus',
-      question: 'An accessory muscle lies over the cubital tunnel. What is it, and which nerve can it compress?',
+      question: 'An accessory muscle takes the place of the cubital tunnel retinaculum. What is it, and which nerve may it compress?',
       options: ['Anconeus epitrochlearis; the ulnar nerve', 'Supracondylar process; the median nerve', 'Accessory brachialis; the radial nerve', 'Os supratrochleare; the ulnar nerve'],
       answer: 0,
-      explanation: <p>An anconeus epitrochlearis over the cubital tunnel can compress the ulnar nerve ({ROSENBERG_TUNNEL}).</p>,
+      explanation: <p>The anconeus epitrochlearis replaces the cubital tunnel retinaculum in about 10% to 20% of people and may cause static or dynamic compression of the ulnar nerve within the tunnel ({SAMPATH}); it is usually an incidental finding ({KIM}).</p>,
     },
   ],
 }

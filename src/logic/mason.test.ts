@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { brobergMorrey, mason, masonSentence } from './mason'
+import { brobergMorrey, brobergMorreySentence, mason, masonFindings, masonSentence } from './mason'
 
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-elbow-mri-sources.md.
@@ -7,7 +7,8 @@ import { brobergMorrey, mason, masonSentence } from './mason'
  * Orthop Relat Res 2012), type IV against Johnston (Ulster Med J 1962). The thresholds are not in
  * the 1986 Broberg and Morrey paper, read in full; the reviews credit their 1987 paper (Clin
  * Orthop Relat Res 1987;216:109-119), which is paywalled, and are checked against a review that
- * states them (van der Windt et al., EFORT Open Rev 2024; 2026-10-29).
+ * states them (van der Windt et al., EFORT Open Rev 2024; 2026-10-29). The Broberg-Morrey
+ * result is labelled as that modification: other versions (Hotchkiss's) have no size requirement.
  */
 
 const type = (input: Parameters<typeof mason>[0]) => mason(input)?.type
@@ -42,16 +43,19 @@ describe('Mason types', () => {
   })
 })
 
-describe('Broberg-Morrey thresholds', () => {
+describe('Broberg-Morrey modification', () => {
   // MA-5, MA-6 (van der Windt et al. 2024): a partial fracture "must be of sufficient size (at
   // least 30% of the articular surface) and displacement (at least 2 mm) to be considered a
-  // displaced fracture (Mason type II, as opposed to nondisplaced Mason type I)". The 2 mm or more
-  // but under 30% case is left undecided here, the site's own choice (with the author).
+  // displaced fracture (Mason type II, as opposed to nondisplaced Mason type I)". By the author's
+  // decision (2026-10-29), a fragment displaced 2 mm or more but under 30% is type I under this
+  // modification; it used to be left undecided.
   test('at the 2 mm and 30% boundaries', () => {
     expect(brobergMorrey(1.9)).toBe('I')
     expect(brobergMorrey(1.9, 50)).toBe('I')
     expect(brobergMorrey(2, 30)).toBe('II')
-    expect(brobergMorrey(2, 29)).toBeUndefined()
+    expect(brobergMorrey(2, 29)).toBe('I')
+    expect(brobergMorrey(5, 10)).toBe('I')
+    // Not decided while the share of the articular surface is missing.
     expect(brobergMorrey(2)).toBeUndefined()
     expect(brobergMorrey(undefined, 40)).toBeUndefined()
   })
@@ -63,5 +67,21 @@ describe('Mason report sentence', () => {
       .toBe('Radial head fracture, Mason type II: marginal sector fracture with displacement.')
     expect(masonSentence(mason({ pattern: 'comminuted', dislocation: true })!))
       .toBe('Radial head fracture with dislocation of the elbow, Mason type IV (Johnston modification).')
+  })
+})
+
+describe('measured findings', () => {
+  // Displacement, articular surface and a mechanical block are recorded separately; van der
+  // Windt et al. 2024: "Displacement (>2 mm) of fragments in radial head fractures without a
+  // mechanical block to pronation/supination is not a clear indication for surgery".
+  test('one line per measurement entered, and the modification named', () => {
+    expect(masonFindings({})).toEqual([])
+    expect(masonFindings({ displacementMm: 3, surfacePercent: 20, mechanicalBlock: false })).toEqual([
+      'Fragment displacement: 3 mm.',
+      'Articular surface involved: 20%.',
+      'Mechanical block to forearm rotation: absent.',
+    ])
+    expect(masonFindings({ mechanicalBlock: true })).toEqual(['Mechanical block to forearm rotation: present.'])
+    expect(brobergMorreySentence('I')).toBe('Broberg-Morrey modification: type I.')
   })
 })

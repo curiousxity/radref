@@ -6,11 +6,11 @@ import { ElbowMriStudyPage } from './ElbowMriStudy'
 const study = studyOf(ElbowMriStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-elbow-mri-sources.md by its ID. The references are
- * matched, and the claims marked verified there were read in an abstract, a paper read in full or
- * an open review (2026-10-29); a few points are still with the author. When those are settled a
- * case may have to change; say in that commit why the old expectation was wrong.
+ * matched, and each claim was read in an abstract, a paper read in full or an open paper cited
+ * beside the original; the points left with the author were settled by the author's decisions of
+ * 2026-10-29. When a case changes, say in that commit why the old expectation was wrong.
  */
 
 describe('elbow MRI lesson', () => {
@@ -21,13 +21,16 @@ describe('elbow MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI but Johnston's), and three open reviews are cited
-  // beside the originals (2026-10-29), but a few claims are still with the author, so the note
-  // keeps saying so. Johnston (Ulster Med J 1962) has no DOI on PubMed or Crossref; the paper is
-  // in PMC only (PMC2384652).
-  test('is still marked as an unchecked draft, with a DOI on every reference but Johnston 1962', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft: every reference has been matched on PubMed and Crossref/)
-    expect(study.references).toHaveLength(21)
+  // The references are matched (each has a DOI but Johnston's), and open papers are cited beside
+  // the originals. With the author's decisions of 2026-10-29 nothing is left unchecked, so the
+  // "Unchecked draft" note is gone; Rosenberg's AJR 1995 paper, which never mentions the anconeus
+  // epitrochlearis, was dropped and seven papers were added (27 references). Johnston (Ulster Med J
+  // 1962) has no DOI on PubMed or Crossref; the paper is in PMC only (PMC2384652).
+  test('is no longer an unchecked draft, with a DOI on every reference but Johnston 1962', () => {
+    expect(study.sourceNote).toMatch(/^Every reference was matched on PubMed and Crossref/)
+    expect(study.sourceNote).not.toMatch(/Unchecked|Still unchecked/)
+    expect(study.references).toHaveLength(27)
+    expect(study.references.some((ref) => ref.citation.startsWith('Rosenberg ZS, Beltran J, Cheung Y, Broker M.'))).toBe(false)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Johnston GW.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -181,7 +184,7 @@ describe('elbow MRI report: hidden fields', () => {
   })
 })
 
-describe('elbow MRI rules (unchecked)', () => {
+describe('elbow MRI rules', () => {
   // MA-1 to MA-4, through the shared logic in src/logic/mason.ts.
   test('a radial head fracture gets its Mason type', () => {
     const fracture = { 'radial-head': 'present', 'radial-head-pattern': 'displaced', 'radial-head-dislocation': 'no' }
@@ -195,12 +198,14 @@ describe('elbow MRI rules (unchecked)', () => {
   // MA-5, MA-6 (van der Windt et al., EFORT Open Rev 2024, crediting Broberg and Morrey 1987): a
   // partial fracture "must be of sufficient size (at least 30% of the articular surface) and
   // displacement (at least 2 mm) to be considered a displaced fracture (Mason type II, as opposed
-  // to nondisplaced Mason type I)".
+  // to nondisplaced Mason type I)". The 2 mm or more but under 30% case used to be left undecided;
+  // by the author's decision (2026-10-29) it is type I under this modification.
   test('Broberg-Morrey at the 2 mm and 30% boundaries', () => {
     const bm = (displacement: string, percent: string) => chips(study, 'bones', { 'radial-head': 'present', 'radial-head-displacement': displacement, 'radial-head-percent': percent })['Broberg-Morrey']
     expect(bm('1.5', '')).toBe('Type I')
     expect(bm('2', '30')).toBe('Type II')
-    expect(bm('2', '25')).toBe('Not decided by the 2 mm and 30% thresholds')
+    expect(bm('2', '25')).toBe('Type I')
+    expect(bm('3', '')).toBe('Enter the share of the articular surface')
     expect(bm('', '40')).toBeUndefined()
   })
 
@@ -246,10 +251,15 @@ describe('elbow MRI rules (unchecked)', () => {
     expect(report(study, values).warnings).toContain('The history is a dislocation, but the radial head fracture is entered without one; if they happened together it is Mason type IV (Johnston).')
   })
 
-  // E2-4: Panner's disease is the whole capitellum under about 10; osteochondritis dissecans
-  // is focal, in adolescents.
+  // E2-4: Panner's disease is under about 10 (Kobayashi 2004) and "the entire ossific center is
+  // usually involved" (Dwek 2012); fragmentation is not required, "seen in six case reports (27 %)"
+  // (Claessen 2015). The old chip and report called it "fragmentation of the whole capitellum",
+  // which made a variable finding obligatory. Osteochondritis dissecans is "an acquired focal
+  // lesion" (Sampath 2013), in adolescents.
   test('Panner against osteochondritis dissecans', () => {
-    expect(chips(study, 'bones', { capitellum: 'panner' })["Panner's disease"]).toBe('Typically under 10 years; the whole capitellum')
+    expect(chips(study, 'bones', { capitellum: 'panner' })["Panner's disease"]).toBe('Typically under 10 years; usually the whole ossification centre')
+    expect(impressionOf({ ...normal, capitellum: 'panner' })).toBe("Diffuse involvement of the whole capitellum, as in Panner's disease.")
+    expect(report(study, { ...normal, capitellum: 'panner' }).text).not.toContain('fragmentation')
     expect(chips(study, 'bones', { capitellum: 'ocd' })['Osteochondritis dissecans']).toBe('Typically adolescents; a focal lesion')
   })
 
@@ -274,6 +284,19 @@ describe('elbow MRI rules (unchecked)', () => {
     expect(chips(study, 'ucl', values)['Undersurface partial tear']).toBe('Deep layer detached from bone, superficial layer intact')
     expect(chips(study, 'ucl', { ...values, 'ucl-partial-type': 'other' })['Undersurface partial tear']).toBeUndefined()
     expect(impressionOf(values)).toBe('Partial tear of the UCL, undersurface (deep layer).')
+  })
+
+  // E3-1: "Periligamentous edema with otherwise intact ligament fibers is consistent with a
+  // low-grade sprain in the appropriate clinical setting" (Powell 2021). The UCL option used to
+  // read "Edema around intact fibres", with no name for the injury; it is a sprain, not a tear.
+  test('edema around an intact UCL is a low-grade sprain, not a tear', () => {
+    const values = { ...normal, ucl: 'edema' }
+    expect(report(study, values).text).toContain('UCL (anterior bundle): low-grade sprain (edema around intact fibres)')
+    expect(impressionOf(values)).toBe('Low-grade sprain of the UCL: edema around otherwise intact fibres.')
+    expect(report(study, values).text).not.toMatch(/UCL[^\n]*tear/)
+    expect(report(study, { ...values, 'impression-negatives': ['no-ligament'] }).warnings)
+      .toContain('Impression says no ligament injury, but these are entered: UCL low-grade sprain.')
+    expect(report(study, { ...values, 'impression-negatives': ['no-ligament'] }).warnings.join(' ')).not.toContain('tear')
   })
 
   // E4-1: LUCL insufficiency underlies posterolateral rotatory instability.
