@@ -47,7 +47,8 @@ by the author's choice).
   (distal spiral) fracture was found; that card keeps its drawing only. Searched again
   2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
   filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
-- **Hearing loss CT:** the five "For the author" questions (see its section below).
+- **Hearing loss CT:** the five questions were decided 2026-10-29; one small point is left (see its
+  section below).
 - Decided 2026-10-28: calvarium and hearing loss stay single pages, with no Report, Learn or
   Quiz tabs.
 - Decided 2026-10-28: the author will not review the pages, so nothing waits for a sign-off. The
@@ -537,10 +538,14 @@ Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
 - [ ] No open CC BY figure with a stated licence version for the labyrinthine fistula yet.
 - [x] Claims checked on PubMed, Crossref and the open full texts (2026-10-28); the ACR Hearing Loss
       and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
-- [ ] Five questions for the author at the end of the sources doc ("For the author"): where claims
-      differ from their papers or have no source. Nothing was reworded.
-- [x] No author review (2026-10-28). The note keeps "Unchecked draft" while the five questions
-      above are open.
+- [x] The five questions decided by the author 2026-10-29 (the sources doc, "The author's
+      decisions"): labyrinthitis ossificans causes broadened (Verbist, Buch); the ACR MRI wording;
+      fibrous dysplasia (Brown, Pontes-Madruga) and pneumolabyrinth (Gross, Botti) recited, Juliano
+      part II dropped; the four unsourced statements sharpened and cited; the implant checklist
+      adapted from Widmann 2020 and Vogl 2015, Young kept for children.
+- [ ] Still unsourced: two checklist points, the sigmoid sinus "placed far forward" and otosclerosis
+      as the example of a round window closed by bone. Ostrander 2026 (already the source of a scan)
+      states both; cite it? The note keeps "Unchecked draft" until then.
 
 ## Calculator papers from the author (first batch)
 

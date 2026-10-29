@@ -18,24 +18,50 @@ const DOI = {
   belden: '10.1148/radiol.2262010897',
   little: '10.1001/archotol.132.12.1300',
   juliano1: '10.1148/radiol.13120733',
-  juliano2: '10.1148/radiol.2015140800',
   barath: '10.3174/ajnr.A2052',
   mukherji: '10.1148/radiology.202.3.9051037',
   young: '10.1148/rg.345130083',
   acr: '10.1016/j.jacr.2018.09.020',
+  brown: '10.2214/ajr.164.3.7863893',
+  pontes: SCAN_SOURCES.pontesMadruga2022.doi,
+  buch: '10.3174/ajnr.A5985',
+  widmann: '10.1186/s13244-020-00902-6',
+  tokat: '10.5152/iao.2022.20146',
+  botti: '10.1007/s00405-021-06827-0',
+  gross: '10.1016/s0165-5876(03)00013-2',
+  manski: '10.1001/jama.1997.03540420057030',
+  kim: '10.1002/lary.23646',
+  jung: '10.3340/jkns.2025.0018',
+  bausch: '10.1002/hed.24067',
+  minor: '10.1097/00129492-200303000-00023',
+  eberhard: '10.3389/fneur.2021.638574',
+  vogl: '10.1055/s-0035-1553413',
 }
 
 const references: LessonReference[] = [
   { citation: 'Purohit B, Hermans R, Op de beeck K. Imaging in otosclerosis: a pictorial review. Insights Imaging. 2014;5(2):245-252. Open access (CC BY 2.0).', doi: DOI.purohit },
   { citation: 'Verbist BM. Imaging of sensorineural hearing loss: a pattern-based approach to diseases of the inner ear and cerebellopontine angle. Insights Imaging. 2012;3(2):139-153. Open access.', doi: DOI.verbist },
   { citation: 'Lee TC, Aviv RI, Chen JM, Nedzelski JM, Fox AJ, Symons SP. CT grading of otosclerosis. AJNR Am J Neuroradiol. 2009;30(7):1435-1439.', doi: DOI.lee },
+  { citation: 'Brown EW, Megerian CA, McKenna MJ, Weber A. Fibrous dysplasia of the temporal bone: imaging findings. AJR Am J Roentgenol. 1995;164(3):679-682.', doi: DOI.brown },
+  { citation: 'Pontes-Madruga TC, Filgueiras HVC, da Silva DMS, da Silva LS, Testa JRG. Fibrous dysplasia: rare manifestation in the temporal bone. Braz J Otorhinolaryngol. 2022;88(2):235-242. Open access.', doi: DOI.pontes },
+  { citation: 'Buch K, Baylosis B, Fujita A, et al. Etiology-specific mineralization patterns in patients with labyrinthitis ossificans. AJNR Am J Neuroradiol. 2019;40(3):551-557.', doi: DOI.buch },
+  { citation: 'Widmann G, Dejaco D, Luger A, Schmutzhard J. Pre- and post-operative imaging of cochlear implants: a pictorial review. Insights Imaging. 2020;11(1):93. Open access.', doi: DOI.widmann },
+  { citation: 'Vogl TJ, Tawfik A, Emam A, et al. Pre-, intra- and post-operative imaging of cochlear implants. Rofo. 2015;187(11):980-989.', doi: DOI.vogl },
+  { citation: 'Tokat T, Catli T, Basaran Bozkurt E, Olgun L. Surgical methods and auditory outcomes of cochlear implantation in cochlear ossification. J Int Adv Otol. 2022;18(1):51-56. Open access.', doi: DOI.tokat },
+  { citation: 'Botti C, Castellucci A, Crocetta FM, et al. Pneumolabyrinth: a systematic review. Eur Arch Otorhinolaryngol. 2021;278(12):4619-4632.', doi: DOI.botti },
+  { citation: 'Gross M, Ben-Yaakov A, Goldfarb A, Eliashar R. Pneumolabyrinth: an unusual finding in a temporal bone fracture. Int J Pediatr Otorhinolaryngol. 2003;67(5):553-555.', doi: DOI.gross },
   { citation: 'Vijayasekaran S, Halsted MJ, Boston M, et al. When is the vestibular aqueduct enlarged? A statistical analysis of the normative distribution of vestibular aqueduct size. AJNR Am J Neuroradiol. 2007;28(6):1133-1138.', doi: DOI.vijay },
   { citation: 'Little SC, Kesser BW. Radiographic classification of temporal bone fractures: clinical predictability using a new system. Arch Otolaryngol Head Neck Surg. 2006;132(12):1300-1304.', doi: DOI.little },
   { citation: 'Juliano AF, Ginat DT, Moonis G. Imaging review of the temporal bone: part I. Anatomy and inflammatory and neoplastic processes. Radiology. 2013;269(1):17-33.', doi: DOI.juliano1 },
-  { citation: 'Juliano AF, Ginat DT, Moonis G. Imaging review of the temporal bone: part II. Traumatic, postoperative, and noninflammatory nonneoplastic conditions. Radiology. 2015;276(3):655-672.', doi: DOI.juliano2 },
   { citation: 'Baráth K, Huber AM, Stämpfli P, Varga Z, Kollias S. Neuroradiology of cholesteatomas. AJNR Am J Neuroradiol. 2011;32(2):221-229.', doi: DOI.barath },
   { citation: 'Mukherji SK, Albernaz VS, Lo WW, et al. Papillary endolymphatic sac tumors: CT, MR imaging, and angiographic findings in 20 patients. Radiology. 1997;202(3):801-808.', doi: DOI.mukherji },
+  { citation: 'Manski TJ, Heffner DK, Glenn GM, et al. Endolymphatic sac tumors: a source of morbid hearing loss in von Hippel-Lindau disease. JAMA. 1997;277(18):1461-1466.', doi: DOI.manski },
+  { citation: 'Kim HJ, Hagan M, Butman JA, et al. Surgical resection of endolymphatic sac tumors in von Hippel-Lindau disease: findings, results, and indications. Laryngoscope. 2013;123(2):477-483.', doi: DOI.kim },
+  { citation: 'Jung NY, Park JB. Von Hippel-Lindau disease: a comprehensive review of diagnosis, genetics, clinical challenges, and surveillance. J Korean Neurosurg Soc. 2025;68(3):338-349. Open access.', doi: DOI.jung },
+  { citation: 'Bausch B, Wellner U, Peyre M, et al. Characterization of endolymphatic sac tumors and von Hippel-Lindau disease in the International Endolymphatic Sac Tumor Registry. Head Neck. 2016;38(Suppl 1):E673-E679.', doi: DOI.bausch },
   { citation: 'Belden CJ, Weg N, Minor LB, Zinreich SJ. CT evaluation of bone dehiscence of the superior semicircular canal as a cause of sound- and/or pressure-induced vertigo. Radiology. 2003;226(2):337-343.', doi: DOI.belden },
+  { citation: 'Minor LB, Carey JP, Cremer PD, Lustig LR, Streubel SO, Ruckenstein MJ. Dehiscence of bone overlying the superior canal as a cause of apparent conductive hearing loss. Otol Neurotol. 2003;24(2):270-278.', doi: DOI.minor },
+  { citation: 'Eberhard KE, Chari DA, Nakajima HH, Klokker M, Cayé-Thomasen P, Lee DJ. Current trends, controversies, and future directions in the evaluation and management of superior canal dehiscence syndrome. Front Neurol. 2021;12:638574. Open access.', doi: DOI.eberhard },
   { citation: 'Young JY, Ryan ME, Young NM. Preoperative imaging of sensorineural hearing loss in pediatric candidates for cochlear implantation. RadioGraphics. 2014;34(5):E133-E149.', doi: DOI.young },
   { citation: 'Expert Panel on Neurologic Imaging: Sharma A, Kirsch CFE, Aulino JM, et al. ACR Appropriateness Criteria Hearing Loss and/or Vertigo. J Am Coll Radiol. 2018;15(11S):S321-S331.', doi: DOI.acr },
 ]
@@ -88,7 +114,7 @@ function FibrousDysplasiaFigure() {
   return (
     <EarScene
       id="hl-fd"
-      title="Fibrous dysplasia: ground-glass bone around the labyrinth, with the otic capsule itself usually spared"
+      title="Fibrous dysplasia: expanded bone around the labyrinth, drawn here as ground glass (one of its patterns), with the otic capsule itself usually spared"
       under={
         <>
           <path d={EAR.bone} className="ear-ground" />
@@ -236,8 +262,8 @@ const bone: Finding[] = [
     badge: OTHER,
     figure: <FibrousDysplasiaFigure />,
     images: [hearingLossScans.fibrousDysplasia],
-    look: <>Expanded bone with a smooth "ground-glass" look in the temporal bone. The otic capsule itself is usually spared.</>,
-    report: <>Say whether it narrows the external or internal auditory canal (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
+    look: <>Expanded bone in the temporal bone, classically "ground glass" on CT (<Cite doi={DOI.pontes}>Pontes-Madruga et al.</Cite>), but the pattern may also be pagetoid, sclerotic or cystic (<Cite doi={DOI.brown}>Brown et al.</Cite>). Otic-capsule involvement is uncommon (<Cite doi={DOI.brown}>Brown et al.</Cite>; <Cite doi={DOI.pontes}>Pontes-Madruga et al.</Cite>).</>,
+    report: <>Temporal-bone fibrous dysplasia may narrow the external auditory canal or involve middle-ear structures (<Cite doi={DOI.brown}>Brown et al.</Cite>; <Cite doi={DOI.pontes}>Pontes-Madruga et al.</Cite>). Say whether the canal is narrowed and what in the middle ear is involved.</>,
   },
 ]
 
@@ -247,16 +273,16 @@ const inside: Finding[] = [
     badge: URGENT,
     figure: <OssificansFigure />,
     images: [hearingLossScans.labyrinthitisOssificans],
-    look: <>The normally fluid-filled cochlea or canals fill with new bone, partly or completely, usually after meningitis or other inner ear infection (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
-    report: <>Say which turns are filled and whether the <strong>basal turn</strong> is open. This decides whether a cochlear implant can go in normally. If the CT looks normal but this is suspected, early fibrous change shows on MRI as loss of the normal fluid signal (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
+    look: <>The normally fluid-filled cochlea or canals fill with new bone, partly or completely (<Cite doi={DOI.verbist}>Verbist</Cite>). Labyrinthitis ossificans is ossification of the labyrinth following an infectious, inflammatory or other inner-ear insult, including meningitis, chronic otomastoiditis, trauma and temporal bone surgery (<Cite doi={DOI.verbist}>Verbist</Cite>; <Cite doi={DOI.buch}>Buch et al.</Cite>).</>,
+    report: <>Say which turns and canals are filled. For a cochlear implant, assess cochlear patency, particularly the <strong>basal-turn scala tympani and round-window region</strong>, because these form the usual electrode-entry route; fibrosis or ossification may complicate insertion (<Cite doi={DOI.widmann}>Widmann et al.</Cite>), and the further the ossification extends, the more drilling is needed (<Cite doi={DOI.tokat}>Tokat et al.</Cite>). If the CT looks normal but this is suspected, early fibrous change shows on MRI as loss of the normal fluid signal (<Cite doi={DOI.verbist}>Verbist</Cite>).</>,
   },
   {
     name: 'Pneumolabyrinth',
     badge: URGENT,
     figure: <PneumolabyrinthFigure />,
     images: [hearingLossScans.pneumolabyrinth],
-    look: <>Dots of air inside the vestibule or cochlea, where there should only be fluid. Usually after trauma or ear surgery.</>,
-    report: <>It means the inner ear has been opened (a perilymph leak). Tell the clinician directly (<Cite doi={DOI.juliano2}>Juliano et al.</Cite>).</>,
+    look: <>Dots of air inside the vestibule or cochlea, where there should only be fluid; the vestibule is the usual site. Most cases follow trauma (with or without a temporal bone fracture), stapes surgery or barotrauma (<Cite doi={DOI.botti}>Botti et al.</Cite>).</>,
+    report: <>Pneumolabyrinth is air within the inner-ear labyrinth, indicating an abnormal communication with an air-containing space (the middle ear or mastoid); thin-section temporal bone CT demonstrates it (<Cite doi={DOI.gross}>Gross et al.</Cite>). Tell the clinician directly.</>,
   },
   {
     name: 'Enlarged vestibular aqueduct',
@@ -291,7 +317,7 @@ const erosion: Finding[] = [
     figure: <ElstFigure />,
     images: [hearingLossScans.elst],
     look: <>A destructive mass behind the internal auditory canal (retrolabyrinthine), with calcified specks inside on CT (<Cite doi={DOI.mukherji}>Mukherji et al.</Cite>).</>,
-    report: <>Recommend MRI. Think of von Hippel–Lindau disease, especially if it is on both sides.</>,
+    report: <>Recommend MRI. Endolymphatic sac tumours may be associated with von Hippel–Lindau disease (<Cite doi={DOI.manski}>Manski et al.</Cite>; <Cite doi={DOI.kim}>Kim et al.</Cite>); bilateral tumours strongly suggest VHL (<Cite doi={DOI.jung}>Jung and Park</Cite>). A one-sided tumour does not exclude it: 39% of apparently sporadic tumours carried a VHL germline mutation (<Cite doi={DOI.bausch}>Bausch et al.</Cite>).</>,
   },
 ]
 
@@ -302,7 +328,7 @@ const canal: Finding[] = [
     figure: <WideIacFigure />,
     images: [hearingLossScans.iac],
     look: <>One canal clearly wider or more flared than the other. Always compare the two sides.</>,
-    report: <>Suggests a mass in the canal, most often a vestibular schwannoma. Recommend MRI with contrast, which is the test for this (<Cite doi={DOI.verbist}>Verbist</Cite>). A normal CT does not exclude a small schwannoma.</>,
+    report: <>Suggests a mass in the canal, most often a vestibular schwannoma (<Cite doi={DOI.verbist}>Verbist</Cite>). Recommend MRI of the head and internal auditory canals, without IV contrast or without and with IV contrast (<Cite doi={DOI.acr}>ACR</Cite>). A normal temporal bone CT does not exclude a schwannoma: CT is insensitive to the soft-tissue causes of sensorineural loss and shows a schwannoma only indirectly, by remodelling of the canal. Dedicated IAC MRI is the preferred examination for suspected retrocochlear disease (<Cite doi={DOI.acr}>ACR</Cite>).</>,
   },
   {
     name: 'Superior canal dehiscence',
@@ -310,19 +336,19 @@ const canal: Finding[] = [
     figure: <DehiscenceFigure />,
     images: [hearingLossScans.scd],
     look: <>No bone covering the top of the superior semicircular canal. Check on coronal or Pöschl reformats (<Cite doi={DOI.belden}>Belden et al.</Cite>).</>,
-    report: <>It typically gives sound- or pressure-induced vertigo and a conductive-type loss rather than pure sensorineural loss. Mention it if you see it.</>,
+    report: <>It may produce a low-frequency air–bone gap, a conductive-type or "pseudo-conductive" hearing-loss pattern, through a third-window mechanism, despite no primary middle-ear lesion (<Cite doi={DOI.minor}>Minor et al.</Cite>; <Cite doi={DOI.eberhard}>Eberhard et al.</Cite>), and sound- or pressure-induced vertigo (<Cite doi={DOI.belden}>Belden et al.</Cite>). Mention it if you see it, but a dehiscence on CT is not the syndrome: it can be incidental, and superior canal dehiscence syndrome needs compatible symptoms and physiological evidence, such as audiometry and VEMPs, not CT alone (<Cite doi={DOI.eberhard}>Eberhard et al.</Cite>).</>,
   },
 ]
 
 const implantChecklist = [
-  'Cochlea: is the basal turn open? Any ossification or malformation?',
+  'Cochlea: any malformation? Is it patent, particularly the basal turn, or is there ossification? Early fibrosis may show only on MRI.',
   'Round window: open, or closed by bone (for example otosclerosis)?',
   'Facial nerve: its course, and whether the canal is dehiscent.',
-  'Mastoid: how well it is aerated.',
-  'Jugular bulb: high-riding or dehiscent?',
+  'Mastoid and middle ear: how well the mastoid is aerated; any mastoiditis, otitis or cholesteatoma.',
+  'Jugular bulb: course variation or dehiscence?',
   'Sigmoid sinus: placed far forward?',
-  'Carotid canal: normal course?',
-  'Internal auditory canal: normal width? A very narrow canal raises concern for a missing cochlear nerve; recommend MRI.',
+  'Carotid canal: course variation or dehiscence?',
+  'Internal auditory canal and cochlear aperture: normal width? A narrow canal or aperture may indicate a hypoplastic or absent cochlear nerve; recommend MRI, the examination of choice for the nerve.',
 ]
 
 const normalFindings = `Cochleae, vestibules and semicircular canals are normally formed on both sides.
@@ -334,7 +360,7 @@ Superior semicircular canals are covered by bone`
 
 const normalImpression = 'No CT cause for sensorineural hearing loss'
 
-const normalRecommendation = 'MRI of the internal auditory canals with contrast is more sensitive for retrocochlear causes such as vestibular schwannoma, if not already performed'
+const normalRecommendation = 'MRI of the head and internal auditory canals, without IV contrast or without and with IV contrast, is more sensitive for retrocochlear causes such as vestibular schwannoma, if not already performed'
 
 const otosclerosisFindings = `[Right / left / bilateral] lucency anterior to the oval window at the fissula ante fenestram.
 Pericochlear lucency forming a "double ring" around the [basal / middle / apical] turn of the cochlea.
@@ -344,7 +370,7 @@ const otosclerosisImpression = 'Fenestral and retrofenestral (cochlear) otoscler
 
 const ossificansFindings = 'Bony obliteration of the [basal / middle / apical] turn of the [right / left] cochlea [and the ___ semicircular canal]'
 
-const ossificansImpression = 'Labyrinthitis ossificans, [right / left]. The basal turn is [patent / partly obstructed / obstructed], which is relevant to cochlear implant planning'
+const ossificansImpression = 'Labyrinthitis ossificans, [right / left]. The basal turn and round window region are [patent / partly obstructed / obstructed], which is relevant to cochlear implant planning'
 
 function FindingCards({ findings }: { findings: Finding[] }) {
   return (
@@ -380,12 +406,15 @@ export function HearingLossCtPage() {
           <p className="eyebrow">Study</p>
           <h2>Hearing loss on temporal bone CT</h2>
           <p>
-            Adult sensorineural hearing loss: what to look for. In adults the cause is usually acquired, not congenital. MRI with contrast is the
-            usual first test for one-sided loss, to look for a vestibular schwannoma (<Cite doi={DOI.acr}>ACR</Cite>). CT is mostly asked for to look
-            for otosclerosis, after trauma, for bone disease, or to plan a cochlear implant.
+            Adult sensorineural hearing loss: what to look for. In adults the cause is usually acquired, not congenital. For acquired sensorineural
+            hearing loss, MRI of the head and internal auditory canals is usually appropriate, either without IV contrast or without and with IV
+            contrast (<Cite doi={DOI.acr}>ACR</Cite>). CT is mostly asked for to look for otosclerosis, after trauma, for bone disease, or to plan a
+            cochlear implant.
           </p>
           <p className="source-note">
-            Unchecked draft, written on 2026-10-28 without access to PubMed. The drawings are schematics,
+            Unchecked draft: written on 2026-10-28 without access to PubMed, checked against the papers later that day, with the author's
+            decisions of 2026-10-29 applied. Still unsourced: two points in the cochlear implant checklist, the sigmoid sinus item and
+            otosclerosis as the example of a round window closed by bone, which neither Widmann et al. nor Vogl et al. states. The drawings are schematics,
             not to scale. The scans are panels from open-access figures published under CC BY licences, credited under each card.
           </p>
         </div>
@@ -428,7 +457,11 @@ export function HearingLossCtPage() {
 
       <section className="info-card">
         <h3>Cochlear implant planning</h3>
-        <p className="fm-lead">If the scan is for an implant, say each of these, normal or not (<Cite doi={DOI.young}>Young et al.</Cite>).</p>
+        <p className="fm-lead">
+          If the scan is for an implant, say each of these, normal or not. The preoperative cochlear-implant imaging checklist is adapted from{' '}
+          <Cite doi={DOI.widmann}>Widmann et al. (2020)</Cite>, with additional surgical-anatomy considerations from{' '}
+          <Cite doi={DOI.vogl}>Vogl et al. (2015)</Cite>. For children, see also <Cite doi={DOI.young}>Young et al. (2014)</Cite>.
+        </p>
         <ul className="plain-list">
           {implantChecklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
