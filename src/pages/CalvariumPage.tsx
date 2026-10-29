@@ -542,7 +542,7 @@ export function CalvariumPage() {
             many there are and how old the patient is will usually narrow the list to one or two.
           </p>
           <p className="source-note">
-            Drafted from the cited reviews and not yet reviewed by the site author. The drawings are schematics, not to scale. The scans are single
+            Drafted from the cited reviews. The drawings are schematics, not to scale. The scans are single
             panels cropped from open-access figures published under CC BY licences, credited under each one; the arrows are the original authors'.
           </p>
         </div>
