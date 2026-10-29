@@ -10,12 +10,13 @@ import { WristMriStudyPage } from './WristMriStudy'
 const study = studyOf(WristMriStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Unchecked draft (one claim unread: whether Herbert and Fisher 1984 itself has type B5). Every
+ * rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims) or, for the four
  * shared classifications, 2026-10-23-wrist-calculators-sources.md (MF, HB, PA, LI claims).
- * The references are matched, but only the claims marked verified there were read in their
- * papers or in an open review cited beside them; when the rest are checked a case may have to
- * change; say in that commit why the old expectation was wrong.
+ * The references are matched, and the claims were read in their papers' abstracts or in the
+ * reviews cited beside them. If a case has to change, say in that commit why the old
+ * expectation was wrong.
  */
 
 describe('wrist MRI lesson', () => {
@@ -26,13 +27,17 @@ describe('wrist MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI); a few claims are still unchecked (the
-  // scapholunate angle bounds, the perilunate mechanism, Palmer 1B and 1C), so the note keeps saying so.
+  // The references are matched (each has a DOI). The author's decisions of 2026-10-29 settled the
+  // scapholunate angle bounds, the perilunate mechanism and Palmer 1B and 1C; one claim is still
+  // unread (whether Herbert and Fisher 1984 itself has type B5), so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
+    expect(study.sourceNote).toMatch(/Still unchecked: whether Herbert and Fisher's 1984 paper itself has type B5/)
+    expect(study.sourceNote).not.toMatch(/scapholunate angle|perilunate|Palmer/)
     // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added;
-    // 24 since the open reviews of 2026-10-29 (Andersson, Ng, Chen, von Borstel).
-    expect(study.references).toHaveLength(24)
+    // 24 since the open reviews of 2026-10-29 (Andersson, Ng, Chen, von Borstel); 32 since the
+    // author's decisions of 2026-10-29 (Zhou, Pang, Vassa, Reagan, Wilson, Dvorsky, Sharma, Okoro).
+    expect(study.references).toHaveLength(32)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -181,7 +186,7 @@ describe('wrist MRI report: hidden fields', () => {
   })
 })
 
-describe('wrist MRI rules (unchecked)', () => {
+describe('wrist MRI rules', () => {
   // W2-2 (HB-): the Herbert type from the shared logic.
   test('a scaphoid fracture gets its Herbert type and sentence', () => {
     expect(chips(study, 'bones', { scaphoid: 'present', herbert: 'B2' }).Herbert).toMatch(/^Type B2 \(/)
@@ -212,15 +217,24 @@ describe('wrist MRI rules (unchecked)', () => {
       .toEqual(['Focal ulnar-side lunate signal is entered, the pattern of ulnar impaction, which goes with positive ulnar variance, but the ulnar variance is entered as negative.'])
   })
 
-  // W3-2: "The normal scapholunate angle is 30° to 60°; above 60° suggests DISI, below 30° VISI."
-  test('scapholunate angle at 30° and 60°', () => {
+  // W3-2, the author's decision (2026-10-29). Normal: "a normal value between 30º and 60º";
+  // "greater than 70º is consistent with a DISI deformity" (Zhou 2024). Over 60°: "SL angle > 60°"
+  // in SL dissociation (Andersson 2017); "scapholunate instability ... scapholunate angle >60°"
+  // (Pang 2018). Below 30°: "The SLL angle < 30° and capitolunate angle > 30° are suggestive of
+  // VISI" (Vassa 2020). The old rule called anything over 60° DISI; the author separated an angle
+  // beyond the normal range (61–70°) from one strongly suggesting DISI (over 70°), and did not
+  // adopt the 80° of some reviews.
+  test('scapholunate angle at 30°, 60° and 70°', () => {
     const angle = (degrees: string) => chips(study, 'scapholunate', { 'sl-angle': degrees })['Scapholunate angle']
     expect(angle('60')).toBe('Within 30–60°')
-    expect(angle('61')).toBe('Above 60°: suggests DISI')
+    expect(angle('61')).toBe('Above 60°: beyond the normal range, supports scapholunate malalignment')
+    expect(angle('70')).toBe('Above 60°: beyond the normal range, supports scapholunate malalignment')
+    expect(angle('71')).toBe('Above 70°: strongly suggests DISI')
     expect(angle('30')).toBe('Within 30–60°')
     expect(angle('29')).toBe('Below 30°: suggests VISI')
     expect(angle('')).toBeUndefined()
-    expect(impressionOf({ ...normal, 'sl-angle': '75' })).toBe('Scapholunate angle 75°, suggesting DISI.')
+    expect(impressionOf({ ...normal, 'sl-angle': '75' })).toBe('Scapholunate angle 75°, strongly suggesting DISI.')
+    expect(impressionOf({ ...normal, 'sl-angle': '65' })).toBe('Scapholunate angle 65°, above the normal range, supporting scapholunate malalignment.')
     expect(impressionOf({ ...normal, 'sl-angle': '45' })).toBe(NORMAL_IMPRESSION)
   })
 

@@ -20,7 +20,7 @@ export const mayfieldScans = {
   stage3: {
     src: '/scans/mayfield/stage3.jpg',
     alt: 'Lateral wrist radiograph with an arrow at the lunate, showing the capitate no longer sitting in line with the lunate.',
-    caption: 'Stage III, perilunate dislocation: lateral radiograph of a dorsal perilunate dislocation showing loss of collinearity between the lunate and the capitate (arrow). The same wrist also had a comminuted distal radius fracture.',
+    caption: 'Perilunate dislocation (stage II or III, as reviews label it differently): lateral radiograph of a dorsal perilunate dislocation showing loss of collinearity between the lunate and the capitate (arrow). The same wrist also had a comminuted distal radius fracture.',
     source: S.sakaria2026,
     figure: 'Fig. 1B',
   },

@@ -5,7 +5,10 @@
  * The 1984 paper is paywalled; the types are checked against AO Surgery Reference's Herbert
  * classification page (Dráč, Kastelec, Suarez; citing Herbert's 1990 book), which adds B5,
  * comminuted (claims HB-1 to HB-5 in
- * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
+ * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md). Steinmann and Adams
+ * (J Orthop Sci 2006) give the same list, B5 included, and word B2 as "displaced or mobile
+ * fractures of the waist"; the author chose (2026-10-29) to keep AO's wording. Whether the 1984
+ * paper itself has B5 is still unread.
  */
 
 export type HerbertType = 'A1' | 'A2' | 'B1' | 'B2' | 'B3' | 'B4' | 'B5' | 'C' | 'D1' | 'D2'
@@ -16,7 +19,8 @@ export const herbertDescriptions: Record<HerbertType, string> = {
   A1: 'fracture of the tubercle', // HB-1
   A2: 'incomplete fracture through the waist', // HB-1
   B1: 'distal oblique fracture', // HB-2
-  B2: 'complete fracture of the waist', // HB-2
+  // HB-2, AO Surgery Reference: "B2 – complete waist fracture".
+  B2: 'complete waist fracture',
   B3: 'proximal pole fracture', // HB-2
   B4: 'trans-scaphoid perilunate fracture-dislocation', // HB-2
   // HB-2: AO Surgery Reference, "B5 – comminuted fracture".
