@@ -174,8 +174,9 @@ uses a claim, its ID is in a comment next to the chip, warning or test.
 
 ## Still to do
 
-1. Keep the "Unchecked draft" notes while any claim the pages use is unverified (N1-N6,
-   S2-1, S3-2, and the unread parts of S2-3, S3-1, S3-3, S6-1, S10-2, S11-1 and S12-1).
+1. Done 2026-10-29 (sixth check): every claim is now read in an abstract, open full text or an
+   open review, and the "Unchecked draft" notes are gone. Left for the author: the S2-3
+   attribution to Richards, Sugaya type III (S11-1) and the Neer page's "better outlook".
 
 ## Second check, 2026-10-25: papers supplied by the author
 
@@ -219,3 +220,36 @@ humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43. doi:10.1007/s11999-
 | N4 | yes | Two-part: one segment displaced; three-part: "one tuberosity is displaced and the surgical neck fracture is displaced"; four-part: "All four segments ... meet criteria for displacement". |
 | N5 | yes | Fracture-dislocations, and articular surface injuries in "two varieties, head-splitting fractures and impaction fractures". |
 | N6 | consistent | The only later pattern is "the valgus impacted four-part fracture category in 2002": "the head is rotated into a valgus posture and driven down between the tuberosities ... the articular surface maintains contact with the glenoid". Now described on the Neer page and in the study; the calculator does not code it separately. |
+
+## Sixth check, 2026-10-29: open sources
+
+The RSNA pages (Hill and Sachs, Richards, Fritz, Tuite, Smith) and the Arthroscopy pages (Snyder,
+Sugaya) now return 403 to a script, so no original was read. Each claim below was read in open full
+text from Europe PMC or PMC, in a peer-reviewed review or study that states it; each is now cited
+beside the original in the study, and the study's references are matched on PubMed and Crossref
+(Crossref spells the first author of Marcon 2015 "Marconi"; PubMed and the article say "Marcon").
+New sources:
+
+- Bao MH, DeAngelis JP, Wu JS. Eur J Radiol Open. 2022;9:100411. doi:10.1016/j.ejro.2022.100411 (PMC8899241)
+- Marcon GF, Macedo TA. Radiol Bras. 2015;48(4):242-248. doi:10.1590/0100-3984.2013.0006 (PMC4567363)
+- Kadi R, Milants A, Shahabpour M. J Belg Soc Radiol. 2017;101(Suppl 2):3. doi:10.5334/jbr-btr.1467 (PMC6251069)
+- Feuerriegel GC, et al. Invest Radiol. 2024;59(4):328-336. doi:10.1097/RLI.0000000000001024 (PMC11882186)
+- Jarraya M, et al. Insights Imaging. 2016;7(2):167-177. doi:10.1007/s13244-015-0462-5 (PMC4805613)
+- Ayik G, et al. Int Orthop. 2025;49(5):1153-1165. doi:10.1007/s00264-025-06465-9 (PMC12003475)
+- Mangi MD, Zadow S, Lim W. Insights Imaging. 2022;13(1):166. doi:10.1186/s13244-022-01305-5 (PMC9556688)
+- Jeong SY, Young KW, Lim TK. Clin Orthop Surg. 2026;18(2):303-311. doi:10.4055/cios25283 (PMC13047394)
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| S2-1 | yes | Bao 2022, Fig. 7 legend: "With anterior dislocation, The impact of the relatively soft humeral head striking against the more rigid anterior glenoid rim leads to a Hill-Sachs fracture at the posterolateral humeral head". Woertler and Waldt (R13) agree: "a compression injury of the posterolateral humeral head which develops during anteroinferior dislocation". "Grooved" is Hill and Sachs's own title (Crossref). |
+| S2-3 | yes (the claim); the attribution to Richards is still unread | Marcon 2015: "Usually, Hill-Sachs defects are visible on the uppermost axial images of the humerus, superolaterally at 5 mm from the top of the humeral head. The normal anatomic groove of the humerus usually lies at 20 to 30 mm from the superior humeral head". Kadi 2017: "a physiological flattening in the humeral neck ... should not be mistaken for a Hill-Sachs impaction which is seen at or above the level of the coracoid process". Woertler and Waldt (R13): "typically seen at or slightly above the level of the coracoid process"; the normal groove "can often be found caudad to that position". **For the author:** the step 2 sentence says "Richards and colleagues ... separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process"; the Richards abstract says only "more cephalic position along the longitudinal humeral axis", so whether Richards names the coracoid is unread. Kept as it is, with Marcon and Kadi cited beside Richards. |
+| S3-2 | yes | Feuerriegel 2024, methods: "graded using the Patte classification (stage 1, proximal stump near the bony insertion; stage 2, proximal stump at the level of the humeral head; and stage 3, proximal stump at the level of the glenoid)". The same three stages, in the same words, in Eur Radiol 2025 (PMC11632038) and Clin Shoulder Elb 2023 (PMC10277714). Some studies word stage 3 "at the level of or more proximal to the glenoid" (Orthop J Sports Med 2025, PMC12351154) or "at glenoid level or beyond" (J Orthop Surg Res 2025, PMC12042595); the page follows Feuerriegel. |
+| S6-1 | yes | Jarraya 2016, text: "Type I: fraying of the free edge of the superior labrum with a normal biceps anchor is thought to be a degenerative process"; "Type II: fraying of the free edge of the superior labrum associated with a detached biceps anchor from the superior glenoid tubercule"; "Type III: bucket handle tear of a meniscoid superior labrum with an otherwise normal biceps tendon attachment"; "Type IV: bucket handle tear of a meniscoid superior labrum with extension of the tear into the biceps tendon". Fig. 8 legend: "Type II. ... Avulsion of superior labrum and biceps anchor"; "Type III. Bucket-handle tear of the superior labrum with intact biceps anchor". Woertler and Waldt (R13) give the four types the same way ("degenerative fraying of the superior labrum; avulsion of the superior labrum and biceps anchor from the glenoid; bucket-handle tear of the superior labrum with preserved biceps anchor; bucket-handle tear of the superior labrum involving the long head of biceps tendon"). |
+| S10-2 | yes | Ayik 2025: "If entrapment occurs in the suprascapular notch, both the supraspinatus and infraspinatus are affected. If compression occurs in the spinoglenoid notch, the infraspinatus is affected in isolation". Mangi 2022: "Muscular changes are more easily appreciated on MRI than ultrasound, with denervation oedema acutely and atrophy in more longstanding cases"; Fig. 4: a paralabral cyst in the spinoglenoid notch with "atrophy and mild denervation oedema in the infraspinatus muscle ..., sparing the supraspinatus since the site of entrapment is distal to the supraspinatus innervation" (on PDFS images); Fig. 5: "fatty atrophy of the supraspinatus ... and infraspinatus muscles". |
+| S11-1 | yes for IV and V; type III **for the author** | Jeong 2026: "In general, types I and II are considered healed, while types IV and V are considered retorn. However, there has been a disagreement as to whether Sugaya type III should be considered a retorn or healed tendon." **For the author:** the page calls type III no re-tear (chip "Type III: no re-tear"; quiz "Only types IV (minor discontinuity) and V (major discontinuity) are re-tears"); Jeong says type III is disputed. Kept as it is; Jeong is cited only where the page says "types IV and V are re-tears". Whether Sugaya 2005 itself defines re-tear is unread. |
+| S12-1 | yes | Kadi 2017: the sublabral foramen "represents a normal detachment of the anterosuperior labrum from the underlying glenoid rim at the one and three o'clock positions"; Fig. 14: "Sublabral foramen is located between the one o'clock and three o'clock position". Also J Belg Soc Radiol 2016 (PMC6100640): "an intact anterosuperior labrum is not attached to the glenoid rim, typically between 1 and 3 o'clock". |
+| N1-N6 | settled (fifth check) | Nothing left unread, so the Neer page and `src/logic/neer.ts` drop "Unchecked draft"/"UNCHECKED". **For the author:** the Neer page says of the valgus-impacted four-part fracture "it has a better outlook"; Carofino and Leopold (PMC3528923, read again on PMC) say "This four-part fracture warranted its own category because the prognosis and treatment for this injury are different than those for the classic four-part fracture". Kept as it is. |
+
+With these, every claim in the study has been read in an abstract, open full text or an open
+review, so the study's sourceNote no longer says "Unchecked draft". The originals still unread are
+listed in `docs/PAPERS_NEEDED.md`.

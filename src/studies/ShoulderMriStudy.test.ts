@@ -6,24 +6,27 @@ import { ShoulderMriStudyPage } from './ShoulderMriStudy'
 const study = studyOf(ShoulderMriStudyPage)
 
 /*
- * Unchecked draft. Each rule case quotes its claim from
+ * Each rule case quotes its claim from
  * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md. The references are matched on
- * PubMed and Crossref; a case quoting the paper's sentence was read in its abstract or open full
- * text, and a case still marked "(to check)" or "(partly checked)" rests on wording no abstract
- * states. When one is checked, replace the comment with the paper's sentence and fix the
- * expectation if the paper differs; say in that commit why the old expectation was wrong.
+ * PubMed and Crossref, and each case quotes the sentence that states it, from the paper's abstract
+ * or open full text or, where the original is paywalled, from the open review cited beside it.
+ * If the original paper is read and differs, fix the expectation and say in that commit why the
+ * old one was wrong.
  */
 
-describe('shoulder MRI: unchecked state', () => {
-  test('the source note says the draft is unchecked', () => {
-    expect(study.sourceNote.startsWith('Unchecked draft')).toBe(true)
+describe('shoulder MRI: checked state', () => {
+  // Every claim was read in an abstract, open full text or an open review (2026-10-29), so the
+  // note no longer calls the study an unchecked draft.
+  test('the source note no longer says the draft is unchecked', () => {
+    expect(study.sourceNote.startsWith('Unchecked draft')).toBe(false)
+    expect(study.sourceNote).toContain('cited beside the original')
   })
 
-  // The references are matched (each has a DOI; Hill and Sachs 1940 has one on Crossref but no
-  // PMID), but claims not in an abstract are still unchecked, so the note keeps saying so.
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    // 26 since the Neer (Kilcoyne, Carofino), Ellman and Goutallier reviews were added (2026-10-25).
-    expect(study.references).toHaveLength(26)
+  // Each reference has a DOI (Hill and Sachs 1940 has one on Crossref but no PMID).
+  test('has a DOI on every reference', () => {
+    // 26 since the Neer (Kilcoyne, Carofino), Ellman and Goutallier reviews were added (2026-10-25);
+    // 34 since Bao, Marcon, Kadi, Feuerriegel, Jarraya, Ayik, Mangi and Jeong were added (2026-10-29).
+    expect(study.references).toHaveLength(34)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -228,7 +231,8 @@ describe('shoulder MRI report: contradictions', () => {
 })
 
 describe('shoulder MRI rules: Neer (shared logic, src/logic/neer.ts)', () => {
-  // N4 (to check): three-part is the surgical neck with one tuberosity displaced.
+  // N4: three-part, "one tuberosity is displaced and the surgical neck fracture is displaced"
+  // (Carofino and Leopold 2013, full text).
   test('the bones step gives the Neer type and the report uses it', () => {
     const values = { ...normal, fracture: 'proximal-humerus', 'neer-surgical': 'displaced', 'neer-greater': 'displaced', 'neer-lesser': 'undisplaced' }
     expect(chips(study, 'bones', values).Neer).toBe('Three-part (surgical neck and greater tuberosity displaced)')
@@ -238,8 +242,8 @@ describe('shoulder MRI rules: Neer (shared logic, src/logic/neer.ts)', () => {
 })
 
 describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', () => {
-  // S3-1 (partly checked: the abstract says only that tears are graded by "location, depth,
-  // and area"; the thresholds are to check): grade 1 "less than 3 mm" deep, grade 2 "3 to 6 mm", grade 3 "more than 6 mm".
+  // S3-1: "Grade 1, < 3 mm deep; Grade 2, 3 to 6 mm deep; and Grade 3, > 6 mm deep" (Bi and Verma
+  // 2025, full text); the Ellman 1990 abstract says only "location, depth, and area".
   test.each([
     ['2.9', 'Articular (A), grade 1'],
     ['3', 'Articular (A), grade 2'],
@@ -253,7 +257,9 @@ describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', 
     expect(chips(study, 'subscapularis', { subscapularis: 'partial', 'subscapularis-side': side })['Subscapularis partial tear (Ellman)']).toBe(expected)
   })
 
-  // S3-2 (to check): stage 1 near the insertion, 2 at the humeral head, 3 at the glenoid.
+  // S3-2: "stage 1, proximal stump near the bony insertion; stage 2, proximal stump at the level of
+  // the humeral head; and stage 3, proximal stump at the level of the glenoid" (Feuerriegel 2024,
+  // full text, citing Patte).
   test.each(['1', '2', '3'])('Patte stage %s', (stage) => {
     expect(chips(study, 'cuff', { supraspinatus: 'full', 'supraspinatus-retraction': stage })['Retraction (Patte)']).toBe(`Stage ${stage}`)
   })
@@ -263,9 +269,9 @@ describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', 
     expect(impressionOf(values)).toBe('Full-thickness tear of the supraspinatus, Patte stage 2 retraction.')
   })
 
-  // S3-3 (partly checked: the abstract says only "grading muscular fatty degeneration in five
-  // stages"; the wording is to check): grade 0 normal, 1 some fatty streaks, 2 more muscle than fat, 3 as much
-  // fat as muscle, 4 more fat than muscle.
+  // S3-3: "Completely normal muscle, without any fatty streak"; "Muscle contains some fatty
+  // streaks"; "more muscle than fat"; "Equal amounts of fat and muscle"; "More fat than muscle is
+  // present" (Somerson 2016, Table 1).
   test.each(['0', '1', '2', '3', '4'])('Goutallier grade %s', (grade) => {
     expect(chips(study, 'cuff', { 'supraspinatus-fat': grade })['Supraspinatus (Goutallier)']).toBe(`Grade ${grade}`)
     expect(chips(study, 'subscapularis', { 'subscapularis-fat': grade })['Subscapularis (Goutallier)']).toBe(`Grade ${grade}`)
@@ -277,9 +283,10 @@ describe('shoulder MRI rules: cuff (Ellman 1990; Patte 1990; Goutallier 1994)', 
 })
 
 describe('shoulder MRI rules: labrum (Snyder 1990)', () => {
-  // S6-1 (partly checked: "We divided the superior labrum pathology into four distinct types";
-  // the wording of each type is to check): type I fraying with the anchor attached; II labrum and anchor detached;
-  // III bucket-handle with the anchor attached; IV bucket-handle extending into the biceps.
+  // S6-1: "Type I. Fraying of the free edge of the superior labrum, intact biceps tendon";
+  // "Type II. ... Avulsion of superior labrum and biceps anchor"; "Type III. Bucket-handle tear of
+  // the superior labrum with intact biceps anchor"; "Type IV: bucket handle tear of a meniscoid
+  // superior labrum with extension of the tear into the biceps tendon" (Jarraya 2016, full text).
   test.each([['i', 'Type I'], ['ii', 'Type II'], ['iii', 'Type III'], ['iv', 'Type IV']])('superior labrum %s is SLAP %s', (value, expected) => {
     expect(chips(study, 'labrum', { 'labrum-superior': value })['SLAP (Snyder)']).toBe(expected)
   })
@@ -289,10 +296,10 @@ describe('shoulder MRI rules: labrum (Snyder 1990)', () => {
 })
 
 describe('shoulder MRI rules: nerves (Fritz 1992; Linker 1993)', () => {
-  // S10-2 (partly checked): "Atrophy of both the supraspinatus and infraspinatus muscles was
-  // seen in association with anteriorly located masses and proximal entrapment of the nerve ...
-  // isolated atrophy of the infraspinatus muscle was seen in association with posteriorly located
-  // masses and distal entrapment" (Fritz 1992, abstract). The notch names are to check.
+  // S10-2: "If entrapment occurs in the suprascapular notch, both the supraspinatus and
+  // infraspinatus are affected. If compression occurs in the spinoglenoid notch, the infraspinatus
+  // is affected in isolation" (Ayik 2025, full text); Fritz 1992's abstract gives the same split
+  // for "anteriorly located masses" and "posteriorly located masses".
   test.each([
     ['suprascapular', 'Can affect the supraspinatus and infraspinatus'],
     ['spinoglenoid', 'Can affect the infraspinatus alone'],
@@ -313,7 +320,9 @@ describe('shoulder MRI rules: repaired cuff (Sugaya 2005)', () => {
   // S11-1 (partly checked): "type I, sufficient thickness with homogenously low intensity; type
   // II, sufficient thickness with partial high intensity; type III, insufficient thickness without
   // discontinuity; type IV, presence of a minor discontinuity; type V, presence of a major
-  // discontinuity" (Sugaya 2005, abstract). "IV and V are re-tears" is to check.
+  // discontinuity" (Sugaya 2005, abstract). "In general, types I and II are considered healed,
+  // while types IV and V are considered retorn" (Jeong 2026, full text); Jeong adds that whether
+  // type III is a re-tear is disputed (in the shoulder sources doc, for the author).
   test.each([
     ['i', 'Type I: no re-tear'],
     ['ii', 'Type II: no re-tear'],

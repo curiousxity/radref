@@ -2,8 +2,10 @@
  * Palmer classification of triangular fibrocartilage complex (TFCC) lesions (Palmer, J Hand
  * Surg Am 1989). Shared by the Palmer calculator and the wrist MRI study.
  *
- * Unchecked draft: the class wording has not yet been checked against the paper (claims PA-1
- * to PA-3 in docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
+ * The paper is paywalled; the classes are checked against von Borstel and colleagues' review,
+ * which reproduces Palmer's table (Magn Reson Med Sci 2017). 1B and 1C are worded differently
+ * there and are not yet settled (claims PA-1 to PA-3 in
+ * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
  */
 
 export type PalmerClass = '1A' | '1B' | '1C' | '1D' | '2A' | '2B' | '2C' | '2D' | '2E'

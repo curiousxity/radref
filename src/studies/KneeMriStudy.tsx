@@ -10,8 +10,9 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 /*
  * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled except Crema 2011, so only claims whose wording is in an abstract
- * or in open full text are verified. The claims table, with each claim's status, is
+ * most of the papers are paywalled, so only claims whose wording is in an abstract, a figure
+ * legend, open full text or an open review (added as a second citation, 2026-10-29) are
+ * verified. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-knee-mri-sources.md; rule chips and warnings carry its
  * claim IDs. Schatzker 1979 has no abstract and no DOI, so its citation stays plain text.
  */
@@ -37,6 +38,9 @@ const LECOUVET_DOI = '10.2214/ajr.170.1.9423603'
 const BENCARDINO_DOI = '10.1148/rg.297095036'
 const CAMPBELL_DOI = '10.2214/ajr.177.2.1770409'
 const LEE_DOI = '10.1148/radiology.173.1.2781006'
+const ESSR_DOI = '10.1007/s00330-024-10706-7'
+const CHIEN_DOI = '10.5114/pjr.2020.99415'
+const CRONE_DOI = '10.1007/s00256-026-05187-2'
 
 const MARKHARDT = <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>
 const DE_SMET = <Cite doi={DE_SMET_DOI}>De Smet and Tuite, AJR 2006</Cite>
@@ -57,6 +61,9 @@ const LECOUVET = <Cite doi={LECOUVET_DOI}>Lecouvet et al., AJR 1998</Cite>
 const BENCARDINO = <Cite doi={BENCARDINO_DOI}>Bencardino et al., Radiographics 2009</Cite>
 const CAMPBELL = <Cite doi={CAMPBELL_DOI}>Campbell et al., AJR 2001</Cite>
 const LEE = <Cite doi={LEE_DOI}>Lee et al., Radiology 1989</Cite>
+const ESSR = <Cite doi={ESSR_DOI}>Parkar and Adriaensen, Eur Radiol 2024</Cite>
+const CHIEN = <Cite doi={CHIEN_DOI}>Chien et al., Pol J Radiol 2020</Cite>
+const CRONE = <Cite doi={CRONE_DOI}>Crone et al., Skeletal Radiol 2026</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
@@ -79,6 +86,9 @@ const references: LessonReference[] = [
   { citation: 'Bencardino JT, Beltran J, Feldman MI, Rose DJ. MR imaging of complications of anterior cruciate ligament graft reconstruction. Radiographics. 2009;29(7):2115-2126.', doi: BENCARDINO_DOI },
   { citation: 'Campbell SE, Sanders TG, Morrison WB. MR imaging of meniscal cysts: incidence, location, and clinical significance. AJR Am J Roentgenol. 2001;177(2):409-413.', doi: CAMPBELL_DOI },
   { citation: 'Lee JH, Weissman BN, Nikpoor N, Aliabadi P, Sosman JL. Lipohemarthrosis of the knee: a review of recent experiences. Radiology. 1989;173(1):189-191.', doi: LEE_DOI },
+  { citation: 'Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee-practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599.', doi: ESSR_DOI },
+  { citation: 'Chien A, Weaver JS, Kinne E, Omar I. Magnetic resonance imaging of the knee. Pol J Radiol. 2020;85:e509-e531.', doi: CHIEN_DOI },
+  { citation: 'Crone AM, Omar IM, Bronson AM, Buchler LT, Selley RS, Weaver JS, Klauser AS, Taljanovic MS. Guide to lower extremity radiologic measurements: part 2 knee. Skeletal Radiol. 2026;55(6):1197-1216.', doi: CRONE_DOI },
 ]
 
 const bruiseTable = (
@@ -151,7 +161,7 @@ const learn: LearnSection[] = [
         <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB) ({MARKHARDT}). Type IV is any fracture of the medial plateau alone, split or depressed, and it carries a risk to the peroneal nerve and popliteal vessels from its fracture-dislocation mechanism. Schatzker counted depression only when it was more than 4 mm, so a lateral split with 4 mm or less is type I ({MARKHARDT}). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken.</p>
 
         <h4>Segond fracture</h4>
-        <p>A Segond fracture is a small avulsion from the lateral rim of the tibial plateau. It is pulled off by the iliotibial tract or the anterior oblique band of the lateral collateral ligament, and it is associated with ACL tear ({CAMPOS}). A Segond fracture with an ACL called intact deserves a second look at the ACL.</p>
+        <p>A Segond fracture is a small avulsion from the lateral rim of the tibial plateau. It is pulled off by the iliotibial tract or the anterior oblique band of the lateral collateral ligament, and it is associated with ACL tear ({CAMPOS}; {ESSR}). A Segond fracture with an ACL called intact deserves a second look at the ACL.</p>
 
         <h4>Subchondral lesions</h4>
         <p>In the femoral condyles, a subchondral area of low signal on T2-weighted images thicker than 4 mm or longer than 14 mm predicted an irreversible lesion (osteonecrosis); thinner and shorter areas predicted a transient one ({LECOUVET}).</p>
@@ -201,9 +211,9 @@ const learn: LearnSection[] = [
     body: (
       <>
         <h4>Native ACL</h4>
-        <p>Call the ACL intact, partially torn or completely torn from its fibres. Indirect signs support a tear: a lateral compartment bone contusion, anterior translation of the tibia, uncovering of the posterior horn of the lateral meniscus, and buckling of the PCL ({GENTILI}). Remember the pivot-shift bruise pattern from step 2 ({SANDERS}) and a Segond fracture ({CAMPOS}).</p>
+        <p>Call the ACL intact, partially torn or completely torn from its fibres. Indirect signs support a tear: a lateral compartment bone contusion, anterior translation of the tibia, uncovering of the posterior horn of the lateral meniscus, and buckling of the PCL ({GENTILI}). Remember the pivot-shift bruise pattern from step 2 ({SANDERS}) and a Segond fracture ({CAMPOS}; {ESSR}).</p>
         <h4>Reconstructed ACL</h4>
-        <p>After reconstruction, describe the graft (intact, partial tear, complete tear) and look for the complications: arthrofibrosis, including the localised "cyclops" lesion in front of the graft; tunnel widening and tunnel cysts; and graft impingement ({BENCARDINO}).</p>
+        <p>After reconstruction, describe the graft (intact, partial tear, complete tear) and look for the complications: arthrofibrosis, including the localised "cyclops" lesion in front of the graft; tunnel widening and tunnel cysts; and graft impingement ({BENCARDINO}; {CHIEN}).</p>
         <ScanFigures images={[kneeMriScans.aclTear, kneeMriScans.cyclopsLesion]} />
       </>
     ),
@@ -248,7 +258,7 @@ const learn: LearnSection[] = [
         <h4>Transient lateral patellar dislocation</h4>
         <p>After an acute lateral patellar dislocation, the medial retinaculum was disrupted at its patellar insertion in 76% of examinations; where the femoral origin of the medial patellofemoral ligament (MPFL) could be seen, 49% showed injury; and 70% had an osteochondral injury of the inferomedial patella ({ELIAS}). The bruise pattern (inferomedial patella and anterolateral lateral femoral condyle) may be the only clue that a dislocation happened ({SANDERS}).</p>
         <h4>Trochlear shape</h4>
-        <p>A lateral trochlear inclination below 11°, measured on the first axial image that shows trochlear cartilage, was a diagnostic test for patellar instability, with a sensitivity of 93% and a specificity of 87% ({CARRILLON}).</p>
+        <p>A lateral trochlear inclination below 11°, measured on the first axial image that shows trochlear cartilage ({CRONE}), was a diagnostic test for patellar instability, with a sensitivity of 93% and a specificity of 87% ({CARRILLON}).</p>
         <ScanFigures images={[kneeMriScans.patellarDislocation]} />
       </>
     ),
@@ -989,7 +999,7 @@ const steps: ReportStep[] = [
       <>
         <p>The bruise pattern is the footprint of the mechanism ({SANDERS}):</p>
         {bruiseTable}
-        <p>Type a tibial plateau fracture by Schatzker ({SCHATZKER}; {MARKHARDT}). A Segond fracture is associated with ACL tear ({CAMPOS}). A subchondral low-signal area over 4 mm thick or over 14 mm long predicted an irreversible lesion ({LECOUVET}).</p>
+        <p>Type a tibial plateau fracture by Schatzker ({SCHATZKER}; {MARKHARDT}). A Segond fracture is associated with ACL tear ({CAMPOS}; {ESSR}). A subchondral low-signal area over 4 mm thick or over 14 mm long predicted an irreversible lesion ({LECOUVET}).</p>
       </>
     ),
     fields: [
@@ -1031,7 +1041,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>Indirect signs of ACL tear: lateral compartment bone contusion, anterior tibial translation, an uncovered posterior horn of the lateral meniscus and a buckled PCL ({GENTILI}).</p>
-        <p>After reconstruction, look for graft tear, arthrofibrosis (including the cyclops lesion), tunnel widening and cysts, and graft impingement ({BENCARDINO}).</p>
+        <p>After reconstruction, look for graft tear, arthrofibrosis (including the cyclops lesion), tunnel widening and cysts, and graft impingement ({BENCARDINO}; {CHIEN}).</p>
       </>
     ),
     fields: [fields.aclStatus, fields.acl, fields.aclSigns, fields.graft, fields.graftFindings],
@@ -1097,7 +1107,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, and the four cartilage depth grades) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so claims are checked against abstracts, figure legends, the papers that are open and open reviews. Still unchecked: where the pivot-shift femoral contusion sits, that the hyperextension pattern puts the posterolateral corner at risk, the juvenile OCD signs, and the four cartilage depth grades, which no cited paper gives.',
   references,
   report: {
     steps,
@@ -1138,7 +1148,7 @@ const study: StudyDefinition = {
       question: 'A Segond fracture is seen. Which ligament does the lesson say to recheck?',
       options: ['The MCL', 'The PCL', 'The ACL', 'The MPFL'],
       answer: 2,
-      explanation: <p>A Segond fracture is an avulsion from the lateral tibial rim by the iliotibial tract or the anterior oblique band of the LCL, and it is associated with ACL tear ({CAMPOS}).</p>,
+      explanation: <p>A Segond fracture is an avulsion from the lateral tibial rim by the iliotibial tract or the anterior oblique band of the LCL, and it is associated with ACL tear ({CAMPOS}; {ESSR}).</p>,
     },
     {
       id: 'lipohemarthrosis',

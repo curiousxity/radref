@@ -14,8 +14,8 @@ const study = studyOf(WristMriStudyPage)
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims) or, for the four
  * shared classifications, 2026-10-23-wrist-calculators-sources.md (MF, HB, PA, LI claims).
  * The references are matched, but only the claims marked verified there were read in their
- * papers; when the rest are checked a case may have to change; say in that commit why the old
- * expectation was wrong.
+ * papers or in an open review cited beside them; when the rest are checked a case may have to
+ * change; say in that commit why the old expectation was wrong.
  */
 
 describe('wrist MRI lesson', () => {
@@ -26,12 +26,13 @@ describe('wrist MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so.
+  // The references are matched (each has a DOI); a few claims are still unchecked (the
+  // scapholunate angle bounds, the perilunate mechanism, Palmer 1B and 1C), so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added.
-    expect(study.references).toHaveLength(20)
+    // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added;
+    // 24 since the open reviews of 2026-10-29 (Andersson, Ng, Chen, von Borstel).
+    expect(study.references).toHaveLength(24)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

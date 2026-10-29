@@ -8,8 +8,8 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 /*
  * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled, so only claims whose wording is in an abstract are verified. The
- * claims table, with each claim's status, is
+ * the papers are paywalled, so only claims whose wording is in an abstract, or in an open review
+ * cited beside the paper (2026-10-29), are verified. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). Rule chips and
  * warnings carry their claim IDs.
  */
@@ -21,6 +21,8 @@ const DONOVAN_DOI = '10.1148/rg.303095111'
 const LEDERMANN_MORRISON_DOI = '10.1055/s-2005-921945'
 const LEDERMANN_NONENHANCING_DOI = '10.2214/ajr.178.1.1780215'
 const CHANTELAU_DOI = '10.1111/j.1464-5491.2005.01677.x'
+const ROSSKOPF_DOI = '10.1186/s13244-019-0768-9'
+const WEAVER_DOI = '10.5114/pjr.2022.113825'
 
 const MORRISON = <Cite doi={MORRISON_DOI}>Morrison et al., Radiology 1998</Cite>
 const LEDERMANN = <Cite doi={LEDERMANN_DOI}>Ledermann et al., Radiology 2002</Cite>
@@ -29,6 +31,8 @@ const DONOVAN = <Cite doi={DONOVAN_DOI}>Donovan and Schweitzer, RadioGraphics 20
 const LEDERMANN_MORRISON = <Cite doi={LEDERMANN_MORRISON_DOI}>Ledermann and Morrison, Semin Musculoskelet Radiol 2005</Cite>
 const LEDERMANN_NONENHANCING = <Cite doi={LEDERMANN_NONENHANCING_DOI}>Ledermann et al., AJR 2002</Cite>
 const CHANTELAU = <Cite doi={CHANTELAU_DOI}>Chantelau, Diabet Med 2005</Cite>
+const ROSSKOPF = <Cite doi={ROSSKOPF_DOI}>Rosskopf et al., Insights Imaging 2019</Cite>
+const WEAVER = <Cite doi={WEAVER_DOI}>Weaver et al., Pol J Radiol 2022</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Morrison WB, Schweitzer ME, Batte WG, Radack DP, Russel KM. Osteomyelitis of the foot: relative importance of primary and secondary MR imaging signs. Radiology. 1998;207(3):625-632.', doi: MORRISON_DOI },
@@ -38,6 +42,8 @@ const references: LessonReference[] = [
   { citation: 'Ledermann HP, Morrison WB. Differential diagnosis of pedal osteomyelitis and diabetic neuroarthropathy: MR imaging. Semin Musculoskelet Radiol. 2005;9(3):272-283.', doi: LEDERMANN_MORRISON_DOI },
   { citation: 'Ledermann HP, Schweitzer ME, Morrison WB. Nonenhancing tissue on MR imaging of pedal infection: characterization of necrotic tissue and associated limitations for diagnosis of osteomyelitis and abscess. AJR Am J Roentgenol. 2002;178(1):215-222.', doi: LEDERMANN_NONENHANCING_DOI },
   { citation: 'Chantelau E. The perils of procrastination: effects of early vs. delayed detection and treatment of incipient Charcot fracture. Diabet Med. 2005;22(12):1707-1712.', doi: CHANTELAU_DOI },
+  { citation: 'Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial review. Insights Imaging. 2019;10(1):77.', doi: ROSSKOPF_DOI },
+  { citation: 'Weaver JS, Omar IM, Mar WA, Klauser AS, Winegar BA, Mlady GW, McCurdy WE, Taljanovic MS. Magnetic resonance imaging of musculoskeletal infections. Pol J Radiol. 2022;87:e141-e162.', doi: WEAVER_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -60,8 +66,8 @@ const learn: LearnSection[] = [
     title: 'Step 2. Skin and soft tissues',
     body: (
       <>
-        <p>Find the ulcer first. Osteomyelitis in the diabetic foot almost always spreads into the bone from an ulcer or sinus tract next to it, so the ulcer tells you which bone to study ({LEDERMANN}). The usual sites are the pressure points: the toes, the metatarsal heads and the calcaneus ({LEDERMANN}).</p>
-        <p>Then look for a sinus tract running from the ulcer towards bone, an abscess (a rim-enhancing collection after contrast), and gas in the soft tissues ({DONOVAN}).</p>
+        <p>Find the ulcer first. Osteomyelitis in the diabetic foot almost always spreads into the bone from an ulcer or sinus tract next to it, so the ulcer tells you which bone to study ({LEDERMANN}). The usual sites are the pressure points: the toes, the metatarsal heads and the calcaneus ({LEDERMANN}; {ROSSKOPF}).</p>
+        <p>Then look for a sinus tract running from the ulcer towards bone, an abscess (a rim-enhancing collection after contrast), and gas in the soft tissues ({DONOVAN}; {WEAVER}).</p>
         <ScanFigures images={[diabeticFootMriScans.sinusTract, diabeticFootMriScans.abscess]} />
       </>
     ),
@@ -94,8 +100,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Telling neuroarthropathy from osteomyelitis requires careful analysis of where the bone signal changes are, their distribution and their pattern ({LEDERMANN_MORRISON}). Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints, whereas osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>
-        <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
-        <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection; a neuropathic bone keeps its outline ({DONOVAN}).</p>
+        <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}; {ROSSKOPF}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
+        <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection ({DONOVAN}; {ROSSKOPF}); a neuropathic bone keeps its outline ({DONOVAN}).</p>
         <ScanFigures images={[diabeticFootMriScans.activeCharcotStir, diabeticFootMriScans.ghostSignT1, diabeticFootMriScans.ghostSignContrast]} />
       </>
     ),
@@ -393,7 +399,7 @@ const steps: ReportStep[] = [
     id: 'soft-tissue',
     title: 'Step 2. Skin and soft tissues',
     learn: 'soft-tissue',
-    teach: <p>Osteomyelitis almost always spreads from an ulcer or sinus tract next to the bone, at the pressure points ({LEDERMANN}). An abscess is a rim-enhancing collection ({DONOVAN}).</p>,
+    teach: <p>Osteomyelitis almost always spreads from an ulcer or sinus tract next to the bone, at the pressure points ({LEDERMANN}; {ROSSKOPF}). An abscess is a rim-enhancing collection ({DONOVAN}; {WEAVER}).</p>,
     fields: [fields.ulcer, fields.ulcerSite, fields.sinus, fields.abscess, fields.abscessSite, fields.gas, fields.devitalised],
   },
   {
@@ -415,7 +421,7 @@ const steps: ReportStep[] = [
     id: 'charcot',
     title: 'Step 5. Charcot neuroarthropathy',
     learn: 'charcot',
-    teach: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints ({DONOVAN}). Active disease shows on MRI before radiographs ({CHANTELAU}). The ghost sign suggests infection within it ({DONOVAN}).</p>,
+    teach: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints ({DONOVAN}). Active disease shows on MRI before radiographs ({CHANTELAU}; {ROSSKOPF}). The ghost sign suggests infection within it ({DONOVAN}; {ROSSKOPF}).</p>,
     fields: [fields.charcot, fields.charcotSites, fields.charcotActivity, fields.charcotDeformity, fields.ghost],
     derive: deriveCharcot,
   },
@@ -432,7 +438,7 @@ const study: StudyDefinition = {
   slug: 'diabetic-foot-mri',
   name: 'Diabetic foot MRI',
   lede: 'Read the diabetic foot MRI: find the ulcer, decide osteomyelitis on T1, look for collections and septic joints, and tell neuroarthropathy from infection.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the ghost sign, the rim-enhancing abscess and soft-tissue gas, septic arthritis alongside osteomyelitis, and marrow edema as the sign of active Charcot disease) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: septic arthritis alongside osteomyelitis, with an effusion as its sign; that a neuropathic bone keeps its outline; and that an inactive Charcot foot shows no edema.',
   references,
   report: {
     steps,
@@ -459,7 +465,7 @@ const study: StudyDefinition = {
       question: 'Where does osteomyelitis usually occur in the diabetic foot?',
       options: ['The midfoot joints', 'The pressure points: toes, metatarsal heads, calcaneus', 'The talar dome', 'The navicular'],
       answer: 1,
-      explanation: <p>The usual sites are the pressure points where ulcers form ({LEDERMANN}).</p>,
+      explanation: <p>The usual sites are the pressure points where ulcers form ({LEDERMANN}; {ROSSKOPF}).</p>,
     },
     {
       id: 'charcot-distribution',
@@ -473,14 +479,14 @@ const study: StudyDefinition = {
       question: 'In a Charcot foot, a bone outline fades on T1 but reappears on fluid-sensitive images. What does it suggest?',
       options: ['Inactive neuroarthropathy', 'Infection within the neuropathic bone', 'A stress fracture', 'An artefact'],
       answer: 1,
-      explanation: <p>The ghost sign suggests infection; a neuropathic bone keeps its outline ({DONOVAN}).</p>,
+      explanation: <p>The ghost sign suggests infection ({DONOVAN}; {ROSSKOPF}); a neuropathic bone keeps its outline ({DONOVAN}).</p>,
     },
     {
       id: 'stage-0',
       question: 'A hot swollen foot in a patient with neuropathy has normal radiographs. What can MRI show?',
       options: ['Nothing until the radiographs change', 'Active Charcot disease, with marrow edema, before the radiographs change', 'Only soft-tissue swelling', 'Only infection'],
       answer: 1,
-      explanation: <p>MRI shows active Charcot disease while the radiographs are still normal ({CHANTELAU}).</p>,
+      explanation: <p>MRI shows active Charcot disease while the radiographs are still normal ({CHANTELAU}; {ROSSKOPF}).</p>,
     },
     {
       id: 'nonenhancing',

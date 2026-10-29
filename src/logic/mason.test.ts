@@ -4,9 +4,10 @@ import { brobergMorrey, mason, masonSentence } from './mason'
 /*
  * Each case quotes its claim from docs/superpowers/research/2026-10-23-elbow-mri-sources.md.
  * Types I to III are checked against Mason's table as Iannuzzi and Leopold reproduce it (Clin
- * Orthop Relat Res 2012), type IV against Johnston (Ulster Med J 1962). The thresholds are still
- * unchecked: the 1986 Broberg and Morrey paper, read in full, does not state them; the review
- * credits their 1987 paper (Clin Orthop Relat Res 1987;216:109-119).
+ * Orthop Relat Res 2012), type IV against Johnston (Ulster Med J 1962). The thresholds are not in
+ * the 1986 Broberg and Morrey paper, read in full; the reviews credit their 1987 paper (Clin
+ * Orthop Relat Res 1987;216:109-119), which is paywalled, and are checked against a review that
+ * states them (van der Windt et al., EFORT Open Rev 2024; 2026-10-29).
  */
 
 const type = (input: Parameters<typeof mason>[0]) => mason(input)?.type
@@ -41,9 +42,11 @@ describe('Mason types', () => {
   })
 })
 
-describe('Broberg-Morrey thresholds (unchecked)', () => {
-  // MA-5: "Type I: displacement of less than 2 mm."
-  // MA-6: "Type II: displacement of 2 mm or more, involving 30% or more of the head."
+describe('Broberg-Morrey thresholds', () => {
+  // MA-5, MA-6 (van der Windt et al. 2024): a partial fracture "must be of sufficient size (at
+  // least 30% of the articular surface) and displacement (at least 2 mm) to be considered a
+  // displaced fracture (Mason type II, as opposed to nondisplaced Mason type I)". The 2 mm or more
+  // but under 30% case is left undecided here, the site's own choice (with the author).
   test('at the 2 mm and 30% boundaries', () => {
     expect(brobergMorrey(1.9)).toBe('I')
     expect(brobergMorrey(1.9, 50)).toBe('I')

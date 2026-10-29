@@ -8,9 +8,9 @@ const study = studyOf(DiabeticFootMriStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). The
- * references are matched, but only the claims marked verified there were read in their
- * papers; when the rest are checked a case may have to change; say in that commit why the old
- * expectation was wrong.
+ * references are matched, and the claims marked verified there were read in an abstract or in
+ * an open review cited beside the paper; when the rest are checked a case may have to change;
+ * say in that commit why the old expectation was wrong.
  */
 
 describe('diabetic foot MRI lesson', () => {
@@ -18,11 +18,12 @@ describe('diabetic foot MRI lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'soft-tissue', 'bone', 'joints', 'charcot', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so.
+  // The references are matched (each has a DOI), but three claims are still unchecked (septic
+  // arthritis, the neuropathic bone outline, the inactive foot), so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(7)
+    // 9 since two open reviews (Rosskopf 2019, Weaver 2022) were added (2026-10-29).
+    expect(study.references).toHaveLength(9)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

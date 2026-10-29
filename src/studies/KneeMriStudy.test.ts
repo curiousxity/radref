@@ -20,13 +20,16 @@ describe('knee MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so. Schatzker 1979 is the one exception: PubMed has no
+  // The references are matched (each has a DOI), but some claims are still unchecked (listed
+  // in the note), so the note keeps saying so. Schatzker 1979 is the one exception: PubMed has no
   // DOI for it and Crossref finds none, so it is cited without one.
   test('is still marked as an unchecked draft, with a DOI on every reference but Schatzker 1979', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 20 since Recht 2005 was added for describing a cartilage defect.
-    expect(study.references).toHaveLength(20)
+    // 20 since Recht 2005 was added for describing a cartilage defect; 23 since three open
+    // reviews were added as second citations (2026-10-29): Parkar and Adriaensen 2024 (Segond
+    // and ACL tear), Chien 2020 (ACL graft complications), Crone 2026 (the level of the 11°
+    // trochlear measurement).
+    expect(study.references).toHaveLength(23)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Schatzker J, McBroom R, Bruce D.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)

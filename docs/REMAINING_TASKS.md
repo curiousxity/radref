@@ -28,9 +28,13 @@ by the author's choice).
   means unstable) but says cartilage "was not assessed"; the cartilage signs come from knee
   and talus studies. Trim to the interface, or keep it with another citation? Unchanged until
   then; details in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, "Third check".
+  Open sources that do state cartilage signs at the capitellum (2026-10-29): Kohyama 2018, Kostyun
+  2024 (a Delphi consensus) and Powell 2021; see the "Fifth check".
 - **Two more for the author, from the 2026-10-28 re-search** (details in the sources docs):
   - Elbow E11-1: the page cites Rosenberg, AJR 1995 for the anconeus epitrochlearis compressing
     the ulnar nerve (four places), but the paper, read in full, never mentions it.
+    Candidate replacement (2026-10-29): Sampath et al., Sports Health 2013, already cited on the
+    page, says it "may cause static or dynamic compression of the ulnar nerve within the tunnel".
   - Knee K2-1: the pivot-shift femoral contusion is "near the terminal sulcus" on the page;
     Sanders 2000's legends say its position depends on knee flexion (posterior with moderate
     flexion, anterior near the sulcus with minimal), and the abstract says "midportion".
@@ -89,14 +93,14 @@ region at a time, end to end, following the ankle pilot
   Schatzker calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Done once the sources check
   in "To do when on a computer" passes.
-- [ ] Shoulder: shoulder MRI study ("pain" only history, repaired rotator cuff included)
+- [x] Shoulder: shoulder MRI study ("pain" only history, repaired rotator cuff included)
   plus a Neer calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-shoulder-mri-study-design.md`. Done once the sources
   check in "To do when on a computer" passes.
 - [ ] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
   2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-elbow-mri-study-design.md`.
-- [ ] Pediatric elbow: radiograph study by age (CRITOE centres, fat pads, lines, Gartland,
+- [x] Pediatric elbow: radiograph study by age (CRITOE centres, fat pads, lines, Gartland,
   Weiss lateral condyle, medial epicondyle, O'Brien radial neck), no separate calculator.
   Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-pediatric-elbow-study-design.md`.
@@ -167,10 +171,14 @@ it is done.
   (Costa; exactly 3 mm is minor), MPFL injury uses Elias's figures, the 11° trochlear
   inclination is a test for patellar instability (Carrillon), and type III is split into
   IIIA (lateral) and IIIB (central) as Markhardt gives it.
-- [ ] Still unchecked, because the papers are paywalled: the ligament each bruise pattern
-  points to, Segond with ACL tear, juvenile OCD signs, cyclops and arthrofibrosis, the MCL
-  bruise sites, SZ-4's wording, the four cartilage depth grades (K10-1) and the level of the
-  11° measurement. Kept with the "Unchecked draft" note by the author's choice.
+- [x] Open sources (2026-10-29, "Seventh check" in the knee sources doc): Segond with ACL tear
+  (Parkar and Adriaensen 2024), cyclops and arthrofibrosis (Chien 2020) and the level of the 11°
+  measurement (Crone 2026) are now cited beside the originals; the MCL bruise wording and SZ-4 were
+  already settled. The Schatzker page no longer says "Unchecked draft".
+- [ ] Still unchecked: where the pivot-shift contusion sits (K2-1, for the author), the posterolateral
+  corner with hyperextension (K2-3), the juvenile OCD signs (K2-8, for the author: the page omits the
+  rim matching joint fluid, which Andriolo 2022 and Kijowski 2008's legends give) and the cartilage
+  depth grades (no source, kept by the author's choice).
 
 ### Shoulder MRI study and Neer calculator
 
@@ -185,10 +193,12 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
 - [x] Matched to the papers by the author's choice (2026-10-23): S3-4 now says Fuchs found MRI
   and CT grades correlated only fairly to moderately; S12-3 (recess mimicking SLAP II) now
   cites Woertler and Waldt, which states it, rather than Smith.
-- [ ] Still unchecked, because the papers are paywalled or have no abstract: Neer N1–N6,
-  S2-1, S3-2, and the unread parts of S2-3 (the coracoid level), S3-1 (Ellman depths), S3-3
-  (Goutallier wording), S6-1 (Snyder types), S10-2, S11-1 (Sugaya re-tears) and S12-1.
-  Kept with the "Unchecked draft" note by the author's choice (2026-10-23).
+- [x] Every claim read (2026-10-29, "Sixth check" in the shoulder sources doc): eight open reviews are
+  cited beside the originals; N1–N5, S3-1 and S3-3 were already settled against Carofino 2013. The
+  shoulder study and the Neer page no longer say "Unchecked draft". For the author: Sugaya type III
+  (the page calls it no re-tear; Jeong 2026 says authors disagree), the coracoid level credited to
+  Richards (his abstract says only "more cephalic"; his RSNA page has no figures), and Neer's
+  valgus-impacted fracture "has a better outlook" (Carofino: prognosis "different").
 
 ### Elbow MRI study and Mason calculator
 
@@ -205,8 +215,13 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`.
   the undersurface UCL tear is a deep-layer detachment, the T-sign a CT arthrography sign, and
   the sublime tubercle is no longer named; lateral epicondylitis cites Potter for ECRB
   degeneration and Bredella for the MRI signal.
-- [ ] Still unchecked: Mason MA-1 to MA-6 and Johnston (no abstracts), Broberg-Morrey 2 mm and
-  30%, E2-1, E11-1, and the unread parts of the partly verified rows.
+- [x] Open sources (2026-10-29, "Fifth check" in the elbow sources doc): the Broberg-Morrey 2 mm and 30%
+  (van der Windt 2024), E1-1's LUCL-first, E3-1, E8-1 and E9-1 are now cited beside the originals;
+  MA-1 to MA-4 were already settled. The Mason page no longer says "Unchecked draft".
+- [ ] Still unchecked: the stage 2 capsule (E1-1; reviews say anterior, or anterior and/or
+  posterior), "fragmentation of the whole capitellum" in Panner's (E2-4), E2-6 and E11-1 (both for
+  the author; candidate sources found, see the top of this file). For the author too: the
+  Broberg-Morrey gap (2 mm or more but under 30%), which van der Windt's wording makes type I.
 
 ### Wrist MRI study
 
@@ -221,8 +236,13 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and
   "proximal"); de Quervain thickening is the reliable sign and intratendinous signal less
   reliable (Glajchen); "MRI shows stage I" Kienböck is dropped, since Lichtman 1977 predates
   clinical MRI (stage I is "normal radiographs").
-- [ ] Still unchecked, because the papers are paywalled or have no abstract: W2-5, W3-2,
-  W4-1 (both on Linscheid 1972), W5-2, and the unread parts of the partly verified rows.
+- [x] Open sources (2026-10-29, "Third check" in the wrist sources doc): W2-5, W3-1, W4-1, W5-1, W5-2,
+  W6-1 and W6-2 are now cited beside the originals (Andersson 2017, Ng 2024, Chen 2009, von Borstel
+  2017).
+- [ ] Still unchecked: the SL angle bounds (W3-2; for the author, reviews put DISI at >60°, >70° or
+  >80°), the perilunate mechanism (W1-1; for the author, reviews say high-energy trauma) and
+  Linscheid as the source for LT disruption and VISI (W4-1; for the author, his abstract does not
+  mention the LT ligament).
 
 ### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
 
@@ -232,9 +252,12 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculat
 - [x] MF-1 and MF-4 verified from Mayfield's abstract; MF-5, HB-5, PA-3 and LI-1 in part.
 - [x] Lichtman stage I is "normal radiographs"; the MRI wording is dropped (the 1977 paper
   predates clinical MRI), by the author's choice (2026-10-23).
-- [ ] Still unchecked, because the papers are paywalled: MF-2, MF-3, the greater-arc
-  sentence, HB-1 to HB-4 (and whether B5 is in Herbert 1984), PA-1, PA-2, LI-2 to LI-4. Who
-  split Lichtman III into IIIA and IIIB (LI-3) still has no source, nor does IIIC.
+- [x] Open sources (2026-10-29, "Sixth check" in the calculators sources doc): the greater-arc sentence
+  (Chen 2009) and Palmer's class 2 (von Borstel 2017); MF-2, MF-3, HB-1 to HB-4 and LI-2 to LI-4 were
+  already settled. The Mayfield and Lichtman pages no longer say "Unchecked draft".
+- [ ] Still unchecked: whether B5 is in Herbert 1984 (Herbert page), and Palmer 1B and 1C (for the
+  author: the table says "ulnar avulsion with or without distal ulnar fracture" and just "distal
+  avulsion"; the page says "ulnar styloid" and "from the lunate or triquetrum").
 
 ### Foot MRI study
 
@@ -249,8 +272,11 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and 
   plantar Lisfranc ligament is cited to Raikin, and a grade-2 sprain counts with a rupture;
   intermetatarsal bursa fluid of 3 mm or less "can be considered physiologic"; tarsal
   coalition and accessory navicular wording follow Newman and Miller.
-- [ ] Still unchecked, because the papers are paywalled: F3-1, F3-4, F4-1, F4-2, F5-1 to
-  F5-3, and the unread parts of the partly verified rows (including the F6-2 warning).
+- [x] Open sources (2026-10-29, "Fifth check" in the foot sources doc): F3-4, F4-1, F4-2, F5-1 to F5-3,
+  F6-2 and F7-1 are now cited beside the originals; F3-1 was already settled.
+- [ ] Still unchecked: the irregular coalition margins (F2-3). For the author: "(the latter at the
+  middle facet)" (Marth 2024: middle facet alone in 10.7%, middle and posterior in 50%), and
+  sesamoid oedema "fits sesamoiditis" (also stress reaction or early osteonecrosis).
 
 ### Diabetic foot MRI study
 
@@ -265,8 +291,10 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-
   the Charcot distribution chip now follows Donovan ("most commonly affects the
   tarsometatarsal and metatarsophalangeal joints"), not "midfoot, away from the pressure
   points", which no listed abstract states.
-- [ ] Still unchecked: the ghost sign (D4-2), and the parts of the partly verified rows the
-  abstracts do not state.
+- [x] Open sources (2026-10-29, "Third check"): D2-2, D4-1 and D7-1 now cite Rosskopf 2019 or Weaver 2022.
+- [ ] Still unchecked: D2-3. For the author: the ghost sign's "a neuropathic bone keeps its outline"
+  (Rosskopf: neuropathic bones "look destroyed on all sequences") and "an inactive foot shows no
+  edema" (Rosskopf: some oedema "may last").
 
 ### Spine CT for pain or injury
 
@@ -334,8 +362,12 @@ claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`.
   and SA-4 in part. Sanders types now use the abstract's names ("split depression" for type
   III) and the page gives its outcome figures by type, by the author's choice to match the
   papers (2026-10-23).
-- [ ] Still unchecked: HK-4, HK-5, HK-6 and HK-8 (Hawkins 1970 has no abstract), SA-2, SA-5,
-  the 2 mm in SA-3, and Myerson MY-1 to MY-6 (the abstract gives no types).
+- [x] Open sources (2026-10-29, "Fourth check" in the foot calculators sources doc): Myerson MY-1 to MY-5
+  (Diebal 2013, Tzatzairis 2019); HK-4, HK-6, HK-8, SA-2, SA-5 and the 2 mm were already settled.
+  The Sanders page no longer says "Unchecked draft".
+- [ ] Still unchecked: MY-6 (needs Myerson 1986) and HK-5. For the author: Hawkins type IV
+  (Alton: body dislocated from the ankle or subtalar joint, plus the talonavicular; the page says
+  both), and reviews that word Myerson A, B2 and C1 differently.
 
 ### Pediatric elbow radiographs
 
@@ -352,8 +384,12 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   picks the ages, and with no sex entered the later (boys') ages are used, the site's choice.
   The anterior humeral line cites Herman for the middle third and Rogers for under 2½ years;
   radiographs underestimate anterior but overestimate medial displacement (Edmonds).
-- [ ] Still unchecked: everything cited to Iyer (its abstract states none of it), the Gartland,
-  O'Brien and Judet types (no abstracts), Jakob's stages, PE2-3, PE3-1, PE4-3, PE5-1, PE5-2.
+- [x] Every claim read (2026-10-29, "Fifth check" in the paediatric elbow sources doc): Gartland, Jakob,
+  O'Brien and Judet against open reviews cited beside them; the "Unchecked draft" note is gone.
+  For the author: the radiocapitellar line "in every view" (it misses the capitellum in 8.6% of
+  normal elbows and is more reliable through the head than the neck), Jakob stage II "moderate"
+  (in Tomori 2018, not in the cited review), and the uncited "in children the radial neck breaks
+  rather than the head".
 
 ### Suprahyoid neck CT and MRI
 
