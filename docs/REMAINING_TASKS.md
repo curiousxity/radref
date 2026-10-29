@@ -412,10 +412,11 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   radiographs underestimate anterior but overestimate medial displacement (Edmonds).
 - [x] Every claim read (2026-10-29, "Fifth check" in the paediatric elbow sources doc): Gartland, Jakob,
   O'Brien and Judet against open reviews cited beside them; the "Unchecked draft" note is gone.
-  For the author: the radiocapitellar line "in every view" (it misses the capitellum in 8.6% of
-  normal elbows and is more reliable through the head than the neck), Jakob stage II "moderate"
-  (in Tomori 2018, not in the cited review), and the uncited "in children the radial neck breaks
-  rather than the head".
+- [x] Decided by the author 2026-10-29: the radiocapitellar line "should normally intersect the
+  capitellum" on the AP and lateral, with normal variation, and a miss raises suspicion rather than
+  proving dislocation (Ramirez 2014: 176 of 2,052 lines; neck against shaft, not head against neck);
+  Jakob stage II without "moderate" (Tomori 2018 added); proximal radial fractures "usually" involve
+  the neck or physis (Macken 2022, Kalbitz 2022 added).
 
 ### Suprahyoid neck CT and MRI
 

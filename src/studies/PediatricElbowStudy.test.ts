@@ -1,9 +1,22 @@
+import { isValidElement } from 'react'
+import type { ReactNode } from 'react'
 import { describe, expect, test } from 'vitest'
 import { chips, report, studyOf } from '../study/testing'
 import type { Values } from '../study/types'
 import { PediatricElbowStudyPage } from './PediatricElbowStudy'
 
 const study = studyOf(PediatricElbowStudyPage)
+
+/** The plain text of a lesson body, citations included, without rendering it. */
+function textOf(node: ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') return String(node)
+  if (Array.isArray(node)) return node.map(textOf).join('')
+  if (isValidElement<{ children?: ReactNode }>(node)) return textOf(node.props.children)
+  return ''
+}
+
+const learnText = (id: string) => textOf(study.learn.find((section) => section.id === id)?.body)
+const teachText = (id: string) => textOf(study.report.steps.find((step) => step.id === id)?.teach)
 
 /*
  * Every rule case below quotes a claim from
@@ -27,8 +40,9 @@ describe('pediatric elbow lesson', () => {
   test('is no longer an unchecked draft, with a DOI on every reference but Gartland and Judet', () => {
     expect(study.sourceNote).toMatch(/^Every reference was matched/)
     expect(study.sourceNote).not.toMatch(/unchecked/i)
-    // 17 since the open reviews (DeFroda, Álvarez Muñoz, Bašković, Colozza) were added.
-    expect(study.references).toHaveLength(17)
+    // 17 since the open reviews (DeFroda, Álvarez Muñoz, Bašković, Colozza) were added; 21 since
+    // Ramirez, Tomori, Macken and Kalbitz were added by the author's decisions of 2026-10-29.
+    expect(study.references).toHaveLength(21)
     for (const ref of study.references) {
       if (/^(Gartland JJ\.|Judet J, Judet R)/.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -259,11 +273,30 @@ describe('pediatric elbow rules', () => {
     expect(impressionOf({ ...normalFour, age: '3', ahl: 'anterior-third' })).toBe(NORMAL_IMPRESSION)
   })
 
-  // PE4-3: "if it does not, the radial head is dislocated, and the ulna must be checked".
-  test('a disrupted radiocapitellar line', () => {
-    expect(chips(study, 'lines', { rcl: 'disrupted' })['Radiocapitellar line']).toBe('Radial head dislocated: check the ulna (Monteggia)')
-    expect(report(study, { ...normal, rcl: 'disrupted' }).warnings).toContain('The radiocapitellar line misses the capitellum, which means a radial head dislocation; check the ulna for a fracture (Monteggia).')
-    expect(impressionOf({ ...normal, rcl: 'disrupted' })).toBe('Radiocapitellar line misses the capitellum: radial head dislocation.')
+  // PE4-3: a line that misses the capitellum raises the suspicion of a radial head dislocation,
+  // and the ulna must be checked (Monteggia). The old case said the miss "means" a dislocation;
+  // Ramirez 2014 (abstract) found that "The RCL does not invariably bisect or fall within the middle
+  // third of the capitellum in normal pediatric elbows. Therefore, an abnormal RCL is suggestive
+  // but not pathognomonic for injury such as Monteggia fracture" (author's decision, 2026-10-29).
+  test('a disrupted radiocapitellar line raises suspicion, not proof', () => {
+    expect(chips(study, 'lines', { rcl: 'disrupted' })['Radiocapitellar line']).toBe('Suspect radial head dislocation: check the ulna (Monteggia)')
+    expect(report(study, { ...normal, rcl: 'disrupted' }).warnings).toContain('The radiocapitellar line misses the capitellum, which raises the suspicion of a radial head dislocation; check the ulna for a fracture (Monteggia).')
+    expect(impressionOf({ ...normal, rcl: 'disrupted' })).toBe('Radiocapitellar line misses the capitellum: suspect radial head dislocation.')
+    const rcl = study.report.steps.flatMap((step) => step.fields).find((field) => field.id === 'rcl')
+    expect(rcl?.help).toBe('Normally through the capitellum on the AP and lateral; normal variation occurs, particularly in young children.')
+  })
+
+  test('the radiocapitellar line is not taught as invariable, and Ramirez is reported as measured', () => {
+    for (const text of [learnText('lines'), teachText('lines'), textOf(study.quiz.find((q) => q.id === 'radiocapitellar')?.explanation)]) {
+      expect(text).not.toMatch(/every view|is dislocated|means a radial head dislocation/)
+      expect(text).toContain('Ramirez et al., J Pediatr Orthop 2014')
+    }
+    expect(learnText('lines')).toContain('raises the suspicion of malalignment rather than proving a dislocation')
+    // 176 of 2,052 lines drawn, not 8.6% of elbows; radial neck against radial shaft, not head
+    // against neck (DeFroda's account of Ramirez, quoted in the fifth check, had both wrong).
+    expect(learnText('lines')).toContain('176 of the 2,052 lines drawn (8.6%)')
+    expect(learnText('lines')).toContain('the most consistent was the line along the radial neck on the lateral view')
+    expect(learnText('lines')).not.toMatch(/radial head rather than|8\.6% of (normal )?elbows/)
   })
 
   // PE5-2: "I undisplaced; II displaced with the posterior cortex intact (hinged); III completely
@@ -288,6 +321,14 @@ describe('pediatric elbow rules', () => {
     expect(weiss('')).toBeUndefined()
   })
 
+  // PE6-3: Jakob stage II without "moderate", which sets no reproducible threshold (author's
+  // decision, 2026-10-29): Bašković 2024, Table 3, "Complete: fracture extends to the articular
+  // surface, no rotated fragment".
+  test('Jakob stage II is a displaced articular fracture without rotation, not "moderate"', () => {
+    expect(learnText('lateral-condyle')).toContain('stage II a displaced fracture extending through the articular surface, without rotation of the fragment')
+    expect(learnText('lateral-condyle')).not.toMatch(/moderate/i)
+  })
+
   // PE7-1: "an entrapped fragment must be named". PE7-2: no displacement threshold; radiographs
   // "are not sufficient to measure anterior displacement nor accurate enough to measure medial
   // displacement" (Edmonds 2010, abstract).
@@ -304,6 +345,18 @@ describe('pediatric elbow rules', () => {
     expect(report(study, { ...normal, dislocation: 'present', 'dislocation-direction': 'posterior' }).warnings)
       .toContain('An elbow dislocation is entered: look again for a medial epicondyle avulsion, which can be entrapped in the joint.')
     expect(report(study, { ...normal, dislocation: 'present', 'me-fracture': 'present' }).warnings).toEqual([])
+  })
+
+  // PE8-3: "The majority of proximal radius fractures are radial neck fractures (89%)" (Macken
+  // 2022); "the valgus force on the radius head is transmitted to the weaker physis and
+  // metaphysis in the neck region" (Kalbitz 2022). Softened from "the radial neck breaks rather
+  // than the head" (author's decision, 2026-10-29).
+  test('radial neck rather than head, softened and cited', () => {
+    const text = learnText('radial-neck')
+    expect(text).toContain('proximal radial fractures usually involve the radial neck or physis rather than the articular radial head')
+    expect(text).toContain('Macken et al., World J Orthop 2022')
+    expect(text).toContain('Kalbitz et al., Front Pediatr 2022')
+    expect(text).not.toContain('breaks rather than the head')
   })
 
   // PE8-1: "I, under 30°; II, 30° to 60°; III, over 60°."

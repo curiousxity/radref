@@ -10,7 +10,10 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * Every reference has been matched on PubMed and Crossref (2026-10-23), and every claim has been
  * read in an abstract or in full text: the Iyer and Alton reviews in full (2026-10-25), and,
  * for the papers with no open copy (Gartland, Leitch, Jakob, O'Brien, Judet), open reviews that
- * state their classifications, cited beside them (2026-10-29). The claims table, with each claim's
+ * state their classifications, cited beside them (2026-10-29). By the author's decisions of 2026-10-29,
+ * the radiocapitellar line is no longer said to pass through the capitellum in every child (Ramirez,
+ * abstract), Jakob stage II no longer says "moderate" (Bašković, Tomori in full), and the radial
+ * neck sentence is cited (Macken, Kalbitz in full). The claims table, with each claim's
  * status, is docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md; rule chips and
  * warnings carry its claim IDs. Gartland (1959) and Judet (1962) have no DOI, so their citations
  * stay plain text.
@@ -22,13 +25,17 @@ const SKAGGS_DOI = '10.2106/00004623-199910000-00007'
 const ROGERS_DOI = '10.1148/128.1.145'
 const HERMAN_DOI = '10.2106/JBJS.H.01316'
 const DEFRODA_DOI = '10.4081/or.2017.7030'
+const RAMIREZ_DOI = '10.1097/BPO.0000000000000199'
 const LEITCH_DOI = '10.2106/JBJS.D.02956'
 const ALTON_GARTLAND_DOI = '10.1007/s11999-014-4033-8'
 const WEISS_DOI = '10.1097/BPO.0b013e3181b2842c'
 const ALVAREZ_DOI = '10.3390/children11121421'
 const JAKOB_DOI = '10.1302/0301-620X.57B4.430'
 const BASKOVIC_DOI = '10.3390/children11080906'
+const TOMORI_DOI = '10.1097/MD.0000000000012182'
 const EDMONDS_DOI = '10.2106/JBJS.I.01637'
+const MACKEN_DOI = '10.5312/wjo.v13.i3.238'
+const KALBITZ_DOI = '10.3389/fped.2022.988372'
 const OBRIEN_DOI = '10.1097/00003086-196500410-00006'
 const COLOZZA_DOI = '10.1186/s13256-020-02390-0'
 
@@ -38,6 +45,7 @@ const SKAGGS = <Cite doi={SKAGGS_DOI}>Skaggs and Mirzayan, J Bone Joint Surg Am 
 const ROGERS = <Cite doi={ROGERS_DOI}>Rogers et al., Radiology 1978</Cite>
 const HERMAN = <Cite doi={HERMAN_DOI}>Herman et al., J Bone Joint Surg Am 2009</Cite>
 const DEFRODA = <Cite doi={DEFRODA_DOI}>DeFroda et al., Orthop Rev (Pavia) 2017</Cite>
+const RAMIREZ = <Cite doi={RAMIREZ_DOI}>Ramirez et al., J Pediatr Orthop 2014</Cite>
 const GARTLAND = 'Gartland, Surg Gynecol Obstet 1959'
 const LEITCH = <Cite doi={LEITCH_DOI}>Leitch et al., J Bone Joint Surg Am 2006</Cite>
 const ALTON_GARTLAND = <Cite doi={ALTON_GARTLAND_DOI}>Alton et al., Clin Orthop Relat Res 2015</Cite>
@@ -45,7 +53,10 @@ const WEISS = <Cite doi={WEISS_DOI}>Weiss et al., J Pediatr Orthop 2009</Cite>
 const ALVAREZ = <Cite doi={ALVAREZ_DOI}>Álvarez Muñoz et al., Children 2024</Cite>
 const JAKOB = <Cite doi={JAKOB_DOI}>Jakob et al., J Bone Joint Surg Br 1975</Cite>
 const BASKOVIC = <Cite doi={BASKOVIC_DOI}>Bašković et al., Children 2024</Cite>
+const TOMORI = <Cite doi={TOMORI_DOI}>Tomori et al., Medicine 2018</Cite>
 const EDMONDS = <Cite doi={EDMONDS_DOI}>Edmonds, J Bone Joint Surg Am 2010</Cite>
+const MACKEN = <Cite doi={MACKEN_DOI}>Macken et al., World J Orthop 2022</Cite>
+const KALBITZ = <Cite doi={KALBITZ_DOI}>Kalbitz et al., Front Pediatr 2022</Cite>
 const OBRIEN = <Cite doi={OBRIEN_DOI}>O'Brien, Clin Orthop Relat Res 1965</Cite>
 const COLOZZA = <Cite doi={COLOZZA_DOI}>Colozza et al., J Med Case Rep 2020</Cite>
 const JUDET = 'Judet et al., Ann Chir 1962'
@@ -57,6 +68,7 @@ const references: LessonReference[] = [
   { citation: 'Rogers LF, Malave S Jr, White H, Tachdjian MO. Plastic bowing, torus and greenstick supracondylar fractures of the humerus: radiographic clues to obscure fractures of the elbow in children. Radiology. 1978;128(1):145-150.', doi: ROGERS_DOI },
   { citation: 'Herman MJ, Boardman MJ, Hoover JR, Chafetz RS. Relationship of the anterior humeral line to the capitellar ossific nucleus: variability with age. J Bone Joint Surg Am. 2009;91(9):2188-2193.', doi: HERMAN_DOI },
   { citation: 'DeFroda SF, Hansen H, Gil JA, Hawari AH, Cruz AI Jr. Radiographic evaluation of common pediatric elbow injuries. Orthop Rev (Pavia). 2017;9(1):7030.', doi: DEFRODA_DOI },
+  { citation: 'Ramirez RN, Ryan DD, Williams J, Wren TA, Ibrahim D, Weiss JM, Kay RM, Lightdale-Miric N, Skaggs DL. A line drawn along the radial shaft misses the capitellum in 16% of radiographs of normal elbows. J Pediatr Orthop. 2014;34(8):763-767.', doi: RAMIREZ_DOI },
   { citation: 'Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154.' },
   { citation: 'Leitch KK, Kay RM, Femino JD, Tolo VT, Storer SK, Skaggs DL. Treatment of multidirectionally unstable supracondylar humeral fractures in children. A modified Gartland type-IV fracture. J Bone Joint Surg Am. 2006;88(5):980-985.', doi: LEITCH_DOI },
   { citation: 'Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741.', doi: ALTON_GARTLAND_DOI },
@@ -64,7 +76,10 @@ const references: LessonReference[] = [
   { citation: 'Álvarez Muñoz M, García de la Blanca JC, Anchía MV, Martí Ciruelos R, Calvo Calvo S, Menéndez Crespo MT. Management of acute lateral humeral condyle fractures in children. Children (Basel). 2024;11(12):1421.', doi: ALVAREZ_DOI },
   { citation: 'Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436.', doi: JAKOB_DOI },
   { citation: 'Bašković M, Pešorda D, Zaninović L, Hasandić D, Lohman Vuga K, Pogorelić Z. Management of pediatric elbow fractures and dislocations. Children (Basel). 2024;11(8):906.', doi: BASKOVIC_DOI },
+  { citation: 'Tomori Y, Nanno M, Takai S. Posteromedial elbow dislocation with lateral humeral condylar fracture in children: three case reports and a literature review. Medicine (Baltimore). 2018;97(36):e12182.', doi: TOMORI_DOI },
   { citation: 'Edmonds EW. How displaced are "nondisplaced" fractures of the medial humeral epicondyle in children? Results of a three-dimensional computed tomography analysis. J Bone Joint Surg Am. 2010;92(17):2785-2791.', doi: EDMONDS_DOI },
+  { citation: 'Macken AA, Eygendaal D, van Bergen CJ. Diagnosis, treatment and complications of radial head and neck fractures in the pediatric patient. World J Orthop. 2022;13(3):238-249.', doi: MACKEN_DOI },
+  { citation: 'Kalbitz M, Lackner I, Perl M, Pressmar J. Radial head and neck fractures in children and adolescents. Front Pediatr. 2022;10:988372.', doi: KALBITZ_DOI },
   { citation: "O'Brien PI. Injuries involving the proximal radial epiphysis. Clin Orthop Relat Res. 1965;41:51-58.", doi: OBRIEN_DOI },
   { citation: 'Colozza A, Padovani S, Caruso G, Cavaciocchi M, Massari L. Arthroscopically-assisted reduction and pinning of a radial neck fracture in a child: a case report and review of the literature. J Med Case Rep. 2020;14(1):78.', doi: COLOZZA_DOI },
   { citation: 'Judet J, Judet R, Lefranc J. [Fracture of the radial head in the child]. Ann Chir. 1962;16:1377-1385. French.' },
@@ -178,7 +193,8 @@ const learn: LearnSection[] = [
         <p>On a true lateral, draw a line along the anterior cortex of the humerus. It is a valuable aid in the search for a supracondylar fracture, and when it is abnormal, other signs of fracture should be carefully sought ({ROGERS}). In most normal children it passes through the middle third of the capitellum ({HERMAN}).</p>
         <p>In young children the line may pass through the anterior third of the capitellum because the ossification centre is small: Rogers and colleagues put this under 2½ years ({ROGERS}), and Herman and colleagues found that under 4 years it passed nearly equally through the anterior or the middle third ({HERMAN}). Read the line with the age.</p>
         <h4>Radiocapitellar line</h4>
-        <p>A line along the radial neck passes through the capitellum in every view. If it does not, the radial head is dislocated, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}; {DEFRODA}).</p>
+        <p>Draw a line along the radial neck on the AP and the lateral. It should normally intersect the capitellum on both views, but normal variation occurs, particularly in young children, so a line that misses the capitellum raises the suspicion of malalignment rather than proving a dislocation ({IYER}; {RAMIREZ}). When it misses, suspect a radial head dislocation and check the ulna for a fracture: a Monteggia injury ({IYER}; {DEFRODA}).</p>
+        <p>Ramirez and colleagues drew the line on the AP and lateral radiographs of 116 normal elbows: 176 of the 2,052 lines drawn (8.6%) missed the capitellum. They compared lines along the radial neck with lines along the radial shaft; lines along the neck missed it less often (1.2% against 12.7%), the most consistent was the line along the radial neck on the lateral view, and the line was more reliable in older children and varied considerably in infants ({RAMIREZ}).</p>
         <ScanFigures images={[pediatricElbowScans.anteriorHumeralLine, pediatricElbowScans.monteggia]} />
       </>
     ),
@@ -211,7 +227,7 @@ const learn: LearnSection[] = [
           <li><strong>Type III:</strong> 2 mm or more, with the articular surface disrupted.</li>
         </ul>
         <p>Whether the articular cartilage is intact often cannot be judged on radiographs alone; arthrography or MRI shows it ({WEISS}; {ALVAREZ}). When it is not judged, a fracture displaced 2 mm or more is type II or III.</p>
-        <p>The older Jakob stages describe the same spectrum: stage I undisplaced with the articular surface intact, stage II complete with moderate displacement, stage III completely displaced and rotated ({JAKOB}; {BASKOVIC}).</p>
+        <p>The older Jakob stages describe the same spectrum: stage I an incomplete, undisplaced fracture with the articular surface intact; stage II a displaced fracture extending through the articular surface, without rotation of the fragment; stage III a displaced fracture with rotation of the fragment ({JAKOB}; {BASKOVIC}; {TOMORI}).</p>
         <ScanFigures images={[pediatricElbowScans.lateralCondyle]} />
       </>
     ),
@@ -232,7 +248,7 @@ const learn: LearnSection[] = [
     title: 'Step 8. Radial head and neck',
     body: (
       <>
-        <p>In children the radial neck breaks rather than the head. O'Brien's types, by the angulation of the radial head ({OBRIEN}; {COLOZZA}):</p>
+        <p>In children, proximal radial fractures usually involve the radial neck or physis rather than the articular radial head ({MACKEN}; {KALBITZ}): much of the child's radial head is cartilaginous, so a valgus force on the head is transmitted to the weaker physis and metaphysis in the neck region ({KALBITZ}). Intra-articular radial head fractures do occur, and are more common in skeletally mature adolescents than in skeletally immature children ({MACKEN}). O'Brien's types, by the angulation of the radial head ({OBRIEN}; {COLOZZA}):</p>
         <ul className="plain-list">
           <li><strong>Type I:</strong> under 30°.</li>
           <li><strong>Type II:</strong> 30° to 60°.</li>
@@ -333,7 +349,7 @@ const fields = {
     { value: 'anterior', label: 'In front of the capitellum' },
     { value: 'posterior', label: 'Through the posterior third or behind' },
   ] },
-  rcl: { id: 'rcl', kind: 'choice', label: 'Radiocapitellar line', required: true, help: 'Passes through the capitellum in every view.', options: [
+  rcl: { id: 'rcl', kind: 'choice', label: 'Radiocapitellar line', required: true, help: 'Normally through the capitellum on the AP and lateral; normal variation occurs, particularly in young children.', options: [
     { value: 'aligned', label: 'Through the capitellum' },
     { value: 'disrupted', label: 'Misses the capitellum' },
   ] },
@@ -503,8 +519,8 @@ function deriveLines(values: Values): Derived[] {
   if (reading === 'young') out.push({ label: 'Anterior humeral line', value: 'Anterior third: can be normal under age 4' })
   // PE4-1: otherwise, look for a supracondylar fracture.
   if (reading === 'abnormal') out.push({ label: 'Anterior humeral line', value: 'Abnormal: look for a supracondylar fracture', tone: 'warn' })
-  // PE4-3: a disrupted radiocapitellar line means a radial head dislocation.
-  if (str(values, 'rcl') === 'disrupted') out.push({ label: 'Radiocapitellar line', value: 'Radial head dislocated: check the ulna (Monteggia)', tone: 'warn' })
+  // PE4-3: a disrupted radiocapitellar line raises the suspicion of a radial head dislocation.
+  if (str(values, 'rcl') === 'disrupted') out.push({ label: 'Radiocapitellar line', value: 'Suspect radial head dislocation: check the ulna (Monteggia)', tone: 'warn' })
   return out
 }
 
@@ -612,7 +628,7 @@ function findings(values: Values): string[] {
   // PE4-1
   if (ahlReading(values) === 'abnormal') out.push(`Anterior humeral line ${ahlPhrases[str(values, 'ahl')] ?? 'abnormal'}: look for a supracondylar fracture.`)
   // PE4-3
-  if (str(values, 'rcl') === 'disrupted') out.push('Radiocapitellar line misses the capitellum: radial head dislocation.')
+  if (str(values, 'rcl') === 'disrupted') out.push('Radiocapitellar line misses the capitellum: suspect radial head dislocation.')
 
   const gartland = gartlandType[str(values, 'gartland')] as string | undefined
   if (str(values, 'supracondylar') === 'present') out.push(gartland ? `Supracondylar fracture, Gartland type ${gartland}.` : 'Supracondylar fracture.')
@@ -699,9 +715,9 @@ function warnings(values: Values): string[] {
   if (ahlReading(values) === 'abnormal' && str(values, 'supracondylar') === 'none') {
     out.push('The anterior humeral line is abnormal, but no supracondylar fracture is entered.')
   }
-  // PE4-3: a disrupted radiocapitellar line means a dislocated radial head.
+  // PE4-3: a disrupted radiocapitellar line raises the suspicion of a dislocated radial head.
   if (str(values, 'rcl') === 'disrupted' && str(values, 'dislocation') !== 'present') {
-    out.push('The radiocapitellar line misses the capitellum, which means a radial head dislocation; check the ulna for a fracture (Monteggia).')
+    out.push('The radiocapitellar line misses the capitellum, which raises the suspicion of a radial head dislocation; check the ulna for a fracture (Monteggia).')
   }
   // PE7-1: after a dislocation, look for an entrapped medial epicondyle.
   if (str(values, 'dislocation') === 'present' && str(values, 'me-fracture') !== 'present') {
@@ -765,7 +781,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>When the anterior humeral line is abnormal, look carefully for other signs of a supracondylar fracture ({ROGERS}). It passes through the middle third of the capitellum in most normal children; under age 4, nearly equally through the anterior or the middle third ({HERMAN}).</p>
-        <p>The radiocapitellar line passes through the capitellum in every view; if not, the radial head is dislocated ({IYER}; {DEFRODA}).</p>
+        <p>The radiocapitellar line should normally intersect the capitellum on the AP and lateral, but normal variation occurs, particularly in young children; a line that misses raises the suspicion of malalignment rather than proving a dislocation ({IYER}; {RAMIREZ}). Then check the ulna (Monteggia) ({DEFRODA}).</p>
       </>
     ),
     fields: [fields.ahl, fields.rcl],
@@ -828,7 +844,7 @@ const study: StudyDefinition = {
   slug: 'pediatric-elbow',
   name: 'Pediatric elbow radiographs',
   lede: 'Read an injured child\'s elbow radiographs by age: which ossification centres to expect, the fat pads, the alignment lines, and the common fractures with their gradings.',
-  sourceNote: "Every reference was matched on PubMed and Crossref, and each claim was read in an abstract or in full text; the Gartland, Jakob, O'Brien and Judet classifications, whose papers have no open copy, were read in the open reviews cited beside them.",
+  sourceNote: "Every reference was matched on PubMed and Crossref, and each claim was read in an abstract or in full text; the Gartland, Jakob, O'Brien and Judet classifications, whose papers have no open copy, were read in the open reviews cited beside them, and the radiocapitellar line in a study of normal elbows.",
   references,
   report: {
     steps,
@@ -883,7 +899,7 @@ const study: StudyDefinition = {
       question: 'The radiocapitellar line misses the capitellum on the lateral view. What must you check next?',
       options: ['The olecranon fat pad', 'The ulna, for a fracture (Monteggia)', 'The medial epicondyle', 'The anterior humeral line'],
       answer: 1,
-      explanation: <p>A radiocapitellar line that misses the capitellum means a radial head dislocation, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}; {DEFRODA}).</p>,
+      explanation: <p>A radiocapitellar line that misses the capitellum raises the suspicion of a radial head dislocation (normal variation occurs, particularly in young children), and the ulna must be checked for a fracture: a Monteggia injury ({IYER}; {RAMIREZ}; {DEFRODA}).</p>,
     },
     {
       id: 'gartland-ii',
