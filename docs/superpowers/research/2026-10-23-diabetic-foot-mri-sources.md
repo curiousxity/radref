@@ -122,3 +122,12 @@ neuropathic bone keeping its outline, and the inactive foot having no edema.
 Needs a browser: https://pubs.rsna.org/doi/full/10.1148/rg.303095111 (Donovan: ghost sign wording,
 rim enhancement, gas) and https://pubs.rsna.org/doi/full/10.1148/radiol.2233011279 (Ledermann:
 septic arthritis, D2-3).
+
+## The author's decisions, 2026-10-29
+
+Both from Rosskopf et al., Insights Imaging 2019 (PMC6682845, read in full), already cited.
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| D4-2 (ghost sign) | Replace "a neuropathic bone keeps its outline": the distinction is apparent disappearance on one sequence against real destruction. Rosskopf, Table: "a neuropathic joint without infection will not demonstrate the 'ghost sign' because the bones are definitely destroyed and will look destroyed on all sequences"; "bones that 'disappear' on T1-weighted images and 'reappear' (outline of the bone becomes visible again) after contrast administration (or on T2-weighted images)—suspicious of osteomyelitis". Fig. 21: the sign "is described in many reviews as pathognomonic ... However, up to now, there is no study published evaluating the accuracy of this sign". Use "raises suspicion", not "diagnoses". | Learn text, help text, chip ("Raises suspicion of superimposed osteomyelitis"), impression ("Ghost sign, raising suspicion of superimposed osteomyelitis in the neuropathic bone."), summary and quiz. Settled. |
+| D7-1 (inactive foot) | Replace "no edema": "During the less active or inactive phase, the foot is not red any more, but some soft tissue and bone marrow edema may last." Absence of edema is not required for inactivity. | Learn text ("edema generally decrease, but residual edema may persist ... so its complete absence is not required") and the activity option ("Inactive: edema decreased (some may persist); sclerosis and remodelling"). Settled. |

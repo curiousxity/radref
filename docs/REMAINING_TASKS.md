@@ -295,9 +295,11 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-
   tarsometatarsal and metatarsophalangeal joints"), not "midfoot, away from the pressure
   points", which no listed abstract states.
 - [x] Open sources (2026-10-29, "Third check"): D2-2, D4-1 and D7-1 now cite Rosskopf 2019 or Weaver 2022.
-- [ ] Still unchecked: D2-3. For the author: the ghost sign's "a neuropathic bone keeps its outline"
-  (Rosskopf: neuropathic bones "look destroyed on all sequences") and "an inactive foot shows no
-  edema" (Rosskopf: some oedema "may last").
+- [x] Decided by the author 2026-10-29 (Rosskopf 2019): the ghost sign "raises suspicion of
+  superimposed osteomyelitis", uncomplicated neuropathic destruction looks destroyed on every
+  sequence, and no study has tested the sign's accuracy; in less active or inactive disease edema
+  decreases but may persist.
+- [ ] Still unchecked: D2-3 (septic arthritis with an effusion; needs Ledermann 2002).
 
 ### Spine CT for pain or injury
 
