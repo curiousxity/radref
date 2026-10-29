@@ -138,3 +138,16 @@ For the author (nothing changed):
    differs from VS by "the absence of vertical displacement". Osterhoff's grouping in the same paper
    counts LC II/III, APC II/III, VS and combined as "unstable" without splitting rotation from
    vertical. Keep the column, or change APC III?
+
+## Fifth check, 2026-10-28: Leone 2022 from the author
+
+Read in full (open access): Leone E, et al. Diagnostics (Basel). 2022;12(2):384.
+doi:10.3390/diagnostics12020384. It bears on the three questions above; nothing changed.
+
+- **APC I threshold:** Leone gives grade 1 as "pubic symphysis diastasis <2.5 cm" and grades 2
+  and 3 as ">2.5 cm", which matches the site's 2.5 cm, against Halawi's 2 cm.
+- **Vertical shear:** "a cranial shift of the hemipelvis", one side; Leone does not say "or both".
+- **APC III stability:** "Anterior–posterior compression grade 3 injuries have a multidirectional
+  instability", and APC II "a rotational instability". That is closer to the site's column
+  (APC III vertically unstable) than Halawi's Tile table. Leone's Tile paragraph still puts
+  vertical instability only in type C.

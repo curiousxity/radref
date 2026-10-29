@@ -307,7 +307,8 @@ under the calculators below.
 - [x] Verified from abstracts or open full text: P1-1, P2-1 (with a caveat), the Denis zones in
   P3-1, P3-3 (with two differences) and P5-1. The caveat and differences are in the sources
   file, for the author.
-- [ ] Still unchecked, because the papers are paywalled: L5 transverse process (P2-2), the
+- [x] L5 transverse process (P2-2): settled by Leone 2022, read in full (2026-10-28).
+- [ ] Still unchecked, because the papers are paywalled: the
   Denis deficit rates (P3-1), the U- or H-shaped fracture (P3-2). Kept on the page with the
   "Unchecked draft" note, by the author's choice (2026-10-23). They need the full text.
 
@@ -488,9 +489,9 @@ document. Where the site differed, the author chose the newer source, and these 
 - [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
-- [ ] Still pending: Broberg and Morrey 1987 and Khurana 2014 (`docs/PAPERS_NEEDED.md`). Rao 1999 was settled
-  from its figure legends and Spence 1970 read in full (2026-10-28); Halawi 2015, sent in place of
-  Khurana, settles the ring-breaks-in-two-places claim but not the L5 transverse process.
+- [ ] Still pending: Broberg and Morrey 1987 (`docs/PAPERS_NEEDED.md`). Rao 1999 was settled
+  from its figure legends and Spence 1970 read in full (2026-10-28); Halawi 2015 and Leone 2022, sent in place of
+  Khurana, settle the ring-breaks-in-two-places claim and the L5 transverse process.
 - [x] Knee cartilage depth grades (under half / half or more): neither Outerbridge nor Recht gives them.
   The author chose (2026-10-25) to keep the four grades as they are, with no source named.
 
