@@ -240,7 +240,10 @@ describe('spine trauma CT rules (unchecked)', () => {
     const condyle = { ...normal, condyle: 'present', 'condyle-side': 'left' }
     expect(vessels({ ...condyle, history: 'high' })).toBe('Expanded Denver screening criterion met: occipital condyle fracture')
     expect(impressionOf({ ...condyle, history: 'high' })).toBe('Left occipital condyle fracture.\nMeets the expanded Denver screening criteria for blunt cerebrovascular injury (occipital condyle fracture).')
-    expect(vessels({ ...condyle, history: 'low' })).toBe('Cervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol (occipital condyle fracture)')
+    expect(vessels({ ...condyle, history: 'low' })).toBe('Craniocervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol (occipital condyle fracture)')
+    // A condyle fracture is a skull base fracture, so the advisory says craniocervical (2026-10-29).
+    expect(impressionOf({ ...condyle, history: 'low' }).split('\n')[1]).toMatch(/^Craniocervical injury associated with blunt cerebrovascular injury risk \(occipital condyle fracture\)/)
+    expect(impressionOf({ ...condyle, history: 'unknown' }).split('\n')[1]).toMatch(/^Craniocervical injury \(occipital condyle fracture\)/)
     expect(vessels({ ...condyle, history: 'unknown' })).toBe('Expanded Denver mechanism requirement cannot be assessed: occipital condyle fracture')
     expect(vessels({ ...condyle, history: 'pain' })).toBe('Expanded Denver mechanism requirement cannot be assessed: occipital condyle fracture')
     expect(report(study, condyle).text).toContain('Occipital condyle fracture: left')

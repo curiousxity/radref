@@ -8,6 +8,13 @@ by the author's choice).
 
 ## Pending (recorded 2026-10-28)
 
+- **Left as they are (the author's choice, 2026-10-29); don't raise again:** the four points that
+  only the original papers could settle: the exact 1 cm / 40% facet boundary (Vaccaro 2016; spine
+  CT and AO Spine), any Lisfranc pattern beyond A to C2 (Myerson 1986; foot study and Myerson),
+  whether B5 is in Herbert and Fisher 1984 (wrist study and Herbert), and three Letournel phrases
+  (Letournel 1980; pelvis CT and Letournel). Those pages keep "Unchecked draft" for them. Also
+  decided: Gupta's "type B on radiographs, type A on CT" case stays off the Myerson page.
+
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
   email is on the "Rad Ref members" policy, and the author is the only member for now
   (2026-10-29). To add one later: Zero Trust → Access controls → Policies, or "Emails ending in"

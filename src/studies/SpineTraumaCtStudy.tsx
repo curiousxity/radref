@@ -429,8 +429,12 @@ function mechanism(values: Values): Mechanism {
  * after low- and high-energy cervical fractures (Turaczyk Kolodziej 2024). "Local trauma protocol"
  * is the author's wording, not a source's.
  */
-const BCVI_ADVISORY = 'Cervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol'
+const BCVI_ADVISORY = 'associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol'
 const MECHANISM_UNKNOWN = 'Expanded Denver mechanism requirement cannot be assessed'
+
+/** "Craniocervical injury" when an occipital condyle fracture is among the reasons, otherwise
+ * "Cervical injury" (the author's decision, 2026-10-29: a condyle fracture is a skull base fracture). */
+const injuryNoun = (reasons: string[]) => (reasons.includes('occipital condyle fracture') ? 'Craniocervical injury' : 'Cervical injury')
 
 /** The Denver chip, by mechanism, or undefined when no reason is entered. */
 function denverChip(values: Values): string | undefined {
@@ -438,7 +442,7 @@ function denverChip(values: Values): string | undefined {
   if (reasons.length === 0) return undefined
   return {
     high: `Expanded Denver screening criterion met: ${reasons.join(', ')}`,
-    low: `${BCVI_ADVISORY} (${reasons.join(', ')})`,
+    low: `${injuryNoun(reasons)} ${BCVI_ADVISORY} (${reasons.join(', ')})`,
     unknown: `${MECHANISM_UNKNOWN}: ${reasons.join(', ')}`,
   }[mechanism(values)]
 }
@@ -450,8 +454,8 @@ function denverSentence(values: Values): string | undefined {
   const list = reasons.join(', ')
   return {
     high: `Meets the expanded Denver screening criteria for blunt cerebrovascular injury (${list}).`,
-    low: `Cervical injury associated with blunt cerebrovascular injury risk (${list}); consider CT angiography according to injury pattern and local trauma protocol.`,
-    unknown: `Cervical injury (${list}); the mechanism requirement of the expanded Denver screening criteria for blunt cerebrovascular injury cannot be assessed from the history given.`,
+    low: `${injuryNoun(reasons)} associated with blunt cerebrovascular injury risk (${list}); consider CT angiography according to injury pattern and local trauma protocol.`,
+    unknown: `${injuryNoun(reasons)} (${list}); the mechanism requirement of the expanded Denver screening criteria for blunt cerebrovascular injury cannot be assessed from the history given.`,
   }[mechanism(values)]
 }
 

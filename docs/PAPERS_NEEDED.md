@@ -14,6 +14,10 @@ Search routes already tried for each: OpenAlex, Semantic Scholar, fatcat, Unpayw
 Europe PMC, and the publisher pages (AJR serves full text in a browser; RSNA shows only the abstract
 and figure legends; Bone & Joint, Ovid, Wiley, SAGE, Springer and Elsevier ask for a sign-in).
 
+**Not being pursued (the author's choice, 2026-10-29).** The four papers below would each settle one
+still-unread point, but the author chose to leave those points as they are: don't ask for these
+papers or raise the points again. The pages that rest on them keep "Unchecked draft".
+
 ## Calculators
 
 - [ ] Vaccaro AR, et al. Eur Spine J. 2016;25(7):2173-2184. doi:10.1007/s00586-015-3831-3. AO Spine and spine CT: is a facet fragment of exactly 1 cm or 40% F1 or F2?

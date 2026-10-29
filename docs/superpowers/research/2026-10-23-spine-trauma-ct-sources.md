@@ -298,3 +298,7 @@ Applied: the header comment names the second round; the test pins 20 references 
 mechanism (high, low, unknown, "pain", no answer), the condyle fracture with each mechanism, and a
 nontraumatic collapse raising nothing. The source note is unchanged (still "Unchecked draft" for the
 exact 1 cm / 40% facet boundary, AO-6).
+
+The author's decision, 2026-10-29 (third round): when an occipital condyle fracture is among the
+Denver reasons, the low-energy advisory and the unknown-mechanism line say "Craniocervical injury"
+rather than "Cervical injury", since a condyle fracture is a skull base fracture.
