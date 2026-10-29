@@ -51,7 +51,9 @@ by the author's choice).
     PMC10381215, PMC13294428.
   - Fifth metatarsal: done 2026-10-28 (zone map, zones 1–3, apophysis, ununited fragment, os
     vesalianum, os peroneum; `src/data/scans/fifthMetatarsal.ts`). No CC BY image of a dancer's
-    (distal spiral) fracture was found; that card keeps its drawing only.
+    (distal spiral) fracture was found; that card keeps its drawing only. Searched again
+    2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
+    filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
 - **Hearing loss CT:** the five "For the author" questions (see its section below).
 - **Calvarium and hearing loss** moved into Studies on 2026-10-28 but are single pages;
   Report, Learn and Quiz tabs like the other studies are optional.
@@ -444,7 +446,10 @@ Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page give
 - [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
 - [x] Burr hole and osteomyelitis now have CT panels from CC BY 4.0 case reports (2026-10-28):
   Sanjabi 2026 Fig. 1 and Li 2026 Fig. 2D (burr hole), Manzoor 2026 Fig. 2 (frontal osteomyelitis).
-- [ ] The "Read the vault in layers" drawing has no real scan beside it yet.
+- [x] "Read the vault in layers" now has a real vault biopsy radiograph with the layers labelled
+  (2026-10-28): Lynnerup 2005 Fig. 1, CC BY 2.0 in its licence statement. No CC BY CT of a normal
+  vault with labelled layers was found; the inner-table fracture CT in Cureus 2026 (PMC13080279) is
+  a photo of a monitor, too blurred to show the diploe.
 
 ## Hearing loss CT page
 

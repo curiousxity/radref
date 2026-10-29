@@ -1,9 +1,9 @@
 /**
  * The CT and MRI panels on the calvarial lesions page. Each is one panel cropped, unchanged
  * apart from conversion to greyscale, from a figure in an open-access article published under
- * CC BY 4.0, which allows reuse and adaptation with credit: the two reviews the page is written
- * from, and three case reports for the burr hole and osteomyelitis, which the reviews do not
- * illustrate. The arrows, circles and panel letters are the original authors'. The files live in `public/members/calvarium/`; `src/pages/calvarium.test.ts` checks
+ * CC BY, which allows reuse and adaptation with credit: the two reviews the page is written
+ * from, three case reports for the burr hole and osteomyelitis, which the reviews do not
+ * illustrate, and a radiograph of a vault biopsy for the layers (CC BY 2.0; the rest are 4.0). The arrows, circles and panel letters are the original authors'. The files live in `public/members/calvarium/`; `src/pages/calvarium.test.ts` checks
  * that each exists and carries its credit.
  */
 
@@ -17,18 +17,25 @@ export type CalvariumImage = {
 }
 
 export const CALVARIUM_SOURCES = {
-  gomez: { short: 'Gomez et al. 2018', doi: '10.1007/s13244-018-0643-0' },
-  pons: { short: 'Pons Escoda et al. 2020', doi: '10.1186/s13244-019-0820-9' },
+  gomez: { short: 'Gomez et al. 2018', doi: '10.1007/s13244-018-0643-0', licence: 'CC BY 4.0' },
+  pons: { short: 'Pons Escoda et al. 2020', doi: '10.1186/s13244-019-0820-9', licence: 'CC BY 4.0' },
   // Case reports, each checked for CC BY 4.0 in the article's licence statement; Crossref agrees
   // for Li (Frontiers) and has no licence for the two Cureus articles.
-  sanjabi: { short: 'Sanjabi et al. 2026', doi: '10.7759/cureus.114767' },
-  li: { short: 'Li et al. 2026', doi: '10.3389/fsurg.2026.1850959' },
-  manzoor: { short: 'Manzoor et al. 2026', doi: '10.7759/cureus.110218' },
+  sanjabi: { short: 'Sanjabi et al. 2026', doi: '10.7759/cureus.114767', licence: 'CC BY 4.0' },
+  li: { short: 'Li et al. 2026', doi: '10.3389/fsurg.2026.1850959', licence: 'CC BY 4.0' },
+  manzoor: { short: 'Manzoor et al. 2026', doi: '10.7759/cureus.110218', licence: 'CC BY 4.0' },
+  // CC BY 2.0 in the article's licence statement (Head Face Med 2005;1:13); Crossref has none.
+  lynnerup: { short: 'Lynnerup et al. 2005', doi: '10.1186/1746-160X-1-13', licence: 'CC BY 2.0' },
 } as const
 
-export const CC_BY = 'CC BY 4.0'
-
 export const calvariumImages = {
+  vaultLayers: {
+    src: '/members/calvarium/vault-layers.jpg',
+    alt: 'Radiograph of a 5 mm trephine biopsy of the skull vault: dense outer and inner tables with mottled diploe between them, labelled',
+    caption: 'A real vault biopsy, X-rayed side on: outer table, diploë, inner table. The labels are the authors\'.',
+    source: 'lynnerup',
+    figure: 'Fig. 1',
+  },
   arachnoidGranulation: {
     src: '/members/calvarium/arachnoid-granulation.jpg',
     alt: 'Axial CT: well-defined lucencies along the inner table of the occipital bone beside the transverse sinuses',

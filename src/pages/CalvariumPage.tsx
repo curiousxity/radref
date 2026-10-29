@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { CALVARIUM_SOURCES, CC_BY, calvariumImages } from '../data/calvariumImages'
+import { CALVARIUM_SOURCES, calvariumImages } from '../data/calvariumImages'
 import type { CalvariumImage } from '../data/calvariumImages'
 
 const GOMEZ = CALVARIUM_SOURCES.gomez.doi
@@ -494,7 +494,7 @@ function Photo({ image }: { image: CalvariumImage }) {
     <figure className="cv-photo">
       <img src={image.src} alt={image.alt} loading="lazy" />
       <figcaption>
-        {image.caption} From <Cite doi={source.doi}>{source.short}</Cite>, {image.figure}, cropped ({CC_BY}).
+        {image.caption} From <Cite doi={source.doi}>{source.short}</Cite>, {image.figure}, cropped ({source.licence}).
       </figcaption>
     </figure>
   )
@@ -542,8 +542,8 @@ export function CalvariumPage() {
             many there are and how old the patient is will usually narrow the list to one or two.
           </p>
           <p className="source-note">
-            Drafted from the cited reviews and not yet reviewed by the site author. The drawings are schematics, not to scale. The scans are single
-            panels cropped from open-access figures published under {CC_BY}, credited under each one; the arrows are the original authors'.
+            Drafted from the cited reviews. The drawings are schematics, not to scale. The scans are single
+            panels cropped from open-access figures published under CC BY licences, credited under each one; the arrows are the original authors'.
           </p>
         </div>
       </section>
@@ -554,6 +554,9 @@ export function CalvariumPage() {
           <LayersFigure />
           <figcaption>Every drawing below is this cross-section, outside at the top.</figcaption>
         </figure>
+        <div className="cv-photos cv-photos-wide">
+          <Photo image={calvariumImages.vaultLayers} />
+        </div>
         <ul className="plain-list">
           <li><strong>Which table?</strong> Outer table, diploë, inner table, or through both. Many lesions favour one.</li>
           <li><strong>What edge?</strong> Sclerotic rim, sharp without a rim, bevelled, or ill defined.</li>
