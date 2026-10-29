@@ -1,8 +1,9 @@
 /**
  * The CT and MRI panels on the calvarial lesions page. Each is one panel cropped, unchanged
- * apart from conversion to greyscale, from a figure in an open-access review published under
- * CC BY 4.0, which allows reuse and adaptation with credit. The arrows and panel letters are the
- * original authors'. The files live in `public/members/calvarium/`; `src/pages/calvarium.test.ts` checks
+ * apart from conversion to greyscale, from a figure in an open-access article published under
+ * CC BY 4.0, which allows reuse and adaptation with credit: the two reviews the page is written
+ * from, and three case reports for the burr hole and osteomyelitis, which the reviews do not
+ * illustrate. The arrows, circles and panel letters are the original authors'. The files live in `public/members/calvarium/`; `src/pages/calvarium.test.ts` checks
  * that each exists and carries its credit.
  */
 
@@ -11,13 +12,18 @@ export type CalvariumImage = {
   alt: string
   /** What the arrows point at, from the source figure's caption. */
   caption: string
-  source: 'gomez' | 'pons'
+  source: keyof typeof CALVARIUM_SOURCES
   figure: string
 }
 
 export const CALVARIUM_SOURCES = {
   gomez: { short: 'Gomez et al. 2018', doi: '10.1007/s13244-018-0643-0' },
   pons: { short: 'Pons Escoda et al. 2020', doi: '10.1186/s13244-019-0820-9' },
+  // Case reports, each checked for CC BY 4.0 in the article's licence statement; Crossref agrees
+  // for Li (Frontiers) and has no licence for the two Cureus articles.
+  sanjabi: { short: 'Sanjabi et al. 2026', doi: '10.7759/cureus.114767' },
+  li: { short: 'Li et al. 2026', doi: '10.3389/fsurg.2026.1850959' },
+  manzoor: { short: 'Manzoor et al. 2026', doi: '10.7759/cureus.110218' },
 } as const
 
 export const CC_BY = 'CC BY 4.0'
@@ -127,5 +133,26 @@ export const calvariumImages = {
     caption: 'Meningioma centred in the diploe, with marked spiculated hyperostosis (arrows).',
     source: 'pons',
     figure: 'Fig. 12h',
+  },
+  burrHoleCt: {
+    src: '/members/calvarium/burr-hole-ct.jpg',
+    alt: 'Axial CT angiogram: a gap through the skull in each temporal region, circled',
+    caption: 'Burr holes in both temporal regions (circles and arrows), from earlier revascularization surgery.',
+    source: 'sanjabi',
+    figure: 'Fig. 1',
+  },
+  burrHole3d: {
+    src: '/members/calvarium/burr-hole-3d.jpg',
+    alt: '3D CT surface rendering of the skull: a small round hole through the bone',
+    caption: 'The burr-hole site from an earlier subdural haematoma drainage, on 3D CT.',
+    source: 'li',
+    figure: 'Fig. 2D',
+  },
+  osteomyelitis: {
+    src: '/members/calvarium/osteomyelitis.jpg',
+    alt: 'Axial CT: forehead swelling over an eroded, fragmented left frontal bone',
+    caption: 'Erosion of the left frontal bone with thinning of the inner and outer tables (arrow), suggesting osteomyelitis.',
+    source: 'manzoor',
+    figure: 'Fig. 2',
   },
 } satisfies Record<string, CalvariumImage>
