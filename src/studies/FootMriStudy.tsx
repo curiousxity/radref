@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { footMriScans } from '../data/scans/footMri'
 import { hawkinsDescriptions, hawkinsSentence, hawkinsTypes } from '../logic/hawkins'
 import type { HawkinsType } from '../logic/hawkins'
 import { myersonDescriptions, myersonGroup, myersonSentence, myersonTypes } from '../logic/myerson'
@@ -126,6 +128,7 @@ const learn: LearnSection[] = [
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
         <h4>Tarsal coalition</h4>
         <p>Calcaneonavicular and talocalcaneal coalitions (the latter at the middle facet) are encountered most frequently. A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
+        <ScanFigures images={[footMriScans.calcaneonavicularCoalition, footMriScans.navicularStressFracture]} />
       </>
     ),
   },
@@ -139,6 +142,7 @@ const learn: LearnSection[] = [
         <p>Then check the alignment of each tarsometatarsal joint, and the gap between the medial cuneiform and the base of the second metatarsal.</p>
         <p>Type a fracture-dislocation by Myerson ({MYERSON}); the Myerson calculator on this site applies the same rules.</p>
         {myersonTable}
+        <ScanFigures images={[footMriScans.lisfrancRupture]} />
       </>
     ),
   },
@@ -150,6 +154,7 @@ const learn: LearnSection[] = [
         <p>A metatarsal stress injury shows as marrow edema, without a fracture line (stress reaction) or with a low-signal fracture line (stress fracture). It is commonest in the second and third metatarsals ({ASHMAN}).</p>
         <p>At the base of the fifth metatarsal, give the zone of a fracture. The fifth metatarsal page on this site sets out the three zones and the papers behind them.</p>
         <p>Freiberg infraction is osteonecrosis of a metatarsal head, most often the second, with flattening of the head ({ASHMAN}).</p>
+        <ScanFigures images={[footMriScans.metatarsalStressFracture, footMriScans.freibergInfraction]} />
       </>
     ),
   },
@@ -161,6 +166,7 @@ const learn: LearnSection[] = [
         <p>Turf toe is an injury of the plantar capsule and plantar plate of the first metatarsophalangeal (MTP) joint, from forced dorsiflexion ({SANDERS_RATHUR}).</p>
         <p>Look at both sesamoids. Marrow edema without a fracture line fits sesamoiditis. A fractured sesamoid has sharp, irregular margins, while a bipartite sesamoid has smooth, corticated margins, is often bilateral, and is usually the medial (tibial) one ({SANDERS_RATHUR}).</p>
         <p>Then note any degenerative change at the first MTP joint.</p>
+        <ScanFigures images={[footMriScans.sesamoiditis]} />
       </>
     ),
   },
@@ -171,6 +177,7 @@ const learn: LearnSection[] = [
       <>
         <p>Look at the plantar plate of each lesser MTP joint. Tears are commonest at the second MTP joint ({UMANS}).</p>
         <p>A plantar plate tear often comes with a lesion in the adjacent intermetatarsal space, pericapsular fibrosis, that can look like a Morton neuroma ({UMANS}). So read step 7 against this one.</p>
+        <ScanFigures images={[footMriScans.plantarPlateTear]} />
       </>
     ),
   },
@@ -183,6 +190,7 @@ const learn: LearnSection[] = [
         <p>A Morton neuroma is commonest in the third space, then the second. It lies plantar to the deep transverse intermetatarsal ligament ({ASHMAN}), and shows as a low- to intermediate-signal-intensity soft-tissue mass in the intermetatarsal space ({BENCARDINO}). Measure its transverse diameter on short-axis images.</p>
         <p>Neuroma-like lesions were found in about a third of 70 volunteers without symptoms ({ZANETTI}). The diagnosis of Morton neuroma at MR imaging may be relevant only when the transverse diameter is 5 mm or more and can be correlated to clinical findings ({ZANETTI}). So a small neuroma is not by itself the cause of the pain.</p>
         <p>In the same volunteers, fluid in the intermetatarsal bursae measured 1 to 4 mm in transverse diameter, and none was found in the fourth space. Fluid collections in the first three bursae with a transverse diameter of 3 mm or less can be considered physiologic ({ZANETTI}). Treat more than that, or fluid in the fourth space, as a finding.</p>
+        <ScanFigures images={[footMriScans.mortonNeuroma]} />
       </>
     ),
   },
@@ -204,6 +212,7 @@ const learn: LearnSection[] = [
         <p>An accessory navicular sits at the tibialis posterior insertion. In patients with focal medial foot pain, MRI showed a bone marrow edema pattern in the accessory navicular, and in some also in the adjacent navicular tuberosity; in a symptomatic accessory navicular it is indicative of chronic stress and/or osteonecrosis ({MILLER}).</p>
         <p>An os peroneum sits in the peroneus longus near the cuboid. Painful os peroneum syndrome is a spectrum: fracture or separation of the os peroneum, fraying or rupture of the peroneus longus beside it, and an enlarged peroneal tubercle ({SOBEL}).</p>
         <p>This site gives the accessory navicular and the os peroneum their own variant line, and a finding line when they are abnormal.</p>
+        <ScanFigures images={[footMriScans.osPeroneumPeroneusLongusSplit]} />
       </>
     ),
   },

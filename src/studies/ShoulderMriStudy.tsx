@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { shoulderMriScans } from '../data/scans/shoulderMri'
 import { classifyNeer, emptyNeerInput } from '../logic/neer'
 import type { LineStatus, NeerInput, NeerLine } from '../logic/neer'
 import { StudyPage } from '../study/StudyPage'
@@ -171,6 +173,7 @@ const learn: LearnSection[] = [
         <h4>Proximal humerus fracture: Neer</h4>
         <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}). Neer later added the valgus-impacted four-part fracture, in which the head is driven down between splayed tuberosities but stays in contact with the glenoid ({CAROFINO}).</p>
         <p>The Neer calculator on this site applies the same rules, and the report step below uses the same code.</p>
+        <ScanFigures images={[shoulderMriScans.hillSachsLesion]} />
       </>
     ),
   },
@@ -187,6 +190,7 @@ const learn: LearnSection[] = [
         <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}; {SOMERSON}):</p>
         {goutallierTable}
         <p>Fuchs and colleagues applied the same grades to MRI and compared them with CT: each method was reproducible between observers, but the correlation between MRI and CT grades was only fair to moderate, even on a simplified 3-grade scale ({FUCHS}). Grade the supraspinatus, infraspinatus and subscapularis on oblique sagittal T1-weighted images.</p>
+        <ScanFigures images={[shoulderMriScans.supraspinatusFullTear, shoulderMriScans.goutallierGrade4]} />
       </>
     ),
   },
@@ -197,6 +201,7 @@ const learn: LearnSection[] = [
       <>
         <p>Follow the subscapularis tendon to the lesser tuberosity on the axial and oblique sagittal images, and grade its muscle with the Goutallier grades above ({GOUTALLIER}). A subscapularis tear goes with a medially displaced biceps tendon, so read step 5 with this step ({WALCH}).</p>
         <p>Teres minor tendon tears are uncommon. An atrophic or edematous teres minor muscle with a normal tendon is more often a nerve problem; see step 10.</p>
+        <ScanFigures images={[shoulderMriScans.subscapularisTear]} />
       </>
     ),
   },
@@ -207,6 +212,7 @@ const learn: LearnSection[] = [
       <>
         <p>Follow the long head of biceps from its anchor on the superior labrum, through the rotator interval, into the bicipital groove. Note tendinosis, a partial tear, or a complete tear with the tendon absent from the groove.</p>
         <p>Then check its position on the axial images. Walch and colleagues found that dislocation of the long head of biceps out of the groove went with tears of the subscapularis ({WALCH}), so a displaced tendon sends you back to step 4.</p>
+        <ScanFigures images={[shoulderMriScans.bicepsDislocation]} />
       </>
     ),
   },
@@ -226,6 +232,7 @@ const learn: LearnSection[] = [
         </div>
         <h4>Posterior labrum</h4>
         <p>Read the posterior labrum on every axial image too, even when the history gives no hint of instability.</p>
+        <ScanFigures images={[shoulderMriScans.bankartLesion, shoulderMriScans.slapTear]} />
       </>
     ),
   },
@@ -235,6 +242,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Follow the inferior glenohumeral ligament to its humeral attachment. Wolf and colleagues described humeral avulsion of the glenohumeral ligaments (HAGL) as a cause of anterior instability ({WOLF}). An intact labrum does not exclude it, so look at the humeral side of the axillary pouch whenever the labrum looks normal in a shoulder that may have dislocated.</p>
+        <ScanFigures images={[shoulderMriScans.haglLesion]} />
       </>
     ),
   },
@@ -264,6 +272,7 @@ const learn: LearnSection[] = [
         <p>Paralabral cysts are associated with labral tears ({TIRMAN}), so a cyst sends you back to the labrum in step 6.</p>
         <p>A mass such as a ganglion can compress the suprascapular nerve. At the suprascapular notch it can affect both the supraspinatus and the infraspinatus; at the spinoglenoid notch, below the branch to the supraspinatus, it affects the infraspinatus alone. Denervation shows as high signal in the muscle on fluid-sensitive images, and later as fatty atrophy ({FRITZ}).</p>
         <p>In quadrilateral space syndrome the axillary nerve is compressed in the quadrilateral space, and MRI shows atrophy of the teres minor ({LINKER}).</p>
+        <ScanFigures images={[shoulderMriScans.paralabralCystDenervation]} />
       </>
     ),
   },
@@ -289,6 +298,7 @@ const learn: LearnSection[] = [
           <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, with an appearance similar to SLAP lesions ({SMITH}); it can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</li>
           <li><strong>Os acromiale:</strong> an unfused ossification centre of the acromion, associated with rotator cuff impingement ({PARK}).</li>
         </ul>
+        <ScanFigures images={[shoulderMriScans.sublabralRecess]} />
       </>
     ),
   },

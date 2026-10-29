@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { diabeticFootMriScans } from '../data/scans/diabeticFootMri'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -60,6 +62,7 @@ const learn: LearnSection[] = [
       <>
         <p>Find the ulcer first. Osteomyelitis in the diabetic foot almost always spreads into the bone from an ulcer or sinus tract next to it, so the ulcer tells you which bone to study ({LEDERMANN}). The usual sites are the pressure points: the toes, the metatarsal heads and the calcaneus ({LEDERMANN}).</p>
         <p>Then look for a sinus tract running from the ulcer towards bone, an abscess (a rim-enhancing collection after contrast), and gas in the soft tissues ({DONOVAN}).</p>
+        <ScanFigures images={[diabeticFootMriScans.sinusTract, diabeticFootMriScans.abscess]} />
       </>
     ),
   },
@@ -71,6 +74,7 @@ const learn: LearnSection[] = [
         <p>Read the marrow on the T1-weighted images first. A confluent pattern of decreased T1 marrow signal in a medullary distribution correlates highly with osteomyelitis; in the same series, no case with a hazy reticulated pattern had osteomyelitis ({JOHNSON}).</p>
         <p>Secondary signs add weight: an adjacent ulcer, a sinus tract, interruption of the cortex and a soft-tissue abscess ({MORRISON}).</p>
         <p>So the question for each abnormal bone is: is the T1 signal confluent, and does the bone touch the ulcer or sinus tract? Confluent T1 change in a bone with no ulcer or sinus tract next to it should make you think again, often of neuroarthropathy (step 5).</p>
+        <ScanFigures images={[diabeticFootMriScans.calcanealOsteomyelitis, diabeticFootMriScans.hazyReticularT1]} />
       </>
     ),
   },
@@ -80,6 +84,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Septic arthritis often comes with osteomyelitis, as the infection spreads across the joint ({LEDERMANN}). Look at every joint next to an infected bone for an effusion, and say which joint it is.</p>
+        <ScanFigures images={[diabeticFootMriScans.septicArthritis]} />
       </>
     ),
   },
@@ -91,6 +96,7 @@ const learn: LearnSection[] = [
         <p>Telling neuroarthropathy from osteomyelitis requires careful analysis of where the bone signal changes are, their distribution and their pattern ({LEDERMANN_MORRISON}). Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints, whereas osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>
         <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
         <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection; a neuropathic bone keeps its outline ({DONOVAN}).</p>
+        <ScanFigures images={[diabeticFootMriScans.ghostSignT1, diabeticFootMriScans.ghostSignContrast]} />
       </>
     ),
   },

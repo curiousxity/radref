@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { ankleMriScans } from '../data/scans/ankleMri'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -126,6 +128,7 @@ const learn: LearnSection[] = [
 
         <h4>Accessory bones and other marrow patterns</h4>
         <p>BME in an accessory bone suggests it is symptomatic. The commonest accessory bones are the os peroneum, os naviculare accessorium and os trigonum; a symptomatic os trigonum usually shows BME in both the ossicle and the adjacent talus. A serpentine marrow line indicates a bone infarct: on T2-weighted images it has an inner low-signal and outer high-signal component, the double line sign. The commonest coalitions are calcaneonavicular and between the middle facet of the talus and the calcaneus, and a fibrous coalition can cause overuse BME (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.talarOsteochondralLesion]} />
       </>
     ),
   },
@@ -147,6 +150,7 @@ const learn: LearnSection[] = [
         </ul>
         <p>Acute injury shows blurred margins, irregular contours, discontinuous, wavy or lax fibres, inhomogeneous signal, or loss of the normal low signal; the PTFL, deep deltoid and AITFL lose their normal striations. Chronic injury shows an attenuated (thin) or thickened ligament with irregular contours and no edema or hemorrhage (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
         <p>Check the peroneal tendons next door: peroneal tendinosis is commonly seen with ATFL injury, and a partial longitudinal tear of peroneus brevis is commonly associated with lateral sprain (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.atflTear]} />
       </>
     ),
   },
@@ -159,6 +163,7 @@ const learn: LearnSection[] = [
         <p>Oae and colleagues called a syndesmotic ligament disrupted when MRI showed ligament discontinuity (criterion 1), or a wavy or curved contour or non-visualisation of the ligament (criterion 2). Using both criteria, MRI diagnosed AITFL disruption with 100% sensitivity, 93% specificity and 97% accuracy, and PITFL disruption with 100% sensitivity, specificity and accuracy (<Cite doi={OAE}>Oae et al., Radiology 2003</Cite>).</p>
         <p>Fluid in the tibiofibular recess normally measures 5 to 7 mm. Fluid measuring more than 12 mm is definitely abnormal and suggests acute injury to the syndesmotic ligaments (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>).</p>
         <p>Also look at the interosseous membrane.</p>
+        <ScanFigures images={[ankleMriScans.aitflTear]} />
       </>
     ),
   },
@@ -174,6 +179,7 @@ const learn: LearnSection[] = [
         <div className="lesson-key">
           <p>Tibialis posterior, tibiospring and spring ligament injuries are seen together because they work together to hold up the medial arch (<Cite doi={SAWANT}>Sawant and Sanghvi, Indian J Radiol Imaging 2018</Cite>). The spring ligament was abnormal in 92% of patients with advanced tibialis posterior injury and 28% of those with a normal tendon (<Cite doi={BALEN}>Balen and Helms, AJR 2001</Cite>).</p>
         </div>
+        <ScanFigures images={[ankleMriScans.springLigamentTear]} />
       </>
     ),
   },
@@ -189,6 +195,7 @@ const learn: LearnSection[] = [
           <p>Advanced tibialis posterior injury has a high association with spring ligament and sinus tarsi abnormalities. Two or more associated abnormalities were present in 80% of patients with tibialis posterior injury and 16% of those with a normal tendon (<Cite doi={BALEN}>Balen and Helms, AJR 2001</Cite>). So an injured tibialis posterior sends you back to step 5 and on to step 10.</p>
         </div>
         <p>Look along the FDL and FHL too. An os trigonum often articulates with the talus, and its motion folds the joint capsule, produces joint fluid, and brings conflict with the FHL sheath or Kager's fat pad (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.tibialisPosteriorTear]} />
       </>
     ),
   },
@@ -223,6 +230,7 @@ const learn: LearnSection[] = [
         <p>A low-lying peroneus brevis has two working definitions. Davda and colleagues call it low-lying when the muscle belly extends below the superior margin of the SPR, seen in up to 33% of people, while noting that foot position changes the level of the musculotendinous junction (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). Huuskonen and colleagues called it low-lying when the belly was seen at least at the level of the lateral malleolus where the PTFL attaches (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>). Say which definition you used.</p>
         <p>The peroneus quartus descends posteromedial to the peroneal tendons and appears on MRI as a separate muscle or tendon separated from them by a fat plane; it occurs in 6.6% to 21.7% of cadaveric specimens. A low-lying brevis and a quartus can both overcrowd the retromalleolar groove, which is associated with longitudinal splitting, tenosynovitis and dislocation (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
         <p>A peroneal tubercle more than 5 mm high is reported to be related to peroneus longus impingement and stenosing tenosynovitis (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>). Huuskonen and colleagues called the tubercle prominent when its length, measured from the lateral margin of the calcaneus, exceeded the width of each peroneal tendon (<Cite doi={HUUSKONEN}>Huuskonen et al., J Foot Ankle Res 2023</Cite>). The os peroneum may be uni-, bi- or multipartite, and painful os peroneum syndrome covers a spectrum from acute fracture to a hypertrophied peroneal tubercle (<Cite doi={DAVDA}>Davda et al., EFORT Open Rev 2017</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.peronealSplitTear]} />
       </>
     ),
   },
@@ -242,6 +250,7 @@ const learn: LearnSection[] = [
 
         <h4>Posterior impingement</h4>
         <p>An elongated posterior process of the talus or an os trigonum causes posterior impingement. BME in the posterior talar process or os trigonum, edema in Kager's fat pad and effusion in the posterior recess are frequent findings (<Cite doi={SZARO_BME}>Szaro et al., Insights Imaging 2020</Cite>). Pathology of the lateral (trigonal) process is the most common cause; a Stieda process is an elongated tubercle; and increased marrow signal in the trigonal process or os trigonum suggests an acute injury or chronic stress fracture (<Cite doi={LAVERY}>Lavery et al., J Orthop Surg Res 2016</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.achillesRupture]} />
       </>
     ),
   },
@@ -271,6 +280,7 @@ const learn: LearnSection[] = [
 
         <h4>Tarsal tunnel</h4>
         <p>MRI shows the flexor retinaculum and the structures deep to it: the tibialis posterior, FDL and FHL tendons and the posterior tibial neurovascular bundle, along with the medial calcaneal branches and the medial and lateral plantar nerves. In six symptomatic patients, MRI showed a mechanical cause of compression in all: two neurilemomas, tenosynovitis of all three tendons, a ganglion from the FHL sheath, post-traumatic fibrosis, and post-traumatic fibrosis with a neuroma (<Cite doi={ERICKSON}>Erickson et al., AJR 1990</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.tarsalTunnelGanglion]} />
       </>
     ),
   },
@@ -284,6 +294,7 @@ const learn: LearnSection[] = [
         <p>In a small study of eight patients, maximum fascia thickness averaged 7.40 mm on sagittal images in plantar fasciitis against 3.22 mm in matched volunteers, and nine of ten affected feet had increased signal in the fascia (<Cite doi={BERKOWITZ}>Berkowitz et al., Radiology 1991</Cite>). These are group means, not a cut-off; none of the papers here gives an MRI thickness threshold.</p>
         <p>An acute tear shows complete or partial interruption of the low-signal fascia, with high signal on fluid-sensitive and intermediate signal on T1-weighted images at the site, and possibly high signal in the surrounding soft tissue. A plantar fibroma is a lobulated mass of low signal on both T1- and T2-weighted images, tending to involve the distal two-thirds of the fascia, usually its central bundle (<Cite doi={DRAGHI}>Draghi et al., Insights Imaging 2017</Cite>).</p>
         <p>The plantar fascia had a low association with advanced tibialis posterior injury: abnormal in 32% against 9% with a normal tendon, a difference that was not significant (<Cite doi={BALEN}>Balen and Helms, AJR 2001</Cite>).</p>
+        <ScanFigures images={[ankleMriScans.plantarFasciitis]} />
       </>
     ),
   },

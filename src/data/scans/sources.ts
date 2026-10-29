@@ -105,4 +105,48 @@ export const SCAN_SOURCES = {
   // Pancreatic cysts
   danti2026: { short: 'Danti et al. 2026', doi: '10.3390/jcm15020585', licence: 'CC BY 4.0' },
   khristenko2024: { short: 'Khristenko et al. 2024', doi: '10.1016/j.ejro.2024.100576', licence: 'CC BY 4.0' },
+  // Shoulder MRI
+  kadi2017: { short: 'Kadi et al. 2017', doi: '10.5334/jbr-btr.1467', licence: 'CC BY 4.0' },
+  yubran2024: { short: 'Yubran et al. 2024', doi: '10.1186/s13244-024-01607-w', licence: 'CC BY 4.0' },
+  ahmad2022: { short: 'Ahmad et al. 2022', doi: '10.1155/2022/4009829', licence: 'CC BY 4.0' },
+  pouliart2016: { short: 'Pouliart et al. 2016', doi: '10.5334/jbr-btr.1227', licence: 'CC BY 4.0' },
+  mercouris2023: { short: 'Mercouris and Mercouris 2023', doi: '10.4102/sajr.v27i1.2707', licence: 'CC BY 4.0' },
+  mangi2022: { short: 'Mangi et al. 2022', doi: '10.1186/s13244-022-01305-5', licence: 'CC BY 4.0' },
+  // Ankle MRI
+  szaro2020: { short: 'Szaro et al. 2020', doi: '10.1186/s13244-020-00900-8', licence: 'CC BY 4.0' },
+  gonzalezGutierrez2025: { short: 'González-Gutiérrez et al. 2025', doi: '10.7759/cureus.93882', licence: 'CC BY 4.0' },
+  andres2024: { short: 'Andres et al. 2024', doi: '10.1177/10711007241231221', licence: 'CC BY 4.0' },
+  bokwaDabrowska2025: { short: 'Bokwa-Dąbrowska et al. 2025', doi: '10.1016/j.ejro.2024.100627', licence: 'CC BY 4.0' },
+  ortiz2026: { short: 'Ortiz and Diaz 2026', doi: '10.7759/cureus.118122', licence: 'CC BY 4.0' },
+  dong2012: { short: 'Dong et al. 2012', doi: '10.1155/2012/230679', licence: 'CC BY 3.0' },
+  kothari2023: { short: 'Kothari et al. 2023', doi: '10.7759/cureus.34228', licence: 'CC BY 3.0' },
+  // Foot MRI
+  palka2025: { short: 'Palka et al. 2025', doi: '10.1186/s13244-025-01945-3', licence: 'CC BY 4.0' },
+  liu2025: { short: 'Liu et al. 2025', doi: '10.1186/s12893-025-03377-8', licence: 'CC BY 4.0' },
+  // Diabetic foot MRI
+  rosskopf2019: { short: 'Rosskopf et al. 2019', doi: '10.1186/s13244-019-0768-9', licence: 'CC BY 4.0' },
+  lauri2020: { short: 'Lauri et al. 2020', doi: '10.3390/jcm9061779', licence: 'CC BY 4.0' },
+  alaia2021: { short: 'Alaia et al. 2021', doi: '10.1007/s00256-021-03807-7', licence: 'CC BY 4.0' },
+  tiegsHeiden2023: { short: 'Tiegs-Heiden et al. 2023', doi: '10.5194/jbji-8-99-2023', licence: 'CC BY 4.0' },
+  // Knee MRI
+  ubl2025: { short: 'Ubl et al. 2025', doi: '10.1177/03635465251332272', licence: 'CC BY 4.0' },
+  koutserimpas2026: { short: 'Koutserimpas et al. 2026', doi: '10.3390/reports9020120', licence: 'CC BY 4.0' },
+  nguyen2026: { short: 'Nguyen et al. 2026', doi: '10.1007/s00256-026-05281-5', licence: 'CC BY 4.0' },
+  lefevre2016: { short: 'Lefevre et al. 2016', doi: '10.1155/2016/8329296', licence: 'CC BY 4.0' },
+  parkar2024: { short: 'Parkar and Adriaensen 2024', doi: '10.1007/s00330-024-10706-7', licence: 'CC BY 4.0' },
+  cristiani2024: { short: 'Cristiani et al. 2024', doi: '10.1007/s00256-024-04665-9', licence: 'CC BY 4.0' },
+  jibri2019: { short: 'Jibri et al. 2019', doi: '10.1186/s13244-019-0755-1', licence: 'CC BY 4.0' },
+  vanhoenacker2016: { short: 'Vanhoenacker et al. 2016', doi: '10.5334/jbr-btr.1206', licence: 'CC BY 4.0' },
+  // Elbow MRI
+  matkovic2024: { short: 'Matković et al. 2024', doi: '10.3390/diagnostics14090916', licence: 'CC BY 4.0' },
+  acosta2019: { short: 'Acosta Batlle et al. 2019', doi: '10.1186/s13244-019-0725-7', licence: 'CC BY 4.0' },
+  nayyar2011: { short: 'Nayyar et al. 2011', doi: '10.1155/2011/515912', licence: 'CC BY 3.0' },
+  metikala2022: { short: 'Metikala et al. 2022', doi: '10.7759/cureus.25172', licence: 'CC BY 3.0' },
+  // Wrist MRI
+  dietrich2026: { short: 'Dietrich et al. 2026', doi: '10.1007/s00330-026-12629-x', licence: 'CC BY 4.0' },
+  thomas2025: { short: 'Thomas et al. 2025', doi: '10.7759/cureus.82322', licence: 'CC BY 4.0' },
+  tischler2014: { short: 'Tischler et al. 2014', doi: '10.1007/s13244-014-0337-1', licence: 'CC BY 4.0' },
+  nevalainen2023: { short: 'Nevalainen et al. 2023', doi: '10.1007/s00330-023-09446-x', licence: 'CC BY 4.0' },
+  saran2025: { short: 'Saran et al. 2025', doi: '10.3390/diagnostics15050592', licence: 'CC BY 4.0' },
+  ferreiraBranco2024: { short: 'Ferreira Branco et al. 2024', doi: '10.1007/s00330-024-10831-3', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>
