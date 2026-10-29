@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react'
 import { Badge } from '../components/Badge'
 import { Cite, LessonReferences } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { fifthMetatarsalScans } from '../data/scans/fifthMetatarsal'
+import type { ScanImage } from '../data/scans/types'
 import type { LessonReference } from '../components/LessonPage'
 
 const references: LessonReference[] = [
@@ -209,6 +212,8 @@ type FractureCard = {
   aka: string
   badge: { label: string; tone: 'good' | 'accent' | 'warn' }
   figure: ReactNode
+  /** Real examples beside the drawing; none for the dancer's fracture yet. */
+  images?: ScanImage[]
   where: string
   how: string
   matters: string
@@ -220,6 +225,7 @@ const fractures: FractureCard[] = [
     aka: 'pseudo-Jones',
     badge: { label: 'Heals well', tone: 'good' },
     figure: <Zone1Figure />,
+    images: [fifthMetatarsalScans.zone1],
     where: 'The tuberosity, proximal to the 4–5 intermetatarsal joint. The line may run into the joint with the cuboid, but not into the 4–5 joint.',
     how: 'Inversion of the hindfoot with the foot plantarflexed: the ankle-sprain mechanism. The peroneus brevis and the lateral band of the plantar fascia, both attached to the tuberosity, pull the fragment off.',
     matters: 'The commonest of the group, and it usually heals. Most are treated with weight bearing as tolerated in a stiff-soled shoe or boot. Fixation is kept for a markedly displaced fragment or a large step in the cuboid joint.',
@@ -229,6 +235,7 @@ const fractures: FractureCard[] = [
     aka: 'acute metaphyseal-diaphyseal fracture',
     badge: { label: 'Watershed: may not unite', tone: 'accent' },
     figure: <Zone2Figure />,
+    images: [fifthMetatarsalScans.zone2],
     where: 'The metaphyseal-diaphyseal junction, running into the 4–5 intermetatarsal joint. This is the fracture Robert Jones described in 1902, his own among the cases.',
     how: 'A large adduction force on the forefoot with the ankle plantarflexed. The base is held tight by the ligaments to the fourth metatarsal and the cuboid, so the bone bends and breaks just beyond them.',
     matters: 'It lies in the watershed of the blood supply, so delayed union and nonunion are well recognised. The choice is a non-weight-bearing cast for roughly 6–8 weeks or an intramedullary screw, which is often offered to athletes and active patients for a quicker, more reliable return.',
@@ -238,6 +245,7 @@ const fractures: FractureCard[] = [
     aka: 'often still called a "Jones"',
     badge: { label: 'Stress: slow to heal', tone: 'warn' },
     figure: <Zone3Figure />,
+    images: [fifthMetatarsalScans.zone3],
     where: 'The proximal shaft, distal to the 4–5 joint, within about 1.5 cm of it.',
     how: 'Repetitive loading rather than one injury, typically in running and jumping athletes. There is often a prodrome of lateral foot pain for weeks before the fracture completes. A cavovarus foot loads this cortex more.',
     matters: 'It shares the poor blood supply and adds chronic stress, so healing is slow. The Torg type (below) guides treatment: an acute type I may go in a non-weight-bearing cast, while delayed union or nonunion is usually fixed.',
@@ -294,6 +302,7 @@ export function FifthMetatarsalPage() {
             <Cite doi="10.1177/107110079301400610">Lawrence and Botte (1993)</Cite>.
           </figcaption>
         </figure>
+        <ScanFigures images={[fifthMetatarsalScans.zones]} wide />
         <ul className="plain-list">
           <li><strong>Zone 1</strong> is proximal to the joint between the fourth and fifth metatarsal bases: the tuberosity.</li>
           <li><strong>Zone 2</strong> is at that joint, the metaphyseal-diaphyseal junction. A zone 2 line runs <em>into</em> the 4–5 joint.</li>
@@ -324,6 +333,7 @@ export function FifthMetatarsalPage() {
                 <dt>Why it matters</dt>
                 <dd>{fracture.matters}</dd>
               </dl>
+              {fracture.images && <ScanFigures images={fracture.images} />}
             </article>
           ))}
         </div>
@@ -423,6 +433,7 @@ export function FifthMetatarsalPage() {
             <figcaption><strong>Accessory ossicles.</strong> The os peroneum, in the peroneus longus tendon beside the cuboid, and the rarer os vesalianum, proximal to the tuberosity. Both are smooth, round and corticated all the way round.</figcaption>
           </figure>
         </div>
+        <ScanFigures images={[fifthMetatarsalScans.apophysis, fifthMetatarsalScans.ununitedFragment, fifthMetatarsalScans.osVesalianum, fifthMetatarsalScans.osPeroneum]} />
         <p className="source-note">
           Normal variants described by <Cite doi="10.2106/00004623-197557060-00010">Dameron (1975)</Cite>.
         </p>

@@ -6,9 +6,10 @@ import type { ScanImage } from '../data/scans/types'
  * conversion to greyscale, from a CC BY open-access figure, credited with its figure and the
  * source's exact licence. The image lists are in `src/data/scans/`.
  */
-export function ScanFigures({ images }: { images: ScanImage[] }) {
+export function ScanFigures({ images, wide = false }: { images: ScanImage[]; wide?: boolean }) {
+  // Square frames suit single panels; `wide` keeps a wide panel at its own shape instead.
   return (
-    <div className="cv-photos">
+    <div className={wide ? 'cv-photos cv-photos-wide' : 'cv-photos'}>
       {images.map((image) => (
         <figure key={image.src} className="cv-photo">
           <img src={image.src} alt={image.alt} loading="lazy" />

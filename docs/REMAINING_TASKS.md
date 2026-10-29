@@ -39,7 +39,7 @@ by the author's choice).
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
   Fritz 1992, Sugaya 2005, Tuite 1996, Smith 1996; none has a free copy), and section 1.
 - **Example scans still to add**, in this order: the fracture classifications Mason,
-  Mayfield, Herbert, Palmer and fifth metatarsal; then the MSK MRI studies (ankle, foot,
+  Mayfield, Herbert and Palmer; then the MSK MRI studies (ankle, foot,
   diabetic foot, knee, shoulder, elbow, wrist). CC BY only, licence version stated; no
   CC BY-NC and nothing without a clear licence. PMC candidates found but not yet vetted:
   - Mason: PMC12565371 (J Clin Med 2025), PMC12766341 (Cureus review), PMC13337401,
@@ -49,8 +49,9 @@ by the author's choice).
   - Herbert (scaphoid): PMC13710594 (Eur Radiol consensus), PMC13653879, PMC13694059.
   - Palmer (TFCC): PMC13652943 (Skeletal Radiol), PMC13447642 (Insights Imaging),
     PMC10381215, PMC13294428.
-  - Fifth metatarsal: PMC13502435 (KSSTA), PMC12551980 (Cureus review), PMC12875555,
-    PMC11446485.
+  - Fifth metatarsal: done 2026-10-28 (zone map, zones 1–3, apophysis, ununited fragment, os
+    vesalianum, os peroneum; `src/data/scans/fifthMetatarsal.ts`). No CC BY image of a dancer's
+    (distal spiral) fracture was found; that card keeps its drawing only.
 - **Hearing loss CT:** the five "For the author" questions (see its section below).
 - **Calvarium and hearing loss** moved into Studies on 2026-10-28 but are single pages;
   Report, Learn and Quiz tabs like the other studies are optional.
