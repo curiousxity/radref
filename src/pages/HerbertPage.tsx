@@ -46,7 +46,7 @@ export function HerbertPage() {
           <span className="calc-tag">Scaphoid</span>
         </div>
         <p>Type a scaphoid fracture as stable, unstable, delayed union or non-union, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the 1984 paper is paywalled, so the types are checked against AO Surgery Reference's Herbert classification page, which follows Herbert's 1990 book and includes B5, a comminuted fracture. Not yet reviewed by the site author. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
+        <p className="source-note">Unchecked draft: the 1984 paper is paywalled, so the types are checked against AO Surgery Reference's Herbert classification page, which follows Herbert's 1990 book and includes B5, a comminuted fracture. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

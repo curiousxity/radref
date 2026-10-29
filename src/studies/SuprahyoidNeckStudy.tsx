@@ -733,7 +733,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the carotid bifurcation sign, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the carotid bifurcation sign, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers.',
   references,
   report: {
     steps,

@@ -44,7 +44,7 @@ export function LichtmanPage() {
           <span className="calc-tag">Lunate</span>
         </div>
         <p>Stage lunate osteonecrosis from the imaging findings, with copyable report text. Stage I has normal radiographs; MRI shows decreased T1 signal in the lunate.</p>
-        <p className="source-note">Unchecked draft: the 1977 paper is paywalled, so the stage wording, the IIIA and IIIB split and stage IIIC are checked against a review of the classification and its later changes (<Cite doi="10.1097/CORR.0000000000000595">Kennedy and Abrams, Clin Orthop Relat Res 2019</Cite>). Not yet reviewed by the site author. Source: <Cite doi="10.2106/00004623-197759070-00011">Lichtman et al., J Bone Joint Surg Am 1977</Cite>.</p>
+        <p className="source-note">Unchecked draft: the 1977 paper is paywalled, so the stage wording, the IIIA and IIIB split and stage IIIC are checked against a review of the classification and its later changes (<Cite doi="10.1097/CORR.0000000000000595">Kennedy and Abrams, Clin Orthop Relat Res 2019</Cite>). Source: <Cite doi="10.2106/00004623-197759070-00011">Lichtman et al., J Bone Joint Surg Am 1977</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

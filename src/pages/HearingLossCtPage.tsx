@@ -385,7 +385,7 @@ export function HearingLossCtPage() {
             for otosclerosis, after trauma, for bone disease, or to plan a cochlear implant.
           </p>
           <p className="source-note">
-            Unchecked draft, written on 2026-10-28 without access to PubMed, and not yet reviewed by the site author. The drawings are schematics,
+            Unchecked draft, written on 2026-10-28 without access to PubMed. The drawings are schematics,
             not to scale. The scans are panels from open-access figures published under CC BY licences, credited under each card.
           </p>
         </div>

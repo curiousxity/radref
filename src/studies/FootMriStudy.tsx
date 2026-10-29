@@ -904,7 +904,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers.',
   references,
   report: {
     steps,

@@ -16,11 +16,10 @@ describe('skull base lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'site', 'findings', 'impression'])
   })
 
-  // Every claim is read, but the site author has not reviewed the study yet, so the note still
-  // says "Unchecked draft". Russo 1997, Nemzek 1998 and Eldevik 2000 have no DOI on PubMed or
+  // Every claim is read, so the note is not marked as a draft. Russo 1997, Nemzek 1998 and Eldevik 2000 have no DOI on PubMed or
   // Crossref, so they are cited in plain text.
-  test('is marked as an unchecked draft, with a DOI on every reference but Russo, Nemzek and Eldevik', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  test('is not marked as a draft, with a DOI on every reference but Russo, Nemzek and Eldevik', () => {
+    expect(study.sourceNote).toMatch(/^Every reference was matched/)
     expect(study.references).toHaveLength(21)
     for (const ref of study.references) {
       if (/^(Russo|Nemzek|Eldevik) /.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()

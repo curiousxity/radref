@@ -61,7 +61,7 @@ export function MasonPage() {
           <span className="calc-tag">Radial head</span>
         </div>
         <p>Type a radial head fracture from two questions, with copyable report text. Types I to III are Mason's own; type IV is Johnston's later addition.</p>
-        <p className="source-note">Unchecked draft: types I to III are checked against Mason's table as a review reproduces it (<Cite doi="10.1007/s11999-012-2319-2">Iannuzzi and Leopold, Clin Orthop Relat Res 2012</Cite>) and type IV against Johnston's own paper. The 2 mm and 30% thresholds are not yet checked: they are not in Broberg and Morrey's 1986 paper, and the review credits their 1987 paper, which is paywalled. Not yet reviewed by the site author. Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
+        <p className="source-note">Unchecked draft: types I to III are checked against Mason's table as a review reproduces it (<Cite doi="10.1007/s11999-012-2319-2">Iannuzzi and Leopold, Clin Orthop Relat Res 2012</Cite>) and type IV against Johnston's own paper. The 2 mm and 30% thresholds are not yet checked: they are not in Broberg and Morrey's 1986 paper, and the review credits their 1987 paper, which is paywalled. Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
       </section>
 
       <section className="calculator-grid">

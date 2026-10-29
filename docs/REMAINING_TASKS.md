@@ -55,8 +55,12 @@ by the author's choice).
     2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
     filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
 - **Hearing loss CT:** the five "For the author" questions (see its section below).
-- **Calvarium and hearing loss** moved into Studies on 2026-10-28 but are single pages;
-  Report, Learn and Quiz tabs like the other studies are optional.
+- Decided 2026-10-28: calvarium and hearing loss stay single pages, with no Report, Learn or
+  Quiz tabs.
+- Decided 2026-10-28: the author will not review the pages, so nothing waits for a sign-off. The
+  "not yet reviewed by the site author" sentences are gone from every source note, and the larynx
+  and skull base notes, whose claims are all checked, no longer start "Unchecked draft". Notes
+  with claims still unread in their papers keep "Unchecked draft".
 
 ## Fix soon
 
@@ -70,12 +74,8 @@ it. `App.tsx` now measures the header into `--header-h`.
 Between 641 and 700px the header takes three rows (138px). A phone-style menu button up
 to ~900px would keep it to one row; the author chose to leave it as it is (2026-10-25).
 
-## Author review
+## Decisions
 
-- **Ankle MRI study** (`/studies/ankle-mri`) is an unreviewed draft. Read the lesson,
-  report and quiz, and the "Omitted claims for the author" section in
-  `docs/superpowers/research/2026-10-19-ankle-mri-sources.md`. Sign it off by removing
-  "Not yet reviewed by the site author" from its source note.
 - Anatomical variants (os trigonum, peroneus quartus, low-lying peroneus brevis belly and
   so on) get their own impression line, not findings only: decided 2026-10-23 and applied to
   the ankle, knee and shoulder reports.
@@ -92,11 +92,11 @@ region at a time, end to end, following the ankle pilot
 - [ ] Knee: knee MRI study ("pain" only history, ACL reconstruction included) plus a
   Schatzker calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Done once the sources check
-  in "To do when on a computer" passes and the author signs it off.
+  in "To do when on a computer" passes.
 - [ ] Shoulder: shoulder MRI study ("pain" only history, repaired rotator cuff included)
   plus a Neer calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-shoulder-mri-study-design.md`. Done once the sources
-  check in "To do when on a computer" passes and the author signs it off.
+  check in "To do when on a computer" passes.
 - [ ] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
   2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-elbow-mri-study-design.md`.
@@ -111,36 +111,37 @@ region at a time, end to end, following the ankle pilot
 - [ ] Foot: foot MRI study ("pain or injury" history) plus three calculators: Hawkins (talar
   neck), Sanders (calcaneus) and Myerson (Lisfranc). Drafted 2026-10-23 as an unchecked draft;
   spec `docs/superpowers/specs/2026-10-23-foot-mri-study-design.md`. Deployed before the check.
-  Done once the sources check passes and the author signs it off.
+  Done once the sources check passes.
   The diabetic foot is its own study (`/studies/diabetic-foot-mri`, the author's choice,
   2026-10-23).
 - [ ] Spine: spine trauma CT study ("pain or injury" history) plus an AO Spine calculator
   (subaxial cervical and thoracolumbar), the author's choice over SLIC and TLICS (2026-10-23).
-  Deployed before the check; done once it passes and the author signs it off.
+  Deployed before the check; done once it passes.
 - [ ] Pelvis: pelvis CT study ("pain or injury" history) plus two calculators, Young-Burgess
   (pelvic ring) and Letournel (acetabulum). Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-pelvis-ct-study-design.md`. Deployed before the check.
-  Done once the sources check passes and the author signs it off.
+  Done once the sources check passes.
 - [x] Head and neck: decided 2026-10-25. Each viewer gets a study and no calculator, one study
   per region covering several exams and histories, picked in step 1. The otic capsule and
   ossicular chain already have the temporal bone CT study; TMJ is skipped for now (2026-10-23).
 - [ ] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
   unchecked draft (`/studies/suprahyoid-neck`); spec
   `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. On the branch only until
-  the author says to merge. Done once the sources check passes and the author signs it off.
+  the author says to merge. Done once the sources check passes.
 - [ ] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
   choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
   an abstract or open full text (`/studies/larynx`); spec
   `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. On the branch only until the author
   says to merge. Every claim is now checked (the T4a wording on 2026-10-25, from Joshi's AJCC
-  table); done once the author signs it off.
+  table).
 - [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
   mass (the author's choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable,
   every claim read in an abstract or open full text (`/studies/skull-base`); spec
   `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
   `docs/superpowers/research/2026-10-25-skull-base-sources.md`. On the branch only until the
-  author says to merge. Done once the author signs it off.
-- [ ] Decide whether the brachial plexus viewer gets a study.
+  author says to merge.
+- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28). Ask which exam and history
+  first.
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
@@ -391,7 +392,7 @@ every claim read before it went in; the table is
   thyroid cartilage", as the study had it. Subglottic T4a is "invading cricoids and/or thyroid
   cartilage", which the study did not have; the author chose to match the paper, so a subglottic
   tumour invading the cricoid or the thyroid cartilage (inner cortex included) is now T4a.
-- [ ] The author's review. The source note still starts "Unchecked draft" until then.
+- [x] No author review (2026-10-28); the note no longer starts "Unchecked draft".
 
 ## Calculator follow-up intervals
 
@@ -443,7 +444,7 @@ from Gomez's and Pons Escoda's figures (fetched with the Europe PMC supplementar
 the PMC pages show a reCAPTCHA and Springer's image host is blocked), each credited with its figure.
 Where the two reviews differ (LCH peak age 1-3 versus 6-10 years), the page gives both.
 
-- [ ] The author's review. The source note says "not yet reviewed by the site author" until then.
+- [x] No author review (2026-10-28); the source note no longer says it is unreviewed.
 - [x] Burr hole and osteomyelitis now have CT panels from CC BY 4.0 case reports (2026-10-28):
   Sanjabi 2026 Fig. 1 and Li 2026 Fig. 2D (burr hole), Manzoor 2026 Fig. 2 (frontal osteomyelitis).
 - [x] "Read the vault in layers" now has a real vault biopsy radiograph with the layers labelled
@@ -464,7 +465,8 @@ Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
       and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
 - [ ] Five questions for the author at the end of the sources doc ("For the author"): where claims
       differ from their papers or have no source. Nothing was reworded.
-- [ ] The author's review; then change the source note away from "Unchecked draft".
+- [x] No author review (2026-10-28). The note keeps "Unchecked draft" while the five questions
+      above are open.
 
 ## Calculator papers from the author (first batch)
 

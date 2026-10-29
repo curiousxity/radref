@@ -83,7 +83,7 @@ export function YoungBurgessPage() {
           <span className="calc-tag">Pelvic ring</span>
         </div>
         <p>Type a pelvic ring injury by the force that caused it, from what CT shows at the sacrum, the sacroiliac joints and the symphysis, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>). Not yet reviewed by the site author. Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
+        <p className="source-note">Unchecked draft: the original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>). Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

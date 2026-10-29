@@ -886,7 +886,7 @@ const study: StudyDefinition = {
   slug: 'thyroid-us',
   name: 'Thyroid ultrasound (TI-RADS)',
   lede: 'Score a thyroid nodule feature by feature, apply the size thresholds, and write the report with the recommendation in the impression.',
-  sourceNote: 'Draft lesson compiled from the ACR TI-RADS white paper (2017) and the papers below; citations checked against PubMed in September 2026. Not yet reviewed by the site author.',
+  sourceNote: 'Lesson compiled from the ACR TI-RADS white paper (2017) and the papers below; citations checked against PubMed in September 2026.',
   references,
   report: {
     steps: [

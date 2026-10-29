@@ -49,7 +49,7 @@ export function MayfieldPage() {
           <span className="calc-tag">Perilunate injury</span>
         </div>
         <p>Stage a perilunate injury, from scapholunate disruption to lunate dislocation, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the original paper is paywalled, so the four stages are checked against its abstract and against a review that reproduces its table (<Cite doi="10.1007/s11999-012-2275-x">Kennedy and Allan, Clin Orthop Relat Res 2012</Cite>). The greater-arc sentence is not yet checked. Not yet reviewed by the site author. Source: <Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>.</p>
+        <p className="source-note">Unchecked draft: the original paper is paywalled, so the four stages are checked against its abstract and against a review that reproduces its table (<Cite doi="10.1007/s11999-012-2275-x">Kennedy and Allan, Clin Orthop Relat Res 2012</Cite>). The greater-arc sentence is not yet checked. Source: <Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

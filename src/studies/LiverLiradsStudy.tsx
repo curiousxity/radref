@@ -971,7 +971,7 @@ const study: StudyDefinition = {
   slug: 'liver-lirads',
   name: 'Liver CT and MRI (LI-RADS)',
   lede: 'One observation at a time in a patient at risk for HCC: who LI-RADS is for, the algorithm in order, the diagnostic table, ancillary features, treated lesions, and the report.',
-  sourceNote: 'Draft lesson compiled from the ACR CT/MRI LI-RADS v2018 core, the 2024 nonradiation treatment response algorithm and the papers below; citations checked against PubMed in September 2026. Not yet reviewed by the site author.',
+  sourceNote: 'Lesson compiled from the ACR CT/MRI LI-RADS v2018 core, the 2024 nonradiation treatment response algorithm and the papers below; citations checked against PubMed in September 2026.',
   references,
   referencesNote: 'The two ACR core documents have no DOI; they are free on the ACR LI-RADS page. Check there for any version newer than v2018 (diagnosis) and v2024 (treatment response).',
   report: {

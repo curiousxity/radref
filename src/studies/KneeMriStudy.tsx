@@ -1085,7 +1085,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, and the four cartilage depth grades) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled except Crema 2011, so the claims not stated in an abstract or open full text (among them the ligaments each bruise pattern points to, the Segond fracture and ACL tear, the juvenile OCD signs, the cyclops lesion, and the four cartilage depth grades) have still not been checked against their papers.',
   references,
   report: {
     steps,
