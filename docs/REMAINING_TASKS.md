@@ -9,8 +9,9 @@ by the author's choice).
 ## Pending (recorded 2026-10-28)
 
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
-  email is on the "Rad Ref members" policy so far; add each member's email there (Zero Trust →
-  Access controls → Policies), or switch to "Emails ending in" for a whole domain.
+  email is on the "Rad Ref members" policy, and the author is the only member for now
+  (2026-10-29). To add one later: Zero Trust → Access controls → Policies, or "Emails ending in"
+  for a whole domain.
 - Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
   "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
 - **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by
@@ -139,8 +140,8 @@ region at a time, end to end, following the ankle pilot
   `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
   `docs/superpowers/research/2026-10-25-skull-base-sources.md`. Live on the site, every claim
   checked.
-- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28). Ask which exam and history
-  first.
+- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28): MRI for "just the typical
+  indications" (2026-10-29). Being written on `claude/brachial-plexus-study`.
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
