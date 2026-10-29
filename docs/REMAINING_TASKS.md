@@ -47,8 +47,7 @@ by the author's choice).
   (distal spiral) fracture was found; that card keeps its drawing only. Searched again
   2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
   filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
-- **Hearing loss CT:** the five questions were decided 2026-10-29; one small point is left (see its
-  section below).
+- **Hearing loss CT:** done 2026-10-29; every statement is sourced.
 - Decided 2026-10-28: calvarium and hearing loss stay single pages, with no Report, Learn or
   Quiz tabs.
 - Decided 2026-10-28: the author will not review the pages, so nothing waits for a sign-off. The
@@ -543,9 +542,9 @@ Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
       fibrous dysplasia (Brown, Pontes-Madruga) and pneumolabyrinth (Gross, Botti) recited, Juliano
       part II dropped; the four unsourced statements sharpened and cited; the implant checklist
       adapted from Widmann 2020 and Vogl 2015, Young kept for children.
-- [ ] Still unsourced: two checklist points, the sigmoid sinus "placed far forward" and otosclerosis
-      as the example of a round window closed by bone. Ostrander 2026 (already the source of a scan)
-      states both; cite it? The note keeps "Unchecked draft" until then.
+- [x] The last two checklist points (the sigmoid sinus placed far forward; otosclerosis closing the
+      round window) cited to Ostrander 2026, the author's choice (2026-10-29). Every statement is
+      sourced, so the note no longer says "Unchecked draft".
 
 ## Calculator papers from the author (first batch)
 

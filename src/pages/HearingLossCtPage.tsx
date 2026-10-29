@@ -36,6 +36,7 @@ const DOI = {
   minor: '10.1097/00129492-200303000-00023',
   eberhard: '10.3389/fneur.2021.638574',
   vogl: '10.1055/s-0035-1553413',
+  ostrander: SCAN_SOURCES.ostrander2026.doi,
 }
 
 const references: LessonReference[] = [
@@ -47,6 +48,7 @@ const references: LessonReference[] = [
   { citation: 'Buch K, Baylosis B, Fujita A, et al. Etiology-specific mineralization patterns in patients with labyrinthitis ossificans. AJNR Am J Neuroradiol. 2019;40(3):551-557.', doi: DOI.buch },
   { citation: 'Widmann G, Dejaco D, Luger A, Schmutzhard J. Pre- and post-operative imaging of cochlear implants: a pictorial review. Insights Imaging. 2020;11(1):93. Open access.', doi: DOI.widmann },
   { citation: 'Vogl TJ, Tawfik A, Emam A, et al. Pre-, intra- and post-operative imaging of cochlear implants. Rofo. 2015;187(11):980-989.', doi: DOI.vogl },
+  { citation: 'Ostrander BT, Vo V, Robinson A, Chang J, Kari E. The preoperative temporal bone CT: a mnemonic for reducing surgical risk. Front Radiol. 2026;6:1784554. Open access (CC BY 4.0).', doi: DOI.ostrander },
   { citation: 'Tokat T, Catli T, Basaran Bozkurt E, Olgun L. Surgical methods and auditory outcomes of cochlear implantation in cochlear ossification. J Int Adv Otol. 2022;18(1):51-56. Open access.', doi: DOI.tokat },
   { citation: 'Botti C, Castellucci A, Crocetta FM, et al. Pneumolabyrinth: a systematic review. Eur Arch Otorhinolaryngol. 2021;278(12):4619-4632.', doi: DOI.botti },
   { citation: 'Gross M, Ben-Yaakov A, Goldfarb A, Eliashar R. Pneumolabyrinth: an unusual finding in a temporal bone fracture. Int J Pediatr Otorhinolaryngol. 2003;67(5):553-555.', doi: DOI.gross },
@@ -412,9 +414,8 @@ export function HearingLossCtPage() {
             cochlear implant.
           </p>
           <p className="source-note">
-            Unchecked draft: written on 2026-10-28 without access to PubMed, checked against the papers later that day, with the author's
-            decisions of 2026-10-29 applied. Still unsourced: two points in the cochlear implant checklist, the sigmoid sinus item and
-            otosclerosis as the example of a round window closed by bone, which neither Widmann et al. nor Vogl et al. states. The drawings are schematics,
+            Written on 2026-10-28 without access to PubMed, then checked against the papers, with the author's decisions of 2026-10-29
+            applied; every statement is now sourced. The drawings are schematics,
             not to scale. The scans are panels from open-access figures published under CC BY licences, credited under each card.
           </p>
         </div>
@@ -460,7 +461,8 @@ export function HearingLossCtPage() {
         <p className="fm-lead">
           If the scan is for an implant, say each of these, normal or not. The preoperative cochlear-implant imaging checklist is adapted from{' '}
           <Cite doi={DOI.widmann}>Widmann et al. (2020)</Cite>, with additional surgical-anatomy considerations from{' '}
-          <Cite doi={DOI.vogl}>Vogl et al. (2015)</Cite>. For children, see also <Cite doi={DOI.young}>Young et al. (2014)</Cite>.
+          <Cite doi={DOI.vogl}>Vogl et al. (2015)</Cite>; the sigmoid sinus and the round window closed by otosclerosis are from{' '}
+          <Cite doi={DOI.ostrander}>Ostrander et al. (2026)</Cite>. For children, see also <Cite doi={DOI.young}>Young et al. (2014)</Cite>.
         </p>
         <ul className="plain-list">
           {implantChecklist.map((item) => <li key={item}>{item}</li>)}

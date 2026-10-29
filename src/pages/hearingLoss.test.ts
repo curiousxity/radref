@@ -25,12 +25,13 @@ describe('hearing loss CT page rules', () => {
   })
 
   // The author's decisions of 2026-10-29 settled all five questions of the sources doc
-  // (docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md). Two checklist points are
-  // stated by neither Widmann nor Vogl (the sigmoid sinus; otosclerosis closing the round window),
-  // so the note keeps "Unchecked draft" and names them.
-  test('the source note marks the page as an unchecked draft and names what is still unsourced', () => {
-    expect(page).toContain('Unchecked draft: written on 2026-10-28')
-    expect(page).toContain('Still unsourced: two points in the cochlear implant checklist, the sigmoid sinus item')
+  // (docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md). The two checklist points
+  // neither Widmann nor Vogl states (the sigmoid sinus; otosclerosis closing the round window) are
+  // cited to Ostrander et al. 2026 (the author's choice), so the note no longer says "Unchecked draft".
+  test('the source note no longer marks the page as an unchecked draft', () => {
+    expect(page).not.toContain('Unchecked draft')
+    expect(page).toContain('every statement is now sourced')
+    expect(page).toContain('Ostrander et al. (2026)')
   })
 
   // Item 46: Widmann et al. 2020 is the primary source for the implant checklist, with Vogl et al.
