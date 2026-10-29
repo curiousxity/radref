@@ -74,3 +74,28 @@ sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181. doi:10.1097/CORR
 |----|---------|----------|
 | P3-1 | yes | "neurologic injuries occurred in 5.9% of fractures lateral to the sacral foramina (Zone 1). In transforaminal fractures (Zone 2), 28.4% ... central fractures (Zone 3) ... (56.7%)". |
 | P3-2 | partly | "These fractures can adopt a U- or H-shaped morphologic pattern and may reflect a loss of continuity between the pelvis and the spine, or 'lumbopelvic dissociation' ... their omission from the original Denis classification overlooks a clinically important sacral fracture pattern." The study now uses "lumbopelvic dissociation". Whether Roy-Camille used the U or H shape is still unchecked. |
+
+## Fourth check, 2026-10-28: Halawi 2015 from the author
+
+Read in full, sent in place of Khurana 2014 (P-R4), which is still unread: Halawi MJ. Pelvic ring
+injuries: emergency assessment and management. J Clin Orthop Trauma. 2015;6(4):252-258.
+doi:10.1016/j.jcot.2015.08.002. Added to the study's references and cited beside Khurana where it
+settles a claim.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| YB-9 (the ring rarely breaks in one place) | yes | "Because the pelvis is a ring structure, an isolated pubic ramus fracture without disruption at another site within the ring is unusual"; Scheyerer's series: "96.8% (171/177) had involvement of the posterior ring on CT scans". |
+| P2-2 (L5 transverse process and vertical instability) | no | Not in Halawi. Still needs Khurana. |
+
+## Fifth check, 2026-10-28: Leone 2022 from the author
+
+Read in full (open access, CC BY 4.0), sent in place of Khurana 2014 (P-R4), which is still unread:
+Leone E, et al. Imaging review of pelvic ring fractures and its complications in high-energy
+trauma. Diagnostics (Basel). 2022;12(2):384. doi:10.3390/diagnostics12020384. Added to the study's
+references and cited beside Khurana for P2-2.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| P2-2 (L5 transverse process and vertical instability) | yes | In vertical shear: "Involvement of the posterior arch of the pelvic ring is characterized by the avulsion of the transverse process of the fifth lumbar vertebra on the impact side, which is a sign of iliolumbar ligament rupture"; "Rotational and vertical instability is the result of vertical shear injuries". Figure 7 shows it with a cranially shifted hemipelvis. Leone ties it to vertical shear rather than calling it a marker on its own; the site's sentence is a fair reading. |
+| P3-1 (Denis deficit) | agrees | "In 6% of cases, there is an impingement of L5 or S1 nerve root" (zone I); "In 28% of cases, there is an ipsilateral neurological deficit" (zone II). No zone III figure. |
+| P3-2 (U- or H-shaped fracture) | agrees | Zone III "may have different morphology (“H”-shaped, “U”-shaped, “λ”-shaped, “T”-shaped), and can result in a spinopelvic dissociation". |

@@ -641,7 +641,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the 6.9 mm rule of Spence, the Denver criteria and the Genant grades) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Denver criteria and the Genant grades) have still not been checked against their papers.',
   references,
   report: {
     steps,

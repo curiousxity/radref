@@ -22,6 +22,8 @@ const BURGESS_DOI = '10.1097/00005373-199007000-00015'
 const DALAL_DOI = '10.1097/00005373-198907000-00012'
 const KHURANA_DOI = '10.1148/rg.345135113'
 const ALTON_DOI = '10.1007/s11999-014-3693-8'
+const HALAWI_DOI = '10.1016/j.jcot.2015.08.002'
+const LEONE_DOI = '10.3390/diagnostics12020384'
 const DENIS_DOI = '10.1097/00003086-198802000-00010'
 const RIZKALLA_DOI = '10.1097/CORR.0000000000000861'
 const ROY_CAMILLE_DOI = '10.1097/00007632-198511000-00011'
@@ -37,6 +39,8 @@ const BURGESS = <Cite doi={BURGESS_DOI}>Burgess et al., J Trauma 1990</Cite>
 const DALAL = <Cite doi={DALAL_DOI}>Dalal et al., J Trauma 1989</Cite>
 const KHURANA = <Cite doi={KHURANA_DOI}>Khurana et al., RadioGraphics 2014</Cite>
 const ALTON = <Cite doi={ALTON_DOI}>Alton and Gee, Clin Orthop Relat Res 2014</Cite>
+const HALAWI = <Cite doi={HALAWI_DOI}>Halawi, J Clin Orthop Trauma 2015</Cite>
+const LEONE = <Cite doi={LEONE_DOI}>Leone et al., Diagnostics 2022</Cite>
 const DENIS = <Cite doi={DENIS_DOI}>Denis et al., Clin Orthop Relat Res 1988</Cite>
 const RIZKALLA = <Cite doi={RIZKALLA_DOI}>Rizkalla et al., Clin Orthop Relat Res 2019</Cite>
 const ROY_CAMILLE = <Cite doi={ROY_CAMILLE_DOI}>Roy-Camille et al., Spine 1985</Cite>
@@ -53,6 +57,8 @@ const references: LessonReference[] = [
   { citation: 'Dalal SA, Burgess AR, Siegel JH, Young JW, Brumback RJ, Poka A, Dunham CM, Gens D, Bathon H. Pelvic fracture in multiple trauma: classification by mechanism is key to pattern of organ injury, resuscitative requirements, and outcome. J Trauma. 1989;29(7):981-1002.', doi: DALAL_DOI },
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: KHURANA_DOI },
   { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: ALTON_DOI },
+  { citation: 'Halawi MJ. Pelvic ring injuries: emergency assessment and management. J Clin Orthop Trauma. 2015;6(4):252-258.', doi: HALAWI_DOI },
+  { citation: 'Leone E, Garipoli A, Ripani U, Lanzetti RM, Spoliti M, Creta D, Giannace C, Galluzzo A, Trinci M, Galluzzo M. Imaging review of pelvic ring fractures and its complications in high-energy trauma. Diagnostics (Basel). 2022;12(2):384.', doi: LEONE_DOI },
   { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.', doi: DENIS_DOI },
   { citation: 'Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181.', doi: RIZKALLA_DOI },
   { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.', doi: ROY_CAMILLE_DOI },
@@ -119,8 +125,8 @@ const learn: LearnSection[] = [
       <>
         <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear pushes one hemipelvis upwards. The Young-Burgess calculator on this site applies the same rules.</p>
         {ybTable}
-        <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}).</p>
-        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}).</p>
+        <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}; {HALAWI}).</p>
+        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>
         <p>Stability is not part of the Young-Burgess system itself; the last column is how the types are usually taught alongside it ({ALTON}).</p>
         <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: needs rose with the grade of AP compression, and APC III needed the most fluid in the first 24 hours ({DALAL}).</p>
       </>
@@ -558,7 +564,7 @@ const steps: ReportStep[] = [
     learn: 'ring',
     teach: (
       <>
-        <p>Young-Burgess types by force vector ({YOUNG}; {BURGESS}). A diastasis over 2.5 cm usually means APC II or worse; an L5 transverse process fracture marks vertical instability ({KHURANA}).</p>
+        <p>Young-Burgess types by force vector ({YOUNG}; {BURGESS}). A diastasis over 2.5 cm usually means APC II or worse; an L5 transverse process fracture marks vertical instability ({KHURANA}; {LEONE}).</p>
         {ybTable}
       </>
     ),
@@ -610,7 +616,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover and the L5 transverse process) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover) have still not been checked against their papers.',
   references,
   report: {
     steps,
@@ -651,7 +657,7 @@ const study: StudyDefinition = {
       question: 'Which finding is a marker of vertical instability of the pelvic ring?',
       options: ['A horizontal pubic ramus fracture', 'An L5 transverse process fracture', 'Sacral ala buckling', 'A small pelvic hematoma'],
       answer: 1,
-      explanation: <p>A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}).</p>,
+      explanation: <p>A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>,
     },
     {
       id: 'denis',

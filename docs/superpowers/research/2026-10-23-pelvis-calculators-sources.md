@@ -111,3 +111,43 @@ fractures. Clin Orthop Relat Res. 2014;472(1):35-38. doi:10.1007/s11999-013-3375
 types (LT-1, yes) and says the 2009 algorithm of Prevezas et al. reads the ilioischial and
 iliopectineal lines first, then the obturator foramen and the spur sign, as the calculator does. It
 does not describe each type, so LT-2, LT-3 and LT-7 beyond Durkee stay unchecked.
+
+## Fourth check, 2026-10-28: Halawi 2015 from the author
+
+Read in full, in place of Khurana 2014 (PC3), which is still unread: Halawi MJ. Pelvic ring injuries:
+emergency assessment and management. J Clin Orthop Trauma. 2015;6(4):252-258.
+doi:10.1016/j.jcot.2015.08.002. Its Table 2 gives the Young-Burgess types from Burgess 1990.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| YB-1 (LC II without an iliac fracture) | yes, agrees with Alton | "In LCII pattern, there is a characteristic avulsion fracture of the iliac wing (crescent fracture) ... Alternatively, there may be disruption of the posterior SI ligaments without a crescent fracture, especially in young patients." |
+| YB-3 (vertical shear) | partly | Table 2: "Vertical displacement of one or both hemipelvices." Text: "APCIII can be differentiated from VS injury by the absence of vertical displacement of the hemipelvis." "Anteriorly and posteriorly" is still not stated. |
+| YB-9 | yes | See the pelvis CT sources, fourth check. |
+
+For the author (nothing changed):
+
+1. **APC I threshold.** Halawi's Table 2: "Symphysis diastasis < 2 cm; SI joints intact." The
+   calculator and study use 2.5 cm, from Alton and Gee's account of Young's original description
+   (YB-6, matched by the author's choice on 2026-10-25). Keep 2.5 cm, or mention that later tables
+   give 2 cm?
+2. **Vertical shear can be both sides.** Halawi: "one or both hemipelvices". The calculator's
+   wording is "a hemipelvis". Add "or both"?
+3. **APC III stability.** The "Usually taught as" column (YB-8) has APC III rotationally and
+   vertically unstable. Halawi's simplified Tile table puts open-book fractures in type B
+   ("Rotationally unstable; vertically stable") and only VS injuries in type C, and says APC III
+   differs from VS by "the absence of vertical displacement". Osterhoff's grouping in the same paper
+   counts LC II/III, APC II/III, VS and combined as "unstable" without splitting rotation from
+   vertical. Keep the column, or change APC III?
+
+## Fifth check, 2026-10-28: Leone 2022 from the author
+
+Read in full (open access): Leone E, et al. Diagnostics (Basel). 2022;12(2):384.
+doi:10.3390/diagnostics12020384. It bears on the three questions above; nothing changed.
+
+- **APC I threshold:** Leone gives grade 1 as "pubic symphysis diastasis <2.5 cm" and grades 2
+  and 3 as ">2.5 cm", which matches the site's 2.5 cm, against Halawi's 2 cm.
+- **Vertical shear:** "a cranial shift of the hemipelvis", one side; Leone does not say "or both".
+- **APC III stability:** "Anterior–posterior compression grade 3 injuries have a multidirectional
+  instability", and APC II "a rotational instability". That is closer to the site's column
+  (APC III vertically unstable) than Halawi's Tile table. Leone's Tile paragraph still puts
+  vertical instability only in type C.

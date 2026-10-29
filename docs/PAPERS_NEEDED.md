@@ -21,8 +21,8 @@ Asked for before and still missing; each settles a specific rule on the live sit
 - [ ] Broberg MA, Morrey BF. Clin Orthop Relat Res. 1987;(216):109-119. doi:10.1097/00003086-198703000-00017. The Mason 2 mm and 30% thresholds.
 - [ ] Palmer AK. J Hand Surg Am. 1989;14(4):594-606. doi:10.1016/0363-5023(89)90174-3. The Palmer TFCC types; no review has stood in for it.
 - [ ] Myerson MS, et al. Foot Ankle. 1986;6(5):225-242. doi:10.1177/107110078600600504. The Lisfranc types; the Scolaro review sent does not describe them.
-- [ ] Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113. Pelvic ring wording.
-- [ ] Spence KF Jr, et al. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013. The 6.9 mm atlas rule.
+- [x] Khurana B, et al. RadioGraphics. 2014;34(5):1317-1333. doi:10.1148/rg.345135113. Not read, but no longer needed: Halawi 2015 (the ring breaking in more than one place) and Leone 2022 (the L5 transverse process, P2-2), both sent in its place on 2026-10-28, settled its claims.
+- [x] Spence KF Jr, et al. J Bone Joint Surg Am. 1970;52(3):543-549. doi:10.2106/00004623-197052030-00013. The 6.9 mm atlas rule. Read in full (2026-10-28); two points for the author.
 - [x] Rao AB, et al. RadioGraphics. 1999;19(6):1605-1632. doi:10.1148/radiographics.19.6.g99no251605. Paraganglioma signs in the suprahyoid neck study. Settled from the figure legends (2026-10-28).
 
 ## 2. Thought to be free, but not
