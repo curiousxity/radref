@@ -287,3 +287,26 @@ Hawkins and Myerson tables, fields and impression sentences follow.
 Still unchecked, so the study keeps "Unchecked draft": irregular joint margins as a sign of
 tarsal coalition (F2-3), and whether Myerson named any pattern beyond A to C2 (MY-6). The source
 note is unchanged.
+
+## The author's decisions, 2026-10-29 (second round)
+
+F2-3: Newman and Newberg 2000's abstract does not state irregular margins. It says: "Tarsal
+coalitions may be osseous, cartilaginous, or fibrous"; CT and MR imaging "allow differentiation of
+osseous from nonosseous coalitions and because they depict the extent of joint involvement as well as
+secondary degenerative changes"; "Short-inversion-time inversion recovery MR images may reveal bone
+marrow edema along the margins of the abnormal articulation, an important clue to the diagnosis."
+Newman stays as background for those statements.
+
+New source, read in full on PMC (`pmc.ncbi.nlm.nih.gov/articles/PMC4071469`; Europe PMC returned an
+error) and matched on PubMed and Crossref: Lawrence DA, Rolen MF, Haims AH, Zayour Z, Moukaddam HA.
+Tarsal coalitions: radiographic, CT, and MR imaging findings. HSS J. 2014;10(2):153-166.
+doi:10.1007/s11420-013-9379-z (PMID 25050099, PMC4071469). PubMed gives the pages as 153-66.
+
+| ID | Decision | Evidence | Change on the page |
+|----|----------|----------|--------------------|
+| F2-3 (irregular margins) | Cite Lawrence for narrowing and irregularity; Newman as background. | Lawrence, radiographs: "In the case of non-osseous coalitions, the two involved bones can demonstrate abnormal narrowing and irregularity of the involved joint space, which may radiographically appear to be degenerative changes." CT: "Oftentimes, non-osseous coalitions have an imaging appearance similar to osteoarthritis, with joint space narrowing, eburnation, and subchondral cystic changes". MR imaging: "Non-osseous coalitions demonstrate narrowing of the affected joint space, and irregularity of the bone interface is a common feature of cartilaginous and fibrous coalitions"; Table 2, cartilaginous and fibrous: "Commonly see irregular joint space narrowing and/or bone marrow edema in the region of the coalition"; "non-osseous subtalar coalitions create abnormal mechanical stress across the affected joint with resultant bone marrow edema adjacent to the articulation". | Step 2: "A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions (Newman). Nonosseous tarsal coalition may manifest as abnormal joint-space narrowing and irregularity, sometimes resembling degenerative change (Lawrence). On STIR images look for bone marrow edema along the margins of the abnormal articulation (Newman; Lawrence)." Was "On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation (Newman)". Settled. |
+| F3-4 (Myerson B2) | B2 states alignment of the first metatarsal with the medial cuneiform (calculators doc, same heading). | Gupta et al. 2008, read in full (calculators doc). | The study's Myerson table, field labels and impression follow the shared logic; step 3 and its teach line add "for type B2, Gupta et al." to the Myerson citations. |
+
+The sourceNote now names only MY-6 (whether Myerson named any displacement pattern beyond types A to
+C2). Myerson 1986 is still unread, so the study keeps "Unchecked draft". The study has 29 references
+(test pinned).

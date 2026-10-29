@@ -271,3 +271,38 @@ criteria, as Andriolo's table gives it; the page's "only when" omits it. Still f
 |----|----------|--------------------|
 | K2-1 | Keep "near the terminal sulcus" as the typical location, not a fixed one: the classic pattern is the posterolateral tibial plateau and the midportion of the lateral femoral condyle, and the exact femoral spot varies with knee flexion at injury (Sanders 2000, PMID 11046168). | Bruise table, pivot shift row: "Lateral femoral condyle, typically near the terminal sulcus (its midportion; the exact spot varies with how far the knee was flexed at injury), and posterolateral tibial plateau", cited to Sanders. Settled. |
 | K2-8 | Name the rim matching joint fluid: "a T2-hyperintense interface rim matching the signal intensity of adjacent joint fluid", since a nonspecific high-T2 interface alone is not specific enough for instability in juvenile OCD (the author pointed to the Nat Clin Pract Rheumatol 2008 research highlight of Kijowski 2008, doi:10.1038/ncprheum0916). | The juvenile sentence now lists that rim first, then the outer low-T2 rim and multiple plate breaks, cited to Kijowski 2008 and Andriolo 2022 (added to the references; its table quotes Kijowski's criteria). The form's "Signs around the fragment" gains that rim as an option. Settled. |
+
+## The author's decisions, 2026-10-29 (second round)
+
+K2-3: Sanders 2000 verifies only the contusion footprint, not the posterolateral corner. Sanders
+abstract (PubMed, PMID 11046168): "Hyperextension results in the 'kissing' contusion pattern
+involving the anterior aspect of the proximal tibia and distal femur"; Fig. 9b legend (sixth check):
+"Depending on the amount of force applied during hyperextension, tears of the ACL, PCL, or both may
+occur." The posterolateral corner gets its own source, and the page now says to assess it rather
+than implying that the contusion pattern shows it is injured.
+
+New source, read in full (Europe PMC full text, CC BY-NC) and matched on PubMed and Crossref:
+Figueroa F, Figueroa D, Putnis S, Guiloff R, Caro P, Espregueira-Mendes J. Posterolateral corner
+knee injuries: a narrative review. EFORT Open Rev. 2021;6(8):676-685.
+doi:10.1302/2058-5241.6.200096 (PMID 34532075, PMC8419800).
+
+Also read (PMC web page) and in agreement, but not cited because it has no DOI (none in PubMed or on
+Crossref): Chahla J, Moatshe G, Dean CS, LaPrade RF. Posterolateral corner of the knee: current
+concepts. Arch Bone Jt Surg. 2016;4(2):97-103 (PMID 27200384, PMC4852053): "A common mechanism of
+injury to the PLC is a direct blow to the anteromedial knee (20). However, hyperextension and
+non-contact varus stress injuries can also damage the PLC (20)."
+
+| ID | Decision | Evidence | Change on the page |
+|----|----------|----------|--------------------|
+| K2-3 | Sanders for the footprint, the PLC review for the soft-tissue risk; "assess", not injury. | Figueroa, "Injury mechanism": "The mechanism of injury to the PLC usually involves a direct varus stress to the knee, contact or non-contact hyperextension, or twisting of the knee when combined with multiple ligamentous injury, including tibiofemoral dislocation." | Step 8: "Anterior femorotibial kissing contusions suggest a hyperextension mechanism (Sanders); the posterolateral corner should also be assessed because hyperextension can injure its structures (Figueroa)." Bruise table, hyperextension row: contusions cited to Sanders; "Points to": "ACL, PCL or both (Sanders); assess the posterolateral corner too (Figueroa)". Chip: "ACL or PCL injury (hyperextension); assess the posterolateral corner"; the report line reads "the pattern points to ACL or PCL injury (hyperextension); assess the posterolateral corner." (test pinned). Settled. |
+| K3-2 ("flap") | Settled while checking what was left unread. | Chien et al. 2020 (already cited, PMC7571514): "Additional descriptive terms such as oblique, parrot beak, vertical flap, horizontal flap, meniscal root, and bucket handle tears are often utilised in reports and are usually displaced fragment variations of the horizontal, longitudinal vertical, and radial tears." | Step 3: the displaced tears "which includes the bucket-handle and flap tears" now cite (Nguyen; Chien). |
+
+With K2-3 settled, the only claim without a source is the four cartilage depth grades (K10-1), which
+no cited paper gives and which the author chose to keep (2026-10-25). That is a known gap, not an
+unread claim, so the knee study no longer says "Unchecked draft". The sourceNote now reads: "Every
+reference has been matched on PubMed and Crossref. Most of the papers are paywalled, so claims are
+checked against abstracts, figure legends, the papers that are open and open reviews cited beside
+them. The four cartilage depth grades have no source: no cited paper gives them, and they are kept
+by the author's choice." The study has 25 references (test pinned). Note for the author: the
+cartilage step still cites Crema after the depth grades, although Crema points to modified Noyes or
+Outerbridge scales rather than giving the four grades (claims table, K10-1).

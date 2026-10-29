@@ -6,11 +6,10 @@ import { DiabeticFootMriStudyPage } from './DiabeticFootMriStudy'
 const study = studyOf(DiabeticFootMriStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). The
- * references are matched, and the claims marked verified there were read in an abstract or in
- * an open review cited beside the paper; when the rest are checked a case may have to change;
- * say in that commit why the old expectation was wrong.
+ * references are matched, and every claim was read in an abstract or in an open review cited
+ * beside the paper. If a case changes, say in that commit why the old expectation was wrong.
  */
 
 describe('diabetic foot MRI lesson', () => {
@@ -18,13 +17,15 @@ describe('diabetic foot MRI lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'soft-tissue', 'bone', 'joints', 'charcot', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but one claim is still unchecked (septic
-  // arthritis with an effusion), so the note keeps saying so. The ghost sign and the inactive
+  // The references are matched (each has a DOI) and every claim read, so the note is not marked as
+  // a draft (2026-10-29, second round, once D2-3 was settled). The ghost sign and the inactive
   // foot follow Rosskopf 2019 (the author's decisions, 2026-10-29).
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 9 since two open reviews (Rosskopf 2019, Weaver 2022) were added (2026-10-29).
-    expect(study.references).toHaveLength(9)
+  test('is not marked as a draft, with a DOI on every reference', () => {
+    expect(study.sourceNote).toMatch(/^Every reference has been matched/)
+    expect(study.sourceNote).not.toMatch(/unchecked/i)
+    // 9 since two open reviews (Rosskopf 2019, Weaver 2022) were added (2026-10-29); 10 with the
+    // SSR nomenclature paper (Alaia 2021) for septic arthritis (D2-3).
+    expect(study.references).toHaveLength(10)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -113,7 +114,7 @@ describe('diabetic foot MRI report: whole cases', () => {
       'Osteomyelitis of the first metatarsal head: confluent low T1 marrow signal next to the ulcer.',
       'Abscess: plantar, 2 cm.',
       'Sinus tract.',
-      'Effusion in the first MTP joint next to the abnormal bone: septic arthritis is possible.',
+      'Effusion in the first MTP joint next to the abnormal bone: possible associated septic arthritis (an effusion alone is nonspecific).',
     ].join('\n'))
     expect(report(study, values).warnings).toEqual([])
   })
@@ -123,7 +124,25 @@ describe('diabetic foot MRI report: whole cases', () => {
   })
 })
 
-describe('diabetic foot MRI rules (unchecked)', () => {
+describe('diabetic foot MRI rules', () => {
+  // D2-3: Ledermann 2002 judged septic arthritis by "synovial enhancement and adjacent cellulitis";
+  // Alaia 2021: "On MRI, septic arthritis is characterized by joint effusion (often complex,
+  // depending on chronicity) although this finding is obviously nonspecific", "the capsule and
+  // synovium show thick enhancement", and "Pericapsular edema and enhancement ... help distinguish
+  // an infective etiology". So an effusion alone is possible septic arthritis, not a diagnosis.
+  test('an effusion alone is possible septic arthritis; synovial enhancement strengthens it', () => {
+    const effusion = { ...infected, joint: 'present', 'joint-site': 'the fifth MTP joint' }
+    expect(chips(study, 'joints', effusion).Joint).toBe('Effusion alone is nonspecific: assess for septic arthritis')
+    expect(impressionOf(effusion)).toContain('Effusion in the fifth MTP joint next to the abnormal bone: possible associated septic arthritis (an effusion alone is nonspecific).')
+    // Without contrast the enhancement question is not asked, and a stale answer is ignored.
+    expect(chips(study, 'joints', { ...effusion, 'joint-enhancement': 'present' }).Joint).toBe('Effusion alone is nonspecific: assess for septic arthritis')
+    const enhancing = { ...effusion, contrast: 'given', 'joint-enhancement': 'present' }
+    expect(chips(study, 'joints', enhancing).Joint).toBe('Synovial enhancement and surrounding inflammation: suspicious for septic arthritis')
+    expect(impressionOf(enhancing)).toContain('Effusion in the fifth MTP joint next to the abnormal bone, with synovial enhancement and surrounding inflammatory change: suspicious for associated septic arthritis.')
+    expect(report(study, enhancing).text).toContain('Synovial enhancement and surrounding inflammatory change: present')
+    expect(chips(study, 'joints', { ...infected, joint: 'none' }).Joint).toBeUndefined()
+  })
+
   // D3: "Confluent decreased T1 marrow signal intensity in a medullary distribution was 95%
   // sensitive in the prediction of osteomyelitis" and "None of the cases with a subcortical
   // distribution or hazy reticulated pattern of abnormal signal intensity had positive results

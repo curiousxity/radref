@@ -2,7 +2,8 @@
 
 Rewritten 2026-10-29, after the open-review checks and the author's decisions of 2026-10-29 settled
 most claims (Palmer, Hawkins and Canale, Burlew, O'Driscoll, Kobayashi, Linscheid, Mayfield,
-Donovan, Chantelau, Mardini and Juliano are no longer needed). Only papers
+Donovan, Chantelau, Mardini and Juliano are no longer needed; nor, after the second round, are
+Roy-Camille, Sanders, Newman and Ledermann). Only papers
 that would settle a claim still unread on a page are listed; send any of them as PDFs in the chat,
 any file names. Everything else once listed here (the ten shoulder papers, the paediatric elbow
 papers, Broberg and Morrey, Khurana, Spence, Rao, most knee, wrist and foot papers) is no longer
@@ -22,10 +23,8 @@ and figure legends; Bone & Joint, Ovid, Wiley, SAGE, Springer and Elsevier ask f
 
 ## Studies
 
-- [ ] Roy-Camille R, et al. Spine. 1985;10(9):838-845. doi:10.1097/00007632-198511000-00011. Pelvis CT: did Roy-Camille describe the U or H shape?
-- [ ] Sanders TG, et al. RadioGraphics. 2000;20:S135-S151. doi:10.1148/radiographics.20.suppl_1.g00oc19s135. Knee: the hyperextension pattern putting the posterolateral corner at risk (legends already read).
-- [ ] Newman JS, Newberg AH. RadioGraphics. 2000;20(2):321-332. doi:10.1148/radiographics.20.2.g00mc03321. Foot: irregular joint margins in a non-osseous coalition.
-- [ ] Ledermann HP, et al. Radiology. 2002;223(3):747-755. doi:10.1148/radiol.2233011279. Diabetic foot: septic arthritis alongside osteomyelitis, with an effusion as its sign.
+None left (2026-10-29): Roy-Camille, Sanders, Newman and Ledermann were replaced by open sources
+that state the claims, by the author's choice.
 
 ## Not a paper problem
 

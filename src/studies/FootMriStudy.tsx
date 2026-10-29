@@ -20,7 +20,10 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * and Myerson wording is in 2026-10-23-foot-calculators-sources.md (HK, SA and MY claims). Rule
  * chips and warnings carry their claim IDs. The author's decisions of 2026-10-29 (talocalcaneal
  * facets, F2-3; sesamoid edema as a differential, F5-3; Hawkins IV; Myerson A, B2, C1 and the
- * later type D) are applied and recorded in both sources docs.
+ * later type D) are applied and recorded in both sources docs. Second round (2026-10-29): the
+ * irregular coalition margins (F2-3) are now in Lawrence 2014's wording, with Newman as
+ * background, and Myerson B2 states alignment of the first metatarsal with the medial cuneiform
+ * (Gupta 2008). Myerson 1986 itself (MY-6) is still unread, so the page stays an unchecked draft.
  */
 
 const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
@@ -48,6 +51,8 @@ const APARISI_DOI = '10.1186/s13244-019-0747-1'
 const GORBACHOVA_DOI = '10.5114/pjr.2020.99472'
 const KUMAR_DOI = '10.1186/s13244-023-01514-6'
 const MARTH_DOI = '10.1007/s00330-023-10304-z'
+const LAWRENCE_DOI = '10.1007/s11420-013-9379-z'
+const GUPTA_DOI = '10.1067/j.cpradiol.2007.08.012'
 const MORACIA_DOI = '10.1302/2058-5241.4.180076'
 const HAMMAD_DOI = '10.1155/tsm2/3933956'
 
@@ -76,6 +81,8 @@ const APARISI = <Cite doi={APARISI_DOI}>Aparisi Gómez et al., Insights Imaging 
 const GORBACHOVA = <Cite doi={GORBACHOVA_DOI}>Gorbachova, Pol J Radiol 2020</Cite>
 const KUMAR = <Cite doi={KUMAR_DOI}>Kumar et al., Insights Imaging 2023</Cite>
 const MARTH = <Cite doi={MARTH_DOI}>Marth et al., Eur Radiol 2024</Cite>
+const LAWRENCE = <Cite doi={LAWRENCE_DOI}>Lawrence et al., HSS J 2014</Cite>
+const GUPTA = <Cite doi={GUPTA_DOI}>Gupta et al., Curr Probl Diagn Radiol 2008</Cite>
 const MORACIA = <Cite doi={MORACIA_DOI}>Moracia-Ochagavía and Rodríguez-Merchán, EFORT Open Rev 2019</Cite>
 const HAMMAD = <Cite doi={HAMMAD_DOI}>Hammad et al., Transl Sports Med 2026</Cite>
 
@@ -98,6 +105,7 @@ const references: LessonReference[] = [
   { citation: 'Sobel M, Pavlov H, Geppert MJ, Thompson FM, DiCarlo EF, Davis WH. Painful os peroneum syndrome: a spectrum of conditions responsible for plantar lateral foot pain. Foot Ankle Int. 1994;15(3):112-124.', doi: SOBEL_DOI },
   { citation: 'Diebal AR, Westrick RB, Alitz C, Gerber JP. Lisfranc injury in a West Point cadet. Sports Health. 2013;5(3):281-285.', doi: DIEBAL_DOI },
   { citation: 'Tzatzairis T, Firth G, Parker L. Adolescent Lisfranc injury treated with TightRope™: a case report and review of literature. World J Orthop. 2019;10(2):115-122.', doi: TZATZAIRIS_DOI },
+  { citation: 'Gupta RT, Wadhwa RP, Learch TJ, Herwick SM. Lisfranc injury: imaging findings for this important but often-missed diagnosis. Curr Probl Diagn Radiol. 2008;37(3):115-126.', doi: GUPTA_DOI },
   { citation: 'Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11(1):97.', doi: SZARO_DOI },
   { citation: 'Burge AJ, Gold SL, Potter HG. Imaging of sports-related midfoot and forefoot injuries. Sports Health. 2012;4(6):518-534.', doi: BURGE_DOI },
   { citation: 'Nwawka OK, Hayashi D, Diaz LE, Goud AR, Arndt WF, Roemer FW, Malguria N, Guermazi A. Sesamoids and accessory ossicles of the foot: anatomical variability and related pathology. Insights Imaging. 2013;4(5):581-593.', doi: NWAWKA_DOI },
@@ -105,6 +113,7 @@ const references: LessonReference[] = [
   { citation: 'Gorbachova T. Magnetic resonance imaging of the ankle and foot. Pol J Radiol. 2020;85:e532-e549.', doi: GORBACHOVA_DOI },
   { citation: 'Kumar S, Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the lower limb: a pictorial review. Insights Imaging. 2023;14(1):166.', doi: KUMAR_DOI },
   { citation: 'Marth AA, Feuerriegel GC, Marcus RP, Sutter R. How accurate is MRI for diagnosing tarsal coalitions? A retrospective diagnostic accuracy study. Eur Radiol. 2024;34(5):3493-3502.', doi: MARTH_DOI },
+  { citation: 'Lawrence DA, Rolen MF, Haims AH, Zayour Z, Moukaddam HA. Tarsal coalitions: radiographic, CT, and MR imaging findings. HSS J. 2014;10(2):153-166.', doi: LAWRENCE_DOI },
   { citation: 'Moracia-Ochagavía I, Rodríguez-Merchán EC. Lisfranc fracture-dislocations: current management. EFORT Open Rev. 2019;4(7):430-444.', doi: MORACIA_DOI },
   { citation: 'Hammad A, Ahmad Y, Abdelnour J, Tscholl P. Lisfranc injuries: latest updates on diagnostics and management. Transl Sports Med. 2026;2026:3933956.', doi: HAMMAD_DOI },
 ]
@@ -163,7 +172,7 @@ const learn: LearnSection[] = [
         <h4>Navicular and the other tarsal bones</h4>
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
         <h4>Tarsal coalition</h4>
-        <p>Calcaneonavicular and talocalcaneal coalitions are encountered most frequently ({NEWMAN}; {SZARO}). Talocalcaneal coalition commonly involves the middle facet and may involve both the middle and posterior facets; isolated posterior-facet coalitions also occur ({SZARO}; {MARTH}). Of the 37 talocalcaneal coalitions in Marth's MRI cohort, 28 involved the middle and posterior facets, 6 the middle facet alone and 3 the posterior facet alone; a posterior coalition was the one case missed by all three readers ({MARTH}). A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
+        <p>Calcaneonavicular and talocalcaneal coalitions are encountered most frequently ({NEWMAN}; {SZARO}). Talocalcaneal coalition commonly involves the middle facet and may involve both the middle and posterior facets; isolated posterior-facet coalitions also occur ({SZARO}; {MARTH}). Of the 37 talocalcaneal coalitions in Marth's MRI cohort, 28 involved the middle and posterior facets, 6 the middle facet alone and 3 the posterior facet alone; a posterior coalition was the one case missed by all three readers ({MARTH}). A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions ({NEWMAN}). Nonosseous tarsal coalition may manifest as abnormal joint-space narrowing and irregularity, sometimes resembling degenerative change ({LAWRENCE}). On STIR images look for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}; {LAWRENCE}).</p>
         <ScanFigures images={[footMriScans.calcaneonavicularCoalition, footMriScans.navicularStressFracture]} />
       </>
     ),
@@ -176,7 +185,7 @@ const learn: LearnSection[] = [
         <p>The Lisfranc ligament complex has dorsal, interosseous and plantar ligaments. The interosseous ligament, from the medial cuneiform to the base of the second metatarsal, is the Lisfranc ligament proper and the strongest of the three ({CASTRO}). The plantar ligament runs between the first cuneiform and the bases of the second and third metatarsals ({RAIKIN}). Say which of the three is sprained or torn.</p>
         <p>In subtle Lisfranc injuries, disruption of that plantar ligament was the strongest MRI predictor of the instability found at surgery, and a rupture or grade-2 sprain of it is highly suggestive of an unstable midfoot ({RAIKIN}).</p>
         <p>Then check the alignment of each tarsometatarsal joint, and the gap between the medial cuneiform and the base of the second metatarsal.</p>
-        <p>Type a fracture-dislocation by Myerson ({MYERSON}; {DIEBAL}; {TZATZAIRIS}); the Myerson calculator on this site applies the same rules.</p>
+        <p>Type a fracture-dislocation by Myerson ({MYERSON}; {DIEBAL}; {TZATZAIRIS}; for type B2, {GUPTA}); the Myerson calculator on this site applies the same rules.</p>
         {myersonTable}
         <p>A later proposed extension, not part of the original types A to C, adds type D for subtle Lisfranc injuries: D1, a distance of 2 mm or less between the medial (first) cuneiform and the base of the second metatarsal; D2, more than 2 mm, either purely ligamentous (D2L) or with a bony avulsion (D2B) ({MORACIA}). The distance is the medial cuneiform–second metatarsal interval, not the gap between the first and second metatarsals, and it does not replace weight-bearing assessment of stability: subtle displacement may only become evident under physiological load ({HAMMAD}).</p>
         <ScanFigures images={[footMriScans.lisfrancRupture]} />
@@ -882,7 +891,7 @@ const steps: ReportStep[] = [
     learn: 'lisfranc',
     teach: (
       <>
-        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}; {DIEBAL}; {TZATZAIRIS}):</p>
+        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}; {DIEBAL}; {TZATZAIRIS}; for type B2, {GUPTA}):</p>
         {myersonTable}
         <p>A later proposed type D for subtle injuries uses the medial cuneiform–second metatarsal distance: D1 2 mm or less, D2 more than 2 mm ({MORACIA}).</p>
       </>
@@ -953,7 +962,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: irregular joint margins as a sign of tarsal coalition, and whether Myerson named any displacement pattern beyond types A to C2.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: whether Myerson named any displacement pattern beyond types A to C2.',
   references,
   report: {
     steps,

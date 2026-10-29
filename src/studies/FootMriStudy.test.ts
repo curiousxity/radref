@@ -25,14 +25,17 @@ describe('foot MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI), but two claims are still unchecked (irregular
-  // coalition margins, Myerson patterns beyond A to C2), so the note keeps saying so.
+  // The references are matched (each has a DOI), but one claim is still unchecked (Myerson
+  // patterns beyond A to C2, MY-6), so the note keeps saying so. The irregular coalition margins
+  // (F2-3) were settled on 2026-10-29 (second round) with Lawrence 2014.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added;
     // 24 since eight open reviews were added beside the paywalled papers (2026-10-29); 27 since
-    // Marth 2024 (talocalcaneal facets) and the two reviews behind the Myerson type D note.
-    expect(study.references).toHaveLength(27)
+    // Marth 2024 (talocalcaneal facets) and the two reviews behind the Myerson type D note; 29
+    // with Lawrence 2014 (non-osseous coalition) and Gupta 2008 (Myerson B2 alignment).
+    expect(study.references).toHaveLength(29)
+    expect(study.sourceNote).not.toMatch(/irregular joint margins/)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
