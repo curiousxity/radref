@@ -5,9 +5,11 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-25), but
- * several papers have no abstract or are paywalled, so only claims whose wording is in an
- * abstract are verified. The claims table, with each claim's status, is
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-25). Several
+ * papers have no abstract or are paywalled; their claims were read in the papers the author
+ * sent, in figure legends or in open reviews cited beside them (Hirvonen for Lemierre,
+ * Fernandes for V3 through the foramen ovale, 2026-10-29). Only the mylohyoid line (N2-12) is
+ * still unread. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). Rule chips and
  * warnings carry their claim IDs.
  */
@@ -24,6 +26,8 @@ const LEMIERRE_DOI = '10.1016/s0140-6736(00)57035-4'
 const GINSBERG_DOI = '10.1016/s0887-2171(99)90018-5'
 const VAN_DEN_BREKEL_DOI = '10.1148/radiology.177.2.2217772'
 const SOM_DOI = '10.2214/ajr.158.5.1566697'
+const HIRVONEN_DOI = '10.1186/s13244-022-01347-9'
+const FERNANDES_DOI = '10.1007/s13244-013-0266-4'
 
 const HARNSBERGER = <Cite doi={HARNSBERGER_DOI}>Harnsberger and Osborn, AJR 1991</Cite>
 const SHIN = <Cite doi={SHIN_DOI}>Shin et al., AJR 2001</Cite>
@@ -40,6 +44,8 @@ const GINSBERG = <Cite doi={GINSBERG_DOI}>Ginsberg, Semin Ultrasound CT MR 1999<
 const RUSSO = 'Russo et al., AJNR 1997'
 const VAN_DEN_BREKEL = <Cite doi={VAN_DEN_BREKEL_DOI}>van den Brekel et al., Radiology 1990</Cite>
 const SOM = <Cite doi={SOM_DOI}>Som, AJR 1992</Cite>
+const HIRVONEN = <Cite doi={HIRVONEN_DOI}>Hirvonen et al., Insights Imaging 2023</Cite>
+const FERNANDES = <Cite doi={FERNANDES_DOI}>Fernandes et al., Insights Imaging 2013</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR Am J Roentgenol. 1991;157(1):147-154.', doi: HARNSBERGER_DOI },
@@ -56,6 +62,8 @@ const references: LessonReference[] = [
   { citation: 'Russo CP, Smoker WR, Weissman JL. MR appearance of trigeminal and hypoglossal motor denervation. AJNR Am J Neuroradiol. 1997;18(7):1375-1383.' },
   { citation: 'van den Brekel MW, Stel HV, Castelijns JA, Nauta JJ, van der Waal I, Valk J, Meyer CJ, Snow GB. Cervical lymph node metastasis: assessment of radiologic criteria. Radiology. 1990;177(2):379-384.', doi: VAN_DEN_BREKEL_DOI },
   { citation: 'Som PM. Detection of metastasis in cervical lymph nodes: CT and MR criteria and differential diagnosis. AJR Am J Roentgenol. 1992;158(5):961-969.', doi: SOM_DOI },
+  { citation: 'Hirvonen J, Heikkinen J, Nyman M, Happonen T, Velhonoja J, Irjala H, Soukka T, Mattila K, Nurminen J. MRI of acute neck infections: evidence summary and pictorial review. Insights Imaging. 2023;14(1):5.', doi: HIRVONEN_DOI },
+  { citation: 'Fernandes T, Lobo JC, Castro R, Oliveira MI, Som PM. Anatomy and pathology of the masticator space. Insights Imaging. 2013;4(5):605-616.', doi: FERNANDES_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -163,9 +171,9 @@ const learn: LearnSection[] = [
     title: 'Step 3. Spread: nerves, bone, airway and vessels',
     body: (
       <>
-        <p>With a mass, look for perineural spread: a tumour can follow a nerve towards its foramen and the skull base. Masticator space tumours spread along V3 through the foramen ovale ({GINSBERG}). Look for an enlarged, enhancing nerve and a widened foramen.</p>
+        <p>With a mass, look for perineural spread: a tumour can follow a nerve towards its foramen and the skull base. Masticator space tumours spread along V3 through the foramen ovale ({GINSBERG}; {FERNANDES}). Look for an enlarged, enhancing nerve and a widened foramen.</p>
         <p>Denervated muscle changes with time. Recent denervation gives edema-like signal and abnormal enhancement, sometimes with a larger muscle, which can be mistaken for infection or tumour; long-standing denervation gives fatty replacement and a smaller muscle. Denervation of the muscles of mastication points to V3 ({RUSSO}).</p>
-        <p>With an infection, look at the airway, the internal jugular vein and the mediastinum. Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}). An oropharyngeal infection can track down into the mediastinum, descending necrotizing mediastinitis. In Estrera's series it most often began in the mandibular molars, and CT was the most important tool for early diagnosis ({ESTRERA}). With either history, look for bone erosion of the mandible and the skull base.</p>
+        <p>With an infection, look at the airway, the internal jugular vein and the mediastinum. Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}; {HIRVONEN}). An oropharyngeal infection can track down into the mediastinum, descending necrotizing mediastinitis. In Estrera's series it most often began in the mandibular molars, and CT was the most important tool for early diagnosis ({ESTRERA}). With either history, look for bone erosion of the mandible and the skull base.</p>
       </>
     ),
   },
@@ -708,7 +716,7 @@ const steps: ReportStep[] = [
     id: 'spread',
     title: 'Step 3. Spread: nerves, bone, airway and vessels',
     learn: 'spread',
-    teach: <p>Perineural spread follows the nerve to the skull base, V3 from the masticator space ({GINSBERG}); recent denervation can mimic infection or tumour ({RUSSO}). With an infection: the airway, jugular vein thrombosis (Lemierre, {LEMIERRE}) and the mediastinum ({ESTRERA}).</p>,
+    teach: <p>Perineural spread follows the nerve to the skull base, V3 from the masticator space ({GINSBERG}; {FERNANDES}); recent denervation can mimic infection or tumour ({RUSSO}). With an infection: the airway, jugular vein thrombosis (Lemierre, {LEMIERRE}; {HIRVONEN}) and the mediastinum ({ESTRERA}).</p>,
     fields: [fields.perineural, fields.perineuralText, fields.denervation, fields.denervationText, fields.bone, fields.boneText, fields.airway, fields.airwayText, fields.ijv, fields.ijvSide, fields.mediastinum],
     derive: deriveSpread,
   },
@@ -733,7 +741,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but several papers have no abstract or are paywalled, so the claims not stated in an abstract (among them the carotid bifurcation sign, the mylohyoid line and Lemierre syndrome) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. Several papers have no abstract or are paywalled, so their claims were read in the full text, in figure legends or in open reviews cited beside them. Still unchecked: the mylohyoid line (which tooth roots lie above or below it).',
   references,
   report: {
     steps,
@@ -802,14 +810,14 @@ const study: StudyDefinition = {
       question: 'After tonsillitis, CT shows a thrombosed internal jugular vein. What is the name for this?',
       options: ['Ludwig angina', 'Lemierre syndrome', 'Descending necrotizing mediastinitis', 'Grisel syndrome'],
       answer: 1,
-      explanation: <p>Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}).</p>,
+      explanation: <p>Thrombophlebitis of the internal jugular vein after an oropharyngeal infection is Lemierre syndrome ({LEMIERRE}; {HIRVONEN}).</p>,
     },
     {
       id: 'denervation',
       question: 'The muscles of mastication on one side are bright on T2 and enhance. What should you look for?',
       options: ['A parotid stone', 'Disease along V3, such as perineural spread', 'A carotid body tumour', 'Retropharyngeal edema'],
       answer: 1,
-      explanation: <p>Recent denervation gives edema-like signal and enhancement; in the masticator muscles it points to V3 ({RUSSO}), the nerve masticator space tumours spread along ({GINSBERG}).</p>,
+      explanation: <p>Recent denervation gives edema-like signal and enhancement; in the masticator muscles it points to V3 ({RUSSO}), the nerve masticator space tumours spread along ({GINSBERG}; {FERNANDES}).</p>,
     },
     {
       id: 'necrosis',

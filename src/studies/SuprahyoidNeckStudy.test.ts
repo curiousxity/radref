@@ -8,9 +8,9 @@ const study = studyOf(SuprahyoidNeckStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). The references
- * are matched, but only the claims marked verified there were read in their papers; when the
- * rest are checked a case may have to change; say in that commit why the old expectation was
- * wrong.
+ * are matched and every claim but the mylohyoid line (N2-12) has been read, in its paper or in
+ * an open review cited beside it; when N2-12 is checked its case may have to change; say in
+ * that commit why the old expectation was wrong.
  */
 
 describe('suprahyoid neck lesson', () => {
@@ -18,12 +18,14 @@ describe('suprahyoid neck lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'lesion', 'spread', 'nodes', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
+  // The references are matched (each has a DOI), but the mylohyoid line (N2-12) is still
   // unchecked, so the note keeps saying so. Estrera 1983 and Russo 1997 are the exceptions:
-  // neither PubMed nor Crossref has a DOI for them.
+  // neither PubMed nor Crossref has a DOI for them. Hirvonen 2023 and Fernandes 2013 are the
+  // open reviews added beside Lemierre and Ginsberg (2026-10-29).
   test('is still marked as an unchecked draft, with a DOI on every reference but Estrera and Russo', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(14)
+    expect(study.sourceNote).toMatch(/Still unchecked: the mylohyoid line/)
+    expect(study.references).toHaveLength(16)
     for (const ref of study.references) {
       if (/^(Estrera|Russo) /.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)

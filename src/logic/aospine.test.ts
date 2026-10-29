@@ -4,11 +4,11 @@ import { aoBody, aoCode, aoFacetCode, aoFacetFracture, aoNeuroDescription, aoSen
 /*
  * AO Spine subaxial cervical and thoracolumbar classification. Each case quotes its claim from
  * docs/superpowers/research/2026-10-23-spine-calculators-sources.md by ID. The papers are
- * matched on PubMed, but only the claims marked verified there were read in an abstract; the
- * rest of the wording is still from memory.
+ * matched on PubMed but paywalled; the wording is checked against AO Spine's posters for both
+ * systems. Still unchecked: whether exactly 1 cm or 40% is F1 or F2 (AO-6).
  */
 
-describe('AO Spine morphology (unchecked)', () => {
+describe('AO Spine morphology', () => {
   // AO-1: "A1 wedge (one endplate), A2 split or pincer (both), A3 incomplete burst (one endplate
   // and the posterior wall), A4 complete burst (both and the wall)."
   test('the vertebral body type from the endplates and posterior wall', () => {
@@ -38,7 +38,7 @@ describe('AO Spine morphology (unchecked)', () => {
   })
 })
 
-describe('AO Spine subaxial facets (unchecked)', () => {
+describe('AO Spine subaxial facets (the exact boundary unchecked)', () => {
   // AO-6: "F1 under 1 cm and under 40% of the lateral mass; F2 1 cm or more, 40% or more, or displaced."
   test('F1 against F2 at 1 cm and 40%', () => {
     expect(aoFacetFracture(9, 39, false)).toBe('F1')

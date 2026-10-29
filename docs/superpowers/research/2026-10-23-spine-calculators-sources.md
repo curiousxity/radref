@@ -111,3 +111,24 @@ BY-NC-ND 4.0 (citing Vaccaro 2015/2016). Hosted unchanged at
 | AO-9 (subaxial) | yes, changed | "+ Continued spinal cord compression", tied to no grade (was N3 only). |
 | AO-10 (subaxial) | yes, OLF added | M1 "Posterior Capsuloligamentous Complex injury without complete disruption"; M2 "Critical disc herniation"; M3 "Stiffening/metabolic bone disease (ie DISH, AS, OPLL, OLF)"; M4 "Vertebral artery abnormality". |
 | AO-5 (subaxial) | yes, notation changed | "C6-C7: C (C7: A1)"; "C6-C7: B2 (F4, F2, N2, M3)"; "If only facet injuries are identified – no A, B, or C injury –, they are listed first after the level of injury." The subaxial code now follows this, commas inside the brackets; facet-only injuries are coded. |
+
+## Fifth check, 2026-10-29: posters re-read and open sources
+
+The to-do list (`docs/REMAINING_TASKS.md`) still lists AO-4, AO-5, AO-7, AO-9, AO-11 and AO-12 as
+unchecked. Four of those were already settled by the posters (second and fourth checks above); the to-do
+is stale for them. Its "AO-7 (the 1 cm / 40% boundary)" mixes two claims: AO-7 is the "BL" notation,
+settled; the boundary is part of AO-6 and is still open. Open full text read from Europe PMC.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| AO-4 | yes (already, both systems) | Thoracolumbar: second check. The subaxial poster's algorithm is the same: "Displacement/Dislocation" YES → "C Translation"; else "Tension band injury" → "Anterior" → "B3 Hyperextension", "Posterior" → "Osseoligamentous disruption" → "B2", "Mono-segmental osseous disruption" → "B1 Pure transosseous disruption"; else the vertebral body. Also Divi SN, Schroeder GD, Oner FC, et al. Global Spine J. 2019;9(1 Suppl):77S-88S. doi:10.1177/2192568219827260 (PMC6512201): "Each region is classified according to a hierarchical system with increasing levels of injury or instability. If multiple injuries to the spine exist in a single patient, the worst injury is listed first". |
+| AO-5 | yes (already, both systems) | Second check (thoracolumbar: "Type A fracture should be classified separately"; "T8-T9: C (T9: A3; N3; M2)") and fourth check (subaxial: "C6-C7: C (C7: A1)"). |
+| AO-6, the exact 1 cm / 40% boundary | no, still unread | Every open source uses strict signs on both sides, so exactly 1 cm or 40% is in neither grade. Subaxial poster: F1 "<1cm in height, <40% of lateral mass"; F2 ">1cm, > than 40% lateral mass, or displaced". Cabrera JP, et al. Global Spine J. 2023;13(2):344-352 (PMC9972275): "F1. Non-displaced facet fracture; fragment of less than 1 cm and less than 40% of the lateral mass. F2. Facet fracture with potential for instability; fragment of >1 cm or >40% of the lateral mass or displaced fragment." Kweh BTS, Vaccaro AR, et al. Global Spine J. 2026 (PMC12882831): "F2 facet fractures involving greater than 1 centimetre bony fragmentation or greater than 40% of the lateral mass". Still read as F2 (the site's reading); needs Vaccaro 2016's full text. |
+| AO-7 | yes (already) | Fourth check: "BL Bilateral injury". |
+| AO-9 | yes (already), **one point for the author** | Second and fourth checks: "+ Continued spinal cord compression", listed with the grades on both posters, tied to none. Divi 2019 (PMC6512201): "The plus sign (+) modifier is used to signify continued spinal cord compression in a patient with a neurological injury." The calculator asks about compression for any grade, so it can write "N0+". Keep, or offer "+" only with a deficit (N1 to N4)? Nothing changed. |
+| AO-11 | yes, citation added | Divi 2019 (PMC6512201): "Morphologic classification is based on radiologic exams and described separately for different regions ... Neurology is denoted starting with N and describes the neurologic status at the initial clinical examination at the emergency room." Cited on the AO Spine page after "Neurology comes from the examination, not the images." |
+| AO-12 | yes | Divi 2019 (PMC6512201): "The current AOSpine Trauma classification subdivides the spinal column into 4 regions: the upper cervical spine (C0-C2), subaxial cervical spine (C3-C7), thoracolumbar spine (T1-L5), and the sacral spine (S1-S5, including coccyx)." The page states this only through its region label, "Subaxial cervical (C3–C7)", so no citation was added. |
+
+Applied: Divi 2019 added to the AO Spine page's references (checked on Crossref) and cited for AO-11;
+the page's source note, the `aospine.ts` header and the test labels now name the exact 1 cm / 40%
+boundary (AO-6) as the one point still unchecked. No rule or wording changed.

@@ -6,8 +6,11 @@
  * study.
  *
  * Unchecked draft: the column lines, the transverse and T-shaped questions, the isolated
- * posterior wall and the spur sign are checked against Durkee's full text; the rest of the
- * wording is not yet (claims LT-1 to LT-9 in
+ * posterior wall and the spur sign are checked against Durkee's full text; the associated types,
+ * the inferior ramus (obturator ring) per type and the joint surface left on the ilium against
+ * Gänsslen et al. (Arch Orthop Trauma Surg 2024, open). Still unread: the posterior column through
+ * the greater sciatic notch, the anterior wall at the middle of the iliopectineal line and the
+ * anterior column's upper end (claims LT-1 to LT-9 in
  * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md).
  */
 

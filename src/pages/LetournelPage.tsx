@@ -66,6 +66,7 @@ const references: LessonReference[] = [
   { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: '10.2106/00004623-196446080-00001' },
   { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.', doi: '10.1097/00003086-198009000-00012' },
   { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.', doi: '10.2214/AJR.05.1269' },
+  { citation: 'Gänsslen A, Tonetti J, Pohlemann T. Algorithms in acetabular fracture classifications. Arch Orthop Trauma Surg. 2024;144(10):4655-4665.', doi: '10.1007/s00402-024-05599-6' },
   { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.', doi: '10.1148/rg.352140098' },
 ]
 
@@ -117,7 +118,7 @@ export function LetournelPage() {
           <span className="calc-tag">Acetabulum</span>
         </div>
         <p>Name an acetabular fracture from a few questions about the column lines, the posterior wall, the obturator ring and the ilium, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, the ten type names are checked against Scheinfeld 2015, and the column lines, the obturator ring and iliac wing questions, the isolated posterior wall and the spur sign against <Cite doi="10.2214/AJR.05.1269">Durkee et al., AJR 2006</Cite>. The wording of the other types is not yet checked. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, the ten type names are checked against Scheinfeld 2015, and the column lines, the obturator ring and iliac wing questions, the isolated posterior wall and the spur sign against <Cite doi="10.2214/AJR.05.1269">Durkee et al., AJR 2006</Cite>, and the associated types and the questions that separate them against an open review (<Cite doi="10.1007/s00402-024-05599-6">Gänsslen et al., Arch Orthop Trauma Surg 2024</Cite>). Not yet checked: that a posterior column fracture runs through the greater sciatic notch, that an anterior wall fracture breaks the middle of the iliopectineal line, and where an anterior column fracture starts. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -165,7 +166,7 @@ export function LetournelPage() {
         <ScanFigures images={[letournelScans.bothColumnSpur, letournelScans.posteriorWall]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Durkee is read in full; the other papers are paywalled, so their wording is checked only where an abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Durkee and Gänsslen are read in full; the other papers are paywalled, so their wording is checked only where an abstract states it." />
     </div>
   )
 }

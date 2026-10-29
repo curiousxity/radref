@@ -126,20 +126,19 @@ region at a time, end to end, following the ankle pilot
   ossicular chain already have the temporal bone CT study; TMJ is skipped for now (2026-10-23).
 - [ ] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
   unchecked draft (`/studies/suprahyoid-neck`); spec
-  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. On the branch only until
-  the author says to merge. Done once the sources check passes.
-- [ ] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
+  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. Live on the site. Done
+  once the sources check passes.
+- [x] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
   choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
   an abstract or open full text (`/studies/larynx`); spec
-  `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. On the branch only until the author
-  says to merge. Every claim is now checked (the T4a wording on 2026-10-25, from Joshi's AJCC
-  table).
-- [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
+  `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. Live on the site. Every claim is
+  now checked (the T4a wording on 2026-10-25, from Joshi's AJCC table).
+- [x] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
   mass (the author's choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable,
   every claim read in an abstract or open full text (`/studies/skull-base`); spec
   `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
-  `docs/superpowers/research/2026-10-25-skull-base-sources.md`. On the branch only until the
-  author says to merge.
+  `docs/superpowers/research/2026-10-25-skull-base-sources.md`. Live on the site, every claim
+  checked.
 - [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28). Ask which exam and history
   first.
 
@@ -309,8 +308,14 @@ is under the calculator below.
   2 mm (ADI) as 95% limits ("less than"), so those values are now outside normal; Laredo's
   features are "significantly more frequent" in benign or malignant collapse, not proof.
 - [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"); two points for the author.
-- [ ] Still unchecked: MRI for what the rule misses (T2-3), the expanded Denver criteria and the C3 question (T5-1), the
-  Genant grades (T6-1).
+- [x] Open sources (2026-10-29, "Seventh check"): T2-3 (Alves 2020, WFNS) and T6-1 (Wáng 2024, ESSR
+  consensus), cited beside the originals.
+- [ ] Still unchecked: the expanded Denver criteria (T5-1; needs Burlew 2012's table) and the exact
+  1 cm / 40% facet boundary (AO-6; needs Vaccaro 2016). For the author: the page's three Denver
+  items are the older modified criteria; the expanded ones read "fracture, subluxation or
+  ligamentous injury at any level" plus any C1–C3 fracture (Brommeland 2018, Sharma 2019), and
+  the form's Denver check cannot see a C3 fracture. Genant: one review's text says grade 3 is
+  "40% or more", its table ">40%"; the page puts exactly 40% in grade 2.
 
 ### AO Spine calculator
 
@@ -320,7 +325,12 @@ Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
 - [x] Match references S1 and S2 on PubMed and Crossref (2026-10-23). Both found; DOIs added.
 - [x] AO-3 verified; AO-1, AO-2, AO-6, AO-8 and AO-10 in part (the abstracts give the type
   names and say facet, neurology and modifier grades exist).
-- [ ] Still unchecked: AO-4, AO-5, AO-7 (the 1 cm / 40% boundary), AO-9, AO-11, AO-12.
+- [x] AO-4, AO-5, AO-7 and AO-9 were already settled by the two posters (second and fourth
+  checks); AO-11 and AO-12 verified from Divi 2019, now cited (2026-10-29, "Fifth check").
+- [ ] Still unchecked: exactly 1 cm or exactly 40% (AO-6). Every open source writes F1 as "<1cm …
+  <40%" and F2 as ">1cm, > than 40%", so the boundary values belong to neither; the calculator
+  reads them as F2. Needs Vaccaro 2016. For the author: Divi says "+" is for ongoing cord
+  compression "in a patient with a neurological injury", but the calculator allows "N0+".
 
 ### Pelvis CT for pain or injury
 
@@ -335,9 +345,11 @@ under the calculators below.
   P3-1, P3-3 (with two differences) and P5-1. The caveat and differences are in the sources
   file, for the author.
 - [x] L5 transverse process (P2-2): settled by Leone 2022, read in full (2026-10-28).
-- [ ] Still unchecked, because the papers are paywalled: the
-  Denis deficit rates (P3-1), the U- or H-shaped fracture (P3-2). Kept on the page with the
-  "Unchecked draft" note, by the author's choice (2026-10-23). They need the full text.
+- [x] The Denis deficit rates (P3-1) were already settled by Rizkalla 2019 (third check); the U- or
+  H-shaped fracture (P3-2) verified from Rizkalla and Leone. Both now cited beside the originals
+  (2026-10-29, "Sixth check").
+- [ ] Still unchecked: whether Roy-Camille 1985 itself used the U or H shape, and the LT-2 points
+  under the calculators below.
 
 ### Pelvis calculators (Young-Burgess, Letournel)
 
@@ -347,10 +359,18 @@ is in `docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md`.
 - [x] Match references PC1 to PC7 on PubMed and Crossref (2026-10-23). All matched; DOIs added.
 - [x] LT-1 (the ten types) verified against Scheinfeld 2015's abstract; parts of YB-3, YB-4,
   LT-3 and LT-5 too.
-- [ ] Still unchecked, because the papers are paywalled and their abstracts do not give the
-  subtype wording: YB-1, YB-2, YB-6 (2.5 cm), YB-8 (stability), YB-9, LT-2, LT-4, LT-6, LT-7.
-  Kept with the "Unchecked draft" notes by the author's choice (2026-10-23). They need the
-  full text.
+- [x] Open sources (2026-10-29, "Sixth check"): YB-1, YB-2, YB-3, YB-6 and YB-9 (Leone 2022, Alton,
+  Halawi), LT-3, LT-4, LT-6, LT-7 and most of LT-2 (Gänsslen 2024, Durkee). Every Young-Burgess
+  claim is now read, so its page no longer says "Unchecked draft".
+- [ ] Still unchecked (Letournel, LT-2): posterior column "through the greater sciatic notch",
+  anterior wall "the middle of the line", anterior column "or the anterior border".
+- [ ] For the author: LC III is "rotationally unstable, vertically stable" on the page, but
+  "multidirectional instability" in Leone; Leone says the system "combines the mechanism and the
+  stability", against Alton's "not a part"; Leone gives LC with VS as the commonest combined
+  mechanism (page: "LC with APC or VS"); Gänsslen says ACPHT also reaches the iliac fossa, which
+  the "up into the iliac wing is both-column, otherwise T-shaped" sentence (study and Letournel
+  hint) leaves out; Gänsslen sees the spur best on the obturator oblique view. Still open from
+  before: Halawi's 2 cm against 2.5 cm, and vertical shear on "one or both" sides.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
@@ -407,11 +427,13 @@ in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`.
   zygomatic arch"); 11 mm for the subdigastric node only, 10 mm for the rest of level II, and
   necrosis of 3 mm or more only in nodes with tumour (van den Brekel, replacing Som's "most
   reliable sign").
-- [ ] Still unchecked, because the papers have no abstract or the abstract does not touch the
-  claim: the fat-shift directions and usual lesions (N2-1 to N2-4, N2-6, Harnsberger and Osborn),
-  the deep parotid signs (N2-5, Shin), carotid splaying (N2-7), retropharyngeal edema against
-  abscess (N2-9, Hoang), the mylohyoid line (N2-12, Mardini), Lemierre (N3-1) and V3 through the
-  foramen ovale (N3-3). Kept with the "Unchecked draft" note. They need the full text.
+- [x] N2-1 to N2-7 and N2-9 were already settled (fourth to sixth checks). Lemierre (N3-1,
+  Hirvonen 2023) and V3 through the foramen ovale (N3-3, Fernandes 2013) verified and cited beside
+  the originals (2026-10-29, "Seventh check").
+- [ ] Still unchecked: the mylohyoid line (N2-12; needs Mardini). For the author: Alves 2021 says
+  only the third molar drains to the submandibular space, and Iwata 2026 found in 118 patients
+  that "the type of causative tooth was not a risk factor"; the page puts second and third molar
+  roots below the line.
 
 ### Larynx CT and MRI
 
@@ -524,9 +546,11 @@ document. Where the site differed, the author chose the newer source, and these 
 - Mason: the 2 mm and 30% are not in the 1986 paper; they are now cited to Broberg and Morrey 1987,
   still unchecked.
 
-- [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
-  counts any medial plateau fracture as IV. For the author.
-- [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
+- [x] Schatzker type IV: the review calls it a split of the medial plateau; the calculator
+  counts any medial plateau fracture as IV. Settled in the third batch: the author confirmed
+  Markhardt's wording, "split or depressed".
+- [x] The subaxial AO Spine facets, neurology and modifiers: checked against the subaxial poster
+  (third batch). Only the exact 1 cm / 40% facet boundary is open (see "AO Spine calculator").
 - [ ] Still pending: Broberg and Morrey 1987 (`docs/PAPERS_NEEDED.md`). Rao 1999 was settled
   from its figure legends and Spence 1970 read in full (2026-10-28); Halawi 2015 and Leone 2022, sent in place of
   Khurana, settle the ring-breaks-in-two-places claim and the L5 transverse process.
@@ -568,6 +592,5 @@ Gartland, Goutallier, Ellman and Denis ("Third check" sections in the sources do
 
 ## Housekeeping
 
-- Delete the `design-update` branch and the `radref-design` worktree
-  (`git worktree remove ../radref-design`, then `git branch -d design-update`) once
-  nothing else is needed from them.
+- Done (checked 2026-10-29): the `design-update` branch and the `radref-design` worktree are
+  gone, locally and on GitHub.

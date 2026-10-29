@@ -9,9 +9,11 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * most of the papers are paywalled, so only claims whose wording is in an abstract or in open
- * full text are verified. The claims table, with each claim's status, is
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
+ * are verified from abstracts, papers the author supplied, AO Spine's posters and open reviews
+ * (Alves 2020 for T2-3, Wáng 2024 for T6-1, cited beside the originals); still unchecked are the
+ * expanded Denver criteria (T5-1) and the exact 1 cm / 40% facet boundary (AO-6). The claims
+ * table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims); the AO Spine
  * wording is in 2026-10-23-spine-calculators-sources.md (AO claims). Rule chips and warnings
  * carry their claim IDs.
@@ -27,6 +29,8 @@ const BURLEW_DOI = '10.1097/TA.0b013e31823de8a0'
 const LAREDO_DOI = '10.1148/radiology.194.1.7997579'
 const GENANT_DOI = '10.1002/jbmr.5650080915'
 const WESTERVELD_DOI = '10.1007/s00586-008-0764-0'
+const ALVES_DOI = '10.14245/ns.2040226.113'
+const WANG_DOI = '10.1007/s00256-024-04678-4'
 
 const VACCARO_TL = <Cite doi={VACCARO_TL_DOI}>Vaccaro et al., Spine 2013</Cite>
 const VACCARO_CX = <Cite doi={VACCARO_CX_DOI}>Vaccaro et al., Eur Spine J 2016</Cite>
@@ -38,6 +42,8 @@ const BURLEW = <Cite doi={BURLEW_DOI}>Burlew et al., J Trauma Acute Care Surg 20
 const LAREDO = <Cite doi={LAREDO_DOI}>Laredo et al., Radiology 1995</Cite>
 const GENANT = <Cite doi={GENANT_DOI}>Genant et al., J Bone Miner Res 1993</Cite>
 const WESTERVELD = <Cite doi={WESTERVELD_DOI}>Westerveld et al., Eur Spine J 2009</Cite>
+const ALVES = <Cite doi={ALVES_DOI}>Alves et al., Neurospine 2020</Cite>
+const WANG = <Cite doi={WANG_DOI}>Wáng et al., Skeletal Radiol 2024</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: VACCARO_TL_DOI },
@@ -50,6 +56,8 @@ const references: LessonReference[] = [
   { citation: 'Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.', doi: LAREDO_DOI },
   { citation: 'Genant HK, Wu CY, van Kuijk C, Nevitt MC. Vertebral fracture assessment using a semiquantitative technique. J Bone Miner Res. 1993;8(9):1137-1148.', doi: GENANT_DOI },
   { citation: 'Westerveld LA, Verlaan JJ, Oner FC. Spinal fractures in patients with ankylosing spinal disorders: a systematic review of the literature on treatment, neurological status and complications. Eur Spine J. 2009;18(2):145-156.', doi: WESTERVELD_DOI },
+  { citation: 'Alves OL, Pereira L, Kim SH, Grin A, Shimokawa N, Konovalov N, Zileli M. Upper cervical spine trauma: WFNS Spine Committee recommendations. Neurospine. 2020;17(4):723-736.', doi: ALVES_DOI },
+  { citation: 'Wáng YXJ, Diacinti D, Aparisi Gómez MP, Santiago FR, Becce F, Tagliafico AS, Prakash M, Isaac A, Dalili D, Griffith JF, Guglielmi G, Bazzocchi A. Radiological diagnosis of prevalent osteoporotic vertebral fracture on radiographs: an interim consensus from a group of experts of the ESSR osteoporosis and metabolism subcommittee. Skeletal Radiol. 2024;53(12):2563-2574.', doi: WANG_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -104,7 +112,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm, which the authors propose as normal values ({ROJAS}). Values of 8.5 mm and 2 mm or more raise the question of craniocervical or atlantoaxial injury.</p>
-        <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). It is an old rule from open-mouth radiographs, not a validated CT test: use it as a pointer to a ligament injury, and do not take a smaller total as proof the ligament is intact, since the rule misses ruptures that MRI shows directly ({DICKMAN}).</p>
+        <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). It is an old rule from open-mouth radiographs, not a validated CT test: use it as a pointer to a ligament injury, and do not take a smaller total as proof the ligament is intact, since the rule misses ruptures that MRI shows directly ({DICKMAN}; {ALVES}).</p>
         <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I an oblique fracture through the upper part of the dens, type II at the junction of the dens with the body of C2, type III through the body of C2. In their series type II fractures were the most prone to non-union. Then look at the rest of C2, including the pars interarticularis.</p>
         <ScanFigures images={[spineTraumaScans.jefferson, spineTraumaScans.odontoid, spineTraumaScans.hangman]} />
       </>
@@ -148,7 +156,7 @@ const learn: LearnSection[] = [
     title: 'Step 6. Vertebral collapse without major trauma',
     body: (
       <>
-        <p>Grade the height loss of a collapsed vertebra by Genant: grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}).</p>
+        <p>Grade the height loss of a collapsed vertebra by Genant: grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}; {WANG}).</p>
         <p>Then decide whether the collapse looks osteoporotic or malignant. CT findings significantly more frequent in benign collapse include fracture lines within the cancellous bone and retropulsion of a fragment of the posterior cortex into the canal. Findings significantly more frequent in malignant collapse include destruction of the anterolateral or posterior cortex, destruction of cancellous bone, destruction of a pedicle, a focal paraspinal soft-tissue mass and an epidural mass ({LAREDO}). These are differences in frequency, not proof either way.</p>
       </>
     ),
@@ -580,7 +588,7 @@ const steps: ReportStep[] = [
     id: 'ccj',
     title: 'Step 2. Craniocervical junction and C1–C2',
     learn: 'ccj',
-    teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). C1 lateral mass overhang over 6.9 mm in total suggests transverse ligament rupture ({SPENCE}), though MRI shows ruptures the rule misses ({DICKMAN}). Odontoid types I–III ({ANDERSON}).</p>,
+    teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). C1 lateral mass overhang over 6.9 mm in total suggests transverse ligament rupture ({SPENCE}), though MRI shows ruptures the rule misses ({DICKMAN}; {ALVES}). Odontoid types I–III ({ANDERSON}).</p>,
     fields: [fields.bdi, fields.adi, fields.condyle, fields.c1, fields.c1Overhang, fields.dens, fields.c2, fields.c2Text],
     derive: deriveCcj,
   },
@@ -617,7 +625,7 @@ const steps: ReportStep[] = [
     id: 'collapse',
     title: 'Step 6. Vertebral collapse without major trauma',
     learn: 'collapse',
-    teach: <p>Genant grades: about 20–25%, 25–40%, over 40% ({GENANT}). Cortical, cancellous or pedicle destruction, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse ({LAREDO}).</p>,
+    teach: <p>Genant grades: about 20–25%, 25–40%, over 40% ({GENANT}; {WANG}). Cortical, cancellous or pedicle destruction, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse ({LAREDO}).</p>,
     fields: [fields.collapse, fields.collapseLevel, fields.heightLoss, fields.collapseFeatures],
     derive: deriveCollapse,
   },
@@ -641,7 +649,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Denver criteria and the Genant grades) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open reviews, except two that are still unchecked: the expanded Denver screening criteria, and whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
   references,
   report: {
     steps,
@@ -661,7 +669,7 @@ const study: StudyDefinition = {
       question: 'A C1 burst fracture has lateral masses overhanging C2 by 4 mm on each side. What does the rule of Spence suggest?',
       options: ['An intact transverse ligament', 'Rupture of the transverse ligament, since the total is over 6.9 mm', 'An odontoid fracture', 'Nothing; the rule is for children'],
       answer: 1,
-      explanation: <p>A combined overhang of more than 6.9 mm suggested transverse ligament rupture ({SPENCE}). The rule can miss ruptures that MRI shows ({DICKMAN}).</p>,
+      explanation: <p>A combined overhang of more than 6.9 mm suggested transverse ligament rupture ({SPENCE}). The rule can miss ruptures that MRI shows ({DICKMAN}; {ALVES}).</p>,
     },
     {
       id: 'odontoid',
@@ -710,7 +718,7 @@ const study: StudyDefinition = {
       question: 'A vertebral body has lost 35% of its height. What is the Genant grade?',
       options: ['Grade 1', 'Grade 2', 'Grade 3', 'Not a fracture'],
       answer: 1,
-      explanation: <p>Grade 1 is about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}).</p>,
+      explanation: <p>Grade 1 is about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}; {WANG}).</p>,
     },
     {
       id: 'malignant',

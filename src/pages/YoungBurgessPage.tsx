@@ -57,6 +57,7 @@ const references: LessonReference[] = [
   { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: '10.1148/radiology.160.2.3726125' },
   { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: '10.1097/00005373-199007000-00015' },
   { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: '10.1007/s11999-014-3693-8' },
+  { citation: 'Leone E, Garipoli A, Ripani U, Lanzetti RM, Spoliti M, Creta D, Giannace C, Galluzzo A, Trinci M, Galluzzo M. Imaging review of pelvic ring fractures and its complications in high-energy trauma. Diagnostics (Basel). 2022;12(2):384.', doi: '10.3390/diagnostics12020384' },
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: '10.1148/rg.345135113' },
 ]
 
@@ -83,7 +84,7 @@ export function YoungBurgessPage() {
           <span className="calc-tag">Pelvic ring</span>
         </div>
         <p>Type a pelvic ring injury by the force that caused it, from what CT shows at the sacrum, the sacroiliac joints and the symphysis, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>). Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
+        <p className="source-note">The original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>) and an open imaging review (<Cite doi="10.3390/diagnostics12020384">Leone et al., Diagnostics 2022</Cite>). Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -144,7 +145,7 @@ export function YoungBurgessPage() {
         <ScanFigures images={[youngBurgessScans.apc, youngBurgessScans.lc]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review and Leone's 2022 open review." />
     </div>
   )
 }

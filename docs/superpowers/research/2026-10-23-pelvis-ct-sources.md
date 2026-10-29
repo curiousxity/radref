@@ -99,3 +99,25 @@ references and cited beside Khurana for P2-2.
 | P2-2 (L5 transverse process and vertical instability) | yes | In vertical shear: "Involvement of the posterior arch of the pelvic ring is characterized by the avulsion of the transverse process of the fifth lumbar vertebra on the impact side, which is a sign of iliolumbar ligament rupture"; "Rotational and vertical instability is the result of vertical shear injuries". Figure 7 shows it with a cranially shifted hemipelvis. Leone ties it to vertical shear rather than calling it a marker on its own; the site's sentence is a fair reading. |
 | P3-1 (Denis deficit) | agrees | "In 6% of cases, there is an impingement of L5 or S1 nerve root" (zone I); "In 28% of cases, there is an ipsilateral neurological deficit" (zone II). No zone III figure. |
 | P3-2 (U- or H-shaped fracture) | agrees | Zone III "may have different morphology (“H”-shaped, “U”-shaped, “λ”-shaped, “T”-shaped), and can result in a spinopelvic dissociation". |
+
+## Sixth check, 2026-10-29: open sources
+
+P3-1 and P3-2 were already settled by the third and fifth checks above; the study's sourceNote
+was stale ("the claims not stated in an abstract or open full text (among them the Letournel
+wording that Durkee does not cover) have still not been checked"). The Roy-Camille paper is still
+abstract-only (doi.org sends it to ovid.com's abstract page). New open source for the Letournel
+wording the study shows: Gänsslen A, Tonetti J, Pohlemann T. Algorithms in acetabular fracture
+classifications. Arch Orthop Trauma Surg. 2024;144(10):4655-4665. doi:10.1007/s00402-024-05599-6
+(PMC11576829, CC BY 4.0, read in full; matched on Crossref). Its verdicts are in the calculators
+sources, sixth check.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| P3-1 (Denis deficit rates) | yes | Rizkalla 2019 (third check): "neurologic injuries occurred in 5.9% of fractures lateral to the sacral foramina (Zone 1). In transforaminal fractures (Zone 2), 28.4% ... central fractures (Zone 3) ... (56.7%)". Leone 2022 (fifth check) agrees for zones I and II. Rizkalla is now cited beside Denis in the sacrum chip and the step's teaching note too, not only in the learn section. |
+| P3-2 (U- or H-shaped fracture) | yes, except the attribution | Rizkalla (third check): "These fractures can adopt a U- or H-shaped morphologic pattern and may reflect a loss of continuity between the pelvis and the spine, or 'lumbopelvic dissociation'". Leone (fifth check, open): Zone III "may have different morphology (“H”-shaped, “U”-shaped, “λ”-shaped, “T”-shaped), and can result in a spinopelvic dissociation". The study now cites Leone (learn section) and Rizkalla (teaching note) beside Roy-Camille. Still unread: whether Roy-Camille 1985 itself used the U or H shape; its abstract describes transverse upper sacral fractures in three types, "usually associated with suicidal attempts by jumping". |
+
+Also cited beside the originals in the study (quotes in the calculators sources, sixth check):
+Leone for the Young-Burgess types (ring learn section, LC and APC chips, the 2.5 cm sentence) and
+Gänsslen for the associated Letournel types and the joint surface on the ilium. The sourceNote now
+lists only what is still unread: parts of the Letournel elementary-type wording (LT-2) and
+Roy-Camille's own use of the U or H shape.

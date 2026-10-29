@@ -6,8 +6,10 @@
  *
  * Unchecked draft: both papers are matched on PubMed but paywalled. The types, order, facets,
  * neurology, modifiers and notation are checked against AO Spine's own posters for both systems
- * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/; claims AO-1 to
- * AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/), and neurology
+ * from the examination and the separate upper cervical system against Divi et al., Global Spine
+ * J 2019 (claims AO-1 to AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * Still unchecked: whether exactly 1 cm or 40% is F1 or F2 (AO-6).
  */
 
 export type AoRegion = 'subaxial' | 'thoracolumbar'

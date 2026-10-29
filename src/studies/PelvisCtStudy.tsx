@@ -9,9 +9,11 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * most of the papers are paywalled, so only claims whose wording is in an abstract or in open
- * full text are verified. The claims table, with each claim's status, is
+ * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
+ * of the papers are paywalled, so claims are verified against abstracts and reviews read in full
+ * (Alton and Gee, Rizkalla, Halawi, Leone, Durkee, Gänsslen); parts of the Letournel
+ * elementary-type wording and Roy-Camille's own use of the U or H shape are still unread (see
+ * the sourceNote). The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims); the Young-Burgess and
  * Letournel wording is in 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). Rule
  * chips and warnings carry their claim IDs.
@@ -33,6 +35,7 @@ const LETOURNEL_DOI = '10.1097/00003086-198009000-00012'
 const DURKEE_DOI = '10.2214/AJR.05.1269'
 const SCHEINFELD_DOI = '10.1148/rg.352140098'
 const KELLOCK_DOI = '10.2214/AJR.19.21510'
+const GANSSLEN_DOI = '10.1007/s00402-024-05599-6'
 
 const YOUNG = <Cite doi={YOUNG_DOI}>Young et al., Radiology 1986</Cite>
 const BURGESS = <Cite doi={BURGESS_DOI}>Burgess et al., J Trauma 1990</Cite>
@@ -50,6 +53,7 @@ const LETOURNEL = <Cite doi={LETOURNEL_DOI}>Letournel, Clin Orthop Relat Res 198
 const DURKEE = <Cite doi={DURKEE_DOI}>Durkee et al., AJR 2006</Cite>
 const SCHEINFELD = <Cite doi={SCHEINFELD_DOI}>Scheinfeld et al., RadioGraphics 2015</Cite>
 const KELLOCK = <Cite doi={KELLOCK_DOI}>Kellock et al., AJR 2019</Cite>
+const GANSSLEN = <Cite doi={GANSSLEN_DOI}>Gänsslen et al., Arch Orthop Trauma Surg 2024</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: YOUNG_DOI },
@@ -65,6 +69,7 @@ const references: LessonReference[] = [
   { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.', doi: LYDERS_DOI },
   { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: JUDET_DOI },
   { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.', doi: LETOURNEL_DOI },
+  { citation: 'Gänsslen A, Tonetti J, Pohlemann T. Algorithms in acetabular fracture classifications. Arch Orthop Trauma Surg. 2024;144(10):4655-4665.', doi: GANSSLEN_DOI },
   { citation: 'Durkee NJ, Jacobson J, Jamadar D, Karunakar MA, Morag Y, Hayes C. Classification of common acetabular fractures: radiographic and CT appearances. AJR Am J Roentgenol. 2006;187(4):915-925.', doi: DURKEE_DOI },
   { citation: 'Scheinfeld MH, Dym AA, Spektor M, Avery LL, Dym RJ, Amanatullah DF. Acetabular fractures: what radiologists should know and how 3D CT can aid classification. RadioGraphics. 2015;35(2):555-577.', doi: SCHEINFELD_DOI },
   { citation: 'Kellock TT, Khurana B, Mandell JC. Diagnostic performance of CT for occult proximal femoral fractures: a systematic review and meta-analysis. AJR Am J Roentgenol. 2019;213(6):1324-1330.', doi: KELLOCK_DOI },
@@ -123,10 +128,10 @@ const learn: LearnSection[] = [
     title: 'Step 2. Pelvic ring',
     body: (
       <>
-        <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear pushes one hemipelvis upwards. The Young-Burgess calculator on this site applies the same rules.</p>
+        <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}; {LEONE}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear pushes one hemipelvis upwards. The Young-Burgess calculator on this site applies the same rules.</p>
         {ybTable}
         <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}; {HALAWI}).</p>
-        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>
+        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}; {LEONE}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>
         <p>Stability is not part of the Young-Burgess system itself; the last column is how the types are usually taught alongside it ({ALTON}).</p>
         <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: needs rose with the grade of AP compression, and APC III needed the most fluid in the first 24 hours ({DALAL}).</p>
       </>
@@ -138,7 +143,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Give a sacral fracture its Denis zone ({DENIS}): zone 1 lateral to the sacral foramina, zone 2 through the foramina, zone 3 medial to them, into the central canal. Neurological deficit rose with the zone, from about 6% in zone 1 to about 28% in zone 2 and about 57% in zone 3 (5.9%, 28.4% and 56.7%; {RIZKALLA}).</p>
-        <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}). This lumbopelvic dissociation is highly unstable, and Denis's zones leave it out ({RIZKALLA}).</p>
+        <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}; {LEONE}). This lumbopelvic dissociation is highly unstable, and Denis's zones leave it out ({RIZKALLA}).</p>
         <p>Insufficiency fractures of the sacrum run vertically through the sacral ala, parallel to the sacroiliac joints, on one side or both about equally often, sometimes with a horizontal component through the sacral bodies. On CT they show as sclerosis or fracture lines, and they often come with insufficiency fractures of the pubic rami ({LYDERS}).</p>
       </>
     ),
@@ -150,9 +155,9 @@ const learn: LearnSection[] = [
       <>
         <p>Name an acetabular fracture by Judet and Letournel ({JUDET}; {LETOURNEL}). The acetabulum sits between an anterior column, whose radiographic line is the iliopectineal line, and a posterior column, whose line is the ilioischial line ({DURKEE}). There are five elementary types:</p>
         {ltTable(ltElementary)}
-        <p>and five associated types, made of two or more elementary ones:</p>
+        <p>and five associated types, made of two or more elementary ones ({GANSSLEN}):</p>
         {ltTable(ltAssociated)}
-        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}). With both lines broken and the obturator ring intact, the fracture is transverse; with the ring broken too, a fracture running up into the iliac wing is both-column and one that does not is T-shaped ({DURKEE}). A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof ({DURKEE}). An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line ({DURKEE}). The Letournel calculator on this site asks the same questions.</p>
+        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}; {GANSSLEN}). With both lines broken and the obturator ring intact, the fracture is transverse; with the ring broken too, a fracture running up into the iliac wing is both-column and one that does not is T-shaped ({DURKEE}). A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof ({DURKEE}). An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line ({DURKEE}). The Letournel calculator on this site asks the same questions.</p>
         <p>Then describe the femoral head (concentric, subluxed or dislocated), intra-articular fragments, marginal impaction and the articular gap or step. These descriptors are this site's checklist.</p>
       </>
     ),
@@ -575,7 +580,7 @@ const steps: ReportStep[] = [
     id: 'sacrum',
     title: 'Step 3. Sacrum and insufficiency fractures',
     learn: 'sacrum',
-    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}). A U- or H-shaped fracture separates the spine from the pelvis ({ROY_CAMILLE}). Insufficiency fractures run vertically through the ala, on one side or both ({LYDERS}).</p>,
+    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}; {RIZKALLA}). A U- or H-shaped fracture separates the spine from the pelvis ({ROY_CAMILLE}; {RIZKALLA}). Insufficiency fractures run vertically through the ala, on one side or both ({LYDERS}).</p>,
     fields: [fields.sacrum, fields.sacrumSide, fields.sacrumZone, fields.sacrumTransverse],
     derive: deriveSacrum,
   },
@@ -616,7 +621,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims are checked against abstracts and reviews read in full, except parts of the Letournel elementary-type wording (the posterior column fracture running through the greater sciatic notch, the anterior wall fragment breaking the middle of the iliopectineal line, the anterior column fracture starting at the anterior border of the ilium) and whether Roy-Camille himself described the U or H shape.',
   references,
   report: {
     steps,
@@ -629,21 +634,21 @@ const study: StudyDefinition = {
       question: 'A pelvic CT after a side impact shows compression of the right sacral ala and horizontal fractures of the right pubic rami. What is the Young-Burgess type?',
       options: ['LC I', 'LC II', 'APC I', 'Vertical shear'],
       answer: 0,
-      explanation: <p>LC I is sacral compression on the side of impact with transverse (horizontal) pubic rami fractures; LC II breaks the posterior ring on that side through the ilium (a crescent fracture-dislocation) or the sacroiliac joint ({YOUNG}; {ALTON}).</p>,
+      explanation: <p>LC I is sacral compression on the side of impact with transverse (horizontal) pubic rami fractures; LC II breaks the posterior ring on that side through the ilium (a crescent fracture-dislocation) or the sacroiliac joint ({YOUNG}; {ALTON}; {LEONE}).</p>,
     },
     {
       id: 'lc3',
       question: 'Lateral compression of one side comes with an open book of the other side. What is it called?',
       options: ['APC III', 'LC III, the windswept pelvis', 'Combined mechanical injury', 'LC II'],
       answer: 1,
-      explanation: <p>LC III is lateral compression on the side of impact with AP compression of the other side, the windswept pelvis ({YOUNG}; {BURGESS}).</p>,
+      explanation: <p>LC III is lateral compression on the side of impact with AP compression of the other side, the windswept pelvis ({YOUNG}; {BURGESS}; {LEONE}).</p>,
     },
     {
       id: 'apc2',
       question: 'The symphysis is widened and the front of the right sacroiliac joint is open, but the back is closed. What is the type?',
       options: ['APC I', 'APC II', 'APC III', 'LC I'],
       answer: 1,
-      explanation: <p>APC II tears the anterior sacroiliac, sacrospinous and sacrotuberous ligaments and leaves the posterior sacroiliac ligaments intact. APC III tears them too ({YOUNG}).</p>,
+      explanation: <p>APC II tears the anterior sacroiliac, sacrospinous and sacrotuberous ligaments and leaves the posterior sacroiliac ligaments intact. APC III tears them too ({YOUNG}; {LEONE}).</p>,
     },
     {
       id: 'diastasis',
@@ -664,7 +669,7 @@ const study: StudyDefinition = {
       question: 'A sacral fracture runs through the sacral foramina. What is its Denis zone, and roughly how often was there a neurological deficit?',
       options: ['Zone 1, about 6%', 'Zone 2, about 28%', 'Zone 3, about 57%', 'Zone 2, about 57%'],
       answer: 1,
-      explanation: <p>Zone 1 is lateral to the foramina, zone 2 through them, zone 3 medial to them. Deficit rose from about 6% to about 28% and about 57% ({DENIS}).</p>,
+      explanation: <p>Zone 1 is lateral to the foramina, zone 2 through them, zone 3 medial to them. Deficit rose from about 6% to about 28% and about 57% ({DENIS}; {RIZKALLA}).</p>,
     },
     {
       id: 'insufficiency',
@@ -685,7 +690,7 @@ const study: StudyDefinition = {
       question: 'What defines a both-column acetabular fracture?',
       options: ['Any fracture of both columns', 'No joint surface left attached to the intact ilium', 'A posterior wall fragment with a transverse fracture', 'An intact obturator ring'],
       answer: 1,
-      explanation: <p>Both columns are separated from each other and from the ilium, so no joint surface stays on the intact ilium; the spike of ilium left behind is the spur sign ({LETOURNEL}; {SCHEINFELD}).</p>,
+      explanation: <p>Both columns are separated from each other and from the ilium, so no joint surface stays on the intact ilium; the spike of ilium left behind is the spur sign ({LETOURNEL}; {SCHEINFELD}; {GANSSLEN}).</p>,
     },
     {
       id: 'occult-hip',

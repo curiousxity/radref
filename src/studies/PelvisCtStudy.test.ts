@@ -21,14 +21,16 @@ describe('pelvis CT lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'ring', 'sacrum', 'acetabulum', 'hips', 'soft-tissues', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so.
+  // The references are matched (each has a DOI), but parts of the Letournel elementary-type
+  // wording and Roy-Camille's own use of the U or H shape are still unread, so the note keeps
+  // saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 16 since the Young-Burgess and Denis reviews (Alton and Gee 2014, Rizkalla 2019), Halawi 2015
+    // 17 since the Young-Burgess and Denis reviews (Alton and Gee 2014, Rizkalla 2019), Halawi 2015
     // and Leone 2022, read in full in place of Khurana for the ring breaking in more than one place
-    // and for the L5 transverse process, were added.
-    expect(study.references).toHaveLength(16)
+    // and for the L5 transverse process, and Gänsslen 2024 (open review of the Letournel types,
+    // 2026-10-29) were added.
+    expect(study.references).toHaveLength(17)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

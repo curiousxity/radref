@@ -5,8 +5,9 @@ import { diastasisOver, ybDescriptions, ybGroup, ybSentence, ybStability, ybType
 /*
  * The two pelvic classifications. Each case quotes its claim from
  * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md by ID. The papers are
- * matched on PubMed, but only the claims marked verified there were read in an abstract; the
- * rest of the wording is still from memory.
+ * matched on PubMed; the claims marked verified there were read in an abstract or in a review
+ * read in full (Alton and Gee, Durkee, Halawi, Leone, Gänsslen). Still unread: parts of the
+ * Letournel posterior column, anterior wall and anterior column wording (LT-2).
  */
 
 describe('Young-Burgess (unchecked)', () => {

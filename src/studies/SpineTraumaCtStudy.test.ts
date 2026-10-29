@@ -9,9 +9,10 @@ const study = studyOf(SpineTraumaCtStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims) or, for AO
- * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). The references are matched,
- * but only the claims marked verified there were read in their papers; when the rest are
- * checked a case may have to change; say in that commit why the old expectation was wrong.
+ * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). The references are matched and
+ * all but two claims are verified there (T5-1, the expanded Denver criteria, and the exact
+ * 1 cm / 40% facet boundary in AO-6); when those are checked a case may have to change; say in
+ * that commit why the old expectation was wrong.
  */
 
 describe('spine trauma CT lesson', () => {
@@ -19,11 +20,13 @@ describe('spine trauma CT lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'ccj', 'subaxial', 'thoracolumbar', 'vessels', 'collapse', 'canal', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so.
+  // The references are matched (each has a DOI). Two claims are still unchecked (T5-1, the
+  // expanded Denver criteria; AO-6, the exact 1 cm / 40% facet boundary), so the note keeps
+  // saying so. Ten cited papers plus two open reviews (Alves 2020, Wáng 2024).
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(10)
+    expect(study.sourceNote).toMatch(/Denver/)
+    expect(study.references).toHaveLength(12)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
     // T-R8: the author list was wrong after Laredo (it read Lakhdar F ... Champsaur P, Morvan G).
     expect(study.references.map((ref) => ref.citation)).toContain('Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.')

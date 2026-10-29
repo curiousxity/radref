@@ -4,7 +4,8 @@
  * the pelvis CT study.
  *
  * The 1986 and 1990 papers are paywalled; the type wording and the 2.5 cm are checked against
- * Alton and Gee's review, which describes Young's 1986 types (Clin Orthop Relat Res 2014; claims
+ * Alton and Gee's review, which describes Young's 1986 types (Clin Orthop Relat Res 2014), and
+ * Leone's open imaging review (Diagnostics 2022), whose table also gives stability by type (claims
  * YB-1 to YB-9 in docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md).
  */
 
