@@ -5,11 +5,10 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-25). Several
- * papers have no abstract or are paywalled; their claims were read in the papers the author
- * sent, in figure legends or in open reviews cited beside them (Hirvonen for Lemierre,
- * Fernandes for V3 through the foramen ovale, 2026-10-29). Only the mylohyoid line (N2-12) is
- * still unread. The claims table, with each claim's status, is
+ * Every reference has been matched on PubMed and Crossref (2026-10-25). Several papers have no
+ * abstract or are paywalled; their claims were read in the papers the author sent, in figure
+ * legends or in open reviews and studies cited beside them (Hirvonen for Lemierre, Fernandes for
+ * V3 through the foramen ovale, Iwata for the mylohyoid line, 2026-10-29). Every claim is read. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). Rule chips and
  * warnings carry their claim IDs.
  */
@@ -28,6 +27,7 @@ const VAN_DEN_BREKEL_DOI = '10.1148/radiology.177.2.2217772'
 const SOM_DOI = '10.2214/ajr.158.5.1566697'
 const HIRVONEN_DOI = '10.1186/s13244-022-01347-9'
 const FERNANDES_DOI = '10.1007/s13244-013-0266-4'
+const IWATA_DOI = '10.1111/odi.70149'
 
 const HARNSBERGER = <Cite doi={HARNSBERGER_DOI}>Harnsberger and Osborn, AJR 1991</Cite>
 const SHIN = <Cite doi={SHIN_DOI}>Shin et al., AJR 2001</Cite>
@@ -46,6 +46,7 @@ const VAN_DEN_BREKEL = <Cite doi={VAN_DEN_BREKEL_DOI}>van den Brekel et al., Rad
 const SOM = <Cite doi={SOM_DOI}>Som, AJR 1992</Cite>
 const HIRVONEN = <Cite doi={HIRVONEN_DOI}>Hirvonen et al., Insights Imaging 2023</Cite>
 const FERNANDES = <Cite doi={FERNANDES_DOI}>Fernandes et al., Insights Imaging 2013</Cite>
+const IWATA = <Cite doi={IWATA_DOI}>Iwata et al., Oral Dis 2026</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Harnsberger HR, Osborn AG. Differential diagnosis of head and neck lesions based on their space of origin. 1. The suprahyoid part of the neck. AJR Am J Roentgenol. 1991;157(1):147-154.', doi: HARNSBERGER_DOI },
@@ -64,6 +65,7 @@ const references: LessonReference[] = [
   { citation: 'Som PM. Detection of metastasis in cervical lymph nodes: CT and MR criteria and differential diagnosis. AJR Am J Roentgenol. 1992;158(5):961-969.', doi: SOM_DOI },
   { citation: 'Hirvonen J, Heikkinen J, Nyman M, Happonen T, Velhonoja J, Irjala H, Soukka T, Mattila K, Nurminen J. MRI of acute neck infections: evidence summary and pictorial review. Insights Imaging. 2023;14(1):5.', doi: HIRVONEN_DOI },
   { citation: 'Fernandes T, Lobo JC, Castro R, Oliveira MI, Som PM. Anatomy and pathology of the masticator space. Insights Imaging. 2013;4(5):605-616.', doi: FERNANDES_DOI },
+  { citation: 'Iwata E, Obata K, Kikuta S, Kaneko N, Sato K, Kitagawa N, et al. The role of the mylohyoid line in the spread of mandibular odontogenic deep neck infection. Oral Dis. 2026;32(6):1698-1708.', doi: IWATA_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -162,7 +164,7 @@ const learn: LearnSection[] = [
         <p>Name the collection, the spaces it fills and, where it can be seen, its source: a tooth, the tonsil, a salivary stone or a suppurative node. Note gas. These fields are this site's own.</p>
         <p>In Freling's series of 76 patients thought clinically to have a deep neck abscess, a fluid collection with complete or partial rim enhancement was an abscess in 82% (53 of 65), and fluid without rim enhancement in 67% (8 of 12). Gas in or beside a collection, or much free gas between the fascias, meant an abscess in every case ({FRELING}).</p>
         <p>In the retropharyngeal space, tell edema from a suppurative node and an abscess by four things: where the fluid is, its shape and mass effect, its wall, and the findings around it. Edema fills the space from side to side, smooth, with tapered top and bottom on sagittal images, no wall and only mild mass effect. A suppurative node sits on one side, rounded, sometimes with a thin rim. An abscess is rounded, with moderate to marked mass effect, and usually has a thick enhancing wall. No one sign settles it: a rim with a low-density centre was under 57% specific for pus at surgery ({HOANG}).</p>
-        <p>The mylohyoid line on the inside of the mandible decides where a dental infection goes. The roots of the second and third molars lie below it, so their infections reach the submandibular space; those of the premolars and the first molar lie above it and reach the sublingual space ({MARDINI}). An odontogenic abscess in the masticator space spreads by where it sits. In Schuknecht's 30 patients, abscesses in the medial pterygoid spread out of the space, to the parapharyngeal space or soft palate in 7 of 13; those in the lateral (masseter and pterygoid) part spread within the space, often through the sub-masseteric space ({SCHUKNECHT}).</p>
+        <p>The mylohyoid line on the inside of the mandible decides where a dental infection goes first. A lesion that breaks through the lingual cortex above it tends to form an abscess in the sublingual space first; one below it reaches the submandibular space ({MARDINI}; {IWATA}). This is often taught by tooth (premolar apices above the line, second and third molar apices generally below), but in Iwata's 118 patients the type of tooth did not predict the space, and the same second molar lay above the line in one patient and below it in another: judge the lesion against the line, not the tooth ({IWATA}). The two spaces communicate around the posterior border of the mylohyoid, so a sublingual abscess can spread on into the submandibular or submental space ({IWATA}). An odontogenic abscess in the masticator space spreads by where it sits. In Schuknecht's 30 patients, abscesses in the medial pterygoid spread out of the space, to the parapharyngeal space or soft palate in 7 of 13; those in the lateral (masseter and pterygoid) part spread within the space, often through the sub-masseteric space ({SCHUKNECHT}).</p>
       </>
     ),
   },
@@ -304,6 +306,10 @@ const fields = {
     { value: 'front', label: 'Premolar or first molar' },
     { value: 'back', label: 'Second or third molar' },
   ] },
+  mylohyoid: { id: 'mylohyoid', kind: 'choice', label: 'Lesion against the mylohyoid line', showIf: (v) => hasCollection(v) && list(v, 'source').includes('dental'), help: 'Where the infection breaks through the lingual cortex, not which tooth it is.', options: [
+    { value: 'above', label: 'Above the line' },
+    { value: 'below', label: 'Below the line' },
+  ] },
 
   perineural: { id: 'perineural', kind: 'choice', label: 'Perineural spread', showIf: massPresent, options: [
     { value: 'none', label: 'None' },
@@ -427,10 +433,10 @@ function deriveLesion(values: Values): Derived[] {
     if (rp === 'edema') out.push({ label: 'Retropharyngeal', value: 'Edema rather than abscess' })
     if (rp === 'node') out.push({ label: 'Retropharyngeal', value: 'Suppurative node pattern', tone: 'warn' })
     if (rp === 'abscess') out.push({ label: 'Retropharyngeal', value: 'Abscess pattern', tone: 'warn' })
-    // N2-12: the mylohyoid line.
-    const tooth = str(values, 'tooth')
-    if (tooth === 'back') out.push({ label: 'Mylohyoid line', value: 'Roots below it: spreads to the submandibular space' })
-    if (tooth === 'front') out.push({ label: 'Mylohyoid line', value: 'Roots above it: spreads to the sublingual space' })
+    // N2-12: the mylohyoid line, by the lesion's position rather than the tooth (Iwata 2026).
+    const mylohyoid = str(values, 'mylohyoid')
+    if (mylohyoid === 'above') out.push({ label: 'Mylohyoid line', value: 'Above it: sublingual space first, may spread to the submandibular space' })
+    if (mylohyoid === 'below') out.push({ label: 'Mylohyoid line', value: 'Below it: submandibular space' })
     // N2-11: how an odontogenic masticator abscess spreads, by where it sits.
     if (list(values, 'source').includes('dental') && collectionSpaces(values).includes('ms')) {
       out.push({ label: 'Masticator space', value: 'Medial pterygoid: spreads out to the parapharyngeal space or soft palate; lateral: spreads within, under the masseter', tone: 'warn' })
@@ -703,12 +709,12 @@ const steps: ReportStep[] = [
       <>
         <p>A mass pushes the parapharyngeal fat away from the space it starts in; a mass with fat all round it is parapharyngeal ({HARNSBERGER}). A widened stylomandibular tunnel points to the deep parotid ({SHIN}); a splayed carotid bifurcation to a carotid body paraganglioma ({RAO}).</p>
         {shiftTable}
-        <p>With an infection, a rim-enhancing collection was an abscess in 82%, and gas meant an abscess every time ({FRELING}); retropharyngeal edema has no wall and only mild mass effect ({HOANG}); the mylohyoid line decides where a dental infection goes ({MARDINI}).</p>
+        <p>With an infection, a rim-enhancing collection was an abscess in 82%, and gas meant an abscess every time ({FRELING}); retropharyngeal edema has no wall and only mild mass effect ({HOANG}); the lesion's position against the mylohyoid line, not the tooth, decides where a dental infection goes first ({MARDINI}; {IWATA}).</p>
       </>
     ),
     fields: [
       fields.mass, fields.massSide, fields.massSize, fields.fatShift, fields.massSigns, fields.flowVoids, fields.massSpace, fields.massText,
-      fields.collection, fields.collectionSide, fields.collectionSpaces, fields.collectionSize, fields.rpPattern, fields.gas, fields.source, fields.tooth,
+      fields.collection, fields.collectionSide, fields.collectionSpaces, fields.collectionSize, fields.rpPattern, fields.gas, fields.source, fields.tooth, fields.mylohyoid,
     ],
     derive: deriveLesion,
   },
@@ -741,7 +747,7 @@ const study: StudyDefinition = {
   slug: 'suprahyoid-neck',
   name: 'Suprahyoid neck CT and MRI',
   lede: 'Read a CT or MRI of the suprahyoid neck for a mass or an infection: the space a mass starts in, from the way it pushes the parapharyngeal fat; the collection and its source; perineural spread, the airway and the jugular vein; the nodes; and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. Several papers have no abstract or are paywalled, so their claims were read in the full text, in figure legends or in open reviews cited beside them. Still unchecked: the mylohyoid line (which tooth roots lie above or below it).',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref. Several papers have no abstract or are paywalled, so their claims were read in the full text, in figure legends or in open reviews and studies cited beside them.',
   references,
   report: {
     steps,
@@ -800,10 +806,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'mylohyoid',
-      question: 'An infected third molar spreads into the floor of the mouth. Which space does it reach first?',
+      question: 'A mandibular dental infection breaks through the lingual cortex above the mylohyoid line. Which space does it usually reach first?',
       options: ['Sublingual space', 'Submandibular space', 'Buccal space', 'Parotid space'],
-      answer: 1,
-      explanation: <p>The roots of the second and third molars lie below the mylohyoid line, so their infections reach the submandibular space ({MARDINI}).</p>,
+      answer: 0,
+      explanation: <p>Above the line, the abscess tends to form in the sublingual space first and may then spread around the mylohyoid into the submandibular or submental space. The lesion's position, not the type of tooth, predicts this ({IWATA}).</p>,
     },
     {
       id: 'lemierre',

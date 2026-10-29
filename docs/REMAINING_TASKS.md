@@ -124,10 +124,10 @@ region at a time, end to end, following the ankle pilot
 - [x] Head and neck: decided 2026-10-25. Each viewer gets a study and no calculator, one study
   per region covering several exams and histories, picked in step 1. The otic capsule and
   ossicular chain already have the temporal bone CT study; TMJ is skipped for now (2026-10-23).
-- [ ] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
+- [x] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
   unchecked draft (`/studies/suprahyoid-neck`); spec
-  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. Live on the site. Done
-  once the sources check passes.
+  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. Live on the site. Every
+  claim read (2026-10-29).
 - [x] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
   choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
   an abstract or open full text (`/studies/larynx`); spec
@@ -436,10 +436,9 @@ in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`.
 - [x] N2-1 to N2-7 and N2-9 were already settled (fourth to sixth checks). Lemierre (N3-1,
   Hirvonen 2023) and V3 through the foramen ovale (N3-3, Fernandes 2013) verified and cited beside
   the originals (2026-10-29, "Seventh check").
-- [ ] Still unchecked: the mylohyoid line (N2-12; needs Mardini). For the author: Alves 2021 says
-  only the third molar drains to the submandibular space, and Iwata 2026 found in 118 patients
-  that "the type of causative tooth was not a risk factor"; the page puts second and third molar
-  roots below the line.
+- [x] Decided by the author 2026-10-29: the mylohyoid line is taught by the lesion's position against
+  the line, not by the tooth (Iwata 2026 added; a form field for above or below). Every claim is now
+  read, so the note no longer says "Unchecked draft".
 
 ### Larynx CT and MRI
 
