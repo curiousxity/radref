@@ -38,9 +38,11 @@ by the author's choice).
   Joint asks for sign-in), Vaccaro 2016 (the Utrecht record has no file), the ten shoulder
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
   Fritz 1992, Sugaya 2005, Tuite 1996, Smith 1996; none has a free copy), and section 1.
-- **Example scans still to add**, in this order: the fracture classifications Mason,
-  Mayfield, Herbert and Palmer; then the MSK MRI studies (ankle, foot,
-  diabetic foot, knee, shoulder, elbow, wrist). CC BY only, licence version stated; no
+- Done 2026-10-28: the MSK MRI studies (ankle, foot, diabetic foot, knee, shoulder, elbow,
+  wrist) have 60 example scans; the sections still without one are listed at the end of
+  `docs/superpowers/research/2026-10-28-example-scans.md`.
+- **Example scans still to add**: the fracture classifications Mason, Mayfield, Herbert and
+  Palmer. CC BY only, licence version stated; no
   CC BY-NC and nothing without a clear licence. PMC candidates found but not yet vetted:
   - Mason: PMC12565371 (J Clin Med 2025), PMC12766341 (Cureus review), PMC13337401,
     PMC12127406.

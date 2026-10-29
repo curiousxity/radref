@@ -408,7 +408,8 @@ Lessons and quick references show real example scans through `ScanFigures`
 - `src/data/scans/scans.test.ts` checks every list: the file exists, is under 40 KB, sits in the
   page's folder, and names a CC BY version, a DOI and a figure; and some page uses every image
   as `<page>Scans.<key>` (so import the list under its own name, not an alias).
-- Studies put them in a Learn section's `body`; no framework change is needed.
+- Studies put them in a Learn section's `body`; no framework change is needed. The MSK MRI studies
+  (ankle, foot, diabetic foot, knee, shoulder, elbow, wrist) each have a list, `<study>Mri.ts`.
 - Sources, licence evidence and crop notes are in
   `docs/superpowers/research/2026-10-28-example-scans.md`. Only CC BY with a stated version is
   used (no NC or ND); one panel per file, cropped, greyscale.

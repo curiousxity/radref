@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { kneeMriScans } from '../data/scans/kneeMri'
 import { schatzker, schatzkerDescriptions, schatzkerSentence, schatzkerTypes } from '../logic/schatzker'
 import type { DepressionSite, LateralPattern, Plateau, SchatzkerResult } from '../logic/schatzker'
 import { StudyPage } from '../study/StudyPage'
@@ -159,6 +161,7 @@ const learn: LearnSection[] = [
 
         <h4>Variants</h4>
         <p>Record a bipartite patella or a fabella when you see one; this site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
+        <ScanFigures images={[kneeMriScans.pivotShiftBruise]} />
       </>
     ),
   },
@@ -176,6 +179,7 @@ const learn: LearnSection[] = [
 
         <h4>Extrusion</h4>
         <p>Medial meniscal extrusion of more than 3 mm was associated with severe degeneration, extensive tearing and root tears; extrusion of 3 mm or less was the minor group ({COSTA}). An extruded meniscus sends you back to look hard at the posterior root.</p>
+        <ScanFigures images={[kneeMriScans.bucketHandleTear, kneeMriScans.meniscalExtrusion]} />
       </>
     ),
   },
@@ -187,6 +191,7 @@ const learn: LearnSection[] = [
         <p>Read the lateral meniscus the same way: the two-slice-touch rule ({DE_SMET}), then the tear type and site ({NGUYEN}).</p>
         <h4>Discoid lateral meniscus</h4>
         <p>A discoid lateral meniscus shows continuity between the anterior and posterior horns, the "bow-tie" appearance, on three or more consecutive 5-mm sagittal images ({SILVERMAN}). The criterion assumes 5-mm sections, so count with care on thinner ones. A discoid meniscus is a variant and gets its own impression line here.</p>
+        <ScanFigures images={[kneeMriScans.discoidMeniscus]} />
       </>
     ),
   },
@@ -199,6 +204,7 @@ const learn: LearnSection[] = [
         <p>Call the ACL intact, partially torn or completely torn from its fibres. Indirect signs support a tear: a lateral compartment bone contusion, anterior translation of the tibia, uncovering of the posterior horn of the lateral meniscus, and buckling of the PCL ({GENTILI}). Remember the pivot-shift bruise pattern from step 2 ({SANDERS}) and a Segond fracture ({CAMPOS}).</p>
         <h4>Reconstructed ACL</h4>
         <p>After reconstruction, describe the graft (intact, partial tear, complete tear) and look for the complications: arthrofibrosis, including the localised "cyclops" lesion in front of the graft; tunnel widening and tunnel cysts; and graft impingement ({BENCARDINO}).</p>
+        <ScanFigures images={[kneeMriScans.aclTear]} />
       </>
     ),
   },
@@ -218,6 +224,7 @@ const learn: LearnSection[] = [
       <>
         <p>Judge the MCL by the integrity of its fibres and by the edema around them; MCL injuries come with bone bruises, whose location Schweitzer and colleagues report ({SCHWEITZER}). The clip (valgus) bruise pattern points to the MCL ({SANDERS}).</p>
         <p>The report here uses descriptive terms (edema around intact fibres, partial tear, complete tear) rather than a numbered grade, because no cited paper here gives an MRI grade.</p>
+        <ScanFigures images={[kneeMriScans.mclTear]} />
       </>
     ),
   },
@@ -240,6 +247,7 @@ const learn: LearnSection[] = [
         <p>After an acute lateral patellar dislocation, the medial retinaculum was disrupted at its patellar insertion in 76% of examinations; where the femoral origin of the medial patellofemoral ligament (MPFL) could be seen, 49% showed injury; and 70% had an osteochondral injury of the inferomedial patella ({ELIAS}). The bruise pattern (inferomedial patella and anterolateral lateral femoral condyle) may be the only clue that a dislocation happened ({SANDERS}).</p>
         <h4>Trochlear shape</h4>
         <p>A lateral trochlear inclination below 11°, measured on the first axial image that shows trochlear cartilage, was a diagnostic test for patellar instability, with a sensitivity of 93% and a specificity of 87% ({CARRILLON}).</p>
+        <ScanFigures images={[kneeMriScans.patellarDislocation]} />
       </>
     ),
   },
@@ -249,6 +257,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Go compartment by compartment: patellofemoral, medial and lateral. Describe each lesion by its depth: signal change only, partial thickness under half, partial thickness half or more, or full thickness, and give its site ({CREMA}). For a traumatic defect, give its location, size and depth, and say whether there is a chondral fragment; if a defect is found, look through the joint for a loose fragment ({RECHT}).</p>
+        <ScanFigures images={[kneeMriScans.osteochondralDefect]} />
       </>
     ),
   },
@@ -258,6 +267,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Look for a popliteal (Baker) cyst and say whether it has ruptured. A parameniscal cyst is usually associated with a meniscal tear ({CAMPBELL}), so a cyst beside a meniscus called intact sends you back to that meniscus. Then note synovitis and the Hoffa fat pad.</p>
+        <ScanFigures images={[kneeMriScans.bakerCyst]} />
       </>
     ),
   },

@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { wristMriScans } from '../data/scans/wristMri'
 import { herbertDescriptions, herbertGroup, herbertSentence, herbertTypes } from '../logic/herbert'
 import type { HerbertType } from '../logic/herbert'
 import { lichtmanDescriptions, lichtmanSentence, lichtmanStages } from '../logic/lichtman'
@@ -139,6 +141,7 @@ const learn: LearnSection[] = [
         <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar aspect of the lunate, sometimes also in the radial aspects of the triquetrum and the ulnar head ({IMAEDA}), and goes with positive ulnar variance ({CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}).</p>
         <p>Stage Kienböck disease by Lichtman, whose four stages are clinical and radiographic ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. Stage I has normal radiographs, and since 1993 decreased T1 signal on MRI. Stage III was split in 1993 by fixed scaphoid rotation (a radioscaphoid angle over 60° is IIIB), and IIIC, a coronal fracture of the lunate, was added later ({KENNEDY_ABRAMS}).</p>
         {lichtmanTable}
+        <ScanFigures images={[wristMriScans.occultScaphoidFracture, wristMriScans.kienbock]} />
       </>
     ),
   },
@@ -149,6 +152,7 @@ const learn: LearnSection[] = [
       <>
         <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}). Say which parts are torn.</p>
         <p>Linscheid and colleagues described the carpal instability patterns. A normal scapholunate angle is 30° to 60°; above 60° suggests dorsal intercalated segment instability (DISI), and below 30° volar intercalated segment instability (VISI) ({LINSCHEID}). Those angles were measured on lateral radiographs, so treat a measurement on sagittal MRI as a pointer, not a diagnosis.</p>
+        <ScanFigures images={[wristMriScans.scapholunateTear]} />
       </>
     ),
   },
@@ -183,6 +187,7 @@ const learn: LearnSection[] = [
         <p>Classes 2D and 2E include perforation of the lunotriquetral ligament, so read them against step 4 ({PALMER}).</p>
         <p>Triangular fibrocartilage defects are also found in the asymptomatic opposite wrist, so a defect is not by itself the cause of the pain ({ZANETTI}).</p>
         <p>Report the ulnar variance (positive, neutral or negative): it matters for ulnar impaction (step 2).</p>
+        <ScanFigures images={[wristMriScans.tfccTear]} />
       </>
     ),
   },
@@ -203,6 +208,7 @@ const learn: LearnSection[] = [
         <p>Go through the six compartments. In de Quervain tenosynovitis, thickening of the abductor pollicis longus and extensor pollicis brevis tendons of the first compartment is the most reliable sign, with edema around them; edema in the subcutaneous fat and increased signal within the tendons are less reliable ({GLAJCHEN}).</p>
         <p>Intersection syndrome shows peritendinous edema where the first compartment crosses the second, proximal to Lister's tubercle ({COSTA}).</p>
         <p>Check the extensor carpi ulnaris for tendinopathy, tears and its position in the groove.</p>
+        <ScanFigures images={[wristMriScans.ecuSubluxation]} />
       </>
     ),
   },
@@ -212,6 +218,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Check the flexor tendons, then the median nerve. MRI signs of carpal tunnel syndrome are swelling of the nerve at the level of the pisiform, flattening at the level of the hamate, palmar bowing of the flexor retinaculum, and increased T2 signal in the nerve ({MESGARZADEH}).</p>
+        <ScanFigures images={[wristMriScans.carpalTunnelSyndrome]} />
       </>
     ),
   },
@@ -221,6 +228,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Follow the ulnar nerve and artery through the Guyon canal. MRI shows its contents and its variants, which include accessory muscles ({ZEISS}). A ganglion or a hook of hamate fracture next to the canal can compress the nerve.</p>
+        <ScanFigures images={[wristMriScans.guyonGanglion]} />
       </>
     ),
   },
@@ -230,6 +238,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>MRI finds occult dorsal ganglia in patients with dorsal wrist pain ({VO}). Look for a ganglion and say where it arises, then for synovitis.</p>
+        <ScanFigures images={[wristMriScans.dorsalGanglion]} />
       </>
     ),
   },

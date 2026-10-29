@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { elbowMriScans } from '../data/scans/elbowMri'
 import { brobergMorrey, mason, masonDescriptions, masonSentence } from '../logic/mason'
 import type { MasonPattern, MasonResult, MasonType } from '../logic/mason'
 import { StudyPage } from '../study/StudyPage'
@@ -147,6 +149,7 @@ const learn: LearnSection[] = [
         <h4>Capitellum: osteochondritis dissecans, Panner, and the pseudodefect</h4>
         <p>Panner's disease is fragmentation of the whole capitellum in children younger than about 10; osteochondritis dissecans is a focal lesion of the capitellum in adolescents, typically throwers and gymnasts ({KOBAYASHI}). On MRI, judge whether an osteochondritis dissecans fragment is stable by looking at the interface between the fragment and the bone and at the overlying cartilage ({KIJOWSKI_OCD}).</p>
         <p>Do not call the pseudodefect a lesion: at the junction of the capitellum and the lateral epicondyle, a groove and the overhanging lateral edges of the capitellum can simulate an osteochondral lesion on axial and coronal images ({ROSENBERG_PSEUDO}).</p>
+        <ScanFigures images={[elbowMriScans.capitellarOcd]} />
       </>
     ),
   },
@@ -157,6 +160,7 @@ const learn: LearnSection[] = [
       <>
         <p>The anterior bundle of the ulnar collateral ligament is the one that matters for valgus stability; describe it as intact, with edema around intact fibres, partially torn or completely torn ({KIJOWSKI_PART2}).</p>
         <p>In throwers, look at the deep surface of the anterior bundle where it attaches to bone. Timmerman and Andrews described an undersurface tear of the deep capsular layer of the anterior bundle: the ligament intact externally, but its undersurface detached at the ulna or the humerus ({TIMMERMAN_ANDREWS}). It is hard to see on MRI: six of their seven patients had a normal MRI. On CT arthrography it gives the "T-sign", contrast leaking around the detachment from bone but contained within the intact superficial layer and capsule, and that was the arthrogram's main advantage over MRI ({TIMMERMAN}).</p>
+        <ScanFigures images={[elbowMriScans.uclTear]} />
       </>
     ),
   },
@@ -167,6 +171,7 @@ const learn: LearnSection[] = [
       <>
         <p>Check the lateral ulnar collateral ligament (LUCL), the radial collateral ligament and the annular ligament by name. Insufficiency of the LUCL is the lesion behind posterolateral rotatory instability ({ODRISCOLL_PLRI}), so a torn LUCL is worth a line in the impression even when the patient's complaint is only pain.</p>
         <p>After a dislocation, the LUCL is the first structure to fail ({ODRISCOLL_SPECTRUM}).</p>
+        <ScanFigures images={[elbowMriScans.luclTear]} />
       </>
     ),
   },
@@ -176,6 +181,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Medial epicondylitis shows as abnormal signal in the common flexor tendon at the medial epicondyle ({KIJOWSKI_MEDIAL}). Describe it as tendinosis, a partial tear or a complete tear, and look next door at the ulnar collateral ligament and the ulnar nerve.</p>
+        <ScanFigures images={[elbowMriScans.flexorTendinosis]} />
       </>
     ),
   },
@@ -186,6 +192,7 @@ const learn: LearnSection[] = [
       <>
         <p>In refractory lateral epicondylitis, the MRI findings correlated with the surgical finding of primary degeneration of the extensor carpi radialis brevis, and the tendon degeneration and degree of tear seen on MRI correlated well with the surgical and histological findings ({POTTER}). Bredella and colleagues defined lateral epicondylitis on MRI as increased signal in the extensor tendons close to their insertion on the lateral epicondyle ({BREDELLA}).</p>
         <p>Read the LUCL again when the extensor origin is abnormal: LUCL abnormalities, thickening and tears, were found in patients with lateral epicondylitis ({BREDELLA}).</p>
+        <ScanFigures images={[elbowMriScans.commonExtensorTear]} />
       </>
     ),
   },
@@ -195,6 +202,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>MRI tells a partial rupture of the distal biceps tendon from a complete one ({FALCHOOK}). For a complete rupture, measure how far the tendon end has retracted; for any tear, note fluid in the bicipitoradial bursa. The cited paper gives no retraction threshold, so the measurement is descriptive.</p>
+        <ScanFigures images={[elbowMriScans.bicepsPartialTear, elbowMriScans.bicepsRetraction]} />
       </>
     ),
   },
@@ -214,6 +222,7 @@ const learn: LearnSection[] = [
       <>
         <p>Follow the ulnar nerve through the cubital tunnel, the radial nerve and its posterior interosseous branch past the supinator, and the median nerve. An abnormal nerve is enlarged with increased T2 signal, and muscles it supplies may show denervation edema ({KIJOWSKI_PART2}).</p>
         <p>An anconeus epitrochlearis, an accessory muscle over the cubital tunnel, can compress the ulnar nerve ({ROSENBERG_TUNNEL}); it is recorded in the variants step.</p>
+        <ScanFigures images={[elbowMriScans.ulnarNeuritis]} />
       </>
     ),
   },

@@ -192,3 +192,137 @@ unmarked); Arias Rodríguez 2025 malignant otitis externa (small panel, red arro
 Not used: Dhaliwal 2023 burst (too dark); Chang 2019 atlanto-occipital dissociation (burned-in
 text); Park 2025 main-duct IPMN (panels too small); Danti Fig. 8b mural nodule (unreadable when
 cropped). No Kienböck ring sign or A2 split fracture found.
+
+## MSK MRI studies (2026-10-28)
+
+Ankle, foot, diabetic foot, knee, shoulder, elbow and wrist MRI: 60 images, one or two under each
+Learn section where a good open figure exists. Same rules as above. Licence versions were checked in
+the article XML and on Crossref; the three Cureus articles have no Crossref licence and state the
+version in the article. For Ahmad 2022, Mercouris 2023, Kothari 2023, Dong 2012, Metikala 2022 and
+Tischler 2014 the version is only in the licence link, as for the IOTA paper. Three figures come from
+Springer's full-size copy (static-content.springer.com) because the PMC copy was too small or
+missing; the figure and caption are the same. Where the authors' arrows were coloured, the grey was
+taken from the red channel (or, for one blue arrow, the blue channel), which leaves grey pixels
+unchanged. Two captions drop a sentence of the source's that would confuse here (the talar lesion's
+"early inactive osteopenia"; the tibialis posterior's "MRI showed tendinopathy").
+
+### Ankle MRI (`src/data/scans/ankleMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| talarOsteochondralLesion | bones | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97 (PMC7431516) | Fig. 18A | CC BY 4.0 | grey from the red channel |
+| atflTear | lateral-ligaments | González-Gutiérrez O, Roldan-Valadez E, Molina-Gonzalez M, Garcia-de-Bustamante Martin-Romo, López-Montoya LO, Gonzalez-Trejo AP, et al. Imaging anatomy of the ankle in normal and pathological states: a clinically focused pictorial review. Cureus. 2025;17(10):e93882 (PMC12585092) | Fig. 9C | CC BY 4.0 |  |
+| aitflTear | syndesmosis | González-Gutiérrez O, Roldan-Valadez E, Molina-Gonzalez M, Garcia-de-Bustamante Martin-Romo, López-Montoya LO, Gonzalez-Trejo AP, et al. Imaging anatomy of the ankle in normal and pathological states: a clinically focused pictorial review. Cureus. 2025;17(10):e93882 (PMC12585092) | Fig. 9A | CC BY 4.0 |  |
+| springLigamentTear | medial-ligaments | Andres L, Donners R, Harder D, Burssens A, Nüesch C, Krähenbühl N. Association between weightbearing CT and MRI findings in progressive collapsing foot deformity. Foot Ankle Int. 2024;45(5):526-534 (PMC11083736) | Fig. 3B | CC BY 4.0 |  |
+| tibialisPosteriorTear | medial-tendons | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97 (PMC7431516) | Fig. 8B | CC BY 4.0 | grey from the red channel |
+| peronealSplitTear | lateral-tendons | Bokwa-Dąbrowska K, Mocanu D, Romanus I, Zych R, Huuskonen M, Szaro P. Peroneus brevis split tear – a challenging diagnosis: a pictorial review of magnetic resonance and ultrasound imaging – Part 2: imaging with magnetic resonance and ultrasound. Eur J Radiol Open. 2025;14:100627 (PMC11733185) | Fig. 9b | CC BY 4.0 | grey from the red channel |
+| achillesRupture | posterior | Ortiz A, Diaz C. Nonoperative management of an acute complete Achilles tendon rupture with mesenchymal stem cells and extracellular vesicles: a case report. Cureus. 2026;18(10):e118122 (PMC13679634) | Fig. 1A | CC BY 4.0 | grey from the red channel |
+| tarsalTunnelGanglion | spaces | Dong Q, Jacobson JA, Jamadar DA, Gandikota G, Brandon C, Morag Y, et al. Entrapment neuropathies in the upper and lower limbs: anatomy and MRI features. Radiol Res Pract. 2012;2012:230679 (PMC3483739) | Fig. 20b | CC BY 3.0 |  |
+| plantarFasciitis | plantar | Kothari EA, Padgett AM, Young SM, Ray J, Shah A, Conklin MJ. A review of pediatric heel pain. Cureus. 2023;15(1):e34228 (PMC9960861) | Fig. 5 | CC BY 3.0 | grey from the red channel |
+
+### Foot MRI (`src/data/scans/footMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| calcaneonavicularCoalition | hindfoot | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97 (PMC7431516) | Fig. 24B | CC BY 4.0 | grey from the red channel |
+| navicularStressFracture | hindfoot | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97 (PMC7431516) | Fig. 14b | CC BY 4.0 | grey from the red channel |
+| lisfrancRupture | lisfranc | Liu Y, Wan H, Lu W, Ding XL. Clinical efficacy analysis of elastic fixation for isolated ligamentous Lisfranc injuries. BMC Surg. 2025;26:38 (PMC12817689) | Fig. 1d | CC BY 4.0 | grey from the red channel; publisher's full-size figure |
+| metatarsalStressFracture | metatarsals | Palka O, Guillin R, Lecigne R, Combes D. Radiological approach to metatarsalgia in current practice: an educational review. Insights Imaging. 2025;16:94 (PMC12041408) | Fig. 9B | CC BY 4.0 | grey from the red channel |
+| freibergInfraction | metatarsals | Palka O, Guillin R, Lecigne R, Combes D. Radiological approach to metatarsalgia in current practice: an educational review. Insights Imaging. 2025;16:94 (PMC12041408) | Fig. 10A | CC BY 4.0 | grey from the red channel |
+| sesamoiditis | hallux | Palka O, Guillin R, Lecigne R, Combes D. Radiological approach to metatarsalgia in current practice: an educational review. Insights Imaging. 2025;16:94 (PMC12041408) | Fig. 3C | CC BY 4.0 | grey from the red channel |
+| plantarPlateTear | lesser-mtp | Palka O, Guillin R, Lecigne R, Combes D. Radiological approach to metatarsalgia in current practice: an educational review. Insights Imaging. 2025;16:94 (PMC12041408) | Fig. 8B | CC BY 4.0 | grey from the red channel |
+| mortonNeuroma | interspaces | Dong Q, Jacobson JA, Jamadar DA, Gandikota G, Brandon C, Morag Y, et al. Entrapment neuropathies in the upper and lower limbs: anatomy and MRI features. Radiol Res Pract. 2012;2012:230679 (PMC3483739) | Fig. 22b | CC BY 3.0 |  |
+| osPeroneumPeroneusLongusSplit | tendons | Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11:97 (PMC7431516) | Fig. 22B | CC BY 4.0 | grey from the red channel |
+
+### Diabetic foot MRI (`src/data/scans/diabeticFootMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| sinusTract | soft-tissue | Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial review. Insights Imaging. 2019;10:77 (PMC6682845) | Fig. 20b | CC BY 4.0 | grey from the red channel |
+| abscess | soft-tissue | Lauri C, Leone A, Cavallini M, Signore A, Giurato L, Uccioli L. Diabetic foot infections: the diagnostic challenges. J Clin Med. 2020;9(6):1779 (PMC7355769) | Fig. 3 | CC BY 4.0 |  |
+| calcanealOsteomyelitis | bone | Alaia EF, Chhabra A, Simpfendorfer CS, Cohen M, Mintz DN, Vossen JA, Zoga AC, Fritz J, Spritzer CE, Armstrong DG, Morrison WB. MRI nomenclature for musculoskeletal infection. Skeletal Radiol. 2021;50(12):2319-2347 (PMC8789645) | Fig. 15A | CC BY 4.0 |  |
+| hazyReticularT1 | bone | Tiegs-Heiden CA, Anderson TC, Collins MS, Johnson MP, Osmon DR, Wenger DE. Outcomes in patients with clinically suspected pedal osteomyelitis based on bone marrow signal pattern on MRI. J Bone Jt Infect. 2023;8(2):99-107 (PMC10134750) | Fig. 3A | CC BY 4.0 |  |
+| septicArthritis | joints | Alaia EF, Chhabra A, Simpfendorfer CS, Cohen M, Mintz DN, Vossen JA, Zoga AC, Fritz J, Spritzer CE, Armstrong DG, Morrison WB. MRI nomenclature for musculoskeletal infection. Skeletal Radiol. 2021;50(12):2319-2347 (PMC8789645) | Fig. 9A | CC BY 4.0 |  |
+| ghostSignT1 | charcot | Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial review. Insights Imaging. 2019;10:77 (PMC6682845) | Fig. 21b | CC BY 4.0 |  |
+| ghostSignContrast | charcot | Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial review. Insights Imaging. 2019;10:77 (PMC6682845) | Fig. 21c | CC BY 4.0 |  |
+
+### Knee MRI (`src/data/scans/kneeMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| pivotShiftBruise | bones | Ubl ST, Vieider RP, Seilern und Aspang J, Siemoneit SF, Pfeiffer TR, Gaebler C, Platzgummer H. Bone bruise patterns after noncontact anterior cruciate ligament tears differ between alpine skiers and pivoting sports athletes. Am J Sports Med. 2025;53(7):1606-1613 (PMC12125494) | Fig. 3D | CC BY 4.0 |  |
+| bucketHandleTear | medial-meniscus | Koutserimpas C, Matzaroglou C, Kaliarntas K, Billis E, Arkoudis NA, Triantafyllou G, Piagkou M, Gliatis J. Double posterior cruciate ligament sign. Reports (Basel). 2026;9(2):120 (PMC13108129) | Fig. 1A | CC BY 4.0 |  |
+| meniscalExtrusion | medial-meniscus | Nguyen JC, Gorbachova T, Flores DV, Casagranda BU, Chalian M, Kani KK, Mills MK, Nwawka OK, Shea KG, Spindler KP, Stevens KJ, Weaver JS, Zoga AC, Boutin RD. Standardized MRI nomenclature for knee meniscal lesions: SSR consensus panel report. Skeletal Radiol. 2026;55(8):1711-1732 (PMC13424353) | Fig. 18 | CC BY 4.0 |  |
+| discoidMeniscus | lateral-meniscus | Lefevre N, Naouri JF, Herman S, Gerometta A, Klouche S, Bohu Y. A current review of the meniscus imaging: proposition of a useful tool for its radiologic analysis. Radiol Res Pract. 2016;2016:8329296 (PMC4766355) | Fig. 16b | CC BY 4.0 |  |
+| aclTear | acl | Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee-practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599 (PMC11399221) | Fig. 2A | CC BY 4.0 | grey from the red channel |
+| mclTear | mcl | Cristiani R, van de Bunt F, Kvist J, Stålman A. High prevalence of associated injuries in anterior cruciate ligament tears: a detailed magnetic resonance imaging analysis of 254 patients. Skeletal Radiol. 2024;53(11):2417-2427 (PMC11410909) | Fig. 1a | CC BY 4.0 | grey from the red channel |
+| patellarDislocation | extensor | Jibri Z, Jamieson P, Rakhra KS, Sampaio ML, Dervin G. Patellar maltracking: an update on the diagnosis and treatment strategies. Insights Imaging. 2019;10:65 (PMC6570735) | Fig. 7 | CC BY 4.0 |  |
+| osteochondralDefect | cartilage | Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee-practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599 (PMC11399221) | Fig. 4A | CC BY 4.0 | grey from the red channel |
+| bakerCyst | synovium | Vanhoenacker F, De Vos N, Van Dyck P. Common mistakes and pitfalls in magnetic resonance imaging of the knee. J Belg Soc Radiol. 2016;100(1):99 (PMC6100447) | Fig. 23A | CC BY 4.0 |  |
+
+### Shoulder MRI (`src/data/scans/shoulderMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| hillSachsLesion | bones | Kadi R, Milants A, Shahabpour M. Shoulder anatomy and normal variants. J Belg Soc Radiol. 2017;101(Suppl 2):3 (PMC6251069) | Fig. 4b | CC BY 4.0 |  |
+| supraspinatusFullTear | cuff | Yubran AP, Pesquera LC, Juan ELS, Saralegui FI, Canga AC, Camara AC, Valdivieso GM, Pisanti Lopez C. Rotator cuff tear patterns: MRI appearance and its surgical relevance. Insights Imaging. 2024;15:61 (PMC10899560) | Fig. 10b | CC BY 4.0 |  |
+| goutallierGrade4 | cuff | Yubran AP, Pesquera LC, Juan ELS, Saralegui FI, Canga AC, Camara AC, Valdivieso GM, Pisanti Lopez C. Rotator cuff tear patterns: MRI appearance and its surgical relevance. Insights Imaging. 2024;15:61 (PMC10899560) | Fig. 23e | CC BY 4.0 |  |
+| subscapularisTear | subscapularis | Ahmad ZY, Diaz LE, Roemer FW, Goud A, Guermazi A. Imaging review of subscapularis tendon and rotator interval pathology. Radiol Res Pract. 2022;2022:4009829 (PMC8767392) | Fig. 5a | CC BY 4.0 |  |
+| bicepsDislocation | biceps | Ahmad ZY, Diaz LE, Roemer FW, Goud A, Guermazi A. Imaging review of subscapularis tendon and rotator interval pathology. Radiol Res Pract. 2022;2022:4009829 (PMC8767392) | Fig. 5b | CC BY 4.0 |  |
+| bankartLesion | labrum | Pouliart N, Doering S, Shahabpour M. What can the radiologist do to help the surgeon manage shoulder instability? J Belg Soc Radiol. 2016;100(1):105 (PMC6100640) | Fig. 5 | CC BY 4.0 | grey from the red channel |
+| slapTear | labrum | Mercouris P, Mercouris M. Superior labrum anterior to posterior lesions: Part 2 - Classification with arthroscopic correlation. SA J Radiol. 2023;27(1):2707 (PMC10879901) | Fig. 4c | CC BY 4.0 |  |
+| haglLesion | capsule | Pouliart N, Doering S, Shahabpour M. What can the radiologist do to help the surgeon manage shoulder instability? J Belg Soc Radiol. 2016;100(1):105 (PMC6100640) | Fig. 11b | CC BY 4.0 | grey from the blue channel (the arrow is blue) |
+| paralabralCystDenervation | nerves | Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the upper limb: a pictorial review. Insights Imaging. 2022;13:166 (PMC9556688) | Fig. 4b | CC BY 4.0 |  |
+| sublabralRecess | variants | Kadi R, Milants A, Shahabpour M. Shoulder anatomy and normal variants. J Belg Soc Radiol. 2017;101(Suppl 2):3 (PMC6251069) | Fig. 13a | CC BY 4.0 |  |
+
+### Elbow MRI (`src/data/scans/elbowMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| capitellarOcd | bones | Matković A, Ferenc T, Dimnjaković D, Jurjević N, Vidjak V, Matković BR. Diagnostics (Basel). 2024;14(9):916 (PMC11083537) | Fig. 1b | CC BY 4.0 |  |
+| uclTear | ucl | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. Insights Imaging. 2019;10:43 (PMC6447645) | Fig. 14a | CC BY 4.0 |  |
+| luclTear | lateral-ligaments | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. Insights Imaging. 2019;10:43 (PMC6447645) | Fig. 24 | CC BY 4.0 |  |
+| flexorTendinosis | flexor | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. Insights Imaging. 2019;10:43 (PMC6447645) | Fig. 10b | CC BY 4.0 |  |
+| commonExtensorTear | extensor | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. Insights Imaging. 2019;10:43 (PMC6447645) | Fig. 9c | CC BY 4.0 |  |
+| bicepsPartialTear | biceps | Nayyar S, Quirno M, Hasan S, Rybak L, Meislin RJ. Case Rep Radiol. 2011;2011:515912 (PMC3350064) | Fig. 1 | CC BY 3.0 |  |
+| bicepsRetraction | biceps | Metikala S, Portnoff B, Herickhoff P. Cureus. 2022;14(5):e25172 (PMC9206879) | Fig. 2a | CC BY 3.0 |  |
+| ulnarNeuritis | nerves | Acosta Batlle J, Cerezal L, López Parra MD, Alba B, Resano S, Blázquez Sánchez J. Insights Imaging. 2019;10:43 (PMC6447645) | Fig. 11a | CC BY 4.0 |  |
+
+### Wrist MRI (`src/data/scans/wristMri.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence | Notes |
+|---|---|---|---|---|---|
+| occultScaphoidFracture | bones | Dietrich TJ, Teh J, Schmitt R, et al. Eur Radiol. 2026;36(10):7584-7598 (PMC13710594) | Fig. 1c | CC BY 4.0 | publisher's full-size figure |
+| kienbock | bones | Thomas M, Richa P, Ibrahim J, Habib F, Savarese R. Cureus. 2025;17(4):e82322 (PMC12081065) | Fig. 2a | CC BY 4.0 | grey from the red channel |
+| scapholunateTear | scapholunate | Tischler BT, Diaz LE, Murakami AM, Roemer FW, Goud AR, Arndt WF, Guermazi A. Insights Imaging. 2014;5(4):407-417 (PMC4141341) | Fig. 2c | CC BY 4.0 |  |
+| tfccTear | tfcc | Nevalainen MT, Zoga AC, Rivlin M, Morrison WB, Roedl JB. Eur Radiol. 2023;33(5):3172-3177 (PMC10121535) | Fig. 1a | CC BY 4.0 |  |
+| ecuSubluxation | extensors | Nevalainen MT, Zoga AC, Rivlin M, Morrison WB, Roedl JB. Eur Radiol. 2023;33(5):3172-3177 (PMC10121535) | Fig. 1b | CC BY 4.0 |  |
+| carpalTunnelSyndrome | flexors | Dong Q, Jacobson JA, Jamadar DA, Gandikota G, Brandon C, Morag Y, Fessell DP, Kim SM. Radiol Res Pract. 2012;2012:230679 (PMC3483739) | Fig. 13b | CC BY 3.0 |  |
+| guyonGanglion | guyon | Saran S, Reddy PS, Shirodkar K, Shah AB, Agarwal A, Shah A, Iyengar KP, Botchu R. Diagnostics (Basel). 2025;15(5):592 (PMC11899079) | Fig. 7a | CC BY 4.0 | grey from the red channel |
+| dorsalGanglion | ganglia | Ferreira Branco D, Botti P, Bouvet C, Abs B, Buzzi M, Beaulieu JY, Poletti PA, Bouredoucen H, Boudabbous S. Eur Radiol. 2024;34(12):7856-7863 (PMC11557617) | Fig. 2b | CC BY 4.0 | publisher's full-size figure |
+
+No image yet:
+
+- Ankle: technique, anterior and impression (spares: Huuskonen 2023 Fig. 5d effusion, Szaro 2020
+  Fig. 19 anterior impingement). Sawant, Davda, Kimura and Walther, cited in the study, are CC BY-NC
+  or BY-NC-SA.
+- Foot: accessory navicular with oedema, turf toe; technique, fascia (the ankle study has plantar
+  fasciitis), variants, impression. Lim 2022 (plantar Lisfranc sprain) is too small in PMC and its
+  publisher copy could not be fetched. Palka 2025 Fig. 7 calls a Morton neuroma bright on T2, against
+  the study's low-to-intermediate signal; Dong 2012 Fig. 22 was used instead.
+- Diabetic foot: technique, impression; an active Charcot (stage 0) panel, Rosskopf 2019 Fig. 14b,
+  is a spare. Rosskopf Fig. 21's legend calls panel b STIR; its text and the image show T1.
+- Knee: lipohemarthrosis, PCL, posterolateral corner, ACL graft and cyclops lesion, impression
+  (spares: Parkar and Adriaensen 2024 Figs. 2C Segond, 2D/2E posterolateral corner; Vanhoenacker
+  2016 Fig. 29 parameniscal cyst). Ubl 2025 says "lateral tibial plateau" where the study's bruise
+  table says posterolateral; the caption keeps the source's words. Nguyen 2026 (meniscal extrusion)
+  is the SSR consensus, not the study's Nguyen RadioGraphics 2014 reference.
+- Shoulder: technique, subacromial and AC joint, GLAD, repaired cuff (Sugaya), impression; the Buford
+  complex, sublabral foramen and os acromiale. Stecco 2008 is CC BY 2.0 at Crossref but the article
+  says only "© Springer-Verlag 2008", so it was not used.
+- Elbow: the UCL T-sign (every figure found was NC, NC-SA, NC-ND or unlicensed), triceps and
+  brachialis, bursae, variants (Acosta Batlle 2019 Fig. 6, an anconeus epitrochlearis, is a spare).
+  Two rejected captions bear on the capitellar OCD stability sentence (E2-6): PMC10814069 Fig. 4C and
+  Acosta Batlle Fig. 32 use interface fluid and cartilage disruption as stability signs.
+- Wrist: lunotriquetral, perilunate and extrinsic ligaments, de Quervain and intersection syndrome,
+  variants (a bifid median nerve, PMC9947498 Fig. 3B, is too small).
