@@ -12,7 +12,8 @@ by the author's choice).
   only the original papers could settle: the exact 1 cm / 40% facet boundary (Vaccaro 2016; spine
   CT and AO Spine), any Lisfranc pattern beyond A to C2 (Myerson 1986; foot study and Myerson),
   whether B5 is in Herbert and Fisher 1984 (wrist study and Herbert), and three Letournel phrases
-  (Letournel 1980; pelvis CT and Letournel). Those pages keep "Unchecked draft" for them. Also
+  (Letournel 1980; pelvis CT and Letournel). Those pages still name the unread point in their
+  notes, but at the author's request no page says "Unchecked draft" any more (2026-10-29). Also
   decided: Gupta's "type B on radiographs, type A on CT" case stays off the Myerson page.
 
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's

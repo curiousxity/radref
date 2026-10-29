@@ -4,7 +4,7 @@
  * morphology; the subaxial system adds facet injuries. Shared by the AO Spine calculator and
  * the spine trauma CT study.
  *
- * Unchecked draft: both papers are matched on PubMed but paywalled. The types, order, facets,
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29): both papers are matched on PubMed but paywalled. The types, order, facets,
  * neurology, modifiers and notation are checked against AO Spine's own posters for both systems
  * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/), and neurology
  * from the examination, the separate upper cervical system and who may carry "+" (AO-9) against

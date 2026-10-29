@@ -7,7 +7,7 @@ import { SpineTraumaCtStudyPage } from './SpineTraumaCtStudy'
 const study = studyOf(SpineTraumaCtStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims) or, for AO
  * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). The references are matched and
  * all but one claim is verified there (the exact 1 cm / 40% facet boundary in AO-6); when it is
@@ -25,8 +25,8 @@ describe('spine trauma CT lesson', () => {
   // Wáng 2024, and for the decisions of 2026-10-29 Radcliff 2013, Woods 2018, Kopparapu 2022 (rule
   // of Spence), Brommeland 2018, Wagner 2023 (Denver), Wáng 2020 (Genant), and for their second
   // round Kim 2020 (the EAST guideline) and Turaczyk Kolodziej 2024 (the low-energy advisory).
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  test('is not labelled an unchecked draft (the author\'s choice), with a DOI on every reference', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
     expect(study.sourceNote).toMatch(/1 cm or 40%/)
     expect(study.sourceNote).not.toMatch(/Denver/)
     expect(study.references).toHaveLength(20)

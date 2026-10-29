@@ -8,7 +8,7 @@ import { PelvisCtStudyPage } from './PelvisCtStudy'
 const study = studyOf(PelvisCtStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims) or, for Young-Burgess
  * and Letournel, 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). The references
  * are matched, but only the claims marked verified there were read in their papers; when the
@@ -24,8 +24,8 @@ describe('pelvis CT lesson', () => {
   // The references are matched (each has a DOI), but parts of the Letournel elementary-type
   // wording are still unread, so the note keeps saying so. Roy-Camille's own use of the U or H
   // shape left the list on 2026-10-29 (second round): the shape is no longer attributed to him.
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  test('is not labelled an unchecked draft (the author\'s choice), with a DOI on every reference', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
     // 17 since the Young-Burgess and Denis reviews (Alton and Gee 2014, Rizkalla 2019), Halawi 2015
     // and Leone 2022, read in full in place of Khurana for the ring breaking in more than one place
     // and for the L5 transverse process, and Gänsslen 2024 (open review of the Letournel types,
@@ -128,7 +128,7 @@ describe('pelvis CT report: whole cases', () => {
   })
 })
 
-describe('pelvis CT rules (unchecked draft)', () => {
+describe('pelvis CT rules', () => {
   // YB-8: the usual stability implication. Decision 36 (2026-10-29): LC III was "rotationally
   // unstable, vertically stable"; Leone: "Lateral compression grade 3 injuries have a
   // multidirectional instability".

@@ -16,7 +16,8 @@ and figure legends; Bone & Joint, Ovid, Wiley, SAGE, Springer and Elsevier ask f
 
 **Not being pursued (the author's choice, 2026-10-29).** The four papers below would each settle one
 still-unread point, but the author chose to leave those points as they are: don't ask for these
-papers or raise the points again. The pages that rest on them keep "Unchecked draft".
+papers or raise the points again. The pages that rest on them name the point in their notes but are
+not labelled "Unchecked draft" (the author's choice).
 
 ## Calculators
 

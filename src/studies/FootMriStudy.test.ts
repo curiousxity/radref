@@ -9,7 +9,7 @@ import { FootMriStudyPage } from './FootMriStudy'
 const study = studyOf(FootMriStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims) or, for the three
  * shared classifications, 2026-10-23-foot-calculators-sources.md (HK, SA, MY claims). The
  * references are matched, and the claims marked verified there were read in an abstract or in
@@ -28,8 +28,8 @@ describe('foot MRI lesson', () => {
   // The references are matched (each has a DOI), but one claim is still unchecked (Myerson
   // patterns beyond A to C2, MY-6), so the note keeps saying so. The irregular coalition margins
   // (F2-3) were settled on 2026-10-29 (second round) with Lawrence 2014.
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  test('is not labelled an unchecked draft (the author\'s choice), with a DOI on every reference', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
     // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added;
     // 24 since eight open reviews were added beside the paywalled papers (2026-10-29); 27 since
     // Marth 2024 (talocalcaneal facets) and the two reviews behind the Myerson type D note; 29

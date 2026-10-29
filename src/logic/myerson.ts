@@ -2,7 +2,7 @@
  * Myerson classification of tarsometatarsal (Lisfranc) fracture-dislocations (Myerson et al.,
  * Foot Ankle 1986). Shared by the Myerson calculator and the foot MRI study.
  *
- * Unchecked draft: the paper is matched on PubMed (PMID 3710321) but paywalled, and its abstract
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29): the paper is matched on PubMed (PMID 3710321) but paywalled, and its abstract
  * does not give the types. The five types are checked against the tables in Diebal et al. (Sports
  * Health 2013) and Tzatzairis et al. (World J Orthop 2019), and the A, B2 and C1 wording follows
  * the author's decision of 2026-10-29 as far as those tables support it. B2 states the alignment of

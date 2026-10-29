@@ -13,7 +13,7 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23), but
  * the papers are paywalled, so only claims whose wording is in an abstract, or in an open review
  * cited beside the paper (2026-10-29), are verified. The claims table, with each claim's status,
  * is docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims); the Hawkins, Sanders
@@ -23,7 +23,7 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * later type D) are applied and recorded in both sources docs. Second round (2026-10-29): the
  * irregular coalition margins (F2-3) are now in Lawrence 2014's wording, with Newman as
  * background, and Myerson B2 states alignment of the first metatarsal with the medial cuneiform
- * (Gupta 2008). Myerson 1986 itself (MY-6) is still unread, so the page stays an unchecked draft.
+ * (Gupta 2008). Myerson 1986 itself (MY-6) is still unread, but the page is not labelled "Unchecked draft" (the author's choice, 2026-10-29).
  */
 
 const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
@@ -962,7 +962,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: whether Myerson named any displacement pattern beyond types A to C2.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: whether Myerson named any displacement pattern beyond types A to C2.',
   references,
   report: {
     steps,

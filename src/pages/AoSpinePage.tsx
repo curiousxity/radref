@@ -120,7 +120,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below), and which neurology grades may carry "+" against an open review; one point is still unchecked, whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2 (read here as F2). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
+        <p className="source-note">The papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below), and which neurology grades may carry "+" against an open review; one point is still unchecked, whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2 (read here as F2). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">

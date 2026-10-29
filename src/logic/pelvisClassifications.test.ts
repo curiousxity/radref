@@ -98,7 +98,7 @@ describe('Young-Burgess', () => {
   })
 })
 
-describe('Letournel (unchecked draft: parts of LT-2 unread)', () => {
+describe('Letournel (parts of LT-2 unread)', () => {
   // LT-1: five elementary and five associated types.
   test('ten types, five of each', () => {
     expect(ltElementary).toHaveLength(5)

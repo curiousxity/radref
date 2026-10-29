@@ -10,7 +10,7 @@ import { WristMriStudyPage } from './WristMriStudy'
 const study = studyOf(WristMriStudyPage)
 
 /*
- * Unchecked draft (one claim unread: whether Herbert and Fisher 1984 itself has type B5). Every
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29; one claim unread: whether Herbert and Fisher 1984 itself has type B5). Every
  * rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims) or, for the four
  * shared classifications, 2026-10-23-wrist-calculators-sources.md (MF, HB, PA, LI claims).
@@ -30,8 +30,8 @@ describe('wrist MRI lesson', () => {
   // The references are matched (each has a DOI). The author's decisions of 2026-10-29 settled the
   // scapholunate angle bounds, the perilunate mechanism and Palmer 1B and 1C; one claim is still
   // unread (whether Herbert and Fisher 1984 itself has type B5), so the note keeps saying so.
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  test('is not labelled an unchecked draft (the author\'s choice), with a DOI on every reference', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
     expect(study.sourceNote).toMatch(/Still unchecked: whether Herbert and Fisher's 1984 paper itself has type B5/)
     expect(study.sourceNote).not.toMatch(/scapholunate angle|perilunate|Palmer/)
     // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added;

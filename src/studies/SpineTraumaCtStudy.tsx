@@ -9,7 +9,7 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
  * are verified from abstracts, papers the author supplied, AO Spine's posters and open papers
  * cited beside the originals (Alves 2020 for T2-3; Radcliff 2013, Woods 2018 and Kopparapu 2022
  * for the rule of Spence, T2-2; Brommeland 2018 and Wagner 2023 for the expanded Denver criteria,
@@ -756,7 +756,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open papers, except one that is still unchecked: whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open papers, except one that is still unchecked: whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
   references,
   report: {
     steps,

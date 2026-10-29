@@ -9,7 +9,7 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
  * of the papers are paywalled, so claims are verified against abstracts and reviews read in full
  * (Alton and Gee, Rizkalla, Halawi, Leone, Durkee, Gänsslen, Dreizin and Smith, Barber, Novak);
  * parts of the Letournel elementary-type wording are still unread (see the sourceNote). The U or
@@ -636,7 +636,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims are checked against abstracts and reviews read in full, except parts of the Letournel elementary-type wording (the posterior column fracture running through the greater sciatic notch, the anterior wall fragment breaking the middle of the iliopectineal line, and the anterior column fracture starting at the anterior border of the ilium).',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and the claims are checked against abstracts and reviews read in full, except parts of the Letournel elementary-type wording (the posterior column fracture running through the greater sciatic notch, the anterior wall fragment breaking the middle of the iliopectineal line, and the anterior column fracture starting at the anterior border of the ilium).',
   references,
   report: {
     steps,
