@@ -281,8 +281,8 @@ is under the calculator below.
 - [x] Matched to the papers by the author's choice (2026-10-23): Rojas gives 8.5 mm (BDI) and
   2 mm (ADI) as 95% limits ("less than"), so those values are now outside normal; Laredo's
   features are "significantly more frequent" in benign or malignant collapse, not proof.
-- [ ] Still unchecked: Spence 6.9 mm and odontoid types (T2-2, T2-4, no abstracts), MRI for
-  what the rule misses (T2-3), the expanded Denver criteria and the C3 question (T5-1), the
+- [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"); two points for the author.
+- [ ] Still unchecked: MRI for what the rule misses (T2-3), the expanded Denver criteria and the C3 question (T5-1), the
   Genant grades (T6-1).
 
 ### AO Spine calculator
@@ -488,7 +488,9 @@ document. Where the site differed, the author chose the newer source, and these 
 - [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
   counts any medial plateau fracture as IV. For the author.
 - [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
-- [ ] Still pending: Broberg and Morrey 1987, Khurana 2014, Rao 1999, Spence 1970 (`docs/PAPERS_NEEDED.md`).
+- [ ] Still pending: Broberg and Morrey 1987 and Khurana 2014 (`docs/PAPERS_NEEDED.md`). Rao 1999 was settled
+  from its figure legends and Spence 1970 read in full (2026-10-28); Halawi 2015, sent in place of
+  Khurana, settles the ring-breaks-in-two-places claim but not the L5 transverse process.
 - [x] Knee cartilage depth grades (under half / half or more): neither Outerbridge nor Recht gives them.
   The author chose (2026-10-25) to keep the four grades as they are, with no source named.
 

@@ -103,3 +103,24 @@ injury, not a CT test, and a total within 6.9 mm no longer reads as reassurance.
 |----|---------|----------|
 | T2-4 | yes, reworded | Fig. 1: "Type I is an oblique fracture through the upper part of the odontoid process itself. Type II is a fracture at the junction of the odontoid process with the vertebral body of the second cervical vertebra. Type III is really a fracture through the body of the atlas [sic: axis]." Abstract: "two avulsion, thirty-two body, and fifteen basilar fractures ... Body fractures are most prone to non-union". The options now use the paper's words. |
 | T2-2, T2-3 | wording only | The chip said "rupture likely" above 6.9 mm; now "suggests rupture", the rule's own word. Below: "does not rule out a rupture". |
+
+## Sixth check, 2026-10-28: Spence 1970 from the author
+
+Read in full: Spence KF Jr, Decker S, Sell KW. Bursting atlantal fracture associated with rupture of
+the transverse ligament. J Bone Joint Surg Am. 1970;52(3):543-549 (T-R4), a page scan.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| T2-2 | yes, with two points for the author | Summary: "if the lateral mass displacement is greater than 6.9 millimeters, the transverse ligament probably is torn." Conclusions: "there is a high probability that the ligament is intact if spread of the lateral mass is less than 5.7 millimeters ... If, however, the spread is greater than 6.9 millimeters, the ligament has probably been torn". The spread is the total of both sides: "Lateral displacement of the lateral masses can be measured accurately on the anteroposterior roentgenogram by measuring the displacement from the outer margin of the body of the second cervical vertebra to the outer edge of the lateral mass on each side." |
+
+For the author (nothing reworded):
+
+1. The page calls it "an old rule from open-mouth radiographs". The figure comes from ten cadaver
+   specimens, cut to mimic a bursting fracture and pulled apart until the ligament tore: "The total
+   excursion of the lateral masses from resting width to ligament rupture ranged from 4.8 to 7.6
+   millimeters, with a mean of 6.3 millimeters." Radiographs are where the paper says to measure it
+   (the anteroposterior view; its Fig. 2 is an open-mouth view of a normal odontoid). Say it is a
+   cadaver-derived rule read on radiographs?
+2. Spence also gives a lower bound: below 5.7 mm the ligament is probably intact. The page, on the
+   author's earlier advice (fifth check), says a total within 6.9 mm "does not rule out a rupture",
+   citing Dickman. Keep as is, or add the 5.7 mm figure with that caveat?
