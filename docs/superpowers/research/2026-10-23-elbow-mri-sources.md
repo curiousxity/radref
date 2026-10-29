@@ -240,3 +240,17 @@ Also in E16, not yet on the page: all ten lesions were anterolateral in the capi
 against the posterior pseudodefect, E2-5), and all six stable lesions had loose bodies at surgery,
 so "the elbow joint should be carefully inspected for the presence of an associated
 intraarticular loose body".
+
+## Fourth check, 2026-10-28: E17 read in full
+
+E17 (Rosenberg, Beltran, Cheung and Broker, AJR 1995) was read in full in the AJR PDF viewer.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| E11-1 | no; **for the author** | E17 never mentions the anconeus epitrochlearis. Its cubital tunnel section covers the arcuate ligament ("a low-signal-intensity structure that bridges the cubital tunnel"), ulnar nerve subluxation or dislocation (4 of 27 patients, all incidental; the arcuate ligament absent in 2 of them) and engorged posterior recurrent ulnar veins mimicking a swollen nerve. The page cites E17 for the anconeus epitrochlearis in four places (`src/studies/ElbowMriStudy.tsx`: the lesson, the variants step, the variant teach line and the quiz). Unchanged until the author decides: find another source, or drop the citation. |
+
+Also in E17, not on the page: a transverse trochlear ridge (sagittal MRI, 73% of patients, 81% of
+volunteers) and a trochlear-groove pseudodefect (3–7 mm) that can mimic an osteophyte or an
+osteochondral fracture; "The absence of a signal change in the adjacent marrow should aid in
+recognizing their benign nature." And "improper positioning of the ulnar nerve often is
+asymptomatic".
