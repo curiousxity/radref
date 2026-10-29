@@ -149,4 +149,19 @@ export const SCAN_SOURCES = {
   nevalainen2023: { short: 'Nevalainen et al. 2023', doi: '10.1007/s00330-023-09446-x', licence: 'CC BY 4.0' },
   saran2025: { short: 'Saran et al. 2025', doi: '10.3390/diagnostics15050592', licence: 'CC BY 4.0' },
   ferreiraBranco2024: { short: 'Ferreira Branco et al. 2024', doi: '10.1007/s00330-024-10831-3', licence: 'CC BY 4.0' },
+  // Palmer
+  zhao2024: { short: 'Zhao et al. 2024', doi: '10.1186/s12891-023-07140-z', licence: 'CC BY 4.0' },
+  wang2026: { short: 'Wang et al. 2026', doi: '10.3389/fmed.2026.1842984', licence: 'CC BY 4.0' },
+  // Mason
+  nietschke2018: { short: 'Nietschke et al. 2018', doi: '10.1007/s11678-018-0456-2', licence: 'CC BY 4.0' },
+  muller2023: { short: 'Müller et al. 2023', doi: '10.3390/jcm12185870', licence: 'CC BY 4.0' },
+  harbrecht2021: { short: 'Harbrecht et al. 2021', doi: '10.1007/s00402-021-03895-z', licence: 'CC BY 4.0' },
+  scoscina2023: { short: 'Scoscina et al. 2023', doi: '10.1007/s12306-022-00745-y', licence: 'CC BY 4.0' },
+  jordan2017: { short: 'Jordan and Jones 2017', doi: '10.2174/1874325001711011405', licence: 'CC BY 4.0' },
+  // Mayfield
+  okoro2023: { short: 'Okoro et al. 2023', doi: '10.3390/life13071426', licence: 'CC BY 4.0' },
+  sakaria2026: { short: 'Sakaria et al. 2026', doi: '10.7759/cureus.103218', licence: 'CC BY 4.0' },
+  rachunekMedved2025: { short: 'Rachunek-Medved et al. 2025', doi: '10.1007/s00402-024-05744-1', licence: 'CC BY 4.0' },
+  // Herbert
+  neubauer2026: { short: 'Neubauer et al. 2026', doi: '10.1007/s10140-026-02481-3', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

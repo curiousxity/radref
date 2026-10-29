@@ -5,6 +5,8 @@ import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { mayfield, mayfieldDescriptions, mayfieldGaps, mayfieldSentence, mayfieldStages } from '../logic/mayfield'
 import type { MayfieldInput } from '../logic/mayfield'
+import { ScanFigures } from '../components/ScanFigures'
+import { mayfieldScans } from '../data/scans/mayfield'
 
 type YesNo = 'no' | 'yes'
 type Form = Record<keyof MayfieldInput, YesNo>
@@ -93,6 +95,11 @@ export function MayfieldPage() {
           </table>
         </div>
         <p>The injury travels around the lunate: from the scapholunate joint, through the capitolunate and lunotriquetral joints, to dislocation of the lunate itself. When the scaphoid breaks instead of the scapholunate ligament tearing, the path runs through the bone (a greater arc injury).</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[mayfieldScans.stage1, mayfieldScans.stage1Mri, mayfieldScans.stage3, mayfieldScans.stage4, mayfieldScans.greaterArc]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1980 paper is paywalled; the stage wording follows Kennedy and Allan's reproduction of its table." />

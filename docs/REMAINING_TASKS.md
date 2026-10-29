@@ -41,21 +41,13 @@ by the author's choice).
 - Done 2026-10-28: the MSK MRI studies (ankle, foot, diabetic foot, knee, shoulder, elbow,
   wrist) have 60 example scans; the sections still without one are listed at the end of
   `docs/superpowers/research/2026-10-28-example-scans.md`.
-- **Example scans still to add**: the fracture classifications Mason, Mayfield, Herbert and
-  Palmer. CC BY only, licence version stated; no
-  CC BY-NC and nothing without a clear licence. PMC candidates found but not yet vetted:
-  - Mason: PMC12565371 (J Clin Med 2025), PMC12766341 (Cureus review), PMC13337401,
-    PMC12127406.
-  - Mayfield (perilunate): PMC13426297 (Cureus, 16 cases), PMC12974986, PMC12717834,
-    PMC13631426, PMC12272136.
-  - Herbert (scaphoid): PMC13710594 (Eur Radiol consensus), PMC13653879, PMC13694059.
-  - Palmer (TFCC): PMC13652943 (Skeletal Radiol), PMC13447642 (Insights Imaging),
-    PMC10381215, PMC13294428.
-  - Fifth metatarsal: done 2026-10-28 (zone map, zones 1–3, apophysis, ununited fragment, os
-    vesalianum, os peroneum; `src/data/scans/fifthMetatarsal.ts`). No CC BY image of a dancer's
-    (distal spiral) fracture was found; that card keeps its drawing only. Searched again
-    2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
-    filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
+- Done 2026-10-28: Mason (I–IV), Mayfield (I, III, IV, greater arc), Herbert (A1, A2, B1–B4, D2) and
+  Palmer (1A–1D) have example scans; the missing types are listed in the example-scans research doc.
+- Fifth metatarsal: done 2026-10-28 (zone map, zones 1–3, apophysis, ununited fragment, os
+  vesalianum, os peroneum; `src/data/scans/fifthMetatarsal.ts`). No CC BY image of a dancer's
+  (distal spiral) fracture was found; that card keeps its drawing only. Searched again
+  2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
+  filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
 - **Hearing loss CT:** the five "For the author" questions (see its section below).
 - Decided 2026-10-28: calvarium and hearing loss stay single pages, with no Report, Learn or
   Quiz tabs.

@@ -5,6 +5,8 @@ import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { brobergMorrey, mason, masonDescriptions, masonSentence } from '../logic/mason'
 import type { MasonPattern, MasonType } from '../logic/mason'
+import { ScanFigures } from '../components/ScanFigures'
+import { masonScans } from '../data/scans/mason'
 
 type Form = {
   dislocation: 'no' | 'yes'
@@ -131,6 +133,11 @@ export function MasonPage() {
           </table>
         </div>
         <p>A dislocation makes the fracture type IV, whatever the pattern. Broberg and Morrey later put numbers on types I and II: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head (<Cite doi="10.1097/00003086-198703000-00017">Broberg and Morrey, Clin Orthop Relat Res 1987</Cite>; unchecked). A fragment displaced 2 mm or more but smaller than 30% of the head falls outside those numbers.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[masonScans.type1, masonScans.type2, masonScans.type2Ct, masonScans.type3, masonScans.type4]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. Johnston is read in full and Mason's types in the 2012 review's reproduction of his table; Broberg and Morrey 1987 is paywalled." />
