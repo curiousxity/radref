@@ -83,7 +83,7 @@ export function NeerPage() {
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Fracture lines</h3>
-          <p>A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Exactly 1 cm or 45° is not displaced. In 2002 Neer added the valgus-impacted four-part fracture: the head is tilted into valgus and driven down between the splayed tuberosities but stays in contact with the glenoid, unlike the classic four-part fracture, and it has a better outlook. Name it in the report when you see it.</p>
+          <p>A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Exactly 1 cm or 45° is not displaced. In 2002 Neer added the valgus-impacted four-part fracture: the head is tilted into valgus and driven down between the splayed tuberosities but stays in contact with the glenoid, unlike the typical displaced four-part fracture. It forms a distinct category, with a different prognosis and different treatment considerations. Name it in the report when you see it.</p>
           <div className="form-grid">
             {NEER_LINES.map((line) => (
               <div key={line} className="form-grid">

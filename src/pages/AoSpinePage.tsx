@@ -5,7 +5,7 @@ import { spineTraumaScans } from '../data/scans/spineTrauma'
 import { CopyBlock } from '../components/CopyBlock'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
-import { aoCode, aoDescription, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoGroup, aoModifiers, aoNeuroDescription, aoNeuros, aoSentence, aoSpine, aoTypes } from '../logic/aospine'
+import { aoCode, aoCompressionAllowed, aoDescription, aoDescriptions, aoFacetCode, aoFacetDescriptions, aoFacets, aoGroup, aoModifiers, aoNeuroDescription, aoNeuros, aoSentence, aoSpine, aoTypes } from '../logic/aospine'
 import type { AoFacet, AoNeuro, AoRegion, PosteriorTensionBand } from '../logic/aospine'
 
 type YesNo = 'no' | 'yes'
@@ -74,6 +74,7 @@ const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 const references: LessonReference[] = [
   { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: '10.1097/BRS.0b013e3182a8a381' },
   { citation: 'Vaccaro AR, Koerner JD, Radcliff KE, Oner FC, Reinhold M, Schnake KJ, Kandziora F, Fehlings MG, Dvorak MF, Aarabi B, Rajasekaran S, Schroeder GD, Kepler CK, Vialle LR. AOSpine subaxial cervical spine injury classification system. Eur Spine J. 2016;25(7):2173-2184.', doi: '10.1007/s00586-015-3831-3' },
+  { citation: 'Divi SN, Schroeder GD, Oner FC, Kandziora F, Schnake KJ, Dvorak MF, Benneker LM, Chapman JR, Vaccaro AR. AOSpine—spine trauma classification system: the value of modifiers: a narrative review with commentary on evolving descriptive principles. Global Spine J. 2019;9(1 Suppl):77S-88S.', doi: '10.1177/2192568219827260' },
 ]
 
 export function AoSpinePage() {
@@ -92,12 +93,14 @@ export function AoSpinePage() {
   const facet = subaxial ? aoFacetCode(form.right === 'none' ? undefined : form.right, form.left === 'none' ? undefined : form.left) : ''
   const modifiers = Object.keys(aoModifiers[form.region]).filter((m) => form.modifiers.includes(m))
   const neuro = form.neuro === 'unknown' ? undefined : form.neuro
+  // AO-9: "+" only with a neurological injury present (N2 to N4), never "N0+".
+  const compressionAllowed = aoCompressionAllowed(neuro)
   const full = (morphology || facet) ? {
     region: form.region,
     morphology,
     ...(facet ? { facet } : {}),
     ...(neuro ? { neuro } : {}),
-    compression: form.compression === 'yes',
+    compression: compressionAllowed && form.compression === 'yes',
     modifiers,
   } : undefined
 
@@ -117,7 +120,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
+        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below), and which neurology grades may carry "+" against an open review; one point is still unchecked, whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2 (read here as F2). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">
@@ -133,8 +136,8 @@ export function AoSpinePage() {
             {form.endplates === '0' && <ChoiceGroup label={subaxial ? 'Isolated lamina or spinous process fractured?' : 'Transverse or spinous process fractured?'} layout="row" value={form.process} options={yesNo} onChange={set('process')} />}
             {subaxial && <ChoiceGroup label="Right facet" layout="stack" value={form.right} options={facetOptions} onChange={set('right')} />}
             {subaxial && <ChoiceGroup label="Left facet" layout="stack" value={form.left} options={facetOptions} onChange={set('left')} />}
-            <ChoiceGroup label="Neurology (from the examination)" layout="stack" value={form.neuro} options={neuroOptions} onChange={set('neuro')} />
-            {form.neuro !== 'unknown' && <ChoiceGroup label="Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />}
+            <ChoiceGroup label="Neurology (from the examination)" layout="stack" value={form.neuro} options={neuroOptions} onChange={(value) => setForm((current) => ({ ...current, neuro: value, compression: aoCompressionAllowed(value === 'unknown' ? undefined : value) ? current.compression : 'no' }))} />
+            {compressionAllowed && <ChoiceGroup label="+ Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />}
             {modifierOptions.map(([m, text]) => (
               <ChoiceGroup key={`${form.region}-${m}`} label={`${m}: ${text}?`} layout="row" value={form.modifiers.includes(m) ? 'yes' : 'no'} options={yesNo} onChange={toggleModifier(m)} />
             ))}
@@ -170,7 +173,7 @@ export function AoSpinePage() {
             </tbody>
           </table>
         </div>
-        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. This page writes the code as the AO Spine posters do: the main type, then the secondary injury, neurology and modifiers in brackets. The thoracolumbar poster separates them with semicolons, C (A3; N3; M2); the subaxial poster with commas, with the facets after the type A injury, B2 (A1, F4 BL, N2, M3). A subaxial injury with only facet injuries is written facets first. If one facet has more than one injury, only the highest is classified. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images.</p>
+        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. This page writes the code as the AO Spine posters do: the main type, then the secondary injury, neurology and modifiers in brackets. The thoracolumbar poster separates them with semicolons, C (A3; N3; M2); the subaxial poster with commas, with the facets after the type A injury, B2 (A1, F4 BL, N2, M3). A subaxial injury with only facet injuries is written facets first. If one facet has more than one injury, only the highest is classified. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>). Both posters list "+" as continued spinal cord compression; it is used in a patient with a neurological injury (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>), so this page offers it only with N2, N3 or N4: not with N0 (intact), N1 (a deficit that has resolved) or NX (not examined).</p>
       </section>
 
       <section className="info-card">
@@ -185,7 +188,7 @@ export function AoSpinePage() {
         <ScanFigures images={[spineTraumaScans.a1, spineTraumaScans.a4, spineTraumaScans.chance, spineTraumaScans.dishExtension, spineTraumaScans.translation, spineTraumaScans.jumpedFacet]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the wording is checked against AO Spine's posters for both systems." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the wording is checked against AO Spine's posters for both systems, and neurology from the examination and the use of the plus sign against an open review (Divi et al. 2019)." />
     </div>
   )
 }

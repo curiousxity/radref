@@ -6,8 +6,11 @@
  *
  * Unchecked draft: both papers are matched on PubMed but paywalled. The types, order, facets,
  * neurology, modifiers and notation are checked against AO Spine's own posters for both systems
- * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/; claims AO-1 to
- * AO-12 in docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/), and neurology
+ * from the examination, the separate upper cervical system and who may carry "+" (AO-9) against
+ * Divi et al., Global Spine J 2019 (claims AO-1 to AO-12 in
+ * docs/superpowers/research/2026-10-23-spine-calculators-sources.md).
+ * Still unchecked: whether exactly 1 cm or 40% is F1 or F2 (AO-6).
  */
 
 export type AoRegion = 'subaxial' | 'thoracolumbar'
@@ -127,6 +130,18 @@ export function aoNeuroDescription(neuro: AoNeuro): string {
   }[neuro]
 }
 
+/**
+ * AO-9: both posters list "+ Continued spinal cord compression" with the grades, tied to none. Divi
+ * et al. 2019, for every region: "The plus sign (+) modifier is used to signify continued spinal
+ * cord compression in a patient with a neurological injury." So it is offered only with a deficit
+ * present at the examination: N2 ("nerve root injury or radiculopathy"), N3 and N4. Not N0
+ * ("neurologically intact"), N1 (a deficit "that has completely recovered by the time of clinical
+ * examination") or NX ("the neurological status is unknown").
+ */
+export function aoCompressionAllowed(neuro?: AoNeuro): boolean {
+  return neuro === 'N2' || neuro === 'N3' || neuro === 'N4'
+}
+
 export const aoModifiers: Record<AoRegion, Record<string, string>> = {
   subaxial: {
     M1: 'posterior capsuloligamentous complex injury without complete disruption',
@@ -146,7 +161,7 @@ export type AoFull = {
   morphology?: { type: AoType; body?: AoBody }
   facet?: string
   neuro?: AoNeuro
-  /** AO-9: "+ Continued spinal cord compression", listed with the grades on both posters, tied to none. */
+  /** AO-9: "+ Continued spinal cord compression"; written only with N2, N3 or N4 (aoCompressionAllowed). */
   compression?: boolean
   modifiers?: string[]
 }
@@ -159,7 +174,7 @@ export type AoFull = {
  * they are listed first after the level of injury").
  */
 export function aoCode({ region, morphology, facet, neuro, compression, modifiers = [] }: AoFull): string {
-  const neuroCode = neuro && `${neuro}${compression ? '+' : ''}`
+  const neuroCode = neuro && `${neuro}${compression && aoCompressionAllowed(neuro) ? '+' : ''}`
   const facets = region === 'subaxial' ? facet : undefined
   const head = morphology?.type ?? facets ?? ''
   const inside = [morphology?.body, morphology ? facets : undefined, neuroCode, ...modifiers].filter(Boolean)

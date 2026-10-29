@@ -8,9 +8,9 @@ const study = studyOf(SuprahyoidNeckStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). The references
- * are matched, but only the claims marked verified there were read in their papers; when the
- * rest are checked a case may have to change; say in that commit why the old expectation was
- * wrong.
+ * are matched and every claim but the mylohyoid line (N2-12) has been read, in its paper or in
+ * an open review cited beside it; when N2-12 is checked its case may have to change; say in
+ * that commit why the old expectation was wrong.
  */
 
 describe('suprahyoid neck lesson', () => {
@@ -18,12 +18,14 @@ describe('suprahyoid neck lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'lesion', 'spread', 'nodes', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so. Estrera 1983 and Russo 1997 are the exceptions:
-  // neither PubMed nor Crossref has a DOI for them.
-  test('is still marked as an unchecked draft, with a DOI on every reference but Estrera and Russo', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.references).toHaveLength(14)
+  // Every claim is read, so the note no longer says "Unchecked draft" (2026-10-29). Estrera 1983
+  // and Russo 1997 are the exceptions to the DOIs: neither PubMed nor Crossref has one for them.
+  // Hirvonen 2023 and Fernandes 2013 are the open reviews added beside Lemierre and Ginsberg, and
+  // Iwata 2026 beside Mardini for the mylohyoid line (2026-10-29).
+  test('is no longer an unchecked draft, with a DOI on every reference but Estrera and Russo', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
+    expect(study.sourceNote).toMatch(/^Every reference has been matched/)
+    expect(study.references).toHaveLength(17)
     for (const ref of study.references) {
       if (/^(Estrera|Russo) /.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -220,14 +222,18 @@ describe('suprahyoid neck rules (unchecked)', () => {
       .toEqual(['Retropharyngeal edema has no enhancing wall, but a rim-enhancing collection is entered: look again at the wall.'])
   })
 
-  // N2-12: the mylohyoid line. N2-11, Schuknecht: "Medial masticator space abscesses exhibited
+  // N2-12: the mylohyoid line, by the lesion's position (Iwata 2026: "When an odontogenic lesion is
+  // located superior to the mylohyoid line, the abscess tends to initially form in the sublingual
+  // space"). N2-11, Schuknecht: "Medial masticator space abscesses exhibited
   // extra-spatial spread only. Extension affected the parapharyngeal space and/or soft palate in
   // 7 of 13 ... The sub-masseteric space served as a previously underestimated pathway for
   // intra-spatial propagation of lateral masticator abscesses."
   test('the mylohyoid line and the masticator space', () => {
     const dental = { ...normalInfection, collection: 'rim', source: ['dental'] }
-    expect(chips(study, 'lesion', { ...dental, tooth: 'back' })['Mylohyoid line']).toBe('Roots below it: spreads to the submandibular space')
-    expect(chips(study, 'lesion', { ...dental, tooth: 'front' })['Mylohyoid line']).toBe('Roots above it: spreads to the sublingual space')
+    expect(chips(study, 'lesion', { ...dental, mylohyoid: 'above' })['Mylohyoid line']).toBe('Above it: sublingual space first, may spread to the submandibular space')
+    expect(chips(study, 'lesion', { ...dental, mylohyoid: 'below' })['Mylohyoid line']).toBe('Below it: submandibular space')
+    // The tooth alone no longer sets the space.
+    expect(chips(study, 'lesion', { ...dental, tooth: 'back' })['Mylohyoid line']).toBeUndefined()
     expect(chips(study, 'lesion', { ...dental, 'collection-spaces': ['ms'] })['Masticator space'])
       .toBe('Medial pterygoid: spreads out to the parapharyngeal space or soft palate; lateral: spreads within, under the masseter')
     expect(chips(study, 'lesion', { ...dental, 'collection-spaces': ['sms'] })['Masticator space']).toBeUndefined()

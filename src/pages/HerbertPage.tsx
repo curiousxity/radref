@@ -25,6 +25,8 @@ const nonunionOptions = herbertTypes.filter((type) => type.startsWith('D')).map(
 const references: LessonReference[] = [
   { citation: 'Dráč P, Kastelec M, Suarez FA. Classifications for fractures of carpal bones: Herbert classification for scaphoid fractures. AO Surgery Reference (surgeryreference.aofoundation.org), AO Foundation; accessed 2026-10-25.' },
   { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: '10.1302/0301-620X.66B1.6693468' },
+  { citation: 'Steinmann SP, Adams JE. Scaphoid fractures and nonunions: diagnosis and treatment. J Orthop Sci. 2006;11(4):424-431.', doi: '10.1007/s00776-006-1025-x' },
+  { citation: 'Cheung JP, Tang CY, Fung BK. Current management of acute scaphoid fractures: a review. Hong Kong Med J. 2014;20(1):52-58.', doi: '10.12809/hkmj134146' },
 ]
 
 export function HerbertPage() {
@@ -48,7 +50,7 @@ export function HerbertPage() {
           <span className="calc-tag">Scaphoid</span>
         </div>
         <p>Type a scaphoid fracture as stable, unstable, delayed union or non-union, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the 1984 paper is paywalled, so the types are checked against AO Surgery Reference's Herbert classification page, which follows Herbert's 1990 book and includes B5, a comminuted fracture. Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
+        <p className="source-note">Unchecked draft: the 1984 paper is paywalled, so the types are checked against AO Surgery Reference's Herbert classification page, which follows Herbert's 1990 book and includes B5, a comminuted fracture. Still unchecked: whether the 1984 paper itself has B5 (<Cite doi="10.1007/s00776-006-1025-x">Steinmann and Adams, J Orthop Sci 2006</Cite> list B5 and credit the 1984 paper, but do not quote it). Source: <Cite doi="10.1302/0301-620X.66B1.6693468">Herbert and Fisher, J Bone Joint Surg Br 1984</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -88,6 +90,7 @@ export function HerbertPage() {
             </tbody>
           </table>
         </div>
+        <p>The wording of B2 varies between sources. AO Surgery Reference lists it as a complete waist fracture; Steinmann and Adams give it as displaced or mobile fractures of the waist (<Cite doi="10.1007/s00776-006-1025-x">Steinmann and Adams, J Orthop Sci 2006</Cite>), and Cheung and colleagues as displaced or mobile complete fractures of the waist (<Cite doi="10.12809/hkmj134146">Cheung et al., Hong Kong Med J 2014</Cite>). This page keeps AO's wording, which does not name displacement.</p>
       </section>
 
       <section className="info-card">
@@ -95,7 +98,7 @@ export function HerbertPage() {
         <ScanFigures images={[herbertScans.typeA1, herbertScans.typeA2, herbertScans.typeB1, herbertScans.typeB2, herbertScans.typeB3, herbertScans.typeB4, herbertScans.typeB5, herbertScans.typeD2]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1984 paper is paywalled; the types follow AO Surgery Reference's Herbert page." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1984 paper is paywalled; the types follow AO Surgery Reference's Herbert page, and Steinmann and Adams give the same list." />
     </div>
   )
 }

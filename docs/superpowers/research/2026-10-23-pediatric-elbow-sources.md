@@ -91,7 +91,7 @@ the review gives approximate ages, not a lower limit for every child.
 |---|---|---|---|---|
 | PE4-1 | On a true lateral, the anterior humeral line normally passes through the middle third of the capitellum; a line passing anterior to that (capitellum displaced posteriorly) points to an extension supracondylar fracture. | not middle third → "look for a supracondylar fracture" | E4 | partly, for the author. E4 abstract: "The anterior humeral line is a valuable aid in the search for supracondylar fractures in children. When it is abnormal other signs of fracture should be carefully sought." and "In children younger than 2 1/2 years the AHL may pass through the anterior third of the capitellum due to the small size of the ossification center". The middle third as normal is not in E4's abstract (E5's background says it "is said to pass through the middle third"), nor is the direction of the abnormal line. For the author: E4 says the anterior third can be normal "younger than 2 1/2 years", earlier than PE4-2's age 4. |
 | PE4-2 | In young children the line often passes through the anterior third of the capitellum without a fracture; this was common under age 4. | anterior third under age 4 → "can be normal under 4" | E5 | yes. E5 abstract: "In children younger than four years of age, it passes nearly equally through the anterior or middle third of the capitellum, whereas in older children it more consistently passes through the middle third of the capitellum." (E4 gives a lower age, "younger than 2 1/2 years".) |
-| PE4-3 | The radiocapitellar line (along the radial neck) passes through the capitellum in every view; if it does not, the radial head is dislocated, and the ulna must be checked for a fracture (Monteggia injury). | disrupted → chip; disrupted + no dislocation entered → warning | E1 | no: not in the E1 abstract (full text paywalled). Kept, unchecked. |
+| PE4-3 | The radiocapitellar line (along the radial neck) passes through the capitellum in every view; if it does not, the radial head is dislocated, and the ulna must be checked for a fracture (Monteggia injury). | disrupted → chip; disrupted + no dislocation entered → warning | E1 | no: not in the E1 abstract (full text paywalled). Kept, unchecked. (Since 2026-10-29, by the author's decision: "should normally intersect the capitellum on AP and lateral views, but normal variation occurs, particularly in young children"; a miss raises suspicion of malalignment rather than proving dislocation. Ramirez 2014 added; rule unchanged, wording of chip, warning and impression softened to "suspect".) |
 
 ### Step 5: supracondylar fracture
 
@@ -107,7 +107,7 @@ the review gives approximate ages, not a lower limit for every child.
 |---|---|---|---|---|
 | PE6-1 | Weiss types: I, displacement under 2 mm; II, 2 mm or more with the articular surface intact; III, 2 mm or more with the articular surface disrupted. | < 2 mm → I; ≥ 2 mm + intact → II; ≥ 2 mm + disrupted → III | E8 | yes. E8 abstract: "A Type I fracture is displaced less than 2 mm. In a Type II fracture there is > or = 2 mm of displacement with intact articular cartilage, as demonstrated by arthrogram (65 patients). In a Type III fracture there is > or = 2 mm of displacement and the articular surface is not intact (93 patients)." |
 | PE6-2 | Whether the articular cartilage is intact often cannot be judged on radiographs alone (arthrography or MRI shows it). | ≥ 2 mm + not judged → "II or III" | E8 | partly. E8 abstract: intact cartilage "as demonstrated by arthrogram", and "all 65 patients with Type II fractures had <4 mm of fracture displacement on pre-operative radiographs, and all fractures Type III fractures had > or = 4 mm of displacement. This may aid in predicting which fractures can be treated with closed pinning prior to an operative arthrogram." Arthrography is stated; MRI and "cannot be judged on radiographs" are not. (The 4 mm finding is not used on the page.) |
-| PE6-3 | Jakob's stages: I undisplaced with the articular surface intact; II complete fracture with moderate displacement; III complete displacement with rotation of the fragment. | lesson only, no chip | E9 | partly. E9 abstract: "If the fracture is incomplete, with an intact hinge of pre-osseous cartilage medially, the fragment will not be displaced. If the fracture is complete the fragment may be displaced, and open reduction with internal fixation is mandatory." Numbered stages and rotation of the fragment are not in the abstract. |
+| PE6-3 | Jakob's stages: I undisplaced with the articular surface intact; II complete fracture with moderate displacement; III complete displacement with rotation of the fragment. (Since 2026-10-29, by the author's decision: II "a displaced fracture extending through the articular surface, without rotation of the fragment"; "moderate" dropped.) | lesson only, no chip | E9 | partly. E9 abstract: "If the fracture is incomplete, with an intact hinge of pre-osseous cartilage medially, the fragment will not be displaced. If the fracture is complete the fragment may be displaced, and open reduction with internal fixation is mandatory." Numbered stages and rotation of the fragment are not in the abstract. |
 
 ### Step 7: medial epicondyle avulsion
 
@@ -122,6 +122,7 @@ the review gives approximate ages, not a lower limit for every child.
 |---|---|---|---|---|
 | PE8-1 | O'Brien types by angulation of the radial head: I, under 30°; II, 30° to 60°; III, over 60°. | < 30 → I; 30–60 → II; > 60 → III | E11 | no: E11 has no abstract in PubMed and no open copy. Kept, unchecked. |
 | PE8-2 | Judet's classification grades by displacement and angulation (types I to IV). | lesson only, no chip | E12 | no: E12 has no abstract, no DOI and no open copy. Kept, unchecked. |
+| PE8-3 | (Added 2026-10-29.) In children, proximal radial fractures usually involve the radial neck or physis rather than the articular radial head; intra-articular radial head fractures do occur and are more common in skeletally mature adolescents. | lesson only, no chip | Macken 2022; Kalbitz 2022 | yes, in full text; see "The author's decisions, 2026-10-29". |
 
 ### Step 9: dislocation, olecranon and variants
 
@@ -233,7 +234,7 @@ page, each cited beside the original paper and checked on Crossref and PubMed:
 
 | ID | Verdict | Evidence |
 |----|---------|----------|
-| PE4-3 | yes | DeFroda 2017: "the radial head should align with the capitellum in all views in order to rule out dislocation"; the radiocapitellar line "should intersect the capitellum at approximately its middle third on all radiographic views ... such as an ulna fracture which can be associated with a radiocapitellar joint dislocation (i.e. Monteggia fracture)"; "Monteggia fractures are complex injuries involving a fracture of the ulna associated with ... radiocapitellar dislocation"; "By definition, this will be disrupted in the case of a Monteggia fracture." With Iyer's "In dislocations, there is compromise of the radial head–capitellum line" (fourth check). DeFroda cited beside Iyer in step 4, the step 4 report note and the quiz. **For the author**: DeFroda also reports that Ramirez et al. found "in 8.6% of elbows the radiocapitellar line did not intersect the capitellum" in normal children, more reliable "when the line was drawn through the radial head rather than the neck" and "less likely to miss the capitellum in patients older than 5 years"; Bašković 2024 gives the rule "In most children older than 2 years". The page states it without exception ("passes through the capitellum in every view. If it does not, the radial head is dislocated") and draws it "along the radial neck". Left as it is. |
+| PE4-3 | yes | DeFroda 2017: "the radial head should align with the capitellum in all views in order to rule out dislocation"; the radiocapitellar line "should intersect the capitellum at approximately its middle third on all radiographic views ... such as an ulna fracture which can be associated with a radiocapitellar joint dislocation (i.e. Monteggia fracture)"; "Monteggia fractures are complex injuries involving a fracture of the ulna associated with ... radiocapitellar dislocation"; "By definition, this will be disrupted in the case of a Monteggia fracture." With Iyer's "In dislocations, there is compromise of the radial head–capitellum line" (fourth check). DeFroda cited beside Iyer in step 4, the step 4 report note and the quiz. **For the author**: DeFroda also reports that Ramirez et al. found "in 8.6% of elbows the radiocapitellar line did not intersect the capitellum" in normal children, more reliable "when the line was drawn through the radial head rather than the neck" and "less likely to miss the capitellum in patients older than 5 years"; Bašković 2024 gives the rule "In most children older than 2 years". The page states it without exception ("passes through the capitellum in every view. If it does not, the radial head is dislocated") and draws it "along the radial neck". Left as it is. **Correction (2026-10-29)**: those three points are DeFroda's account of Ramirez, not Ramirez's, and two are wrong against Ramirez's own abstract (read 2026-10-29, see "The author's decisions, 2026-10-29"): the 8.6% is 176 of 2,052 lines drawn, not 8.6% of elbows; Ramirez compared lines along the radial neck with lines along the radial shaft, not the head with the neck, and found the neck line on the lateral view most consistent; and the over-5 finding is about the middle third ("the percent of measurements falling within the middle third of the capitellum was higher in patients above 5 years of age"), not about missing the capitellum. |
 | PE5-2 | yes (Gartland's own wording) | Alton 2015, PMC page: Gartland "described three types of extension injury based on degree of displacement: type I, nondisplaced; type II, moderately displaced; and type III, severely displaced injury, and he considered flexion-type injuries separately". Alton now cited beside Gartland for the sentence "Gartland graded extension fractures as undisplaced, moderately displaced and severely displaced". The Wilkins types were settled in the third check (Bašković's Table 1 agrees: "IIa posterior cortex intact, AHL anterior to capitellum ... III no cortical contact"). |
 | PE5-3 | yes | Alton 2015: Leitch "suggested the addition of a type IV injury believed to be difficult to treat owing to multiplanar instability, identified intraoperatively, from no intact periosteal hinge"; types II and III had "a torn anterior periosteum but an intact posterior hinge". Alton now cited beside Leitch. (Alton's Table 1 adds "Flexion and extension instability demonstrated radiographically", which agrees with Leitch's abstract: fluoroscopy under anaesthesia.) |
 | PE6-2 | yes | Álvarez Muñoz 2024: on radiographs "the incompletely ossified epiphysis can complicate fracture identification, especially when there is no or minimal displacement"; MRI "allows for the observation of the incompletely ossified epiphysis. It proves especially useful in patients with undisplaced or minimally displaced fractures, aiding in the assessment of articular cartilage integrity"; arthrography "remains a widely used intraoperative method to assess articular cartilage congruency". With Weiss's "as demonstrated by arthrogram" (abstract). Cited beside Weiss in step 6, its report note and the quiz. (Its Weiss types match Weiss's abstract: "<2 mm displacement, with an intact articular surface ... ≥2 mm displacement, maintaining the intact articular surface ... ≥2 mm displacement and loss of articular congruence".) |
@@ -243,14 +244,90 @@ page, each cited beside the original paper and checked on Crossref and PubMed:
 
 Also re-read, nothing to change: PE7-2 (Edmonds abstract: "Internal oblique radiographs of the elbow appear to approximate the true anterior displacement") and PE4-1 (the page now says only what Rogers's and Herman's abstracts say).
 
-Changes made: the four sources above added to the references (17 now) with `<Cite doi>` links beside
+Changes made: the four sources above added to the references (17 then) with `<Cite doi>` links beside
 the originals; Alton cited beside Gartland (step 5) and Leitch (type IV). Every claim has now been read
 in an abstract or full text, so the source note no longer starts "Unchecked draft";
 `PediatricElbowStudy.test.ts` pins the new note and 17 references. One sentence outside the claims
 table has no citation: "In children the radial neck breaks rather than the head" (step 8); no open
-source stating it was found in this round.
+source stating it was found in this round. (Cited since 2026-10-29, as PE8-3; see below.)
 
 Needs a browser (could not be read by script): Jakob 1975,
 https://online.boneandjoint.org.uk/doi/10.1302/0301-620X.57B4.430 (stage wording and any
 millimetre cut-offs); Rogers 1978, https://pubs.rsna.org/doi/10.1148/128.1.145 (403; figure legends
 for PE4-1).
+
+## The author's decisions, 2026-10-29
+
+Sources read for these decisions (each checked on Crossref and PubMed, Vancouver as on the page):
+
+- Ramirez RN, Ryan DD, Williams J, Wren TA, Ibrahim D, Weiss JM, Kay RM, Lightdale-Miric N, Skaggs
+  DL. A line drawn along the radial shaft misses the capitellum in 16% of radiographs of normal
+  elbows. J Pediatr Orthop. 2014;34(8):763-767. doi:10.1097/BPO.0000000000000199 (PMID 24787305).
+  Read: PubMed abstract (not in PMC).
+- Tomori Y, Nanno M, Takai S. Posteromedial elbow dislocation with lateral humeral condylar fracture
+  in children: three case reports and a literature review. Medicine (Baltimore). 2018;97(36):e12182.
+  doi:10.1097/MD.0000000000012182 (PMID 30200122, PMC6133417). Read in full text (Europe PMC).
+- Macken AA, Eygendaal D, van Bergen CJ. Diagnosis, treatment and complications of radial head and
+  neck fractures in the pediatric patient. World J Orthop. 2022;13(3):238-249.
+  doi:10.5312/wjo.v13.i3.238 (PMID 35317255, PMC8935328). Read in full text (Europe PMC). This is the
+  author's wjgnet.com review.
+- Kalbitz M, Lackner I, Perl M, Pressmar J. Radial head and neck fractures in children and
+  adolescents. Front Pediatr. 2022;10:988372. doi:10.3389/fped.2022.988372 (PMID 36741096,
+  PMC9897312). Read in full text (Europe PMC). PubMed dates the issue 2022 (published online
+  2023 Jan 20; Crossref gives 2023). It is a retrospective series of 67 patients; the sentence used
+  is from its introduction.
+
+| ID | Decision | Change on the page |
+|---|---|---|
+| 25 (PE4-3) | Keep the instruction to assess the radiocapitellar line on every view, but not the claim that it always intersects the capitellum in a normal child. Correct the Ramirez figures (176 of 2,052 lines, not 8.6% of elbows; neck against shaft, not head against neck). | Step 4 learn text: "Draw a line along the radial neck on the AP and the lateral. It should normally intersect the capitellum on both views, but normal variation occurs, particularly in young children, so a line that misses the capitellum raises the suspicion of malalignment rather than proving a dislocation (Iyer; Ramirez). When it misses, suspect a radial head dislocation and check the ulna for a fracture: a Monteggia injury (Iyer; DeFroda)." A new paragraph reports Ramirez as measured: 116 normal elbows, 176 of the 2,052 lines drawn (8.6%) missed the capitellum; neck lines against shaft lines (1.2% against 12.7% missed); the neck line on the lateral most consistent; more reliable in older children, considerable variation in infants. Step 4 summary and the quiz explanation say the same, citing Ramirez. Field help: "Normally through the capitellum on the AP and lateral; normal variation occurs, particularly in young children." (was "Passes through the capitellum in every view."). Chip: "Suspect radial head dislocation: check the ulna (Monteggia)" (was "Radial head dislocated: ..."). Impression: "Radiocapitellar line misses the capitellum: suspect radial head dislocation." (was "...: radial head dislocation."). Warning: "...which raises the suspicion of a radial head dislocation; check the ulna..." (was "which means"). Rule unchanged (a miss still fires the chip, impression line and warning). The page never stated the 8.6% or head-against-neck; the error was this doc's fifth check, which repeated DeFroda's account of Ramirez (corrected there). |
+| 26 (PE6-3) | Drop "moderate" from Jakob stage II; if the page gives numbers, name the source's convention. | Step 6 learn text: "stage I an incomplete, undisplaced fracture with the articular surface intact; stage II a displaced fracture extending through the articular surface, without rotation of the fragment; stage III a displaced fracture with rotation of the fragment (Jakob; Bašković; Tomori)" (was "stage II complete with moderate displacement"). Tomori added for "displaced" in stage II. The page gives no millimetre thresholds for Jakob, so none is named. Jakob appears nowhere else on the page (no option, chip, impression line, table row or quiz question); the test pins the new wording and the absence of "moderate". |
+| 27 (PE8-3) | Keep the radial neck teaching point with a citation, softened. Add articular radial head fractures in older children only if a peer-reviewed source read says so. | Step 8 learn text: "In children, proximal radial fractures usually involve the radial neck or physis rather than the articular radial head (Macken; Kalbitz): much of the child's radial head is cartilaginous, so a valgus force on the head is transmitted to the weaker physis and metaphysis in the neck region (Kalbitz). Intra-articular radial head fractures do occur, and are more common in skeletally mature adolescents than in skeletally immature children (Macken)." (was "In children the radial neck breaks rather than the head."). |
+
+Quotes relied on:
+
+- Ramirez 2014, abstract: "The RCL was drawn out on the anteroposterior and lateral radiographs of
+  116 normal pediatric elbows by 3 examiners. On each radiograph, lines were drawn along the
+  longitudinal center of the radial neck as well as the radial shaft."; "Of the 2052 RCLs drawn, 50%
+  (1029/2052) fell outside the middle third of the capitellum and 8.6% (176/2052) missed the
+  capitellum completely. Lines drawn along the radial neck in the anteroposterior and lateral views
+  missed the capitellum less frequently (1.2% vs. 12.7%, P<0.0001) ... when compared with lines drawn
+  using the radial shaft."; "The RCL is more reliable in older patients and shows considerable
+  variation in infants."; "The RCL does not invariably bisect or fall within the middle third of the
+  capitellum in normal pediatric elbows. Therefore, an abnormal RCL is suggestive but not
+  pathognomonic for injury such as Monteggia fracture."; "The most consistent RCL is drawn along the
+  radial neck on the lateral view." (The abstract's own figures are not all consistent: "passed
+  through its central third less (77.8% vs. 44.7%...)" for neck against shaft must mean more, and
+  "significantly more often on the lateral view ... (98.8% vs. 96.8%, P=0.06)" is not significant at
+  0.05; neither figure is used on the page.)
+- Iyer 2012 (fourth check), for "suspicion": "If the integrity of one or both of these lines
+  [anterior humeral, radial head–capitellar] is compromised, then fracture or dislocation, or both,
+  should be suspected".
+- Bašković 2024, Table 3: "Complete: fracture extends to the articular surface, no rotated
+  fragment"; "Complete with rotation: fracture extends to the articular surface, rotated fragment";
+  "Incomplete: fracture does not extend to the articular surface".
+- Tomori 2018: "stage II, fractures have >2 mm displacement with moderate displacement of the
+  articular surface; and stage III, fractures have significant displacement and rotation". Cited for
+  the displacement only; its 2 mm and "moderate" are not on the page.
+- Jakob 1975, abstract (unchanged): "If the fracture is incomplete, with an intact hinge of
+  pre-osseous cartilage medially, the fragment will not be displaced. If the fracture is complete the
+  fragment may be displaced".
+- Macken 2022: "The majority of proximal radius fractures are radial neck fractures (89%), and these
+  fractures occur more frequently in younger patients compared to radial head fractures"; "The force
+  through the lateral capitellum compresses the radial head, causing it to break at the weakest
+  point, which is often the radial neck at the metaphysis"; "Intra-articular fractures are less
+  common in skeletally immature children compared to skeletally mature adolescents (52 vs 7 per
+  cent)" (the order of the two percentages is the paper's; not used on the page).
+- Kalbitz 2022: "The most common type of lesion of the proximal radius in children is the fracture
+  of the radial neck"; "Since much of the radial head in children is cartilaginous, the valgus force
+  on the radius head is transmitted to the weaker physis and metaphysis in the neck region".
+
+Not supported by a peer-reviewed source read, so not added: that articular radial head fractures
+become more common "as the physis closes" in those words. Macken states the age contrast in terms of
+skeletal maturity ("skeletally immature children compared to skeletally mature adolescents"), and
+the page uses that wording.
+
+Code: `PediatricElbowStudy.tsx` has the four new `*_DOI` constants, `<Cite>` constants and
+references (21 now); the source note adds "and the radiocapitellar line in a study of normal elbows"
+and still starts "Every reference was matched"; the header comment names the decisions.
+`PediatricElbowStudy.test.ts` pins 21 references, the new chip, warning, impression and help text,
+and the new learn wording for all three items.

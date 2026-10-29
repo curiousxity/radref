@@ -167,6 +167,8 @@ describe('shoulder MRI report: repaired cuff', () => {
   test('an intact repair is noted beside the normal impression; a re-tear is a finding', () => {
     expect(impressionOf({ ...normal, 'prior-repair': 'yes', 'repair-integrity': 'ii' })).toBe(`${NORMAL_IMPRESSION}\nIntact rotator cuff repair, Sugaya type II.`)
     expect(impressionOf({ ...normal, 'prior-repair': 'yes', 'repair-integrity': 'iv' })).toBe('Re-tear of the repaired rotator cuff, Sugaya type IV.')
+    // Type III by its morphology, not as intact or re-torn (the author's decision, 2026-10-29).
+    expect(impressionOf({ ...normal, 'prior-repair': 'yes', 'repair-integrity': 'iii' })).toBe(`${NORMAL_IMPRESSION}\nRotator cuff repair with insufficient tendon thickness but preserved continuity, Sugaya type III.`)
   })
 })
 
@@ -322,11 +324,12 @@ describe('shoulder MRI rules: repaired cuff (Sugaya 2005)', () => {
   // discontinuity; type IV, presence of a minor discontinuity; type V, presence of a major
   // discontinuity" (Sugaya 2005, abstract). "In general, types I and II are considered healed,
   // while types IV and V are considered retorn" (Jeong 2026, full text); Jeong adds that whether
-  // type III is a re-tear is disputed (in the shoulder sources doc, for the author).
+  // type III is a re-tear is disputed, so type III is given by its morphology (the author's
+  // decision, 2026-10-29).
   test.each([
     ['i', 'Type I: no re-tear'],
     ['ii', 'Type II: no re-tear'],
-    ['iii', 'Type III: no re-tear'],
+    ['iii', 'Type III: insufficient thickness, continuity preserved; re-tear status disputed'],
     ['iv', 'Type IV: re-tear'],
     ['v', 'Type V: re-tear'],
   ])('Sugaya %s', (value, expected) => {

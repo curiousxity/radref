@@ -9,12 +9,13 @@ by the author's choice).
 ## Pending (recorded 2026-10-28)
 
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
-  email is on the "Rad Ref members" policy so far; add each member's email there (Zero Trust →
-  Access controls → Policies), or switch to "Emails ending in" for a whole domain.
+  email is on the "Rad Ref members" policy, and the author is the only member for now
+  (2026-10-29). To add one later: Zero Trust → Access controls → Policies, or "Emails ending in"
+  for a whole domain.
 - Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
   "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
-- **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by
-  region since 2026-10-28. Choices made without the author:
+- **Regions: confirmed by the author 2026-10-29.** The home page, menu and `/regions/<slug>` pages
+  are by region since 2026-10-28. The choices, all kept:
   - a 13th region, "General", for pages with no body part (contrast pages, IR
     anticoagulation, vessel diameters, ellipsoid volume, Doppler indices);
   - Hip has only Letournel of its own, so the pelvis CT study and the pelvis 3D model are also
@@ -22,22 +23,14 @@ by the author's choice).
   - the skull base pages and carotid stenosis are also under Neuro, the brachial plexus also
     under Shoulder; rectal, prostate and adnexal MRI are under Pelvis;
   - the home tabs and the Studies blurb ("How to read each study, step by step.") are gone.
-- **Elbow OCD sentence (E2-6), the author to decide.** The elbow study says MRI judges
-  capitellar OCD stability from the fragment-bone interface and the overlying cartilage.
-  Kijowski and De Smet 2005, read in full, supports the interface (a high-T2 rim or cyst
-  means unstable) but says cartilage "was not assessed"; the cartilage signs come from knee
-  and talus studies. Trim to the interface, or keep it with another citation? Unchanged until
-  then; details in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`, "Third check".
-  Open sources that do state cartilage signs at the capitellum (2026-10-29): Kohyama 2018, Kostyun
-  2024 (a Delphi consensus) and Powell 2021; see the "Fifth check".
+- Decided 2026-10-29: the elbow OCD sentence keeps the cartilage signs (E2-6), now cited to Kostyun
+  2024 and Kohyama 2018 beside Kijowski and De Smet; see the elbow sources doc.
 - **Two more for the author, from the 2026-10-28 re-search** (details in the sources docs):
-  - Elbow E11-1: the page cites Rosenberg, AJR 1995 for the anconeus epitrochlearis compressing
-    the ulnar nerve (four places), but the paper, read in full, never mentions it.
-    Candidate replacement (2026-10-29): Sampath et al., Sports Health 2013, already cited on the
-    page, says it "may cause static or dynamic compression of the ulnar nerve within the tunnel".
-  - Knee K2-1: the pivot-shift femoral contusion is "near the terminal sulcus" on the page;
-    Sanders 2000's legends say its position depends on knee flexion (posterior with moderate
-    flexion, anterior near the sulcus with minimal), and the abstract says "midportion".
+  - Elbow E11-1: decided 2026-10-29. The anconeus epitrochlearis now cites Sampath 2013 ("may cause
+    static or dynamic compression"), with Kim 2019 for its being usually incidental; Rosenberg AJR
+    1995 is gone from the references.
+  - Knee K2-1: decided 2026-10-29. "Near the terminal sulcus" stays as the typical location; the
+    table now says the exact spot varies with knee flexion at injury (Sanders 2000).
 - **PDFs needed from the author** (`docs/PAPERS_NEEDED.md`): Herbert and Fisher 1984 (Bone &
   Joint asks for sign-in), Vaccaro 2016 (the Utrecht record has no file), the ten shoulder
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
@@ -54,7 +47,8 @@ by the author's choice).
   (distal spiral) fracture was found; that card keeps its drawing only. Searched again
   2026-10-28: Europe PMC full text and figure legends (`FIG:`), PMC full text with the CC BY
   filter, and Wikimedia Commons (only CC BY-SA there). Open-i's API no longer answers.
-- **Hearing loss CT:** the five "For the author" questions (see its section below).
+- **Hearing loss CT:** the five questions were decided 2026-10-29; one small point is left (see its
+  section below).
 - Decided 2026-10-28: calvarium and hearing loss stay single pages, with no Report, Learn or
   Quiz tabs.
 - Decided 2026-10-28: the author will not review the pages, so nothing waits for a sign-off. The
@@ -97,7 +91,7 @@ region at a time, end to end, following the ankle pilot
   plus a Neer calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-shoulder-mri-study-design.md`. Done once the sources
   check in "To do when on a computer" passes.
-- [ ] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
+- [x] Elbow: elbow MRI study ("pain or injury" history) plus a Mason calculator. Drafted
   2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-elbow-mri-study-design.md`.
 - [x] Pediatric elbow: radiograph study by age (CRITOE centres, fat pads, lines, Gartland,
@@ -124,24 +118,23 @@ region at a time, end to end, following the ankle pilot
 - [x] Head and neck: decided 2026-10-25. Each viewer gets a study and no calculator, one study
   per region covering several exams and histories, picked in step 1. The otic capsule and
   ossicular chain already have the temporal bone CT study; TMJ is skipped for now (2026-10-23).
-- [ ] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
+- [x] Suprahyoid neck: CT or MRI for a mass, CT for infection. Drafted 2026-10-25 as an
   unchecked draft (`/studies/suprahyoid-neck`); spec
-  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. On the branch only until
-  the author says to merge. Done once the sources check passes.
-- [ ] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
+  `docs/superpowers/specs/2026-10-25-suprahyoid-neck-study-design.md`. Live on the site. Every
+  claim read (2026-10-29).
+- [x] Larynx: CT for a known cancer, MRI for a known cancer, CT for hoarseness (the author's
   choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable, every claim read in
   an abstract or open full text (`/studies/larynx`); spec
-  `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. On the branch only until the author
-  says to merge. Every claim is now checked (the T4a wording on 2026-10-25, from Joshi's AJCC
-  table).
-- [ ] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
+  `docs/superpowers/specs/2026-10-25-larynx-study-design.md`. Live on the site. Every claim is
+  now checked (the T4a wording on 2026-10-25, from Joshi's AJCC table).
+- [x] Skull base: MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base
   mass (the author's choice, 2026-10-25). Written 2026-10-25 with the paper databases reachable,
   every claim read in an abstract or open full text (`/studies/skull-base`); spec
   `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
-  `docs/superpowers/research/2026-10-25-skull-base-sources.md`. On the branch only until the
-  author says to merge.
-- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28). Ask which exam and history
-  first.
+  `docs/superpowers/research/2026-10-25-skull-base-sources.md`. Live on the site, every claim
+  checked.
+- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28): MRI for "just the typical
+  indications" (2026-10-29). Written 2026-10-29 with every claim read (PR #22); done once merged.
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
@@ -175,9 +168,11 @@ it is done.
   (Parkar and Adriaensen 2024), cyclops and arthrofibrosis (Chien 2020) and the level of the 11°
   measurement (Crone 2026) are now cited beside the originals; the MCL bruise wording and SZ-4 were
   already settled. The Schatzker page no longer says "Unchecked draft".
-- [ ] Still unchecked: where the pivot-shift contusion sits (K2-1, for the author), the posterolateral
-  corner with hyperextension (K2-3), the juvenile OCD signs (K2-8, for the author: the page omits the
-  rim matching joint fluid, which Andriolo 2022 and Kijowski 2008's legends give) and the cartilage
+- [x] Decided by the author 2026-10-29: the pivot-shift contusion is "typically" near the terminal
+  sulcus, the exact spot varying with knee flexion (K2-1); juvenile OCD instability names the
+  T2-hyperintense rim matching adjacent joint fluid, with Andriolo 2022 cited and a form option
+  added (K2-8).
+- [ ] Still unchecked: the posterolateral corner with hyperextension (K2-3), and the cartilage
   depth grades (no source, kept by the author's choice).
 
 ### Shoulder MRI study and Neer calculator
@@ -195,10 +190,12 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   cites Woertler and Waldt, which states it, rather than Smith.
 - [x] Every claim read (2026-10-29, "Sixth check" in the shoulder sources doc): eight open reviews are
   cited beside the originals; N1–N5, S3-1 and S3-3 were already settled against Carofino 2013. The
-  shoulder study and the Neer page no longer say "Unchecked draft". For the author: Sugaya type III
-  (the page calls it no re-tear; Jeong 2026 says authors disagree), the coracoid level credited to
-  Richards (his abstract says only "more cephalic"; his RSNA page has no figures), and Neer's
-  valgus-impacted fracture "has a better outlook" (Carofino: prognosis "different").
+  shoulder study and the Neer page no longer say "Unchecked draft".
+- [x] Decided by the author 2026-10-29: Sugaya type III is given by its morphology (insufficient
+  thickness, continuity preserved) with the disagreement over healed or re-torn and its higher
+  progression to re-tear (Jeong 2026); Richards is cited only for the Hill-Sachs lesion lying more
+  cephalad, the coracoid level only to Marcon and Kadi; Neer's valgus-impacted fracture "carries a
+  different prognosis and different treatment considerations", not "a better outlook".
 
 ### Elbow MRI study and Mason calculator
 
@@ -218,10 +215,13 @@ claim is in `docs/superpowers/research/2026-10-23-elbow-mri-sources.md`.
 - [x] Open sources (2026-10-29, "Fifth check" in the elbow sources doc): the Broberg-Morrey 2 mm and 30%
   (van der Windt 2024), E1-1's LUCL-first, E3-1, E8-1 and E9-1 are now cited beside the originals;
   MA-1 to MA-4 were already settled. The Mason page no longer says "Unchecked draft".
-- [ ] Still unchecked: the stage 2 capsule (E1-1; reviews say anterior, or anterior and/or
-  posterior), "fragmentation of the whole capitellum" in Panner's (E2-4), E2-6 and E11-1 (both for
-  the author; candidate sources found, see the top of this file). For the author too: the
-  Broberg-Morrey gap (2 mm or more but under 30%), which van der Windt's wording makes type I.
+- [x] Decided by the author 2026-10-29 (the elbow sources doc, "The author's decisions"): stage 2 is
+  the anterior and posterior capsule with a perched dislocation (Acosta Batlle 2019); Panner's is
+  diffuse involvement of the whole capitellum with variable fragmentation (Dwek 2012, Claessen
+  2015); a UCL with edema around intact fibres is a low-grade sprain (Powell 2021); the OCD signs
+  and the anconeus as above; Mason under the Broberg-Morrey modification makes 2 mm or more but
+  under 30% type I, and records displacement, surface and a mechanical block separately. Every
+  claim is read, so the elbow study no longer says "Unchecked draft".
 
 ### Wrist MRI study
 
@@ -239,10 +239,13 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and
 - [x] Open sources (2026-10-29, "Third check" in the wrist sources doc): W2-5, W3-1, W4-1, W5-1, W5-2,
   W6-1 and W6-2 are now cited beside the originals (Andersson 2017, Ng 2024, Chen 2009, von Borstel
   2017).
-- [ ] Still unchecked: the SL angle bounds (W3-2; for the author, reviews put DISI at >60°, >70° or
-  >80°), the perilunate mechanism (W1-1; for the author, reviews say high-energy trauma) and
-  Linscheid as the source for LT disruption and VISI (W4-1; for the author, his abstract does not
-  mention the LT ligament).
+- [x] Decided by the author 2026-10-29 (the wrist sources doc, "The author's decisions"): above 60°
+  is beyond normal and supports SL malalignment, above 70° strongly suggests DISI, 80° not required
+  (Pang, Vassa, Zhou); perilunate injuries usually follow high-energy trauma, a fall on the
+  outstretched hand one example (Dvorsky, Okoro); Linscheid kept for the history, LT disruption and
+  VISI cited to Reagan 1984, Andersson, Vassa and Wilson 2023; Mayfield stages named by the
+  structures, with the reviews' differing "perilunate dislocation" labels noted.
+- [ ] Still unchecked: whether B5 is in Herbert 1984 (the wrist study and the Herbert page).
 
 ### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
 
@@ -255,9 +258,10 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculat
 - [x] Open sources (2026-10-29, "Sixth check" in the calculators sources doc): the greater-arc sentence
   (Chen 2009) and Palmer's class 2 (von Borstel 2017); MF-2, MF-3, HB-1 to HB-4 and LI-2 to LI-4 were
   already settled. The Mayfield and Lichtman pages no longer say "Unchecked draft".
-- [ ] Still unchecked: whether B5 is in Herbert 1984 (Herbert page), and Palmer 1B and 1C (for the
-  author: the table says "ulnar avulsion with or without distal ulnar fracture" and just "distal
-  avulsion"; the page says "ulnar styloid" and "from the lunate or triquetrum").
+- [x] Decided by the author 2026-10-29: Palmer 1B and 1C use the table labels, the 1C anatomy cited
+  to Vassa (the Palmer and Mayfield pages no longer say "Unchecked draft"); Herbert B2 keeps AO's
+  "complete waist fracture", with Steinmann and Adams's "displaced or mobile" noted.
+- [ ] Still unchecked: whether B5 is in Herbert 1984 (needs the paper).
 
 ### Foot MRI study
 
@@ -274,9 +278,11 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and 
   coalition and accessory navicular wording follow Newman and Miller.
 - [x] Open sources (2026-10-29, "Fifth check" in the foot sources doc): F3-4, F4-1, F4-2, F5-1 to F5-3,
   F6-2 and F7-1 are now cited beside the originals; F3-1 was already settled.
-- [ ] Still unchecked: the irregular coalition margins (F2-3). For the author: "(the latter at the
-  middle facet)" (Marth 2024: middle facet alone in 10.7%, middle and posterior in 50%), and
-  sesamoid oedema "fits sesamoiditis" (also stress reaction or early osteonecrosis).
+- [x] Decided by the author 2026-10-29: talocalcaneal coalition "commonly involves the middle facet
+  and may involve both the middle and posterior facets" (Marth 2024 added, its counts given as a
+  cohort finding); sesamoid marrow oedema is nonspecific (sesamoiditis, stress reaction or fracture,
+  early osteonecrosis), cited to Nwawka and Burge; Myerson type D added as a later proposal.
+- [ ] Still unchecked: the irregular coalition margins (F2-3; needs Newman 2000) and MY-6.
 
 ### Diabetic foot MRI study
 
@@ -292,9 +298,11 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-
   tarsometatarsal and metatarsophalangeal joints"), not "midfoot, away from the pressure
   points", which no listed abstract states.
 - [x] Open sources (2026-10-29, "Third check"): D2-2, D4-1 and D7-1 now cite Rosskopf 2019 or Weaver 2022.
-- [ ] Still unchecked: D2-3. For the author: the ghost sign's "a neuropathic bone keeps its outline"
-  (Rosskopf: neuropathic bones "look destroyed on all sequences") and "an inactive foot shows no
-  edema" (Rosskopf: some oedema "may last").
+- [x] Decided by the author 2026-10-29 (Rosskopf 2019): the ghost sign "raises suspicion of
+  superimposed osteomyelitis", uncomplicated neuropathic destruction looks destroyed on every
+  sequence, and no study has tested the sign's accuracy; in less active or inactive disease edema
+  decreases but may persist.
+- [ ] Still unchecked: D2-3 (septic arthritis with an effusion; needs Ledermann 2002).
 
 ### Spine CT for pain or injury
 
@@ -308,9 +316,19 @@ is under the calculator below.
 - [x] Matched to the papers by the author's choice (2026-10-23): Rojas gives 8.5 mm (BDI) and
   2 mm (ADI) as 95% limits ("less than"), so those values are now outside normal; Laredo's
   features are "significantly more frequent" in benign or malignant collapse, not proof.
-- [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"); two points for the author.
-- [ ] Still unchecked: MRI for what the rule misses (T2-3), the expanded Denver criteria and the C3 question (T5-1), the
-  Genant grades (T6-1).
+- [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"). Decided by the author 2026-10-29:
+  a cadaver-derived rule historically applied to radiographs, not reliable on its own or carried
+  over to CT (Radcliff 2013, Woods 2018, Kopparapu 2022); 5.7 mm only as history, and no value
+  reads "intact".
+- [x] Open sources (2026-10-29, "Seventh check"): T2-3 (Alves 2020, WFNS) and T6-1 (Wáng 2024, ESSR
+  consensus), cited beside the originals.
+- [x] Decided by the author 2026-10-29: the expanded Denver wording ("a cervical spine fracture,
+  subluxation or ligamentous injury at any level"; Brommeland 2018, Wagner 2023), with any subaxial
+  injury, C3 included, triggering the check, counted as a criterion with a high-energy mechanism;
+  Genant grade 2 is more than 25% up to 40% (Wáng 2020), a visual estimate.
+- [ ] Still unchecked: the exact 1 cm / 40% facet boundary (AO-6; needs Vaccaro 2016). Burlew 2012's
+  own table is unread, but the wording is settled from Brommeland and Wagner. Not yet asked: the
+  expanded list also has occipital condyle fractures, which the form's Denver check does not count.
 
 ### AO Spine calculator
 
@@ -320,7 +338,15 @@ Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
 - [x] Match references S1 and S2 on PubMed and Crossref (2026-10-23). Both found; DOIs added.
 - [x] AO-3 verified; AO-1, AO-2, AO-6, AO-8 and AO-10 in part (the abstracts give the type
   names and say facet, neurology and modifier grades exist).
-- [ ] Still unchecked: AO-4, AO-5, AO-7 (the 1 cm / 40% boundary), AO-9, AO-11, AO-12.
+- [x] AO-4, AO-5, AO-7 and AO-9 were already settled by the two posters (second and fourth
+  checks); AO-11 and AO-12 verified from Divi 2019, now cited (2026-10-29, "Fifth check").
+- [x] Decided by the author 2026-10-29: "+" only with a neurological injury (Divi 2019), so the
+  calculator offers it only for N2, N3 and N4 and clears it otherwise. The author's "incomplete
+  deficit or nerve injury" wording is in no peer-reviewed source read, so N4+ is allowed (Divi's
+  "a patient with a neurological injury") and N1 (recovered) is not.
+- [ ] Still unchecked: exactly 1 cm or exactly 40% (AO-6). Every open source writes F1 as "<1cm …
+  <40%" and F2 as ">1cm, > than 40%", so the boundary values belong to neither; the calculator
+  reads them as F2. Needs Vaccaro 2016.
 
 ### Pelvis CT for pain or injury
 
@@ -335,9 +361,11 @@ under the calculators below.
   P3-1, P3-3 (with two differences) and P5-1. The caveat and differences are in the sources
   file, for the author.
 - [x] L5 transverse process (P2-2): settled by Leone 2022, read in full (2026-10-28).
-- [ ] Still unchecked, because the papers are paywalled: the
-  Denis deficit rates (P3-1), the U- or H-shaped fracture (P3-2). Kept on the page with the
-  "Unchecked draft" note, by the author's choice (2026-10-23). They need the full text.
+- [x] The Denis deficit rates (P3-1) were already settled by Rizkalla 2019 (third check); the U- or
+  H-shaped fracture (P3-2) verified from Rizkalla and Leone. Both now cited beside the originals
+  (2026-10-29, "Sixth check").
+- [ ] Still unchecked: whether Roy-Camille 1985 itself used the U or H shape, and the LT-2 points
+  under the calculators below.
 
 ### Pelvis calculators (Young-Burgess, Letournel)
 
@@ -347,10 +375,18 @@ is in `docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md`.
 - [x] Match references PC1 to PC7 on PubMed and Crossref (2026-10-23). All matched; DOIs added.
 - [x] LT-1 (the ten types) verified against Scheinfeld 2015's abstract; parts of YB-3, YB-4,
   LT-3 and LT-5 too.
-- [ ] Still unchecked, because the papers are paywalled and their abstracts do not give the
-  subtype wording: YB-1, YB-2, YB-6 (2.5 cm), YB-8 (stability), YB-9, LT-2, LT-4, LT-6, LT-7.
-  Kept with the "Unchecked draft" notes by the author's choice (2026-10-23). They need the
-  full text.
+- [x] Open sources (2026-10-29, "Sixth check"): YB-1, YB-2, YB-3, YB-6 and YB-9 (Leone 2022, Alton,
+  Halawi), LT-3, LT-4, LT-6, LT-7 and most of LT-2 (Gänsslen 2024, Durkee). Every Young-Burgess
+  claim is now read, so its page no longer says "Unchecked draft".
+- [ ] Still unchecked (Letournel, LT-2): posterior column "through the greater sciatic notch",
+  anterior wall "the middle of the line", anterior column "or the anterior border".
+- [x] Decided by the author 2026-10-29 (the pelvis calculators doc, "The author's decisions"): APC I
+  keeps 2.5 cm with a caveat that thresholds vary and diastasis alone does not prove stability; VS
+  on one or both sides; APC III unstable even without vertical displacement; LC III unstable, the
+  posterior ring setting the direction; Young-Burgess as a force-vector classification whose
+  patterns inform stability ("Stability implication" column); Leone's LC with VS as the commonest
+  combination; iliac-wing extension in anterior-column (including ACPHT) and both-column fractures;
+  the spur best seen on the obturator oblique view.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 
@@ -365,9 +401,13 @@ claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`.
 - [x] Open sources (2026-10-29, "Fourth check" in the foot calculators sources doc): Myerson MY-1 to MY-5
   (Diebal 2013, Tzatzairis 2019); HK-4, HK-6, HK-8, SA-2, SA-5 and the 2 mm were already settled.
   The Sanders page no longer says "Unchecked draft".
-- [ ] Still unchecked: MY-6 (needs Myerson 1986) and HK-5. For the author: Hawkins type IV
-  (Alton: body dislocated from the ankle or subtalar joint, plus the talonavicular; the page says
-  both), and reviews that word Myerson A, B2 and C1 differently.
+- [x] Decided by the author 2026-10-29: Hawkins IV keeps subtalar and tibiotalar dislocation plus
+  the talonavicular, from Alton's Fig. 1 legend (its text says "ankle or subtalar"), which also
+  settles HK-5; the Hawkins page no longer says "Unchecked draft". Myerson A, B2 and C1 reworded
+  to the anatomy; type D added as a separately labelled later proposal (Moracia-Ochagavía 2019,
+  Hammad 2026).
+- [ ] Still unchecked: MY-6 (needs Myerson 1986). Myerson B2's "first tarsometatarsal joint in
+  place" is read from the tables (metatarsals 2–5 only) rather than stated in words.
 
 ### Pediatric elbow radiographs
 
@@ -386,10 +426,11 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   radiographs underestimate anterior but overestimate medial displacement (Edmonds).
 - [x] Every claim read (2026-10-29, "Fifth check" in the paediatric elbow sources doc): Gartland, Jakob,
   O'Brien and Judet against open reviews cited beside them; the "Unchecked draft" note is gone.
-  For the author: the radiocapitellar line "in every view" (it misses the capitellum in 8.6% of
-  normal elbows and is more reliable through the head than the neck), Jakob stage II "moderate"
-  (in Tomori 2018, not in the cited review), and the uncited "in children the radial neck breaks
-  rather than the head".
+- [x] Decided by the author 2026-10-29: the radiocapitellar line "should normally intersect the
+  capitellum" on the AP and lateral, with normal variation, and a miss raises suspicion rather than
+  proving dislocation (Ramirez 2014: 176 of 2,052 lines; neck against shaft, not head against neck);
+  Jakob stage II without "moderate" (Tomori 2018 added); proximal radial fractures "usually" involve
+  the neck or physis (Macken 2022, Kalbitz 2022 added).
 
 ### Suprahyoid neck CT and MRI
 
@@ -407,11 +448,12 @@ in `docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md`.
   zygomatic arch"); 11 mm for the subdigastric node only, 10 mm for the rest of level II, and
   necrosis of 3 mm or more only in nodes with tumour (van den Brekel, replacing Som's "most
   reliable sign").
-- [ ] Still unchecked, because the papers have no abstract or the abstract does not touch the
-  claim: the fat-shift directions and usual lesions (N2-1 to N2-4, N2-6, Harnsberger and Osborn),
-  the deep parotid signs (N2-5, Shin), carotid splaying (N2-7), retropharyngeal edema against
-  abscess (N2-9, Hoang), the mylohyoid line (N2-12, Mardini), Lemierre (N3-1) and V3 through the
-  foramen ovale (N3-3). Kept with the "Unchecked draft" note. They need the full text.
+- [x] N2-1 to N2-7 and N2-9 were already settled (fourth to sixth checks). Lemierre (N3-1,
+  Hirvonen 2023) and V3 through the foramen ovale (N3-3, Fernandes 2013) verified and cited beside
+  the originals (2026-10-29, "Seventh check").
+- [x] Decided by the author 2026-10-29: the mylohyoid line is taught by the lesion's position against
+  the line, not by the tooth (Iwata 2026 added; a form field for above or below). Every claim is now
+  read, so the note no longer says "Unchecked draft".
 
 ### Larynx CT and MRI
 
@@ -496,10 +538,14 @@ Europe PMC or Crossref. Claims, verdicts and the figures chosen are in
 - [ ] No open CC BY figure with a stated licence version for the labyrinthine fistula yet.
 - [x] Claims checked on PubMed, Crossref and the open full texts (2026-10-28); the ACR Hearing Loss
       and/or Vertigo criteria now cite the header, and Young 2014 is confirmed.
-- [ ] Five questions for the author at the end of the sources doc ("For the author"): where claims
-      differ from their papers or have no source. Nothing was reworded.
-- [x] No author review (2026-10-28). The note keeps "Unchecked draft" while the five questions
-      above are open.
+- [x] The five questions decided by the author 2026-10-29 (the sources doc, "The author's
+      decisions"): labyrinthitis ossificans causes broadened (Verbist, Buch); the ACR MRI wording;
+      fibrous dysplasia (Brown, Pontes-Madruga) and pneumolabyrinth (Gross, Botti) recited, Juliano
+      part II dropped; the four unsourced statements sharpened and cited; the implant checklist
+      adapted from Widmann 2020 and Vogl 2015, Young kept for children.
+- [ ] Still unsourced: two checklist points, the sigmoid sinus "placed far forward" and otosclerosis
+      as the example of a round window closed by bone. Ostrander 2026 (already the source of a scan)
+      states both; cite it? The note keeps "Unchecked draft" until then.
 
 ## Calculator papers from the author (first batch)
 
@@ -524,9 +570,11 @@ document. Where the site differed, the author chose the newer source, and these 
 - Mason: the 2 mm and 30% are not in the 1986 paper; they are now cited to Broberg and Morrey 1987,
   still unchecked.
 
-- [ ] Schatzker type IV: the review calls it a split of the medial plateau; the calculator still
-  counts any medial plateau fracture as IV. For the author.
-- [ ] The subaxial AO Spine facets, neurology and modifiers are still unchecked (poster asked for).
+- [x] Schatzker type IV: the review calls it a split of the medial plateau; the calculator
+  counts any medial plateau fracture as IV. Settled in the third batch: the author confirmed
+  Markhardt's wording, "split or depressed".
+- [x] The subaxial AO Spine facets, neurology and modifiers: checked against the subaxial poster
+  (third batch). Only the exact 1 cm / 40% facet boundary is open (see "AO Spine calculator").
 - [ ] Still pending: Broberg and Morrey 1987 (`docs/PAPERS_NEEDED.md`). Rao 1999 was settled
   from its figure legends and Spence 1970 read in full (2026-10-28); Halawi 2015 and Leone 2022, sent in place of
   Khurana, settle the ring-breaks-in-two-places claim and the L5 transverse process.
@@ -568,6 +616,5 @@ Gartland, Goutallier, Ellman and Denis ("Third check" sections in the sources do
 
 ## Housekeeping
 
-- Delete the `design-update` branch and the `radref-design` worktree
-  (`git worktree remove ../radref-design`, then `git branch -d design-update`) once
-  nothing else is needed from them.
+- Done (checked 2026-10-29): the `design-update` branch and the `radref-design` worktree are
+  gone, locally and on GitHub.

@@ -99,3 +99,47 @@ references and cited beside Khurana for P2-2.
 | P2-2 (L5 transverse process and vertical instability) | yes | In vertical shear: "Involvement of the posterior arch of the pelvic ring is characterized by the avulsion of the transverse process of the fifth lumbar vertebra on the impact side, which is a sign of iliolumbar ligament rupture"; "Rotational and vertical instability is the result of vertical shear injuries". Figure 7 shows it with a cranially shifted hemipelvis. Leone ties it to vertical shear rather than calling it a marker on its own; the site's sentence is a fair reading. |
 | P3-1 (Denis deficit) | agrees | "In 6% of cases, there is an impingement of L5 or S1 nerve root" (zone I); "In 28% of cases, there is an ipsilateral neurological deficit" (zone II). No zone III figure. |
 | P3-2 (U- or H-shaped fracture) | agrees | Zone III "may have different morphology (“H”-shaped, “U”-shaped, “λ”-shaped, “T”-shaped), and can result in a spinopelvic dissociation". |
+
+## Sixth check, 2026-10-29: open sources
+
+P3-1 and P3-2 were already settled by the third and fifth checks above; the study's sourceNote
+was stale ("the claims not stated in an abstract or open full text (among them the Letournel
+wording that Durkee does not cover) have still not been checked"). The Roy-Camille paper is still
+abstract-only (doi.org sends it to ovid.com's abstract page). New open source for the Letournel
+wording the study shows: Gänsslen A, Tonetti J, Pohlemann T. Algorithms in acetabular fracture
+classifications. Arch Orthop Trauma Surg. 2024;144(10):4655-4665. doi:10.1007/s00402-024-05599-6
+(PMC11576829, CC BY 4.0, read in full; matched on Crossref). Its verdicts are in the calculators
+sources, sixth check.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| P3-1 (Denis deficit rates) | yes | Rizkalla 2019 (third check): "neurologic injuries occurred in 5.9% of fractures lateral to the sacral foramina (Zone 1). In transforaminal fractures (Zone 2), 28.4% ... central fractures (Zone 3) ... (56.7%)". Leone 2022 (fifth check) agrees for zones I and II. Rizkalla is now cited beside Denis in the sacrum chip and the step's teaching note too, not only in the learn section. |
+| P3-2 (U- or H-shaped fracture) | yes, except the attribution | Rizkalla (third check): "These fractures can adopt a U- or H-shaped morphologic pattern and may reflect a loss of continuity between the pelvis and the spine, or 'lumbopelvic dissociation'". Leone (fifth check, open): Zone III "may have different morphology (“H”-shaped, “U”-shaped, “λ”-shaped, “T”-shaped), and can result in a spinopelvic dissociation". The study now cites Leone (learn section) and Rizkalla (teaching note) beside Roy-Camille. Still unread: whether Roy-Camille 1985 itself used the U or H shape; its abstract describes transverse upper sacral fractures in three types, "usually associated with suicidal attempts by jumping". |
+
+Also cited beside the originals in the study (quotes in the calculators sources, sixth check):
+Leone for the Young-Burgess types (ring learn section, LC and APC chips, the 2.5 cm sentence) and
+Gänsslen for the associated Letournel types and the joint surface on the ilium. The sourceNote now
+lists only what is still unread: parts of the Letournel elementary-type wording (LT-2) and
+Roy-Camille's own use of the U or H shape.
+
+## The author's decisions, 2026-10-29
+
+The study shares the Young-Burgess and Letournel wording with the calculators; the full table, the
+sources read and every quote are in `2026-10-23-pelvis-calculators-sources.md`, "The author's
+decisions, 2026-10-29". No reference was added to the study (Alton, Halawi, Leone and Gänsslen were
+already cited); the AJR paper the author named for the iliac wing and spur sign (Lawrence et al.,
+AJR 2013;201(3):W425-W436, doi:10.2214/AJR.12.10470) could not be read and is not cited.
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| 33 | APC I: 2.5 cm stays the conventional threshold, with a caveat. | Ring section: "Published thresholds vary (Halawi), and diastasis alone does not establish stability: it is measured on a single static image, and the pelvis may have sprung back or been reduced by a binder (Alton)." The table's APC I row: "symphyseal diastasis, conventionally less than 2.5 cm, with no posterior instability". |
+| 34 | Vertical shear: "one or both". | Ring section: "Vertical shear, from an axial force, pushes one or both hemipelves upwards (Alton; Halawi; Leone)"; table row and the ring-type option follow `ybDescriptions.VS`. |
+| 35 | APC III: rotationally and vertically unstable; vertical displacement need not be present. | Ring section sentence as on the calculator page; table row and chip: "rotationally and vertically unstable, even without vertical displacement". |
+| 36 | LC III: no unconditional "vertically stable". | Chip and table: "unstable, to a degree and in a direction set by the posterior ring injury". `VERTICALLY_STABLE` no longer contains LC III, so an L5 transverse process fracture with LC III raises no warning (test pinned). |
+| 37 | Young-Burgess and stability. | The column is "Stability implication"; the old sentence ("Stability is not part of the Young-Burgess system itself; the last column is how the types are usually taught alongside it") is replaced by the force-vector and stability paragraph. |
+| 38 | Combined mechanism. | Ring section: "A combined mechanism has features of more than one primary pattern (Alton); Leone describes lateral compression with vertical shear as the commonest combination (Leone)." |
+| 39 | Iliac wing sentence. | Step 4: the old "a fracture running up into the iliac wing is both-column and one that does not is T-shaped (Durkee)" is replaced by the both-column definition (no articular fragment connected to the sacroiliac joint, Gänsslen) and "Iliac wing extension may occur in anterior column fractures, including the anterior column with posterior hemitransverse, and in both-column fractures; a T-shaped fracture usually does not reach the iliac wing (Durkee; Gänsslen)". The both-column quiz explanation adds that a fracture into the iliac wing does not define it. |
+| 40 | Spur sign. | Step 4 and the both-column quiz explanation: best seen on the obturator oblique view, the iliac fragment left attached to the sacroiliac joint (Gänsslen), with Durkee's location kept. "Ipsilateral" and "projecting beside the displaced acetabular fragments" are not added (no source read states them). |
+
+The study's sourceNote and its "Unchecked draft" note are unchanged: the three LT-2 phrases and
+Roy-Camille's own use of the U or H shape are still unread.

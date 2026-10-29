@@ -18,7 +18,9 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * cited beside the paper (2026-10-29), are verified. The claims table, with each claim's status,
  * is docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims); the Hawkins, Sanders
  * and Myerson wording is in 2026-10-23-foot-calculators-sources.md (HK, SA and MY claims). Rule
- * chips and warnings carry their claim IDs.
+ * chips and warnings carry their claim IDs. The author's decisions of 2026-10-29 (talocalcaneal
+ * facets, F2-3; sesamoid edema as a differential, F5-3; Hawkins IV; Myerson A, B2, C1 and the
+ * later type D) are applied and recorded in both sources docs.
  */
 
 const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
@@ -45,6 +47,9 @@ const NWAWKA_DOI = '10.1007/s13244-013-0277-1'
 const APARISI_DOI = '10.1186/s13244-019-0747-1'
 const GORBACHOVA_DOI = '10.5114/pjr.2020.99472'
 const KUMAR_DOI = '10.1186/s13244-023-01514-6'
+const MARTH_DOI = '10.1007/s00330-023-10304-z'
+const MORACIA_DOI = '10.1302/2058-5241.4.180076'
+const HAMMAD_DOI = '10.1155/tsm2/3933956'
 
 const HAWKINS = <Cite doi={HAWKINS_DOI}>Hawkins, J Bone Joint Surg Am 1970</Cite>
 const CANALE = <Cite doi={CANALE_DOI}>Canale and Kelly, J Bone Joint Surg Am 1978</Cite>
@@ -70,6 +75,9 @@ const NWAWKA = <Cite doi={NWAWKA_DOI}>Nwawka et al., Insights Imaging 2013</Cite
 const APARISI = <Cite doi={APARISI_DOI}>Aparisi Gómez et al., Insights Imaging 2019</Cite>
 const GORBACHOVA = <Cite doi={GORBACHOVA_DOI}>Gorbachova, Pol J Radiol 2020</Cite>
 const KUMAR = <Cite doi={KUMAR_DOI}>Kumar et al., Insights Imaging 2023</Cite>
+const MARTH = <Cite doi={MARTH_DOI}>Marth et al., Eur Radiol 2024</Cite>
+const MORACIA = <Cite doi={MORACIA_DOI}>Moracia-Ochagavía and Rodríguez-Merchán, EFORT Open Rev 2019</Cite>
+const HAMMAD = <Cite doi={HAMMAD_DOI}>Hammad et al., Transl Sports Med 2026</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.', doi: HAWKINS_DOI },
@@ -96,6 +104,9 @@ const references: LessonReference[] = [
   { citation: 'Aparisi Gómez MP, Aparisi F, Bartoloni A, Ferrando Fons MA, Battista G, Guglielmi G, Bazzocchi A. Anatomical variation in the ankle and foot: from incidental finding to inductor of pathology. Part II: midfoot and forefoot. Insights Imaging. 2019;10(1):69.', doi: APARISI_DOI },
   { citation: 'Gorbachova T. Magnetic resonance imaging of the ankle and foot. Pol J Radiol. 2020;85:e532-e549.', doi: GORBACHOVA_DOI },
   { citation: 'Kumar S, Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the lower limb: a pictorial review. Insights Imaging. 2023;14(1):166.', doi: KUMAR_DOI },
+  { citation: 'Marth AA, Feuerriegel GC, Marcus RP, Sutter R. How accurate is MRI for diagnosing tarsal coalitions? A retrospective diagnostic accuracy study. Eur Radiol. 2024;34(5):3493-3502.', doi: MARTH_DOI },
+  { citation: 'Moracia-Ochagavía I, Rodríguez-Merchán EC. Lisfranc fracture-dislocations: current management. EFORT Open Rev. 2019;4(7):430-444.', doi: MORACIA_DOI },
+  { citation: 'Hammad A, Ahmad Y, Abdelnour J, Tscholl P. Lisfranc injuries: latest updates on diagnostics and management. Transl Sports Med. 2026;2026:3933956.', doi: HAMMAD_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -152,7 +163,7 @@ const learn: LearnSection[] = [
         <h4>Navicular and the other tarsal bones</h4>
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
         <h4>Tarsal coalition</h4>
-        <p>Calcaneonavicular and talocalcaneal coalitions (the latter at the middle facet) are encountered most frequently ({NEWMAN}; {SZARO}). A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
+        <p>Calcaneonavicular and talocalcaneal coalitions are encountered most frequently ({NEWMAN}; {SZARO}). Talocalcaneal coalition commonly involves the middle facet and may involve both the middle and posterior facets; isolated posterior-facet coalitions also occur ({SZARO}; {MARTH}). Of the 37 talocalcaneal coalitions in Marth's MRI cohort, 28 involved the middle and posterior facets, 6 the middle facet alone and 3 the posterior facet alone; a posterior coalition was the one case missed by all three readers ({MARTH}). A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
         <ScanFigures images={[footMriScans.calcaneonavicularCoalition, footMriScans.navicularStressFracture]} />
       </>
     ),
@@ -167,6 +178,7 @@ const learn: LearnSection[] = [
         <p>Then check the alignment of each tarsometatarsal joint, and the gap between the medial cuneiform and the base of the second metatarsal.</p>
         <p>Type a fracture-dislocation by Myerson ({MYERSON}; {DIEBAL}; {TZATZAIRIS}); the Myerson calculator on this site applies the same rules.</p>
         {myersonTable}
+        <p>A later proposed extension, not part of the original types A to C, adds type D for subtle Lisfranc injuries: D1, a distance of 2 mm or less between the medial (first) cuneiform and the base of the second metatarsal; D2, more than 2 mm, either purely ligamentous (D2L) or with a bony avulsion (D2B) ({MORACIA}). The distance is the medial cuneiform–second metatarsal interval, not the gap between the first and second metatarsals, and it does not replace weight-bearing assessment of stability: subtle displacement may only become evident under physiological load ({HAMMAD}).</p>
         <ScanFigures images={[footMriScans.lisfrancRupture]} />
       </>
     ),
@@ -189,7 +201,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Turf toe is an injury of the plantar capsule and plantar plate of the first metatarsophalangeal (MTP) joint, from forced dorsiflexion ({SANDERS_RATHUR}; {BURGE}).</p>
-        <p>Look at both sesamoids. Marrow edema without a fracture line fits sesamoiditis. A fractured sesamoid has sharp, irregular margins, while a bipartite sesamoid has smooth, corticated margins, is often bilateral, and is usually the medial (tibial) one ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>
+        <p>Look at both sesamoids. Sesamoid marrow edema is not specific: it may reflect sesamoiditis, a stress reaction or stress fracture, or early osteonecrosis, and on MRI early osteonecrosis can look the same as sesamoiditis. Look for a fracture line, sclerosis and fragmentation, and correlate with the clinical findings ({NWAWKA}; {BURGE}).</p>
+        <p>A fractured sesamoid has sharp, irregular margins, while a bipartite sesamoid has smooth, corticated margins, is often bilateral, and is usually the medial (tibial) one ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>
         <p>Then note any degenerative change at the first MTP joint.</p>
         <ScanFigures images={[footMriScans.sesamoiditis]} />
       </>
@@ -366,7 +379,7 @@ const fields = {
   coalition: { id: 'coalition', kind: 'choice', label: 'Tarsal coalition', required: true, options: [
     { value: 'none', label: 'None' },
     { value: 'calcaneonavicular', label: 'Calcaneonavicular' },
-    { value: 'talocalcaneal', label: 'Talocalcaneal (middle facet)' },
+    { value: 'talocalcaneal', label: 'Talocalcaneal' },
     { value: 'other', label: 'Other' },
   ] },
   coalitionKind: { id: 'coalition-kind', kind: 'choice', label: 'Coalition', showIf: (v) => !['', 'none'].includes(str(v, 'coalition')), options: [
@@ -406,7 +419,7 @@ const fields = {
   halluxPlate: { id: 'hallux-plate', kind: 'choice', label: 'First MTP plantar plate (turf toe)', required: true, options: ligamentOptions },
   sesamoids: { id: 'sesamoids', kind: 'choice', label: 'Sesamoids', required: true, options: [
     { value: 'normal', label: 'Normal' },
-    { value: 'edema', label: 'Marrow edema, no fracture (sesamoiditis)' },
+    { value: 'edema', label: 'Marrow edema, no fracture line' },
     { value: 'fracture', label: 'Fracture' },
   ] },
   sesamoidSide: { id: 'sesamoid-side', kind: 'choice', label: 'Which sesamoid', showIf: (v) => ['edema', 'fracture'].includes(str(v, 'sesamoids')), options: [
@@ -714,7 +727,8 @@ function findings(values: Values): string[] {
   const sesamoids = str(values, 'sesamoids')
   const side = picked(values, fields.sesamoidSide)
   const sesamoid = side ? `the ${side} sesamoid` : 'a sesamoid'
-  if (sesamoids === 'edema') out.push(`Marrow edema in ${sesamoid}, without fracture (sesamoiditis).`)
+  // F5-3: the edema is not specific (Nwawka 2013; Burge 2012), so the impression names the differential.
+  if (sesamoids === 'edema') out.push(`Marrow edema in ${sesamoid}, without a fracture line: sesamoiditis, stress reaction or early osteonecrosis.`)
   if (sesamoids === 'fracture') out.push(`Fracture of ${sesamoid}.`)
   if (str(values, 'hallux-arthritis') === 'present') out.push('Degenerative change at the first MTP joint.')
 
@@ -856,7 +870,7 @@ const steps: ReportStep[] = [
       <>
         <p>Hawkins types of talar neck fracture ({HAWKINS}; type IV {CANALE}):</p>
         {hawkinsTable}
-        <p>Sanders types are read on the coronal CT image where the posterior facet is widest ({SANDERS}). The commonest coalitions are calcaneonavicular and talocalcaneal ({NEWMAN}; {SZARO}).</p>
+        <p>Sanders types are read on the coronal CT image where the posterior facet is widest ({SANDERS}). The commonest coalitions are calcaneonavicular and talocalcaneal; a talocalcaneal coalition commonly involves the middle facet, often with the posterior facet too ({NEWMAN}; {SZARO}; {MARTH}).</p>
       </>
     ),
     fields: [fields.talus, fields.hawkins, fields.talusText, fields.calcaneus, fields.sanders, fields.navicular, fields.coalition, fields.coalitionKind],
@@ -870,6 +884,7 @@ const steps: ReportStep[] = [
       <>
         <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}; {DIEBAL}; {TZATZAIRIS}):</p>
         {myersonTable}
+        <p>A later proposed type D for subtle injuries uses the medial cuneiform–second metatarsal distance: D1 2 mm or less, D2 more than 2 mm ({MORACIA}).</p>
       </>
     ),
     fields: [fields.lisfrancDorsal, fields.lisfrancInterosseous, fields.lisfrancPlantar, fields.tmt, fields.myerson],
@@ -886,7 +901,7 @@ const steps: ReportStep[] = [
     id: 'hallux',
     title: 'Step 5. First MTP joint and sesamoids',
     learn: 'hallux',
-    teach: <p>Turf toe injures the plantar plate of the first MTP joint ({SANDERS_RATHUR}; {BURGE}). A fractured sesamoid has sharp, irregular margins; a bipartite one smooth, corticated margins ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>,
+    teach: <p>Turf toe injures the plantar plate of the first MTP joint ({SANDERS_RATHUR}; {BURGE}). Sesamoid marrow edema may be sesamoiditis, stress injury or early osteonecrosis ({NWAWKA}; {BURGE}). A fractured sesamoid has sharp, irregular margins; a bipartite one smooth, corticated margins ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>,
     fields: [fields.halluxPlate, fields.sesamoids, fields.sesamoidSide, fields.halluxArthritis],
   },
   {

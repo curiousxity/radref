@@ -18,8 +18,9 @@ describe('diabetic foot MRI lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'soft-tissue', 'bone', 'joints', 'charcot', 'impression'])
   })
 
-  // The references are matched (each has a DOI), but three claims are still unchecked (septic
-  // arthritis, the neuropathic bone outline, the inactive foot), so the note keeps saying so.
+  // The references are matched (each has a DOI), but one claim is still unchecked (septic
+  // arthritis with an effusion), so the note keeps saying so. The ghost sign and the inactive
+  // foot follow Rosskopf 2019 (the author's decisions, 2026-10-29).
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     // 9 since two open reviews (Rosskopf 2019, Weaver 2022) were added (2026-10-29).
@@ -160,7 +161,7 @@ describe('diabetic foot MRI rules (unchecked)', () => {
   // "the usual Charcot distribution" (midfoot, away from the pressure points), which no listed
   // abstract states; it now fires on the tarsometatarsal or metatarsophalangeal joints.
   // D7: active disease shows marrow edema before radiographs change.
-  // D4: the ghost sign suggests infection within the neuropathic bone.
+  // D4: the ghost sign raises suspicion of osteomyelitis within the neuropathic bone (Rosskopf 2019).
   test('Charcot distribution, activity and the ghost sign', () => {
     const charcot = { ...normal, charcot: 'present', 'charcot-sites': ['tmt', 'chopart'], 'charcot-activity': 'active' }
     expect(chips(study, 'charcot', charcot).Distribution).toBe('Tarsometatarsal or metatarsophalangeal: the commonest Charcot sites')
@@ -168,11 +169,11 @@ describe('diabetic foot MRI rules (unchecked)', () => {
     expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['chopart'] }).Distribution).toBeUndefined()
     expect(chips(study, 'charcot', { ...charcot, 'charcot-sites': ['ip'] }).Distribution).toBeUndefined()
     expect(chips(study, 'charcot', charcot).Activity).toBe('Active: MRI shows this before radiographs change')
-    expect(chips(study, 'charcot', { ...charcot, ghost: 'present' })['Ghost sign']).toBe('Suggests infection within the neuropathic bone')
+    expect(chips(study, 'charcot', { ...charcot, ghost: 'present' })['Ghost sign']).toBe('Raises suspicion of superimposed osteomyelitis')
     expect(impressionOf({ ...charcot, 'charcot-deformity': 'collapse', ghost: 'present' })).toBe([
       'Active neuropathic (Charcot) arthropathy of the tarsometatarsal (Lisfranc), naviculocuneiform and Chopart joints.',
       'Collapse of the arch (rocker-bottom deformity).',
-      'Ghost sign, suggesting infection within the neuropathic bone.',
+      'Ghost sign, raising suspicion of superimposed osteomyelitis in the neuropathic bone.',
     ].join('\n'))
   })
 

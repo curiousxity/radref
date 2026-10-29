@@ -98,3 +98,39 @@ figure legends.
 | ID | Verdict | Evidence |
 |----|---------|----------|
 | N2-7 | yes | Two carotid body tumours: "The ECA (short arrow) is splayed from the ICA (long arrow)" (Fig. 4a), and a mass "that splays the ECA (short arrow) from the ICA (long arrow)" (Fig. 8a; Fig. 8b shows the same at angiography). Vagal paragangliomas instead displace "both the ECA and ICA anteriorly" (Fig. 10b). |
+
+## Seventh check, 2026-10-29: open sources
+
+Status before this check. The to-do list in `docs/REMAINING_TASKS.md` was stale: N2-1 to N2-4
+and N2-6 were settled in the fourth and fifth checks (Harnsberger and Osborn; Shin), N2-5 and
+N2-9 in the fifth (Shin; Hoang) and N2-7 in the sixth (Rao's figure legends). The study's
+source note still named "the carotid bifurcation sign" as unchecked; it no longer does. Left
+were N2-12 (Mardini), N3-1 (Lemierre) and the V3 part of N3-3 (Ginsberg). All three papers are
+on ScienceDirect, which returned 403 here.
+
+New open sources (full text read in Europe PMC; metadata checked on Crossref):
+
+- Hirvonen J, Heikkinen J, Nyman M, Happonen T, Velhonoja J, Irjala H, Soukka T, Mattila K,
+  Nurminen J. MRI of acute neck infections: evidence summary and pictorial review. Insights
+  Imaging. 2023;14(1):5. doi:10.1186/s13244-022-01347-9 (PMC9826778). Cited beside Lemierre.
+- Fernandes T, Lobo JC, Castro R, Oliveira MI, Som PM. Anatomy and pathology of the masticator
+  space. Insights Imaging. 2013;4(5):605-616. doi:10.1007/s13244-013-0266-4 (PMC3781239). Cited
+  beside Ginsberg.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| N3-1 | yes | Hirvonen, "Complications: Venous thrombosis": "Lemierre's syndrome ... typically involves internal jugular vein thrombophlebitis and septic fever following acute pharyngeal infections most commonly caused by Fusobacterium necrophorum. The causative focus mostly originates from pharyngitis or tonsillitis, accounting for over 85% of the cases". The source says "pharyngeal" and the page "oropharyngeal"; tonsillitis is oropharyngeal, so the page is taken as stating the same. Added as a second citation beside Lemierre (text, summary, quiz). |
+| N3-3 (V3 part) | yes | Fernandes, perineural spread: "Primary or secondary tumour extension to the masticator space may extend intracranially along the mandibular nerve through the foramen ovale"; "V3 ... enters the masticator space through the foramen ovale". Also the signs the page lists: "widening or destruction of the neural foramina", "enlargement and increased enhancement of the involved nerve", and a case "causing widening of the foramen ovale" (Fig. 18). Added beside Ginsberg (text, summary, quiz). N3-3 is now verified in full. |
+| N2-12 | partly | No open radiology review states the page's rule as it stands. **For the author**: (1) Alves IdS et al., Dental findings on face and neck imaging, Radiol Bras 2021;54(2):107-114, doi:10.1590/0100-3984.2019.0104 (PMC8029935): "This condition mainly originates in the lower second and third molars because their apices extend down to near the mandibular insertion of the mylohyoid muscle (mylohyoid line)", but then "When infected, the lower third molar drains into the submandibular space and the other lower teeth drain into the sublingual space", which puts the second molar above the line, unlike the page ("The roots of the second and third molars lie below it ... those of the premolars and the first molar lie above it"). (2) Iwata E et al., The Role of the Mylohyoid Line in the Spread of Mandibular Odontogenic Deep Neck Infection, Oral Dis 2026;32:1698-1708, doi:10.1111/odi.70149 (PMC13457651), states the page's rule only as a belief and then disputes it: "It is commonly believed that infections from teeth with apices located superior to the mylohyoid line (e.g., premolars and first molars) tend to spread to the sublingual space, while those inferior to the line (e.g., second and third molars) spread to the submandibular space ... However, this assumption is largely based on anatomical inference rather than empirical evidence"; in 118 patients "the type of causative tooth was not a risk factor for abscess formation in both the sublingual space and 'submandibular or submental' space", and "Since any mandibular tooth can lead to abscess formation in these regions ... [surgeons] should carefully assess the anatomical position of the lesion". The page and its tooth chip ("Roots below it: spreads to the submandibular space") are unchanged. Hirvonen (above) states only the anatomy: sublingual and submandibular infections are split "based on the superior and inferior location relative to the mylohyoid muscle". Still needs Mardini. |
+
+Still unchecked after this check: N2-12 only. The source note says so, and keeps "Unchecked
+draft". Needs a browser: https://www.sciencedirect.com/science/article/pii/S0033838917301276
+(Mardini, N2-12); https://www.sciencedirect.com/science/article/pii/S0140673600570354 (Lemierre)
+and https://www.sciencedirect.com/science/article/pii/S0887217199900185 (Ginsberg) would only
+confirm the originals, since N3-1 and N3-3 are now settled from open reviews.
+
+## The author's decisions, 2026-10-29
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| N2-12 | Replace the fixed tooth rule with the anatomical one: the site of lingual cortical perforation relative to the mylohyoid attachment decides the first space; spread is not reliably predicted by which tooth is infected. The author pointed to Iwata 2026 and an NCBI Bookshelf chapter (NBK589648; behind a reCAPTCHA here, so not read or cited). Iwata et al., Oral Dis 2026;32(6):1698-1708, doi:10.1111/odi.70149 (PMC13457651, read in full): "When an odontogenic lesion is located superior to the mylohyoid line, the abscess tends to initially form in the sublingual space and subsequently spread to the submandibular or submental space"; "It is commonly believed that infections from teeth with apices located superior to the mylohyoid line (e.g., premolars and first molars) tend to spread to the sublingual space, while those inferior to the line (e.g., second and third molars) spread to the submandibular space"; "the type of causative tooth (i.e., anterior, premolar, or molar) was not a significant risk factor in any of the three analyses"; "one case was superior to the line and one was inferior, even for the same second molar"; the "glosso-mylohyoid gap" between the posterior border of the mylohyoid and the hyoglossus "is considered a potential pathway for the spread of inflammation from the sublingual space to the submandibular or submental space". The "below the line → submandibular" half is stated by Iwata only as the reviews' view; it is cited to Mardini and Iwata together. | Learn text rewritten (position against the line; the tooth rule as commonly taught, and Iwata's finding that tooth type did not predict the space; the spaces communicating around the posterior border); a new form field "Lesion against the mylohyoid line" (above / below) drives the chip, and the tooth field no longer does; summary and quiz rewritten; Iwata added to the references (17). Every claim is now read, so the note no longer says "Unchecked draft". |

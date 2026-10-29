@@ -16,16 +16,21 @@ const firstOptions: { value: FirstRay; label: string }[] = [
 
 const lesserOptions: { value: LesserRays; label: string }[] = [
   { value: 'none', label: 'None' },
-  { value: 'some', label: 'Some of them' },
+  { value: 'some', label: 'Some, not all four' },
   { value: 'all', label: 'All four' },
 ]
 
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
+const MORACIA_DOI = '10.1302/2058-5241.4.180076'
+const HAMMAD_DOI = '10.1155/tsm2/3933956'
+
 const references: LessonReference[] = [
   { citation: 'Myerson MS, Fisher RT, Burgess AR, Kenzora JE. Fracture dislocations of the tarsometatarsal joints: end results correlated with pathology and treatment. Foot Ankle. 1986;6(5):225-242.', doi: '10.1177/107110078600600504' },
   { citation: 'Diebal AR, Westrick RB, Alitz C, Gerber JP. Lisfranc injury in a West Point cadet. Sports Health. 2013;5(3):281-285.', doi: '10.1177/1941738113477991' },
   { citation: 'Tzatzairis T, Firth G, Parker L. Adolescent Lisfranc injury treated with TightRope™: a case report and review of literature. World J Orthop. 2019;10(2):115-122.', doi: '10.5312/wjo.v10.i2.115' },
+  { citation: 'Moracia-Ochagavía I, Rodríguez-Merchán EC. Lisfranc fracture-dislocations: current management. EFORT Open Rev. 2019;4(7):430-444.', doi: MORACIA_DOI },
+  { citation: 'Hammad A, Ahmad Y, Abdelnour J, Tscholl P. Lisfranc injuries: latest updates on diagnostics and management. Transl Sports Med. 2026;2026:3933956.', doi: HAMMAD_DOI },
 ]
 
 export function MyersonPage() {
@@ -48,7 +53,7 @@ export function MyersonPage() {
           <span className="calc-tag">Lisfranc</span>
         </div>
         <p>Type a tarsometatarsal (Lisfranc) fracture-dislocation from which metatarsals are displaced and which way, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the paper is paywalled and its abstract does not give the types, so the types are checked against two later papers that tabulate them (<Cite doi="10.1177/1941738113477991">Diebal et al., Sports Health 2013</Cite>; <Cite doi="10.5312/wjo.v10.i2.115">Tzatzairis et al., World J Orthop 2019</Cite>). Still unchecked: whether Myerson named any displacement pattern beyond types A to C2. Source: <Cite doi="10.1177/107110078600600504">Myerson et al., Foot Ankle 1986</Cite>.</p>
+        <p className="source-note">Unchecked draft: the paper is paywalled and its abstract does not give the types, so the types are checked against two later papers that tabulate them (<Cite doi="10.1177/1941738113477991">Diebal et al., Sports Health 2013</Cite>; <Cite doi="10.5312/wjo.v10.i2.115">Tzatzairis et al., World J Orthop 2019</Cite>). Still unchecked: whether Myerson named any displacement pattern beyond types A to C2. Type D, a later proposal, is described from two reviews. Source: <Cite doi="10.1177/107110078600600504">Myerson et al., Foot Ankle 1986</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -56,7 +61,7 @@ export function MyersonPage() {
           <h3>Displacement at the tarsometatarsal joints</h3>
           <div className="form-grid">
             <ChoiceGroup label="First metatarsal" layout="stack" value={first} options={firstOptions} onChange={setFirst} />
-            <ChoiceGroup label="Second to fifth metatarsals displaced (laterally or dorsoplantar)" layout="stack" value={lesser} options={lesserOptions} onChange={setLesser} />
+            <ChoiceGroup label="Second to fifth metatarsals displaced (laterally, or with the first metatarsal)" layout="stack" value={lesser} options={lesserOptions} onChange={setLesser} />
           </div>
         </article>
 
@@ -89,7 +94,8 @@ export function MyersonPage() {
             </tbody>
           </table>
         </div>
-        <p>The types describe fracture-dislocations. A subtle ligament injury without displacement has no Myerson type; describe the ligaments and the alignment instead.</p>
+        <p>The types describe fracture-dislocations. A subtle ligament injury has no type among Myerson's 1986 types; describe the ligaments and the alignment.</p>
+        <p>A later proposed extension, not part of the original types A to C, adds type D for subtle Lisfranc injuries: D1, a distance of 2 mm or less between the medial (first) cuneiform and the base of the second metatarsal; D2, more than 2 mm, either purely ligamentous (D2L) or with a bony avulsion (D2B) (<Cite doi={MORACIA_DOI}>Moracia-Ochagavía and Rodríguez-Merchán, EFORT Open Rev 2019</Cite>). The distance is the medial cuneiform–second metatarsal interval, not the gap between the first and second metatarsals. It does not replace weight-bearing assessment of stability: these injuries rely on it, as subtle displacement may only become evident under physiological load (<Cite doi={HAMMAD_DOI}>Hammad et al., Transl Sports Med 2026</Cite>). This calculator gives types A to C2 only.</p>
       </section>
 
       <section className="info-card">
@@ -97,7 +103,7 @@ export function MyersonPage() {
         <ScanFigures images={[lisfrancScans.fleck, lisfrancScans.diastasis]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, and its abstract does not give the types; the two later papers give them in tables." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, and its abstract does not give the types; the two later papers give them in tables. The two reviews describe the later proposed type D." />
     </div>
   )
 }

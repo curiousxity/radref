@@ -30,8 +30,9 @@ describe('foot MRI lesson', () => {
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added;
-    // 24 since eight open reviews were added beside the paywalled papers (2026-10-29).
-    expect(study.references).toHaveLength(24)
+    // 24 since eight open reviews were added beside the paywalled papers (2026-10-29); 27 since
+    // Marth 2024 (talocalcaneal facets) and the two reviews behind the Myerson type D note.
+    expect(study.references).toHaveLength(27)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -139,7 +140,7 @@ describe('foot MRI report: whole cases', () => {
       'Moderate joint effusion, second tarsometatarsal joint.',
       'Sprain of the interosseous Lisfranc ligament.',
       'Metatarsal stress fracture: second metatarsal, third metatarsal.',
-      'Marrow edema in the medial (tibial) sesamoid, without fracture (sesamoiditis).',
+      'Marrow edema in the medial (tibial) sesamoid, without a fracture line: sesamoiditis, stress reaction or early osteonecrosis.',
       'Tibialis posterior at the navicular: tendinosis.',
     ].join('\n'))
     expect(report(study, values).warnings).toEqual([])
@@ -154,8 +155,16 @@ describe('foot MRI report: whole cases', () => {
       .toBe('Features of plantar fasciitis.\nNo fracture.\nNo Lisfranc injury.')
   })
 
+  // F2-3, the author's decision (2026-10-29): talocalcaneal coalitions are not only at the middle
+  // facet. Marth 2024, Table 2: of 37 talocalcaneal coalitions, "Middle facet 6", "Middle and
+  // posterior facet 28", "Posterior facet 3". The line said "Talocalcaneal (middle facet)".
+  // F5-3, same day: sesamoid edema is not specific. Nwawka 2013: "On MRI, both sesamoiditis and
+  // osteonecrosis may show changes in the pattern of bone-marrow oedema isolated to the sesamoid".
+  // The line said "(sesamoiditis)".
   test('report wording for the forefoot and coalition lines', () => {
-    expect(impressionOf({ ...normal, coalition: 'talocalcaneal', 'coalition-kind': 'non-osseous' })).toBe('Talocalcaneal (middle facet) coalition, non-osseous.')
+    expect(impressionOf({ ...normal, coalition: 'talocalcaneal', 'coalition-kind': 'non-osseous' })).toBe('Talocalcaneal coalition, non-osseous.')
+    expect(report(study, { ...normal, sesamoids: 'edema', 'sesamoid-side': 'lateral' }).text).toContain('Sesamoids: marrow edema, no fracture line')
+    expect(impressionOf({ ...normal, sesamoids: 'edema' })).toBe('Marrow edema in a sesamoid, without a fracture line: sesamoiditis, stress reaction or early osteonecrosis.')
     expect(impressionOf({ ...normal, coalition: 'other' })).toBe('Tarsal coalition.')
     expect(impressionOf({ ...normal, 'fifth-base': 'zone-2' })).toBe('Fifth metatarsal base fracture, zone 2: Jones fracture.')
     expect(impressionOf({ ...normal, freiberg: 'second' })).toBe('Osteonecrosis of the second metatarsal head (Freiberg infraction).')

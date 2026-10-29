@@ -100,8 +100,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Telling neuroarthropathy from osteomyelitis requires careful analysis of where the bone signal changes are, their distribution and their pattern ({LEDERMANN_MORRISON}). Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints, whereas osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>
-        <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}; {ROSSKOPF}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
-        <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection ({DONOVAN}; {ROSSKOPF}); a neuropathic bone keeps its outline ({DONOVAN}).</p>
+        <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}; {ROSSKOPF}). In less active or inactive disease, soft-tissue and bone-marrow edema generally decrease, but residual edema may persist ({ROSSKOPF}), so its complete absence is not required; the foot shows sclerosis, remodelling and deformity.</p>
+        <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline is poorly defined on T1-weighted images but becomes visible again on T2-weighted or contrast images (the ghost sign) raises suspicion of superimposed osteomyelitis ({DONOVAN}; {ROSSKOPF}). In uncomplicated neuropathic destruction the structural loss persists: the bone looks destroyed on every sequence and does not reappear ({ROSSKOPF}). The sign is often called pathognomonic, but no study has yet tested its accuracy ({ROSSKOPF}).</p>
         <ScanFigures images={[diabeticFootMriScans.activeCharcotStir, diabeticFootMriScans.ghostSignT1, diabeticFootMriScans.ghostSignContrast]} />
       </>
     ),
@@ -197,14 +197,14 @@ const fields = {
   ] },
   charcotActivity: { id: 'charcot-activity', kind: 'choice', label: 'Activity', showIf: (v) => str(v, 'charcot') === 'present', options: [
     { value: 'active', label: 'Active: subchondral marrow edema and effusions' },
-    { value: 'inactive', label: 'Inactive: no edema; sclerosis and remodelling' },
+    { value: 'inactive', label: 'Inactive: edema decreased (some may persist); sclerosis and remodelling' },
   ] },
   charcotDeformity: { id: 'charcot-deformity', kind: 'choice', label: 'Deformity', showIf: (v) => str(v, 'charcot') === 'present', options: [
     { value: 'none', label: 'None' },
     { value: 'collapse', label: 'Collapsed arch (rocker-bottom)' },
     { value: 'other', label: 'Other deformity' },
   ] },
-  ghost: { id: 'ghost', kind: 'choice', label: 'Ghost sign', showIf: (v) => str(v, 'charcot') === 'present', help: 'A bone outline that fades on T1 but reappears on fluid-sensitive or contrast images.', options: [
+  ghost: { id: 'ghost', kind: 'choice', label: 'Ghost sign', showIf: (v) => str(v, 'charcot') === 'present', help: 'A bone outline that is poorly defined on T1 but becomes visible again on T2-weighted or contrast images.', options: [
     { value: 'absent', label: 'Absent' },
     { value: 'present', label: 'Present' },
   ] },
@@ -256,8 +256,8 @@ function deriveCharcot(values: Values): Derived[] {
   const out: Derived[] = []
   // D5: neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints.
   if (usualCharcot(values)) out.push({ label: 'Distribution', value: 'Tarsometatarsal or metatarsophalangeal: the commonest Charcot sites', tone: 'good' })
-  // D4: the ghost sign suggests infection within the neuropathic joint.
-  if (str(values, 'ghost') === 'present') out.push({ label: 'Ghost sign', value: 'Suggests infection within the neuropathic bone', tone: 'warn' })
+  // D4: the ghost sign raises suspicion of osteomyelitis within the neuropathic joint (Rosskopf 2019).
+  if (str(values, 'ghost') === 'present') out.push({ label: 'Ghost sign', value: 'Raises suspicion of superimposed osteomyelitis', tone: 'warn' })
   // D7: active disease shows marrow edema, before radiographic change.
   if (str(values, 'charcot-activity') === 'active') out.push({ label: 'Activity', value: 'Active: MRI shows this before radiographs change', tone: 'warn' })
   return out
@@ -333,7 +333,7 @@ function findings(values: Values): string[] {
     const activity = str(values, 'charcot-activity')
     out.push(`${activity === 'active' ? 'Active n' : activity === 'inactive' ? 'Inactive n' : 'N'}europathic (Charcot) arthropathy${sites.length > 0 ? ` of the ${sites.join(', ')} joints` : ''}.`)
     if (str(values, 'charcot-deformity') === 'collapse') out.push('Collapse of the arch (rocker-bottom deformity).')
-    if (str(values, 'ghost') === 'present') out.push('Ghost sign, suggesting infection within the neuropathic bone.')
+    if (str(values, 'ghost') === 'present') out.push('Ghost sign, raising suspicion of superimposed osteomyelitis in the neuropathic bone.')
   }
   return out.filter((sentence): sentence is string => Boolean(sentence))
 }
@@ -421,7 +421,7 @@ const steps: ReportStep[] = [
     id: 'charcot',
     title: 'Step 5. Charcot neuroarthropathy',
     learn: 'charcot',
-    teach: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints ({DONOVAN}). Active disease shows on MRI before radiographs ({CHANTELAU}; {ROSSKOPF}). The ghost sign suggests infection within it ({DONOVAN}; {ROSSKOPF}).</p>,
+    teach: <p>Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints ({DONOVAN}). Active disease shows on MRI before radiographs ({CHANTELAU}; {ROSSKOPF}). The ghost sign raises suspicion of osteomyelitis within it ({DONOVAN}; {ROSSKOPF}).</p>,
     fields: [fields.charcot, fields.charcotSites, fields.charcotActivity, fields.charcotDeformity, fields.ghost],
     derive: deriveCharcot,
   },
@@ -438,7 +438,7 @@ const study: StudyDefinition = {
   slug: 'diabetic-foot-mri',
   name: 'Diabetic foot MRI',
   lede: 'Read the diabetic foot MRI: find the ulcer, decide osteomyelitis on T1, look for collections and septic joints, and tell neuroarthropathy from infection.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: septic arthritis alongside osteomyelitis, with an effusion as its sign; that a neuropathic bone keeps its outline; and that an inactive Charcot foot shows no edema.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: septic arthritis alongside osteomyelitis, with an effusion as its sign.',
   references,
   report: {
     steps,
@@ -479,7 +479,7 @@ const study: StudyDefinition = {
       question: 'In a Charcot foot, a bone outline fades on T1 but reappears on fluid-sensitive images. What does it suggest?',
       options: ['Inactive neuroarthropathy', 'Infection within the neuropathic bone', 'A stress fracture', 'An artefact'],
       answer: 1,
-      explanation: <p>The ghost sign suggests infection ({DONOVAN}; {ROSSKOPF}); a neuropathic bone keeps its outline ({DONOVAN}).</p>,
+      explanation: <p>The ghost sign raises suspicion of superimposed osteomyelitis ({DONOVAN}; {ROSSKOPF}). In uncomplicated neuropathic destruction the bone looks destroyed on every sequence; it does not disappear and reappear ({ROSSKOPF}).</p>,
     },
     {
       id: 'stage-0',

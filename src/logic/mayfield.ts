@@ -4,7 +4,10 @@
  *
  * The paper itself is paywalled. Stages I and IV and the sequential progression are checked
  * against its abstract, and all four stages against Kennedy and Allan's review, which reproduces
- * Mayfield's table (Clin Orthop Relat Res 2012; claims MF-1 to MF-5 in
+ * Mayfield's table (Clin Orthop Relat Res 2012), and against two open reviews (Dvorsky et al.,
+ * J Hand Surg Glob Online 2025; Sharma et al., Indian J Radiol Imaging 2025). The reviews differ
+ * on which stage they call the perilunate dislocation (II or III), so, by the author's decision
+ * of 2026-10-29, each stage is named by the structures disrupted (claims MF-1 to MF-5 in
  * docs/superpowers/research/2026-10-23-wrist-calculators-sources.md).
  */
 
@@ -23,15 +26,19 @@ export type MayfieldResult = { stage: MayfieldStage; description: string }
 export const mayfieldStages: MayfieldStage[] = ['I', 'II', 'III', 'IV']
 
 export const mayfieldDescriptions: Record<MayfieldStage, string> = {
-  I: 'scapholunate disruption (scapholunate dissociation)', // MF-1
+  // MF-1, Kennedy and Allan: "In the first stage of this classification, the scapholunate
+  // articulation is disrupted".
+  I: 'scapholunate disruption',
   // MF-2, Kennedy and Allan: "capitolunate joint disruption in addition to the scapholunate
-  // injury ... Radiographs may show capitate subluxation or dislocation."
-  II: 'scapholunate and capitolunate disruption, with the capitate subluxed or dislocated',
-  // MF-3: "The third stage of progression is perilunate dislocation ... The lunotriquetral joint
-  // is now also disrupted. Radiographically, the capitate is dislocated dorsally".
-  III: 'perilunate dislocation: the disruption extends through the lunotriquetral joint, with the capitate dislocated dorsally',
-  // MF-4: "the radiolunate joint is disrupted and the lunate is dislocated volarly from the lunate fossa".
-  IV: 'lunate dislocation: the radiolunate joint is disrupted and the lunate dislocates volarly from the lunate fossa',
+  // injury ... Radiographs may show capitate subluxation or dislocation"; Dvorsky 2025: "the
+  // lunate remains aligned with the distal radius, whereas the capitate and remaining carpal
+  // bones dislocate dorsally".
+  II: 'capitolunate disruption, with dorsal displacement or dislocation of the capitate relative to the lunate',
+  // MF-3, Kennedy and Allan: "The lunotriquetral joint is now also disrupted".
+  III: 'additional lunotriquetral disruption',
+  // MF-4, Kennedy and Allan: "the radiolunate joint is disrupted and the lunate is dislocated
+  // volarly from the lunate fossa".
+  IV: 'lunate dislocation, volarly from the lunate fossa of the radius',
 }
 
 const structureOf: Record<MayfieldStage, keyof MayfieldInput> = {

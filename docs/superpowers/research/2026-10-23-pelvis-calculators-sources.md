@@ -151,3 +151,140 @@ doi:10.3390/diagnostics12020384. It bears on the three questions above; nothing 
   instability", and APC II "a rotational instability". That is closer to the site's column
   (APC III vertically unstable) than Halawi's Tile table. Leone's Tile paragraph still puts
   vertical instability only in type C.
+
+## Sixth check, 2026-10-29: open sources
+
+Read in full, both open access:
+
+- Leone E, et al. Imaging review of pelvic ring fractures and its complications in high-energy
+  trauma. Diagnostics (Basel). 2022;12(2):384. doi:10.3390/diagnostics12020384 (already read for
+  P2-2; here its section 4.3 and Table 1, "Young and Burgess classification"). Now cited on the
+  Young-Burgess page and beside Young and Burgess in the pelvis CT study.
+- Gänsslen A, Tonetti J, Pohlemann T. Algorithms in acetabular fracture classifications. Arch
+  Orthop Trauma Surg. 2024;144(10):4655-4665. doi:10.1007/s00402-024-05599-6 (PMC11576829,
+  CC BY 4.0; Europe PMC full text; matched on Crossref). Now cited on the Letournel page and in the
+  pelvis CT study.
+
+Tried and blocked (need a browser): Brandser and Marsh, AJR 1998 (ajronline.org, Cloudflare
+challenge); Scheinfeld 2015, Khurana 2014 and Young 1986 on pubs.rsna.org (403); Saterbak 1995,
+Iowa Orthop J 15:184-196 (PMC2329054, a free scanned PDF behind PMC's proof-of-work download page).
+A Cureus 2025 review (PMC12640466) describes each elementary type but cites Radiopaedia for it, so
+it is not used.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| YB-1 | yes | Leone: LC "Grade 1: compression fracture of the sacrum on the side of the impact, and transverse fracture of unilateral or bilateral pubic branches"; "Grade 2: grade 1 fractures, iliac wing fracture, posterior sacroiliac joint diastasis"; "Grade 3: the lateral compression force is associated with a contralateral anteroposterior compression force, with an external rotation of the contralateral hemipelvis (“windswept pelvis”)". With Alton and Halawi (second and fourth checks) every part of YB-1 is now stated. |
+| YB-2 | yes | Leone: APC "Grade 1: pubic symphysis diastasis <2.5 cm"; "Grade 2: ... anterior sacroiliac joint diastasis ... The anterior sacroiliac joint diastasis is due to the rupture of the anterior sacroiliac ligament, sacrospinous ligament, and sacrotuberous ligament"; "Grade 3: ... anterior and posterior sacroiliac joint diastasis". |
+| YB-3 | yes | Leone: "a destruction of the posterior elements of the pelvis and a cranial shift of the hemipelvis"; "Anteriorly, this kind of trauma may show a disruption of the pubic symphysis and vertical fracture of the pubic rami." (One side; Halawi's "one or both hemipelvices" question stays open, fourth check.) |
+| YB-4 | partly | Leone: "The combination of lateral compression and vertical shear is the most common type of combined mechanism injury." The page, from Alton (second check): "most often lateral compression with AP compression or vertical shear". **For the author**: Leone names only LC with VS; nothing changed. |
+| YB-6 | yes | Already verified (Alton). Leone agrees: "A widening > 2.5 cm is typically associated with a lesion of the pelvic ligaments of the posterior tension band"; APC grade 1 "<2.5 cm", grades 2 and 3 ">2.5 cm". Halawi's 2 cm (fourth check, question 1) is still open. |
+| YB-8 | partly; one mismatch | Leone, Table 1 ("Fracture Stability"): LC grade 1 "Stable", grade 2 "Rotational instability", grade 3 "Multidirectional instability"; APC grade 1 "Stable", grade 2 "Rotational instability", grade 3 "Multidirectional instability"; vertical shear and combined mechanism "Multidirectional instability"; text: "Combined mechanism injuries are unstable". Seven of the eight "Usually taught as" entries agree. **For the author**: LC III. The page: "rotationally unstable, vertically stable"; Leone: "Lateral compression grade 3 injuries have a multidirectional instability". Nothing changed. **For the author** too: Leone says "The Young and Burgess classification combines the mechanism and the stability of the fractures", against Alton's "The concept of stability ... is not a part of the Young and Burgess classification", which the page quotes. |
+| YB-9 | yes | Already verified (Halawi, fourth check); not repeated on the calculator page. |
+| LT-2 (PW) | yes | Gänsslen, Table 1: "isolated ilioischial: PW, PC, PC/W"; Table 2: "isol. Ilioischial − inferior ramus: PW". Agrees with Durkee (second check). |
+| LT-2 (PC) | partly | Gänsslen: "an inferior ramus fracture is usually present in AC, PC, PC/PW, T-shaped, ACPHT and ABC fractures, while the inferior ramus is usually intact in AW, PW, pT, and T/PW", so the posterior column fracture breaks the obturator ring (usually). "Through the greater sciatic notch" is not stated. Still unread. |
+| LT-2 (AW) | partly | Gänsslen, Table 2: "isol. iliopectineal − inferior ramus: AW"; the iliopectineal line is broken and the obturator ring usually intact. "The middle of the iliopectineal line" is not stated. Still unread. |
+| LT-2 (AC) | partly | Gänsslen, Table 2: "isol. iliopectineal + inferior ramus: AC"; "fracture lines extending between the anterior inferior iliac spine (AIIS) up to the iliac crest ... usually seen in AC, ACPHT and ABC fractures". "Or the anterior border" is not stated. Still unread. |
+| LT-2 (T) | yes | Gänsslen: "ip + ii − inferior ramus: pT, TPW"; agrees with Durkee. |
+| LT-3 | yes | Gänsslen: "if a PW fragment is present according to row 2 a PC/W fracture is diagnosed" (ilioischial line and inferior ramus broken); "if PW fragment is present according to row 6 a TPW fracture is diagnosed, while a pure transverse fracture is excluded"; "T-shaped = primary transverse fracture line plus a distal column separation"; "ACPHT = primary horizontal fracture line (anterior column separation or displacement) and a typical transverse fracture exclusively in the posterior part the acetabulum (posterior 'vertical' fracture = hemitransverse component)"; "ABC definition: complete separation of both columns on axial CT images with a transverse main fracture line and no articular fragment connected to the SI-joint". |
+| LT-4 | yes | Already verified (Durkee). Gänsslen: "iliopectineal line = represents to ¾ the medial part of the anterior column; disruption indicates anterior column involvement"; ilioischial line "represents the posterior column in its lower and middle parts; disruption indicates posterior column involvement". |
+| LT-5 | yes | Gänsslen: "The pathognomonic feature of an ABC fracture is the spur sign, which can be optimally seen on the obturator oblique view. This spur corresponds to the iliac fragment attached to the SI-joint without having any articular fragment attached." (The page dropped the obturator oblique view on Durkee's wording, second check; Gänsslen ties the spur to that view. Nothing changed.) |
+| LT-6 | yes | Already verified (Durkee). Gänsslen: "ip + ii − inferior ramus: pT, TPW". |
+| LT-7 | yes | Gänsslen: "ip + ii + inferior ramus: T, ACPHT, ABC"; "if no articular part is connected an ABC fracture is proven, while an articular connection indicates an ACPHT fracture"; the T-shaped and ACPHT definitions under LT-3. |
+
+**For the author** (nothing changed): the iliac wing sentence. The Letournel page and the pelvis CT
+study say that with both lines and the obturator ring broken, "a fracture running up into the iliac
+wing is both-column and one that does not is T-shaped" (from Durkee, who covers only five types).
+Gänsslen: iliac fossa fracture lines are "usually seen in AC, ACPHT and ABC fractures ... Only
+T-shaped fractures usually have no iliac fossa involvement", so an ACPHT fracture also runs up into
+the iliac wing. The calculator itself asks about the joint surface on the ilium before the
+pattern, so it still reaches ACPHT; only the sentence and the calculator's hint leave ACPHT out.
+
+Still unread after this check: LT-2's posterior column "through the greater sciatic notch", anterior
+wall "breaking the middle of the iliopectineal line" and anterior column "from the iliac crest or the
+anterior border". The pages' notes now say so.
+
+## The author's decisions, 2026-10-29
+
+Applied to `youngburgess.ts`, `letournel.ts`, both calculator pages and the pelvis CT study. Sources
+re-read for this (all in full): Alton and Gee 2014 (PMC4079881, PMC article page), Halawi 2015
+(PMC4600881, PMC article page), Leone 2022 (PMC8870907, Europe PMC full text) and Gänsslen 2024
+(PMC11576829, Europe PMC full text). Halawi is now also cited on the Young-Burgess page (reference
+checked on Crossref: Halawi MJ. Pelvic ring injuries: emergency assessment and management. J Clin
+Orthop Trauma. 2015;6(4):252-258. doi:10.1016/j.jcot.2015.08.002).
+
+Not readable: Lawrence DA, Menn K, Baumgaertner M, Haims AH. Acetabular fractures: anatomic and
+clinical considerations. AJR Am J Roentgenol. 2013;201(3):W425-W436. doi:10.2214/AJR.12.10470
+(PMID 23971473; matched on Crossref). ajronline.org returns a Cloudflare challenge (403) to curl with
+browser User-Agents, OpenAlex and Semantic Scholar list no open copy, it is not in PMC, and the
+PubMed abstract does not mention the iliac wing or the spur sign. It is not cited; decisions 39 and
+40 rest on Gänsslen (and Durkee, already cited).
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| 33 | APC I: keep 2.5 cm as the conventional threshold, with a caveat; 2 cm only in a source-variation note reproducing Halawi's table. | APC I now reads "symphyseal diastasis, conventionally less than 2.5 cm, with no posterior instability". The Young-Burgess page and the study add: "Published thresholds vary (Halawi), and diastasis alone does not establish stability: it is measured on a single static image, and the pelvis may have sprung back or been reduced by a binder (Alton)." 2 cm is not mentioned on any page. |
+| 34 | Vertical shear: "one or both". | VS now reads "vertical (cranial) displacement of one or both hemipelves from an axial force, with the anterior and posterior ring disrupted"; the calculator asks "Is one hemipelvis, or both, displaced upwards (vertically)?"; the study's ring section says vertical shear "pushes one or both hemipelves upwards". |
+| 35 | APC III: keep "rotationally and vertically unstable"; vertical displacement need not be present. | APC III now reads "complete sacroiliac joint disruption, anterior and posterior sacroiliac ligaments torn; vertical displacement need not be present"; stability "rotationally and vertically unstable, even without vertical displacement". Both pages: "APC III is rotationally and vertically unstable, but it has no vertical displacement, which is what separates it from vertical shear (Halawi; Leone): no displacement on a static image does not prove vertical stability (Alton)." Halawi's Tile table ("Rotationally unstable; vertically stable" for type B, where open-book injuries sit) is conflicting secondary-source terminology and is not shown on the pages. |
+| 36 | LC III: remove the unconditional "vertically stable". | Stability now "unstable, to a degree and in a direction set by the posterior ring injury"; description "lateral compression on the side of impact with external rotation (AP compression) of the other hemipelvis, the windswept pelvis". Both pages: "LC III is unstable; how unstable, and in which direction, depends on the posterior ring injury (Leone)." The study's L5 warning (P2-2 against a vertically stable type) no longer fires for LC III. Leone's "multidirectional instability" is not turned into a requirement for vertical displacement. |
+| 37 | Reconcile Young-Burgess and stability. | The "Usually taught as" column is now "Stability implication". Alton's "not a part" sentence and the "usually taught as" framing are replaced on both pages by: "Young-Burgess classifies pelvic ring injuries by the main direction of the force and the disruption it causes (Alton; Leone). The patterns inform the assessment of stability, but do not replace a direct look at the posterior ring or the stability-based Tile and AO/OTA classifications (Alton; Leone); the last column gives the usual implication of each type." |
+| 38 | Combined mechanism: definition apart from frequency. | CMI now reads "combined mechanism: features of more than one primary pattern (lateral compression, AP compression, vertical shear)". Both pages: "A combined mechanism has features of more than one primary pattern (Alton); Leone describes lateral compression with vertical shear as the commonest combination (Leone)." The calculator page adds that it names a combined mechanism only for vertical displacement with lateral compression (the site's reading, YB-4). Alton's "majority ... combined with AP or VS" is no longer on the pages. |
+| 39 | Iliac wing sentence: broaden; both-column is decided by detachment of the joint surface, not the wing. | Study (step 4) and Letournel page: "With the obturator ring broken as well, the fracture is T-shaped, anterior column with posterior hemitransverse, or both-column; what makes it both-column is that no articular fragment stays connected to the sacroiliac joint, not a fracture into the iliac wing. Iliac wing extension may occur in anterior column fractures, including the anterior column with posterior hemitransverse, and in both-column fractures; a T-shaped fracture usually does not reach the iliac wing." The Letournel hint says the same. The calculator logic was checked: it has no iliac wing input; both-column is reached only by "no joint surface still attached to the intact ilium" (`articularOnIlium: false`), so nothing in the logic changed. The anterior column option label ("Runs up into the ilium and down through the pubic ramus") is unchanged; it names the ilium, not the iliac wing. |
+| 40 | Spur sign: "best demonstrated" on the obturator oblique view; the iliac fragment attached to the sacroiliac joint. | Study and Letournel page: "The spur sign of a both-column fracture is best seen on the obturator oblique view: it is the iliac fragment left attached to the sacroiliac joint with no joint surface on it, a shard of bone pointing backwards at the level of the acetabular roof on radiographs and CT." The study's both-column quiz explanation says the same. Not added, because no source read states it: "ipsilateral" (Gänsslen says only "the obturator oblique view") and "projecting beside the displaced acetabular fragments" (the location kept is Durkee's). |
+
+Quotes relied on:
+
+- Alton and Gee: "APC I injuries show less than 2.5 cm of symphyseal widening and have no posterior
+  instability either clinically or radiographically"; "In the original description by Young et
+  al., a 2.5-cm diastasis at the symphysis pubis was the criterion to differentiate APC I from APC
+  II injuries ... This measurement is made off a single, static radiograph at one time. However,
+  Gardner et al. showed pelvic ring injuries recoil and the displacement seen on pelvic AP
+  radiographs often underrepresent the actual degree of injury as the pelvis may have “sprung back”
+  or it may be reduced by a pelvic binder or sheet"; "These data suggest that unstressed imaging
+  may underrepresent the degree of injury and true pelvic instability"; "VS injuries result from an
+  axially loaded force delivered over one or both hemipelves lateral to the midline"; "Complex
+  injury patterns are a combination of any three primary patterns (APC, LC, or VS)"; "The vector of
+  force applied to the pelvic ring is an important determining factor in resulting injury pattern
+  and is the foundation of the Young and Burgess classification system"; "AP-directed forces cause
+  deformity or instability in a predictable pattern based on the injury and disruption of anterior
+  and posterior pelvic structures"; "The concept of stability, central to the AO/OTA classification
+  system, is not a part of the Young and Burgess classification"; the AO/OTA system "separates
+  pelvic ring injuries based on anatomic location and stability"; "This classification system is
+  limited in its description of posterior ring injuries".
+- Halawi, Table 2: "Symphysis diastasis < 2 cm; SI joints intact" (APC I); "Symphysis diastasis
+  with disruption of the anterior and posterior SI ligaments" (APC III); "Vertical displacement of
+  one or both hemipelvices" (VS); "A combination of the above injuries" (combined). Text: "APCIII
+  can be differentiated from VS injury by the absence of vertical displacement of the hemipelvis."
+  Table 1 (Tile): type B "Rotationally unstable; vertically stable".
+- Leone: "Once the pelvic ring fracture is recognized, it is essential to assess its stability.
+  Fractures and dislocations of the posterior part of the pelvic ring, and in particular the degree
+  of involvement of the posterior tension band, affect the stability of the pelvic ring"; Tile
+  "Type B fractures have rotational instability, but they are vertically stable, due to an
+  incomplete disruption of the posterior arch structures"; "Type C fractures are vertically and
+  rotationally unstable, and they are characterized by a complete disruption of the anterior and
+  posterior arches"; "The Young and Burgess classification combines the mechanism and the stability
+  of the fractures"; "The first step in using this system is the identification of the main
+  direction of the force vector"; LC "Grade 3: the lateral compression force is associated with a
+  contralateral anteroposterior compression force, with an external rotation of the contralateral
+  hemipelvis (“windswept pelvis”) ... Lateral compression grade 3 injuries have a multidirectional
+  instability"; APC "Grade 3: ... anterior and posterior sacroiliac joint diastasis ...
+  Anterior–posterior compression grade 3 injuries have a multidirectional instability"; vertical
+  shear "a destruction of the posterior elements of the pelvis and a cranial shift of the
+  hemipelvis ... Anteriorly, this kind of trauma may show a disruption of the pubic symphysis and
+  vertical fracture of the pubic rami. Rotational and vertical instability is the result of vertical
+  shear injuries"; "The combination of lateral compression and vertical shear is the most common
+  type of combined mechanism injury."
+- Gänsslen: "Some fracture types show fracture lines extending between the anterior inferior iliac
+  spine (AIIS) up to the iliac crest. These fracture types represent iliac fossa involvement, which
+  is usually seen in AC, ACPHT and ABC fractures ... Only T-shaped fractures usually have no iliac
+  fossa involvement. Thus, if no fracture line extends into the iliac wing, a T-shaped fracture is
+  likely"; "ABC definition: complete separation of both columns on axial CT images with a transverse
+  main fracture line and no articular fragment connected to the SI-joint"; "if no articular part is
+  connected an ABC fracture is proven, while an articular connection indicates an ACPHT fracture";
+  "The pathognomonic feature of an ABC fracture is the spur sign, which can be optimally seen on the
+  obturator oblique view. This spur corresponds to the iliac fragment attached to the SI-joint
+  without having any articular fragment attached."
+
+Claim status after these decisions: YB-2, YB-3, YB-4 and YB-8 now match their sources' wording; the
+Young-Burgess page had no "Unchecked draft" note and still has none. The Letournel page keeps its
+"Unchecked draft" note while the three LT-2 phrases (posterior column through the greater sciatic
+notch, anterior wall at the middle of the iliopectineal line, the anterior column's upper end) are
+unread.

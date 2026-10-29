@@ -52,7 +52,7 @@ export function HawkinsPage() {
           <span className="calc-tag">Talar neck</span>
         </div>
         <p>Type a talar neck fracture from its displacement and the joints around the talus, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled, so the four types, the joints and the Hawkins sign are checked against a review of both (<Cite doi="10.1007/s11999-015-4136-x">Alton et al., Clin Orthop Relat Res 2015</Cite>). Source: <Cite doi="10.2106/00004623-197052050-00013">Hawkins, J Bone Joint Surg Am 1970</Cite>; type IV from <Cite doi="10.2106/00004623-197860020-00001">Canale and Kelly, J Bone Joint Surg Am 1978</Cite>.</p>
+        <p className="source-note">The papers are paywalled, so the four types, the joints of each type (from the review's classification figure) and the Hawkins sign are checked against a review of both (<Cite doi="10.1007/s11999-015-4136-x">Alton et al., Clin Orthop Relat Res 2015</Cite>). Source: <Cite doi="10.2106/00004623-197052050-00013">Hawkins, J Bone Joint Surg Am 1970</Cite>; type IV from <Cite doi="10.2106/00004623-197860020-00001">Canale and Kelly, J Bone Joint Surg Am 1978</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -105,7 +105,7 @@ export function HawkinsPage() {
         <ScanFigures images={[hawkinsScans.type2b, hawkinsScans.type3]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the type wording is checked against Alton et al.'s 2015 review." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Both papers are paywalled; the type wording and the joints of each type are checked against Alton et al.'s 2015 review." />
     </div>
   )
 }
