@@ -25,6 +25,7 @@ const references: LessonReference[] = [
   { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.', doi: '10.1016/0363-5023(89)90174-3' },
   { citation: 'von Borstel D, Wang M, Small K, Nozaki T, Yoshioka H. High-resolution 3T MR imaging of the triangular fibrocartilage complex. Magn Reson Med Sci. 2017;16(1):3-15.', doi: '10.2463/mrms.rev.2016-0011' },
   { citation: 'Vassa R, Garg A, Omar IM. Magnetic resonance imaging of the wrist and hand. Pol J Radiol. 2020;85:e461-e488.', doi: '10.5114/pjr.2020.99034' },
+  { citation: 'McNamara CT, Colakoglu S, Iorio ML. A systematic review and analysis of Palmer type I triangular fibrocartilage complex injuries: outcomes of treatment. J Hand Microsurg. 2020;12(2):116-122.', doi: '10.1055/s-0040-1713580' },
 ]
 
 export function PalmerPage() {
@@ -88,7 +89,7 @@ export function PalmerPage() {
             </tbody>
           </table>
         </div>
-        <p>1B and 1C carry the labels of Palmer's table: 1B ulnar avulsion, with or without a distal ulnar fracture, and 1C distal avulsion (<Cite doi="10.2463/mrms.rev.2016-0011">von Borstel et al., Magn Reson Med Sci 2017</Cite>). The carpal attachments torn in 1C are those at the lunate and triquetrum, through the ulnolunate and ulnotriquetral ligaments (<Cite doi="10.5114/pjr.2020.99034">Vassa et al., Pol J Radiol 2020</Cite>).</p>
+        <p>1B and 1C carry the labels of Palmer's table: 1B ulnar avulsion, with or without a distal ulnar fracture, and 1C distal avulsion (<Cite doi="10.2463/mrms.rev.2016-0011">von Borstel et al., Magn Reson Med Sci 2017</Cite>). The carpal attachments torn in 1C are those at the lunate and triquetrum, through the ulnolunate and ulnotriquetral ligaments (<Cite doi="10.5114/pjr.2020.99034">Vassa et al., Pol J Radiol 2020</Cite>). A systematic review words 1B more narrowly, as ulnar avulsion with or without an ulnar styloid fracture (<Cite doi="10.1055/s-0040-1713580">McNamara et al., J Hand Microsurg 2020</Cite>); this page keeps the table's distal ulnar fracture.</p>
         <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it (<Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>; <Cite doi="10.2463/mrms.rev.2016-0011">von Borstel et al., Magn Reson Med Sci 2017</Cite>).</p>
       </section>
 

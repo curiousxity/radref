@@ -220,10 +220,18 @@ Suggested wording the sources did not support, kept closer to the source:
 
 ### Follow-up sources from the author, 2026-10-29
 
-The author sent replacement sources for the Palmer and Herbert gaps. Neither could be read, so
-neither page changed.
+The author sent replacement sources for the Palmer and Herbert gaps. Neither could be read online;
+the author then uploaded both as PDFs, which were read (second table).
 
 | ID | Source | Verdict | Change on the page |
 |----|--------|---------|--------------------|
 | PA-1 | McNamara CT, Colakoglu S, Iorio ML. A systematic review and analysis of Palmer type I triangular fibrocartilage complex injuries: outcomes of treatment. J Hand Microsurg. 2020;12(2):116-122. doi:10.1055/s-0040-1713580 (PMC7410809) | not read. Europe PMC has no open full text (`fullTextXML` returns 500), and PMC and Thieme answer with a browser challenge; the PubMed abstract does not give the class wording. Its Table 1 ("1B Ulnar avulsion (± ulnar styloid fracture)") is unchecked. | None. 1B keeps von Borstel's table label, "with or without a distal ulnar fracture". |
 | HB-2 | Cheung JP, Tang CY, Fung BK. Current management of acute scaphoid fractures: a review. Hong Kong Med J. 2014;20(1):52-58. doi:10.12809/hkmj134146 (Crossref and PubMed 24323670; the DOI suggested, 10.12809/hkmj133918, does not resolve on Crossref) | not read. hkmj.org answers 403 with a browser challenge; the PubMed abstract does not give the types. "B2 (displaced or mobile complete fractures of the waist)" is unchecked. | None. The page keeps AO's "complete waist fracture" and Steinmann and Adams's "displaced or mobile fractures of the waist". |
+
+Read in the uploaded PDFs (both matched on Crossref; the Hong Kong Med J record there has no volume or
+pages, which are from PubMed):
+
+| ID | Source | Verdict and quote | Change on the page |
+|----|--------|-------------------|--------------------|
+| PA-1 | McNamara et al., J Hand Microsurg 2020 (above) | yes. p. 117, Table 1, "Palmer classification", "Type 1 injuries: traumatic": "Type 1A Central tear"; "Type 1B Ulnar avulsion (± ulnar styloid fracture)"; "Type 1C Distal avulsion"; "Type 1D Radial avulsion (± sigmoid notch fracture)". Narrower than von Borstel's and Margulies's reproductions for 1B ("with or without distal ulnar fracture"). | Palmer page, after the 1B and 1C paragraph: "A systematic review words 1B more narrowly, as ulnar avulsion with or without an ulnar styloid fracture (McNamara); this page keeps the table's distal ulnar fracture." McNamara added to the references. The 1B label in `src/logic/palmer.ts` is unchanged. |
+| HB-2 | Cheung et al., Hong Kong Med J 2014 (above) | yes. p. 54: "Type B fractures are acute unstable fractures. These include subtypes B1 (oblique fractures of the distal third of the scaphoid), B2 (displaced or mobile complete fractures of the waist), B3 (proximal pole fractures), B4 (fracture dislocations), and B5 (comminuted fractures)." (Their ref. 14.) | Herbert page, B2 sentence: "..., and Cheung and colleagues as displaced or mobile complete fractures of the waist (Cheung). This page keeps AO's wording, which does not name displacement." Cheung added to the references. B2 in `src/logic/herbert.ts` stays AO's "complete waist fracture". Cheung, like Steinmann and Adams, lists B5 without quoting the 1984 paper, so the B5 question stays open. |

@@ -37,8 +37,9 @@ describe('wrist MRI lesson', () => {
     // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added;
     // 24 since the open reviews of 2026-10-29 (Andersson, Ng, Chen, von Borstel); 32 since the
     // author's decisions of 2026-10-29 (Zhou, Pang, Vassa, Reagan, Wilson, Dvorsky, Sharma, Okoro);
-    // 34 with the author's follow-up sources (Kitay and Wolfe 2012, Pinho and Sobania 2017).
-    expect(study.references).toHaveLength(34)
+    // 34 with the author's follow-up sources (Kitay and Wolfe 2012, Pinho and Sobania 2017); 35
+    // with Cooney 2012 for the history of the DISI and VISI terms.
+    expect(study.references).toHaveLength(35)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

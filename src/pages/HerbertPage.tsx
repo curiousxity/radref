@@ -26,6 +26,7 @@ const references: LessonReference[] = [
   { citation: 'Dráč P, Kastelec M, Suarez FA. Classifications for fractures of carpal bones: Herbert classification for scaphoid fractures. AO Surgery Reference (surgeryreference.aofoundation.org), AO Foundation; accessed 2026-10-25.' },
   { citation: 'Herbert TJ, Fisher WE. Management of the fractured scaphoid using a new bone screw. J Bone Joint Surg Br. 1984;66(1):114-123.', doi: '10.1302/0301-620X.66B1.6693468' },
   { citation: 'Steinmann SP, Adams JE. Scaphoid fractures and nonunions: diagnosis and treatment. J Orthop Sci. 2006;11(4):424-431.', doi: '10.1007/s00776-006-1025-x' },
+  { citation: 'Cheung JP, Tang CY, Fung BK. Current management of acute scaphoid fractures: a review. Hong Kong Med J. 2014;20(1):52-58.', doi: '10.12809/hkmj134146' },
 ]
 
 export function HerbertPage() {
@@ -89,7 +90,7 @@ export function HerbertPage() {
             </tbody>
           </table>
         </div>
-        <p>The wording of B2 varies between sources. AO Surgery Reference lists it as a complete waist fracture; Steinmann and Adams give it as displaced or mobile fractures of the waist (<Cite doi="10.1007/s00776-006-1025-x">Steinmann and Adams, J Orthop Sci 2006</Cite>). This page keeps AO's wording, which does not name displacement.</p>
+        <p>The wording of B2 varies between sources. AO Surgery Reference lists it as a complete waist fracture; Steinmann and Adams give it as displaced or mobile fractures of the waist (<Cite doi="10.1007/s00776-006-1025-x">Steinmann and Adams, J Orthop Sci 2006</Cite>), and Cheung and colleagues as displaced or mobile complete fractures of the waist (<Cite doi="10.12809/hkmj134146">Cheung et al., Hong Kong Med J 2014</Cite>). This page keeps AO's wording, which does not name displacement.</p>
       </section>
 
       <section className="info-card">
