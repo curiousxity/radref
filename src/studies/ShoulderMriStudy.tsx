@@ -165,7 +165,7 @@ const sugayaTable = (
       <tbody>
         <tr><td className="vessel-name">I</td><td>Sufficient thickness, homogeneously low signal</td></tr>
         <tr><td className="vessel-name">II</td><td>Sufficient thickness, with a partial high-signal area</td></tr>
-        <tr><td className="vessel-name">III</td><td>Insufficient thickness, without discontinuity (disputed: healed or re-torn)</td></tr>
+        <tr><td className="vessel-name">III</td><td>Insufficient thickness with preserved continuity, without a frank discontinuity; classed as healed or re-torn depending on the author</td></tr>
         <tr><td className="vessel-name">IV</td><td>Minor discontinuity: a small re-tear</td></tr>
         <tr><td className="vessel-name">V</td><td>Major discontinuity: a large re-tear</td></tr>
       </tbody>
@@ -192,7 +192,7 @@ const learn: LearnSection[] = [
         <h4>Hill-Sachs lesion</h4>
         <p>The Hill-Sachs lesion is a grooved impaction defect of the posterolateral humeral head, made against the anterior glenoid rim when the shoulder dislocates anteriorly ({HILL_SACHS}; {BAO}). Workman and colleagues compared MRI with radiographs and arthroscopy for detecting it ({WORKMAN}).</p>
         <div className="lesson-key">
-          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies more cephalad ({RICHARDS}). It lies on the most superior axial images, at or above the level of the coracoid process ({MARCON}; {KADI}).</p>
+          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies more cephalad than the normal groove ({RICHARDS}), usually on the uppermost axial images ({MARCON}). Normal flattening below the level of the coracoid should not be mistaken for a Hill-Sachs defect ({KADI}).</p>
         </div>
         <h4>Proximal humerus fracture: Neer</h4>
         <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}). Neer later added the valgus-impacted four-part fracture, in which the head is driven down between splayed tuberosities but stays in contact with the glenoid ({CAROFINO}).</p>
@@ -991,7 +991,7 @@ const steps: ReportStep[] = [
     learn: 'bones',
     teach: (
       <>
-        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}; {BAO}). It lies more cephalad than the normal groove ({RICHARDS}), on the most superior axial images, at or above the coracoid ({MARCON}; {KADI}).</p>
+        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}; {BAO}). It lies more cephalad than the normal groove ({RICHARDS}), usually on the uppermost axial images ({MARCON}); normal flattening below the coracoid level is not a Hill-Sachs defect ({KADI}).</p>
         <p>Neer: a segment is a part only when displaced more than 1 cm or angulated more than 45°; no displaced segment is one-part, however many fracture lines ({NEER}).</p>
       </>
     ),
@@ -1134,7 +1134,7 @@ const study: StudyDefinition = {
       question: 'Flattening of the posterolateral humeral head is seen on axial images well below the coracoid. What is it most likely to be?',
       options: ['A Hill-Sachs lesion', 'A reverse Hill-Sachs lesion', 'A greater tuberosity fracture', 'The normal groove'],
       answer: 3,
-      explanation: <p>The Hill-Sachs defect lies more cephalad than the normal groove of the posterolateral head ({RICHARDS}), on the most superior axial images, at or above the level of the coracoid ({MARCON}; {KADI}).</p>,
+      explanation: <p>The Hill-Sachs defect lies more cephalad than the normal groove of the posterolateral head ({RICHARDS}), usually on the uppermost axial images ({MARCON}). Normal flattening below the coracoid level should not be mistaken for a Hill-Sachs defect ({KADI}).</p>,
     },
     {
       id: 'ellman-grade',
