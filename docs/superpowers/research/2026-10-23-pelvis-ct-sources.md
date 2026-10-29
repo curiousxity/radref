@@ -143,3 +143,42 @@ AJR 2013;201(3):W425-W436, doi:10.2214/AJR.12.10470) could not be read and is no
 
 The study's sourceNote and its "Unchecked draft" note are unchanged: the three LT-2 phrases and
 Roy-Camille's own use of the U or H shape are still unread.
+
+## The author's decisions, 2026-10-29 (second round)
+
+P3-2: the U or H letter shape is no longer attributed to Roy-Camille. His 1985 abstract (PubMed,
+PMID 4089659) describes "transverse fractures of the upper sacrum", says "The injury results from
+falls from a height and is usually associated with suicidal attempts by jumping", and "The position
+of the lumbar spine in lordosis or kyphosis at the time of impact determines which of three types of
+morbid anatomy will result"; it names no letter shape. The U or H shape describes the overall
+multiplanar configuration; Roy-Camille's classification describes the sagittal angulation and
+displacement of the transverse component. Roy-Camille stays cited for his own classification only.
+
+New sources, read in full and matched on PubMed and Crossref:
+
+- Dreizin D, Smith EB. CT of sacral fractures: classification systems and management.
+  RadioGraphics. 2022;42(7):1975-1993. doi:10.1148/rg.220075 (PMID 36112523, PMC10333055, NIH
+  author manuscript; read via NCBI efetch, Europe PMC returned an error).
+- Barber LA, Katsuura Y, Qureshi S. Sacral fractures: a review. HSS J. 2023;19(2):234-246.
+  doi:10.1177/15563316221129607 (PMID 37065102, PMC10090841; read on PMC).
+- Novak AA, Patterson JT, Githens MF, Firoozabadi R, Kleweno CP. Sacral U-type fractures in
+  patients older than 65 years. J Am Acad Orthop Surg Glob Res Rev. 2024;8(10):e24.00030.
+  doi:10.5435/JAAOSGlobal-D-24-00030 (PMID 39432807, PMC11495793; Europe PMC full text).
+
+| ID | Decision | Evidence | Change on the page |
+|----|----------|----------|--------------------|
+| P3-2 (U or H shape) | The U- or H-shaped pattern represents spinopelvic dissociation; cite the reviews, not Roy-Camille. | Dreizin: "Mechanical failure in the transverse plane typically follows failure through bilateral longitudinal S1-S2 transforaminal fractures"; "The ensuing torque and sheer stress through the S1-S2 region create a characteristic U- or H-shaped fracture, with dissociation of the lumbosacro coccygeal functional unit"; "In the original description of Denis et al (18), zone 3 fracture is synonymous with a high-energy U- or H-shaped fracture with spino-pelvic dissociation". Barber: "Sacral fractures with a transverse component (so-called multiplanar fractures) can also be classified descriptively according to the letter they most closely resemble H-type, U-type, λ-type, and T-type fracture patterns. Notably, U-type sacral fractures represent spinopelvic dissociation because the upper portion of the sacrum remains attached to the lumbar spine while the lower portion remains attached to the pelvis." Novak: "These fractures include bilateral, longitudinal, transforaminal sacral fractures with an associated transverse component; this combination effectively creates a disassociation between the spine and the posterior pelvic ring, so-called spinopelvic instability"; "Extension of the U-shaped fracture lines creating “Y-,” “lambda-,” or “H-” shaped fractures can also occur." Rizkalla and Leone (third and fifth checks) kept. | Sacrum learn section: "A transverse fracture of the upper sacrum joined to vertical fractures through the foramina on both sides makes a U- or H-shaped fracture (Novak; Dreizin). The U- or H-shaped sacral fracture pattern represents spinopelvic dissociation: the upper sacrum stays attached to the lumbar spine and the lower sacrum to the pelvis (Rizkalla; Leone; Dreizin; Barber)." The sacrum step's teaching note cites Rizkalla, Dreizin and Barber for the shape. Chip and impression wording unchanged ("U- or H-shaped: the spine is separated from the pelvis"; it carries no citation). |
+| P3-2 (Roy-Camille) | Keep Roy-Camille for his own classification only. | Roy-Camille abstract as above. Dreizin: "Roy-Camille et al (9) developed a subclassification system for classic U- or H-shaped Denis zone 3 fractures, which they mostly observed in patients after suicide attempts involving falls from a great height. This system describes the degree of kyphosis and direction of displacement resulting from reproducible mechanisms." Barber: "the Roy–Camille classification characterizes Zone 3 transverse fractures in the sagittal plane based on angulation and displacement [51]. Type 1 fractures are angulated but without translation. Type 2 fractures are angulated with incomplete translation. Type 3 fractures show both complete translation and displacement." | New paragraph: "Roy-Camille described transverse fractures of the upper sacrum after falls from a height, usually suicidal jumps, in three types set by the position of the lumbar spine at impact (Roy-Camille). The Roy-Camille classification characterizes the sagittal angulation and displacement of the transverse component (Roy-Camille; Dreizin; Barber)." Teaching note: "Roy-Camille's types describe the angulation and displacement of its transverse component (Roy-Camille; Barber)." |
+
+Notes for the author:
+
+- Novak writes "sacral U-type fractures were first described by Roy-Camille in 1985"; the page does
+  not repeat this, by the author's decision, since Roy-Camille's own abstract names no letter shape.
+- Dreizin says that in Denis's original description "zone 3 fracture is synonymous with a
+  high-energy U- or H-shaped fracture", while Rizkalla says the U and H patterns' "omission from the
+  original Denis classification overlooks a clinically important sacral fracture pattern". The page
+  keeps Rizkalla's sentence ("Denis's zones leave it out"); the two reviews disagree on this point.
+
+The sourceNote no longer lists "whether Roy-Camille himself described the U or H shape". It keeps
+"Unchecked draft" for the three LT-2 phrases, which are still unread. The study now has 20
+references (test pinned).

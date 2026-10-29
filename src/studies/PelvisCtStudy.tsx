@@ -9,11 +9,13 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23). Most
  * of the papers are paywalled, so claims are verified against abstracts and reviews read in full
- * (Alton and Gee, Rizkalla, Halawi, Leone, Durkee, Gänsslen); parts of the Letournel
- * elementary-type wording and Roy-Camille's own use of the U or H shape are still unread (see
- * the sourceNote). The claims table, with each claim's status, is
+ * (Alton and Gee, Rizkalla, Halawi, Leone, Durkee, Gänsslen, Dreizin and Smith, Barber, Novak);
+ * parts of the Letournel elementary-type wording are still unread (see the sourceNote). The U or
+ * H shape is no longer attributed to Roy-Camille (author's decision, 2026-10-29, second round):
+ * the shape and spinopelvic dissociation are cited to the reviews, and Roy-Camille only for his
+ * own classification of the transverse fracture. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims); the Young-Burgess and
  * Letournel wording is in 2026-10-23-pelvis-calculators-sources.md (YB and LT claims, and the
  * author's decisions of 2026-10-29 on the APC I threshold, vertical shear, APC III and LC III
@@ -31,6 +33,9 @@ const LEONE_DOI = '10.3390/diagnostics12020384'
 const DENIS_DOI = '10.1097/00003086-198802000-00010'
 const RIZKALLA_DOI = '10.1097/CORR.0000000000000861'
 const ROY_CAMILLE_DOI = '10.1097/00007632-198511000-00011'
+const DREIZIN_DOI = '10.1148/rg.220075'
+const BARBER_DOI = '10.1177/15563316221129607'
+const NOVAK_DOI = '10.5435/JAAOSGlobal-D-24-00030'
 const LYDERS_DOI = '10.3174/ajnr.A1666'
 const JUDET_DOI = '10.2106/00004623-196446080-00001'
 const LETOURNEL_DOI = '10.1097/00003086-198009000-00012'
@@ -49,6 +54,9 @@ const LEONE = <Cite doi={LEONE_DOI}>Leone et al., Diagnostics 2022</Cite>
 const DENIS = <Cite doi={DENIS_DOI}>Denis et al., Clin Orthop Relat Res 1988</Cite>
 const RIZKALLA = <Cite doi={RIZKALLA_DOI}>Rizkalla et al., Clin Orthop Relat Res 2019</Cite>
 const ROY_CAMILLE = <Cite doi={ROY_CAMILLE_DOI}>Roy-Camille et al., Spine 1985</Cite>
+const DREIZIN = <Cite doi={DREIZIN_DOI}>Dreizin and Smith, RadioGraphics 2022</Cite>
+const BARBER = <Cite doi={BARBER_DOI}>Barber et al., HSS J 2023</Cite>
+const NOVAK = <Cite doi={NOVAK_DOI}>Novak et al., JAAOS Glob Res Rev 2024</Cite>
 const LYDERS = <Cite doi={LYDERS_DOI}>Lyders et al., AJNR 2010</Cite>
 const JUDET = <Cite doi={JUDET_DOI}>Judet et al., J Bone Joint Surg Am 1964</Cite>
 const LETOURNEL = <Cite doi={LETOURNEL_DOI}>Letournel, Clin Orthop Relat Res 1980</Cite>
@@ -68,6 +76,9 @@ const references: LessonReference[] = [
   { citation: 'Denis F, Davis S, Comfort T. Sacral fractures: an important problem. Retrospective analysis of 236 cases. Clin Orthop Relat Res. 1988;(227):67-81.', doi: DENIS_DOI },
   { citation: 'Rizkalla JM, Lines T, Nimmons S. Classifications in brief: the Denis classification of sacral fractures. Clin Orthop Relat Res. 2019;477(9):2178-2181.', doi: RIZKALLA_DOI },
   { citation: 'Roy-Camille R, Saillant G, Gagna G, Mazel C. Transverse fracture of the upper sacrum. Suicidal jumper\'s fracture. Spine (Phila Pa 1976). 1985;10(9):838-845.', doi: ROY_CAMILLE_DOI },
+  { citation: 'Dreizin D, Smith EB. CT of sacral fractures: classification systems and management. RadioGraphics. 2022;42(7):1975-1993.', doi: DREIZIN_DOI },
+  { citation: 'Barber LA, Katsuura Y, Qureshi S. Sacral fractures: a review. HSS J. 2023;19(2):234-246.', doi: BARBER_DOI },
+  { citation: 'Novak AA, Patterson JT, Githens MF, Firoozabadi R, Kleweno CP. Sacral U-type fractures in patients older than 65 years. J Am Acad Orthop Surg Glob Res Rev. 2024;8(10):e24.00030.', doi: NOVAK_DOI },
   { citation: 'Lyders EM, Whitlow CT, Baker MD, Morris PP. Imaging and treatment of sacral insufficiency fractures. AJNR Am J Neuroradiol. 2010;31(2):201-210.', doi: LYDERS_DOI },
   { citation: 'Judet R, Judet J, Letournel E. Fractures of the acetabulum: classification and surgical approaches for open reduction. Preliminary report. J Bone Joint Surg Am. 1964;46:1615-1646.', doi: JUDET_DOI },
   { citation: 'Letournel E. Acetabulum fractures: classification and management. Clin Orthop Relat Res. 1980;(151):81-106.', doi: LETOURNEL_DOI },
@@ -145,7 +156,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Give a sacral fracture its Denis zone ({DENIS}): zone 1 lateral to the sacral foramina, zone 2 through the foramina, zone 3 medial to them, into the central canal. Neurological deficit rose with the zone, from about 6% in zone 1 to about 28% in zone 2 and about 57% in zone 3 (5.9%, 28.4% and 56.7%; {RIZKALLA}).</p>
-        <p>A transverse fracture of the upper sacrum joined to vertical fractures on both sides (the U- or H-shaped fracture, the suicidal jumper's fracture) separates the spine from the pelvis ({ROY_CAMILLE}; {LEONE}). This lumbopelvic dissociation is highly unstable, and Denis's zones leave it out ({RIZKALLA}).</p>
+        <p>A transverse fracture of the upper sacrum joined to vertical fractures through the foramina on both sides makes a U- or H-shaped fracture ({NOVAK}; {DREIZIN}). The U- or H-shaped sacral fracture pattern represents spinopelvic dissociation: the upper sacrum stays attached to the lumbar spine and the lower sacrum to the pelvis ({RIZKALLA}; {LEONE}; {DREIZIN}; {BARBER}). This lumbopelvic dissociation is highly unstable, and Denis's zones leave it out ({RIZKALLA}).</p>
+        <p>Roy-Camille described transverse fractures of the upper sacrum after falls from a height, usually suicidal jumps, in three types set by the position of the lumbar spine at impact ({ROY_CAMILLE}). The Roy-Camille classification characterizes the sagittal angulation and displacement of the transverse component ({ROY_CAMILLE}; {DREIZIN}; {BARBER}).</p>
         <p>Insufficiency fractures of the sacrum run vertically through the sacral ala, parallel to the sacroiliac joints, on one side or both about equally often, sometimes with a horizontal component through the sacral bodies. On CT they show as sclerosis or fracture lines, and they often come with insufficiency fractures of the pubic rami ({LYDERS}).</p>
       </>
     ),
@@ -583,7 +595,7 @@ const steps: ReportStep[] = [
     id: 'sacrum',
     title: 'Step 3. Sacrum and insufficiency fractures',
     learn: 'sacrum',
-    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}; {RIZKALLA}). A U- or H-shaped fracture separates the spine from the pelvis ({ROY_CAMILLE}; {RIZKALLA}). Insufficiency fractures run vertically through the ala, on one side or both ({LYDERS}).</p>,
+    teach: <p>Denis zones 1 to 3, lateral to, through and medial to the foramina, with deficit rising from about 6% to 57% ({DENIS}; {RIZKALLA}). A U- or H-shaped fracture separates the spine from the pelvis ({RIZKALLA}; {DREIZIN}; {BARBER}); Roy-Camille's types describe the angulation and displacement of its transverse component ({ROY_CAMILLE}; {BARBER}). Insufficiency fractures run vertically through the ala, on one side or both ({LYDERS}).</p>,
     fields: [fields.sacrum, fields.sacrumSide, fields.sacrumZone, fields.sacrumTransverse],
     derive: deriveSacrum,
   },
@@ -624,7 +636,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims are checked against abstracts and reviews read in full, except parts of the Letournel elementary-type wording (the posterior column fracture running through the greater sciatic notch, the anterior wall fragment breaking the middle of the iliopectineal line, the anterior column fracture starting at the anterior border of the ilium) and whether Roy-Camille himself described the U or H shape.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and the claims are checked against abstracts and reviews read in full, except parts of the Letournel elementary-type wording (the posterior column fracture running through the greater sciatic notch, the anterior wall fragment breaking the middle of the iliopectineal line, and the anterior column fracture starting at the anterior border of the ilium).',
   references,
   report: {
     steps,

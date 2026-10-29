@@ -15,7 +15,7 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23), but
  * the papers are paywalled and Linscheid 1972 has no abstract in PubMed, so claims are verified
  * from abstracts or from open reviews cited beside the original (2026-10-29: Andersson, Ng,
  * Chen, von Borstel; then, with the author's decisions of 2026-10-29, Zhou, Pang, Vassa, Wilson,
@@ -958,7 +958,7 @@ const study: StudyDefinition = {
   slug: 'wrist-mri',
   name: 'Wrist MRI',
   lede: 'Read a wrist MRI for pain or injury: a fixed search pattern through the scaphoid and lunate, the intrinsic ligaments and perilunate ring, the TFCC, tendons, tunnels and ganglia, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The original papers are paywalled, so claims are checked against their abstracts or against open reviews cited beside them. Still unchecked: whether Herbert and Fisher\'s 1984 paper itself has type B5 (the reviews that list it credit the 1984 paper or Herbert\'s 1990 book).',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref. The original papers are paywalled, so claims are checked against their abstracts or against open reviews cited beside them. Still unchecked: whether Herbert and Fisher\'s 1984 paper itself has type B5 (the reviews that list it credit the 1984 paper or Herbert\'s 1990 book).',
   references,
   report: {
     steps,

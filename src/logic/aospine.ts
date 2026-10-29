@@ -4,7 +4,7 @@
  * morphology; the subaxial system adds facet injuries. Shared by the AO Spine calculator and
  * the spine trauma CT study.
  *
- * Unchecked draft: both papers are matched on PubMed but paywalled. The types, order, facets,
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29): both papers are matched on PubMed but paywalled. The types, order, facets,
  * neurology, modifiers and notation are checked against AO Spine's own posters for both systems
  * (AO Foundation 2020, CC BY-NC-ND 4.0, hosted unchanged in public/references/), and neurology
  * from the examination, the separate upper cervical system and who may carry "+" (AO-9) against
@@ -136,7 +136,10 @@ export function aoNeuroDescription(neuro: AoNeuro): string {
  * cord compression in a patient with a neurological injury." So it is offered only with a deficit
  * present at the examination: N2 ("nerve root injury or radiculopathy"), N3 and N4. Not N0
  * ("neurologically intact"), N1 (a deficit "that has completely recovered by the time of clinical
- * examination") or NX ("the neurological status is unknown").
+ * examination") or NX ("the neurological status is unknown"). The list is this site's
+ * implementation of Divi's definition, not a list AO Spine publishes. N4 is kept (the author's
+ * decision C, 2026-10-29): a complete injury is a neurological injury. Allowed is not added: "+"
+ * needs the separate compression answer (aoCode), never the grade alone.
  */
 export function aoCompressionAllowed(neuro?: AoNeuro): boolean {
   return neuro === 'N2' || neuro === 'N3' || neuro === 'N4'

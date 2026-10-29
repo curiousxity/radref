@@ -7,9 +7,13 @@ import { lines, list, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled, so only claims whose wording is in an abstract, or in an open review
- * cited beside the paper (2026-10-29), are verified. The claims table, with each claim's status, is
+ * Every reference has been matched on PubMed and Crossref (2026-10-23). The papers are paywalled,
+ * so claims are verified against an abstract or an open review cited beside the paper
+ * (2026-10-29). The last unread claim, septic arthritis with osteomyelitis (D2-3), was settled on
+ * 2026-10-29 (second round): Ledermann 2002 for the association (judged by synovial enhancement
+ * and adjacent cellulitis, in advanced infection), Alaia 2021 for the effusion being nonspecific,
+ * so an effusion alone gives "possible associated septic arthritis". With every claim read, the
+ * page is no longer marked as an unchecked draft. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-diabetic-foot-mri-sources.md (D claims). Rule chips and
  * warnings carry their claim IDs.
  */
@@ -23,9 +27,11 @@ const LEDERMANN_NONENHANCING_DOI = '10.2214/ajr.178.1.1780215'
 const CHANTELAU_DOI = '10.1111/j.1464-5491.2005.01677.x'
 const ROSSKOPF_DOI = '10.1186/s13244-019-0768-9'
 const WEAVER_DOI = '10.5114/pjr.2022.113825'
+const ALAIA_DOI = '10.1007/s00256-021-03807-7'
 
 const MORRISON = <Cite doi={MORRISON_DOI}>Morrison et al., Radiology 1998</Cite>
 const LEDERMANN = <Cite doi={LEDERMANN_DOI}>Ledermann et al., Radiology 2002</Cite>
+const ALAIA = <Cite doi={ALAIA_DOI}>Alaia et al., Skeletal Radiol 2021</Cite>
 const JOHNSON = <Cite doi={JOHNSON_DOI}>Johnson et al., AJR 2009</Cite>
 const DONOVAN = <Cite doi={DONOVAN_DOI}>Donovan and Schweitzer, RadioGraphics 2010</Cite>
 const LEDERMANN_MORRISON = <Cite doi={LEDERMANN_MORRISON_DOI}>Ledermann and Morrison, Semin Musculoskelet Radiol 2005</Cite>
@@ -37,6 +43,7 @@ const WEAVER = <Cite doi={WEAVER_DOI}>Weaver et al., Pol J Radiol 2022</Cite>
 const references: LessonReference[] = [
   { citation: 'Morrison WB, Schweitzer ME, Batte WG, Radack DP, Russel KM. Osteomyelitis of the foot: relative importance of primary and secondary MR imaging signs. Radiology. 1998;207(3):625-632.', doi: MORRISON_DOI },
   { citation: 'Ledermann HP, Morrison WB, Schweitzer ME. MR image analysis of pedal osteomyelitis: distribution, patterns of spread, and frequency of associated ulceration and septic arthritis. Radiology. 2002;223(3):747-755.', doi: LEDERMANN_DOI },
+  { citation: 'Alaia EF, Chhabra A, Simpfendorfer CS, Cohen M, Mintz DN, Vossen JA, Zoga AC, Fritz J, Spritzer CE, Armstrong DG, Morrison WB. MRI nomenclature for musculoskeletal infection. Skeletal Radiol. 2021;50(12):2319-2347.', doi: ALAIA_DOI },
   { citation: 'Johnson PW, Collins MS, Wenger DE. Diagnostic utility of T1-weighted MRI characteristics in evaluation of osteomyelitis of the foot. AJR Am J Roentgenol. 2009;192(1):96-100.', doi: JOHNSON_DOI },
   { citation: 'Donovan A, Schweitzer ME. Use of MR imaging in diagnosing diabetes-related pedal osteomyelitis. RadioGraphics. 2010;30(3):723-736.', doi: DONOVAN_DOI },
   { citation: 'Ledermann HP, Morrison WB. Differential diagnosis of pedal osteomyelitis and diabetic neuroarthropathy: MR imaging. Semin Musculoskelet Radiol. 2005;9(3):272-283.', doi: LEDERMANN_MORRISON_DOI },
@@ -89,7 +96,8 @@ const learn: LearnSection[] = [
     title: 'Step 4. Joints',
     body: (
       <>
-        <p>Septic arthritis often comes with osteomyelitis, as the infection spreads across the joint ({LEDERMANN}). Look at every joint next to an infected bone for an effusion, and say which joint it is.</p>
+        <p>Septic arthritis may accompany pedal osteomyelitis ({LEDERMANN}; {ALAIA}). In Ledermann's series of 161 feet suspected of osteomyelitis (82% of the patients had diabetes), MRI showed septic arthritis, judged by synovial enhancement and adjacent cellulitis, in 53 feet (33%), most often at the fifth and first metatarsophalangeal joints: one-third of patients with advanced pedal infection, not a rate for every diabetic foot ({LEDERMANN}).</p>
+        <p>An adjacent joint effusion raises concern but is nonspecific; synovial enhancement and surrounding inflammatory changes strengthen suspicion for joint infection ({LEDERMANN}; {ALAIA}). Look at every joint next to an infected bone, say which joint it is, and after contrast say whether the synovium and capsule enhance.</p>
         <ScanFigures images={[diabeticFootMriScans.septicArthritis]} />
       </>
     ),
@@ -185,6 +193,10 @@ const fields = {
 
   joint: { id: 'joint', kind: 'choice', label: 'Effusion next to an abnormal bone', required: true, options: nonePresent },
   jointSite: { id: 'joint-site', kind: 'text', label: 'Which joint', placeholder: 'e.g. first MTP joint', showIf: (v) => str(v, 'joint') === 'present' },
+  jointEnhancement: { id: 'joint-enhancement', kind: 'choice', label: 'Synovial enhancement and surrounding inflammatory change', showIf: (v) => str(v, 'joint') === 'present' && str(v, 'contrast') === 'given', help: 'Thick enhancement of the synovium and capsule, with edema and enhancement of the soft tissues around the capsule.', options: [
+    { value: 'absent', label: 'Absent' },
+    { value: 'present', label: 'Present' },
+  ] },
 
   charcot: { id: 'charcot', kind: 'choice', label: 'Neuroarthropathy (Charcot)', required: true, options: nonePresent },
   charcotSites: { id: 'charcot-sites', kind: 'multi', label: 'Joints involved', showIf: (v) => str(v, 'charcot') === 'present', options: [
@@ -251,6 +263,18 @@ function deriveBone(values: Values): Derived[] {
   return out
 }
 
+/** D2-3: synovial enhancement is entered (only asked after contrast). */
+const jointEnhances = (values: Values) => str(values, 'joint') === 'present' && str(values, 'contrast') === 'given' && str(values, 'joint-enhancement') === 'present'
+
+function deriveJoints(values: Values): Derived[] {
+  if (str(values, 'joint') !== 'present') return []
+  // D2-3: an effusion alone is nonspecific (Alaia 2021); synovial enhancement and surrounding
+  // inflammatory change strengthen suspicion (Ledermann 2002; Alaia 2021).
+  return [jointEnhances(values)
+    ? { label: 'Joint', value: 'Synovial enhancement and surrounding inflammation: suspicious for septic arthritis', tone: 'warn' }
+    : { label: 'Joint', value: 'Effusion alone is nonspecific: assess for septic arthritis', tone: 'warn' }]
+}
+
 function deriveCharcot(values: Values): Derived[] {
   if (!charcotPresent(values)) return []
   const out: Derived[] = []
@@ -306,6 +330,7 @@ function charcotLines(values: Values): (string | false)[] {
   const sites = chosen(values, fields.charcotSites)
   return [
     choiceLine(values, fields.joint, str(values, 'joint') === 'present' && str(values, 'joint-site')),
+    str(values, 'joint') === 'present' && str(values, 'contrast') === 'given' && choiceLine(values, fields.jointEnhancement),
     choiceLine(values, fields.charcot, charcotPresent(values) && sites.length > 0 && sites.join(', ')),
     charcotPresent(values) && choiceLine(values, fields.charcotActivity),
     charcotPresent(values) && choiceLine(values, fields.charcotDeformity),
@@ -326,7 +351,13 @@ function findings(values: Values): string[] {
   if (str(values, 'sinus') === 'present') out.push('Sinus tract.')
   if (str(values, 'gas') === 'present') out.push('Soft-tissue gas.')
   if (str(values, 'devitalised') === 'present' && str(values, 'contrast') === 'given') out.push('Non-enhancing (devitalised) tissue, in which osteomyelitis and abscess may not enhance.')
-  if (str(values, 'joint') === 'present') out.push(`Effusion in ${str(values, 'joint-site') || 'a joint'} next to the abnormal bone: septic arthritis is possible.`)
+  // D2-3: an effusion alone gives possible septic arthritis; enhancement strengthens suspicion.
+  if (str(values, 'joint') === 'present') {
+    const joint = str(values, 'joint-site') || 'a joint'
+    out.push(jointEnhances(values)
+      ? `Effusion in ${joint} next to the abnormal bone, with synovial enhancement and surrounding inflammatory change: suspicious for associated septic arthritis.`
+      : `Effusion in ${joint} next to the abnormal bone: possible associated septic arthritis (an effusion alone is nonspecific).`)
+  }
 
   if (charcotPresent(values)) {
     const sites = chosen(values, fields.charcotSites)
@@ -414,8 +445,9 @@ const steps: ReportStep[] = [
     id: 'joints',
     title: 'Step 4. Joints',
     learn: 'joints',
-    teach: <p>Septic arthritis often comes with osteomyelitis ({LEDERMANN}).</p>,
-    fields: [fields.joint, fields.jointSite],
+    teach: <p>Septic arthritis may accompany pedal osteomyelitis ({LEDERMANN}; {ALAIA}). An effusion alone is nonspecific; synovial enhancement and surrounding inflammatory change strengthen suspicion ({LEDERMANN}; {ALAIA}).</p>,
+    fields: [fields.joint, fields.jointSite, fields.jointEnhancement],
+    derive: deriveJoints,
   },
   {
     id: 'charcot',
@@ -438,7 +470,7 @@ const study: StudyDefinition = {
   slug: 'diabetic-foot-mri',
   name: 'Diabetic foot MRI',
   lede: 'Read the diabetic foot MRI: find the ulcer, decide osteomyelitis on T1, look for collections and septic joints, and tell neuroarthropathy from infection.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: septic arthritis alongside osteomyelitis, with an effusion as its sign.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and each claim was read in an abstract or open full text. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them.',
   references,
   report: {
     steps,

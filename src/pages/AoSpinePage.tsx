@@ -120,7 +120,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below), and which neurology grades may carry "+" against an open review; one point is still unchecked, whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2 (read here as F2). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
+        <p className="source-note">The papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below), and which neurology grades may carry "+" against an open review; one point is still unchecked, whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2 (read here as F2). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">
@@ -137,7 +137,12 @@ export function AoSpinePage() {
             {subaxial && <ChoiceGroup label="Right facet" layout="stack" value={form.right} options={facetOptions} onChange={set('right')} />}
             {subaxial && <ChoiceGroup label="Left facet" layout="stack" value={form.left} options={facetOptions} onChange={set('left')} />}
             <ChoiceGroup label="Neurology (from the examination)" layout="stack" value={form.neuro} options={neuroOptions} onChange={(value) => setForm((current) => ({ ...current, neuro: value, compression: aoCompressionAllowed(value === 'unknown' ? undefined : value) ? current.compression : 'no' }))} />
-            {compressionAllowed && <ChoiceGroup label="+ Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />}
+            {compressionAllowed && (
+              <>
+                <ChoiceGroup label="+ Continued spinal cord compression?" layout="row" value={form.compression} options={yesNo} onChange={set('compression')} />
+                <p className="field-help" style={{ gridColumn: '1 / -1', margin: 0 }}>+ indicates continued spinal cord compression in a patient with neurological injury. Complete spinal cord injury (N4) does not exclude this modifier. With N2, radicular symptoms or root compression alone do not establish continued cord compression. A deficit alone never adds it: answer this question.</p>
+              </>
+            )}
             {modifierOptions.map(([m, text]) => (
               <ChoiceGroup key={`${form.region}-${m}`} label={`${m}: ${text}?`} layout="row" value={form.modifiers.includes(m) ? 'yes' : 'no'} options={yesNo} onChange={toggleModifier(m)} />
             ))}
@@ -173,7 +178,7 @@ export function AoSpinePage() {
             </tbody>
           </table>
         </div>
-        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. This page writes the code as the AO Spine posters do: the main type, then the secondary injury, neurology and modifiers in brackets. The thoracolumbar poster separates them with semicolons, C (A3; N3; M2); the subaxial poster with commas, with the facets after the type A injury, B2 (A1, F4 BL, N2, M3). A subaxial injury with only facet injuries is written facets first. If one facet has more than one injury, only the highest is classified. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>). Both posters list "+" as continued spinal cord compression; it is used in a patient with a neurological injury (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>), so this page offers it only with N2, N3 or N4: not with N0 (intact), N1 (a deficit that has resolved) or NX (not examined).</p>
+        <p>The most severe injury names the type: C over B3 over B2 over B1 over A. A B or C injury also carries its type A fracture, classified separately. This page writes the code as the AO Spine posters do: the main type, then the secondary injury, neurology and modifiers in brackets. The thoracolumbar poster separates them with semicolons, C (A3; N3; M2); the subaxial poster with commas, with the facets after the type A injury, B2 (A1, F4 BL, N2, M3). A subaxial injury with only facet injuries is written facets first. If one facet has more than one injury, only the highest is classified. In A3 and A4 a vertical fracture of the lamina is usually present and is not a tension band failure. Neurology comes from the examination, not the images (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>). Both posters list "+" as continued spinal cord compression; it is used in a patient with a neurological injury (<Cite doi="10.1177/2192568219827260">Divi et al., Global Spine J 2019</Cite>), so this page offers it only with N2, N3 or N4: not with N0 (intact), N1 (a deficit that has resolved) or NX (not examined). That list is this calculator's implementation of Divi's definition, not a list of combinations published by AO Spine. "+" is added only when continued compression is answered yes, never because a deficit is present.</p>
       </section>
 
       <section className="info-card">

@@ -6,7 +6,7 @@ import { SuprahyoidNeckStudyPage } from './SuprahyoidNeckStudy'
 const study = studyOf(SuprahyoidNeckStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Every claim is read (2026-10-29). Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-25-suprahyoid-neck-sources.md (N claims). The references
  * are matched and every claim but the mylohyoid line (N2-12) has been read, in its paper or in
  * an open review cited beside it; when N2-12 is checked its case may have to change; say in

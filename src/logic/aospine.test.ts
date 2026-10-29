@@ -86,6 +86,20 @@ describe('AO Spine code and sentence', () => {
     }
   })
 
+  // The author's decision C, 2026-10-29 (second round): keep N4+ (Divi 2019: "+" is used "in a
+  // patient with a neurological injury", and a complete cord injury is one), and never add "+"
+  // because a deficit exists: it needs the separate "continued spinal cord compression" answer.
+  test('"+" is allowed with N4 but never added by the grade alone', () => {
+    expect(aoCompressionAllowed('N4')).toBe(true)
+    for (const region of ['subaxial', 'thoracolumbar'] as const) {
+      expect(aoCode({ region, morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
+      for (const neuro of ['N2', 'N3', 'N4'] as const) {
+        expect(aoCode({ region, morphology: { type: 'C' }, neuro })).toBe(`C (${neuro})`)
+        expect(aoCode({ region, morphology: { type: 'C' }, neuro, compression: false })).not.toMatch(/\+/)
+      }
+    }
+  })
+
   // The thoracolumbar poster's nomenclature examples: "T8-T9: C (T9: A3; N3; M2)" and "L1: A4 (N0; M1)".
   test('thoracolumbar code follows the poster', () => {
     expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'C', body: 'A3' }, neuro: 'N3', modifiers: ['M2'] })).toBe('C (A3; N3; M2)')

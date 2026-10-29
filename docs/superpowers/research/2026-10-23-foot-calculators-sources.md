@@ -204,3 +204,27 @@ Cureus 2025 review (PMC12616291).
 
 Still open: MY-6 (whether Myerson 1986 names any further pattern) until the paper is read, so the
 Myerson page keeps "Unchecked draft".
+
+## The author's decisions, 2026-10-29 (second round)
+
+MY-2 (decision A): B2 should say "alignment", not "in place" or "preserved", and should not say the
+first tarsometatarsal joint, capsule or ligaments are intact; a radiograph or CT shows alignment,
+not that the joint is uninjured.
+
+New source: Gupta RT, Wadhwa RP, Learch TJ, Herwick SM. Lisfranc injury: imaging findings for this
+important but often-missed diagnosis. Curr Probl Diagn Radiol. 2008;37(3):115-126.
+doi:10.1067/j.cpradiol.2007.08.012 (PMID 18436111; matched on PubMed and Crossref). The author
+found it as a PDF on a university course page
+(`smithengineering.queensu.ca/.../11.21.2008_Simon.pdf`); that copy is the journal article as
+printed (pages 115 to 126, footed "Curr Probl Diagn Radiol, May/June 2008"), and it was read in full there. The
+page cites the journal article, not the URL.
+
+| ID | Decision | Evidence | Change on the page |
+|----|----------|----------|--------------------|
+| MY-2 (B2) | "B2: lateral displacement of one or more of metatarsals 2–5, with maintained alignment of the first metatarsal with the medial cuneiform." | Gupta, text: "Type B characterizes a partially incongruent injury with further subclassifications of B1 and B2, describing medial dislocation of the first metatarsal and lateral dislocation of the second to fifth metatarsals, respectively." Fig. 7 legend: "The second metatarsal is also displaced laterally relative to the second cuneiform. The alignment of the first metatarsal and first cuneiform appears to be within normal limits ... Selected images from an axial CT scan show lateral displacement of the first metatarsal relative to the first cuneiform (arrow) in addition to fractures described on conventional radiographs. Based on initial radiographs, this would have been classified as a Type B, lateral dislocation. In combination with CT, classification was changed to Type A, or homolateral." Radiographic relationship: "the lateral margin of the first metatarsal should also be aligned with the lateral margin of the medial cuneiform." "One or more" stays from Diebal ("Lateral dislocations—involving any of the 4 lateral metatarsals"); Gupta's own text says "the second to fifth metatarsals". | `myersonDescriptions.B2` is now "lateral displacement of one or more of metatarsals 2 to 5, with maintained alignment of the first metatarsal with the medial cuneiform" (was "one or more of metatarsals 2 to 5 displaced laterally (partial lateral incongruity), with the first tarsometatarsal joint in place"; "2 to 5" kept for consistency with C1 and C2). It feeds the Myerson page's result, table and impression and the foot MRI study's table, field and impression. The calculator's first-metatarsal option "In place" is now "Aligned with the medial cuneiform". Gupta is added to the Myerson page's references (six in all) and its source note, and to the foot MRI study. The rule is unchanged. Test pins the B2 sentence and that it says neither "intact", "in place" nor "preserved". |
+
+Not added to the page: Gupta's Fig. 7 case (a type B on radiographs reclassified as type A once CT
+showed the first metatarsal displaced laterally) would support a caveat that radiographs can miss
+first-metatarsal displacement; the author may want it on the Myerson page.
+
+MY-6 is still open (Myerson 1986 unread), so the Myerson page keeps "Unchecked draft".

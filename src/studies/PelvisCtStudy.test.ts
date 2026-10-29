@@ -8,7 +8,7 @@ import { PelvisCtStudyPage } from './PelvisCtStudy'
 const study = studyOf(PelvisCtStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims) or, for Young-Burgess
  * and Letournel, 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). The references
  * are matched, but only the claims marked verified there were read in their papers; when the
@@ -22,15 +22,18 @@ describe('pelvis CT lesson', () => {
   })
 
   // The references are matched (each has a DOI), but parts of the Letournel elementary-type
-  // wording and Roy-Camille's own use of the U or H shape are still unread, so the note keeps
-  // saying so.
-  test('is still marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  // wording are still unread, so the note keeps saying so. Roy-Camille's own use of the U or H
+  // shape left the list on 2026-10-29 (second round): the shape is no longer attributed to him.
+  test('is not labelled an unchecked draft (the author\'s choice), with a DOI on every reference', () => {
+    expect(study.sourceNote).not.toMatch(/Unchecked draft/)
     // 17 since the Young-Burgess and Denis reviews (Alton and Gee 2014, Rizkalla 2019), Halawi 2015
     // and Leone 2022, read in full in place of Khurana for the ring breaking in more than one place
     // and for the L5 transverse process, and Gänsslen 2024 (open review of the Letournel types,
-    // 2026-10-29) were added.
-    expect(study.references).toHaveLength(17)
+    // 2026-10-29) were added; 20 since Dreizin and Smith 2022, Barber 2023 and Novak 2024 (open
+    // sacral fracture reviews, 2026-10-29 second round) replaced Roy-Camille as the source for the
+    // U or H shape.
+    expect(study.references).toHaveLength(20)
+    expect(study.sourceNote).not.toMatch(/Roy-Camille/)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -125,7 +128,7 @@ describe('pelvis CT report: whole cases', () => {
   })
 })
 
-describe('pelvis CT rules (unchecked draft)', () => {
+describe('pelvis CT rules', () => {
   // YB-8: the usual stability implication. Decision 36 (2026-10-29): LC III was "rotationally
   // unstable, vertically stable"; Leone: "Lateral compression grade 3 injuries have a
   // multidirectional instability".
@@ -162,9 +165,11 @@ describe('pelvis CT rules (unchecked draft)', () => {
     expect(zone('3')).toBe("Zone 3: neurological deficit in about 57% in Denis's series")
   })
 
-  // P3-2: the U or H shape after injury. P3-3: "There may also be a horizontal component to the
-  // fracture through the sacral bodies" (Lyders). The insufficiency chip said "H-shaped", but in
-  // Lyders the H is the bone-scan Honda sign, not a CT shape.
+  // P3-2: the U or H shape after injury: "a characteristic U- or H-shaped fracture, with
+  // dissociation of the lumbosacrococcygeal functional unit" (Dreizin and Smith 2022). P3-3:
+  // "There may also be a horizontal component to the fracture through the sacral bodies" (Lyders).
+  // The insufficiency chip said "H-shaped", but in Lyders the H is the bone-scan Honda sign, not a
+  // CT shape.
   test('H or U shape', () => {
     expect(chips(study, 'sacrum', { sacrum: 'traumatic', 'sacrum-transverse': 'yes' }).Pattern).toBe('U- or H-shaped: the spine is separated from the pelvis')
     expect(chips(study, 'sacrum', { sacrum: 'insufficiency', 'sacrum-transverse': 'yes' }).Pattern).toBe('Insufficiency fracture with a horizontal component through the sacral bodies')

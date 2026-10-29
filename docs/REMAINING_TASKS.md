@@ -8,6 +8,14 @@ by the author's choice).
 
 ## Pending (recorded 2026-10-28)
 
+- **Left as they are (the author's choice, 2026-10-29); don't raise again:** the four points that
+  only the original papers could settle: the exact 1 cm / 40% facet boundary (Vaccaro 2016; spine
+  CT and AO Spine), any Lisfranc pattern beyond A to C2 (Myerson 1986; foot study and Myerson),
+  whether B5 is in Herbert and Fisher 1984 (wrist study and Herbert), and three Letournel phrases
+  (Letournel 1980; pelvis CT and Letournel). Those pages still name the unread point in their
+  notes, but at the author's request no page says "Unchecked draft" any more (2026-10-29). Also
+  decided: Gupta's "type B on radiographs, type A on CT" case stays off the Myerson page.
+
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
   email is on the "Rad Ref members" policy, and the author is the only member for now
   (2026-10-29). To add one later: Zero Trust → Access controls → Policies, or "Emails ending in"
@@ -82,7 +90,7 @@ region at a time, end to end, following the ankle pilot
 
 - [x] Ankle: ankle MRI study. No calculator, by the author's choice (no Weber or
   Lauge-Hansen).
-- [ ] Knee: knee MRI study ("pain" only history, ACL reconstruction included) plus a
+- [x] Knee: knee MRI study ("pain" only history, ACL reconstruction included) plus a
   Schatzker calculator. Drafted 2026-10-23 as an unchecked draft; spec
   `docs/superpowers/specs/2026-10-23-knee-mri-study-design.md`. Done once the sources check
   in "To do when on a computer" passes.
@@ -132,8 +140,8 @@ region at a time, end to end, following the ankle pilot
   `docs/superpowers/specs/2026-10-25-skull-base-study-design.md`, claims
   `docs/superpowers/research/2026-10-25-skull-base-sources.md`. Live on the site, every claim
   checked.
-- [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28): MRI for "just the typical
-  indications" (2026-10-29). Written 2026-10-29 with every claim read (PR #22); done once merged.
+- [x] Brachial plexus: gets a study (the author's choice, 2026-10-28): MRI for "just the typical
+  indications" (2026-10-29). Written 2026-10-29 with every claim read; merged (PR #22).
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
@@ -171,8 +179,10 @@ it is done.
   sulcus, the exact spot varying with knee flexion (K2-1); juvenile OCD instability names the
   T2-hyperintense rim matching adjacent joint fluid, with Andriolo 2022 cited and a form option
   added (K2-8).
-- [ ] Still unchecked: the posterolateral corner with hyperextension (K2-3), and the cartilage
-  depth grades (no source, kept by the author's choice).
+- [x] Decided by the author 2026-10-29 (second round): kissing contusions suggest hyperextension
+  (Sanders) and the posterolateral corner should be assessed (Figueroa 2021). Nothing is left unread,
+  so the knee study no longer says "Unchecked draft"; the cartilage depth grades have no source,
+  kept by the author's choice, and the note says so.
 
 ### Shoulder MRI study and Neer calculator
 
@@ -281,7 +291,10 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and 
   and may involve both the middle and posterior facets" (Marth 2024 added, its counts given as a
   cohort finding); sesamoid marrow oedema is nonspecific (sesamoiditis, stress reaction or fracture,
   early osteonecrosis), cited to Nwawka and Burge; Myerson type D added as a later proposal.
-- [ ] Still unchecked: the irregular coalition margins (F2-3; needs Newman 2000) and MY-6.
+- [x] Decided 2026-10-29 (second round): non-osseous coalition narrowing and irregularity cited to
+  Lawrence 2014; Myerson B2 as "maintained alignment of the first metatarsal with the medial
+  cuneiform" (Gupta 2008).
+- [ ] Still unchecked: MY-6 (needs Myerson 1986).
 
 ### Diabetic foot MRI study
 
@@ -301,7 +314,9 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-diabetic-foot-
   superimposed osteomyelitis", uncomplicated neuropathic destruction looks destroyed on every
   sequence, and no study has tested the sign's accuracy; in less active or inactive disease edema
   decreases but may persist.
-- [ ] Still unchecked: D2-3 (septic arthritis with an effusion; needs Ledermann 2002).
+- [x] Decided 2026-10-29 (second round): an effusion alone is nonspecific, "possible associated septic
+  arthritis"; synovial enhancement makes it "suspicious" (Ledermann; Alaia 2021, the SSR white
+  paper). Nothing is left unread, so the study no longer says "Unchecked draft".
 
 ### Spine CT for pain or injury
 
@@ -363,8 +378,9 @@ under the calculators below.
 - [x] The Denis deficit rates (P3-1) were already settled by Rizkalla 2019 (third check); the U- or
   H-shaped fracture (P3-2) verified from Rizkalla and Leone. Both now cited beside the originals
   (2026-10-29, "Sixth check").
-- [ ] Still unchecked: whether Roy-Camille 1985 itself used the U or H shape, and the LT-2 points
-  under the calculators below.
+- [x] Decided 2026-10-29 (second round): the U or H shape is cited to Dreizin, Novak, Rizkalla and
+  Leone, and Roy-Camille only for his types of the transverse component (Dreizin, Barber).
+- [ ] Still unchecked: the LT-2 points under the calculators below.
 
 ### Pelvis calculators (Young-Burgess, Letournel)
 

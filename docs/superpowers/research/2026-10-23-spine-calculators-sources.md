@@ -175,3 +175,27 @@ examination"); keep both choices, or change once Vaccaro 2016 is read?
 
 No new reference (Divi 2019 was already cited). The AO Spine page keeps "Unchecked draft" for the exact
 1 cm / 40% facet boundary (AO-6), still unread until Vaccaro 2016.
+
+### Second round, 2026-10-29: decision C
+
+Decisions B and D (Denver) are in `2026-10-23-spine-trauma-ct-sources.md`. Divi 2019 re-read in full text
+(Europe PMC XML, PMC6512201).
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| AO-9 (C) | Keep "+" with N2, N3 and N4 (N4 included); "+" needs an affirmative finding and is never added because a deficit exists; say that the N2–N4 list is the calculator's implementation of Divi's definition, not an AO-published list. | No rule change: `aoCode` writes "+" only when `compression` is true and the grade is N2–N4, and the calculator's "+ Continued spinal cord compression?" (the posters' wording) starts at "No" and is a separate answer. New help text under that question: "+ indicates continued spinal cord compression in a patient with neurological injury. Complete spinal cord injury (N4) does not exclude this modifier. With N2, radicular symptoms or root compression alone do not establish continued cord compression. A deficit alone never adds it: answer this question." Morphology card adds: "That list is this calculator's implementation of Divi's definition, not a list of combinations published by AO Spine. "+" is added only when continued compression is answered yes, never because a deficit is present." The `aoCompressionAllowed` comment says the same. Tests: N4+ allowed in both systems; N2, N3 and N4 with no compression answer (or "no") write no "+". |
+
+Quotes relied on:
+
+- Divi 2019 (PMC6512201), re-read: "N4 means complete spinal cord injury. ... The plus sign (+) modifier is
+  used to signify continued spinal cord compression in a patient with a neurological injury."
+- Both posters (`public/references/`): "+ Continued spinal cord compression", tied to no grade.
+- Not cited: Huang X, et al. Front Neurol. 2025 (PMC12727610), re-read: "+ Indicates ongoing cord
+  compression in a patient with neurological deficits, signifying an urgent need for surgical
+  decompression".
+
+Not stated by a source, kept as the site's reading of Divi's definition: "Complete spinal cord injury (N4)
+does not exclude this modifier" (no source names N4 with "+"; N4 is "complete spinal cord injury", a
+neurological injury, and the posters tie "+" to no grade), and "With N2, radicular symptoms or root
+compression alone do not establish continued cord compression" (the modifier is defined as spinal cord
+compression; no source says this of N2 in words). No new reference.

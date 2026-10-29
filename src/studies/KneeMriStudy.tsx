@@ -9,10 +9,14 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * most of the papers are paywalled, so only claims whose wording is in an abstract, a figure
- * legend, open full text or an open review (added as a second citation, 2026-10-29) are
- * verified. The claims table, with each claim's status, is
+ * Every reference has been matched on PubMed and Crossref (2026-10-23). Most of the papers are
+ * paywalled, so claims are verified against an abstract, a figure legend, open full text or an
+ * open review (added as a second citation, 2026-10-29). The last unread claim, the posterolateral
+ * corner with hyperextension (K2-3), was settled on 2026-10-29 (second round): Sanders for the
+ * contusion footprint, Figueroa 2021 for hyperextension as a PLC mechanism, so the page says to
+ * assess the corner rather than implying it is injured. The four cartilage depth grades (K10-1)
+ * have no source and are kept by the author's choice; the note says so, and the page is no longer
+ * marked as an unchecked draft. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-knee-mri-sources.md; rule chips and warnings carry its
  * claim IDs. Schatzker 1979 has no abstract and no DOI, so its citation stays plain text.
  */
@@ -42,6 +46,7 @@ const ESSR_DOI = '10.1007/s00330-024-10706-7'
 const CHIEN_DOI = '10.5114/pjr.2020.99415'
 const CRONE_DOI = '10.1007/s00256-026-05187-2'
 const ANDRIOLO_DOI = '10.1177/19476035221121789'
+const FIGUEROA_DOI = '10.1302/2058-5241.6.200096'
 
 const MARKHARDT = <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>
 const DE_SMET = <Cite doi={DE_SMET_DOI}>De Smet and Tuite, AJR 2006</Cite>
@@ -66,6 +71,7 @@ const ESSR = <Cite doi={ESSR_DOI}>Parkar and Adriaensen, Eur Radiol 2024</Cite>
 const CHIEN = <Cite doi={CHIEN_DOI}>Chien et al., Pol J Radiol 2020</Cite>
 const CRONE = <Cite doi={CRONE_DOI}>Crone et al., Skeletal Radiol 2026</Cite>
 const ANDRIOLO = <Cite doi={ANDRIOLO_DOI}>Andriolo et al., Cartilage 2022</Cite>
+const FIGUEROA = <Cite doi={FIGUEROA_DOI}>Figueroa et al., EFORT Open Rev 2021</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
@@ -92,6 +98,7 @@ const references: LessonReference[] = [
   { citation: 'Chien A, Weaver JS, Kinne E, Omar I. Magnetic resonance imaging of the knee. Pol J Radiol. 2020;85:e509-e531.', doi: CHIEN_DOI },
   { citation: 'Crone AM, Omar IM, Bronson AM, Buchler LT, Selley RS, Weaver JS, Klauser AS, Taljanovic MS. Guide to lower extremity radiologic measurements: part 2 knee. Skeletal Radiol. 2026;55(6):1197-1216.', doi: CRONE_DOI },
   { citation: 'Andriolo L, Solaro L, Altamura SA, Carey JL, Zaffagnini S, Filardo G. Classification systems for knee osteochondritis dissecans: a systematic review. Cartilage. 2022;13(3):19476035221121789.', doi: ANDRIOLO_DOI },
+  { citation: 'Figueroa F, Figueroa D, Putnis S, Guiloff R, Caro P, Espregueira-Mendes J. Posterolateral corner knee injuries: a narrative review. EFORT Open Rev. 2021;6(8):676-685.', doi: FIGUEROA_DOI },
 ]
 
 const bruiseTable = (
@@ -107,7 +114,7 @@ const bruiseTable = (
       <tbody>
         <tr><td className="vessel-name">Pivot shift</td><td>Lateral femoral condyle, typically near the terminal sulcus (its midportion; the exact spot varies with how far the knee was flexed at injury), and posterolateral tibial plateau ({SANDERS})</td><td>ACL tear</td></tr>
         <tr><td className="vessel-name">Dashboard</td><td>Anterior proximal tibia</td><td>PCL injury</td></tr>
-        <tr><td className="vessel-name">Hyperextension</td><td>"Kissing" contusions of the anterior tibia and the anterior femoral condyles</td><td>ACL, PCL and posterolateral corner</td></tr>
+        <tr><td className="vessel-name">Hyperextension</td><td>"Kissing" contusions of the anterior tibia and the anterior femoral condyles ({SANDERS})</td><td>ACL, PCL or both ({SANDERS}); assess the posterolateral corner too ({FIGUEROA})</td></tr>
         <tr><td className="vessel-name">Clip (valgus)</td><td>Lateral femoral condyle, sometimes the medial femoral condyle from avulsion</td><td>MCL injury</td></tr>
         <tr><td className="vessel-name">Lateral patellar dislocation</td><td>Inferomedial patella and anterolateral lateral femoral condyle</td><td>Medial patellofemoral ligament injury</td></tr>
       </tbody>
@@ -188,7 +195,7 @@ const learn: LearnSection[] = [
         <p>Signal inside the meniscus that does not reach a surface is not a tear.</p>
 
         <h4>What kind of tear?</h4>
-        <p>Tears are described as horizontal, longitudinal (vertical), radial, root, complex, or displaced, which includes the bucket-handle and flap tears ({NGUYEN}). Say where it is: anterior horn, body, posterior horn or root. A displaced fragment matters to the surgeon, so look for it in the notch and in the recesses whenever a meniscus looks short.</p>
+        <p>Tears are described as horizontal, longitudinal (vertical), radial, root, complex, or displaced, which includes the bucket-handle and flap tears ({NGUYEN}; {CHIEN}). Say where it is: anterior horn, body, posterior horn or root. A displaced fragment matters to the surgeon, so look for it in the notch and in the recesses whenever a meniscus looks short.</p>
 
         <h4>Extrusion</h4>
         <p>Medial meniscal extrusion of more than 3 mm was associated with severe degeneration, extensive tearing and root tears; extrusion of 3 mm or less was the minor group ({COSTA}). An extruded meniscus sends you back to look hard at the posterior root.</p>
@@ -247,7 +254,7 @@ const learn: LearnSection[] = [
     title: 'Step 8. Lateral side and posterolateral corner',
     body: (
       <>
-        <p>The lateral stabilising structures are the lateral collateral ligament, the biceps femoris tendon, the popliteus tendon and the iliotibial tract, with the other posterolateral corner structures ({RECONDO}). Check each by name. The hyperextension bruise pattern puts the posterolateral corner at risk ({SANDERS}).</p>
+        <p>The lateral stabilising structures are the lateral collateral ligament, the biceps femoris tendon, the popliteus tendon and the iliotibial tract, with the other posterolateral corner structures ({RECONDO}). Check each by name. Anterior femorotibial kissing contusions suggest a hyperextension mechanism ({SANDERS}); the posterolateral corner should also be assessed because hyperextension can injure its structures ({FIGUEROA}).</p>
         <ScanFigures images={[kneeMriScans.lclTear, kneeMriScans.posterolateralCorner]} />
       </>
     ),
@@ -363,11 +370,11 @@ const meniscusSites: Option[] = [
   { value: 'root', label: 'Root' },
 ]
 
-/** K2-1 to K2-5: what each bruise pattern points to. */
+/** K2-1 to K2-5: what each bruise pattern points to. K2-3: hyperextension says to assess the PLC, not that it is injured. */
 const bruisePoints: Record<string, string> = {
   pivot: 'ACL tear (pivot shift)',
   dashboard: 'PCL injury (dashboard)',
-  hyperextension: 'ACL, PCL and posterolateral corner (hyperextension)',
+  hyperextension: 'ACL or PCL injury (hyperextension); assess the posterolateral corner',
   clip: 'MCL injury (clip)',
   patellar: 'Lateral patellar dislocation: check the MPFL',
 }
@@ -1111,7 +1118,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so claims are checked against abstracts, figure legends, the papers that are open and open reviews. Still unchecked: that the hyperextension pattern puts the posterolateral corner at risk, and the four cartilage depth grades, which no cited paper gives.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref. Most of the papers are paywalled, so claims are checked against abstracts, figure legends, the papers that are open and open reviews cited beside them. The four cartilage depth grades have no source: no cited paper gives them, and they are kept by the author\'s choice.',
   references,
   report: {
     steps,

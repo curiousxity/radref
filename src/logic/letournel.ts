@@ -5,7 +5,7 @@
  * Scheinfeld et al., RadioGraphics 2015). Shared by the Letournel calculator and the pelvis CT
  * study.
  *
- * Unchecked draft: the column lines, the transverse and T-shaped questions, the isolated
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29): the column lines, the transverse and T-shaped questions, the isolated
  * posterior wall and the spur sign are checked against Durkee's full text; the associated types,
  * the inferior ramus (obturator ring) per type, the joint surface left on the ilium, the iliac
  * wing and the obturator oblique view for the spur sign against Gänsslen et al. (Arch Orthop

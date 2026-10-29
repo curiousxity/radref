@@ -6,10 +6,11 @@ import { KneeMriStudyPage } from './KneeMriStudy'
 const study = studyOf(KneeMriStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
+ * Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-knee-mri-sources.md by its ID. The references are
- * matched, but only the claims marked verified there were read in their papers; when the rest
- * are checked a case may have to change; say in that commit why the old expectation was wrong.
+ * matched and every claim has been read, except the cartilage depth grades (K10-1), which have no
+ * source and are kept by the author's choice. If a case changes, say in that commit why the old
+ * expectation was wrong.
  */
 
 describe('knee MRI lesson', () => {
@@ -20,16 +21,20 @@ describe('knee MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI), but some claims are still unchecked (listed
-  // in the note), so the note keeps saying so. Schatzker 1979 is the one exception: PubMed has no
-  // DOI for it and Crossref finds none, so it is cited without one.
-  test('is still marked as an unchecked draft, with a DOI on every reference but Schatzker 1979', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  // The references are matched (each has a DOI) and every claim read, so the note is not marked as
+  // a draft (2026-10-29, second round, once K2-3 was settled). The cartilage depth grades have no
+  // source and are kept by the author's choice; the note says so. Schatzker 1979 is the one
+  // exception to the DOIs: PubMed has no DOI for it and Crossref finds none, so it is cited without
+  // one.
+  test('is not marked as a draft, with a DOI on every reference but Schatzker 1979', () => {
+    expect(study.sourceNote).toMatch(/^Every reference has been matched/)
+    expect(study.sourceNote).toMatch(/depth grades have no source/)
     // 20 since Recht 2005 was added for describing a cartilage defect; 23 since three open
     // reviews were added as second citations (2026-10-29): Parkar and Adriaensen 2024 (Segond
     // and ACL tear), Chien 2020 (ACL graft complications), Crone 2026 (the level of the 11°
-    // trochlear measurement); 24 with Andriolo 2022 for the juvenile OCD signs (2026-10-29).
-    expect(study.references).toHaveLength(24)
+    // trochlear measurement); 24 with Andriolo 2022 for the juvenile OCD signs (2026-10-29); 25
+    // with Figueroa 2021 for hyperextension as a posterolateral corner mechanism (K2-3).
+    expect(study.references).toHaveLength(25)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Schatzker J, McBroom R, Bruce D.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -205,7 +210,7 @@ describe('knee MRI report: hidden fields', () => {
   })
 })
 
-describe('knee MRI rules (unchecked)', () => {
+describe('knee MRI rules', () => {
   // K1-1: "A fat-fluid level in the knee (lipohaemarthrosis) indicates an intra-articular fracture."
   test('a fat-fluid level', () => {
     expect(chips(study, 'technique', { 'fat-fluid': 'present' })['Fat-fluid level']).toBe('Indicates an intra-articular fracture')
@@ -215,12 +220,18 @@ describe('knee MRI rules (unchecked)', () => {
     expect(report(study, { ...normal, 'fat-fluid': 'present', fracture: 'present' }).warnings).toEqual([])
   })
 
-  // K2-1 to K2-5: the bruise patterns of Sanders et al.
+  // K2-1 to K2-5: the bruise patterns of Sanders et al. K2-3: "Depending on the amount of force
+  // applied during hyperextension, tears of the ACL, PCL, or both may occur" (Sanders, Fig. 9b);
+  // the PLC is to be assessed, not presumed injured: "The mechanism of injury to the PLC usually
+  // involves a direct varus stress to the knee, contact or non-contact hyperextension" (Figueroa
+  // 2021).
   test('each bruise pattern points to its injury', () => {
     const pointsTo = (pattern: string) => chips(study, 'bones', { marrow: 'present', 'bruise-pattern': pattern })['Bruise pattern points to']
     expect(pointsTo('pivot')).toBe('ACL tear (pivot shift)')
     expect(pointsTo('dashboard')).toBe('PCL injury (dashboard)')
-    expect(pointsTo('hyperextension')).toBe('ACL, PCL and posterolateral corner (hyperextension)')
+    expect(pointsTo('hyperextension')).toBe('ACL or PCL injury (hyperextension); assess the posterolateral corner')
+    expect(report(study, { ...normal, marrow: 'present', 'bruise-pattern': 'hyperextension' }).text)
+      .toContain('Bone marrow edema; the pattern points to ACL or PCL injury (hyperextension); assess the posterolateral corner.')
     expect(pointsTo('clip')).toBe('MCL injury (clip)')
     expect(pointsTo('patellar')).toBe('Lateral patellar dislocation: check the MPFL')
     expect(pointsTo('other')).toBeUndefined()

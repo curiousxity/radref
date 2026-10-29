@@ -129,10 +129,15 @@ describe('Myerson (unchecked)', () => {
   // The author's decision (2026-10-29): standardise A, B2 and C1. Was A "all five metatarsals
   // displaced in one direction, laterally or dorsoplantar (homolateral)", B2 "one or more of the
   // lesser metatarsals displaced laterally", C1 "the first metatarsal displaced medially and some
-  // of the lesser metatarsals laterally".
+  // of the lesser metatarsals laterally". Second round (2026-10-29): B2 says alignment, not that
+  // the first joint is "in place" (it was "one or more of metatarsals 2 to 5 displaced laterally
+  // (partial lateral incongruity), with the first tarsometatarsal joint in place"). Gupta 2008:
+  // B2 is "lateral dislocation of the second to fifth metatarsals"; Fig. 7, "The alignment of the
+  // first metatarsal and first cuneiform appears to be within normal limits".
   test('A, B2 and C1 wording', () => {
     expect(myersonDescriptions.A).toBe('all five metatarsals displaced together in the same direction')
-    expect(myersonSentence('B2')).toBe('Tarsometatarsal (Lisfranc) fracture-dislocation, Myerson type B2 (partial incongruity): one or more of metatarsals 2 to 5 displaced laterally (partial lateral incongruity), with the first tarsometatarsal joint in place.')
+    expect(myersonSentence('B2')).toBe('Tarsometatarsal (Lisfranc) fracture-dislocation, Myerson type B2 (partial incongruity): lateral displacement of one or more of metatarsals 2 to 5, with maintained alignment of the first metatarsal with the medial cuneiform.')
+    expect(myersonDescriptions.B2).not.toMatch(/intact|in place|preserved/)
     expect(myersonDescriptions.C1).toBe('the first metatarsal displaced medially and some, but not all, of metatarsals 2 to 5 laterally (partial divergence)')
   })
 })

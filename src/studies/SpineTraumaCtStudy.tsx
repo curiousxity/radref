@@ -9,12 +9,14 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
+ * Not labelled "Unchecked draft" (the author's choice, 2026-10-29), though one point is still unread. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
  * are verified from abstracts, papers the author supplied, AO Spine's posters and open papers
  * cited beside the originals (Alves 2020 for T2-3; Radcliff 2013, Woods 2018 and Kopparapu 2022
  * for the rule of Spence, T2-2; Brommeland 2018 and Wagner 2023 for the expanded Denver criteria,
  * T5-1; Wáng 2024 and Wáng 2020 for Genant, T6-1), with the author's decisions of 2026-10-29
- * applied. Still unchecked: the exact 1 cm / 40% facet boundary (AO-6). The claims
+ * applied, and their second round (B, D: the low-energy BCVI advisory, from the EAST guideline,
+ * Kim 2020, and Turaczyk Kolodziej 2024; the occipital condyle fracture as a Denver item). Still
+ * unchecked: the exact 1 cm / 40% facet boundary (AO-6). The claims
  * table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims); the AO Spine
  * wording is in 2026-10-23-spine-calculators-sources.md (AO claims). Rule chips and warnings
@@ -39,6 +41,8 @@ const KOPPARAPU_DOI = '10.3171/2021.12.SPINE211188'
 const BROMMELAND_DOI = '10.1186/s13049-018-0559-1'
 const WAGNER_DOI = '10.1259/bjr.20221116'
 const WANG_ATM_DOI = '10.21037/atm.2020.02.23'
+const KIM_DOI = '10.1097/TA.0000000000002668'
+const TURACZYK_DOI = '10.1016/j.jss.2024.04.058'
 
 const VACCARO_TL = <Cite doi={VACCARO_TL_DOI}>Vaccaro et al., Spine 2013</Cite>
 const VACCARO_CX = <Cite doi={VACCARO_CX_DOI}>Vaccaro et al., Eur Spine J 2016</Cite>
@@ -58,6 +62,8 @@ const KOPPARAPU = <Cite doi={KOPPARAPU_DOI}>Kopparapu et al., J Neurosurg Spine 
 const BROMMELAND = <Cite doi={BROMMELAND_DOI}>Brommeland et al., Scand J Trauma Resusc Emerg Med 2018</Cite>
 const WAGNER = <Cite doi={WAGNER_DOI}>Wagner et al., Br J Radiol 2023</Cite>
 const WANG_ATM = <Cite doi={WANG_ATM_DOI}>Wáng et al., Ann Transl Med 2020</Cite>
+const KIM = <Cite doi={KIM_DOI}>Kim et al. (EAST guideline), J Trauma Acute Care Surg 2020</Cite>
+const TURACZYK = <Cite doi={TURACZYK_DOI}>Turaczyk Kolodziej et al., J Surg Res 2024</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: VACCARO_TL_DOI },
@@ -78,6 +84,8 @@ const references: LessonReference[] = [
   { citation: 'Brommeland T, Helseth E, Aarhus M, Moen KG, Dyrskog S, Bergholt B, Olivecrona Z, Jeppesen E. Best practice guidelines for blunt cerebrovascular injury (BCVI). Scand J Trauma Resusc Emerg Med. 2018;26(1):90.', doi: BROMMELAND_DOI },
   { citation: 'Wagner MJ, Hussein I, Low G, Samji KB. Comparing the Denver criteria sets for blunt trauma: a retrospective study of cases in Edmonton, Alberta. Br J Radiol. 2023;96(1148):20221116.', doi: WAGNER_DOI },
   { citation: 'Wáng YXJ, Diacinti D, Yu W, Cheng XG, Nogueira-Barbosa MH, Che-Nordin N, Guglielmi G, Ruiz Santiago F. Semi-quantitative grading and extended semi-quantitative grading for osteoporotic vertebral deformity: a radiographic image database for education and calibration. Ann Transl Med. 2020;8(6):398.', doi: WANG_ATM_DOI },
+  { citation: 'Kim DY, Biffl W, Bokhari F, Brakenridge S, Chao E, Claridge JA, Fraser D, Jawa R, Kasotakis G, Kerwin A, Khan U, Kurek S, Plurad D, Robinson BRH, Stassen N, Tesoriero R, Yorkgitis B, Como JJ. Evaluation and management of blunt cerebrovascular injury: a practice management guideline from the Eastern Association for the Surgery of Trauma. J Trauma Acute Care Surg. 2020;88(6):875-887.', doi: KIM_DOI },
+  { citation: 'Turaczyk Kolodziej DA, Lung M, Lilienthal M, Galet C, Mani V, Skeete D. Shifting perspectives: equal blunt cerebrovascular risk in low- versus high-energy cervical fracture. J Surg Res. 2024;300:63-70.', doi: TURACZYK_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -168,7 +176,8 @@ const learn: LearnSection[] = [
     title: 'Step 5. Vertebral arteries',
     body: (
       <>
-        <p>Some cervical spine injuries put the vertebral arteries at risk. In the expanded Denver screening criteria for blunt cerebrovascular injury, a cervical spine fracture, subluxation or ligamentous injury at any level is a risk factor, C3 and below as much as C1 and C2 ({BURLEW}; {BROMMELAND}; {WAGNER}). The criteria apply to trauma patients with signs or symptoms of blunt cerebrovascular injury, or with a high-energy mechanism and one or more of the risk factors ({BROMMELAND}). After a high-energy injury with a cervical spine injury, say so in the report.</p>
+        <p>Some cervical spine injuries put the vertebral arteries at risk. In the expanded Denver screening criteria for blunt cerebrovascular injury, a cervical spine fracture, subluxation or ligamentous injury at any level is a risk factor, C3 and below as much as C1 and C2 ({BURLEW}; {BROMMELAND}; {WAGNER}). The criteria apply to trauma patients with signs or symptoms of blunt cerebrovascular injury, or with a high-energy mechanism and one or more of the risk factors ({BROMMELAND}). An occipital condyle fracture is its own item in the same list, also with a high-energy mechanism ({BROMMELAND}; {WAGNER}). After a high-energy injury with either, say in the report that the expanded Denver screening criterion is met.</p>
+        <p>After a low-energy injury the risk-factor route as written does not apply, but that alone does not settle whether CT angiography is needed. The EAST guideline recommends screening CT angiography for high-risk cervical spine injuries and conditionally recommends it for low-risk ones ({KIM}); in one retrospective series of cervical spine fractures, blunt cerebrovascular injury rates were similar after low-energy and high-energy mechanisms ({TURACZYK}). So the report raises CT angiography as a consideration, by injury pattern and local trauma protocol. If the history does not give the mechanism, the report says the mechanism requirement cannot be assessed rather than treating it as low energy (this site's rule).</p>
       </>
     ),
   },
@@ -196,7 +205,7 @@ const learn: LearnSection[] = [
     title: 'Step 8. Other findings and the impression',
     body: (
       <>
-        <p>Give each injured level with its type, then the craniocervical measurements that are out of range, then any vertebral artery screening criterion. List the findings from the top of the spine down.</p>
+        <p>Give each injured level with its type, then the craniocervical measurements that are out of range, then any vertebral artery screening criterion or consideration. List the findings from the top of the spine down.</p>
       </>
     ),
   },
@@ -237,6 +246,7 @@ const fields = {
     { value: 'pain', label: 'Pain, no injury given' },
     { value: 'low', label: 'Low-energy injury, such as a fall from standing' },
     { value: 'high', label: 'High-energy injury' },
+    { value: 'unknown', label: 'Injury, mechanism unknown or not documented' },
   ] },
   coverage: { id: 'coverage', kind: 'choice', label: 'Coverage', required: true, options: [
     { value: 'cervical', label: 'Cervical spine' },
@@ -260,6 +270,11 @@ const fields = {
   bdi: { id: 'bdi', kind: 'number', label: 'Basion–dens interval', unit: 'mm', min: 0, max: 40, step: 0.1, showIf: cervicalCovered },
   adi: { id: 'adi', kind: 'number', label: 'Atlantodental interval', unit: 'mm', min: 0, max: 20, step: 0.1, showIf: cervicalCovered, help: 'Adult values on CT.' },
   condyle: { id: 'condyle', kind: 'choice', label: 'Occipital condyle fracture', required: true, showIf: cervicalCovered, options: nonePresent },
+  condyleSide: { id: 'condyle-side', kind: 'choice', label: 'Side', showIf: (v) => cervicalCovered(v) && str(v, 'condyle') === 'present', options: [
+    { value: 'right', label: 'Right' },
+    { value: 'left', label: 'Left' },
+    { value: 'bilateral', label: 'Bilateral' },
+  ] },
   c1: { id: 'c1', kind: 'choice', label: 'C1 fracture', required: true, showIf: cervicalCovered, options: nonePresent },
   c1Overhang: { id: 'c1-overhang', kind: 'number', label: 'Combined lateral mass overhang', unit: 'mm', min: 0, max: 30, step: 0.1, showIf: (v) => cervicalCovered(v) && str(v, 'c1') === 'present', help: 'Both lateral masses of C1 over C2, added together.' },
   dens: { id: 'dens', kind: 'choice', label: 'Odontoid fracture', required: true, showIf: cervicalCovered, options: [
@@ -368,15 +383,22 @@ function injurySentence(item: Injury): string {
 }
 
 /**
- * T5-1: the expanded Denver risk factor "Cervical spine fracture, subluxation or ligamentous injury
- * at any level" (Brommeland 2018; Wagner 2023), as far as this form can see it: any C1 or C2
- * fracture, any subaxial injury (C3 included; a subaxial injury is a fracture, a ligamentous
- * injury or a subluxation), and a fracture into a foramen transversarium.
+ * T5-1: the expanded Denver risk factors "Complex skull fracture/basilar skull fracture/occipital
+ * condyle fracture" and "Cervical spine fracture, subluxation or ligamentous injury at any level"
+ * (Brommeland 2018, Table 3; Wagner 2023, Table 1), as far as this form can see them: an occipital
+ * condyle fracture, any C1 or C2 fracture, any subaxial injury (C3 included; a subaxial injury is
+ * a fracture, a ligamentous injury or a subluxation), and a fracture into a foramen transversarium.
+ *
+ * Nontraumatic or chronic findings: the form records the cervical items only as fractures or
+ * injuries, with no acute or chronic, traumatic or nontraumatic qualifier, so it cannot express a
+ * confirmed nontraumatic or chronic abnormality there. The one nontraumatic finding it records,
+ * vertebral collapse without major trauma (step 6), is not a reason here.
  */
 function denverReasons(values: Values): string[] {
   if (!cervicalCovered(values)) return []
   const cx = injury(values, 'subaxial')
   return [
+    str(values, 'condyle') === 'present' && 'occipital condyle fracture',
     str(values, 'c1') === 'present' && 'C1 fracture',
     !['', 'none'].includes(str(values, 'dens')) && 'odontoid fracture',
     str(values, 'c2') === 'present' && 'C2 fracture',
@@ -385,8 +407,57 @@ function denverReasons(values: Values): string[] {
   ].filter((reason): reason is string => Boolean(reason))
 }
 
-/** T5-1: the risk factors count with a high-energy mechanism (Brommeland 2018). */
-const highEnergy = (values: Values) => str(values, 'history') === 'high'
+type Mechanism = 'high' | 'low' | 'unknown'
+
+/**
+ * T5-1: the risk factors count with a "High-energy transfer mechanism" (Brommeland 2018, Table 3).
+ * The history field maps onto three states: "High-energy injury" is high; "Low-energy injury" is
+ * low; "Injury, mechanism unknown or not documented", "Pain, no injury given" (an injury, if there
+ * was one, is not documented) and no answer are unknown. Unknown is never read as low energy: that
+ * is this site's safeguard (the author's decision B, 2026-10-29), not a quoted rule.
+ */
+function mechanism(values: Values): Mechanism {
+  const history = str(values, 'history')
+  return history === 'high' || history === 'low' ? history : 'unknown'
+}
+
+/**
+ * T5-1, the author's decision B (2026-10-29): only a high-energy mechanism meets the criterion.
+ * After a low-energy injury the output is a separate advisory (the author's wording), so it cannot
+ * be read as "CT angiography not indicated": EAST conditionally recommends CT angiography for
+ * low-risk cervical spine injuries (Kim 2020), and blunt cerebrovascular injury rates were similar
+ * after low- and high-energy cervical fractures (Turaczyk Kolodziej 2024). "Local trauma protocol"
+ * is the author's wording, not a source's.
+ */
+const BCVI_ADVISORY = 'associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol'
+const MECHANISM_UNKNOWN = 'Expanded Denver mechanism requirement cannot be assessed'
+
+/** "Craniocervical injury" when an occipital condyle fracture is among the reasons, otherwise
+ * "Cervical injury" (the author's decision, 2026-10-29: a condyle fracture is a skull base fracture). */
+const injuryNoun = (reasons: string[]) => (reasons.includes('occipital condyle fracture') ? 'Craniocervical injury' : 'Cervical injury')
+
+/** The Denver chip, by mechanism, or undefined when no reason is entered. */
+function denverChip(values: Values): string | undefined {
+  const reasons = denverReasons(values)
+  if (reasons.length === 0) return undefined
+  return {
+    high: `Expanded Denver screening criterion met: ${reasons.join(', ')}`,
+    low: `${injuryNoun(reasons)} ${BCVI_ADVISORY} (${reasons.join(', ')})`,
+    unknown: `${MECHANISM_UNKNOWN}: ${reasons.join(', ')}`,
+  }[mechanism(values)]
+}
+
+/** The Denver impression line, by mechanism. */
+function denverSentence(values: Values): string | undefined {
+  const reasons = denverReasons(values)
+  if (reasons.length === 0) return undefined
+  const list = reasons.join(', ')
+  return {
+    high: `Meets the expanded Denver screening criteria for blunt cerebrovascular injury (${list}).`,
+    low: `${injuryNoun(reasons)} associated with blunt cerebrovascular injury risk (${list}); consider CT angiography according to injury pattern and local trauma protocol.`,
+    unknown: `${injuryNoun(reasons)} (${list}); the mechanism requirement of the expanded Denver screening criteria for blunt cerebrovascular injury cannot be assessed from the history given.`,
+  }[mechanism(values)]
+}
 
 /** T2-1: the CT normal is less than the limit, so a value at the limit is outside it. */
 const atOrOver = (values: Values, id: string, limit: number) => {
@@ -429,11 +500,8 @@ function deriveRegion(region: AoRegion) {
 }
 
 function deriveVessels(values: Values): Derived[] {
-  const reasons = denverReasons(values)
-  if (reasons.length === 0) return []
-  return [highEnergy(values)
-    ? { label: 'Vertebral arteries', value: `Screening criterion met: ${reasons.join(', ')}`, tone: 'warn' }
-    : { label: 'Vertebral arteries', value: `${upperFirst(reasons.join(', '))}: a screening criterion with a high-energy mechanism` }]
+  const chip = denverChip(values)
+  return chip ? [{ label: 'Vertebral arteries', value: chip, tone: 'warn' }] : []
 }
 
 function deriveCollapse(values: Values): Derived[] {
@@ -479,7 +547,8 @@ function cervicalLines(values: Values): (string | false | undefined)[] {
   return [
     bdi !== undefined && `Basion–dens interval: ${bdi} mm`,
     adi !== undefined && `Atlantodental interval: ${adi} mm`,
-    choiceLine(values, fields.condyle),
+    str(values, 'condyle') === 'present' && `Occipital condyle fracture: ${picked(values, fields.condyleSide) || 'present'}`,
+    str(values, 'condyle') === 'none' && choiceLine(values, fields.condyle),
     choiceLine(values, fields.c1, str(values, 'c1') === 'present' && overhang !== undefined && `combined lateral mass overhang ${overhang} mm`),
     choiceLine(values, fields.dens),
     choiceLine(values, fields.c2, str(values, 'c2') === 'present' && str(values, 'c2-text')),
@@ -519,7 +588,7 @@ function findings(values: Values): string[] {
   const adi = atOrOver(values, 'adi', 2)
   if (adi !== undefined) out.push(`Atlantodental interval ${adi} mm; in adults on CT, normal is less than 2 mm.`)
   if (cervicalCovered(values)) {
-    if (str(values, 'condyle') === 'present') out.push('Occipital condyle fracture.')
+    if (str(values, 'condyle') === 'present') out.push({ right: 'Right occipital condyle fracture.', left: 'Left occipital condyle fracture.', bilateral: 'Bilateral occipital condyle fractures.' }[str(values, 'condyle-side')] ?? 'Occipital condyle fracture.')
     if (str(values, 'c1') === 'present') {
       const overhang = num(values, 'c1-overhang')
       out.push(`C1 fracture${overhang !== undefined && overhang > 6.9 ? `, with combined lateral mass overhang of ${overhang} mm, above the 6.9 mm of the rule of Spence; the overhang does not reliably establish transverse ligament injury, which MRI shows directly` : ''}.`)
@@ -530,8 +599,8 @@ function findings(values: Values): string[] {
   }
   const cx = injury(values, 'subaxial')
   if (cx) out.push(injurySentence(cx))
-  const reasons = denverReasons(values)
-  if (reasons.length > 0 && highEnergy(values)) out.push(`Meets the expanded Denver screening criteria for blunt cerebrovascular injury (${reasons.join(', ')}).`)
+  const denver = denverSentence(values)
+  if (denver) out.push(denver)
   const tl = injury(values, 'thoracolumbar')
   if (tl) out.push(injurySentence(tl))
 
@@ -627,7 +696,7 @@ const steps: ReportStep[] = [
     title: 'Step 2. Craniocervical junction and C1–C2',
     learn: 'ccj',
     teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). The rule of Spence, cadaver-derived and applied to open-mouth radiographs, takes a combined C1 lateral-mass overhang over 6.9 mm to suggest transverse ligament disruption ({SPENCE}). Neither 6.9 mm nor the older reassuring 5.7 mm reliably establishes or excludes the injury; on CT the overhang did not correlate with the ligament on MRI, which shows it directly ({WOODS}; {KOPPARAPU}; {RADCLIFF}). Odontoid types I–III ({ANDERSON}).</p>,
-    fields: [fields.bdi, fields.adi, fields.condyle, fields.c1, fields.c1Overhang, fields.dens, fields.c2, fields.c2Text],
+    fields: [fields.bdi, fields.adi, fields.condyle, fields.condyleSide, fields.c1, fields.c1Overhang, fields.dens, fields.c2, fields.c2Text],
     derive: deriveCcj,
   },
   {
@@ -655,7 +724,7 @@ const steps: ReportStep[] = [
     id: 'vessels',
     title: 'Step 5. Vertebral arteries',
     learn: 'vessels',
-    teach: <p>Expanded Denver criteria: with a high-energy mechanism, a cervical spine fracture, subluxation or ligamentous injury at any level ({BURLEW}; {BROMMELAND}; {WAGNER}). Signs or symptoms of blunt cerebrovascular injury are a separate criterion ({BROMMELAND}).</p>,
+    teach: <p>Expanded Denver criteria: with a high-energy mechanism, a cervical spine fracture, subluxation or ligamentous injury at any level, or an occipital condyle fracture ({BURLEW}; {BROMMELAND}; {WAGNER}). Signs or symptoms of blunt cerebrovascular injury are a separate criterion ({BROMMELAND}). After a low-energy injury CT angiography is still a consideration: EAST conditionally recommends it for low-risk cervical spine injuries ({KIM}; {TURACZYK}). An unknown mechanism is not read as low energy (this site's rule).</p>,
     fields: [fields.foramen],
     derive: deriveVessels,
   },
@@ -687,7 +756,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open papers, except one that is still unchecked: whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open papers, except one that is still unchecked: whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
   references,
   report: {
     steps,
