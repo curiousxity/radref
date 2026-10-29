@@ -129,6 +129,14 @@ describe('registry', () => {
     expect(relatedTo('/studies/skull-base').map((item) => item.path)).toContain('/skull-base')
   })
 
+  test('the brachial plexus study links to the 3D brachial plexus, both ways, and is listed under Shoulder too', () => {
+    expect(relatedTo('/brachial-plexus').map((item) => item.path)).toContain('/studies/brachial-plexus')
+    expect(relatedTo('/studies/brachial-plexus').map((item) => item.path)).toContain('/brachial-plexus')
+    for (const region of ['Spine', 'Shoulder'] as const) {
+      expect(regionGroups(region).flatMap(({ items }) => items.map((item) => item.path)), region).toContain('/studies/brachial-plexus')
+    }
+  })
+
   test('the elbow studies and the Mason calculator link to the 3D elbow', () => {
     const elbow = relatedTo('/elbow').map((item) => item.path)
     expect(elbow).toContain('/studies/elbow-mri')
