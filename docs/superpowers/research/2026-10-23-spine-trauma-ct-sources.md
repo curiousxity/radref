@@ -238,3 +238,63 @@ Not changed, for the author:
 Applied: the study's source note now names only the exact 1 cm / 40% facet boundary (AO-6) as unchecked
 (still "Unchecked draft"); the header comment and test labels say the same; the test pins 18 references.
 Status: T2-2 and T5-1 verified; T6-1's boundaries verified.
+
+### Second round, 2026-10-29: decisions B and D
+
+Decision C (AO Spine "+") is in `2026-10-23-spine-calculators-sources.md`. Brommeland 2018 and Wagner 2023
+re-read in full text (Europe PMC XML); Kim 2020 (EAST) and Turaczyk Kolodziej 2024 read in their PubMed
+abstracts (Kim also on the journal's abstract page; full text paywalled, the EAST site returned 403).
+References checked on Crossref.
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| T5-1 (B) | Keep the expanded Denver criterion as Brommeland's Table 3 structures it (high-energy mechanism with the risk factor; signs or symptoms a separate route), but make the low-energy output impossible to read as "CTA not indicated"; never treat an unknown mechanism as low energy. | History gains the option "Injury, mechanism unknown or not documented". Mapping: "High-energy injury" → high; "Low-energy injury, such as a fall from standing" → low; "Injury, mechanism unknown or not documented", "Pain, no injury given" and no answer → unknown. Chip (step 5), high: "Expanded Denver screening criterion met: [items]" (was "Screening criterion met: ..."); impression unchanged, "Meets the expanded Denver screening criteria for blunt cerebrovascular injury ([items])." Low: chip "Cervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol ([items])" (was "[items]: a screening criterion with a high-energy mechanism", with nothing in the impression); impression "Cervical injury associated with blunt cerebrovascular injury risk ([items]); consider CT angiography according to injury pattern and local trauma protocol." Unknown: chip "Expanded Denver mechanism requirement cannot be assessed: [items]"; impression "Cervical injury ([items]); the mechanism requirement of the expanded Denver screening criteria for blunt cerebrovascular injury cannot be assessed from the history given." Lesson step 5: a new paragraph, "After a low-energy injury the risk-factor route as written does not apply, but that alone does not settle whether CT angiography is needed. The EAST guideline recommends screening CT angiography for high-risk cervical spine injuries and conditionally recommends it for low-risk ones ({KIM}); in one retrospective series of cervical spine fractures, blunt cerebrovascular injury rates were similar after low-energy and high-energy mechanisms ({TURACZYK}). So the report raises CT angiography as a consideration, by injury pattern and local trauma protocol. If the history does not give the mechanism, the report says the mechanism requirement cannot be assessed rather than treating it as low energy (this site's rule)." Teach line and step 8 follow. |
+| T5-1 (B), nontraumatic or chronic | Do not trigger the screening output from a confirmed nontraumatic or chronic finding alone. | Not expressible: the cervical items (condyle, C1, odontoid, C2, subaxial, foramen) are recorded only as fractures or injuries, with no acute/chronic or traumatic/nontraumatic qualifier. The one nontraumatic finding the form records, "Vertebral collapse without major trauma" (step 6), never feeds the Denver logic; a test pins that. Noted in the `denverReasons` comment. |
+| T5-1 (D) | Occipital condyle fracture as a Denver item, with the same mechanism handling. | The form already asked "Occipital condyle fracture" (step 2, none/present) but did not count it. `denverReasons` now lists "occipital condyle fracture" first; high → "Expanded Denver screening criterion met: occipital condyle fracture"; low → the advisory; unknown → cannot be assessed. A "Side" question (right, left, bilateral) appears when it is present; findings "Occipital condyle fracture: left" ("present" when no side is given), impression "Left occipital condyle fracture." / "Bilateral occipital condyle fractures.". Lesson and teach line add: "An occipital condyle fracture is its own item in the same list, also with a high-energy mechanism ({BROMMELAND}; {WAGNER})." |
+
+Quotes relied on:
+
+- Brommeland 2018 (PMC6206718), re-read: "These criteria apply to trauma patients with signs or symptoms
+  of BCVI or a high-energy trauma mechanism with one or more of the risk factors listed in Table 3." Table
+  3, "Risk factors for BVCI", "(High-energy transfer mechanism with):", lists "Complex skull
+  fracture/basilar skull fracture/occipital condyle fracture" and "Cervical spine fracture, subluxation
+  or ligamentous injury at any level".
+- Wagner 2023 (PMC10392660), re-read: Table 1 has "Complex skull fracture/basilar skull fracture/occipital
+  condyle fracture" in the Denver, modified Denver and expanded Denver columns ("Blunt trauma victims
+  positive for one or more criteria are recommended to have CT angiography").
+- Kim DY, et al. (EAST) 2020, abstract (PubMed and the journal's abstract page): "Among patients with
+  high-risk cervical spine injuries, we recommend screening computed tomography angiography to detect
+  BCVI. For patients with low-risk risk cervical injuries, we conditionally recommend performing a
+  computed tomography angiography to detect BCVI." Also: "We recommend using a screening protocol to
+  detect BCVI in blunt polytrauma patients." Methods: GRADE; "Guidelines, Level III".
+- Turaczyk Kolodziej DA, et al. 2024, abstract: "Clinical implications of screening for blunt
+  cerebrovascular injury (BCVI) after low-energy mechanisms of injury (LEMI) remain unclear"; "LEMI and
+  HEMI groups presented similar BCVI rates (12.6% versus 14.4%; P = 0.640)"; "BCVI rates were similar
+  between HEMI and LEMI groups when screening based on cervical spine fractures." (Retrospective, one
+  centre; 25 LEMI and 95 HEMI patients with BCVI; it excluded "single spinous process, osteophyte, and
+  chronic fractures".)
+
+Not stated by a source I could read, kept as the site's own:
+
+- "Case by case": the EAST abstract says "conditionally recommend"; its definition of low-risk against
+  high-risk cervical spine injuries and any "case by case" wording are in the paywalled full text (not
+  read). EAST's "low-risk" is about the injury pattern, not the mechanism; the page cites it only for
+  "consider CT angiography according to injury pattern", and Turaczyk Kolodziej for the mechanism.
+- "Local trauma protocol": the author's wording. EAST recommends "a screening protocol" but does not say
+  "local".
+- The unknown-mechanism rule (cannot be assessed, never read as low energy): this site's safeguard, said
+  in the code comment and labelled "this site's rule" on the page, with no citation.
+- The advisory names a condyle fracture "cervical injury" (the author's fixed wording); the form treats
+  the craniocervical junction as part of the cervical study (step 2).
+
+New references (cited on the page, Crossref-checked):
+
+| # | Citation | PMID | DOI | Read |
+|---|---|---|---|---|
+| T-R19 | Kim DY, Biffl W, Bokhari F, Brakenridge S, Chao E, Claridge JA, Fraser D, Jawa R, Kasotakis G, Kerwin A, Khan U, Kurek S, Plurad D, Robinson BRH, Stassen N, Tesoriero R, Yorkgitis B, Como JJ. Evaluation and management of blunt cerebrovascular injury: a practice management guideline from the Eastern Association for the Surgery of Trauma. J Trauma Acute Care Surg. 2020;88(6):875-887. (Erratum: 2020;89(2):420, doi:10.1097/TA.0000000000002828.) | 32176167 | 10.1097/TA.0000000000002668 | Abstract |
+| T-R20 | Turaczyk Kolodziej DA, Lung M, Lilienthal M, Galet C, Mani V, Skeete D. Shifting perspectives: equal blunt cerebrovascular risk in low- versus high-energy cervical fracture. J Surg Res. 2024;300:63-70. | 38795674 | 10.1016/j.jss.2024.04.058 | Abstract |
+
+Applied: the header comment names the second round; the test pins 20 references and has cases for each
+mechanism (high, low, unknown, "pain", no answer), the condyle fracture with each mechanism, and a
+nontraumatic collapse raising nothing. The source note is unchanged (still "Unchecked draft" for the
+exact 1 cm / 40% facet boundary, AO-6).

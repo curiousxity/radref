@@ -21,14 +21,15 @@ describe('spine trauma CT lesson', () => {
 
   // The references are matched (each has a DOI). One claim is still unchecked (AO-6, the exact
   // 1 cm / 40% facet boundary), so the note keeps saying so; the expanded Denver criteria (T5-1)
-  // are settled (the author's decisions, 2026-10-29). Ten cited papers plus eight open ones:
-  // Alves 2020, Wáng 2024, and for the decisions of 2026-10-29 Radcliff 2013, Woods 2018,
-  // Kopparapu 2022 (rule of Spence), Brommeland 2018, Wagner 2023 (Denver), Wáng 2020 (Genant).
+  // are settled (the author's decisions, 2026-10-29). Ten cited papers plus ten more: Alves 2020,
+  // Wáng 2024, and for the decisions of 2026-10-29 Radcliff 2013, Woods 2018, Kopparapu 2022 (rule
+  // of Spence), Brommeland 2018, Wagner 2023 (Denver), Wáng 2020 (Genant), and for their second
+  // round Kim 2020 (the EAST guideline) and Turaczyk Kolodziej 2024 (the low-energy advisory).
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
     expect(study.sourceNote).toMatch(/1 cm or 40%/)
     expect(study.sourceNote).not.toMatch(/Denver/)
-    expect(study.references).toHaveLength(18)
+    expect(study.references).toHaveLength(20)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
     // T-R8: the author list was wrong after Laredo (it read Lakhdar F ... Champsaur P, Morvan G).
     expect(study.references.map((ref) => ref.citation)).toContain('Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.')
@@ -173,19 +174,79 @@ describe('spine trauma CT rules (unchecked)', () => {
   // mechanism.
   test('vertebral artery screening criteria', () => {
     const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
-    expect(vessels({ ...normal, foramen: 'yes' })).toBe('Screening criterion met: fracture into a foramen transversarium')
-    expect(vessels({ ...normal, c1: 'present' })).toBe('Screening criterion met: C1 fracture')
-    expect(vessels({ ...normal, dens: 'II', c2: 'present' })).toBe('Screening criterion met: odontoid fracture, C2 fracture')
-    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' })).toBe('Screening criterion met: subaxial cervical injury at C3')
-    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C6', 'cx-type': 'A0' })).toBe('Screening criterion met: subaxial cervical injury at C6')
-    expect(vessels({ ...normal, cx: 'present', 'cx-facet-left': 'F4' })).toBe('Screening criterion met: subaxial cervical injury')
-    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C5–C6', 'cx-type': 'B2' })).toBe('Screening criterion met: subaxial cervical injury at C5–C6')
+    expect(vessels({ ...normal, foramen: 'yes' })).toBe('Expanded Denver screening criterion met: fracture into a foramen transversarium')
+    expect(vessels({ ...normal, c1: 'present' })).toBe('Expanded Denver screening criterion met: C1 fracture')
+    expect(vessels({ ...normal, dens: 'II', c2: 'present' })).toBe('Expanded Denver screening criterion met: odontoid fracture, C2 fracture')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' })).toBe('Expanded Denver screening criterion met: subaxial cervical injury at C3')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C6', 'cx-type': 'A0' })).toBe('Expanded Denver screening criterion met: subaxial cervical injury at C6')
+    expect(vessels({ ...normal, cx: 'present', 'cx-facet-left': 'F4' })).toBe('Expanded Denver screening criterion met: subaxial cervical injury')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C5–C6', 'cx-type': 'B2' })).toBe('Expanded Denver screening criterion met: subaxial cervical injury at C5–C6')
     expect(impressionOf({ ...normal, cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' }).split('\n')[1]).toBe('Meets the expanded Denver screening criteria for blunt cerebrovascular injury (subaxial cervical injury at C3).')
-    // Without a high-energy mechanism the injury is shown, but not as a criterion met.
-    expect(vessels({ ...normal, history: 'low', c1: 'present' })).toBe('C1 fracture: a screening criterion with a high-energy mechanism')
-    expect(impressionOf({ ...normal, history: 'low', c1: 'present' })).toBe('C1 fracture.')
     expect(vessels({ ...normal, tl: 'present', 'tl-type': 'A1' })).toBeUndefined()
     expect(vessels(normal)).toBeUndefined()
+  })
+
+  // The author's decision B, 2026-10-29 (second round): keep the criterion as Brommeland's Table 3
+  // has it ("Risk factors for BVCI (High-energy transfer mechanism with): ..."), but after a
+  // low-energy injury give a separate advisory, so the output cannot be read as "CT angiography not
+  // indicated". It said "C1 fracture: a screening criterion with a high-energy mechanism" and the
+  // impression said nothing. EAST (Kim 2020, abstract): "For patients with low-risk risk cervical
+  // injuries, we conditionally recommend performing a computed tomography angiography to detect
+  // BCVI"; Turaczyk Kolodziej 2024 (abstract): "BCVI rates were similar between HEMI and LEMI
+  // groups when screening based on cervical spine fractures."
+  test('Denver by mechanism: high-energy meets the criterion', () => {
+    const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
+    expect(vessels({ ...normal, history: 'high', c1: 'present' })).toBe('Expanded Denver screening criterion met: C1 fracture')
+    expect(impressionOf({ ...normal, history: 'high', c1: 'present' })).toBe('C1 fracture.\nMeets the expanded Denver screening criteria for blunt cerebrovascular injury (C1 fracture).')
+  })
+
+  test('Denver by mechanism: low-energy gives an advisory, never "criterion met" and never silence', () => {
+    const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
+    const low = { ...normal, history: 'low', cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' }
+    expect(vessels(low)).toBe('Cervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol (subaxial cervical injury at C3)')
+    expect(vessels(low)).not.toMatch(/criterion met|not indicated|not met/i)
+    const impression = impressionOf(low)
+    expect(impression.split('\n')[1]).toBe('Cervical injury associated with blunt cerebrovascular injury risk (subaxial cervical injury at C3); consider CT angiography according to injury pattern and local trauma protocol.')
+    expect(impression).not.toMatch(/Meets the expanded Denver/)
+  })
+
+  // The site's safeguard (decision B), not a quoted rule: an unknown or undocumented mechanism is
+  // not read as low energy. "Pain, no injury given" and no answer count as unknown.
+  test('Denver by mechanism: unknown or not documented cannot be assessed', () => {
+    const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
+    for (const history of ['unknown', 'pain', '']) {
+      const values = { ...normal, history, c1: 'present' }
+      expect(vessels(values), history).toBe('Expanded Denver mechanism requirement cannot be assessed: C1 fracture')
+      expect(impressionOf(values), history).not.toMatch(/Meets the expanded Denver|consider CT angiography/)
+    }
+    expect(impressionOf({ ...normal, history: 'unknown', c1: 'present' })).toBe('C1 fracture.\nCervical injury (C1 fracture); the mechanism requirement of the expanded Denver screening criteria for blunt cerebrovascular injury cannot be assessed from the history given.')
+    expect(report(study, { ...normal, history: 'unknown' }).text).toContain('History: injury, mechanism unknown or not documented')
+  })
+
+  // The nontraumatic finding the form records (vertebral collapse without major trauma) raises no
+  // Denver output; the form has no chronic or nontraumatic qualifier for the cervical items.
+  test('Denver: a nontraumatic collapse alone raises nothing', () => {
+    const values = { ...normal, history: 'pain', collapse: 'present', 'collapse-level': 'C5', 'height-loss': '30' }
+    expect(chips(study, 'vessels', values)['Vertebral arteries']).toBeUndefined()
+    expect(impressionOf(values)).not.toMatch(/Denver|angiography/)
+  })
+
+  // The author's decision D, 2026-10-29: Brommeland 2018, Table 3, and Wagner 2023, Table 1, list
+  // "Complex skull fracture/basilar skull fracture/occipital condyle fracture" with the high-energy
+  // risk factors. The form asked about a condyle fracture but did not count it; it now does, with
+  // the same mechanism handling.
+  test('occipital condyle fracture as a Denver item, by mechanism', () => {
+    const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
+    const condyle = { ...normal, condyle: 'present', 'condyle-side': 'left' }
+    expect(vessels({ ...condyle, history: 'high' })).toBe('Expanded Denver screening criterion met: occipital condyle fracture')
+    expect(impressionOf({ ...condyle, history: 'high' })).toBe('Left occipital condyle fracture.\nMeets the expanded Denver screening criteria for blunt cerebrovascular injury (occipital condyle fracture).')
+    expect(vessels({ ...condyle, history: 'low' })).toBe('Cervical injury associated with BCVI risk; consider CTA according to injury pattern and local trauma protocol (occipital condyle fracture)')
+    expect(vessels({ ...condyle, history: 'unknown' })).toBe('Expanded Denver mechanism requirement cannot be assessed: occipital condyle fracture')
+    expect(vessels({ ...condyle, history: 'pain' })).toBe('Expanded Denver mechanism requirement cannot be assessed: occipital condyle fracture')
+    expect(report(study, condyle).text).toContain('Occipital condyle fracture: left')
+    expect(report(study, { ...normal, condyle: 'present' }).text).toContain('Occipital condyle fracture: present')
+    expect(impressionOf({ ...normal, condyle: 'present', 'condyle-side': 'bilateral' }).split('\n')[0]).toBe('Bilateral occipital condyle fractures.')
+    expect(report(study, normal).text).toContain('Occipital condyle fracture: none')
   })
 
   // AO-1 to AO-7 via the shared logic, and AO-10: the ankylosed spine modifier by region.
