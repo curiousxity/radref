@@ -273,9 +273,11 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/foot-mri`). Every paper and 
   coalition and accessory navicular wording follow Newman and Miller.
 - [x] Open sources (2026-10-29, "Fifth check" in the foot sources doc): F3-4, F4-1, F4-2, F5-1 to F5-3,
   F6-2 and F7-1 are now cited beside the originals; F3-1 was already settled.
-- [ ] Still unchecked: the irregular coalition margins (F2-3). For the author: "(the latter at the
-  middle facet)" (Marth 2024: middle facet alone in 10.7%, middle and posterior in 50%), and
-  sesamoid oedema "fits sesamoiditis" (also stress reaction or early osteonecrosis).
+- [x] Decided by the author 2026-10-29: talocalcaneal coalition "commonly involves the middle facet
+  and may involve both the middle and posterior facets" (Marth 2024 added, its counts given as a
+  cohort finding); sesamoid marrow oedema is nonspecific (sesamoiditis, stress reaction or fracture,
+  early osteonecrosis), cited to Nwawka and Burge; Myerson type D added as a later proposal.
+- [ ] Still unchecked: the irregular coalition margins (F2-3; needs Newman 2000) and MY-6.
 
 ### Diabetic foot MRI study
 
@@ -387,9 +389,13 @@ claim is in `docs/superpowers/research/2026-10-23-foot-calculators-sources.md`.
 - [x] Open sources (2026-10-29, "Fourth check" in the foot calculators sources doc): Myerson MY-1 to MY-5
   (Diebal 2013, Tzatzairis 2019); HK-4, HK-6, HK-8, SA-2, SA-5 and the 2 mm were already settled.
   The Sanders page no longer says "Unchecked draft".
-- [ ] Still unchecked: MY-6 (needs Myerson 1986) and HK-5. For the author: Hawkins type IV
-  (Alton: body dislocated from the ankle or subtalar joint, plus the talonavicular; the page says
-  both), and reviews that word Myerson A, B2 and C1 differently.
+- [x] Decided by the author 2026-10-29: Hawkins IV keeps subtalar and tibiotalar dislocation plus
+  the talonavicular, from Alton's Fig. 1 legend (its text says "ankle or subtalar"), which also
+  settles HK-5; the Hawkins page no longer says "Unchecked draft". Myerson A, B2 and C1 reworded
+  to the anatomy; type D added as a separately labelled later proposal (Moracia-Ochagavía 2019,
+  Hammad 2026).
+- [ ] Still unchecked: MY-6 (needs Myerson 1986). Myerson B2's "first tarsometatarsal joint in
+  place" is read from the tables (metatarsals 2–5 only) rather than stated in words.
 
 ### Pediatric elbow radiographs
 

@@ -4,15 +4,18 @@
  *
  * Unchecked draft: the paper is matched on PubMed (PMID 3710321) but paywalled, and its abstract
  * does not give the types. The five types are checked against the tables in Diebal et al. (Sports
- * Health 2013) and Tzatzairis et al. (World J Orthop 2019); whether the paper names any further
- * pattern (MY-6) is still unchecked (claims MY-1 to MY-6 in
- * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * Health 2013) and Tzatzairis et al. (World J Orthop 2019), and the A, B2 and C1 wording follows
+ * the author's decision of 2026-10-29 as far as those tables support it; whether the paper names
+ * any further pattern (MY-6) is still unchecked (claims MY-1 to MY-6 in
+ * docs/superpowers/research/2026-10-23-foot-calculators-sources.md). The later proposed type D
+ * for subtle injuries is not part of the 1986 types and is not output here; the page and the
+ * study describe it in a note.
  */
 
 /** How the first metatarsal is displaced at its tarsometatarsal joint. */
 export type FirstRay = 'none' | 'medial' | 'with-lesser'
 
-/** How many of the second to fifth metatarsals are displaced (laterally or dorsoplantar). */
+/** How many of the second to fifth metatarsals are displaced (laterally, or with the first in type A). */
 export type LesserRays = 'none' | 'some' | 'all'
 
 export type MyersonInput = { first: FirstRay; lesser: LesserRays }
@@ -22,11 +25,16 @@ export type MyersonType = 'A' | 'B1' | 'B2' | 'C1' | 'C2'
 export const myersonTypes: MyersonType[] = ['A', 'B1', 'B2', 'C1', 'C2']
 
 export const myersonDescriptions: Record<MyersonType, string> = {
-  A: 'all five metatarsals displaced in one direction, laterally or dorsoplantar (homolateral)', // MY-1
+  // MY-1, Tzatzairis: "Dislocation of M1-M5 in the same direction". Was "in one direction,
+  // laterally or dorsoplantar (homolateral)"; open sources differ on the direction (MY-1 note).
+  A: 'all five metatarsals displaced together in the same direction',
   B1: 'the first metatarsal displaced medially', // MY-2
-  B2: 'one or more of the lesser metatarsals displaced laterally', // MY-2
-  C1: 'the first metatarsal displaced medially and some of the lesser metatarsals laterally', // MY-3
-  C2: 'the first metatarsal displaced medially and all the lesser metatarsals laterally', // MY-3
+  // MY-2, Diebal: "Lateral dislocations—involving any of the 4 lateral metatarsals"; the first is
+  // B1's alone ("involving only the M1 joint", Tzatzairis).
+  B2: 'one or more of metatarsals 2 to 5 displaced laterally (partial lateral incongruity), with the first tarsometatarsal joint in place',
+  // MY-3, Tzatzairis: "Divergent, incomplete dislocation involving M1 and some of the lateral metatarsals".
+  C1: 'the first metatarsal displaced medially and some, but not all, of metatarsals 2 to 5 laterally (partial divergence)',
+  C2: 'the first metatarsal displaced medially and all of metatarsals 2 to 5 laterally', // MY-3
 }
 
 const groups: Record<string, string> = { A: 'total incongruity', B: 'partial incongruity', C: 'divergent' }

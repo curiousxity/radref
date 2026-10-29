@@ -259,3 +259,31 @@ any pattern beyond A to C2 (MY-6).
 Needs a browser: https://pubs.rsna.org/doi/full/10.1148/radiographics.20.2.g00mc03321 (Newman,
 irregular joint margins, F2-3) and https://pubs.rsna.org/doi/full/10.1148/radiographics.21.6.g01nv071425
 (Ashman, F4-1, F4-2, F7-1 as cited) both returned 403.
+
+## The author's decisions, 2026-10-29
+
+New references, read in full from Europe PMC (`fullTextXML`), checked against Crossref and cited
+on the page (27 in all; the test pins 27):
+
+- Marth AA, Feuerriegel GC, Marcus RP, Sutter R. How accurate is MRI for diagnosing tarsal
+  coalitions? A retrospective diagnostic accuracy study. Eur Radiol. 2024;34(5):3493-3502.
+  doi:10.1007/s00330-023-10304-z (PMC11126476). Published online 2023; the issue is 2024.
+- Moracia-Ochagavía I, Rodríguez-Merchán EC. Lisfranc fracture-dislocations: current management.
+  EFORT Open Rev. 2019;4(7):430-444. doi:10.1302/2058-5241.4.180076 (PMC6667981).
+- Hammad A, Ahmad Y, Abdelnour J, Tscholl P. Lisfranc injuries: latest updates on diagnostics and
+  management. Transl Sports Med. 2026;2026:3933956. doi:10.1155/tsm2/3933956 (PMC12782322).
+
+The Hawkins and Myerson decisions (items 20 to 22) are set out in
+`2026-10-23-foot-calculators-sources.md`, same heading; the study uses the shared logic, so its
+Hawkins and Myerson tables, fields and impression sentences follow.
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| F2-3 (item 18) | Replace the exclusive "at the middle facet". Marth's percentages are of all 56 coalitions in the study, not of the talocalcaneal ones: text, "Talocalcaneal coalitions were located either in the middle facet (10.7%), in the middle and posterior facet (50.0%), or in the posterior facet only (5.3%)"; Table 2 (coalition group n = 56), "Talocalcaneal coalition 37 (66.1) Middle facet 6 (10.7) Middle and posterior facet 28 (50.0) Posterior facet 3 (5.4)" (the text rounds 3/56 to 5.3%, the table to 5.4%). So of 37 talocalcaneal coalitions, 34 involved the middle facet and 31 the posterior. Fig. 2: "a talocalcaneal coalition in posterior location ... The coalition in this location was missed by all three readers". Szaro 2020: "between the middle facet of the talus and the calcaneus". | Step 2: "Calcaneonavicular and talocalcaneal coalitions are encountered most frequently (Newman; Szaro). Talocalcaneal coalition commonly involves the middle facet and may involve both the middle and posterior facets; isolated posterior-facet coalitions also occur (Szaro; Marth). Of the 37 talocalcaneal coalitions in Marth's MRI cohort, 28 involved the middle and posterior facets, 6 the middle facet alone and 3 the posterior facet alone; a posterior coalition was the one case missed by all three readers (Marth)." The counts are given as Marth's cohort, not as prevalence. Teach line likewise. The option "Talocalcaneal (middle facet)" is now "Talocalcaneal", so the impression reads "Talocalcaneal coalition, non-osseous." (test updated). Irregular joint margins stay unchecked. |
+| F5-3 (item 19) | Sesamoid marrow edema is not specific; don't label it sesamoiditis. Nwawka 2013: "On MRI, both sesamoiditis and osteonecrosis may show changes in the pattern of bone-marrow oedema isolated to the sesamoid ... CT may be useful in differentiating between these two entities, as subtle increases in sclerosis detected on CT would favour a diagnosis of osteonecrosis"; Table 3, osteonecrosis: "bone marrow oedema pattern (early)"; Fig. 10 legend: "These results suggest bony sesamoiditis or stress reaction"; "Chronic pain can be caused by stress fracture, stress reaction, osteoarthritis and osteonecrosis of the sesamoids"; Fig. 7 legend, sesamoiditis with "no diastasis, fragmentation or sclerosis"; Fig. 11 legend, "a fragmented medial hallucal sesamoid ... which suggests post-traumatic osteonecrosis"; abstract, imaging "should be used in concert with clinical findings". Burge 2012: "Imaging manifestations of sesamoid injury depend on the nature of pathology and commonly overlap. Sesamoid stress reaction and sesamoiditis both manifest as hyperintense signal on fluid sensitive images"; "On MRI, the low-intensity fracture line is surrounded by marrow edema signal"; osteonecrosis displays "mixed edema and sclerosis". | Step 5: "Sesamoid marrow edema is not specific: it may reflect sesamoiditis, a stress reaction or stress fracture, or early osteonecrosis, and on MRI early osteonecrosis can look the same as sesamoiditis. Look for a fracture line, sclerosis and fragmentation, and correlate with the clinical findings (Nwawka; Burge)." (Was "Marrow edema without a fracture line fits sesamoiditis", cited with Sanders and Rathur, whose full text is unread; the new sentence is cited to the two papers that state it.) Option "Marrow edema, no fracture (sesamoiditis)" is now "Marrow edema, no fracture line"; impression "Marrow edema in the medial (tibial) sesamoid, without a fracture line: sesamoiditis, stress reaction or early osteonecrosis." (was "..., without fracture (sesamoiditis)."). Teach line adds the differential. There is no sesamoid chip. Not changed (outside this file): the caption of the `sesamoiditis` scan in `src/data/scans/footMri.ts` still ends "in favour of medial hallux sesamoiditis", which describes that case. |
+| F2-1 (item 20) | Hawkins IV names all three joints (calculators doc). | Follows from the shared logic. |
+| F3-4 (items 21, 22) | Myerson A, B2 and C1 standardised; type D added as a later proposal (calculators doc). | The study's Myerson table, field labels and impression follow the shared logic. Step 3 adds the type D note (Moracia-Ochagavía and Rodríguez-Merchán; Hammad), with the medial cuneiform–second metatarsal interval and the weight-bearing caveat; the teach panel adds a one-line version. The report field gives types A to C2 only. |
+
+Still unchecked, so the study keeps "Unchecked draft": irregular joint margins as a sign of
+tarsal coalition (F2-3), and whether Myerson named any pattern beyond A to C2 (MY-6). The source
+note is unchanged.

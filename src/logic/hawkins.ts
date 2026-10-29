@@ -4,9 +4,11 @@
  * calculator and the foot MRI study.
  *
  * Both papers are matched on PubMed (PMIDs 5479485, 417084) but paywalled. The four types, the
- * joints and the Hawkins sign are checked against Alton, Patton and Gee's review (Clin Orthop
- * Relat Res 2015; claims HK-1 to HK-8 in
- * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
+ * joints, the cumulative reading of the types (HK-5, from the review's classification figure) and
+ * the Hawkins sign are checked against Alton, Patton and Gee's review (Clin Orthop Relat Res 2015;
+ * claims HK-1 to HK-8 in docs/superpowers/research/2026-10-23-foot-calculators-sources.md). Type IV
+ * follows the review's figure, which lists all three joints; its text says "ankle or subtalar"
+ * (the author's decision, 2026-10-29).
  */
 
 /** Whether the fracture is displaced, and which joints around the talus are subluxed or dislocated. */
@@ -27,7 +29,10 @@ export const hawkinsDescriptions: Record<HawkinsType, string> = {
   I: 'undisplaced or minimally displaced fracture of the talar neck, with the subtalar and ankle joints in place',
   II: 'displaced fracture with subluxation or dislocation of the subtalar joint; the ankle joint is in place', // HK-2
   III: 'displaced fracture with the talar body dislocated from both the subtalar and the ankle joint', // HK-3
-  IV: 'as type III, with subluxation or dislocation of the talar head at the talonavicular joint', // HK-4
+  // HK-4, Alton's Fig. 1: "Type IV is a talar neck fracture with subtalar, tibiotalar, and
+  // talonavicular dislocations"; the text: "dislocation or subluxation of the head of the talus
+  // from the talonavicular joint".
+  IV: 'displaced fracture with subtalar and tibiotalar (ankle) dislocation, plus subluxation or dislocation of the talar head at the talonavicular joint',
 }
 
 const jointOf: Record<Exclude<HawkinsType, 'I'>, keyof HawkinsInput> = {
@@ -48,8 +53,9 @@ export function hawkins(input: HawkinsInput): HawkinsType | undefined {
 }
 
 /**
- * HK-5: each type includes the joint injuries of the types before it. The earlier types
- * whose joint is not marked, for a "check" note.
+ * HK-5: each type includes the joint injuries of the types before it (Alton's Fig. 1: type II
+ * subtalar; III subtalar and tibiotalar; IV subtalar, tibiotalar and talonavicular). The earlier
+ * types whose joint is not marked, for a "check" note (the site's handling).
  */
 export function hawkinsGaps(input: HawkinsInput): HawkinsType[] {
   const type = hawkins(input)

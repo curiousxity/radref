@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { hawkins, hawkinsDescriptions, hawkinsGaps, hawkinsSentence, hawkinsTypes } from './hawkins'
-import { myerson, myersonGroup, myersonSentence, myersonTypes } from './myerson'
+import { myerson, myersonDescriptions, myersonGroup, myersonSentence, myersonTypes } from './myerson'
 import { sanders, sandersDescription, sandersGroup, sandersSentence, sandersTypes } from './sanders'
 
 /*
@@ -10,7 +10,7 @@ import { sanders, sandersDescription, sandersGroup, sandersSentence, sandersType
  * rest of the wording is still from memory.
  */
 
-describe('Hawkins (unchecked)', () => {
+describe('Hawkins', () => {
   test('each type from its joints', () => {
     // HK-1: "Type I injuries include vertical fractures of the neck of the talus with a minimally
     // displaced fracture line" (Alton et al. 2015)."
@@ -20,7 +20,8 @@ describe('Hawkins (unchecked)', () => {
     expect(hawkins({ displaced: true, subtalar: true })).toBe('II')
     // HK-3: "Type III: the body dislocated from both the subtalar and the ankle joint."
     expect(hawkins({ displaced: true, subtalar: true, ankle: true })).toBe('III')
-    // HK-4: "Type IV (Canale and Kelly): type III with talonavicular subluxation or dislocation."
+    // HK-4: "Type IV is a talar neck fracture with subtalar, tibiotalar, and talonavicular
+    // dislocations" (Alton et al. 2015, Fig. 1).
     expect(hawkins({ displaced: true, subtalar: true, ankle: true, talonavicular: true })).toBe('IV')
   })
 
@@ -35,7 +36,10 @@ describe('Hawkins (unchecked)', () => {
     expect(hawkinsGaps({ displaced: true })).toEqual([])
   })
 
-  // HK-5: "Each type includes the joint injuries of the types before it."
+  // HK-5: each type includes the joint injuries of the types before it. Alton et al. 2015, Fig. 1:
+  // "(B) Type II is a talar neck fracture with subtalar dislocation", "(C) Type III is a talar neck
+  // fracture with subtalar and tibiotalar dislocations", "(D) Type IV ... with subtalar,
+  // tibiotalar, and talonavicular dislocations". Listing the unmarked ones is the site's handling.
   test('the highest type wins, and the unmarked earlier types are listed', () => {
     expect(hawkins({ displaced: true, ankle: true })).toBe('III')
     expect(hawkinsGaps({ displaced: true, ankle: true })).toEqual(['II'])
@@ -47,6 +51,9 @@ describe('Hawkins (unchecked)', () => {
     for (const type of hawkinsTypes) expect(hawkinsDescriptions[type]).toBeTruthy()
     // Was "undisplaced"; the review says "minimally displaced", with both joints reduced.
     expect(hawkinsSentence('I')).toBe('Talar neck fracture, Hawkins type I: undisplaced or minimally displaced fracture of the talar neck, with the subtalar and ankle joints in place.')
+    // The author's decision (2026-10-29): type IV names all three joints, as Alton's figure does.
+    // Was "as type III, with subluxation or dislocation of the talar head at the talonavicular joint".
+    expect(hawkinsDescriptions.IV).toBe('displaced fracture with subtalar and tibiotalar (ankle) dislocation, plus subluxation or dislocation of the talar head at the talonavicular joint')
   })
 })
 
@@ -92,13 +99,16 @@ describe('Sanders (unchecked)', () => {
 
 describe('Myerson (unchecked)', () => {
   test('each type from the displacement pattern', () => {
-    // MY-1: "Type A: total incongruity, all five metatarsals displaced in one direction."
+    // MY-1: "Dislocation of M1-M5 in the same direction" (Tzatzairis 2019).
     expect(myerson({ first: 'with-lesser', lesser: 'all' })).toBe('A')
-    // MY-2: "B1: the first metatarsal displaced medially; B2: one or more lesser metatarsals laterally."
+    // MY-2: B1 "Medial dislocation involving only the M1 joint" (Tzatzairis); B2 "Lateral
+    // dislocations—involving any of the 4 lateral metatarsals" (Diebal 2013), so some or all four.
     expect(myerson({ first: 'medial', lesser: 'none' })).toBe('B1')
     expect(myerson({ first: 'none', lesser: 'some' })).toBe('B2')
     expect(myerson({ first: 'none', lesser: 'all' })).toBe('B2')
-    // MY-3: "C1: first medially and some lesser laterally; C2: first medially and all lesser laterally."
+    // MY-3: C1 "Divergent, incomplete dislocation involving M1 and some of the lateral
+    // metatarsals"; C2 "Divergent, complete dislocation involving M1 and all of the lateral
+    // metatarsals" (Tzatzairis).
     expect(myerson({ first: 'medial', lesser: 'some' })).toBe('C1')
     expect(myerson({ first: 'medial', lesser: 'all' })).toBe('C2')
   })
@@ -114,5 +124,15 @@ describe('Myerson (unchecked)', () => {
   test('groups and sentence', () => {
     expect(myersonTypes.map(myersonGroup)).toEqual(['total incongruity', 'partial incongruity', 'partial incongruity', 'divergent', 'divergent'])
     expect(myersonSentence('B1')).toBe('Tarsometatarsal (Lisfranc) fracture-dislocation, Myerson type B1 (partial incongruity): the first metatarsal displaced medially.')
+  })
+
+  // The author's decision (2026-10-29): standardise A, B2 and C1. Was A "all five metatarsals
+  // displaced in one direction, laterally or dorsoplantar (homolateral)", B2 "one or more of the
+  // lesser metatarsals displaced laterally", C1 "the first metatarsal displaced medially and some
+  // of the lesser metatarsals laterally".
+  test('A, B2 and C1 wording', () => {
+    expect(myersonDescriptions.A).toBe('all five metatarsals displaced together in the same direction')
+    expect(myersonSentence('B2')).toBe('Tarsometatarsal (Lisfranc) fracture-dislocation, Myerson type B2 (partial incongruity): one or more of metatarsals 2 to 5 displaced laterally (partial lateral incongruity), with the first tarsometatarsal joint in place.')
+    expect(myersonDescriptions.C1).toBe('the first metatarsal displaced medially and some, but not all, of metatarsals 2 to 5 laterally (partial divergence)')
   })
 })
