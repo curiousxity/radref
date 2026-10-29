@@ -46,7 +46,7 @@ export function MyersonPage() {
           <span className="calc-tag">Lisfranc</span>
         </div>
         <p>Type a tarsometatarsal (Lisfranc) fracture-dislocation from which metatarsals are displaced and which way, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract does not give the types, so the wording of every type has not yet been checked against it. Not yet reviewed by the site author. Source: <Cite doi="10.1177/107110078600600504">Myerson et al., Foot Ankle 1986</Cite>.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract does not give the types, so the wording of every type has not yet been checked against it. Source: <Cite doi="10.1177/107110078600600504">Myerson et al., Foot Ankle 1986</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

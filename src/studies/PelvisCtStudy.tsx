@@ -610,7 +610,7 @@ const study: StudyDefinition = {
   slug: 'pelvis-ct',
   name: 'Pelvis CT for pain or injury',
   lede: 'Read a pelvis CT for pain or injury: Young-Burgess ring injuries, sacral fractures and insufficiency fractures, Letournel acetabular types, the hips, active bleeding, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover and the L5 transverse process) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Letournel wording that Durkee does not cover and the L5 transverse process) have still not been checked against their papers.',
   references,
   report: {
     steps,

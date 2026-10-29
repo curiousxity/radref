@@ -5,11 +5,11 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Written on 2026-10-25 with PubMed, Crossref, Europe PMC and Unpaywall
+ * Written on 2026-10-25 with PubMed, Crossref, Europe PMC and Unpaywall
  * reachable, so every reference was matched as it was cited and every claim was read in an
  * abstract (Tamhankar also in its open full text) before it went in. The claims table is
  * docs/superpowers/research/2026-10-25-skull-base-sources.md (S claims). Rule chips and warnings
- * carry their claim IDs. Not yet reviewed by the site author.
+ * carry their claim IDs.
  */
 
 const SHETH_DOI = '10.1148/rg.294085743'
@@ -607,7 +607,7 @@ const study: StudyDefinition = {
   slug: 'skull-base',
   name: 'Skull base MRI and CT',
   lede: 'Read an MRI for a cranial nerve palsy or for perineural spread, or a CT for a skull base mass: follow the nerve segment by segment, the signs and limits of perineural spread, the bone margins of a jugular foramen mass, chordoma and chondrosarcoma, and the report.',
-  sourceNote: 'Unchecked draft: every reference was matched on PubMed and Crossref as it was cited, and each claim was read in its abstract or open full text. Not yet reviewed by the site author.',
+  sourceNote: 'Every reference was matched on PubMed and Crossref as it was cited, and each claim was read in its abstract or open full text.',
   references,
   report: {
     steps,

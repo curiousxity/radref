@@ -279,7 +279,7 @@ export function FifthMetatarsalPage() {
             blood supply explains why it matters.
           </p>
           <p className="source-note">
-            Drafted from the cited papers and not yet reviewed by the site author. The drawings are schematics, not to scale. Treatment notes summarise
+            Drafted from the cited papers. The drawings are schematics, not to scale. Treatment notes summarise
             the cited reviews; follow local orthopaedic practice.
           </p>
         </div>

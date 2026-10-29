@@ -426,7 +426,7 @@ const study: StudyDefinition = {
   slug: 'diabetic-foot-mri',
   name: 'Diabetic foot MRI',
   lede: 'Read the diabetic foot MRI: find the ulcer, decide osteomyelitis on T1, look for collections and septic joints, and tell neuroarthropathy from infection.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the ghost sign, the rim-enhancing abscess and soft-tissue gas, septic arthritis alongside osteomyelitis, and marrow edema as the sign of active Charcot disease) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the ghost sign, the rim-enhancing abscess and soft-tissue gas, septic arthritis alongside osteomyelitis, and marrow edema as the sign of active Charcot disease) have still not been checked against their papers.',
   references,
   report: {
     steps,

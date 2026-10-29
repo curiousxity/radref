@@ -1067,7 +1067,7 @@ const study: StudyDefinition = {
   slug: 'shoulder-mri',
   name: 'Shoulder MRI',
   lede: 'Read a shoulder MRI with no history beyond pain: a fixed search pattern through the bones, rotator cuff, biceps, labrum, ligaments, nerves and a repaired cuff, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers.',
   references,
   report: {
     steps,

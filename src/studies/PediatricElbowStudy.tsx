@@ -815,7 +815,7 @@ const study: StudyDefinition = {
   slug: 'pediatric-elbow',
   name: 'Pediatric elbow radiographs',
   lede: 'Read an injured child\'s elbow radiographs by age: which ossification centres to expect, the fat pads, the alignment lines, and the common fractures with their gradings.',
-  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the radiocapitellar line's link to a Monteggia injury, Gartland's original wording, the O'Brien and Judet types, and Jakob's stages) have still not been checked against their papers. Not yet reviewed by the site author.",
+  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the radiocapitellar line's link to a Monteggia injury, Gartland's original wording, the O'Brien and Judet types, and Jakob's stages) have still not been checked against their papers.",
   references,
   report: {
     steps,

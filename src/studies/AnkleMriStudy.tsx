@@ -1273,7 +1273,7 @@ const study: StudyDefinition = {
   slug: 'ankle-mri',
   name: 'Ankle MRI',
   lede: 'Read an ankle MRI with no history beyond pain: a fixed search pattern through bones, ligaments, tendons, spaces and the plantar fascia, and the report.',
-  sourceNote: 'Draft lesson compiled from the papers below; citations checked against PubMed in October 2026. Not yet reviewed by the site author.',
+  sourceNote: 'Lesson compiled from the papers below; citations checked against PubMed in October 2026.',
   references,
   report: {
     steps,

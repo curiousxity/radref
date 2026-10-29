@@ -817,7 +817,7 @@ const study: StudyDefinition = {
   slug: 'elbow-mri',
   name: 'Elbow MRI',
   lede: 'Read an elbow MRI for pain or after an injury: a fixed search pattern through the bones, collateral ligaments, tendons, nerves and bursae, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Broberg-Morrey 2 mm and 30% thresholds, the structures failing at each stage after a dislocation, the anterior bundle as the main valgus restraint, the nerve signs and the anconeus epitrochlearis) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Broberg-Morrey 2 mm and 30% thresholds, the structures failing at each stage after a dislocation, the anterior bundle as the main valgus restraint, the nerve signs and the anconeus epitrochlearis) have still not been checked against their papers.',
   references,
   report: {
     steps,

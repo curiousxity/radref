@@ -43,7 +43,7 @@ export function PalmerPage() {
           <span className="calc-tag">TFCC</span>
         </div>
         <p>Class a triangular fibrocartilage complex lesion as traumatic or degenerative, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract says only that traumatic lesions are classed by location and degenerative ones by the location and severity of the changes, so the wording of each class has not yet been checked. Not yet reviewed by the site author. Source: <Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>.</p>
+        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract says only that traumatic lesions are classed by location and degenerative ones by the location and severity of the changes, so the wording of each class has not yet been checked. Source: <Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

@@ -695,7 +695,7 @@ const study: StudyDefinition = {
   slug: 'incidental-lung-nodule',
   name: 'Incidental lung nodule CT (Fleischner)',
   lede: 'Whether the guideline applies, how to type and measure the nodule, the Fleischner 2017 row, and what the report must say.',
-  sourceNote: 'Draft lesson compiled from the Fleischner Society 2017 guideline (MacMahon et al., Radiology 2017) and the papers below; citations checked against PubMed in September 2026. Not yet reviewed by the site author.',
+  sourceNote: 'Lesson compiled from the Fleischner Society 2017 guideline (MacMahon et al., Radiology 2017) and the papers below; citations checked against PubMed in September 2026.',
   references,
   referencesNote: 'The measurement statement (Bankier et al.) is cited for the 2 mm growth threshold and the solid-component measurement as summarized by Bueno et al.; its full text was not checked for this draft.',
   report: {

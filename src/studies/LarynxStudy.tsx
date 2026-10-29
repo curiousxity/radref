@@ -5,11 +5,11 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Written on 2026-10-25 with PubMed, Crossref and Europe PMC reachable, so every
+ * Written on 2026-10-25 with PubMed, Crossref and Europe PMC reachable, so every
  * reference was matched as it was cited and every claim was read in an abstract or open full text
  * before it went in, except those marked unchecked or part in the claims table,
  * docs/superpowers/research/2026-10-25-larynx-sources.md (L claims). Rule chips and warnings carry
- * their claim IDs. Not yet reviewed by the site author.
+ * their claim IDs.
  */
 
 const CONNOR_DOI = '10.1102/1470-7330.2007.0010'
@@ -667,7 +667,7 @@ const study: StudyDefinition = {
   slug: 'larynx',
   name: 'Larynx CT and MRI',
   lede: 'Read a CT or MRI of the larynx for a known cancer or for hoarseness: the subsite and the fat spaces, cartilage invasion on CT and MRI, the T category imaging can set, the signs of a paralysed cord and where to look for its cause, the nodes, and the report.',
-  sourceNote: 'Unchecked draft: every reference was matched on PubMed and Crossref as it was cited, and each claim was read in an abstract or open full text, the T categories in the AJCC seventh edition table in Joshi\'s review (the eighth edition did not change them). Not yet reviewed by the site author.',
+  sourceNote: 'Every reference was matched on PubMed and Crossref as it was cited, and each claim was read in an abstract or open full text, the T categories in the AJCC seventh edition table in Joshi\'s review (the eighth edition did not change them).',
   references,
   report: {
     steps,

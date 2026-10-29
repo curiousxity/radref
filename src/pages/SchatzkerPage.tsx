@@ -77,7 +77,7 @@ export function SchatzkerPage() {
           <span className="calc-tag">Tibial plateau</span>
         </div>
         <p>Type a tibial plateau fracture from a few questions, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: Schatzker's 1979 paper has no abstract and is paywalled, so the types are checked against Markhardt 2009's abstract and a later review (<Cite doi="10.1007/s11999-012-2451-z">Zeltser and Leopold, Clin Orthop Relat Res 2013</Cite>). Not yet reviewed by the site author. Sources: Schatzker et al., Clin Orthop Relat Res 1979; <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>.</p>
+        <p className="source-note">Unchecked draft: Schatzker's 1979 paper has no abstract and is paywalled, so the types are checked against Markhardt 2009's abstract and a later review (<Cite doi="10.1007/s11999-012-2451-z">Zeltser and Leopold, Clin Orthop Relat Res 2013</Cite>). Sources: Schatzker et al., Clin Orthop Relat Res 1979; <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

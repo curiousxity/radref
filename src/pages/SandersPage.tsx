@@ -50,7 +50,7 @@ export function SandersPage() {
           <span className="calc-tag">Calcaneus</span>
         </div>
         <p>Type an intra-articular calcaneal fracture from the fracture lines through the posterior facet on coronal CT, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the paper is paywalled, so the four types are worded as in its abstract, and the widest-facet image, the A, B and C lines, the subtype letters and the 2 mm are checked against a later review (<Cite doi="10.1097/CORR.0000000000000539">Jiménez-Almonte et al., Clin Orthop Relat Res 2019</Cite>). Not yet reviewed by the site author. Source: <Cite doi="10.1097/00003086-199305000-00012">Sanders et al., Clin Orthop Relat Res 1993</Cite>.</p>
+        <p className="source-note">Unchecked draft: the paper is paywalled, so the four types are worded as in its abstract, and the widest-facet image, the A, B and C lines, the subtype letters and the 2 mm are checked against a later review (<Cite doi="10.1097/CORR.0000000000000539">Jiménez-Almonte et al., Clin Orthop Relat Res 2019</Cite>). Source: <Cite doi="10.1097/00003086-199305000-00012">Sanders et al., Clin Orthop Relat Res 1993</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

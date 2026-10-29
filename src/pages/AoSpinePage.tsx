@@ -117,7 +117,7 @@ export function AoSpinePage() {
           <span className="calc-tag">Spine trauma</span>
         </div>
         <p>Classify a subaxial cervical or thoracolumbar injury by morphology, with facet injuries in the neck, neurology and modifiers, and copyable report text.</p>
-        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below). Not yet reviewed by the site author. Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
+        <p className="source-note">Unchecked draft: the papers are paywalled. The types, facet grades, neurology grades, modifiers and notation are checked against AO Spine's own posters for both systems (below). Sources: <Cite doi="10.1097/BRS.0b013e3182a8a381">Vaccaro et al., Spine 2013</Cite> (thoracolumbar); <Cite doi="10.1007/s00586-015-3831-3">Vaccaro et al., Eur Spine J 2016</Cite> (subaxial cervical).</p>
       </section>
 
       <section className="calculator-grid">

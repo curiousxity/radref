@@ -16,10 +16,10 @@ describe('larynx lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'tumour', 'cartilage', 'nodes', 'impression'])
   })
 
-  // Every reference is matched (each has a DOI) and every claim read, but the site author has not
-  // reviewed the study yet, so the note still says "Unchecked draft".
-  test('is marked as an unchecked draft, with a DOI on every reference', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
+  // Every reference is matched (each has a DOI) and every claim read, so the note is not marked as a
+  // draft.
+  test('is not marked as a draft, with a DOI on every reference', () => {
+    expect(study.sourceNote).toMatch(/^Every reference was matched/)
     expect(study.references).toHaveLength(15)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })

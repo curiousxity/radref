@@ -724,7 +724,7 @@ const study: StudyDefinition = {
   slug: 'lung-screening-ct',
   name: 'Lung screening CT (Lung-RADS)',
   lede: 'Read a screening LDCT step by step: comparison, nodule type, mean diameter, growth, the Lung-RADS category and its management.',
-  sourceNote: 'Draft lesson compiled from the ACR Lung-RADS v2022 table and notes (November 2022) and the papers below; citations checked against PubMed in September 2026. Not yet reviewed by the site author.',
+  sourceNote: 'Lesson compiled from the ACR Lung-RADS v2022 table and notes (November 2022) and the papers below; citations checked against PubMed in September 2026.',
   references,
   referencesNote: 'Note numbers in the lesson ("note 6") are the numbered notes under the ACR Lung-RADS v2022 table.',
   report: {

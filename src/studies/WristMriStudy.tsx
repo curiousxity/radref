@@ -888,7 +888,7 @@ const study: StudyDefinition = {
   slug: 'wrist-mri',
   name: 'Wrist MRI',
   lede: 'Read a wrist MRI for pain or injury: a fixed search pattern through the scaphoid and lunate, the intrinsic ligaments and perilunate ring, the TFCC, tendons, tunnels and ganglia, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Palmer wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers. Not yet reviewed by the site author.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Palmer wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers.',
   references,
   report: {
     steps,

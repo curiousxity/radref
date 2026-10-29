@@ -117,7 +117,7 @@ export function LetournelPage() {
           <span className="calc-tag">Acetabulum</span>
         </div>
         <p>Name an acetabular fracture from a few questions about the column lines, the posterior wall, the obturator ring and the ilium, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the references are matched on PubMed, the ten type names are checked against Scheinfeld 2015, and the column lines, the obturator ring and iliac wing questions, the isolated posterior wall and the spur sign against <Cite doi="10.2214/AJR.05.1269">Durkee et al., AJR 2006</Cite>. The wording of the other types is not yet checked. Not yet reviewed by the site author. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
+        <p className="source-note">Unchecked draft: the references are matched on PubMed, the ten type names are checked against Scheinfeld 2015, and the column lines, the obturator ring and iliac wing questions, the isolated posterior wall and the spur sign against <Cite doi="10.2214/AJR.05.1269">Durkee et al., AJR 2006</Cite>. The wording of the other types is not yet checked. Sources: <Cite doi="10.2106/00004623-196446080-00001">Judet et al., J Bone Joint Surg Am 1964</Cite>; <Cite doi="10.1097/00003086-198009000-00012">Letournel, Clin Orthop Relat Res 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">

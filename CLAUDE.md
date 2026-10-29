@@ -462,12 +462,14 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI, skull base MRI and CT (all three unchecked drafts,
-below). Drafted from the guidelines (ankle MRI from the published
+FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI, skull base MRI and CT (below). Drafted from the guidelines (ankle MRI from the published
 papers in its reference list) rather than from the site author's
-notes, and labelled as unreviewed drafts in their source note until the author signs
-them off: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
+notes: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
+
+The author will not review the pages (2026-10-28), so nothing waits for a sign-off and no source
+note says "not yet reviewed by the site author". A note starts "Unchecked draft" only while some
+of its claims have not been read in their papers.
 
 Unchecked drafts: knee MRI, shoulder MRI, elbow MRI, wrist MRI, foot MRI, diabetic foot MRI,
 spine CT for pain or injury, pelvis CT for pain or injury and pediatric elbow radiographs (and the Schatzker, Neer, Mason, Mayfield, Herbert, Palmer, Lichtman, Hawkins,
@@ -519,12 +521,10 @@ cancer, CT for hoarseness) was written the same day with the databases reachable
 read in an abstract or open full text before it went in
 (`docs/superpowers/research/2026-10-25-larynx-sources.md`); the T4a cartilage wording was checked
 later that day against Joshi's AJCC table, which differed for subglottic tumours (matched to the
-paper by the author's choice). Its source note still starts "Unchecked draft" only because the
-author has not reviewed it. The skull base study (`/studies/skull-base`:
+paper by the author's choice). Its source note no longer starts "Unchecked draft" (2026-10-28). The skull base study (`/studies/skull-base`:
 MRI for a cranial nerve palsy, MRI for perineural spread, CT for a skull base mass) was written
 the same way the same day (`docs/superpowers/research/2026-10-25-skull-base-sources.md`); Russo
-1997, Nemzek 1998 and Eldevik 2000 have no DOI. Its note starts "Unchecked draft" only because the
-author has not reviewed it. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+1997, Nemzek 1998 and Eldevik 2000 have no DOI. Its note no longer starts "Unchecked draft" either. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
 `doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
 and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
 Europe PMC API on `www.ebi.ac.uk`.
