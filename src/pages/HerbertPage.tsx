@@ -5,6 +5,8 @@ import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { herbertDescriptions, herbertGroup, herbertSentence, herbertTypes } from '../logic/herbert'
 import type { HerbertType } from '../logic/herbert'
+import { ScanFigures } from '../components/ScanFigures'
+import { herbertScans } from '../data/scans/herbert'
 
 type Timing = 'acute' | 'delayed' | 'nonunion'
 
@@ -86,6 +88,11 @@ export function HerbertPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[herbertScans.typeA1, herbertScans.typeA2, herbertScans.typeB1, herbertScans.typeB2, herbertScans.typeB3, herbertScans.typeB4, herbertScans.typeD2]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1984 paper is paywalled; the types follow AO Surgery Reference's Herbert page." />

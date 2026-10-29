@@ -326,3 +326,71 @@ No image yet:
   Acosta Batlle Fig. 32 use interface fluid and cartilage disruption as stability signs.
 - Wrist: lunotriquetral, perilunate and extrinsic ligaments, de Quervain and intersection syndrome,
   variants (a bifid median nerve, PMC9947498 Fig. 3B, is too small).
+
+## Mason, Mayfield, Herbert and Palmer (2026-10-28)
+
+Each page gets an "Examples" card above its references. The source names the type itself, in
+its caption, its text or the authors' label inside the panel; where only the injury is named (e.g.
+"perilunate dislocation" for Mayfield III), the page's own definition makes the same mapping. Same
+licence and crop rules as above. Several figures are the publisher's full-size copy
+(static-content.springer.com or MDPI) because the PMC copy was too small; the figure is the same.
+
+### Mason (`src/data/scans/mason.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | How the source names it |
+|---|---|---|---|---|---|
+| type1 | I | Nietschke R, Burkhart KJ, Hollinger B, Dehlinger FI, Zimmerer A, Schneider MM. Reasons for surgical revision after conservatively treated radial head fractures—retrospective study of 70 patients. Obere Extremität. 2018;13(2):112-120 (PMC5976694) | Fig. 1a | CC BY 4.0 | Fig. 1 caption: "Radiographs (two planes) of a radial head fracture (Mason I)". Text: "The classification according to Mason [31], later modified according to Johnston, is the most commonly used classification system ... |
+| type2 | II | Müller M, Mann V, Zapf J, Kirchhoff K, Zyskowski M, Biberthaler P, Kirchhoff C, Wurm M. Functional Postoperative Outcome for 92 Cases of Radial Head Fractures: A PROM-Based Retrospective Study. J Clin Med. 2023;12(18):5870 (PMC10532215) | Fig. 1A | CC BY 4.0 | Fig. 1 caption: "(A,B) Mason type II fracture in AP and lateral oblique view". Text: "Fractures with a displacement of 2 mm or more without signs of comminution are classified as type II fractures." |
+| type2Ct | II | Harbrecht A, Hackl M, Leschinger T, Wegmann K, Seybold D, Müller LP. Radial head fractures with interposed capitellar cartilage fragment–hindrance to bone healing–a case series. Arch Orthop Trauma Surg. 2021;141(9):1615-1624 (PMC8354868) | Fig. 7c | CC BY 4.0 | Fig. 7 caption: "a, b Preoperative radiographs (lateral and oblique) of a Mason type II fracture (Case 3). c CT-scan in axial view and d in sagittal view". Text: "Fractures were categorized according to the modified ... |
+| type3 | III | Scoscina D, Facco G, Luciani P, Setaro N, Senesi L, Martiniani M, Gigante AP. Mason type III fractures of the radial head: ORIF, resection or prosthetic replacement? Musculoskelet Surg. 2023;107(2):223-230 (PMC10192170) | Fig. 1a | CC BY 4.0 | Fig. 1 caption: "Anteroposterior (a) and lateral (b) X-ray and 3D CT (c, d) images of a patient with Mason type III radial head fracture". Text: "type III are comminuted fractures involving the whole radial head". |
+| type4 | IV | Jordan RW, Jones ADR. Radial Head Fractures. Open Orthop J. 2017;11:1405-1416 (PMC5721345) | Fig. 4 | CC BY 4.0 | Fig. 4 caption: "AP and lateral views of a Mason type IV injury." Table 1 (Mason classification): "Type IV / Fracture associated with posterior dislocation". |
+
+### Mayfield (`src/data/scans/mayfield.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | How the source names it |
+|---|---|---|---|---|---|
+| stage1 | I | Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging Diagnosis and Management of Carpal Trauma and Instability—An Illustrated Guide. Life (Basel). 2023;13(7):1426 (PMC10381215) | Fig. 27a | CC BY 4.0 | Caption: '(a) PA wrist radiograph showing scapholunate joint widening (arrow).' Article text: 'the injury progresses through four distinct stages ... The first stage consists of scapholunate dissociation (Figure ... |
+| stage1Mri | I | Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging Diagnosis and Management of Carpal Trauma and Instability—An Illustrated Guide. Life (Basel). 2023;13(7):1426 (PMC10381215) | Fig. 27b | CC BY 4.0 | Caption: '(b) Coronal T1 FS MR arthrogram in a different patient showing disruption of the scapholunate ligament (arrow).' Article text: 'the injury progresses through four distinct stages ... The first stage ... |
+| stage3 | III | Sakaria S, Reyes M, Chandan P, Schwartz G. Dorsal Perilunate Dislocation Coupled With a Distal Radius Fracture: A Report of a Rare Case. Cureus. 2026;18(2):e103218 (PMC12974986) | Fig. 1B | CC BY 4.0 | Caption: 'Preoperative posterior-anterior view (A) and lateral view (B) of the right wrist demonstrate a comminuted intra-articular displaced fracture of the distal radius with a die-punch fragment along with a ... |
+| stage4 | IV | Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging Diagnosis and Management of Carpal Trauma and Instability—An Illustrated Guide. Life (Basel). 2023;13(7):1426 (PMC10381215) | Fig. 30b | CC BY 4.0 | Caption: '(b) Lateral wrist radiograph showing an anteriorly dislocated lunate which is anteriorly rotated ~90°.' Article text: 'The fourth and final stage of injury results in tears/disruptions of all the ligaments ... |
+| greaterArc | Greater arc | Rachunek-Medved K, Medved F, Besz W, Illg C, Lauer H, Krauß S, Daigeler A, Thiel JT. Do perilunate dislocations and fracture-dislocations result in different radiological outcomes following wrist alignment reconstruction? A single-center retrospective study including 51 patients with perilunate injuries. Arch Orthop Trauma Surg. 2025;145(1):106 (PMC11698771) | Fig. 1b | CC BY 4.0 | Caption: 'X-ray series in lateral and PA projections, along with corresponding CT scans with three-dimensional reconstructions of a ligamentous-only perilunate dislocation (a) and a trans-scaphoid perilunate ... |
+
+### Herbert (`src/data/scans/herbert.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | How the source names it |
+|---|---|---|---|---|---|
+| typeA1 | A1 | Neubauer C, Schuppert C, Reidelbach CS, Zajonc H, Simunovic F, Goerke SM, Bamberg F, Wirtz S, Russe MF, Diallo TD, Neubauer J. Single-sequence low-field 3D T1-weighted MRI for scaphoid fracture detection compared to radiography: prospective diagnostic accuracy pilot study. Emerg Radiol. 2026;33(4):775-784 (PMC13433498) | Fig. 2A | CC BY 4.0 | Caption: 'a stable scaphoid fracture of the tubercle type A1 in a 33-year-old female patient (A-D)'. Text: stability 'as displayed for category A1 and A2 versus instability ... B1-4 by Schmitt and Rosenthal after ... |
+| typeA2 | A2 | Dietrich TJ, Teh J, Schmitt R, Blum A, Hesse N, Lalam RK, et al. Interdisciplinary consensus statements on imaging of scaphoid fractures. Eur Radiol. 2026;36(10):7584-7598 (PMC13710594) | Fig. 1b | CC BY 4.0 | Caption: 'Sagittal-oblique MPR image parallel to the scaphoid's longitudinal axis on cone beam CT, demonstrating an incomplete acute fracture on the dorsal aspect of the mid-third (arrow)'. Mapping: mid-third = ... |
+| typeB1 | B1 | Neubauer C, Schuppert C, Reidelbach CS, Zajonc H, Simunovic F, Goerke SM, Bamberg F, Wirtz S, Russe MF, Diallo TD, Neubauer J. Single-sequence low-field 3D T1-weighted MRI for scaphoid fracture detection compared to radiography: prospective diagnostic accuracy pilot study. Emerg Radiol. 2026;33(4):775-784 (PMC13433498) | Fig. 3C | CC BY 4.0 | Caption: 'An extended oblique B1 type fracture in a 28-year-old male patient is shown in panels A-E' and 'X-ray (A, F, K), CT (B/C, G/H, L/M)'. Matches page B1 'distal oblique fracture' (the source says oblique; it ... |
+| typeB2 | B2 | Neubauer C, Schuppert C, Reidelbach CS, Zajonc H, Simunovic F, Goerke SM, Bamberg F, Wirtz S, Russe MF, Diallo TD, Neubauer J. Single-sequence low-field 3D T1-weighted MRI for scaphoid fracture detection compared to radiography: prospective diagnostic accuracy pilot study. Emerg Radiol. 2026;33(4):775-784 (PMC13433498) | Fig. 3H | CC BY 4.0 | Caption: 'a slightly displaced transverse fracture type B2 in a 45-year-old male patient in F-J' and 'the type B2 and B3 fractures are not visualized by X-ray (F/K)'. Source names type B2; page B2 is 'complete ... |
+| typeB3 | B3 | Dietrich TJ, Teh J, Schmitt R, Blum A, Hesse N, Lalam RK, et al. Interdisciplinary consensus statements on imaging of scaphoid fractures. Eur Radiol. 2026;36(10):7584-7598 (PMC13710594) | Fig. 2c | CC BY 4.0 | Caption: 'Sagittal-oblique MPR image parallel to the scaphoid's longitudinal axis, showing a proximal pole scaphoid fracture with significant displacement of the dorsal fracture margin (arrow)'. Matches page B3 ... |
+| typeB4 | B4 | Rachunek-Medved K, Medved F, Besz W, Illg C, Lauer H, Krauß S, Daigeler A, Thiel JT. Do perilunate dislocations and fracture-dislocations result in different radiological outcomes following wrist alignment reconstruction? A single-center retrospective study including 51 patients with perilunate injuries. Arch Orthop Trauma Surg. 2025;145(1):106 (PMC11698771) | Fig. 1b | CC BY 4.0 | Caption: 'X-ray series in lateral and PA projections, along with corresponding CT scans with three-dimensional reconstructions of a ligamentous-only perilunate dislocation (a) and a trans-scaphoid perilunate ... |
+| typeD2 | D2 | Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging Diagnosis and Management of Carpal Trauma and Instability—An Illustrated Guide. Life (Basel). 2023;13(7):1426 (PMC10381215) | Fig. 6b | CC BY 4.0 | Caption 6b: 'PA radiograph of the wrist in a different patient showing a more obvious nonunion, again with sclerosis of the fracture margins (arrows) in an untreated injury'; 6a (same figure): 'sclerosis and ... |
+
+### Palmer (`src/data/scans/palmer.ts`)
+
+| Key | Type | Source (PMCID) | Figure | Licence | How the source names it |
+|---|---|---|---|---|---|
+| class1a | 1A | Zhao X, Yu A, Zhao H, Qiu Y. Diagnostic value of MRI in traumatic triangular fibrocartilage complex injuries: a retrospective study. BMC Musculoskelet Disord. 2024;25:63 (PMC10787402) | Fig. 1A | CC BY 4.0 | Fig. 1 caption: 'MRI images of the traumatic TFCC injuries according to Palmer's classification.' Panel A is labelled 'IA' in the image. The article text uses Palmer 1A for this class ('subtyped into four types ... |
+| class1b | 1B | Wang W, Zhang Y, Liu J, Xu H, Xu X, Chen P, Liu H, Fu H, Zhao X, Qi C. Ulnar styloid abduction angle: a novel radiological predictor of Palmer Type IB tears of the triangular fibrocartilage complex. Front Med (Lausanne). 2026;13:1842984 (PMC13377355) | Fig. 2A | CC BY 4.0 | Fig. 2 caption: 'Representative high-resolution 3.0T MRI of a typical Palmer Type IB TFCC tear. (A) Coronal fat-suppressed T2-weighted image demonstrates a complete avulsion of the deep radioulnar ligament at the ... |
+| class1c | 1C | Zhao X, Yu A, Zhao H, Qiu Y. Diagnostic value of MRI in traumatic triangular fibrocartilage complex injuries: a retrospective study. BMC Musculoskelet Disord. 2024;25:63 (PMC10787402) | Fig. 1E | CC BY 4.0 | Fig. 1 caption: 'MRI images of the traumatic TFCC injuries according to Palmer's classification.' Panel E is labelled 'IC' in the image; Table 6 lists 'IC 1 (1)' (one arthroscopy-confirmed Palmer 1C case). |
+| class1d | 1D | Zhao X, Yu A, Zhao H, Qiu Y. Diagnostic value of MRI in traumatic triangular fibrocartilage complex injuries: a retrospective study. BMC Musculoskelet Disord. 2024;25:63 (PMC10787402) | Fig. 1F | CC BY 4.0 | Fig. 1 caption: 'MRI images of the traumatic TFCC injuries according to Palmer's classification.' Panel F is labelled 'ID' in the image; Table 6 lists 'ID 4 (2)'. |
+
+Not found, and mismatches:
+
+- Mason: no subtle type I seen only as a fat pad sign. Not used because they contradict the page:
+  Laun 2015 calls a fracture with posterior dislocation "type III" (the page's IV); Liu 2018 and
+  other Hotchkiss-based papers call a comminuted fracture "type II" (the page's III); Haasters 2019
+  calls a fracture displaced under 2 mm type I (the page's I is undisplaced). The type I radiograph
+  (Nietschke) has no arrow and a faint line; its caption says so.
+- Mayfield: no stage II. Okoro 2023 names the stages differently (II "perilunate dislocation", III
+  "midcarpal dislocation"), so it is used only for stages I and IV, where it agrees with the page.
+  The greater-arc example and Herbert B4 are the same Rachunek-Medved radiograph.
+- Herbert: no B5 (Fukuda 2024 is too small), C (Farkash 2015 too small, burned-in date) or D1 (no
+  radiograph or CT figure says fibrous). Neubauer 2026 uses the Krimmer modification, whose A2 is a
+  non-displaced waist fracture rather than the page's incomplete one, so A2 comes from Dietrich 2026
+  (an incomplete mid-third fracture). Neubauer's Fig. 3 caption says the B1 fracture is "partially
+  visible (G/H)", probably a typo for B/C.
+- Palmer: no class 2 (degenerative). von Borstel 2017 has captioned 1A, 1B, 1C+2A and 2D figures
+  but is CC BY-NC-ND; Cerezal 2026's Palmer schematics are "used with permission". Zhao 2024's 1A,
+  1C and 1D are named by the authors' labels in the panels, not in the caption.

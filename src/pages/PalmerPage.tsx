@@ -5,6 +5,8 @@ import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
 import { palmerClasses, palmerDescriptions, palmerKind, palmerSentence } from '../logic/palmer'
 import type { PalmerClass } from '../logic/palmer'
+import { ScanFigures } from '../components/ScanFigures'
+import { palmerScans } from '../data/scans/palmer'
 
 type Kind = 'traumatic' | 'degenerative'
 
@@ -85,6 +87,11 @@ export function PalmerPage() {
           </table>
         </div>
         <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it.</p>
+      </section>
+
+      <section className="info-card">
+        <h3>Examples</h3>
+        <ScanFigures images={[palmerScans.class1a, palmerScans.class1b, palmerScans.class1c, palmerScans.class1d]} />
       </section>
 
       <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the class wording has been checked only where the abstract states it." />
