@@ -133,7 +133,7 @@ region at a time, end to end, following the ankle pilot
   `docs/superpowers/research/2026-10-25-skull-base-sources.md`. Live on the site, every claim
   checked.
 - [ ] Brachial plexus: gets a study (the author's choice, 2026-10-28): MRI for "just the typical
-  indications" (2026-10-29). Being written on `claude/brachial-plexus-study`.
+  indications" (2026-10-29). Written 2026-10-29 with every claim read (PR #22); done once merged.
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.
@@ -315,15 +315,19 @@ is under the calculator below.
 - [x] Matched to the papers by the author's choice (2026-10-23): Rojas gives 8.5 mm (BDI) and
   2 mm (ADI) as 95% limits ("less than"), so those values are now outside normal; Laredo's
   features are "significantly more frequent" in benign or malignant collapse, not proof.
-- [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"); two points for the author.
+- [x] Spence 6.9 mm (T2-2): read in full 2026-10-28 ("Sixth check"). Decided by the author 2026-10-29:
+  a cadaver-derived rule historically applied to radiographs, not reliable on its own or carried
+  over to CT (Radcliff 2013, Woods 2018, Kopparapu 2022); 5.7 mm only as history, and no value
+  reads "intact".
 - [x] Open sources (2026-10-29, "Seventh check"): T2-3 (Alves 2020, WFNS) and T6-1 (Wáng 2024, ESSR
   consensus), cited beside the originals.
-- [ ] Still unchecked: the expanded Denver criteria (T5-1; needs Burlew 2012's table) and the exact
-  1 cm / 40% facet boundary (AO-6; needs Vaccaro 2016). For the author: the page's three Denver
-  items are the older modified criteria; the expanded ones read "fracture, subluxation or
-  ligamentous injury at any level" plus any C1–C3 fracture (Brommeland 2018, Sharma 2019), and
-  the form's Denver check cannot see a C3 fracture. Genant: one review's text says grade 3 is
-  "40% or more", its table ">40%"; the page puts exactly 40% in grade 2.
+- [x] Decided by the author 2026-10-29: the expanded Denver wording ("a cervical spine fracture,
+  subluxation or ligamentous injury at any level"; Brommeland 2018, Wagner 2023), with any subaxial
+  injury, C3 included, triggering the check, counted as a criterion with a high-energy mechanism;
+  Genant grade 2 is more than 25% up to 40% (Wáng 2020), a visual estimate.
+- [ ] Still unchecked: the exact 1 cm / 40% facet boundary (AO-6; needs Vaccaro 2016). Burlew 2012's
+  own table is unread, but the wording is settled from Brommeland and Wagner. Not yet asked: the
+  expanded list also has occipital condyle fractures, which the form's Denver check does not count.
 
 ### AO Spine calculator
 
@@ -335,10 +339,13 @@ Drafted 2026-10-23 as an unchecked draft (`/ao-spine`). Every claim is in
   names and say facet, neurology and modifier grades exist).
 - [x] AO-4, AO-5, AO-7 and AO-9 were already settled by the two posters (second and fourth
   checks); AO-11 and AO-12 verified from Divi 2019, now cited (2026-10-29, "Fifth check").
+- [x] Decided by the author 2026-10-29: "+" only with a neurological injury (Divi 2019), so the
+  calculator offers it only for N2, N3 and N4 and clears it otherwise. The author's "incomplete
+  deficit or nerve injury" wording is in no peer-reviewed source read, so N4+ is allowed (Divi's
+  "a patient with a neurological injury") and N1 (recovered) is not.
 - [ ] Still unchecked: exactly 1 cm or exactly 40% (AO-6). Every open source writes F1 as "<1cm …
   <40%" and F2 as ">1cm, > than 40%", so the boundary values belong to neither; the calculator
-  reads them as F2. Needs Vaccaro 2016. For the author: Divi says "+" is for ongoing cord
-  compression "in a patient with a neurological injury", but the calculator allows "N0+".
+  reads them as F2. Needs Vaccaro 2016.
 
 ### Pelvis CT for pain or injury
 

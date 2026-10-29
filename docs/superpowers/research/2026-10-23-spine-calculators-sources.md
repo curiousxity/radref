@@ -132,3 +132,46 @@ settled; the boundary is part of AO-6 and is still open. Open full text read fro
 Applied: Divi 2019 added to the AO Spine page's references (checked on Crossref) and cited for AO-11;
 the page's source note, the `aospine.ts` header and the test labels now name the exact 1 cm / 40%
 boundary (AO-6) as the one point still unchecked. No rule or wording changed.
+
+## The author's decisions, 2026-10-29
+
+Decision 31 of the author's list (decisions 28 to 30 and 32 are in
+`2026-10-23-spine-trauma-ct-sources.md`). Posters re-read from `public/references/`; open papers read
+in full text.
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| AO-9 (31) | Block "N0+". Bind "+" to the posters' definition and offer it only with the neurology grades that qualify, not every non-N0 grade (N1 is a resolved deficit, NX an examination not done). | `aoCompressionAllowed` (new, `aospine.ts`): "+" only with N2, N3 or N4, in both systems; `aoCode` drops a "+" given with N0, N1, NX or no grade. Calculator: the "+ Continued spinal cord compression?" question shows only for N2 to N4, and choosing another grade clears it. Morphology card: "Both posters list "+" as continued spinal cord compression; it is used in a patient with a neurological injury ({Divi 2019}), so this page offers it only with N2, N3 or N4: not with N0 (intact), N1 (a deficit that has resolved) or NX (not examined)." Source note and references note name Divi 2019 for it. The calculator has no separate radiological cord-compression finding, and the spine CT study does not code neurology, so nothing else changed. Tests: no "+" with N0, N1, NX or no grade in either system; "+" with N2. |
+
+Quotes relied on:
+
+- Subaxial poster (© 2020 AO Foundation), Neurology table: "N0 Neurology intact", "N1 Transient
+  neurologic deficit", "N2 Radicular symptoms", "N3 Incomplete spinal cord injury or any degree of cauda
+  equina injury", "N4 Complete spinal cord injury", "NX Cannot be examined", "+ Continued spinal cord
+  compression". The thoracolumbar poster's table is word for word the same. Neither poster ties "+" to a
+  grade or says "incomplete neurologic deficit or nerve injury".
+- Divi SN, et al. Global Spine J. 2019 (PMC6512201), for all regions ("The neurologic status of the
+  patient ... essentially the same for all regions"): "N0 indicates a neurologically intact patient,
+  whereas N1 indicates patients that had a transient neurologic deficit that has completely recovered by
+  the time of clinical examination. N2 denotes a nerve root injury or radiculopathy, whereas N3 denote
+  incomplete spinal cord injury or complete or incomplete cauda equina injury. N4 means complete spinal
+  cord injury. Nx is used when a patient is unable to be examined and the neurological status is
+  unknown. The plus sign (+) modifier is used to signify continued spinal cord compression in a patient
+  with a neurological injury."
+- Thoracolumbar, secondary: Vu C, Gendelberg D. Clin Orthop Relat Res. 2020 (PMC7438146), read in full:
+  "a "+" is designated for continued spinal cord compression" (no grade named). Also, not cited: Huang X,
+  et al. Front Neurol. 2025 (PMC12727610), subaxial table: "+ Indicates ongoing cord compression in a
+  patient with neurological deficits".
+
+Not supported by a peer-reviewed source I could read, so not used: the wording "in setting of
+incomplete neurologic deficit or nerve injury". It is on neither poster, and a Europe PMC search of open
+full text ("ongoing cord compression", "continued spinal cord compression", "incomplete neurologic
+deficit or nerve", and a sweep of 99 open AO Spine subaxial or thoracolumbar papers) found it only for
+SLIC's neuro modifier ("Continuous cord compression in setting of neurological deficit"), not for AO
+Spine. Vaccaro 2016 (S2) is paywalled. **For the author:** that wording would exclude N4 (complete
+injury); Divi's "a patient with a neurological injury" includes it, so the page allows N4+. N1 is
+excluded on Divi's own definition (deficit "completely recovered by the time of clinical
+examination"); keep both choices, or change once Vaccaro 2016 is read?
+
+No new reference (Divi 2019 was already cited). The AO Spine page keeps "Unchecked draft" for the exact
+1 cm / 40% facet boundary (AO-6), still unread until Vaccaro 2016.

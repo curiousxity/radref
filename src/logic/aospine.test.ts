@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { aoBody, aoCode, aoFacetCode, aoFacetFracture, aoNeuroDescription, aoSentence, aoSpine } from './aospine'
+import { aoBody, aoCode, aoCompressionAllowed, aoFacetCode, aoFacetFracture, aoNeuroDescription, aoNeuros, aoSentence, aoSpine } from './aospine'
 
 /*
  * AO Spine subaxial cervical and thoracolumbar classification. Each case quotes its claim from
@@ -68,6 +68,22 @@ describe('AO Spine code and sentence', () => {
     expect(aoCode({ region: 'subaxial', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
     // The thoracolumbar poster lists "+ Continued spinal cord compression" without tying it to N3.
     expect(aoCode({ region: 'thoracolumbar', morphology: { type: 'C' }, neuro: 'N4', compression: true })).toBe('C (N4+)')
+  })
+
+  // AO-9, the author's decision of 2026-10-29: no "N0+". Divi 2019: "+" signifies "continued spinal
+  // cord compression in a patient with a neurological injury". The calculator wrote "+" with any
+  // grade, so "N0+" (neurologically intact) was possible; it is now written only with a deficit
+  // present at the examination, N2 to N4, and not with N1 (resolved) or NX (not examined).
+  test('"+" only with a neurological injury present (N2 to N4)', () => {
+    expect(aoNeuros.filter((n) => aoCompressionAllowed(n))).toEqual(['N2', 'N3', 'N4'])
+    expect(aoCompressionAllowed(undefined)).toBe(false)
+    for (const region of ['subaxial', 'thoracolumbar'] as const) {
+      expect(aoCode({ region, morphology: { type: 'A1' }, neuro: 'N0', compression: true })).toBe('A1 (N0)')
+      expect(aoCode({ region, morphology: { type: 'A1' }, neuro: 'N1', compression: true })).toBe('A1 (N1)')
+      expect(aoCode({ region, morphology: { type: 'A1' }, neuro: 'NX', compression: true })).toBe('A1 (NX)')
+      expect(aoCode({ region, morphology: { type: 'A1' }, neuro: 'N2', compression: true })).toBe('A1 (N2+)')
+      expect(aoCode({ region, morphology: { type: 'A1' }, compression: true })).toBe('A1')
+    }
   })
 
   // The thoracolumbar poster's nomenclature examples: "T8-T9: C (T9: A3; N3; M2)" and "L1: A4 (N0; M1)".

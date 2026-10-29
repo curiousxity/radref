@@ -10,9 +10,8 @@ const study = studyOf(SpineTraumaCtStudyPage)
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims) or, for AO
  * Spine, 2026-10-23-spine-calculators-sources.md (AO claims). The references are matched and
- * all but two claims are verified there (T5-1, the expanded Denver criteria, and the exact
- * 1 cm / 40% facet boundary in AO-6); when those are checked a case may have to change; say in
- * that commit why the old expectation was wrong.
+ * all but one claim is verified there (the exact 1 cm / 40% facet boundary in AO-6); when it is
+ * checked a case may have to change; say in that commit why the old expectation was wrong.
  */
 
 describe('spine trauma CT lesson', () => {
@@ -20,13 +19,16 @@ describe('spine trauma CT lesson', () => {
     expect(study.learn.map((section) => section.id)).toEqual(['technique', 'ccj', 'subaxial', 'thoracolumbar', 'vessels', 'collapse', 'canal', 'impression'])
   })
 
-  // The references are matched (each has a DOI). Two claims are still unchecked (T5-1, the
-  // expanded Denver criteria; AO-6, the exact 1 cm / 40% facet boundary), so the note keeps
-  // saying so. Ten cited papers plus two open reviews (Alves 2020, Wáng 2024).
+  // The references are matched (each has a DOI). One claim is still unchecked (AO-6, the exact
+  // 1 cm / 40% facet boundary), so the note keeps saying so; the expanded Denver criteria (T5-1)
+  // are settled (the author's decisions, 2026-10-29). Ten cited papers plus eight open ones:
+  // Alves 2020, Wáng 2024, and for the decisions of 2026-10-29 Radcliff 2013, Woods 2018,
+  // Kopparapu 2022 (rule of Spence), Brommeland 2018, Wagner 2023 (Denver), Wáng 2020 (Genant).
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    expect(study.sourceNote).toMatch(/Denver/)
-    expect(study.references).toHaveLength(12)
+    expect(study.sourceNote).toMatch(/1 cm or 40%/)
+    expect(study.sourceNote).not.toMatch(/Denver/)
+    expect(study.references).toHaveLength(18)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
     // T-R8: the author list was wrong after Laredo (it read Lakhdar F ... Champsaur P, Morvan G).
     expect(study.references.map((ref) => ref.citation)).toContain('Laredo JD, Lakhdari K, Bellaïche L, Hamze B, Janklewicz P, Tubiana JM. Acute vertebral collapse: CT findings in benign and malignant nontraumatic cases. Radiology. 1995;194(1):41-48.')
@@ -113,7 +115,7 @@ describe('spine trauma CT report: whole cases', () => {
     expect(impressionOf(values)).toBe([
       "Odontoid fracture, Anderson and D'Alonzo type II.",
       aoSentence({ region: 'subaxial', morphology: { type: 'B2', body: 'A1' }, facet: 'F2 BL', modifiers: [] }, 'C5–C6'),
-      'Meets the expanded Denver screening criteria for blunt cerebrovascular injury (C1–C3 fracture).',
+      'Meets the expanded Denver screening criteria for blunt cerebrovascular injury (odontoid fracture, subaxial cervical injury at C5–C6).',
       aoSentence({ region: 'thoracolumbar', morphology: { type: 'A3' }, modifiers: [] }, 'L1'),
       'Spinal canal narrowed: 30% at L1.',
     ].join('\n'))
@@ -144,25 +146,46 @@ describe('spine trauma CT rules (unchecked)', () => {
     expect(impressionOf({ ...normal, bdi: '8', adi: '1' })).toBe('No acute fracture or malalignment of the spine.')
   })
 
-  // T2-2: "A combined overhang of more than 6.9 mm suggested transverse ligament rupture."
-  // T2-3: the rule can miss ruptures that MRI shows.
-  test('C1 lateral mass overhang at 6.9 mm', () => {
+  // T2-2: Spence 1970: "if the lateral mass displacement is greater than 6.9 millimeters, the
+  // transverse ligament probably is torn", and "a high probability that the ligament is intact if
+  // spread of the lateral mass is less than 5.7 millimeters". T2-3: the rule misses ruptures MRI
+  // shows. The author's decisions of 2026-10-29 (28, 29): the rule is cadaver-derived and was
+  // applied to radiographs; on CT the overhang did not correlate with the ligament (Radcliff 2013),
+  // and "LMD is not a reliable independent indicator for TAL failure" (Woods 2018). The chip above
+  // 6.9 mm said "suggests rupture" as if the rule were a CT test; it now says it is not a reliable
+  // test on its own. No value, however small, reads as an intact ligament.
+  test('C1 lateral mass overhang at 6.9 mm, and never "intact" below 5.7 mm', () => {
     const overhang = (mm: string) => chips(study, 'ccj', { coverage: 'cervical', c1: 'present', 'c1-overhang': mm })['Transverse ligament']
-    // "Rupture likely" claimed more than the rule's own "suggested"; and a total within 6.9 mm
-    // must not read as reassurance, since the rule misses ruptures MRI shows (Dickman).
-    expect(overhang('7')).toBe('Overhang above 6.9 mm: suggests rupture')
-    expect(overhang('6.9')).toBe('Overhang within 6.9 mm: does not rule out a rupture; MRI shows it directly')
-    expect(impressionOf({ ...normal, c1: 'present', 'c1-overhang': '8' }).split('\n')[0]).toBe('C1 fracture, with combined lateral mass overhang of 8 mm suggesting transverse ligament rupture.')
+    expect(overhang('7')).toBe('Overhang above 6.9 mm: suggests disruption by the rule of Spence, not a reliable test on its own; MRI shows the ligament')
+    expect(overhang('6.9')).toBe('Overhang within 6.9 mm: does not exclude a ligament injury; MRI shows the ligament')
+    expect(overhang('5')).toBe('Overhang within 6.9 mm: does not exclude a ligament injury; MRI shows the ligament')
+    for (const mm of ['0', '3', '5.6', '5.7', '6']) expect(overhang(mm)).not.toMatch(/intact|reassur/i)
+    expect(impressionOf({ ...normal, c1: 'present', 'c1-overhang': '8' }).split('\n')[0]).toBe('C1 fracture, with combined lateral mass overhang of 8 mm, above the 6.9 mm of the rule of Spence; the overhang does not reliably establish transverse ligament injury, which MRI shows directly.')
+    expect(impressionOf({ ...normal, c1: 'present', 'c1-overhang': '4' })).not.toMatch(/intact|reassur/i)
   })
 
-  // T5-1: expanded Denver criteria: subluxation, foramen transversarium, C1–C3 fractures.
+  // T5-1, the author's decision of 2026-10-29 (30): the expanded Denver risk factor is "Cervical
+  // spine fracture, subluxation or ligamentous injury at any level" (Brommeland 2018, Table 3;
+  // Wagner 2023, Table 1), in "trauma patients with signs or symptoms of BCVI or a high-energy
+  // trauma mechanism with one or more of the risk factors" (Brommeland). The form used the older,
+  // more selective list (subluxation, foramen, C1–C3) and could not see C3, so a subaxial A1
+  // fracture, at C3 or anywhere, raised nothing; now any cervical injury does, with a high-energy
+  // mechanism.
   test('vertebral artery screening criteria', () => {
-    expect(chips(study, 'vessels', { ...normal, foramen: 'yes' })['Vertebral arteries']).toBe('Screening criterion met: fracture into a foramen transversarium')
-    expect(chips(study, 'vessels', { ...normal, c1: 'present' })['Vertebral arteries']).toBe('Screening criterion met: C1–C3 fracture')
-    expect(chips(study, 'vessels', { ...normal, cx: 'present', 'cx-facet-left': 'F4' })['Vertebral arteries']).toBe('Screening criterion met: subluxation')
-    expect(chips(study, 'vessels', { ...normal, cx: 'present', 'cx-type': 'C' })['Vertebral arteries']).toBe('Screening criterion met: subluxation')
-    expect(chips(study, 'vessels', { ...normal, cx: 'present', 'cx-type': 'A1' })['Vertebral arteries']).toBeUndefined()
-    expect(chips(study, 'vessels', normal)['Vertebral arteries']).toBeUndefined()
+    const vessels = (values: Values) => chips(study, 'vessels', values)['Vertebral arteries']
+    expect(vessels({ ...normal, foramen: 'yes' })).toBe('Screening criterion met: fracture into a foramen transversarium')
+    expect(vessels({ ...normal, c1: 'present' })).toBe('Screening criterion met: C1 fracture')
+    expect(vessels({ ...normal, dens: 'II', c2: 'present' })).toBe('Screening criterion met: odontoid fracture, C2 fracture')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' })).toBe('Screening criterion met: subaxial cervical injury at C3')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C6', 'cx-type': 'A0' })).toBe('Screening criterion met: subaxial cervical injury at C6')
+    expect(vessels({ ...normal, cx: 'present', 'cx-facet-left': 'F4' })).toBe('Screening criterion met: subaxial cervical injury')
+    expect(vessels({ ...normal, cx: 'present', 'cx-level': 'C5–C6', 'cx-type': 'B2' })).toBe('Screening criterion met: subaxial cervical injury at C5–C6')
+    expect(impressionOf({ ...normal, cx: 'present', 'cx-level': 'C3', 'cx-type': 'A1' }).split('\n')[1]).toBe('Meets the expanded Denver screening criteria for blunt cerebrovascular injury (subaxial cervical injury at C3).')
+    // Without a high-energy mechanism the injury is shown, but not as a criterion met.
+    expect(vessels({ ...normal, history: 'low', c1: 'present' })).toBe('C1 fracture: a screening criterion with a high-energy mechanism')
+    expect(impressionOf({ ...normal, history: 'low', c1: 'present' })).toBe('C1 fracture.')
+    expect(vessels({ ...normal, tl: 'present', 'tl-type': 'A1' })).toBeUndefined()
+    expect(vessels(normal)).toBeUndefined()
   })
 
   // AO-1 to AO-7 via the shared logic, and AO-10: the ankylosed spine modifier by region.
@@ -174,7 +197,9 @@ describe('spine trauma CT rules (unchecked)', () => {
       .toBe(aoSentence({ region: 'thoracolumbar', morphology: { type: 'B3' }, modifiers: ['M2'] }, 'T10'))
   })
 
-  // T6-1: "Grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40%."
+  // T6-1: "Grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40%." The author's
+  // decision of 2026-10-29 (32): exactly 40% stays grade 2. Wáng 2020, Table 1: grade 2 ">25–1/3"
+  // and ">1/3–40%", grade 3 ">40%".
   test('Genant grade at 20, 25 and 40%', () => {
     const genant = (pct: string) => chips(study, 'collapse', { collapse: 'present', 'height-loss': pct }).Genant
     expect(genant('19')).toBe('Under 20%: below grade 1')

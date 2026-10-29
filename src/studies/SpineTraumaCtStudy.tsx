@@ -10,9 +10,11 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 /*
  * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23). Claims
- * are verified from abstracts, papers the author supplied, AO Spine's posters and open reviews
- * (Alves 2020 for T2-3, Wáng 2024 for T6-1, cited beside the originals); still unchecked are the
- * expanded Denver criteria (T5-1) and the exact 1 cm / 40% facet boundary (AO-6). The claims
+ * are verified from abstracts, papers the author supplied, AO Spine's posters and open papers
+ * cited beside the originals (Alves 2020 for T2-3; Radcliff 2013, Woods 2018 and Kopparapu 2022
+ * for the rule of Spence, T2-2; Brommeland 2018 and Wagner 2023 for the expanded Denver criteria,
+ * T5-1; Wáng 2024 and Wáng 2020 for Genant, T6-1), with the author's decisions of 2026-10-29
+ * applied. Still unchecked: the exact 1 cm / 40% facet boundary (AO-6). The claims
  * table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-spine-trauma-ct-sources.md (T claims); the AO Spine
  * wording is in 2026-10-23-spine-calculators-sources.md (AO claims). Rule chips and warnings
@@ -31,6 +33,12 @@ const GENANT_DOI = '10.1002/jbmr.5650080915'
 const WESTERVELD_DOI = '10.1007/s00586-008-0764-0'
 const ALVES_DOI = '10.14245/ns.2040226.113'
 const WANG_DOI = '10.1007/s00256-024-04678-4'
+const RADCLIFF_DOI = '10.1111/os.12034'
+const WOODS_DOI = '10.1093/neuros/nyx194'
+const KOPPARAPU_DOI = '10.3171/2021.12.SPINE211188'
+const BROMMELAND_DOI = '10.1186/s13049-018-0559-1'
+const WAGNER_DOI = '10.1259/bjr.20221116'
+const WANG_ATM_DOI = '10.21037/atm.2020.02.23'
 
 const VACCARO_TL = <Cite doi={VACCARO_TL_DOI}>Vaccaro et al., Spine 2013</Cite>
 const VACCARO_CX = <Cite doi={VACCARO_CX_DOI}>Vaccaro et al., Eur Spine J 2016</Cite>
@@ -44,6 +52,12 @@ const GENANT = <Cite doi={GENANT_DOI}>Genant et al., J Bone Miner Res 1993</Cite
 const WESTERVELD = <Cite doi={WESTERVELD_DOI}>Westerveld et al., Eur Spine J 2009</Cite>
 const ALVES = <Cite doi={ALVES_DOI}>Alves et al., Neurospine 2020</Cite>
 const WANG = <Cite doi={WANG_DOI}>Wáng et al., Skeletal Radiol 2024</Cite>
+const RADCLIFF = <Cite doi={RADCLIFF_DOI}>Radcliff et al., Orthop Surg 2013</Cite>
+const WOODS = <Cite doi={WOODS_DOI}>Woods et al., Neurosurgery 2018</Cite>
+const KOPPARAPU = <Cite doi={KOPPARAPU_DOI}>Kopparapu et al., J Neurosurg Spine 2022</Cite>
+const BROMMELAND = <Cite doi={BROMMELAND_DOI}>Brommeland et al., Scand J Trauma Resusc Emerg Med 2018</Cite>
+const WAGNER = <Cite doi={WAGNER_DOI}>Wagner et al., Br J Radiol 2023</Cite>
+const WANG_ATM = <Cite doi={WANG_ATM_DOI}>Wáng et al., Ann Transl Med 2020</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Vaccaro AR, Oner C, Kepler CK, Dvorak M, Schnake K, Bellabarba C, Reinhold M, Aarabi B, Kandziora F, Chapman J, Shanmuganathan R, Fehlings M, Vialle L. AOSpine thoracolumbar spine injury classification system: fracture description, neurological status, and key modifiers. Spine (Phila Pa 1976). 2013;38(23):2028-2037.', doi: VACCARO_TL_DOI },
@@ -58,6 +72,12 @@ const references: LessonReference[] = [
   { citation: 'Westerveld LA, Verlaan JJ, Oner FC. Spinal fractures in patients with ankylosing spinal disorders: a systematic review of the literature on treatment, neurological status and complications. Eur Spine J. 2009;18(2):145-156.', doi: WESTERVELD_DOI },
   { citation: 'Alves OL, Pereira L, Kim SH, Grin A, Shimokawa N, Konovalov N, Zileli M. Upper cervical spine trauma: WFNS Spine Committee recommendations. Neurospine. 2020;17(4):723-736.', doi: ALVES_DOI },
   { citation: 'Wáng YXJ, Diacinti D, Aparisi Gómez MP, Santiago FR, Becce F, Tagliafico AS, Prakash M, Isaac A, Dalili D, Griffith JF, Guglielmi G, Bazzocchi A. Radiological diagnosis of prevalent osteoporotic vertebral fracture on radiographs: an interim consensus from a group of experts of the ESSR osteoporosis and metabolism subcommittee. Skeletal Radiol. 2024;53(12):2563-2574.', doi: WANG_DOI },
+  { citation: 'Radcliff KE, Sonagli MA, Rodrigues LM, Sidhu GS, Albert TJ, Vaccaro AR. Does C1 fracture displacement correlate with transverse ligament integrity? Orthop Surg. 2013;5(2):94-99.', doi: RADCLIFF_DOI },
+  { citation: 'Woods RO, Inceoglu S, Akpolat YT, Cheng WK, Jabo B, Danisa O. C1 lateral mass displacement and transverse atlantal ligament failure in Jefferson\'s fracture: a biomechanical study of the "rule of Spence". Neurosurgery. 2018;82(2):226-231.', doi: WOODS_DOI },
+  { citation: 'Kopparapu S, Mao G, Judy BF, Theodore N. Fifty years later: the "rule of Spence" is finally ready for retirement. J Neurosurg Spine. 2022;37(2):149-156.', doi: KOPPARAPU_DOI },
+  { citation: 'Brommeland T, Helseth E, Aarhus M, Moen KG, Dyrskog S, Bergholt B, Olivecrona Z, Jeppesen E. Best practice guidelines for blunt cerebrovascular injury (BCVI). Scand J Trauma Resusc Emerg Med. 2018;26(1):90.', doi: BROMMELAND_DOI },
+  { citation: 'Wagner MJ, Hussein I, Low G, Samji KB. Comparing the Denver criteria sets for blunt trauma: a retrospective study of cases in Edmonton, Alberta. Br J Radiol. 2023;96(1148):20221116.', doi: WAGNER_DOI },
+  { citation: 'Wáng YXJ, Diacinti D, Yu W, Cheng XG, Nogueira-Barbosa MH, Che-Nordin N, Guglielmi G, Ruiz Santiago F. Semi-quantitative grading and extended semi-quantitative grading for osteoporotic vertebral deformity: a radiographic image database for education and calibration. Ann Transl Med. 2020;8(6):398.', doi: WANG_ATM_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -112,7 +132,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Measure the basion–dens interval and the atlantodental interval. On CT in adults, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm, which the authors propose as normal values ({ROJAS}). Values of 8.5 mm and 2 mm or more raise the question of craniocervical or atlantoaxial injury.</p>
-        <p>Look at the occipital condyles and the ring of C1. When C1 is fractured, add the overhang of both lateral masses over C2: more than 6.9 mm in total suggested rupture of the transverse ligament ({SPENCE}). It is an old rule from open-mouth radiographs, not a validated CT test: use it as a pointer to a ligament injury, and do not take a smaller total as proof the ligament is intact, since the rule misses ruptures that MRI shows directly ({DICKMAN}; {ALVES}).</p>
+        <p>Look at the occipital condyles and the ring of C1. The rule of Spence is a cadaver-derived criterion historically applied to open-mouth AP radiographs: a combined C1 lateral-mass overhang over C2 (right and left added together) of more than 6.9 mm suggests transverse atlantal ligament disruption ({SPENCE}; {RADCLIFF}). Historically, less than 5.7 mm combined overhang was considered reassuring and more than 6.9 mm concerning for ligament rupture; neither threshold reliably establishes or excludes transverse atlantal ligament injury, and the overhang is not a reliable stand-alone test of ligament integrity ({SPENCE}; {WOODS}; {KOPPARAPU}).</p>
+        <p>Do not carry the radiographic threshold over to CT unchanged: measured on CT, the combined overhang did not correlate with ligament integrity on MRI ({RADCLIFF}). The rule misses ruptures, and MRI shows the ligament directly ({DICKMAN}; {ALVES}).</p>
         <p>Give an odontoid fracture its Anderson and D'Alonzo type ({ANDERSON}): type I an oblique fracture through the upper part of the dens, type II at the junction of the dens with the body of C2, type III through the body of C2. In their series type II fractures were the most prone to non-union. Then look at the rest of C2, including the pars interarticularis.</p>
         <ScanFigures images={[spineTraumaScans.jefferson, spineTraumaScans.odontoid, spineTraumaScans.hangman]} />
       </>
@@ -147,7 +168,7 @@ const learn: LearnSection[] = [
     title: 'Step 5. Vertebral arteries',
     body: (
       <>
-        <p>Some cervical spine fractures put the vertebral arteries at risk. The expanded Denver screening criteria for blunt cerebrovascular injury include cervical spine fractures with subluxation, fractures extending into a foramen transversarium, and fractures of C1 to C3 ({BURLEW}). When one is present, say so in the report.</p>
+        <p>Some cervical spine injuries put the vertebral arteries at risk. In the expanded Denver screening criteria for blunt cerebrovascular injury, a cervical spine fracture, subluxation or ligamentous injury at any level is a risk factor, C3 and below as much as C1 and C2 ({BURLEW}; {BROMMELAND}; {WAGNER}). The criteria apply to trauma patients with signs or symptoms of blunt cerebrovascular injury, or with a high-energy mechanism and one or more of the risk factors ({BROMMELAND}). After a high-energy injury with a cervical spine injury, say so in the report.</p>
       </>
     ),
   },
@@ -156,7 +177,7 @@ const learn: LearnSection[] = [
     title: 'Step 6. Vertebral collapse without major trauma',
     body: (
       <>
-        <p>Grade the height loss of a collapsed vertebra by Genant: grade 1 about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}; {WANG}).</p>
+        <p>Grade the height loss of a collapsed vertebra by Genant: grade 1 about 20–25%, grade 2 more than 25% up to 40%, grade 3 more than 40% ({GENANT}; {WANG}; {WANG_ATM}). The grade is a visual estimate, a source of disagreement between readers, so a value near a boundary is no more precise than the eye ({WANG}); exactly 40% is grade 2 ({WANG_ATM}).</p>
         <p>Then decide whether the collapse looks osteoporotic or malignant. CT findings significantly more frequent in benign collapse include fracture lines within the cancellous bone and retropulsion of a fragment of the posterior cortex into the canal. Findings significantly more frequent in malignant collapse include destruction of the anterolateral or posterior cortex, destruction of cancellous bone, destruction of a pedicle, a focal paraspinal soft-tissue mass and an epidural mass ({LAREDO}). These are differences in frequency, not proof either way.</p>
       </>
     ),
@@ -302,7 +323,10 @@ const fields = {
 const MALIGNANT = ['cortex', 'cancellous', 'pedicle', 'epidural', 'paraspinal']
 const BENIGN = ['lines', 'retropulsion']
 
-/** T6-1: Genant grade from the height loss; 0 under 20%. */
+/**
+ * T6-1: Genant grade from the height loss; 0 under 20%. Wáng 2020, Table 1: grade 1 "≥20–25%",
+ * grade 2 ">25–1/3" and ">1/3–40%", grade 3 ">40%", so exactly 40% is grade 2.
+ */
 function genantGrade(heightLoss: number): 0 | 1 | 2 | 3 {
   if (heightLoss < 20) return 0
   if (heightLoss <= 25) return 1
@@ -343,17 +367,26 @@ function injurySentence(item: Injury): string {
   return aoSentence({ ...aoFullOf({ ...item, type: item.type }), modifiers: item.modifiers }, item.level || undefined)
 }
 
-/** T5-1: the expanded Denver criteria that this form can see. */
+/**
+ * T5-1: the expanded Denver risk factor "Cervical spine fracture, subluxation or ligamentous injury
+ * at any level" (Brommeland 2018; Wagner 2023), as far as this form can see it: any C1 or C2
+ * fracture, any subaxial injury (C3 included; a subaxial injury is a fracture, a ligamentous
+ * injury or a subluxation), and a fracture into a foramen transversarium.
+ */
 function denverReasons(values: Values): string[] {
   if (!cervicalCovered(values)) return []
   const cx = injury(values, 'subaxial')
-  const subluxation = cx && (cx.type === 'C' || [facetValue(values, 'cx-facet-right'), facetValue(values, 'cx-facet-left')].includes('F4'))
   return [
-    (str(values, 'c1') === 'present' || !['', 'none'].includes(str(values, 'dens')) || str(values, 'c2') === 'present') && 'C1–C3 fracture',
+    str(values, 'c1') === 'present' && 'C1 fracture',
+    !['', 'none'].includes(str(values, 'dens')) && 'odontoid fracture',
+    str(values, 'c2') === 'present' && 'C2 fracture',
+    cx && `subaxial cervical injury${cx.level ? ` at ${cx.level}` : ''}`,
     str(values, 'foramen') === 'yes' && 'fracture into a foramen transversarium',
-    subluxation && 'subluxation',
   ].filter((reason): reason is string => Boolean(reason))
 }
+
+/** T5-1: the risk factors count with a high-energy mechanism (Brommeland 2018). */
+const highEnergy = (values: Values) => str(values, 'history') === 'high'
 
 /** T2-1: the CT normal is less than the limit, so a value at the limit is outside it. */
 const atOrOver = (values: Values, id: string, limit: number) => {
@@ -371,12 +404,14 @@ function deriveCcj(values: Values): Derived[] {
   if (bdi !== undefined) out.push(bdi >= 8.5 ? { label: 'Basion–dens', value: '8.5 mm or more', tone: 'warn' } : { label: 'Basion–dens', value: 'Under 8.5 mm', tone: 'good' })
   const adi = num(values, 'adi')
   if (adi !== undefined) out.push(adi >= 2 ? { label: 'Atlantodental', value: '2 mm or more', tone: 'warn' } : { label: 'Atlantodental', value: 'Under 2 mm', tone: 'good' })
-  // T2-2, T2-3: combined overhang over 6.9 mm suggests transverse ligament rupture.
+  // T2-2, T2-3: the rule of Spence (over 6.9 mm suggests disruption) is cadaver-derived and was
+  // applied to radiographs; neither 6.9 nor 5.7 mm establishes or excludes the injury, so no
+  // value reads as an intact ligament.
   const overhang = num(values, 'c1-overhang')
   if (str(values, 'c1') === 'present' && overhang !== undefined) {
     out.push(overhang > 6.9
-      ? { label: 'Transverse ligament', value: 'Overhang above 6.9 mm: suggests rupture', tone: 'warn' }
-      : { label: 'Transverse ligament', value: 'Overhang within 6.9 mm: does not rule out a rupture; MRI shows it directly' })
+      ? { label: 'Transverse ligament', value: 'Overhang above 6.9 mm: suggests disruption by the rule of Spence, not a reliable test on its own; MRI shows the ligament', tone: 'warn' }
+      : { label: 'Transverse ligament', value: 'Overhang within 6.9 mm: does not exclude a ligament injury; MRI shows the ligament' })
   }
   return out
 }
@@ -395,7 +430,10 @@ function deriveRegion(region: AoRegion) {
 
 function deriveVessels(values: Values): Derived[] {
   const reasons = denverReasons(values)
-  return reasons.length > 0 ? [{ label: 'Vertebral arteries', value: `Screening criterion met: ${reasons.join(', ')}`, tone: 'warn' }] : []
+  if (reasons.length === 0) return []
+  return [highEnergy(values)
+    ? { label: 'Vertebral arteries', value: `Screening criterion met: ${reasons.join(', ')}`, tone: 'warn' }
+    : { label: 'Vertebral arteries', value: `${upperFirst(reasons.join(', '))}: a screening criterion with a high-energy mechanism` }]
 }
 
 function deriveCollapse(values: Values): Derived[] {
@@ -484,7 +522,7 @@ function findings(values: Values): string[] {
     if (str(values, 'condyle') === 'present') out.push('Occipital condyle fracture.')
     if (str(values, 'c1') === 'present') {
       const overhang = num(values, 'c1-overhang')
-      out.push(`C1 fracture${overhang !== undefined && overhang > 6.9 ? `, with combined lateral mass overhang of ${overhang} mm suggesting transverse ligament rupture` : ''}.`)
+      out.push(`C1 fracture${overhang !== undefined && overhang > 6.9 ? `, with combined lateral mass overhang of ${overhang} mm, above the 6.9 mm of the rule of Spence; the overhang does not reliably establish transverse ligament injury, which MRI shows directly` : ''}.`)
     }
     const dens = str(values, 'dens')
     if (dens && dens !== 'none') out.push(`Odontoid fracture, Anderson and D'Alonzo type ${dens}.`)
@@ -493,7 +531,7 @@ function findings(values: Values): string[] {
   const cx = injury(values, 'subaxial')
   if (cx) out.push(injurySentence(cx))
   const reasons = denverReasons(values)
-  if (reasons.length > 0) out.push(`Meets the expanded Denver screening criteria for blunt cerebrovascular injury (${reasons.join(', ')}).`)
+  if (reasons.length > 0 && highEnergy(values)) out.push(`Meets the expanded Denver screening criteria for blunt cerebrovascular injury (${reasons.join(', ')}).`)
   const tl = injury(values, 'thoracolumbar')
   if (tl) out.push(injurySentence(tl))
 
@@ -588,7 +626,7 @@ const steps: ReportStep[] = [
     id: 'ccj',
     title: 'Step 2. Craniocervical junction and C1–C2',
     learn: 'ccj',
-    teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). C1 lateral mass overhang over 6.9 mm in total suggests transverse ligament rupture ({SPENCE}), though MRI shows ruptures the rule misses ({DICKMAN}; {ALVES}). Odontoid types I–III ({ANDERSON}).</p>,
+    teach: <p>On adult CT, 95% had a basion–dens interval less than 8.5 mm and an atlantodental interval less than 2 mm ({ROJAS}). The rule of Spence, cadaver-derived and applied to open-mouth radiographs, takes a combined C1 lateral-mass overhang over 6.9 mm to suggest transverse ligament disruption ({SPENCE}). Neither 6.9 mm nor the older reassuring 5.7 mm reliably establishes or excludes the injury; on CT the overhang did not correlate with the ligament on MRI, which shows it directly ({WOODS}; {KOPPARAPU}; {RADCLIFF}). Odontoid types I–III ({ANDERSON}).</p>,
     fields: [fields.bdi, fields.adi, fields.condyle, fields.c1, fields.c1Overhang, fields.dens, fields.c2, fields.c2Text],
     derive: deriveCcj,
   },
@@ -617,7 +655,7 @@ const steps: ReportStep[] = [
     id: 'vessels',
     title: 'Step 5. Vertebral arteries',
     learn: 'vessels',
-    teach: <p>Screening criteria include cervical fractures with subluxation, into a foramen transversarium, or of C1 to C3 ({BURLEW}).</p>,
+    teach: <p>Expanded Denver criteria: with a high-energy mechanism, a cervical spine fracture, subluxation or ligamentous injury at any level ({BURLEW}; {BROMMELAND}; {WAGNER}). Signs or symptoms of blunt cerebrovascular injury are a separate criterion ({BROMMELAND}).</p>,
     fields: [fields.foramen],
     derive: deriveVessels,
   },
@@ -625,7 +663,7 @@ const steps: ReportStep[] = [
     id: 'collapse',
     title: 'Step 6. Vertebral collapse without major trauma',
     learn: 'collapse',
-    teach: <p>Genant grades: about 20–25%, 25–40%, over 40% ({GENANT}; {WANG}). Cortical, cancellous or pedicle destruction, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse ({LAREDO}).</p>,
+    teach: <p>Genant grades: about 20–25%, over 25% up to 40%, over 40% ({GENANT}; {WANG}; {WANG_ATM}); a visual estimate, so a boundary is approximate. Cortical, cancellous or pedicle destruction, a focal paraspinal mass and an epidural mass were significantly more frequent in malignant collapse ({LAREDO}).</p>,
     fields: [fields.collapse, fields.collapseLevel, fields.heightLoss, fields.collapseFeatures],
     derive: deriveCollapse,
   },
@@ -649,7 +687,7 @@ const study: StudyDefinition = {
   slug: 'spine-trauma-ct',
   name: 'Spine CT for pain or injury',
   lede: 'Read a spine CT for pain or injury: the craniocervical junction and C1–C2, AO Spine types in the neck and the thoracolumbar spine, the vertebral arteries, collapse without major trauma, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open reviews, except two that are still unchecked: the expanded Denver screening criteria, and whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, and the claims have been checked against their papers, AO Spine\'s posters or open papers, except one that is still unchecked: whether a facet fragment of exactly 1 cm or 40% of the lateral mass is F1 or F2.',
   references,
   report: {
     steps,
@@ -666,10 +704,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'spence',
-      question: 'A C1 burst fracture has lateral masses overhanging C2 by 4 mm on each side. What does the rule of Spence suggest?',
-      options: ['An intact transverse ligament', 'Rupture of the transverse ligament, since the total is over 6.9 mm', 'An odontoid fracture', 'Nothing; the rule is for children'],
+      question: 'On CT, a C1 burst fracture has a combined lateral-mass overhang of 5 mm. What follows for the transverse ligament?',
+      options: ['It is intact, since the total is under 5.7 mm', 'It may still be injured: the overhang does not reliably exclude injury, and MRI shows the ligament directly', 'It is torn', 'Nothing; the rule is for children'],
       answer: 1,
-      explanation: <p>A combined overhang of more than 6.9 mm suggested transverse ligament rupture ({SPENCE}). The rule can miss ruptures that MRI shows ({DICKMAN}; {ALVES}).</p>,
+      explanation: <p>The rule of Spence is cadaver-derived and was applied to open-mouth radiographs: historically, less than 5.7 mm was considered reassuring and more than 6.9 mm concerning ({SPENCE}). Neither threshold reliably establishes or excludes transverse atlantal ligament injury ({WOODS}; {KOPPARAPU}), and on CT the overhang did not correlate with the ligament on MRI ({RADCLIFF}).</p>,
     },
     {
       id: 'odontoid',
@@ -708,17 +746,17 @@ const study: StudyDefinition = {
     },
     {
       id: 'denver',
-      question: 'Which cervical fracture meets the expanded Denver screening criteria for blunt cerebrovascular injury?',
-      options: ['A C6 spinous process fracture', 'A fracture extending into a foramen transversarium', 'A T1 transverse process fracture', 'An L1 compression fracture'],
+      question: 'After a high-energy injury, which fracture meets the expanded Denver screening criteria for blunt cerebrovascular injury?',
+      options: ['An L1 compression fracture', 'A C3 vertebral body fracture', 'A T12 wedge fracture', 'A sacral fracture'],
       answer: 1,
-      explanation: <p>The criteria include cervical fractures with subluxation, fractures into a foramen transversarium, and fractures of C1 to C3 ({BURLEW}).</p>,
+      explanation: <p>With a high-energy mechanism, a cervical spine fracture, subluxation or ligamentous injury at any level is a risk factor, so a C3 fracture counts ({BURLEW}; {BROMMELAND}; {WAGNER}).</p>,
     },
     {
       id: 'genant',
       question: 'A vertebral body has lost 35% of its height. What is the Genant grade?',
       options: ['Grade 1', 'Grade 2', 'Grade 3', 'Not a fracture'],
       answer: 1,
-      explanation: <p>Grade 1 is about 20–25%, grade 2 about 25–40%, grade 3 more than 40% ({GENANT}; {WANG}).</p>,
+      explanation: <p>Grade 1 is about 20–25%, grade 2 more than 25% up to 40%, grade 3 more than 40% ({GENANT}; {WANG}; {WANG_ATM}).</p>,
     },
     {
       id: 'malignant',
