@@ -35,7 +35,7 @@ done. These two still need a PDF:
 
 ## 3. Papers behind the remaining study claims
 
-Lower priority: each settles one or two claims in a study that still carries "Unchecked draft".
+Lower priority: each settles one or two claims in a study whose note still starts "Unchecked draft".
 
 ### Paediatric elbow study
 
@@ -87,7 +87,7 @@ Lower priority: each settles one or two claims in a study that still carries "Un
 - [ ] O'Driscoll SW 1992, Clin Orthop Relat Res. doi:10.1097/00003086-199207000-00024
 - [ ] Kobayashi K 2004, J Am Acad Orthop Surg. doi:10.5435/00124635-200407000-00005
 - [ ] Rosenberg ZS 1994, Radiology. doi:10.1148/radiology.191.3.8184072
-- [ ] Kijowski R 2005, Skeletal Radiol. doi:10.1007/s00256-004-0854-y
+- [x] Kijowski R 2005, Skeletal Radiol. doi:10.1007/s00256-004-0854-y (read in full, 2026-10-28)
 - [ ] Timmerman LA 1994, Am J Sports Med. doi:10.1177/036354659402200105
 - [ ] Potter HG 1995, Radiology. doi:10.1148/radiology.196.1.7784585
 - [x] Rosenberg ZS 1995, AJR. doi:10.2214/ajr.164.2.7839980 (read, 2026-10-28; the claim it is cited for is not in it, for the author)
