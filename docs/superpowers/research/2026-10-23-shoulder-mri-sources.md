@@ -253,3 +253,11 @@ New sources:
 With these, every claim in the study has been read in an abstract, open full text or an open
 review, so the study's sourceNote no longer says "Unchecked draft". The originals still unread are
 listed in `docs/PAPERS_NEEDED.md`.
+
+## The author's decisions, 2026-10-29
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| S11-1, type III | Give the morphology first and acknowledge the disagreement. Jeong 2026 (full text, PMC13047394): "there has been a disagreement as to whether Sugaya type III should be considered a retorn or healed tendon"; a long-term study "concluded that Sugaya type III should not be considered as a retear"; in Jeong's series type III "can progress to a retear with a higher risk than Sugaya type I/II" (4 of 33 against 1 of 76). | Repaired-cuff step and summary say type III is disputed, citing Jeong; the table marks it "disputed: healed or re-torn"; the chip reads "Type III: insufficient thickness, continuity preserved; re-tear status disputed" (neutral, not "no re-tear"); the impression reads "Rotator cuff repair with insufficient tendon thickness but preserved continuity, Sugaya type III."; the quiz asks only for the type. |
+| S2-3 | Cite Richards only for the Hill-Sachs lesion lying more cephalad than the normal groove; his abstract gives no coracoid cutoff. | The coracoid level is cited to Marcon 2015 and Kadi 2017 alone (help text, summary, quiz). |
+| N (valgus-impacted) | "Different prognosis and treatment considerations", not "a better outlook": the reviews distinguish the pattern but do not show uniformly better outcomes. | Neer page: "it carries a different prognosis and different treatment considerations". |

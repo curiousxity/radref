@@ -196,10 +196,12 @@ the check (2026-10-23); labelled "Unchecked draft" until it is done.
   cites Woertler and Waldt, which states it, rather than Smith.
 - [x] Every claim read (2026-10-29, "Sixth check" in the shoulder sources doc): eight open reviews are
   cited beside the originals; N1–N5, S3-1 and S3-3 were already settled against Carofino 2013. The
-  shoulder study and the Neer page no longer say "Unchecked draft". For the author: Sugaya type III
-  (the page calls it no re-tear; Jeong 2026 says authors disagree), the coracoid level credited to
-  Richards (his abstract says only "more cephalic"; his RSNA page has no figures), and Neer's
-  valgus-impacted fracture "has a better outlook" (Carofino: prognosis "different").
+  shoulder study and the Neer page no longer say "Unchecked draft".
+- [x] Decided by the author 2026-10-29: Sugaya type III is given by its morphology (insufficient
+  thickness, continuity preserved) with the disagreement over healed or re-torn and its higher
+  progression to re-tear (Jeong 2026); Richards is cited only for the Hill-Sachs lesion lying more
+  cephalad, the coracoid level only to Marcon and Kadi; Neer's valgus-impacted fracture "carries a
+  different prognosis and different treatment considerations", not "a better outlook".
 
 ### Elbow MRI study and Mason calculator
 

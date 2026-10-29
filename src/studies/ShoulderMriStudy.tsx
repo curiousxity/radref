@@ -165,7 +165,7 @@ const sugayaTable = (
       <tbody>
         <tr><td className="vessel-name">I</td><td>Sufficient thickness, homogeneously low signal</td></tr>
         <tr><td className="vessel-name">II</td><td>Sufficient thickness, with a partial high-signal area</td></tr>
-        <tr><td className="vessel-name">III</td><td>Insufficient thickness, without discontinuity</td></tr>
+        <tr><td className="vessel-name">III</td><td>Insufficient thickness, without discontinuity (disputed: healed or re-torn)</td></tr>
         <tr><td className="vessel-name">IV</td><td>Minor discontinuity: a small re-tear</td></tr>
         <tr><td className="vessel-name">V</td><td>Major discontinuity: a large re-tear</td></tr>
       </tbody>
@@ -192,7 +192,7 @@ const learn: LearnSection[] = [
         <h4>Hill-Sachs lesion</h4>
         <p>The Hill-Sachs lesion is a grooved impaction defect of the posterolateral humeral head, made against the anterior glenoid rim when the shoulder dislocates anteriorly ({HILL_SACHS}; {BAO}). Workman and colleagues compared MRI with radiographs and arthroscopy for detecting it ({WORKMAN}).</p>
         <div className="lesson-key">
-          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process ({RICHARDS}; {MARCON}; {KADI}).</p>
+          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies more cephalad ({RICHARDS}). It lies on the most superior axial images, at or above the level of the coracoid process ({MARCON}; {KADI}).</p>
         </div>
         <h4>Proximal humerus fracture: Neer</h4>
         <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}). Neer later added the valgus-impacted four-part fracture, in which the head is driven down between splayed tuberosities but stays in contact with the glenoid ({CAROFINO}).</p>
@@ -307,7 +307,7 @@ const learn: LearnSection[] = [
     title: 'Step 11. Repaired rotator cuff',
     body: (
       <>
-        <p>This step applies only when the cuff has been repaired before. Sugaya and colleagues classified the repaired cuff on MRI in five types; types IV and V are re-tears ({SUGAYA}; {JEONG}):</p>
+        <p>This step applies only when the cuff has been repaired before. Sugaya and colleagues classified the repaired cuff on MRI in five types; types IV and V are re-tears ({SUGAYA}; {JEONG}). Type III, insufficient thickness with preserved continuity, is disputed: authors disagree whether to group it as healed or re-torn. One long-term study argues against calling it a re-tear, while later work found it progresses to a complete re-tear more often than types I and II ({JEONG}).</p>
         {sugayaTable}
         <ScanFigures images={[shoulderMriScans.sugayaType1Healed, shoulderMriScans.sugayaType4Retear]} />
       </>
@@ -429,7 +429,7 @@ const superiorLabrumOptions: Option[] = [
 ]
 const snyderType: Record<string, string> = { i: 'I', ii: 'II', iii: 'III', iv: 'IV' }
 
-/** S11-1 (types in the Sugaya 2005 abstract; IV and V as re-tears in Jeong 2026): Sugaya's five types; IV and V are re-tears. */
+/** S11-1 (types in the Sugaya 2005 abstract; IV and V as re-tears in Jeong 2026): Sugaya's five types; IV and V are re-tears, III is disputed. */
 const sugayaOptions: Option[] = [
   { value: 'i', label: 'Sufficient thickness, homogeneously low signal' },
   { value: 'ii', label: 'Sufficient thickness, partial high-signal area' },
@@ -705,9 +705,11 @@ function deriveNerves(values: Values): Derived[] {
 
 function deriveRepair(values: Values): Derived[] {
   // S11-1 (checked in the Sugaya 2005 abstract and Jeong 2026): Sugaya types I to V; IV and V are re-tears.
+  // Type III is described by its morphology: whether it is a re-tear is disputed (Jeong 2026).
   const value = str(values, 'repair-integrity')
   const type = sugayaType[value] as string | undefined
   if (!type) return []
+  if (value === 'iii') return [{ label: 'Repaired cuff (Sugaya)', value: 'Type III: insufficient thickness, continuity preserved; re-tear status disputed', tone: 'neutral' }]
   return [{ label: 'Repaired cuff (Sugaya)', value: `Type ${type}: ${sugayaRetear(value) ? 're-tear' : 'no re-tear'}`, tone: sugayaRetear(value) ? 'warn' : 'good' }]
 }
 
@@ -873,7 +875,8 @@ function findings(values: Values): string[] {
 function notes(values: Values): string[] {
   const out: string[] = []
   const repair = str(values, 'repair-integrity')
-  if (str(values, 'prior-repair') === 'yes' && repair && !sugayaRetear(repair)) out.push(`Intact rotator cuff repair, Sugaya type ${sugayaType[repair]}.`)
+  if (str(values, 'prior-repair') === 'yes' && repair === 'iii') out.push('Rotator cuff repair with insufficient tendon thickness but preserved continuity, Sugaya type III.')
+  else if (str(values, 'prior-repair') === 'yes' && repair && !sugayaRetear(repair)) out.push(`Intact rotator cuff repair, Sugaya type ${sugayaType[repair]}.`)
   const variants = list(values, 'variants')
   if (variants.includes('sublabral-foramen')) out.push('Sublabral foramen, a normal variant.')
   if (variants.includes('buford')) out.push('Buford complex, a normal variant.')
@@ -988,7 +991,7 @@ const steps: ReportStep[] = [
     learn: 'bones',
     teach: (
       <>
-        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}; {BAO}). It lies on the most superior axial images, at or above the coracoid; the normal groove lies lower ({RICHARDS}; {MARCON}; {KADI}).</p>
+        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}; {BAO}). It lies more cephalad than the normal groove ({RICHARDS}), on the most superior axial images, at or above the coracoid ({MARCON}; {KADI}).</p>
         <p>Neer: a segment is a part only when displaced more than 1 cm or angulated more than 45°; no displaced segment is one-part, however many fracture lines ({NEER}).</p>
       </>
     ),
@@ -1077,7 +1080,7 @@ const steps: ReportStep[] = [
     learn: 'repair',
     teach: (
       <>
-        <p>Sugaya types of the repaired cuff; IV and V are re-tears ({SUGAYA}; {JEONG}):</p>
+        <p>Sugaya types of the repaired cuff; IV and V are re-tears, and whether type III is one is disputed ({SUGAYA}; {JEONG}):</p>
         {sugayaTable}
       </>
     ),
@@ -1131,7 +1134,7 @@ const study: StudyDefinition = {
       question: 'Flattening of the posterolateral humeral head is seen on axial images well below the coracoid. What is it most likely to be?',
       options: ['A Hill-Sachs lesion', 'A reverse Hill-Sachs lesion', 'A greater tuberosity fracture', 'The normal groove'],
       answer: 3,
-      explanation: <p>The Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid; the normal groove of the posterolateral head lies lower ({RICHARDS}; {MARCON}; {KADI}).</p>,
+      explanation: <p>The Hill-Sachs defect lies more cephalad than the normal groove of the posterolateral head ({RICHARDS}), on the most superior axial images, at or above the level of the coracoid ({MARCON}; {KADI}).</p>,
     },
     {
       id: 'ellman-grade',
@@ -1177,10 +1180,10 @@ const study: StudyDefinition = {
     },
     {
       id: 'sugaya',
-      question: 'A repaired supraspinatus has insufficient thickness but no discontinuity. What Sugaya type is it, and is it a re-tear?',
-      options: ['Type II; no re-tear', 'Type III; no re-tear', 'Type IV; re-tear', 'Type V; re-tear'],
+      question: 'A repaired supraspinatus has insufficient thickness but no discontinuity. What Sugaya type is it?',
+      options: ['Type II', 'Type III', 'Type IV', 'Type V'],
       answer: 1,
-      explanation: <p>Sugaya type III is insufficient thickness without discontinuity. Only types IV (minor discontinuity) and V (major discontinuity) are re-tears ({SUGAYA}).</p>,
+      explanation: <p>Sugaya type III is insufficient thickness without discontinuity ({SUGAYA}). Types IV (minor discontinuity) and V (major discontinuity) are re-tears; authors disagree whether type III should be grouped as healed or re-torn, and it progresses to a complete re-tear more often than types I and II ({JEONG}).</p>,
     },
     {
       id: 'buford',
