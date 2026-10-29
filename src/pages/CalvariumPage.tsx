@@ -543,7 +543,7 @@ export function CalvariumPage() {
           </p>
           <p className="source-note">
             Drafted from the cited reviews. The drawings are schematics, not to scale. The scans are single
-            panels cropped from open-access figures published under {CC_BY}, credited under each one; the arrows are the original authors'.
+            panels cropped from open-access figures published under CC BY licences, credited under each one; the arrows are the original authors'.
           </p>
         </div>
       </section>
