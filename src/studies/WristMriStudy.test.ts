@@ -36,8 +36,9 @@ describe('wrist MRI lesson', () => {
     expect(study.sourceNote).not.toMatch(/scapholunate angle|perilunate|Palmer/)
     // 20 since the Lichtman and Mayfield reviews (Kennedy and Abrams 2019, Kennedy and Allan 2012) were added;
     // 24 since the open reviews of 2026-10-29 (Andersson, Ng, Chen, von Borstel); 32 since the
-    // author's decisions of 2026-10-29 (Zhou, Pang, Vassa, Reagan, Wilson, Dvorsky, Sharma, Okoro).
-    expect(study.references).toHaveLength(32)
+    // author's decisions of 2026-10-29 (Zhou, Pang, Vassa, Reagan, Wilson, Dvorsky, Sharma, Okoro);
+    // 34 with the author's follow-up sources (Kitay and Wolfe 2012, Pinho and Sobania 2017).
+    expect(study.references).toHaveLength(34)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })
@@ -217,7 +218,10 @@ describe('wrist MRI rules', () => {
       .toEqual(['Focal ulnar-side lunate signal is entered, the pattern of ulnar impaction, which goes with positive ulnar variance, but the ulnar variance is entered as negative.'])
   })
 
-  // W3-2, the author's decision (2026-10-29). Normal: "a normal value between 30º and 60º";
+  // W3-2, the author's decision (2026-10-29). Kitay and Wolfe 2012: the SL angle "normally
+  // measures 46° (range, 30° to 60°)"; "A unilateral SL angle of greater than 70° is considered
+  // highly suggestive of increased flexion, or rotatory subluxation of the scaphoid". Zhou 2024:
+  // "a normal value between 30º and 60º";
   // "greater than 70º is consistent with a DISI deformity" (Zhou 2024). Over 60°: "SL angle > 60°"
   // in SL dissociation (Andersson 2017); "scapholunate instability ... scapholunate angle >60°"
   // (Pang 2018). Below 30°: "The SLL angle < 30° and capitolunate angle > 30° are suggestive of

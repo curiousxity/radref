@@ -19,7 +19,7 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * the papers are paywalled and Linscheid 1972 has no abstract in PubMed, so claims are verified
  * from abstracts or from open reviews cited beside the original (2026-10-29: Andersson, Ng,
  * Chen, von Borstel; then, with the author's decisions of 2026-10-29, Zhou, Pang, Vassa, Wilson,
- * Reagan, Dvorsky, Sharma and Okoro). The one claim still unread is whether Herbert and Fisher's
+ * Reagan, Dvorsky, Sharma, Okoro, Kitay and Pinho). The one claim still unread is whether Herbert and Fisher's
  * 1984 paper itself has type B5. The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims); the Mayfield, Herbert,
  * Palmer and Lichtman wording is in 2026-10-23-wrist-calculators-sources.md (MF, HB, PA and LI
@@ -58,6 +58,8 @@ const WILSON_DOI = '10.1007/s12178-022-09819-7'
 const DVORSKY_DOI = '10.1016/j.jhsg.2025.100803'
 const SHARMA_DOI = '10.1055/s-0044-1801268'
 const OKORO_DOI = '10.3390/life13071426'
+const KITAY_DOI = '10.1016/j.jhsa.2012.07.035'
+const PINHO_DOI = '10.1016/j.rboe.2017.06.007'
 
 const LINSCHEID = <Cite doi={LINSCHEID_DOI}>Linscheid et al., J Bone Joint Surg Am 1972</Cite>
 const MAYFIELD = <Cite doi={MAYFIELD_DOI}>Mayfield et al., J Hand Surg Am 1980</Cite>
@@ -91,6 +93,8 @@ const WILSON = <Cite doi={WILSON_DOI}>Wilson, Curr Rev Musculoskelet Med 2023</C
 const DVORSKY = <Cite doi={DVORSKY_DOI}>Dvorsky et al., J Hand Surg Glob Online 2025</Cite>
 const SHARMA = <Cite doi={SHARMA_DOI}>Sharma et al., Indian J Radiol Imaging 2025</Cite>
 const OKORO = <Cite doi={OKORO_DOI}>Okoro et al., Life 2023</Cite>
+const KITAY = <Cite doi={KITAY_DOI}>Kitay and Wolfe, J Hand Surg Am 2012</Cite>
+const PINHO = <Cite doi={PINHO_DOI}>Pinho and Sobania, Rev Bras Ortop 2017</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Linscheid RL, Dobyns JH, Beabout JW, Bryan RS. Traumatic instability of the wrist. Diagnosis, classification, and pathomechanics. J Bone Joint Surg Am. 1972;54(8):1612-1632.', doi: LINSCHEID_DOI },
@@ -125,6 +129,8 @@ const references: LessonReference[] = [
   { citation: 'Dvorsky JL, Rosenberry S, Da Costa A, Green A, Fowler J. A review of perilunate wrist dislocations. J Hand Surg Glob Online. 2025;7(5):100803.', doi: DVORSKY_DOI },
   { citation: 'Sharma M, Choudhury SR, Sinha A, Prakash M. Multimodality imaging in wrist fractures and dislocations. Indian J Radiol Imaging. 2025;35(3):374-386.', doi: SHARMA_DOI },
   { citation: 'Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging diagnosis and management of carpal trauma and instability: an illustrated guide. Life (Basel). 2023;13(7):1426.', doi: OKORO_DOI },
+  { citation: 'Kitay A, Wolfe SW. Scapholunate instability: current concepts in diagnosis and management. J Hand Surg Am. 2012;37(10):2175-2196.', doi: KITAY_DOI },
+  { citation: 'Pinho AB, Sobania RL. Perilunate carpal dislocation. Clinical evaluation of patients operated with reduction and percutaneous fixation without capsular-ligament repair. Rev Bras Ortop. 2017;52(4):402-409.', doi: PINHO_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -162,7 +168,7 @@ const learn: LearnSection[] = [
       <>
         <p>This lesson is for the wrist MRI that arrives with pain, or pain after an injury. It walks a fixed search pattern through every compartment, and uses the injury, when there is one, to decide where to look hardest. The order and the protocol checklist are this site's own; none of the papers below prescribes them.</p>
         <p>Check that the study has all three planes, fat-suppressed fluid-sensitive imaging for marrow edema, ligaments and tendons, and a T1-weighted sequence for fractures and marrow.</p>
-        <p>A fall on the outstretched hand is a common mechanism of a scaphoid fracture ({SHARMA}). A perilunate injury usually follows high-energy trauma, such as a motor vehicle accident, a fall from a height or a sports injury ({DVORSKY}); a fall onto the outstretched hand with the wrist dorsiflexed is one example ({OKORO}). What sets it apart is forceful loading of the wrist in hyperextension, often with ulnar deviation and intercarpal supination ({MAYFIELD}; {DVORSKY}). With such a history, look hardest at the scaphoid, the scapholunate ligament and the ring of structures around the lunate.</p>
+        <p>A fall on the outstretched hand is a common mechanism of a scaphoid fracture ({SHARMA}). Perilunate dislocations typically follow high-energy trauma, such as a motor vehicle accident, a fall from a height or a sports injury ({PINHO}; {DVORSKY}), and may result from a fall on the outstretched hand ({PINHO}; {OKORO}). What sets them apart is abrupt, forceful extension of the wrist, often with ulnar deviation and intercarpal supination ({MAYFIELD}; {PINHO}; {DVORSKY}). With such a history, look hardest at the scaphoid, the scapholunate ligament and the ring of structures around the lunate.</p>
       </>
     ),
   },
@@ -190,8 +196,8 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}; {ANDERSSON}). Say which parts are torn.</p>
-        <p>Linscheid and colleagues described the carpal instability patterns, with the lunate dorsiflexed or palmar flexed within the carpus ({LINSCHEID}). Dorsal intercalated segment instability (DISI) is dorsal tilt of the lunate ({VASSA}). The scapholunate angle also depends on the position of the scaphoid, so an increased angle is not the same thing as a tilted lunate: one study defined DISI by a radiolunate angle over 15° and scapholunate instability by a scapholunate angle over 60° ({PANG}).</p>
-        <p>A normal scapholunate angle is 30° to 60° ({ZHOU}). An angle over 60° is beyond that range and supports scapholunate malalignment ({ANDERSSON}; {PANG}); over 70° is consistent with DISI ({ZHOU}), and this site reads it as strongly suggestive. Some reviews set the bar at 80° ({VASSA}); this site does not require it. An angle below 30° suggests volar intercalated segment instability (VISI) ({VASSA}). The angle is best measured on a true lateral radiograph; on MRI it depends on positioning and may be unreliable ({VASSA}), so treat a measurement on sagittal MRI as a pointer, not a diagnosis.</p>
+        <p>Linscheid and colleagues described the carpal instability patterns, with the lunate dorsiflexed or palmar flexed within the carpus ({LINSCHEID}). Dorsal intercalated segment instability (DISI) is dorsal tilt of the lunate ({VASSA}): on a true lateral radiograph, dorsal radiolunate angulation greater than 15° indicates DISI ({KITAY}; {PANG}). The scapholunate angle also depends on the scaphoid: an angle greater than 70° is highly suggestive of increased flexion, or rotatory subluxation, of the scaphoid ({KITAY}). So an increased scapholunate angle is not the same thing as a tilted lunate.</p>
+        <p>A normal scapholunate angle is 30° to 60° ({KITAY}; {ZHOU}). An angle over 60° is beyond that range and supports scapholunate malalignment ({ANDERSSON}; {PANG}); over 70° is consistent with DISI ({ZHOU}), and this site reads it as strongly suggestive. Some reviews set the bar at 80° ({VASSA}); this site does not require it. An angle below 30° suggests volar intercalated segment instability (VISI) ({VASSA}). The angle is best measured on a true lateral radiograph; on MRI it depends on positioning and may be unreliable ({VASSA}), so treat a measurement on sagittal MRI as a pointer, not a diagnosis.</p>
         <ScanFigures images={[wristMriScans.scapholunateTear]} />
       </>
     ),
@@ -835,7 +841,7 @@ const steps: ReportStep[] = [
     id: 'technique',
     title: 'Step 1. History, technique and the global look',
     learn: 'technique',
-    teach: <p>After a fall on the outstretched hand or other high-energy trauma, look hardest at the scaphoid, the scapholunate ligament and the ring around the lunate ({SHARMA}; {DVORSKY}). The protocol checklist is this site's own.</p>,
+    teach: <p>After a fall on the outstretched hand or other high-energy trauma, look hardest at the scaphoid, the scapholunate ligament and the ring around the lunate ({SHARMA}; {PINHO}). The protocol checklist is this site's own.</p>,
     fields: [fields.history, fields.protocol, fields.protocolMissing, fields.effusion, fields.marrow, fields.marrowSite],
   },
   {
@@ -856,7 +862,7 @@ const steps: ReportStep[] = [
     id: 'scapholunate',
     title: 'Step 3. Scapholunate ligament and DISI',
     learn: 'scapholunate',
-    teach: <p>The dorsal part of the scapholunate ligament is the strongest ({BERGER}; {ANDERSSON}). A normal scapholunate angle is 30–60° ({ZHOU}); over 60° supports scapholunate malalignment ({ANDERSSON}; {PANG}), and over 70° strongly suggests DISI ({ZHOU}), which is dorsal tilt of the lunate ({VASSA}). Below 30° suggests VISI. Best measured on a true lateral radiograph ({VASSA}).</p>,
+    teach: <p>The dorsal part of the scapholunate ligament is the strongest ({BERGER}; {ANDERSSON}). A normal scapholunate angle is 30–60° ({ZHOU}); over 60° supports scapholunate malalignment ({ANDERSSON}; {PANG}), and over 70° strongly suggests DISI ({ZHOU}), which is dorsal tilt of the lunate, a dorsal radiolunate angle over 15° on a true lateral radiograph ({VASSA}; {KITAY}). Below 30° suggests VISI. Best measured on a true lateral radiograph ({VASSA}).</p>,
     fields: [fields.sl, fields.slParts, fields.slAngle],
     derive: deriveScapholunate,
   },

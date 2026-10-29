@@ -214,7 +214,7 @@ the table). Read in full in Europe PMC (`fullTextXML`) unless marked; each match
 - Sharma M, Choudhury SR, Sinha A, Prakash M. Multimodality imaging in wrist fractures and dislocations. Indian J Radiol Imaging. 2025;35(3):374-386. doi:10.1055/s-0044-1801268 (PMC12169939).
 - Okoro CK, Skalski MR, Patel DB, White EA, Matcuk GR. Imaging diagnosis and management of carpal trauma and instability: an illustrated guide. Life (Basel). 2023;13(7):1426. doi:10.3390/life13071426 (PMC10381215).
 
-The study has 32 references (was 24). All eight are in `src/studies/WristMriStudy.tsx` as `*_DOI`
+The study had 32 references after these (was 24; 34 after the follow-up below). All eight are in `src/studies/WristMriStudy.tsx` as `*_DOI`
 constants with `<Cite>` links.
 
 | ID | Decision | Change on the page |
@@ -227,8 +227,8 @@ constants with `<Cite>` links.
 | W2-2, HB-2 (17) | Keep AO's B2 wording. | The study's Herbert table and options (from `src/logic/herbert.ts`) now read "complete waist fracture" (was "complete fracture of the waist"). The variation note is on the Herbert page only (calculators file). |
 
 The source note now lists one unread claim, whether Herbert and Fisher 1984 itself has type B5, so
-the study stays an "Unchecked draft" (`src/studies/WristMriStudy.test.ts` pins this and the 32
-references).
+the study stays an "Unchecked draft" (`src/studies/WristMriStudy.test.ts` pins this and the
+reference count, now 34).
 
 Suggested wording the sources did not support, kept closer to the source:
 
@@ -236,3 +236,17 @@ Suggested wording the sources did not support, kept closer to the source:
 - W1-1: the suggested "a fall from height onto an outstretched hand". Dvorsky says "falls from a height" but does not mention the outstretched hand; the outstretched hand is from Okoro ("a fall onto a dorsiflexed wrist (e.g., the FOOSH)"), given as one example.
 - W4-1: the review said to note that Linscheid 1972 described volar instability without elucidating its aetiology (Shin AY, Battaglia MJ, Bishop AT. Lunotriquetral instability: diagnosis and treatment. J Am Acad Orthop Surg. 2000;8(3):170-179. doi:10.5435/00124635-200005000-00004, matched on Crossref and PubMed 10874224). Only its abstract could be read (ovid.com and journals.lww.com show the abstract only), and the abstract does not mention Linscheid, so it is not cited and the page does not make that point. Wilson 2023 was read in its abstract only, which supports the static-VISI sentence but not the wording "generally also involves failure of secondary stabilising ligaments"; the page uses the abstract's words (the dorsal radiocarpal ligament).
 - W5-1: the open textbook (NCBI Bookshelf NBK570159) could not be opened (reCAPTCHA), and the Stony Brook PDF (Vutescu) has no identifiable journal version; neither is cited. The peer-reviewed reviews above carry the terminology note.
+
+### Follow-up sources from the author, 2026-10-29
+
+The author sent replacement sources for the gaps above. Each was opened and quoted from its text;
+two could be read and were added (the study now has 34 references), one could not.
+
+- Kitay A, Wolfe SW. Scapholunate instability: current concepts in diagnosis and management. J Hand Surg Am. 2012;37(10):2175-2196. doi:10.1016/j.jhsa.2012.07.035 (matched on Crossref). Read in the published PDF hosted by the author (scottwolfemd.com).
+- Pinho AB, Sobania RL. Perilunate carpal dislocation. Clinical evaluation of patients operated with reduction and percutaneous fixation without capsular-ligament repair. Rev Bras Ortop. 2017;52(4):402-409. doi:10.1016/j.rboe.2017.06.007 (PMC5582806; matched on Crossref). Read in full in Europe PMC.
+
+| ID | Source | Verdict and quote | Change on the page |
+|----|--------|-------------------|--------------------|
+| W3-2 | Kitay and Wolfe 2012 | yes. p. 2179: "Deviation of this line from the longitudinal axis of the radius (the radiolunate angle) by more than 15° in the dorsal direction on a true lateral film indicates DISI." p. 2181: the SL angle "normally measures 46° (range, 30° to 60°). A unilateral SL angle of greater than 70° is considered highly suggestive of increased flexion, or rotatory subluxation of the scaphoid." Two separate statements, not a paired rule; the article does not say "neutral". | Learn: "DISI is dorsal tilt of the lunate (Vassa): on a true lateral radiograph, dorsal radiolunate angulation greater than 15° indicates DISI (Kitay; Pang). The scapholunate angle also depends on the scaphoid: an angle greater than 70° is highly suggestive of increased flexion, or rotatory subluxation, of the scaphoid (Kitay). So an increased scapholunate angle is not the same thing as a tilted lunate." Normal 30–60° now cites Kitay beside Zhou. Teach panel adds the radiolunate angle. The rule (61–70° supports malalignment, over 70° strongly suggests DISI) is unchanged. |
+| W1-1 | Pinho and Sobania 2017 | yes. "They are serious carpal lesions that occur after high-energy trauma or when the victim falls on the outstretched hand"; "generally resulting from shock or high-energy trauma"; "Injury mechanism involves abrupt wrist extension, associated with ulnar deviation and supination of the intercarpal joint." | Learn: "Perilunate dislocations typically follow high-energy trauma, such as a motor vehicle accident, a fall from a height or a sports injury (Pinho; Dvorsky), and may result from a fall on the outstretched hand (Pinho; Okoro). What sets them apart is abrupt, forceful extension of the wrist, often with ulnar deviation and intercarpal supination (Mayfield; Pinho; Dvorsky)." Dvorsky still carries "falls from a height". Teach panel cites Sharma and Pinho. |
+| W4-1 | Cooney WP. The modern history of the wrist. J Wrist Surg. 2012;1(2):95-102. doi:10.1055/s-0032-1320012 (PMC3658683) | not read. Europe PMC has no open full text (`fullTextXML` returns 500), PubMed has no abstract, and PMC and Thieme answer with a browser challenge. | None: not cited, and the sentence that Linscheid's paper established the DISI and VISI terminology is not on the page. Linscheid 1972 stays for the historical description, as before. |
