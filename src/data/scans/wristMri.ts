@@ -59,4 +59,32 @@ export const wristMriScans = {
     source: S.ferreiraBranco2024,
     figure: 'Fig. 2b',
   },
+  lunotriquetralTear: {
+    src: '/scans/wrist-mri/lunotriquetral-tear.jpg',
+    alt: 'Coronal T1-weighted MR arthrogram of the wrist with bright contrast outlining the carpal joints and an arrow at a contrast-filled gap in the lunotriquetral ligament.',
+    caption: 'Lunotriquetral ligament tear on a coronal T1-weighted MR arthrogram obtained during axial traction: the tear is distended by contrast medium (arrow).',
+    source: S.dallaudiere2016,
+    figure: 'Fig. 3b',
+  },
+  radioscaphocapitateTear: {
+    src: '/scans/wrist-mri/radioscaphocapitate-tear.jpg',
+    alt: 'Sagittal proton-density MRI of the wrist through the scaphoid, labelled S, with an arrow at the torn palmar radioscaphocapitate ligament in front of the radius.',
+    caption: 'Torn palmar radioscaphocapitate ligament (arrow) on sagittal proton-density MRI after a distal radius fracture, with rotatory subluxation of the scaphoid (S).',
+    source: S.shahabpour2021,
+    figure: 'Fig. 2c',
+  },
+  bifidMedianNerve: {
+    src: '/scans/wrist-mri/bifid-median-nerve.jpg',
+    alt: 'Axial proton-density MRI of the wrist at the carpal tunnel with two white arrows at the two bundles of a bifid median nerve and a grey arrow at a small vessel between them.',
+    caption: 'Bifid median nerve (white arrows) with a persistent median artery (grey arrow, blue in the original) on axial PD-weighted MRI, in a patient with carpal tunnel syndrome proven on electrophysiology.',
+    source: S.mangi2022,
+    figure: 'Fig. 11b',
+  },
+  osStyloideum: {
+    src: '/scans/wrist-mri/os-styloideum.jpg',
+    alt: 'Axial T1-weighted MRI of the wrist at the carpometacarpal level with an arrowhead at a small separate ossicle on the dorsal surface.',
+    caption: 'Carpal boss: a characteristic unfused os styloideum (arrowhead) on axial T1-weighted MRI.',
+    source: S.nevalainen2019,
+    figure: 'Fig. 1c',
+  },
 } satisfies Record<string, ScanImage>

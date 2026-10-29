@@ -212,6 +212,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Check the triceps at its olecranon insertion and the brachialis in front of the joint ({KIJOWSKI_PART2}). There is no cited grading here, so this step is descriptive.</p>
+        <ScanFigures images={[elbowMriScans.tricepsAvulsion]} />
       </>
     ),
   },
@@ -232,6 +233,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Look for olecranon bursitis, loose bodies in the recesses, synovitis, and a thickened synovial fringe (plica). These are descriptive findings with no cited rule here.</p>
+        <ScanFigures images={[elbowMriScans.olecranonBursitis]} />
       </>
     ),
   },
@@ -241,6 +243,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Record a supracondylar process, an anconeus epitrochlearis ({ROSENBERG_TUNNEL}) or an os supratrochleare dorsale when you see one. This site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
+        <ScanFigures images={[elbowMriScans.anconeusEpitrochlearis]} />
       </>
     ),
   },

@@ -190,7 +190,7 @@ const learn: LearnSection[] = [
         <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}; {SOMERSON}):</p>
         {goutallierTable}
         <p>Fuchs and colleagues applied the same grades to MRI and compared them with CT: each method was reproducible between observers, but the correlation between MRI and CT grades was only fair to moderate, even on a simplified 3-grade scale ({FUCHS}). Grade the supraspinatus, infraspinatus and subscapularis on oblique sagittal T1-weighted images.</p>
-        <ScanFigures images={[shoulderMriScans.supraspinatusFullTear, shoulderMriScans.goutallierGrade4]} />
+        <ScanFigures images={[shoulderMriScans.supraspinatusPartialArticular, shoulderMriScans.supraspinatusFullTear, shoulderMriScans.patteStage3, shoulderMriScans.goutallierGrade4]} />
       </>
     ),
   },
@@ -252,6 +252,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Check the acromioclavicular joint for osteoarthritis or injury, and the subacromial-subdeltoid bursa for fluid or thickening. An os acromiale is reported in step 12.</p>
+        <ScanFigures images={[shoulderMriScans.subacromialBursitis, shoulderMriScans.acJointOsteoarthritis]} />
       </>
     ),
   },
@@ -261,6 +262,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Check the cartilage of the glenoid and the humeral head. A cartilage injury next to an anteroinferior labral tear raises the GLAD lesion of step 6 ({NEVIASER_GLAD}).</p>
+        <ScanFigures images={[shoulderMriScans.glenoidChondralLesion]} />
       </>
     ),
   },
@@ -283,6 +285,7 @@ const learn: LearnSection[] = [
       <>
         <p>This step applies only when the cuff has been repaired before. Sugaya and colleagues classified the repaired cuff on MRI in five types; types IV and V are re-tears ({SUGAYA}):</p>
         {sugayaTable}
+        <ScanFigures images={[shoulderMriScans.sugayaType1Healed, shoulderMriScans.sugayaType4Retear]} />
       </>
     ),
   },
@@ -298,7 +301,7 @@ const learn: LearnSection[] = [
           <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, with an appearance similar to SLAP lesions ({SMITH}); it can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</li>
           <li><strong>Os acromiale:</strong> an unfused ossification centre of the acromion, associated with rotator cuff impingement ({PARK}).</li>
         </ul>
-        <ScanFigures images={[shoulderMriScans.sublabralRecess]} />
+        <ScanFigures images={[shoulderMriScans.sublabralRecess, shoulderMriScans.bufordComplex, shoulderMriScans.sublabralForamen]} />
       </>
     ),
   },

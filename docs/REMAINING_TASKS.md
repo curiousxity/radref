@@ -39,10 +39,12 @@ by the author's choice).
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
   Fritz 1992, Sugaya 2005, Tuite 1996, Smith 1996; none has a free copy), and section 1.
 - Done 2026-10-28: the MSK MRI studies (ankle, foot, diabetic foot, knee, shoulder, elbow,
-  wrist) have 60 example scans; the sections still without one are listed at the end of
-  `docs/superpowers/research/2026-10-28-example-scans.md`.
+  wrist) have 60 example scans; 2026-10-29 added 25 more for the empty sections (knee PCL and
+  posterolateral corner, shoulder subacromial, repair and variants, and others). What is still
+  missing is listed under "Filling the gaps" in `docs/superpowers/research/2026-10-28-example-scans.md`.
 - Done 2026-10-28: Mason (I–IV), Mayfield (I, III, IV, greater arc), Herbert (A1, A2, B1–B4, D2) and
-  Palmer (1A–1D) have example scans; the missing types are listed in the example-scans research doc.
+  Palmer (1A–1D) have example scans; Herbert B5 and Palmer 2D were added on 2026-10-29. The missing
+  types are listed in the example-scans research doc.
 - Fifth metatarsal: done 2026-10-28 (zone map, zones 1–3, apophysis, ununited fragment, os
   vesalianum, os peroneum; `src/data/scans/fifthMetatarsal.ts`). No CC BY image of a dancer's
   (distal spiral) fracture was found; that card keeps its drawing only. Searched again

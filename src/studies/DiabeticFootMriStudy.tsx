@@ -96,7 +96,7 @@ const learn: LearnSection[] = [
         <p>Telling neuroarthropathy from osteomyelitis requires careful analysis of where the bone signal changes are, their distribution and their pattern ({LEDERMANN_MORRISON}). Neuroarthropathy most commonly affects the tarsometatarsal and metatarsophalangeal joints, whereas osteomyelitis occurs distal to the tarsometatarsal joint, in the calcaneus and in the malleoli ({DONOVAN}).</p>
         <p>An active Charcot foot shows subchondral marrow edema and effusions. MRI shows it while the radiographs are still normal (stage 0), when treatment can still prevent collapse ({CHANTELAU}). An inactive foot shows no edema, with sclerosis, remodelling and deformity.</p>
         <p>The two diseases can coexist. In a neuropathic joint, a bone whose outline fades on T1-weighted images but reappears on fluid-sensitive or contrast images (the ghost sign) suggests infection; a neuropathic bone keeps its outline ({DONOVAN}).</p>
-        <ScanFigures images={[diabeticFootMriScans.ghostSignT1, diabeticFootMriScans.ghostSignContrast]} />
+        <ScanFigures images={[diabeticFootMriScans.activeCharcotStir, diabeticFootMriScans.ghostSignT1, diabeticFootMriScans.ghostSignContrast]} />
       </>
     ),
   },

@@ -66,4 +66,18 @@ export const ankleMriScans = {
     source: S.kothari2023,
     figure: 'Fig. 5',
   },
+  anteriorImpingementOsteophytes: {
+    src: '/scans/ankle-mri/anterior-impingement-osteophytes.jpg',
+    alt: 'Sagittal fat-suppressed MR image of the ankle with two arrows on osteophytes at the anterior margin of the distal tibia and the talar neck.',
+    caption: 'Anterior impingement in a 22-year-old soccer player with chronic anterior ankle pain and no specific injury: osteophytes (arrows) with bone marrow edema.',
+    source: S.szaro2020,
+    figure: 'Fig. 19',
+  },
+  anteriorFibrousBandImpingement: {
+    src: '/scans/ankle-mri/anterior-fibrous-band-impingement.jpg',
+    alt: 'Axial proton-density fat-saturated MR image of the ankle with an arrow on a thin dark band crossing fluid in the anterior joint recess and an asterisk on the effusion.',
+    caption: 'Web impingement after an ankle sprain: a fibrous band (arrow) traverses the anterior talocrural recess, with joint effusion (asterisk). Arthroscopy confirmed a fibrous band spanning the recess.',
+    source: S.soualili2025,
+    figure: 'Fig. 3b',
+  },
 } satisfies Record<string, ScanImage>
