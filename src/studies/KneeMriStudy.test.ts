@@ -28,8 +28,8 @@ describe('knee MRI lesson', () => {
     // 20 since Recht 2005 was added for describing a cartilage defect; 23 since three open
     // reviews were added as second citations (2026-10-29): Parkar and Adriaensen 2024 (Segond
     // and ACL tear), Chien 2020 (ACL graft complications), Crone 2026 (the level of the 11°
-    // trochlear measurement).
-    expect(study.references).toHaveLength(23)
+    // trochlear measurement); 24 with Andriolo 2022 for the juvenile OCD signs (2026-10-29).
+    expect(study.references).toHaveLength(24)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Schatzker J, McBroom R, Bruce D.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)

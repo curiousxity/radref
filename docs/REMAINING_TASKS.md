@@ -36,9 +36,8 @@ by the author's choice).
     the ulnar nerve (four places), but the paper, read in full, never mentions it.
     Candidate replacement (2026-10-29): Sampath et al., Sports Health 2013, already cited on the
     page, says it "may cause static or dynamic compression of the ulnar nerve within the tunnel".
-  - Knee K2-1: the pivot-shift femoral contusion is "near the terminal sulcus" on the page;
-    Sanders 2000's legends say its position depends on knee flexion (posterior with moderate
-    flexion, anterior near the sulcus with minimal), and the abstract says "midportion".
+  - Knee K2-1: decided 2026-10-29. "Near the terminal sulcus" stays as the typical location; the
+    table now says the exact spot varies with knee flexion at injury (Sanders 2000).
 - **PDFs needed from the author** (`docs/PAPERS_NEEDED.md`): Herbert and Fisher 1984 (Bone &
   Joint asks for sign-in), Vaccaro 2016 (the Utrecht record has no file), the ten shoulder
   papers (Hill 1940, Richards 1994, Ellman 1990, Patte 1990, Goutallier 1994, Snyder 1990,
@@ -175,9 +174,11 @@ it is done.
   (Parkar and Adriaensen 2024), cyclops and arthrofibrosis (Chien 2020) and the level of the 11°
   measurement (Crone 2026) are now cited beside the originals; the MCL bruise wording and SZ-4 were
   already settled. The Schatzker page no longer says "Unchecked draft".
-- [ ] Still unchecked: where the pivot-shift contusion sits (K2-1, for the author), the posterolateral
-  corner with hyperextension (K2-3), the juvenile OCD signs (K2-8, for the author: the page omits the
-  rim matching joint fluid, which Andriolo 2022 and Kijowski 2008's legends give) and the cartilage
+- [x] Decided by the author 2026-10-29: the pivot-shift contusion is "typically" near the terminal
+  sulcus, the exact spot varying with knee flexion (K2-1); juvenile OCD instability names the
+  T2-hyperintense rim matching adjacent joint fluid, with Andriolo 2022 cited and a form option
+  added (K2-8).
+- [ ] Still unchecked: the posterolateral corner with hyperextension (K2-3), and the cartilage
   depth grades (no source, kept by the author's choice).
 
 ### Shoulder MRI study and Neer calculator

@@ -41,6 +41,7 @@ const LEE_DOI = '10.1148/radiology.173.1.2781006'
 const ESSR_DOI = '10.1007/s00330-024-10706-7'
 const CHIEN_DOI = '10.5114/pjr.2020.99415'
 const CRONE_DOI = '10.1007/s00256-026-05187-2'
+const ANDRIOLO_DOI = '10.1177/19476035221121789'
 
 const MARKHARDT = <Cite doi={MARKHARDT_DOI}>Markhardt et al., Radiographics 2009</Cite>
 const DE_SMET = <Cite doi={DE_SMET_DOI}>De Smet and Tuite, AJR 2006</Cite>
@@ -64,6 +65,7 @@ const LEE = <Cite doi={LEE_DOI}>Lee et al., Radiology 1989</Cite>
 const ESSR = <Cite doi={ESSR_DOI}>Parkar and Adriaensen, Eur Radiol 2024</Cite>
 const CHIEN = <Cite doi={CHIEN_DOI}>Chien et al., Pol J Radiol 2020</Cite>
 const CRONE = <Cite doi={CRONE_DOI}>Crone et al., Skeletal Radiol 2026</Cite>
+const ANDRIOLO = <Cite doi={ANDRIOLO_DOI}>Andriolo et al., Cartilage 2022</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Schatzker J, McBroom R, Bruce D. The tibial plateau fracture. The Toronto experience 1968-1975. Clin Orthop Relat Res. 1979;(138):94-104.' },
@@ -89,6 +91,7 @@ const references: LessonReference[] = [
   { citation: 'Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee-practice recommendations by ESSR. Eur Radiol. 2024;34(10):6590-6599.', doi: ESSR_DOI },
   { citation: 'Chien A, Weaver JS, Kinne E, Omar I. Magnetic resonance imaging of the knee. Pol J Radiol. 2020;85:e509-e531.', doi: CHIEN_DOI },
   { citation: 'Crone AM, Omar IM, Bronson AM, Buchler LT, Selley RS, Weaver JS, Klauser AS, Taljanovic MS. Guide to lower extremity radiologic measurements: part 2 knee. Skeletal Radiol. 2026;55(6):1197-1216.', doi: CRONE_DOI },
+  { citation: 'Andriolo L, Solaro L, Altamura SA, Carey JL, Zaffagnini S, Filardo G. Classification systems for knee osteochondritis dissecans: a systematic review. Cartilage. 2022;13(3):19476035221121789.', doi: ANDRIOLO_DOI },
 ]
 
 const bruiseTable = (
@@ -102,7 +105,7 @@ const bruiseTable = (
         </tr>
       </thead>
       <tbody>
-        <tr><td className="vessel-name">Pivot shift</td><td>Lateral femoral condyle near the terminal sulcus, and posterolateral tibial plateau</td><td>ACL tear</td></tr>
+        <tr><td className="vessel-name">Pivot shift</td><td>Lateral femoral condyle, typically near the terminal sulcus (its midportion; the exact spot varies with how far the knee was flexed at injury), and posterolateral tibial plateau ({SANDERS})</td><td>ACL tear</td></tr>
         <tr><td className="vessel-name">Dashboard</td><td>Anterior proximal tibia</td><td>PCL injury</td></tr>
         <tr><td className="vessel-name">Hyperextension</td><td>"Kissing" contusions of the anterior tibia and the anterior femoral condyles</td><td>ACL, PCL and posterolateral corner</td></tr>
         <tr><td className="vessel-name">Clip (valgus)</td><td>Lateral femoral condyle, sometimes the medial femoral condyle from avulsion</td><td>MCL injury</td></tr>
@@ -167,7 +170,7 @@ const learn: LearnSection[] = [
         <p>In the femoral condyles, a subchondral area of low signal on T2-weighted images thicker than 4 mm or longer than 14 mm predicted an irreversible lesion (osteonecrosis); thinner and shorter areas predicted a transient one ({LECOUVET}).</p>
 
         <h4>Osteochondritis dissecans</h4>
-        <p>The MRI signs of an unstable fragment differ by age. In adults, a rim of high T2 signal behind the fragment signals instability. In juvenile lesions, that rim signals instability only when it has a second, outer rim of low T2 signal, or when there are multiple breaks in the subchondral bone plate ({KIJOWSKI}).</p>
+        <p>The MRI signs of an unstable fragment differ by age. In adults, a rim of high T2 signal behind the fragment signals instability. In juvenile lesions, a high-T2 interface alone is not specific enough: the rim signals instability only when it is a T2-hyperintense interface rim matching the signal intensity of adjacent joint fluid, when it has a second, outer rim of low T2 signal, or when there are multiple breaks in the subchondral bone plate ({KIJOWSKI}; {ANDRIOLO}).</p>
 
         <h4>Variants</h4>
         <p>Record a bipartite patella or a fabella when you see one; this site's report gives each variant its own impression line, so the referrer knows it was seen and judged.</p>
@@ -459,6 +462,7 @@ const fields = {
   ] },
   ocdSigns: { id: 'ocd-signs', kind: 'multi', label: 'Signs around the fragment', showIf: (v) => str(v, 'ocd') === 'present', options: [
     { value: 'rim', label: 'High T2 signal rim behind the fragment' },
+    { value: 'fluid-rim', label: 'T2-hyperintense interface rim matching the signal intensity of adjacent joint fluid' },
     { value: 'outer-rim', label: 'Second, outer low T2 signal rim' },
     { value: 'breaks', label: 'Multiple breaks in the subchondral bone plate' },
     { value: 'displaced', label: 'Fragment displaced' },
@@ -1107,7 +1111,7 @@ const study: StudyDefinition = {
   slug: 'knee-mri',
   name: 'Knee MRI',
   lede: 'Read a knee MRI with no history beyond pain: a fixed search pattern through bones, menisci, ligaments, the extensor mechanism and cartilage, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so claims are checked against abstracts, figure legends, the papers that are open and open reviews. Still unchecked: where the pivot-shift femoral contusion sits, that the hyperextension pattern puts the posterolateral corner at risk, the juvenile OCD signs, and the four cartilage depth grades, which no cited paper gives.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so claims are checked against abstracts, figure legends, the papers that are open and open reviews. Still unchecked: that the hyperextension pattern puts the posterolateral corner at risk, and the four cartilage depth grades, which no cited paper gives.',
   references,
   report: {
     steps,

@@ -264,3 +264,10 @@ intensity than adjacent joint fluid". Fig. 5, an unstable one: "inner rim of hig
 ... and second outer rim of low T2 signal intensity ... The high T2 signal intensity rim has same
 signal intensity as adjacent joint fluid". So the rim's signal matching fluid is one of the juvenile
 criteria, as Andriolo's table gives it; the page's "only when" omits it. Still for the author.
+
+## The author's decisions, 2026-10-29
+
+| ID | Decision | Change on the page |
+|----|----------|--------------------|
+| K2-1 | Keep "near the terminal sulcus" as the typical location, not a fixed one: the classic pattern is the posterolateral tibial plateau and the midportion of the lateral femoral condyle, and the exact femoral spot varies with knee flexion at injury (Sanders 2000, PMID 11046168). | Bruise table, pivot shift row: "Lateral femoral condyle, typically near the terminal sulcus (its midportion; the exact spot varies with how far the knee was flexed at injury), and posterolateral tibial plateau", cited to Sanders. Settled. |
+| K2-8 | Name the rim matching joint fluid: "a T2-hyperintense interface rim matching the signal intensity of adjacent joint fluid", since a nonspecific high-T2 interface alone is not specific enough for instability in juvenile OCD (the author pointed to the Nat Clin Pract Rheumatol 2008 research highlight of Kijowski 2008, doi:10.1038/ncprheum0916). | The juvenile sentence now lists that rim first, then the outer low-T2 rim and multiple plate breaks, cited to Kijowski 2008 and Andriolo 2022 (added to the references; its table quotes Kijowski's criteria). The form's "Signs around the fragment" gains that rim as an option. Settled. |
