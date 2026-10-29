@@ -206,3 +206,56 @@ R5 (Castro et al., AJR 2010) was read in full on the AJR site, in a browser.
 |----|---------|----------|
 | F3-1 | yes | The ligaments are grouped "into three groups: dorsal, interosseous, and plantar"; "The Lisfranc ligament is the medial (first) interosseous ligament, C1-M2, and the largest of the three interosseous ligaments"; biomechanically "the Lisfranc ligament is stronger and stiffer than the plantar Lisfranc ligament and ... the dorsal ligament is significantly weaker than the Lisfranc/plantar complex". |
 | F3-2 | yes | "The second plantar ligament, C1-M2,3, was designated the plantar Lisfranc ligament"; it arises from C1 and splits into "a superficial component that inserts on the base of M3 and a deeper band that attaches at the base of M2". The page's citation of Castro for this is now backed by Castro itself. |
+
+## Fifth check, 2026-10-29: open sources
+
+The RSNA pages for Newman 2000, Ashman 2001, Zanetti 1997 and Miller 1995 return 403 to curl
+(and Ashman to WebFetch), so their figure legends were not read. Open reviews were read in full from
+Europe PMC (`fullTextXML`) instead. New references, each checked against Crossref and now cited
+beside the original on the page:
+
+- Burge AJ, Gold SL, Potter HG. Imaging of sports-related midfoot and forefoot injuries. Sports
+  Health. 2012;4(6):518-534. doi:10.1177/1941738112459489 (PMC3497949).
+- Nwawka OK, Hayashi D, Diaz LE, Goud AR, Arndt WF, Roemer FW, Malguria N, Guermazi A. Sesamoids
+  and accessory ossicles of the foot: anatomical variability and related pathology. Insights
+  Imaging. 2013;4(5):581-593. doi:10.1007/s13244-013-0277-1 (PMC3781258).
+- Aparisi Gómez MP, Aparisi F, Bartoloni A, Ferrando Fons MA, Battista G, Guglielmi G,
+  Bazzocchi A. Anatomical variation in the ankle and foot: from incidental finding to inductor
+  of pathology. Part II: midfoot and forefoot. Insights Imaging. 2019;10(1):69.
+  doi:10.1186/s13244-019-0747-1 (PMC6667607; Crossref spells the title "midfooot").
+- Gorbachova T. Magnetic resonance imaging of the ankle and foot. Pol J Radiol.
+  2020;85:e532-e549. doi:10.5114/pjr.2020.99472 (PMC7571512).
+- Kumar S, Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the lower limb: a pictorial
+  review. Insights Imaging. 2023;14(1):166. doi:10.1186/s13244-023-01514-6 (PMC10545616).
+- Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a
+  pictorial essay. Insights Imaging. 2020;11(1):97. doi:10.1186/s13244-020-00900-8 (PMC7431516).
+- For the Myerson types (F3-4): Diebal AR, Westrick RB, Alitz C, Gerber JP. Lisfranc injury in a
+  West Point cadet. Sports Health. 2013;5(3):281-285. doi:10.1177/1941738113477991 (PMC3658402);
+  and Tzatzairis T, Firth G, Parker L. Adolescent Lisfranc injury treated with TightRope™: a case
+  report and review of literature. World J Orthop. 2019;10(2):115-122.
+  doi:10.5312/wjo.v10.i2.115 (PMC6379736). Both are case reports whose review sections tabulate
+  the types; the quotes are in the calculators doc, fourth check.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| F2-1, F2-2 | yes (already) | Settled by Alton 2015 and Jiménez-Almonte 2019, which the page already cites beside Hawkins and Sanders. |
+| F2-3 | partly | Middle facet, Szaro 2020: "Two of the most common coalitions are between the calcaneus and the navicular bone or between the middle facet of the talus and the calcaneus." **For the author:** in Marth et al., Eur Radiol 2024 (PMC11126476), talocalcaneal coalitions "were located either in the middle facet (10.7%), in the middle and posterior facet (50.0%), or in the posterior facet only (5.3%)", so most also took in the posterior facet; the page says "(the latter at the middle facet)". Irregular joint margins: only implied there ("the absence of bone deformities, irregularities, and bone marrow edema indicates that the abnormality is actually an anatomical variant, rather than a TC"); still unchecked. |
+| F3-1 | yes (already) | Settled in the fourth check (Castro, read in full). |
+| F3-4 | yes | Diebal table, row "1986 Myerson et al": types A, B1, B2, C1, C2; the EFORT review (Moracia-Ochagavía and Rodríguez-Merchán 2019, PMC6667981) captions its figure "The 1986 Myerson classification for Lisfranc fracture-dislocations". Type wording: calculators doc, MY-1 to MY-6. |
+| F4-1 | yes | Burge: "low-grade stress reactions manifest as focal marrow edema on MRI but tend to be occult on radiography. A frank stress fracture appears as a discrete linear low-signal abnormality with surrounding marrow edema"; "Given the increased stresses experienced by the second and third metatarsals during walking and running, these metatarsals are at greatest risk for stress fracture." |
+| F4-2 | yes | Burge: "Freiberg infraction is an osteonecrosis of the metatarsal head ... Radiographs demonstrate flattening and sclerosis of the metatarsal head, with the second metatarsal head being the most commonly affected." (A 2025 review, J Korean Soc Radiol, PMC12710284, says "the second and third metatarsal heads".) |
+| F5-1 | yes | Burge: "Hyperdorsiflexion injury to the plantar plate of the first MTP joint, colloquially termed 'turf toe'"; the first MTP plantar plate complex "incorporates the hallux sesamoids in addition to the plantar capsule and plantar aponeurosis"; findings include "capsular disruption". Gorbachova agrees: "a spectrum of traumatic injuries of the capsuloligamentous structures of the first metatarsophalangeal (MTP) joint, typically resulting from a hyperextension injury". |
+| F5-2 | yes | Nwawka, Table 2: a fractured medial sesamoid shows "a sharp, radiolucent, uncorticated line between the two fragments"; a bipartite one "Two corticated components"; Table 3, fracture: "Irregular bony fragment with poorly corticated margins"; text: "The medial sesamoid commonly shows bipartite variation." Aparisi Gómez: "Note the smooth, rounded contours of the bipartite components"; "It is more common to find medial bipartite sesamoids than lateral sesamoids. Medial bipartite sesamoids can be bilateral in a frequency ranging from 22 to 85%"; in a fracture "there is usually a sharp parting line". |
+| F5-3 | yes | Nwawka, Table 3, sesamoiditis: "Bone marrow oedema isolated to the sesamoid without changes in the metatarsal head on MRI". **For the author (no change made):** the same sources say the pattern is not specific: Nwawka's figure legend, "These results suggest bony sesamoiditis or stress reaction", and its Table 3 gives a "bone marrow oedema pattern (early)" for osteonecrosis; Burge, "Sesamoid stress reaction and sesamoiditis both manifest as hyperintense signal on fluid sensitive images, though sesamoiditis more commonly involves both sesamoids". The page says only "fits sesamoiditis". |
+| F6-2 | yes, for the unread half | Gorbachova: "Pericapsular fibrosis associated with plantar plate and capsular tears can mimic Morton's neuroma [81]. In such cases, an eccentric location of the mass, adherent to the capsule rather than centered over the interdigital space, as well as a presence of primary and secondary signs of plantar plate tear provide helpful diagnostic clues." Also Park et al., Diagnostics 2025 (PMC12427879): "Indirect signs—such as pericapsular fibrosis and capsular thickening—can resemble Morton's neuroma and must be carefully differentiated." The warning's reach (space n − 1 or n) stays the site's own; Umans reported only the second space beside the second joint. |
+| F7-1 | yes | Site, Gorbachova: "The most common locations are the interspace between the third and fourth toes (third web space), followed by the interspace between the second and third toes" (agrees with R11, third check). Ligament, Kumar: "Entrapment of the digital nerves can occur in the intermetatarsal space between the metatarsal heads, plantar to the intermetatarsal ligaments [10]. The entrapment leads to perineural fibrosis of the digital nerve, a condition known as Morton's neuroma". (Also J Ultrason 2023, PMC10668940: "These nerves are located plantar to the intermetatarsal ligament".) |
+
+Changes applied: the eight references above added (24 in all; the test pins 24), each cited
+beside the original paper where it states the claim (steps 2, 3, 4, 5, 6 and 7, their teach
+lines and the matching quiz explanations). No claim was reworded. The source note now names
+only what is still unchecked: irregular joint margins in a coalition, and whether Myerson named
+any pattern beyond A to C2 (MY-6).
+
+Needs a browser: https://pubs.rsna.org/doi/full/10.1148/radiographics.20.2.g00mc03321 (Newman,
+irregular joint margins, F2-3) and https://pubs.rsna.org/doi/full/10.1148/radiographics.21.6.g01nv071425
+(Ashman, F4-1, F4-2, F7-1 as cited) both returned 403.

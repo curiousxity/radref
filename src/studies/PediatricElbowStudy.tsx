@@ -7,12 +7,13 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled, so only claims whose wording is in an abstract are verified; the
- * Iyer review's abstract states none of its claims, and Gartland, O'Brien and Judet have no
- * abstract. The claims table, with each claim's status, is
- * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md; rule chips and warnings carry
- * its claim IDs. Gartland (1959) and Judet (1962) have no DOI, so their citations stay plain text.
+ * Every reference has been matched on PubMed and Crossref (2026-10-23), and every claim has been
+ * read in an abstract or in full text: the Iyer and Alton reviews in full (2026-10-25), and,
+ * for the papers with no open copy (Gartland, Leitch, Jakob, O'Brien, Judet), open reviews that
+ * state their classifications, cited beside them (2026-10-29). The claims table, with each claim's
+ * status, is docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md; rule chips and
+ * warnings carry its claim IDs. Gartland (1959) and Judet (1962) have no DOI, so their citations
+ * stay plain text.
  */
 
 const IYER_DOI = '10.2214/AJR.10.7314'
@@ -20,25 +21,33 @@ const CHENG_DOI = '10.1097/01241398-199803000-00006'
 const SKAGGS_DOI = '10.2106/00004623-199910000-00007'
 const ROGERS_DOI = '10.1148/128.1.145'
 const HERMAN_DOI = '10.2106/JBJS.H.01316'
+const DEFRODA_DOI = '10.4081/or.2017.7030'
 const LEITCH_DOI = '10.2106/JBJS.D.02956'
 const ALTON_GARTLAND_DOI = '10.1007/s11999-014-4033-8'
 const WEISS_DOI = '10.1097/BPO.0b013e3181b2842c'
+const ALVAREZ_DOI = '10.3390/children11121421'
 const JAKOB_DOI = '10.1302/0301-620X.57B4.430'
+const BASKOVIC_DOI = '10.3390/children11080906'
 const EDMONDS_DOI = '10.2106/JBJS.I.01637'
 const OBRIEN_DOI = '10.1097/00003086-196500410-00006'
+const COLOZZA_DOI = '10.1186/s13256-020-02390-0'
 
 const IYER = <Cite doi={IYER_DOI}>Iyer et al., AJR 2012</Cite>
 const CHENG = <Cite doi={CHENG_DOI}>Cheng et al., J Pediatr Orthop 1998</Cite>
 const SKAGGS = <Cite doi={SKAGGS_DOI}>Skaggs and Mirzayan, J Bone Joint Surg Am 1999</Cite>
 const ROGERS = <Cite doi={ROGERS_DOI}>Rogers et al., Radiology 1978</Cite>
 const HERMAN = <Cite doi={HERMAN_DOI}>Herman et al., J Bone Joint Surg Am 2009</Cite>
+const DEFRODA = <Cite doi={DEFRODA_DOI}>DeFroda et al., Orthop Rev (Pavia) 2017</Cite>
 const GARTLAND = 'Gartland, Surg Gynecol Obstet 1959'
 const LEITCH = <Cite doi={LEITCH_DOI}>Leitch et al., J Bone Joint Surg Am 2006</Cite>
 const ALTON_GARTLAND = <Cite doi={ALTON_GARTLAND_DOI}>Alton et al., Clin Orthop Relat Res 2015</Cite>
 const WEISS = <Cite doi={WEISS_DOI}>Weiss et al., J Pediatr Orthop 2009</Cite>
+const ALVAREZ = <Cite doi={ALVAREZ_DOI}>Álvarez Muñoz et al., Children 2024</Cite>
 const JAKOB = <Cite doi={JAKOB_DOI}>Jakob et al., J Bone Joint Surg Br 1975</Cite>
+const BASKOVIC = <Cite doi={BASKOVIC_DOI}>Bašković et al., Children 2024</Cite>
 const EDMONDS = <Cite doi={EDMONDS_DOI}>Edmonds, J Bone Joint Surg Am 2010</Cite>
 const OBRIEN = <Cite doi={OBRIEN_DOI}>O'Brien, Clin Orthop Relat Res 1965</Cite>
+const COLOZZA = <Cite doi={COLOZZA_DOI}>Colozza et al., J Med Case Rep 2020</Cite>
 const JUDET = 'Judet et al., Ann Chir 1962'
 
 const references: LessonReference[] = [
@@ -47,13 +56,17 @@ const references: LessonReference[] = [
   { citation: 'Skaggs DL, Mirzayan R. The posterior fat pad sign in association with occult fracture of the elbow in children. J Bone Joint Surg Am. 1999;81(10):1429-1433.', doi: SKAGGS_DOI },
   { citation: 'Rogers LF, Malave S Jr, White H, Tachdjian MO. Plastic bowing, torus and greenstick supracondylar fractures of the humerus: radiographic clues to obscure fractures of the elbow in children. Radiology. 1978;128(1):145-150.', doi: ROGERS_DOI },
   { citation: 'Herman MJ, Boardman MJ, Hoover JR, Chafetz RS. Relationship of the anterior humeral line to the capitellar ossific nucleus: variability with age. J Bone Joint Surg Am. 2009;91(9):2188-2193.', doi: HERMAN_DOI },
+  { citation: 'DeFroda SF, Hansen H, Gil JA, Hawari AH, Cruz AI Jr. Radiographic evaluation of common pediatric elbow injuries. Orthop Rev (Pavia). 2017;9(1):7030.', doi: DEFRODA_DOI },
   { citation: 'Gartland JJ. Management of supracondylar fractures of the humerus in children. Surg Gynecol Obstet. 1959;109(2):145-154.' },
   { citation: 'Leitch KK, Kay RM, Femino JD, Tolo VT, Storer SK, Skaggs DL. Treatment of multidirectionally unstable supracondylar humeral fractures in children. A modified Gartland type-IV fracture. J Bone Joint Surg Am. 2006;88(5):980-985.', doi: LEITCH_DOI },
   { citation: 'Alton TB, Werner SE, Gee AO. Classifications in brief: the Gartland classification of supracondylar humerus fractures. Clin Orthop Relat Res. 2015;473(2):738-741.', doi: ALTON_GARTLAND_DOI },
   { citation: 'Weiss JM, Graves S, Yang S, Mendelsohn E, Kay RM, Skaggs DL. A new classification system predictive of complications in surgically treated pediatric humeral lateral condyle fractures. J Pediatr Orthop. 2009;29(6):602-605.', doi: WEISS_DOI },
+  { citation: 'Álvarez Muñoz M, García de la Blanca JC, Anchía MV, Martí Ciruelos R, Calvo Calvo S, Menéndez Crespo MT. Management of acute lateral humeral condyle fractures in children. Children (Basel). 2024;11(12):1421.', doi: ALVAREZ_DOI },
   { citation: 'Jakob R, Fowles JV, Rang M, Kassab MT. Observations concerning fractures of the lateral humeral condyle in children. J Bone Joint Surg Br. 1975;57(4):430-436.', doi: JAKOB_DOI },
+  { citation: 'Bašković M, Pešorda D, Zaninović L, Hasandić D, Lohman Vuga K, Pogorelić Z. Management of pediatric elbow fractures and dislocations. Children (Basel). 2024;11(8):906.', doi: BASKOVIC_DOI },
   { citation: 'Edmonds EW. How displaced are "nondisplaced" fractures of the medial humeral epicondyle in children? Results of a three-dimensional computed tomography analysis. J Bone Joint Surg Am. 2010;92(17):2785-2791.', doi: EDMONDS_DOI },
   { citation: "O'Brien PI. Injuries involving the proximal radial epiphysis. Clin Orthop Relat Res. 1965;41:51-58.", doi: OBRIEN_DOI },
+  { citation: 'Colozza A, Padovani S, Caruso G, Cavaciocchi M, Massari L. Arthroscopically-assisted reduction and pinning of a radial neck fracture in a child: a case report and review of the literature. J Med Case Rep. 2020;14(1):78.', doi: COLOZZA_DOI },
   { citation: 'Judet J, Judet R, Lefranc J. [Fracture of the radial head in the child]. Ann Chir. 1962;16:1377-1385. French.' },
 ]
 
@@ -165,7 +178,7 @@ const learn: LearnSection[] = [
         <p>On a true lateral, draw a line along the anterior cortex of the humerus. It is a valuable aid in the search for a supracondylar fracture, and when it is abnormal, other signs of fracture should be carefully sought ({ROGERS}). In most normal children it passes through the middle third of the capitellum ({HERMAN}).</p>
         <p>In young children the line may pass through the anterior third of the capitellum because the ossification centre is small: Rogers and colleagues put this under 2½ years ({ROGERS}), and Herman and colleagues found that under 4 years it passed nearly equally through the anterior or the middle third ({HERMAN}). Read the line with the age.</p>
         <h4>Radiocapitellar line</h4>
-        <p>A line along the radial neck passes through the capitellum in every view. If it does not, the radial head is dislocated, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}).</p>
+        <p>A line along the radial neck passes through the capitellum in every view. If it does not, the radial head is dislocated, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}; {DEFRODA}).</p>
         <ScanFigures images={[pediatricElbowScans.anteriorHumeralLine, pediatricElbowScans.monteggia]} />
       </>
     ),
@@ -175,13 +188,13 @@ const learn: LearnSection[] = [
     title: 'Step 5. Supracondylar fracture',
     body: (
       <>
-        <p>The supracondylar fracture is the commonest elbow fracture in children ({IYER}). Gartland graded extension fractures as undisplaced, moderately displaced and severely displaced ({GARTLAND}); the types in use today are Wilkins's modification, which adds posterior cortical contact ({ALTON_GARTLAND}):</p>
+        <p>The supracondylar fracture is the commonest elbow fracture in children ({IYER}). Gartland graded extension fractures as undisplaced, moderately displaced and severely displaced ({GARTLAND}; {ALTON_GARTLAND}); the types in use today are Wilkins's modification, which adds posterior cortical contact ({ALTON_GARTLAND}):</p>
         <ul className="plain-list">
           <li><strong>Type I:</strong> undisplaced.</li>
           <li><strong>Type II:</strong> displaced, with the posterior cortex intact (a hinge); the anterior humeral line passes in front of the capitellum. Wilkins split it into IIA, without rotation or translation of the fragment, and IIB, with them.</li>
           <li><strong>Type III:</strong> completely displaced, with no cortical contact.</li>
         </ul>
-        <p>A "type IV" fracture is unstable in both flexion and extension because the periosteal hinge is lost in front and behind; it is recognised under anaesthesia rather than on the first radiographs ({LEITCH}), so this report does not offer it.</p>
+        <p>A "type IV" fracture is unstable in both flexion and extension because the periosteal hinge is lost in front and behind; it is recognised under anaesthesia rather than on the first radiographs ({LEITCH}; {ALTON_GARTLAND}), so this report does not offer it.</p>
         <ScanFigures images={[pediatricElbowScans.supracondylarType1, pediatricElbowScans.supracondylarType2, pediatricElbowScans.supracondylarType3]} />
       </>
     ),
@@ -197,8 +210,8 @@ const learn: LearnSection[] = [
           <li><strong>Type II:</strong> 2 mm or more, with the articular surface intact.</li>
           <li><strong>Type III:</strong> 2 mm or more, with the articular surface disrupted.</li>
         </ul>
-        <p>Whether the articular cartilage is intact often cannot be judged on radiographs alone; arthrography or MRI shows it ({WEISS}). When it is not judged, a fracture displaced 2 mm or more is type II or III.</p>
-        <p>The older Jakob stages describe the same spectrum: stage I undisplaced with the articular surface intact, stage II complete with moderate displacement, stage III completely displaced and rotated ({JAKOB}).</p>
+        <p>Whether the articular cartilage is intact often cannot be judged on radiographs alone; arthrography or MRI shows it ({WEISS}; {ALVAREZ}). When it is not judged, a fracture displaced 2 mm or more is type II or III.</p>
+        <p>The older Jakob stages describe the same spectrum: stage I undisplaced with the articular surface intact, stage II complete with moderate displacement, stage III completely displaced and rotated ({JAKOB}; {BASKOVIC}).</p>
         <ScanFigures images={[pediatricElbowScans.lateralCondyle]} />
       </>
     ),
@@ -219,13 +232,13 @@ const learn: LearnSection[] = [
     title: 'Step 8. Radial head and neck',
     body: (
       <>
-        <p>In children the radial neck breaks rather than the head. O'Brien's types, by the angulation of the radial head ({OBRIEN}):</p>
+        <p>In children the radial neck breaks rather than the head. O'Brien's types, by the angulation of the radial head ({OBRIEN}; {COLOZZA}):</p>
         <ul className="plain-list">
           <li><strong>Type I:</strong> under 30°.</li>
           <li><strong>Type II:</strong> 30° to 60°.</li>
           <li><strong>Type III:</strong> over 60°.</li>
         </ul>
-        <p>Judet's classification grades the same fracture by displacement and angulation, in types I to IV ({JUDET}).</p>
+        <p>Judet's classification grades the same fracture by displacement and angulation, in types I to IV ({JUDET}; {BASKOVIC}).</p>
         <ScanFigures images={[pediatricElbowScans.radialNeck]} />
       </>
     ),
@@ -752,7 +765,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>When the anterior humeral line is abnormal, look carefully for other signs of a supracondylar fracture ({ROGERS}). It passes through the middle third of the capitellum in most normal children; under age 4, nearly equally through the anterior or the middle third ({HERMAN}).</p>
-        <p>The radiocapitellar line passes through the capitellum in every view; if not, the radial head is dislocated ({IYER}).</p>
+        <p>The radiocapitellar line passes through the capitellum in every view; if not, the radial head is dislocated ({IYER}; {DEFRODA}).</p>
       </>
     ),
     fields: [fields.ahl, fields.rcl],
@@ -775,7 +788,7 @@ const steps: ReportStep[] = [
     id: 'lateral-condyle',
     title: 'Step 6. Lateral condyle fracture',
     learn: 'lateral-condyle',
-    teach: <p>Weiss I under 2 mm; II 2 mm or more, articular surface intact; III 2 mm or more, articular surface disrupted. The cartilage often cannot be judged on radiographs ({WEISS}).</p>,
+    teach: <p>Weiss I under 2 mm; II 2 mm or more, articular surface intact; III 2 mm or more, articular surface disrupted. The cartilage often cannot be judged on radiographs ({WEISS}; {ALVAREZ}).</p>,
     fields: [fields.lateralCondyle, fields.lcDisplacement, fields.lcArticular],
     derive: deriveLateralCondyle,
   },
@@ -791,7 +804,7 @@ const steps: ReportStep[] = [
     id: 'radial-neck',
     title: 'Step 8. Radial head and neck',
     learn: 'radial-neck',
-    teach: <p>O'Brien by angulation: I under 30°, II 30° to 60°, III over 60° ({OBRIEN}).</p>,
+    teach: <p>O'Brien by angulation: I under 30°, II 30° to 60°, III over 60° ({OBRIEN}; {COLOZZA}).</p>,
     fields: [fields.radialNeck, fields.rnAngulation],
     derive: deriveRadialNeck,
   },
@@ -815,7 +828,7 @@ const study: StudyDefinition = {
   slug: 'pediatric-elbow',
   name: 'Pediatric elbow radiographs',
   lede: 'Read an injured child\'s elbow radiographs by age: which ossification centres to expect, the fat pads, the alignment lines, and the common fractures with their gradings.',
-  sourceNote: "Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the radiocapitellar line's link to a Monteggia injury, Gartland's original wording, the O'Brien and Judet types, and Jakob's stages) have still not been checked against their papers.",
+  sourceNote: "Every reference was matched on PubMed and Crossref, and each claim was read in an abstract or in full text; the Gartland, Jakob, O'Brien and Judet classifications, whose papers have no open copy, were read in the open reviews cited beside them.",
   references,
   report: {
     steps,
@@ -870,7 +883,7 @@ const study: StudyDefinition = {
       question: 'The radiocapitellar line misses the capitellum on the lateral view. What must you check next?',
       options: ['The olecranon fat pad', 'The ulna, for a fracture (Monteggia)', 'The medial epicondyle', 'The anterior humeral line'],
       answer: 1,
-      explanation: <p>A radiocapitellar line that misses the capitellum means a radial head dislocation, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}).</p>,
+      explanation: <p>A radiocapitellar line that misses the capitellum means a radial head dislocation, and the ulna must be checked for a fracture: a Monteggia injury ({IYER}; {DEFRODA}).</p>,
     },
     {
       id: 'gartland-ii',
@@ -884,14 +897,14 @@ const study: StudyDefinition = {
       question: 'A lateral condyle fracture is displaced 3 mm, and the articular surface cannot be judged on the radiographs. What is the Weiss type?',
       options: ['Type I', 'Type II', 'Type III', 'Type II or III, depending on the articular surface'],
       answer: 3,
-      explanation: <p>Weiss type I is under 2 mm; at 2 mm or more it is type II if the articular surface is intact and type III if disrupted, which often cannot be judged on radiographs alone ({WEISS}).</p>,
+      explanation: <p>Weiss type I is under 2 mm; at 2 mm or more it is type II if the articular surface is intact and type III if disrupted, which often cannot be judged on radiographs alone ({WEISS}; {ALVAREZ}).</p>,
     },
     {
       id: 'obrien',
       question: "A radial neck fracture is angulated 45°. What is the O'Brien type?",
       options: ['Type I', 'Type II', 'Type III', 'Type IV'],
       answer: 1,
-      explanation: <p>O'Brien type I is under 30°, type II 30° to 60°, type III over 60° of angulation ({OBRIEN}).</p>,
+      explanation: <p>O'Brien type I is under 30°, type II 30° to 60°, type III over 60° of angulation ({OBRIEN}; {COLOZZA}).</p>,
     },
   ],
 }

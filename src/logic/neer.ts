@@ -1,10 +1,10 @@
 /**
  * Neer classification of proximal humerus fractures (Neer, J Bone Joint Surg Am 1970).
- * UNCHECKED: the paper is matched on PubMed (PMID 5455339, DOI 10.2106/00004623-197052060-00001),
- * but it has no abstract and its full text is paywalled. The thresholds (N2), the named patterns
- * (N4) and fracture-dislocations and head-splitting fractures (N5) are checked against Kilcoyne
- * et al.'s pictorial review of the classification (AJR 1990); the rest of the claims in
- * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md (N1-N6) are still to check.
+ * The paper is matched on PubMed (PMID 5455339, DOI 10.2106/00004623-197052060-00001), but it has
+ * no abstract and its full text is paywalled, so its rules (N1-N5) are checked against two reviews
+ * of the classification, Kilcoyne et al. (AJR 1990) and Carofino and Leopold (Clin Orthop Relat
+ * Res 2013); N6 is the author's decision. The quotes are in
+ * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
  *
  * The proximal humerus has four segments: the articular segment (separated at the anatomical
  * neck), the greater tuberosity, the lesser tuberosity and the shaft (separated at the surgical

@@ -8,8 +8,9 @@ const study = studyOf(ElbowMriStudyPage)
 /*
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-elbow-mri-sources.md by its ID. The references are
- * matched, but only the claims marked verified there were read in their papers; when the rest
- * are checked a case may have to change; say in that commit why the old expectation was wrong.
+ * matched, and the claims marked verified there were read in an abstract, a paper read in full or
+ * an open review (2026-10-29); a few points are still with the author. When those are settled a
+ * case may have to change; say in that commit why the old expectation was wrong.
  */
 
 describe('elbow MRI lesson', () => {
@@ -20,12 +21,13 @@ describe('elbow MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI but Johnston's), but claims not in an abstract
-  // are still unchecked, so the note keeps saying so. Johnston (Ulster Med J 1962) has no DOI on
-  // PubMed or Crossref; the paper is in PMC only (PMC2384652).
+  // The references are matched (each has a DOI but Johnston's), and three open reviews are cited
+  // beside the originals (2026-10-29), but a few claims are still with the author, so the note
+  // keeps saying so. Johnston (Ulster Med J 1962) has no DOI on PubMed or Crossref; the paper is
+  // in PMC only (PMC2384652).
   test('is still marked as an unchecked draft, with a DOI on every reference but Johnston 1962', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft: every reference has been matched on PubMed and Crossref/)
-    expect(study.references).toHaveLength(18)
+    expect(study.references).toHaveLength(21)
     for (const ref of study.references) {
       if (ref.citation.startsWith('Johnston GW.')) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -190,8 +192,10 @@ describe('elbow MRI rules (unchecked)', () => {
     expect(impressionOf({ ...normal, ...fracture })).toBe('Radial head fracture, Mason type II: marginal sector fracture with displacement.')
   })
 
-  // MA-5: "Type I: displacement of less than 2 mm." MA-6: "Type II: displacement of 2 mm or
-  // more, involving 30% or more of the head."
+  // MA-5, MA-6 (van der Windt et al., EFORT Open Rev 2024, crediting Broberg and Morrey 1987): a
+  // partial fracture "must be of sufficient size (at least 30% of the articular surface) and
+  // displacement (at least 2 mm) to be considered a displaced fracture (Mason type II, as opposed
+  // to nondisplaced Mason type I)".
   test('Broberg-Morrey at the 2 mm and 30% boundaries', () => {
     const bm = (displacement: string, percent: string) => chips(study, 'bones', { 'radial-head': 'present', 'radial-head-displacement': displacement, 'radial-head-percent': percent })['Broberg-Morrey']
     expect(bm('1.5', '')).toBe('Type I')

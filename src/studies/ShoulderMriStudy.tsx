@@ -9,19 +9,23 @@ import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
 
 /*
- * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23; Hill and
- * Sachs 1940 is not in PubMed, so on Crossref only), but most of the papers are paywalled, so
- * only claims whose wording is in an abstract or in open full text are verified. Every claim and
- * rule is listed with an ID (S2-1 and so on), with its status, in
- * docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
+ * Every reference has been matched on PubMed and Crossref (2026-10-23; Hill and Sachs 1940 is not
+ * in PubMed, so on Crossref only). Most of the original papers are paywalled, so a claim their
+ * abstract does not state was read in an open review or study, cited beside the original
+ * (2026-10-25 and 2026-10-29). Every claim and rule is listed with an ID (S2-1 and so on), with its
+ * status and the quoted evidence, in docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
  */
 
 const NEER_DOI = '10.2106/00004623-197052060-00001'
 const HILL_SACHS_DOI = '10.1148/35.6.690'
+const BAO_DOI = '10.1016/j.ejro.2022.100411'
 const WORKMAN_DOI = '10.1148/radiology.185.3.1438774'
 const RICHARDS_DOI = '10.1148/radiology.190.3.8115607'
+const MARCON_DOI = '10.1590/0100-3984.2013.0006'
+const KADI_DOI = '10.5334/jbr-btr.1467'
 const ELLMAN_DOI = '10.1097/00003086-199005000-00010'
 const PATTE_DOI = '10.1097/00003086-199005000-00012'
+const FEUERRIEGEL_DOI = '10.1097/RLI.0000000000001024'
 const GOUTALLIER_DOI = '10.1097/00003086-199407000-00014'
 const KILCOYNE_DOI = '10.2214/ajr.154.5.2108538'
 const CAROFINO_DOI = '10.1007/s11999-012-2454-9'
@@ -30,14 +34,18 @@ const SOMERSON_DOI = '10.1007/s11999-015-4630-1'
 const FUCHS_DOI = '10.1016/s1058-2746(99)90097-6'
 const WALCH_DOI = '10.1016/s1058-2746(98)90218-x'
 const SNYDER_DOI = '10.1016/0749-8063(90)90056-j'
+const JARRAYA_DOI = '10.1007/s13244-015-0462-5'
 const NEVIASER_ALPSA_DOI = '10.1016/s0749-8063(05)80338-x'
 const NEVIASER_GLAD_DOI = '10.1016/s0749-8063(05)80339-1'
 const WOERTLER_DOI = '10.1007/s00330-006-0258-6'
 const WOLF_DOI = '10.1016/0749-8063(95)90139-6'
 const TIRMAN_DOI = '10.1148/radiology.190.3.8115605'
 const FRITZ_DOI = '10.1148/radiology.182.2.1732962'
+const AYIK_DOI = '10.1007/s00264-025-06465-9'
+const MANGI_DOI = '10.1186/s13244-022-01305-5'
 const LINKER_DOI = '10.1148/radiology.188.3.8351331'
 const SUGAYA_DOI = '10.1016/j.arthro.2005.08.011'
+const JEONG_DOI = '10.4055/cios25283'
 const TUITE_DOI = '10.1148/radiology.199.2.8668808'
 const WILLIAMS_DOI = '10.1016/s0749-8063(05)80105-7'
 const SMITH_DOI = '10.1148/radiology.201.1.8816553'
@@ -45,10 +53,14 @@ const PARK_DOI = '10.1148/radiology.193.1.8090902'
 
 const NEER = <Cite doi={NEER_DOI}>Neer, J Bone Joint Surg Am 1970</Cite>
 const HILL_SACHS = <Cite doi={HILL_SACHS_DOI}>Hill and Sachs, Radiology 1940</Cite>
+const BAO = <Cite doi={BAO_DOI}>Bao et al., Eur J Radiol Open 2022</Cite>
 const WORKMAN = <Cite doi={WORKMAN_DOI}>Workman et al., Radiology 1992</Cite>
 const RICHARDS = <Cite doi={RICHARDS_DOI}>Richards et al., Radiology 1994</Cite>
+const MARCON = <Cite doi={MARCON_DOI}>Marcon and Macedo, Radiol Bras 2015</Cite>
+const KADI = <Cite doi={KADI_DOI}>Kadi et al., J Belg Soc Radiol 2017</Cite>
 const ELLMAN = <Cite doi={ELLMAN_DOI}>Ellman, Clin Orthop Relat Res 1990</Cite>
 const PATTE = <Cite doi={PATTE_DOI}>Patte, Clin Orthop Relat Res 1990</Cite>
+const FEUERRIEGEL = <Cite doi={FEUERRIEGEL_DOI}>Feuerriegel et al., Invest Radiol 2024</Cite>
 const GOUTALLIER = <Cite doi={GOUTALLIER_DOI}>Goutallier et al., Clin Orthop Relat Res 1994</Cite>
 const KILCOYNE = <Cite doi={KILCOYNE_DOI}>Kilcoyne et al., AJR 1990</Cite>
 const CAROFINO = <Cite doi={CAROFINO_DOI}>Carofino and Leopold, Clin Orthop Relat Res 2013</Cite>
@@ -57,14 +69,18 @@ const SOMERSON = <Cite doi={SOMERSON_DOI}>Somerson et al., Clin Orthop Relat Res
 const FUCHS = <Cite doi={FUCHS_DOI}>Fuchs et al., J Shoulder Elbow Surg 1999</Cite>
 const WALCH = <Cite doi={WALCH_DOI}>Walch et al., J Shoulder Elbow Surg 1998</Cite>
 const SNYDER = <Cite doi={SNYDER_DOI}>Snyder et al., Arthroscopy 1990</Cite>
+const JARRAYA = <Cite doi={JARRAYA_DOI}>Jarraya et al., Insights Imaging 2016</Cite>
 const NEVIASER_ALPSA = <Cite doi={NEVIASER_ALPSA_DOI}>Neviaser, Arthroscopy 1993 (ALPSA)</Cite>
 const NEVIASER_GLAD = <Cite doi={NEVIASER_GLAD_DOI}>Neviaser, Arthroscopy 1993 (GLAD)</Cite>
 const WOERTLER = <Cite doi={WOERTLER_DOI}>Woertler and Waldt, Eur Radiol 2006</Cite>
 const WOLF = <Cite doi={WOLF_DOI}>Wolf et al., Arthroscopy 1995</Cite>
 const TIRMAN = <Cite doi={TIRMAN_DOI}>Tirman et al., Radiology 1994</Cite>
 const FRITZ = <Cite doi={FRITZ_DOI}>Fritz et al., Radiology 1992</Cite>
+const AYIK = <Cite doi={AYIK_DOI}>Ayik et al., Int Orthop 2025</Cite>
+const MANGI = <Cite doi={MANGI_DOI}>Mangi et al., Insights Imaging 2022</Cite>
 const LINKER = <Cite doi={LINKER_DOI}>Linker et al., Radiology 1993</Cite>
 const SUGAYA = <Cite doi={SUGAYA_DOI}>Sugaya et al., Arthroscopy 2005</Cite>
+const JEONG = <Cite doi={JEONG_DOI}>Jeong et al., Clin Orthop Surg 2026</Cite>
 const TUITE = <Cite doi={TUITE_DOI}>Tuite and Orwin, Radiology 1996</Cite>
 const WILLIAMS = <Cite doi={WILLIAMS_DOI}>Williams et al., Arthroscopy 1994</Cite>
 const SMITH = <Cite doi={SMITH_DOI}>Smith et al., Radiology 1996</Cite>
@@ -73,10 +89,14 @@ const PARK = <Cite doi={PARK_DOI}>Park et al., Radiology 1994</Cite>
 const references: LessonReference[] = [
   { citation: 'Neer CS 2nd. Displaced proximal humeral fractures. I. Classification and evaluation. J Bone Joint Surg Am. 1970;52(6):1077-1089.', doi: NEER_DOI },
   { citation: 'Hill HA, Sachs MD. The grooved defect of the humeral head: a frequently unrecognized complication of dislocations of the shoulder joint. Radiology. 1940;35(6):690-700.', doi: HILL_SACHS_DOI },
+  { citation: "Bao MH, DeAngelis JP, Wu JS. Imaging of traumatic shoulder injuries - understanding the surgeon's perspective. Eur J Radiol Open. 2022;9:100411.", doi: BAO_DOI },
   { citation: 'Workman TL, Burkhard TK, Resnick D, Goff WB 2nd, Balsara ZN, Davis DJ, Lapoint JM. Hill-Sachs lesion: comparison of detection with MR imaging, radiography, and arthroscopy. Radiology. 1992;185(3):847-852.', doi: WORKMAN_DOI },
   { citation: 'Richards RD, Sartoris DJ, Pathria MN, Resnick D. Hill-Sachs lesion and normal humeral groove: MR imaging features allowing their differentiation. Radiology. 1994;190(3):665-668.', doi: RICHARDS_DOI },
+  { citation: 'Marcon GF, Macedo TA. Artifacts and pitfalls in shoulder magnetic resonance imaging. Radiol Bras. 2015;48(4):242-248.', doi: MARCON_DOI },
+  { citation: 'Kadi R, Milants A, Shahabpour M. Shoulder anatomy and normal variants. J Belg Soc Radiol. 2017;101(Suppl 2):3.', doi: KADI_DOI },
   { citation: 'Ellman H. Diagnosis and treatment of incomplete rotator cuff tears. Clin Orthop Relat Res. 1990;(254):64-74.', doi: ELLMAN_DOI },
   { citation: 'Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;(254):81-86.', doi: PATTE_DOI },
+  { citation: 'Feuerriegel GC, Marcus RP, Sommer S, Wieser K, Bouaicha S, Sutter R. Fat fractions of the rotator cuff muscles acquired with 2-point Dixon MRI: predicting outcome after arthroscopic rotator cuff repair. Invest Radiol. 2024;59(4):328-336.', doi: FEUERRIEGEL_DOI },
   { citation: 'Goutallier D, Postel JM, Bernageau J, Lavau L, Voisin MC. Fatty muscle degeneration in cuff ruptures. Pre- and postoperative evaluation by CT scan. Clin Orthop Relat Res. 1994;(304):78-83.', doi: GOUTALLIER_DOI },
   { citation: 'Kilcoyne RF, Shuman WP, Matsen FA 3rd, Morris M, Rockwood CA. The Neer classification of displaced proximal humeral fractures: spectrum of findings on plain radiographs and CT scans. AJR Am J Roentgenol. 1990;154(5):1029-1033.', doi: KILCOYNE_DOI },
   { citation: 'Carofino BC, Leopold SS. Classifications in brief: the Neer classification for proximal humerus fractures. Clin Orthop Relat Res. 2013;471(1):39-43.', doi: CAROFINO_DOI },
@@ -85,14 +105,18 @@ const references: LessonReference[] = [
   { citation: 'Fuchs B, Weishaupt D, Zanetti M, Hodler J, Gerber C. Fatty degeneration of the muscles of the rotator cuff: assessment by computed tomography versus magnetic resonance imaging. J Shoulder Elbow Surg. 1999;8(6):599-605.', doi: FUCHS_DOI },
   { citation: 'Walch G, Nové-Josserand L, Boileau P, Levigne C. Subluxations and dislocations of the tendon of the long head of the biceps. J Shoulder Elbow Surg. 1998;7(2):100-108.', doi: WALCH_DOI },
   { citation: 'Snyder SJ, Karzel RP, Del Pizzo W, Ferkel RD, Friedman MJ. SLAP lesions of the shoulder. Arthroscopy. 1990;6(4):274-279.', doi: SNYDER_DOI },
+  { citation: "Jarraya M, Roemer FW, Gale HI, Landreau P, D'Hooghe P, Guermazi A. MR-arthrography and CT-arthrography in sports-related glenolabral injuries: a matched descriptive illustration. Insights Imaging. 2016;7(2):167-177.", doi: JARRAYA_DOI },
   { citation: 'Neviaser TJ. The anterior labroligamentous periosteal sleeve avulsion lesion: a cause of anterior instability of the shoulder. Arthroscopy. 1993;9(1):17-21.', doi: NEVIASER_ALPSA_DOI },
   { citation: 'Neviaser TJ. The GLAD lesion: another cause of anterior shoulder pain. Arthroscopy. 1993;9(1):22-23.', doi: NEVIASER_GLAD_DOI },
   { citation: 'Woertler K, Waldt S. MR imaging in sports-related glenohumeral instability. Eur Radiol. 2006;16(12):2622-2636.', doi: WOERTLER_DOI },
   { citation: 'Wolf EM, Cheng JC, Dickson K. Humeral avulsion of glenohumeral ligaments as a cause of anterior shoulder instability. Arthroscopy. 1995;11(5):600-607.', doi: WOLF_DOI },
   { citation: 'Tirman PF, Feller JF, Janzen DL, Peterfy CG, Bergman AG. Association of glenoid labral cysts with labral tears and glenohumeral instability: radiologic findings and clinical significance. Radiology. 1994;190(3):653-658.', doi: TIRMAN_DOI },
   { citation: 'Fritz RC, Helms CA, Steinbach LS, Genant HK. Suprascapular nerve entrapment: evaluation with MR imaging. Radiology. 1992;182(2):437-444.', doi: FRITZ_DOI },
+  { citation: 'Ayik G, Kolac UC, Kaymakoglu M, McFarland E, Huri G. Dark side of the shoulder: suprascapular and axillary nerve compressions. Int Orthop. 2025;49(5):1153-1165.', doi: AYIK_DOI },
+  { citation: 'Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the upper limb: a pictorial review. Insights Imaging. 2022;13(1):166.', doi: MANGI_DOI },
   { citation: 'Linker CS, Helms CA, Fritz RC. Quadrilateral space syndrome: findings at MR imaging. Radiology. 1993;188(3):675-676.', doi: LINKER_DOI },
   { citation: 'Sugaya H, Maeda K, Matsuki K, Moriishi J. Functional and structural outcome after arthroscopic full-thickness rotator cuff repair: single-row versus dual-row fixation. Arthroscopy. 2005;21(11):1307-1316.', doi: SUGAYA_DOI },
+  { citation: 'Jeong SY, Young KW, Lim TK. Type III Sugaya classification after rotator cuff repair: preoperative risk factors and progression to retear. Clin Orthop Surg. 2026;18(2):303-311.', doi: JEONG_DOI },
   { citation: 'Tuite MJ, Orwin JF. Anterosuperior labral variants of the shoulder: appearance on gradient-recalled-echo and fast spin-echo MR images. Radiology. 1996;199(2):537-540.', doi: TUITE_DOI },
   { citation: 'Williams MM, Snyder SJ, Buford D Jr. The Buford complex--the "cord-like" middle glenohumeral ligament and absent anterosuperior labrum complex: a normal anatomic capsulolabral variant. Arthroscopy. 1994;10(3):241-247.', doi: WILLIAMS_DOI },
   { citation: 'Smith DK, Chopp TM, Aufdemorte TB, Witkowski EG, Jones RC. Sublabral recess of the superior glenoid labrum: study of cadavers with conventional nonenhanced MR imaging, MR arthrography, anatomic dissection, and limited histologic examination. Radiology. 1996;201(1):251-256.', doi: SMITH_DOI },
@@ -166,9 +190,9 @@ const learn: LearnSection[] = [
     body: (
       <>
         <h4>Hill-Sachs lesion</h4>
-        <p>The Hill-Sachs lesion is a grooved impaction defect of the posterolateral humeral head, made against the anterior glenoid rim when the shoulder dislocates anteriorly ({HILL_SACHS}). Workman and colleagues compared MRI with radiographs and arthroscopy for detecting it ({WORKMAN}).</p>
+        <p>The Hill-Sachs lesion is a grooved impaction defect of the posterolateral humeral head, made against the anterior glenoid rim when the shoulder dislocates anteriorly ({HILL_SACHS}; {BAO}). Workman and colleagues compared MRI with radiographs and arthroscopy for detecting it ({WORKMAN}).</p>
         <div className="lesson-key">
-          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process ({RICHARDS}).</p>
+          <p>Do not call the normal groove a Hill-Sachs lesion. Richards and colleagues describe a normal flattening of the posterolateral humeral head lower down, and separate it from a Hill-Sachs lesion by its level: the Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid process ({RICHARDS}; {MARCON}; {KADI}).</p>
         </div>
         <h4>Proximal humerus fracture: Neer</h4>
         <p>Neer divided the proximal humerus into four segments: the articular segment (at the anatomical neck), the greater tuberosity, the lesser tuberosity and the shaft (at the surgical neck). A segment counts as a part only when it is displaced more than 1 cm or angulated more than 45°. Whatever the number of fracture lines, a fracture with no displaced segment is one-part. Two-part fractures displace one segment; three-part fractures displace the surgical neck and one tuberosity; four-part fractures displace both tuberosities and the articular segment. Fracture-dislocations and articular surface fractures (head-splitting and impression) are named as well ({NEER}; {KILCOYNE}). Neer later added the valgus-impacted four-part fracture, in which the head is driven down between splayed tuberosities but stays in contact with the glenoid ({CAROFINO}).</p>
@@ -185,7 +209,7 @@ const learn: LearnSection[] = [
         <h4>Partial-thickness tears</h4>
         <p>Ellman described incomplete tears at arthroscopy by side, articular (A), bursal (B) or interstitial (C), and by depth: grade 1 less than 3 mm deep, grade 2 3 to 6 mm, and grade 3 more than 6 mm ({ELLMAN}; {BI_VERMA}). These are arthroscopic grades; measuring the depth on MRI is an approximation.</p>
         <h4>Full-thickness tears</h4>
-        <p>Measure the tear from front to back and its retraction. Patte staged retraction in the frontal plane by where the tendon stump lies: stage 1 near the bony insertion, stage 2 at the level of the humeral head, and stage 3 at the level of the glenoid ({PATTE}).</p>
+        <p>Measure the tear from front to back and its retraction. Patte staged retraction in the frontal plane by where the tendon stump lies: stage 1 near the bony insertion, stage 2 at the level of the humeral head, and stage 3 at the level of the glenoid ({PATTE}; {FEUERRIEGEL}).</p>
         <h4>Fatty infiltration of the muscles</h4>
         <p>Goutallier and colleagues graded fatty degeneration of the cuff muscles on CT ({GOUTALLIER}; {SOMERSON}):</p>
         {goutallierTable}
@@ -225,7 +249,7 @@ const learn: LearnSection[] = [
         <p>Woertler and Waldt review the anteroinferior labroligamentous injuries of anterior instability ({WOERTLER}): the Bankart lesion (the labrum torn from the glenoid with its periosteum disrupted); the bony Bankart (with a fracture of the anteroinferior glenoid rim); and the Perthes lesion (the labrum torn off, but with the scapular periosteum stripped and intact, so the labrum may stay in place).</p>
         <p>In the ALPSA lesion the labroligamentous complex is avulsed with an intact periosteal sleeve and displaced medially and inferiorly down the scapular neck ({NEVIASER_ALPSA}). The GLAD lesion is a superficial anteroinferior labral tear with an adjacent glenoid cartilage injury, causing pain without instability ({NEVIASER_GLAD}).</p>
         <h4>Superior labrum: SLAP</h4>
-        <p>Snyder and colleagues described four types of superior labrum anterior to posterior (SLAP) lesion at arthroscopy ({SNYDER}):</p>
+        <p>Snyder and colleagues described four types of superior labrum anterior to posterior (SLAP) lesion at arthroscopy ({SNYDER}; {JARRAYA}):</p>
         {snyderTable}
         <div className="lesson-key">
           <p>Before calling a SLAP tear, rule out the normal variants of step 12: a sublabral recess looks like published examples of SLAP lesions ({SMITH}), and misreading a sublabral recess as a tear, or a tear as a recess, gives false positive and false negative diagnoses of a type II SLAP lesion ({WOERTLER}).</p>
@@ -272,7 +296,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Paralabral cysts are associated with labral tears ({TIRMAN}), so a cyst sends you back to the labrum in step 6.</p>
-        <p>A mass such as a ganglion can compress the suprascapular nerve. At the suprascapular notch it can affect both the supraspinatus and the infraspinatus; at the spinoglenoid notch, below the branch to the supraspinatus, it affects the infraspinatus alone. Denervation shows as high signal in the muscle on fluid-sensitive images, and later as fatty atrophy ({FRITZ}).</p>
+        <p>A mass such as a ganglion can compress the suprascapular nerve. At the suprascapular notch it can affect both the supraspinatus and the infraspinatus; at the spinoglenoid notch, below the branch to the supraspinatus, it affects the infraspinatus alone. Denervation shows as high signal in the muscle on fluid-sensitive images, and later as fatty atrophy ({FRITZ}; {AYIK}; {MANGI}).</p>
         <p>In quadrilateral space syndrome the axillary nerve is compressed in the quadrilateral space, and MRI shows atrophy of the teres minor ({LINKER}).</p>
         <ScanFigures images={[shoulderMriScans.paralabralCystDenervation]} />
       </>
@@ -283,7 +307,7 @@ const learn: LearnSection[] = [
     title: 'Step 11. Repaired rotator cuff',
     body: (
       <>
-        <p>This step applies only when the cuff has been repaired before. Sugaya and colleagues classified the repaired cuff on MRI in five types; types IV and V are re-tears ({SUGAYA}):</p>
+        <p>This step applies only when the cuff has been repaired before. Sugaya and colleagues classified the repaired cuff on MRI in five types; types IV and V are re-tears ({SUGAYA}; {JEONG}):</p>
         {sugayaTable}
         <ScanFigures images={[shoulderMriScans.sugayaType1Healed, shoulderMriScans.sugayaType4Retear]} />
       </>
@@ -296,7 +320,7 @@ const learn: LearnSection[] = [
       <>
         <p>On this site each variant gets its own line in the impression, so the reader knows it was seen and not mistaken for a tear.</p>
         <ul className="plain-list">
-          <li><strong>Sublabral foramen:</strong> the anterosuperior labrum is not attached to the glenoid, between about the 1 and 3 o'clock positions; do not call it a tear ({TUITE}).</li>
+          <li><strong>Sublabral foramen:</strong> the anterosuperior labrum is not attached to the glenoid, between about the 1 and 3 o'clock positions; do not call it a tear ({TUITE}; {KADI}).</li>
           <li><strong>Buford complex:</strong> an absent anterosuperior labrum with a thick, cord-like middle glenohumeral ligament, a normal variant ({WILLIAMS}).</li>
           <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, with an appearance similar to SLAP lesions ({SMITH}); it can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</li>
           <li><strong>Os acromiale:</strong> an unfused ossification centre of the acromion, associated with rotator cuff impingement ({PARK}).</li>
@@ -349,7 +373,7 @@ const sideOptions: Option[] = [
 const ellmanSide: Record<string, string> = { articular: 'A', bursal: 'B', interstitial: 'C' }
 const sideWords: Record<string, string> = { articular: 'articular-side', bursal: 'bursal-side', interstitial: 'interstitial' }
 
-/** S3-1 (to check): Ellman grade 1 is less than 3 mm deep, grade 2 3 to 6 mm, grade 3 more than 6 mm. */
+/** S3-1 (checked in Bi and Verma 2025): Ellman grade 1 is less than 3 mm deep, grade 2 3 to 6 mm, grade 3 more than 6 mm. */
 function ellmanGrade(depth: number): string {
   if (depth < 3) return '1'
   if (depth <= 6) return '2'
@@ -395,7 +419,7 @@ const anteriorLabrumOptions: Option[] = [
   { value: 'other', label: 'Other tear' },
 ]
 
-/** S6-1 (to check): Snyder's four SLAP types, worded as their definitions. */
+/** S6-1 (checked in Jarraya 2016 and Woertler 2006): Snyder's four SLAP types, worded as their definitions. */
 const superiorLabrumOptions: Option[] = [
   { value: 'intact', label: 'Intact' },
   { value: 'i', label: 'Fraying, anchor attached' },
@@ -405,7 +429,7 @@ const superiorLabrumOptions: Option[] = [
 ]
 const snyderType: Record<string, string> = { i: 'I', ii: 'II', iii: 'III', iv: 'IV' }
 
-/** S11-1 (to check): Sugaya's five types; IV and V are re-tears. */
+/** S11-1 (types in the Sugaya 2005 abstract; IV and V as re-tears in Jeong 2026): Sugaya's five types; IV and V are re-tears. */
 const sugayaOptions: Option[] = [
   { value: 'i', label: 'Sufficient thickness, homogeneously low signal' },
   { value: 'ii', label: 'Sufficient thickness, partial high-signal area' },
@@ -620,7 +644,7 @@ function anyLabralTear(values: Values): string[] {
 
 function deriveBones(values: Values): Derived[] {
   const result = neer(values)
-  // N1-N5 (to check): the Neer type from the shared logic.
+  // N1-N5 (checked in Carofino and Leopold 2013): the Neer type from the shared logic.
   return result ? [{ label: 'Neer', value: result.label, tone: 'warn' }] : []
 }
 
@@ -639,10 +663,10 @@ function deriveCuff(values: Values): Derived[] {
     const chip = ellmanChip(values, id, name)
     if (chip) out.push(chip)
   }
-  // S3-2 (to check): Patte stages 1 to 3 by where the stump lies.
+  // S3-2 (checked in Feuerriegel 2024): Patte stages 1 to 3 by where the stump lies.
   const patte = str(values, 'supraspinatus-retraction')
   if (patte) out.push({ label: 'Retraction (Patte)', value: `Stage ${patte}`, tone: 'warn' })
-  // S3-3 (to check): Goutallier grades 0 to 4.
+  // S3-3 (checked in Somerson 2016): Goutallier grades 0 to 4.
   for (const [id, name] of cuffMuscles.slice(0, 2)) {
     const grade = str(values, id)
     if (grade) out.push({ label: `${name} (Goutallier)`, value: `Grade ${grade}`, tone: grade === '0' ? 'good' : 'warn' })
@@ -660,19 +684,19 @@ function deriveSubscapularis(values: Values): Derived[] {
 }
 
 function deriveLabrum(values: Values): Derived[] {
-  // S6-1 (to check): Snyder SLAP types I to IV.
+  // S6-1 (checked in Jarraya 2016): Snyder SLAP types I to IV.
   const type = snyderType[str(values, 'labrum-superior')] as string | undefined
   return type ? [{ label: 'SLAP (Snyder)', value: `Type ${type}`, tone: 'warn' }] : []
 }
 
 function deriveNerves(values: Values): Derived[] {
   const out: Derived[] = []
-  // S10-2 (to check): a mass at the suprascapular notch can affect both muscles; at the
+  // S10-2 (checked in Ayik 2025 and Mangi 2022): a mass at the suprascapular notch can affect both muscles; at the
   // spinoglenoid notch, the infraspinatus alone.
   const site = str(values, 'cyst-site')
   if (site === 'suprascapular') out.push({ label: 'Cyst site (Fritz)', value: 'Can affect the supraspinatus and infraspinatus', tone: 'warn' })
   if (site === 'spinoglenoid') out.push({ label: 'Cyst site (Fritz)', value: 'Can affect the infraspinatus alone', tone: 'warn' })
-  // S10-3 (to check): quadrilateral space syndrome shows teres minor atrophy.
+  // S10-3 (checked in the Linker 1993 abstract): quadrilateral space syndrome shows teres minor atrophy.
   if (list(values, 'denervation-muscles').includes('teres-minor')) {
     out.push({ label: 'Teres minor denervation (Linker)', value: 'Consider quadrilateral space syndrome', tone: 'warn' })
   }
@@ -680,7 +704,7 @@ function deriveNerves(values: Values): Derived[] {
 }
 
 function deriveRepair(values: Values): Derived[] {
-  // S11-1 (to check): Sugaya types I to V; IV and V are re-tears.
+  // S11-1 (checked in the Sugaya 2005 abstract and Jeong 2026): Sugaya types I to V; IV and V are re-tears.
   const value = str(values, 'repair-integrity')
   const type = sugayaType[value] as string | undefined
   if (!type) return []
@@ -908,18 +932,18 @@ function warnings(values: Values): string[] {
     if (negatives.includes(key) && found.length > 0) out.push(`Impression says ${phrase}, but these are entered: ${found.join(', ')}.`)
   }
 
-  // S10-1 (to check): paralabral cysts are associated with labral tears.
+  // S10-1 (checked in the Tirman 1994 abstract): paralabral cysts are associated with labral tears.
   if (str(values, 'paralabral-cyst') === 'present' && anyLabralTear(values).length === 0 && str(values, 'labrum-anterior') !== '') {
     out.push('A paralabral cyst is entered with an intact labrum. Paralabral cysts go with labral tears: look at the labrum again.')
   }
-  // S5-1 (to check): a displaced long head of biceps goes with subscapularis tears.
+  // S5-1 (checked in the Walch 1998 abstract): a displaced long head of biceps goes with subscapularis tears.
   const position = str(values, 'biceps-position')
   if ((position === 'subluxed' || position === 'dislocated') && ['normal', 'tendinosis'].includes(str(values, 'subscapularis'))) {
     out.push('The long head of biceps is displaced medially, but no subscapularis tear is entered. Displaced biceps tendons go with subscapularis tears: look at it again.')
   }
   // S12-3: "false positive and false negative diagnoses of a SLAP type 2 lesion can be caused by
   // misinterpretation of a sublabral recess as a tear and vice versa" (Woertler and Waldt 2006,
-  // full text). S6-1 (the Snyder type wording) is still unchecked.
+  // full text). S6-1 (the Snyder type wording) is checked in Jarraya 2016.
   if (str(values, 'labrum-superior') === 'ii' && list(values, 'variants').includes('sublabral-recess')) {
     out.push('Both a type II SLAP tear and a sublabral recess are entered at the biceps anchor. The recess can mimic the tear: decide which it is.')
   }
@@ -964,7 +988,7 @@ const steps: ReportStep[] = [
     learn: 'bones',
     teach: (
       <>
-        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}). It lies on the most superior axial images, at or above the coracoid; the normal groove lies lower ({RICHARDS}).</p>
+        <p>The Hill-Sachs lesion is an impaction defect of the posterolateral humeral head from anterior dislocation ({HILL_SACHS}; {BAO}). It lies on the most superior axial images, at or above the coracoid; the normal groove lies lower ({RICHARDS}; {MARCON}; {KADI}).</p>
         <p>Neer: a segment is a part only when displaced more than 1 cm or angulated more than 45°; no displaced segment is one-part, however many fracture lines ({NEER}).</p>
       </>
     ),
@@ -977,7 +1001,7 @@ const steps: ReportStep[] = [
     learn: 'cuff',
     teach: (
       <>
-        <p>Ellman (arthroscopic): articular (A), bursal (B) or interstitial (C); grade 1 less than 3 mm deep, grade 2 3 to 6 mm, grade 3 more than 6 mm ({ELLMAN}). Patte retraction: stage 1 near the insertion, 2 at the humeral head, 3 at the glenoid ({PATTE}).</p>
+        <p>Ellman (arthroscopic): articular (A), bursal (B) or interstitial (C); grade 1 less than 3 mm deep, grade 2 3 to 6 mm, grade 3 more than 6 mm ({ELLMAN}). Patte retraction: stage 1 near the insertion, 2 at the humeral head, 3 at the glenoid ({PATTE}; {FEUERRIEGEL}).</p>
         <p>Goutallier grades of fatty infiltration ({GOUTALLIER}), applied to MRI by Fuchs and colleagues, who found the MRI and CT grades correlated only fairly to moderately ({FUCHS}):</p>
         {goutallierTable}
       </>
@@ -1007,7 +1031,7 @@ const steps: ReportStep[] = [
     teach: (
       <>
         <p>Anteroinferior: Bankart, bony Bankart and Perthes ({WOERTLER}); ALPSA, displaced medially down the scapular neck with an intact periosteal sleeve ({NEVIASER_ALPSA}); GLAD, a superficial tear with adjacent cartilage injury ({NEVIASER_GLAD}).</p>
-        <p>Snyder's SLAP types ({SNYDER}):</p>
+        <p>Snyder's SLAP types ({SNYDER}; {JARRAYA}):</p>
         {snyderTable}
       </>
     ),
@@ -1040,7 +1064,7 @@ const steps: ReportStep[] = [
     learn: 'nerves',
     teach: (
       <>
-        <p>Paralabral cysts go with labral tears ({TIRMAN}). At the suprascapular notch a mass can affect the supraspinatus and infraspinatus; at the spinoglenoid notch the infraspinatus alone ({FRITZ}).</p>
+        <p>Paralabral cysts go with labral tears ({TIRMAN}). At the suprascapular notch a mass can affect the supraspinatus and infraspinatus; at the spinoglenoid notch the infraspinatus alone ({FRITZ}; {AYIK}).</p>
         <p>Teres minor atrophy points to quadrilateral space syndrome ({LINKER}).</p>
       </>
     ),
@@ -1053,7 +1077,7 @@ const steps: ReportStep[] = [
     learn: 'repair',
     teach: (
       <>
-        <p>Sugaya types of the repaired cuff; IV and V are re-tears ({SUGAYA}):</p>
+        <p>Sugaya types of the repaired cuff; IV and V are re-tears ({SUGAYA}; {JEONG}):</p>
         {sugayaTable}
       </>
     ),
@@ -1080,7 +1104,7 @@ const study: StudyDefinition = {
   slug: 'shoulder-mri',
   name: 'Shoulder MRI',
   lede: 'Read a shoulder MRI with no history beyond pain: a fixed search pattern through the bones, rotator cuff, biceps, labrum, ligaments, nerves and a repaired cuff, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but most of the papers are paywalled, so the claims not stated in an abstract or open full text (among them the Patte stages, the Snyder type wording, the Hill-Sachs level and the sublabral foramen position) have still not been checked against their papers.',
+  sourceNote: 'Every reference has been matched on PubMed and Crossref, and each claim was read in an abstract or open full text. Most of the original papers are paywalled, so where an abstract does not state a claim (the Neer rules, the Ellman, Patte, Goutallier and Snyder grades, the Hill-Sachs level, the suprascapular nerve sites, the Sugaya re-tears and the sublabral foramen position), an open review or study that states it is cited beside the original.',
   references,
   report: {
     steps,
@@ -1107,7 +1131,7 @@ const study: StudyDefinition = {
       question: 'Flattening of the posterolateral humeral head is seen on axial images well below the coracoid. What is it most likely to be?',
       options: ['A Hill-Sachs lesion', 'A reverse Hill-Sachs lesion', 'A greater tuberosity fracture', 'The normal groove'],
       answer: 3,
-      explanation: <p>The Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid; the normal groove of the posterolateral head lies lower ({RICHARDS}).</p>,
+      explanation: <p>The Hill-Sachs defect lies on the most superior axial images, at or above the level of the coracoid; the normal groove of the posterolateral head lies lower ({RICHARDS}; {MARCON}; {KADI}).</p>,
     },
     {
       id: 'ellman-grade',
@@ -1121,7 +1145,7 @@ const study: StudyDefinition = {
       question: 'The retracted supraspinatus stump lies at the level of the glenoid on the oblique coronal images. What Patte stage is that?',
       options: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'],
       answer: 2,
-      explanation: <p>Patte stage 1 is a stump near the bony insertion, stage 2 at the level of the humeral head, and stage 3 at the level of the glenoid ({PATTE}).</p>,
+      explanation: <p>Patte stage 1 is a stump near the bony insertion, stage 2 at the level of the humeral head, and stage 3 at the level of the glenoid ({PATTE}; {FEUERRIEGEL}).</p>,
     },
     {
       id: 'goutallier',
@@ -1135,7 +1159,7 @@ const study: StudyDefinition = {
       question: 'The superior labrum and the biceps anchor are detached from the glenoid. What SLAP type is that, and what variant should you rule out first?',
       options: ['Type I; a Buford complex', 'Type II; a sublabral recess', 'Type III; a sublabral foramen', 'Type IV; an os acromiale'],
       answer: 1,
-      explanation: <p>In Snyder's type II the superior labrum and biceps anchor are detached from the glenoid ({SNYDER}). A sublabral recess can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</p>,
+      explanation: <p>In Snyder's type II the superior labrum and biceps anchor are detached from the glenoid ({SNYDER}; {JARRAYA}). A sublabral recess can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</p>,
     },
     {
       id: 'alpsa',
@@ -1149,7 +1173,7 @@ const study: StudyDefinition = {
       question: 'A paralabral cyst sits in the spinoglenoid notch. Which muscle is it expected to denervate?',
       options: ['Supraspinatus and infraspinatus', 'Infraspinatus alone', 'Teres minor', 'Deltoid'],
       answer: 1,
-      explanation: <p>At the suprascapular notch a mass can affect both the supraspinatus and the infraspinatus; at the spinoglenoid notch, below the branch to the supraspinatus, the infraspinatus alone ({FRITZ}). A paralabral cyst should also send you back to the labrum ({TIRMAN}).</p>,
+      explanation: <p>At the suprascapular notch a mass can affect both the supraspinatus and the infraspinatus; at the spinoglenoid notch, below the branch to the supraspinatus, the infraspinatus alone ({FRITZ}; {AYIK}; {MANGI}). A paralabral cyst should also send you back to the labrum ({TIRMAN}).</p>,
     },
     {
       id: 'sugaya',

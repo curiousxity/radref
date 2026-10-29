@@ -229,3 +229,38 @@ These are from the legends, not the body text:
 | K2-2 | yes | Fig. 6a: the dashboard injury "is the most common mechanism of injury resulting in disruption of the PCL"; Fig. 6b: the PCL "is usually tight when the knee is in 90° of flexion and is, therefore, at risk"; the ACL "usually remains intact". |
 | K2-3 | ACL and PCL: yes. Posterolateral corner: partly | Fig. 9b: "Depending on the amount of force applied during hyperextension, tears of the ACL, PCL, or both may occur." Figs. 11 and 12 show posterior capsule disruption after severe hyperextension, the "posterior lateral joint capsule" in 12a, and a thrombosed popliteal artery in 11b. The legends do not name the posterolateral corner as such. |
 | K2-4 | yes | Fig. 13b: the larger contusion is from direct force to the lateral femoral condyle; "A smaller area of edema ... may occur within the medial femoral condyle or the medial tibial plateau due to an avulsive injury of the MCL"; "Stretching or disruption of the MCL ... can occur". (In Fig. 14 the small medial femoral edema is "likely secondary to impaction" instead.) |
+
+## Seventh check, 2026-10-29: open sources
+
+The RSNA pages for Campos (K9), Kijowski (K15), Bencardino (K17), Schweitzer (K10), Elias (K12) and
+Carrillon (K13) all returned 403 (a Cloudflare "Just a moment..." challenge) to curl and WebFetch,
+so their figure legends were not read. Instead, open full text from Europe PMC was searched; three
+open reviews state claims as the page has them and are now second citations beside the original:
+
+- Parkar AP, Adriaensen MEAPM. ESR essentials: MRI of the knee-practice recommendations by ESSR.
+  Eur Radiol. 2024;34(10):6590-6599. doi:10.1007/s00330-024-10706-7 (PMC11399221).
+- Chien A, Weaver JS, Kinne E, Omar I. Magnetic resonance imaging of the knee. Pol J Radiol.
+  2020;85:e509-e531. doi:10.5114/pjr.2020.99415 (PMC7571514).
+- Crone AM, Omar IM, Bronson AM, et al. Guide to lower extremity radiologic measurements: part 2
+  knee. Skeletal Radiol. 2026;55(6):1197-1216. doi:10.1007/s00256-026-05187-2 (PMC13139256).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| K2-6 | yes (ACL association) | Parkar and Adriaensen, body text: "An associated avulsion is the Segond fracture, i.e. a small avulsion of the anterolateral tibial rim where the iliotibial band and anterolateral capsule attach. This is associated with an ACL rupture in adult patients"; Fig. 2 legend: "Segond avulsion has a 95% association with ACL rupture". Chien et al. also: the Segond fracture "is highly associated with ACL injury". The ITT and AOB were already in K9's abstract. Cited as ({CAMPOS}; {ESSR}) wherever the page links Segond to ACL tear. |
+| K5-2 | yes | Chien et al.: "Potential reconstruction complications include graft tear, graft impingement, arthrofibrosis, ganglion cyst formation, tunnel widening/resorption, hardware failure, and osteoarthritis" and "Focal arthrofibrosis, also known as a cyclops lesion, represents localised fibrosis anterior to the distal portion of the ACL graft"; Fig. 22b legend: "arthrofibrosis at the anterior aspect of the intercondylar notch, called a 'cyclops lesion'". Cited as ({BENCARDINO}; {CHIEN}). |
+| K9-2 (level) | yes | Crone et al.: "The MRI measurement of the lateral trochlear inclination was initially described by Carrillon et al. The measurement is made on axial imaging of the knee, at the most superior level where trochlear cartilage is visualized"; their table: "Axial knee MRI through the superior margin of trochlear cartilage", "< 11° dysplastic trochlea". Cited beside the measurement level only; the 93% and 87% stay with Carrillon. (Also Pace et al., Orthop J Sports Med 2025, doi:10.1177/23259671251371276, PMC12501464: "As described by the original authors, LTI is measured on the most proximal axial MRI scan in which trochlear cartilage can be appreciated".) |
+| K7-1 | yes, as worded | The page names no bruise site; it says MCL injuries come with bone bruises "whose location Schweitzer and colleagues report". K10's own abstract (PubMed): "To investigate the multiple signs of medial collateral ligament (MCL) sprains, including the location and prevalence of associated bone bruises". The sites themselves are not on the page and were not read. |
+| K2-8 | partly; **for the author** | Andriolo L, et al. Classification systems for knee osteochondritis dissecans: a systematic review. Cartilage. 2022;13(3):19476035221121789. doi:10.1177/19476035221121789 (PMC9634996), its table row for Kijowski et al.: "A high T2 signal intensity rim or cysts surrounding an adult OCD lesion are unequivocal signs of instability. A high T2 signal intensity rim surrounding a JOCD lesion indicates instability only if it has the same signal intensity as adjacent joint fluid, is surrounded by a second outer rim of low T2 signal intensity, or is accompanied by multiple breaks in the subchondral bone plate on T2-weighted MR images. Cysts surrounding a JOCD lesion indicate instability only if they are multiple or large in size." The page says the juvenile rim signals instability "only when it has a second, outer rim of low T2 signal, or when there are multiple breaks in the subchondral bone plate": it leaves out the first condition (signal the same as joint fluid), so "only when" is narrower than the review. Page unchanged, no citation added. |
+| K2-3 (PLC) | still partly | No open source found that ties the hyperextension "kissing" pattern to the posterolateral corner. Open papers give varus hyperextension with anteromedial bruises as a PLC mechanism (e.g. Orthop J Sports Med 2023, PMC10469253: "many PLC injuries were accompanied by an AM bone bruise ... the injury pattern ... was likely varus hyperextension"), and Sports Health 2010 (PMC3445054), Table 1, gives the anterior tibial "lip" from hyperextension as "Rule out ACL tear". Neither says the page's claim. |
+| SZ-4 | already settled | Verified against Markhardt in full in the fourth check ("a medial tibial plateau fracture with a split or depressed component"); the calculator's source note now says Markhardt was read in full rather than its abstract. |
+
+Not needed any more for the page: Campos (K2-6 now has an open second source), Bencardino (K5-2),
+Carrillon (K9-2's level). Still worth reading if the author wants: Kijowski 2008 (to confirm the
+three juvenile criteria for K2-8) and Schweitzer 1995 (if the page should name the MCL bruise sites).
+
+Kijowski 2008 figure legends (RSNA page, read in a browser on 2026-10-29) bear on K2-8. Fig. 4, a
+stable juvenile lesion: "surrounded by high T2 signal intensity rim ... that has lower signal
+intensity than adjacent joint fluid". Fig. 5, an unstable one: "inner rim of high T2 signal intensity
+... and second outer rim of low T2 signal intensity ... The high T2 signal intensity rim has same
+signal intensity as adjacent joint fluid". So the rim's signal matching fluid is one of the juvenile
+criteria, as Andriolo's table gives it; the page's "only when" omits it. Still for the author.

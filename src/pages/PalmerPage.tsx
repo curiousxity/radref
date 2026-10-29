@@ -23,6 +23,7 @@ const degenerativeOptions = palmerClasses.filter((c) => palmerKind(c) === 'degen
 
 const references: LessonReference[] = [
   { citation: 'Palmer AK. Triangular fibrocartilage complex lesions: a classification. J Hand Surg Am. 1989;14(4):594-606.', doi: '10.1016/0363-5023(89)90174-3' },
+  { citation: 'von Borstel D, Wang M, Small K, Nozaki T, Yoshioka H. High-resolution 3T MR imaging of the triangular fibrocartilage complex. Magn Reson Med Sci. 2017;16(1):3-15.', doi: '10.2463/mrms.rev.2016-0011' },
 ]
 
 export function PalmerPage() {
@@ -45,7 +46,7 @@ export function PalmerPage() {
           <span className="calc-tag">TFCC</span>
         </div>
         <p>Class a triangular fibrocartilage complex lesion as traumatic or degenerative, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the reference is matched on PubMed, but the paper is paywalled and its abstract says only that traumatic lesions are classed by location and degenerative ones by the location and severity of the changes, so the wording of each class has not yet been checked. Source: <Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>.</p>
+        <p className="source-note">Unchecked draft: the paper is paywalled, so the classes are checked against a review that reproduces Palmer's table (<Cite doi="10.2463/mrms.rev.2016-0011">von Borstel et al., Magn Reson Med Sci 2017</Cite>). The 1B and 1C wording here is not yet checked: the table gives 1B as ulnar avulsion with or without a distal ulnar fracture, and 1C as distal avulsion. Source: <Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -86,7 +87,7 @@ export function PalmerPage() {
             </tbody>
           </table>
         </div>
-        <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it.</p>
+        <p>Class 2 lesions are stages of ulnocarpal abutment, each including the one before it (<Cite doi="10.1016/0363-5023(89)90174-3">Palmer, J Hand Surg Am 1989</Cite>; <Cite doi="10.2463/mrms.rev.2016-0011">von Borstel et al., Magn Reson Med Sci 2017</Cite>).</p>
       </section>
 
       <section className="info-card">
@@ -94,7 +95,7 @@ export function PalmerPage() {
         <ScanFigures images={[palmerScans.class1a, palmerScans.class1b, palmerScans.class1c, palmerScans.class1d, palmerScans.class2d]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled, so the class wording has been checked only where the abstract states it." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The paper is paywalled; the class wording is checked against von Borstel and colleagues' reproduction of its table." />
     </div>
   )
 }

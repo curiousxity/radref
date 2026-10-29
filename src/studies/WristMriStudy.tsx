@@ -16,8 +16,9 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 /*
  * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled and Linscheid 1972 has no abstract, so only claims whose wording is
- * in an abstract are verified. The claims table, with each claim's status, is
+ * the papers are paywalled and Linscheid 1972 has no abstract in PubMed, so claims are verified
+ * from abstracts or from open reviews cited beside the original (2026-10-29: Andersson, Ng,
+ * Chen, von Borstel). The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-wrist-mri-sources.md (W claims); the Mayfield, Herbert,
  * Palmer and Lichtman wording is in 2026-10-23-wrist-calculators-sources.md (MF, HB, PA and LI
  * claims). Rule chips and warnings carry their claim IDs.
@@ -43,6 +44,10 @@ const ZEISS_DOI = '10.2214/ajr.158.5.1566671'
 const BERGER_DOI = '10.1016/S0363-5023(96)80096-7'
 const VO_DOI = '10.1016/S0363-5023(05)80288-6'
 const CONWAY_DOI = '10.1148/radiology.156.1.3923555'
+const ANDERSSON_DOI = '10.1302/2058-5241.2.170016'
+const NG_DOI = '10.21037/qims-24-420'
+const CHEN_DOI = '10.1177/1941738109347981'
+const VON_BORSTEL_DOI = '10.2463/mrms.rev.2016-0011'
 
 const LINSCHEID = <Cite doi={LINSCHEID_DOI}>Linscheid et al., J Bone Joint Surg Am 1972</Cite>
 const MAYFIELD = <Cite doi={MAYFIELD_DOI}>Mayfield et al., J Hand Surg Am 1980</Cite>
@@ -64,6 +69,10 @@ const ZEISS = <Cite doi={ZEISS_DOI}>Zeiss et al., AJR 1992</Cite>
 const BERGER = <Cite doi={BERGER_DOI}>Berger, J Hand Surg Am 1996</Cite>
 const VO = <Cite doi={VO_DOI}>Vo et al., J Hand Surg Am 1995</Cite>
 const CONWAY = <Cite doi={CONWAY_DOI}>Conway et al., Radiology 1985</Cite>
+const ANDERSSON = <Cite doi={ANDERSSON_DOI}>Andersson, EFORT Open Rev 2017</Cite>
+const NG = <Cite doi={NG_DOI}>Ng et al., Quant Imaging Med Surg 2024</Cite>
+const CHEN = <Cite doi={CHEN_DOI}>Chen et al., Sports Health 2009</Cite>
+const VON_BORSTEL = <Cite doi={VON_BORSTEL_DOI}>von Borstel et al., Magn Reson Med Sci 2017</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Linscheid RL, Dobyns JH, Beabout JW, Bryan RS. Traumatic instability of the wrist. Diagnosis, classification, and pathomechanics. J Bone Joint Surg Am. 1972;54(8):1612-1632.', doi: LINSCHEID_DOI },
@@ -86,6 +95,10 @@ const references: LessonReference[] = [
   { citation: 'Berger RA. The gross and histologic anatomy of the scapholunate interosseous ligament. J Hand Surg Am. 1996;21(2):170-178.', doi: BERGER_DOI },
   { citation: 'Vo P, Wright T, Hayden F, Dell P, Chidgey L. Evaluating dorsal wrist pain: MRI diagnosis of occult dorsal wrist ganglion. J Hand Surg Am. 1995;20(4):667-670.', doi: VO_DOI },
   { citation: 'Conway WF, Destouet JM, Gilula LA, Bellinghausen HW, Weeks PM. The carpal boss: an overview of radiographic evaluation. Radiology. 1985;156(1):29-31.', doi: CONWAY_DOI },
+  { citation: 'Andersson JK. Treatment of scapholunate ligament injury: current concepts. EFORT Open Rev. 2017;2(9):382-393.', doi: ANDERSSON_DOI },
+  { citation: 'Ng AWH, Chan JYS, Griffith JF, Ng ISH, Tse WL, Ng SSH. Imaging of dorsal wrist pain. Quant Imaging Med Surg. 2024;14(9):6945-6962.', doi: NG_DOI },
+  { citation: 'Chen NC, Jupiter JB, Jebson PJL. Sports-related wrist injuries in adults. Sports Health. 2009;1(6):469-477.', doi: CHEN_DOI },
+  { citation: 'von Borstel D, Wang M, Small K, Nozaki T, Yoshioka H. High-resolution 3T MR imaging of the triangular fibrocartilage complex. Magn Reson Med Sci. 2017;16(1):3-15.', doi: VON_BORSTEL_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -138,7 +151,7 @@ const learn: LearnSection[] = [
         <h4>Other carpal bones and the distal radius</h4>
         <p>Look along every carpal bone, including the hook of the hamate and the dorsal surface of the triquetrum, and at the distal radius.</p>
         <h4>The lunate: Kienböck disease or ulnar impaction</h4>
-        <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar aspect of the lunate, sometimes also in the radial aspects of the triquetrum and the ulnar head ({IMAEDA}), and goes with positive ulnar variance ({CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}).</p>
+        <p>Abnormal lunate signal has two common patterns. Ulnar impaction gives focal abnormal signal in the ulnar aspect of the lunate, sometimes also in the radial aspects of the triquetrum and the ulnar head ({IMAEDA}), and goes with positive ulnar variance ({CEREZAL}). Kienböck disease is told apart by signal through the whole lunate rather than a focal area ({CEREZAL}; {NG}).</p>
         <p>Stage Kienböck disease by Lichtman, whose four stages are clinical and radiographic ({LICHTMAN}); the Lichtman calculator on this site applies the same rules. Stage I has normal radiographs, and since 1993 decreased T1 signal on MRI. Stage III was split in 1993 by fixed scaphoid rotation (a radioscaphoid angle over 60° is IIIB), and IIIC, a coronal fracture of the lunate, was added later ({KENNEDY_ABRAMS}).</p>
         {lichtmanTable}
         <ScanFigures images={[wristMriScans.occultScaphoidFracture, wristMriScans.kienbock]} />
@@ -150,7 +163,7 @@ const learn: LearnSection[] = [
     title: 'Step 3. Scapholunate ligament and DISI',
     body: (
       <>
-        <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}). Say which parts are torn.</p>
+        <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}; {ANDERSSON}). Say which parts are torn.</p>
         <p>Linscheid and colleagues described the carpal instability patterns. A normal scapholunate angle is 30° to 60°; above 60° suggests dorsal intercalated segment instability (DISI), and below 30° volar intercalated segment instability (VISI) ({LINSCHEID}). Those angles were measured on lateral radiographs, so treat a measurement on sagittal MRI as a pointer, not a diagnosis.</p>
         <ScanFigures images={[wristMriScans.scapholunateTear]} />
       </>
@@ -161,7 +174,7 @@ const learn: LearnSection[] = [
     title: 'Step 4. Lunotriquetral ligament and VISI',
     body: (
       <>
-        <p>Look at the lunotriquetral ligament in the same way. Its disruption goes with VISI ({LINSCHEID}).</p>
+        <p>Look at the lunotriquetral ligament in the same way. Its disruption goes with VISI ({LINSCHEID}; {ANDERSSON}).</p>
         <ScanFigures images={[wristMriScans.lunotriquetralTear]} />
       </>
     ),
@@ -173,7 +186,7 @@ const learn: LearnSection[] = [
       <>
         <p>Mayfield and colleagues described perilunar instability as a progression around the lunate, radial to ulnar ({MAYFIELD}; {KENNEDY_ALLAN}). Stage III is the perilunate dislocation. The stages build on each other, so a later stage includes the injuries of the earlier ones. The Mayfield calculator on this site applies the same rules.</p>
         {mayfieldTable}
-        <p>The sequence starts at the scapholunate ligament, unless the injury passes through the scaphoid instead (a greater-arc injury). So a stage III or IV injury with an intact scapholunate ligament and no scaphoid fracture deserves a second look ({MAYFIELD}).</p>
+        <p>The sequence starts at the scapholunate ligament, unless the injury passes through the scaphoid instead (a greater-arc injury). So a stage III or IV injury with an intact scapholunate ligament and no scaphoid fracture deserves a second look ({MAYFIELD}; {CHEN}).</p>
         <p>This site gives a Mayfield stage only when you mark a perilunate injury, so an isolated scapholunate tear from another cause is not called stage I.</p>
       </>
     ),
@@ -183,9 +196,9 @@ const learn: LearnSection[] = [
     title: 'Step 6. TFCC and ulnar variance',
     body: (
       <>
-        <p>Classify a TFCC lesion by Palmer: class 1 traumatic, class 2 degenerative ({PALMER}). The Palmer calculator on this site applies the same rules.</p>
+        <p>Classify a TFCC lesion by Palmer: class 1 traumatic, class 2 degenerative ({PALMER}; {VON_BORSTEL}). The Palmer calculator on this site applies the same rules.</p>
         {palmerTable}
-        <p>Classes 2D and 2E include perforation of the lunotriquetral ligament, so read them against step 4 ({PALMER}).</p>
+        <p>Classes 2D and 2E include perforation of the lunotriquetral ligament, so read them against step 4 ({PALMER}; {VON_BORSTEL}).</p>
         <p>Triangular fibrocartilage defects are also found in the asymptomatic opposite wrist, so a defect is not by itself the cause of the pain ({ZANETTI}).</p>
         <p>Report the ulnar variance (positive, neutral or negative): it matters for ulnar impaction (step 2).</p>
         <ScanFigures images={[wristMriScans.tfccTear]} />
@@ -807,7 +820,7 @@ const steps: ReportStep[] = [
     id: 'scapholunate',
     title: 'Step 3. Scapholunate ligament and DISI',
     learn: 'scapholunate',
-    teach: <p>The dorsal part of the scapholunate ligament is the strongest ({BERGER}). A scapholunate angle above 60° suggests DISI, below 30° VISI, measured on radiographs ({LINSCHEID}).</p>,
+    teach: <p>The dorsal part of the scapholunate ligament is the strongest ({BERGER}; {ANDERSSON}). A scapholunate angle above 60° suggests DISI, below 30° VISI, measured on radiographs ({LINSCHEID}).</p>,
     fields: [fields.sl, fields.slParts, fields.slAngle],
     derive: deriveScapholunate,
   },
@@ -815,7 +828,7 @@ const steps: ReportStep[] = [
     id: 'lunotriquetral',
     title: 'Step 4. Lunotriquetral ligament and VISI',
     learn: 'lunotriquetral',
-    teach: <p>Lunotriquetral disruption goes with VISI ({LINSCHEID}).</p>,
+    teach: <p>Lunotriquetral disruption goes with VISI ({LINSCHEID}; {ANDERSSON}).</p>,
     fields: [fields.lt],
   },
   {
@@ -900,7 +913,7 @@ const study: StudyDefinition = {
   slug: 'wrist-mri',
   name: 'Wrist MRI',
   lede: 'Read a wrist MRI for pain or injury: a fixed search pattern through the scaphoid and lunate, the intrinsic ligaments and perilunate ring, the TFCC, tendons, tunnels and ganglia, and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the scapholunate angle bounds and VISI, the Palmer wording, the greater-arc exception, and diffuse versus focal lunate signal) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The original papers are paywalled, so claims are checked against their abstracts or against open reviews cited beside them. Still unchecked: the scapholunate angle bounds (the reviews give different DISI thresholds), a fall on the outstretched hand as the usual mechanism of perilunate injury, and the Palmer 1B and 1C wording.',
   references,
   report: {
     steps,
@@ -920,7 +933,7 @@ const study: StudyDefinition = {
       question: 'Signal is abnormal only on the ulnar side of the lunate, and the ulnar variance is positive. Which diagnosis fits?',
       options: ['Kienböck disease', 'Ulnar impaction', 'Scaphoid nonunion', 'Perilunate dislocation'],
       answer: 1,
-      explanation: <p>Ulnar impaction gives focal signal in the ulnar aspect of the lunate ({IMAEDA}) and goes with positive ulnar variance; Kienböck disease involves the whole lunate ({CEREZAL}).</p>,
+      explanation: <p>Ulnar impaction gives focal signal in the ulnar aspect of the lunate ({IMAEDA}) and goes with positive ulnar variance; Kienböck disease involves the whole lunate ({CEREZAL}; {NG}).</p>,
     },
     {
       id: 'lichtman-i',
@@ -934,7 +947,7 @@ const study: StudyDefinition = {
       question: 'Which part of the scapholunate ligament is the strongest?',
       options: ['The volar part', 'The membranous (proximal) part', 'The dorsal part', 'All parts are equally strong'],
       answer: 2,
-      explanation: <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}).</p>,
+      explanation: <p>The scapholunate ligament has dorsal, proximal (membranous) and volar parts, and the dorsal part is the strongest ({BERGER}; {ANDERSSON}).</p>,
     },
     {
       id: 'disi',
@@ -948,14 +961,14 @@ const study: StudyDefinition = {
       question: 'In Mayfield\'s progressive perilunar instability, where does the injury usually start?',
       options: ['At the lunotriquetral ligament', 'At the scapholunate ligament (or through the scaphoid)', 'At the TFCC', 'At the distal radioulnar joint'],
       answer: 1,
-      explanation: <p>The progression runs around the lunate from radial to ulnar, starting at the scapholunate ligament unless the injury passes through the scaphoid ({MAYFIELD}).</p>,
+      explanation: <p>The progression runs around the lunate from radial to ulnar, starting at the scapholunate ligament unless the injury passes through the scaphoid ({MAYFIELD}; {CHEN}).</p>,
     },
     {
       id: 'palmer-classes',
       question: 'In the Palmer classification, what separates class 1 from class 2 TFCC lesions?',
       options: ['Size of the tear', 'Class 1 traumatic, class 2 degenerative', 'Class 1 radial, class 2 ulnar', 'Whether the patient is under 40'],
       answer: 1,
-      explanation: <p>Palmer class 1 lesions are traumatic and class 2 lesions degenerative ({PALMER}).</p>,
+      explanation: <p>Palmer class 1 lesions are traumatic and class 2 lesions degenerative ({PALMER}; {VON_BORSTEL}).</p>,
     },
     {
       id: 'tfcc-asymptomatic',

@@ -6,11 +6,11 @@ import { PediatricElbowStudyPage } from './PediatricElbowStudy'
 const study = studyOf(PediatricElbowStudyPage)
 
 /*
- * Unchecked draft. Every rule case below quotes a claim from
- * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md by its ID. The references
- * are matched, but only the claims marked verified there were read in their papers; when the
- * rest are checked a case may have to change; say in that commit why the old expectation was
- * wrong.
+ * Every rule case below quotes a claim from
+ * docs/superpowers/research/2026-10-23-pediatric-elbow-sources.md by its ID. Each claim was read
+ * in an abstract or in full text (the classifications whose papers have no open copy in open
+ * reviews); if a paper read later changes a claim, say in that commit why the old expectation
+ * was wrong.
  */
 
 describe('pediatric elbow lesson', () => {
@@ -21,13 +21,14 @@ describe('pediatric elbow lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI but two), but claims not in an abstract are
-  // still unchecked, so the note keeps saying so. Gartland (Surg Gynecol Obstet 1959) and Judet
-  // (Ann Chir 1962) have no DOI on PubMed or Crossref.
-  test('is still marked as an unchecked draft, with a DOI on every reference but Gartland and Judet', () => {
-    expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 13 since the Gartland review (Alton et al. 2015) was added.
-    expect(study.references).toHaveLength(13)
+  // Every claim has been read (2026-10-29), so the note no longer says "Unchecked draft".
+  // Gartland (Surg Gynecol Obstet 1959) and Judet (Ann Chir 1962) have no DOI on PubMed or
+  // Crossref.
+  test('is no longer an unchecked draft, with a DOI on every reference but Gartland and Judet', () => {
+    expect(study.sourceNote).toMatch(/^Every reference was matched/)
+    expect(study.sourceNote).not.toMatch(/unchecked/i)
+    // 17 since the open reviews (DeFroda, Álvarez Muñoz, Bašković, Colozza) were added.
+    expect(study.references).toHaveLength(17)
     for (const ref of study.references) {
       if (/^(Gartland JJ\.|Judet J, Judet R)/.test(ref.citation)) expect(ref.doi, ref.citation).toBeUndefined()
       else expect(ref.doi, ref.citation).toMatch(/^10\./)
@@ -174,7 +175,7 @@ describe('pediatric elbow report: hidden fields', () => {
   })
 })
 
-describe('pediatric elbow rules (unchecked)', () => {
+describe('pediatric elbow rules', () => {
   // PE2-1: "the capitulum first, followed by the radial head, medial epicondyle, olecranon,
   // trochlea, and last, the lateral epicondyle", with 50% of girls ossified at "ages 1, 5, 5, 9,
   // 9, and 10 years", and in boys, "with the exception of the capitulum, an average delay of 2

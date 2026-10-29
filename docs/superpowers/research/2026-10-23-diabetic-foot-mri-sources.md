@@ -86,3 +86,39 @@ D3 (Johnson, Collins and Wenger, AJR 2009) was read in full on the AJR site, in 
 | ID | Verdict | Evidence |
 |----|---------|----------|
 | D3-1 | yes, as reworded on 2026-10-23 | "None of the cases of osteomyelitis in our series had a limited subcortical distribution or hazy reticulated pattern"; confluent medullary low T1 signal: sensitivity 95%, specificity 91%, NPV 98%. "Only the T1-weighted sequences, however, were reviewed", so the dropped clause about bright fluid-sensitive images was rightly dropped; the authors only add, from experience, that "T2-weighted MRI may be overly sensitive". The hazy reticulated pattern "likely correlates with" noninfectious reactive marrow edema. |
+
+## Third check, 2026-10-29: open sources
+
+Donovan 2010 and Ledermann 2002 (RSNA) return 403 to curl. Open reviews were read in
+full from Europe PMC instead. New references, checked against Crossref and cited beside the
+original on the page:
+
+- Rosskopf AB, Loupatatzis C, Pfirrmann CWA, Böni T, Berli MC. The Charcot foot: a pictorial
+  review. Insights Imaging. 2019;10(1):77. doi:10.1186/s13244-019-0768-9 (PMC6682845).
+- Weaver JS, Omar IM, Mar WA, Klauser AS, Winegar BA, Mlady GW, McCurdy WE, Taljanovic MS.
+  Magnetic resonance imaging of musculoskeletal infections. Pol J Radiol. 2022;87:e141-e162.
+  doi:10.5114/pjr.2022.113825 (PMC9047866).
+
+Also read, not cited: Alaia et al., Skeletal Radiol 2021 (PMC8789645, SSR nomenclature
+consensus); Skeletal Radiol 2024 review of lower extremity infection mimics (PMC11371866);
+Imaging Insights into Midfoot and Forefoot Disorders, J Korean Soc Radiol 2025 (PMC12710284).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| D2-2 | yes | Rosskopf, Table 1, osteomyelitis: "Usually affects weight-bearing surfaces of the toes, metatarsal heads, calcaneus, malleolus, and a special area in Charcot: cuboid (in rocker-bottom deformity)"; "Develops almost exclusively by continuous spread of infection from skin ulcerations and sinus tracts". The Skeletal Radiol 2024 review agrees: "toes and weight-bearing regions such as metatarsal heads and calcaneus". |
+| D2-3 | partly (unchanged) | No open source read states that septic arthritis accompanies pedal osteomyelitis by spread across the joint, or names the effusion as its sign. Weaver says, of all sites, "Septic arthritis is most commonly caused by hematogenous seeding in both children and adults". Still unchecked. |
+| D4-1 | yes | Weaver: "Organized soft tissue, and intraosseous and subperiosteal abscesses show rim enhancement"; "MRI can detect soft tissue or intraosseous gas but has lower sensitivity compared to CT. If present, gas bubbles appear as small focal signal voids on all MRI sequences". Alaia (consensus): "Soft tissue abscess should be used for demarcated fluid collections with peripheral enhancement". Sinus tract: Rosskopf, Table 1, osteomyelitis: sinus tracts "Often present". |
+| D4-2 | partly | Positive sign, Rosskopf, Table 1: "bones that 'disappear' on T1-weighted images and 'reappear' (outline of the bone becomes visible again) after contrast administration (or on T2-weighted images)—suspicious of osteomyelitis"; the Skeletal Radiol 2024 review: "low T1 signal on pre-contrast images with poor definition of the bones ('disappeared') that then 'reappear' after contrast administration, also known as the 'ghost sign'". **For the author:** the neuropathic half is worded differently. Rosskopf: "a neuropathic joint without infection will not demonstrate the 'ghost sign' because the bones are definitely destroyed and will look destroyed on all sequences"; the page: "a neuropathic bone keeps its outline". Rosskopf also warns: "up to now, there is no study published evaluating the accuracy of this sign". |
+| D7-1 | yes, for MRI before radiographs | Rosskopf: "MRI is the best imaging modality to confirm diagnosis of suspected early active Charcot disease [24]. This may be crucial, since conventional radiographs can appear normal during very early stage of Charcot disease (Eichenholtz stage 0)"; "Early signs of a Charcot foot in MRI are bone marrow edema and soft tissue edema, joint effusion, and eventually microfractures (subchondral)". Treatment preventing collapse stays with Chantelau's abstract. **For the author:** (1) the page says an inactive foot "shows no edema"; Rosskopf: "During the less active or inactive phase, the foot is not red any more, but some soft tissue and bone marrow edema may last", and "Bone marrow edema can be present (very common in middle-stage Charcot foot) or absent, depending on disease activity". (2) The page's "subchondral marrow edema": Rosskopf puts "subchondral" on the microfractures; the Skeletal Radiol 2024 review says the neuropathic edema pattern "tends to be periarticular, subchondral". |
+| D5-1 | yes (already) | Rosskopf, Table 1, active Charcot: "Usually involves several joints and bones (mostly tarso-metatarsal joints and metatarsophalangeal joints)", which agrees with the page's Donovan wording. |
+
+Changes applied: Rosskopf and Weaver added (9 references; the test pins 9) and cited beside the
+original where they state the claim (D2-2, D4-1, the ghost sign itself, D7-1, in the lesson,
+teach lines and quiz). In the ghost sign sentence Rosskopf is cited only on "suggests
+infection"; "a neuropathic bone keeps its outline" keeps Donovan alone. No claim was reworded.
+The source note now lists as unchecked: septic arthritis with an effusion as its sign, the
+neuropathic bone keeping its outline, and the inactive foot having no edema.
+
+Needs a browser: https://pubs.rsna.org/doi/full/10.1148/rg.303095111 (Donovan: ghost sign wording,
+rim enhancement, gas) and https://pubs.rsna.org/doi/full/10.1148/radiol.2233011279 (Ledermann:
+septic arthritis, D2-3).

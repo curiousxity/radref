@@ -30,6 +30,7 @@ const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 const references: LessonReference[] = [
   { citation: 'Mayfield JK, Johnson RP, Kilcoyne RK. Carpal dislocations: pathomechanics and progressive perilunar instability. J Hand Surg Am. 1980;5(3):226-241.', doi: '10.1016/s0363-5023(80)80007-4' },
   { citation: 'Kennedy SA, Allan CH. In brief: Mayfield et al. classification: carpal dislocations and progressive perilunar instability. Clin Orthop Relat Res. 2012;470(4):1243-1245.', doi: '10.1007/s11999-012-2275-x' },
+  { citation: 'Chen NC, Jupiter JB, Jebson PJL. Sports-related wrist injuries in adults. Sports Health. 2009;1(6):469-477.', doi: '10.1177/1941738109347981' },
 ]
 
 export function MayfieldPage() {
@@ -51,7 +52,7 @@ export function MayfieldPage() {
           <span className="calc-tag">Perilunate injury</span>
         </div>
         <p>Stage a perilunate injury, from scapholunate disruption to lunate dislocation, with copyable report text.</p>
-        <p className="source-note">Unchecked draft: the original paper is paywalled, so the four stages are checked against its abstract and against a review that reproduces its table (<Cite doi="10.1007/s11999-012-2275-x">Kennedy and Allan, Clin Orthop Relat Res 2012</Cite>). The greater-arc sentence is not yet checked. Source: <Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>.</p>
+        <p className="source-note">The original paper is paywalled, so the four stages are checked against its abstract and against a review that reproduces its table (<Cite doi="10.1007/s11999-012-2275-x">Kennedy and Allan, Clin Orthop Relat Res 2012</Cite>). The greater-arc sentence is checked against a review that describes the fracture through the scaphoid in place of the scapholunate injury (<Cite doi="10.1177/1941738109347981">Chen et al., Sports Health 2009</Cite>). Source: <Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
@@ -94,7 +95,7 @@ export function MayfieldPage() {
             </tbody>
           </table>
         </div>
-        <p>The injury travels around the lunate: from the scapholunate joint, through the capitolunate and lunotriquetral joints, to dislocation of the lunate itself. When the scaphoid breaks instead of the scapholunate ligament tearing, the path runs through the bone (a greater arc injury).</p>
+        <p>The injury travels around the lunate: from the scapholunate joint, through the capitolunate and lunotriquetral joints, to dislocation of the lunate itself. When the scaphoid breaks instead of the scapholunate ligament tearing, the path runs through the bone (a greater arc injury) (<Cite doi="10.1016/s0363-5023(80)80007-4">Mayfield et al., J Hand Surg Am 1980</Cite>; <Cite doi="10.1177/1941738109347981">Chen et al., Sports Health 2009</Cite>).</p>
       </section>
 
       <section className="info-card">

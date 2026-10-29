@@ -135,3 +135,40 @@ Scolaro J, Ahn J, Mehta S. In brief: Lisfranc fracture dislocations. Clin Orthop
 | HK-7 | yes | AVN 5.7% type I, 18.4% II, 44.7% III, 12.1% IV in a pooled series. |
 | HK-8 | yes, detail added | "subchondral atrophy on the AP radiograph between 6 and 8 weeks after injury (known as the Hawkins sign)", "a positive prognostic indicator"; "the absence of subchondral atrophy was not a universally reliable indicator of the development of AVN" (Canale and Kelly). |
 | MY-* | no | Scolaro does not describe the Myerson types: "Hardcastle et al. further categorized Lisfranc injuries into Type A, B, or C based on displacement and incongruity ... Myerson followed with modifications to this system based on direction of dislocation". Myerson stays unchecked. |
+
+## Fourth check, 2026-10-29: open sources for Myerson
+
+Myerson 1986 is still unread (the SAGE page returns 403 to curl). Read in full from Europe PMC:
+
+- Diebal AR, Westrick RB, Alitz C, Gerber JP. Lisfranc injury in a West Point cadet. Sports
+  Health. 2013;5(3):281-285. doi:10.1177/1941738113477991 (PMC3658402). Table 1 sets out
+  Quénu and Kuss 1909, Hardcastle 1982 and Myerson 1986 row by row.
+- Tzatzairis T, Firth G, Parker L. Adolescent Lisfranc injury treated with TightRope™: a case
+  report and review of literature. World J Orthop. 2019;10(2):115-122.
+  doi:10.5312/wjo.v10.i2.115 (PMC6379736). Table 1, "Myerson classification system".
+- Moracia-Ochagavía I, Rodríguez-Merchán EC. Lisfranc fracture-dislocations: current management.
+  EFORT Open Rev. 2019 (PMC6667981); not cited on the page (its Myerson figure is an image).
+
+Both cited papers are case reports with a review section and a table of the types; no open
+radiology or orthopaedic review was found that sets out all five types in words. Both are now
+cited on the Myerson page and, for the study's Myerson table, in the foot MRI study.
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| MY-1 | yes | Diebal, Myerson row: "Type A: Total incongruity of the tarsometatarsal joint—lateral or dorsoplantar". Tzatzairis: "Type A: Complete ... Dislocation of M1-M5 in the same direction (either lateral or dorsoplantar)". **For the author:** other open papers word type A differently: J Child Orthop 2022 (PMC9254024), "complete incongruity of the TMT joint complex in the medial or lateral direction"; Cureus 2025 (PMC12616291), "homolateral displacement of all five metatarsals in the same direction, either medially or laterally". The page follows Diebal and Tzatzairis ("laterally or dorsoplantar"). |
+| MY-2 | yes | B1, Diebal: "Medial dislocations—first ray in isolation with or without medial cuneiform displacement"; Tzatzairis: "Medial dislocation involving only the M1 joint". B2, Diebal: "Lateral dislocations—involving any of the 4 lateral metatarsals" (Tzatzairis: "Lateral dislocation involving any of the M2-M4", which leaves out M5). |
+| MY-3 | yes | Tzatzairis: C1 "Divergent, incomplete dislocation involving M1 and some of the lateral metatarsals"; C2 "Divergent, complete dislocation involving M1 and all of the lateral metatarsals". Diebal: C2 "Total displacement—involving all metatarsals with the medial column displaced medially and the middle and lateral columns displaced laterally"; C1 "Partial displacement—medial and middle columns" (narrower than the page's "some of the lesser metatarsals"). |
+| MY-4 | yes | Groups: Diebal's Hardcastle row, which the Myerson row subdivides: "Type A: Total incongruity", "Type B: Partial incongruity—medial or lateral dislocation", "Type C: Divergent—total or partial displacement"; Transl Sports Med 2026 (PMC12782322): "A: total incongruity, B: partial incongruity, C: divergent". History, EFORT 2019: "originally described by Quenu and Kuss in 1909 ... modified by Hardcastle et al in 1982 ... Myerson proposed a modification of the classification". (The history is not on the page.) |
+| MY-5 | yes, with a note | EFORT 2019: "Recently, the introduction of a fourth category to the Myerson-modified Hardcastle classification has been proposed, which corresponds to the so-called subtle injury of the Lisfranc joint or lesion type D", split into D1 (C1–M2 ≤ 2 mm) and D2 (> 2 mm). So the 1986 types name no undisplaced injury, as the page says. **For the author:** a later type D for subtle injuries exists; the page does not use it. |
+| MY-6 | partly | None of the four tabulations read (Diebal, Tzatzairis, J Child Orthop 2022, Cureus 2025) lists a type with the first metatarsal displaced laterally with only some or none of the lesser ones; type A is all five in every one. Whether the 1986 paper names such a pattern still needs the paper. |
+| HK-5 | partly (no new reading) | The cumulative reading holds for type III in Alton (third check): type III is "similar ... to Type II, with the addition of a dislocation of the ankle". **For the author:** for type IV Alton gives "dislocation of the body from the ankle or subtalar joint with additional dislocation or subluxation of the head of the talus from the talonavicular joint", that is the ankle or the subtalar joint, while the page's type IV is "as type III" (both joints). The handling of gaps stays the site's own. Alton's full text is not open (PMC4523513 has no body), so it was not reread. |
+
+Already settled, though `docs/REMAINING_TASKS.md` still lists them: HK-4, HK-6 and HK-8 (third
+check, Alton 2015) and SA-2, SA-5 and the 2 mm of SA-3 (second check, Jiménez-Almonte 2019).
+
+Changes applied: the Myerson page lists Diebal and Tzatzairis (three references) and cites them
+in its source note, which now names MY-6 as the one point still unchecked; the header comment
+of `src/logic/myerson.ts` says the same. No type wording or rule changed.
+
+Needs a browser: https://journals.sagepub.com/doi/10.1177/107110078600600504 (Myerson 1986:
+MY-1 to MY-6 against the paper itself, MY-6 above all).

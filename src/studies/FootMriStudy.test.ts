@@ -12,9 +12,9 @@ const study = studyOf(FootMriStudyPage)
  * Unchecked draft. Every rule case below quotes a claim from
  * docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims) or, for the three
  * shared classifications, 2026-10-23-foot-calculators-sources.md (HK, SA, MY claims). The
- * references are matched, but only the claims marked verified there were read in their papers;
- * when the rest are checked a case may have to change; say in that commit why the old
- * expectation was wrong.
+ * references are matched, and the claims marked verified there were read in an abstract or in
+ * an open review cited beside the paper; when the rest are checked a case may have to change;
+ * say in that commit why the old expectation was wrong.
  */
 
 describe('foot MRI lesson', () => {
@@ -25,12 +25,13 @@ describe('foot MRI lesson', () => {
     ])
   })
 
-  // The references are matched (each has a DOI), but claims not in an abstract are still
-  // unchecked, so the note keeps saying so.
+  // The references are matched (each has a DOI), but two claims are still unchecked (irregular
+  // coalition margins, Myerson patterns beyond A to C2), so the note keeps saying so.
   test('is still marked as an unchecked draft, with a DOI on every reference', () => {
     expect(study.sourceNote).toMatch(/^Unchecked draft/)
-    // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added.
-    expect(study.references).toHaveLength(16)
+    // 16 since the Hawkins and Sanders reviews (Alton 2015, Jiménez-Almonte 2019) were added;
+    // 24 since eight open reviews were added beside the paywalled papers (2026-10-29).
+    expect(study.references).toHaveLength(24)
     for (const ref of study.references) expect(ref.doi, ref.citation).toMatch(/^10\./)
   })
 })

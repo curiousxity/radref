@@ -14,10 +14,11 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
 
 /*
  * Unchecked draft. Every reference has been matched on PubMed and Crossref (2026-10-23), but
- * the papers are paywalled, so only claims whose wording is in an abstract are verified. The
- * claims table, with each claim's status, is docs/superpowers/research/2026-10-23-foot-mri-sources.md
- * (F claims); the Hawkins, Sanders and Myerson wording is in 2026-10-23-foot-calculators-sources.md
- * (HK, SA and MY claims). Rule chips and warnings carry their claim IDs.
+ * the papers are paywalled, so only claims whose wording is in an abstract, or in an open review
+ * cited beside the paper (2026-10-29), are verified. The claims table, with each claim's status,
+ * is docs/superpowers/research/2026-10-23-foot-mri-sources.md (F claims); the Hawkins, Sanders
+ * and Myerson wording is in 2026-10-23-foot-calculators-sources.md (HK, SA and MY claims). Rule
+ * chips and warnings carry their claim IDs.
  */
 
 const HAWKINS_DOI = '10.2106/00004623-197052050-00013'
@@ -36,6 +37,14 @@ const BENCARDINO_DOI = '10.2214/ajr.175.3.1750649'
 const UMANS_DOI = '10.1007/s00256-014-1920-8'
 const SANDERS_RATHUR_DOI = '10.1016/j.rcl.2008.09.001'
 const SOBEL_DOI = '10.1177/107110079401500306'
+const DIEBAL_DOI = '10.1177/1941738113477991'
+const TZATZAIRIS_DOI = '10.5312/wjo.v10.i2.115'
+const SZARO_DOI = '10.1186/s13244-020-00900-8'
+const BURGE_DOI = '10.1177/1941738112459489'
+const NWAWKA_DOI = '10.1007/s13244-013-0277-1'
+const APARISI_DOI = '10.1186/s13244-019-0747-1'
+const GORBACHOVA_DOI = '10.5114/pjr.2020.99472'
+const KUMAR_DOI = '10.1186/s13244-023-01514-6'
 
 const HAWKINS = <Cite doi={HAWKINS_DOI}>Hawkins, J Bone Joint Surg Am 1970</Cite>
 const CANALE = <Cite doi={CANALE_DOI}>Canale and Kelly, J Bone Joint Surg Am 1978</Cite>
@@ -53,6 +62,14 @@ const BENCARDINO = <Cite doi={BENCARDINO_DOI}>Bencardino et al., AJR 2000</Cite>
 const UMANS = <Cite doi={UMANS_DOI}>Umans et al., Skeletal Radiol 2014</Cite>
 const SANDERS_RATHUR = <Cite doi={SANDERS_RATHUR_DOI}>Sanders and Rathur, Radiol Clin North Am 2008</Cite>
 const SOBEL = <Cite doi={SOBEL_DOI}>Sobel et al., Foot Ankle Int 1994</Cite>
+const DIEBAL = <Cite doi={DIEBAL_DOI}>Diebal et al., Sports Health 2013</Cite>
+const TZATZAIRIS = <Cite doi={TZATZAIRIS_DOI}>Tzatzairis et al., World J Orthop 2019</Cite>
+const SZARO = <Cite doi={SZARO_DOI}>Szaro et al., Insights Imaging 2020</Cite>
+const BURGE = <Cite doi={BURGE_DOI}>Burge et al., Sports Health 2012</Cite>
+const NWAWKA = <Cite doi={NWAWKA_DOI}>Nwawka et al., Insights Imaging 2013</Cite>
+const APARISI = <Cite doi={APARISI_DOI}>Aparisi Gómez et al., Insights Imaging 2019</Cite>
+const GORBACHOVA = <Cite doi={GORBACHOVA_DOI}>Gorbachova, Pol J Radiol 2020</Cite>
+const KUMAR = <Cite doi={KUMAR_DOI}>Kumar et al., Insights Imaging 2023</Cite>
 
 const references: LessonReference[] = [
   { citation: 'Hawkins LG. Fractures of the neck of the talus. J Bone Joint Surg Am. 1970;52(5):991-1002.', doi: HAWKINS_DOI },
@@ -71,6 +88,14 @@ const references: LessonReference[] = [
   { citation: 'Umans H, Srinivasan R, Elsinger E, Wilde GE. MRI of lesser metatarsophalangeal joint plantar plate tears and associated adjacent interspace lesions. Skeletal Radiol. 2014;43(10):1361-1368.', doi: UMANS_DOI },
   { citation: 'Sanders TG, Rathur SK. Imaging of painful conditions of the hallucal sesamoid complex and plantar capsular structures of the first metatarsophalangeal joint. Radiol Clin North Am. 2008;46(6):1079-1092.', doi: SANDERS_RATHUR_DOI },
   { citation: 'Sobel M, Pavlov H, Geppert MJ, Thompson FM, DiCarlo EF, Davis WH. Painful os peroneum syndrome: a spectrum of conditions responsible for plantar lateral foot pain. Foot Ankle Int. 1994;15(3):112-124.', doi: SOBEL_DOI },
+  { citation: 'Diebal AR, Westrick RB, Alitz C, Gerber JP. Lisfranc injury in a West Point cadet. Sports Health. 2013;5(3):281-285.', doi: DIEBAL_DOI },
+  { citation: 'Tzatzairis T, Firth G, Parker L. Adolescent Lisfranc injury treated with TightRope™: a case report and review of literature. World J Orthop. 2019;10(2):115-122.', doi: TZATZAIRIS_DOI },
+  { citation: 'Szaro P, Geijer M, Solidakis N. Traumatic and non-traumatic bone marrow edema in ankle MRI: a pictorial essay. Insights Imaging. 2020;11(1):97.', doi: SZARO_DOI },
+  { citation: 'Burge AJ, Gold SL, Potter HG. Imaging of sports-related midfoot and forefoot injuries. Sports Health. 2012;4(6):518-534.', doi: BURGE_DOI },
+  { citation: 'Nwawka OK, Hayashi D, Diaz LE, Goud AR, Arndt WF, Roemer FW, Malguria N, Guermazi A. Sesamoids and accessory ossicles of the foot: anatomical variability and related pathology. Insights Imaging. 2013;4(5):581-593.', doi: NWAWKA_DOI },
+  { citation: 'Aparisi Gómez MP, Aparisi F, Bartoloni A, Ferrando Fons MA, Battista G, Guglielmi G, Bazzocchi A. Anatomical variation in the ankle and foot: from incidental finding to inductor of pathology. Part II: midfoot and forefoot. Insights Imaging. 2019;10(1):69.', doi: APARISI_DOI },
+  { citation: 'Gorbachova T. Magnetic resonance imaging of the ankle and foot. Pol J Radiol. 2020;85:e532-e549.', doi: GORBACHOVA_DOI },
+  { citation: 'Kumar S, Mangi MD, Zadow S, Lim W. Nerve entrapment syndromes of the lower limb: a pictorial review. Insights Imaging. 2023;14(1):166.', doi: KUMAR_DOI },
 ]
 
 const upperFirst = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
@@ -127,7 +152,7 @@ const learn: LearnSection[] = [
         <h4>Navicular and the other tarsal bones</h4>
         <p>Look at the navicular for a stress injury or fracture, then along the cuboid and the cuneiforms.</p>
         <h4>Tarsal coalition</h4>
-        <p>Calcaneonavicular and talocalcaneal coalitions (the latter at the middle facet) are encountered most frequently. A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
+        <p>Calcaneonavicular and talocalcaneal coalitions (the latter at the middle facet) are encountered most frequently ({NEWMAN}; {SZARO}). A coalition may be osseous, cartilaginous or fibrous, and CT and MRI tell osseous from non-osseous coalitions. On MRI look for irregular joint margins, and on STIR images for bone marrow edema along the margins of the abnormal articulation ({NEWMAN}).</p>
         <ScanFigures images={[footMriScans.calcaneonavicularCoalition, footMriScans.navicularStressFracture]} />
       </>
     ),
@@ -140,7 +165,7 @@ const learn: LearnSection[] = [
         <p>The Lisfranc ligament complex has dorsal, interosseous and plantar ligaments. The interosseous ligament, from the medial cuneiform to the base of the second metatarsal, is the Lisfranc ligament proper and the strongest of the three ({CASTRO}). The plantar ligament runs between the first cuneiform and the bases of the second and third metatarsals ({RAIKIN}). Say which of the three is sprained or torn.</p>
         <p>In subtle Lisfranc injuries, disruption of that plantar ligament was the strongest MRI predictor of the instability found at surgery, and a rupture or grade-2 sprain of it is highly suggestive of an unstable midfoot ({RAIKIN}).</p>
         <p>Then check the alignment of each tarsometatarsal joint, and the gap between the medial cuneiform and the base of the second metatarsal.</p>
-        <p>Type a fracture-dislocation by Myerson ({MYERSON}); the Myerson calculator on this site applies the same rules.</p>
+        <p>Type a fracture-dislocation by Myerson ({MYERSON}; {DIEBAL}; {TZATZAIRIS}); the Myerson calculator on this site applies the same rules.</p>
         {myersonTable}
         <ScanFigures images={[footMriScans.lisfrancRupture]} />
       </>
@@ -151,9 +176,9 @@ const learn: LearnSection[] = [
     title: 'Step 4. Metatarsals',
     body: (
       <>
-        <p>A metatarsal stress injury shows as marrow edema, without a fracture line (stress reaction) or with a low-signal fracture line (stress fracture). It is commonest in the second and third metatarsals ({ASHMAN}).</p>
+        <p>A metatarsal stress injury shows as marrow edema, without a fracture line (stress reaction) or with a low-signal fracture line (stress fracture). It is commonest in the second and third metatarsals ({ASHMAN}; {BURGE}).</p>
         <p>At the base of the fifth metatarsal, give the zone of a fracture. The fifth metatarsal page on this site sets out the three zones and the papers behind them.</p>
-        <p>Freiberg infraction is osteonecrosis of a metatarsal head, most often the second, with flattening of the head ({ASHMAN}).</p>
+        <p>Freiberg infraction is osteonecrosis of a metatarsal head, most often the second, with flattening of the head ({ASHMAN}; {BURGE}).</p>
         <ScanFigures images={[footMriScans.metatarsalStressFracture, footMriScans.freibergInfraction]} />
       </>
     ),
@@ -163,8 +188,8 @@ const learn: LearnSection[] = [
     title: 'Step 5. First MTP joint and sesamoids',
     body: (
       <>
-        <p>Turf toe is an injury of the plantar capsule and plantar plate of the first metatarsophalangeal (MTP) joint, from forced dorsiflexion ({SANDERS_RATHUR}).</p>
-        <p>Look at both sesamoids. Marrow edema without a fracture line fits sesamoiditis. A fractured sesamoid has sharp, irregular margins, while a bipartite sesamoid has smooth, corticated margins, is often bilateral, and is usually the medial (tibial) one ({SANDERS_RATHUR}).</p>
+        <p>Turf toe is an injury of the plantar capsule and plantar plate of the first metatarsophalangeal (MTP) joint, from forced dorsiflexion ({SANDERS_RATHUR}; {BURGE}).</p>
+        <p>Look at both sesamoids. Marrow edema without a fracture line fits sesamoiditis. A fractured sesamoid has sharp, irregular margins, while a bipartite sesamoid has smooth, corticated margins, is often bilateral, and is usually the medial (tibial) one ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>
         <p>Then note any degenerative change at the first MTP joint.</p>
         <ScanFigures images={[footMriScans.sesamoiditis]} />
       </>
@@ -176,7 +201,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Look at the plantar plate of each lesser MTP joint. Tears are commonest at the second MTP joint ({UMANS}).</p>
-        <p>A plantar plate tear often comes with a lesion in the adjacent intermetatarsal space, pericapsular fibrosis, that can look like a Morton neuroma ({UMANS}). So read step 7 against this one.</p>
+        <p>A plantar plate tear often comes with a lesion in the adjacent intermetatarsal space, pericapsular fibrosis, that can look like a Morton neuroma ({UMANS}; {GORBACHOVA}). So read step 7 against this one.</p>
         <ScanFigures images={[footMriScans.plantarPlateTear]} />
       </>
     ),
@@ -187,7 +212,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Number the spaces by the metatarsals either side: the first lies between the first and second metatarsals, the third between the third and fourth.</p>
-        <p>A Morton neuroma is commonest in the third space, then the second. It lies plantar to the deep transverse intermetatarsal ligament ({ASHMAN}), and shows as a low- to intermediate-signal-intensity soft-tissue mass in the intermetatarsal space ({BENCARDINO}). Measure its transverse diameter on short-axis images.</p>
+        <p>A Morton neuroma is commonest in the third space, then the second ({ASHMAN}; {GORBACHOVA}). It lies plantar to the deep transverse intermetatarsal ligament ({ASHMAN}; {KUMAR}), and shows as a low- to intermediate-signal-intensity soft-tissue mass in the intermetatarsal space ({BENCARDINO}). Measure its transverse diameter on short-axis images.</p>
         <p>Neuroma-like lesions were found in about a third of 70 volunteers without symptoms ({ZANETTI}). The diagnosis of Morton neuroma at MR imaging may be relevant only when the transverse diameter is 5 mm or more and can be correlated to clinical findings ({ZANETTI}). So a small neuroma is not by itself the cause of the pain.</p>
         <p>In the same volunteers, fluid in the intermetatarsal bursae measured 1 to 4 mm in transverse diameter, and none was found in the fourth space. Fluid collections in the first three bursae with a transverse diameter of 3 mm or less can be considered physiologic ({ZANETTI}). Treat more than that, or fluid in the fourth space, as a finding.</p>
         <ScanFigures images={[footMriScans.mortonNeuroma]} />
@@ -831,7 +856,7 @@ const steps: ReportStep[] = [
       <>
         <p>Hawkins types of talar neck fracture ({HAWKINS}; type IV {CANALE}):</p>
         {hawkinsTable}
-        <p>Sanders types are read on the coronal CT image where the posterior facet is widest ({SANDERS}). The commonest coalitions are calcaneonavicular and talocalcaneal ({NEWMAN}).</p>
+        <p>Sanders types are read on the coronal CT image where the posterior facet is widest ({SANDERS}). The commonest coalitions are calcaneonavicular and talocalcaneal ({NEWMAN}; {SZARO}).</p>
       </>
     ),
     fields: [fields.talus, fields.hawkins, fields.talusText, fields.calcaneus, fields.sanders, fields.navicular, fields.coalition, fields.coalitionKind],
@@ -843,7 +868,7 @@ const steps: ReportStep[] = [
     learn: 'lisfranc',
     teach: (
       <>
-        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}):</p>
+        <p>Dorsal, interosseous and plantar ligaments; the interosseous is the strongest ({CASTRO}). A rupture or grade-2 sprain of the plantar ligament is highly suggestive of an unstable midfoot ({RAIKIN}). Myerson types ({MYERSON}; {DIEBAL}; {TZATZAIRIS}):</p>
         {myersonTable}
       </>
     ),
@@ -854,28 +879,28 @@ const steps: ReportStep[] = [
     id: 'metatarsals',
     title: 'Step 4. Metatarsals',
     learn: 'metatarsals',
-    teach: <p>Stress injury is commonest in the second and third metatarsals; Freiberg infraction most often affects the second metatarsal head ({ASHMAN}). The fifth metatarsal page sets out the base zones.</p>,
+    teach: <p>Stress injury is commonest in the second and third metatarsals; Freiberg infraction most often affects the second metatarsal head ({ASHMAN}; {BURGE}). The fifth metatarsal page sets out the base zones.</p>,
     fields: [fields.stress, fields.stressSites, fields.fifthBase, fields.freiberg],
   },
   {
     id: 'hallux',
     title: 'Step 5. First MTP joint and sesamoids',
     learn: 'hallux',
-    teach: <p>Turf toe injures the plantar plate of the first MTP joint. A fractured sesamoid has sharp, irregular margins; a bipartite one smooth, corticated margins ({SANDERS_RATHUR}).</p>,
+    teach: <p>Turf toe injures the plantar plate of the first MTP joint ({SANDERS_RATHUR}; {BURGE}). A fractured sesamoid has sharp, irregular margins; a bipartite one smooth, corticated margins ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>,
     fields: [fields.halluxPlate, fields.sesamoids, fields.sesamoidSide, fields.halluxArthritis],
   },
   {
     id: 'lesser-mtp',
     title: 'Step 6. Lesser MTP joints and plantar plates',
     learn: 'lesser-mtp',
-    teach: <p>Plantar plate tears are commonest at the second MTP joint, and fibrosis beside them can look like a Morton neuroma ({UMANS}).</p>,
+    teach: <p>Plantar plate tears are commonest at the second MTP joint, and fibrosis beside them can look like a Morton neuroma ({UMANS}; {GORBACHOVA}).</p>,
     fields: [fields.plate, fields.plateJoint, fields.mtpSynovitis],
   },
   {
     id: 'interspaces',
     title: 'Step 7. Intermetatarsal spaces',
     learn: 'interspaces',
-    teach: <p>Morton neuroma: third space, then second, plantar to the intermetatarsal ligament ({ASHMAN}). Found in a third of volunteers without symptoms; the diagnosis may be relevant only at 5 mm or more, with clinical correlation, and bursal fluid of 3 mm or less in the first three spaces can be considered physiologic ({ZANETTI}).</p>,
+    teach: <p>Morton neuroma: third space, then second, plantar to the intermetatarsal ligament ({ASHMAN}; {GORBACHOVA}; {KUMAR}). Found in a third of volunteers without symptoms; the diagnosis may be relevant only at 5 mm or more, with clinical correlation, and bursal fluid of 3 mm or less in the first three spaces can be considered physiologic ({ZANETTI}).</p>,
     fields: [fields.neuroma, fields.neuromaSpace, fields.neuromaSize, fields.bursa, fields.bursaSpace, fields.bursaSize],
     derive: deriveInterspaces,
   },
@@ -913,7 +938,7 @@ const study: StudyDefinition = {
   slug: 'foot-mri',
   name: 'Foot MRI',
   lede: 'Read a foot MRI for pain or injury: a fixed search pattern from the talus and calcaneus through the Lisfranc complex and metatarsals to the MTP joints, plantar plates and intermetatarsal spaces, then the tendons, variants and the report.',
-  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref, but the papers are paywalled, so the claims not stated in an abstract (among them the Myerson types, the Lisfranc ligament anatomy, the stress injury, Freiberg, turf toe and sesamoid descriptions, and the site of a neuroma) have still not been checked against their papers.',
+  sourceNote: 'Unchecked draft: every reference has been matched on PubMed and Crossref. The papers are paywalled, so the claims their abstracts do not state are checked against open reviews cited beside them. Still unchecked: irregular joint margins as a sign of tarsal coalition, and whether Myerson named any displacement pattern beyond types A to C2.',
   references,
   report: {
     steps,
@@ -968,14 +993,14 @@ const study: StudyDefinition = {
       question: 'The first metatarsal is displaced medially and all four lesser metatarsals laterally. What is the Myerson type?',
       options: ['A', 'B1', 'C1', 'C2'],
       answer: 3,
-      explanation: <p>A divergent pattern with all the lesser metatarsals displaced is type C2; with only some of them, C1 ({MYERSON}).</p>,
+      explanation: <p>A divergent pattern with all the lesser metatarsals displaced is type C2; with only some of them, C1 ({MYERSON}; {DIEBAL}; {TZATZAIRIS}).</p>,
     },
     {
       id: 'morton-space',
       question: 'Where is a Morton neuroma most often found?',
       options: ['The first intermetatarsal space, dorsal to the intermetatarsal ligament', 'The third intermetatarsal space, plantar to the deep transverse intermetatarsal ligament', 'The fourth intermetatarsal space, within the bursa', 'Under the second metatarsal head'],
       answer: 1,
-      explanation: <p>It is commonest in the third space, then the second, plantar to the deep transverse intermetatarsal ligament ({ASHMAN}).</p>,
+      explanation: <p>It is commonest in the third space, then the second, plantar to the deep transverse intermetatarsal ligament ({ASHMAN}; {GORBACHOVA}; {KUMAR}).</p>,
     },
     {
       id: 'morton-size',
@@ -989,21 +1014,21 @@ const study: StudyDefinition = {
       question: 'A second MTP plantar plate tear is seen. What in the next intermetatarsal space can mimic a Morton neuroma?',
       options: ['A ganglion', 'Pericapsular fibrosis', 'An os intermetatarseum', 'A stress fracture'],
       answer: 1,
-      explanation: <p>Plantar plate tears often come with pericapsular fibrosis in the adjacent intermetatarsal space, which can look like a Morton neuroma ({UMANS}).</p>,
+      explanation: <p>Plantar plate tears often come with pericapsular fibrosis in the adjacent intermetatarsal space, which can look like a Morton neuroma ({UMANS}; {GORBACHOVA}).</p>,
     },
     {
       id: 'sesamoid',
       question: 'How is a bipartite sesamoid told from a fractured one?',
       options: ['It has smooth, corticated margins and is often bilateral', 'It has sharp, irregular margins', 'It is always the lateral sesamoid', 'It always shows marrow edema'],
       answer: 0,
-      explanation: <p>A bipartite sesamoid has smooth, corticated margins, is often bilateral and usually the medial one; a fracture has sharp, irregular margins ({SANDERS_RATHUR}).</p>,
+      explanation: <p>A bipartite sesamoid has smooth, corticated margins, is often bilateral and usually the medial one; a fracture has sharp, irregular margins ({SANDERS_RATHUR}; {NWAWKA}; {APARISI}).</p>,
     },
     {
       id: 'freiberg',
       question: 'Which bone is most often affected by Freiberg infraction?',
       options: ['The navicular', 'The second metatarsal head', 'The medial sesamoid', 'The fifth metatarsal base'],
       answer: 1,
-      explanation: <p>Freiberg infraction is osteonecrosis of a metatarsal head, most often the second ({ASHMAN}).</p>,
+      explanation: <p>Freiberg infraction is osteonecrosis of a metatarsal head, most often the second ({ASHMAN}; {BURGE}).</p>,
     },
   ],
 }

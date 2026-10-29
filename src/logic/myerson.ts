@@ -3,7 +3,9 @@
  * Foot Ankle 1986). Shared by the Myerson calculator and the foot MRI study.
  *
  * Unchecked draft: the paper is matched on PubMed (PMID 3710321) but paywalled, and its abstract
- * does not give the types, so the type wording is still unchecked (claims MY-1 to MY-6 in
+ * does not give the types. The five types are checked against the tables in Diebal et al. (Sports
+ * Health 2013) and Tzatzairis et al. (World J Orthop 2019); whether the paper names any further
+ * pattern (MY-6) is still unchecked (claims MY-1 to MY-6 in
  * docs/superpowers/research/2026-10-23-foot-calculators-sources.md).
  */
 

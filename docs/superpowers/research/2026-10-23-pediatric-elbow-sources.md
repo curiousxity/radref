@@ -210,3 +210,47 @@ Read in full: Iyer 2012 (E1).
 | PE4-3 | partly | "If the integrity of one or both of these lines [anterior humeral, radial head–capitellar] is compromised, then fracture or dislocation, or both, should be suspected"; "In dislocations, there is compromise of the radial head–capitellum line". The link to a Monteggia injury is not in Iyer; still unchecked. |
 | PE5-1 | yes | "Supracondylar humerus fractures are the most common elbow fractures in children, accounting for 50–70%". |
 | PE7-1 | yes | "Thirty percent to 55% of medial epicondyle fractures are associated with elbow dislocations ... the risk of trapping an avulsed medial epicondylar fragment within the ulnar-humeral joint"; "Intraarticular incarceration ... occurs in 5–18%". |
+
+## Fifth check, 2026-10-29: open sources
+
+The papers still unread (Leitch, Weiss, Jakob, O'Brien, Judet and Rogers in full, Edmonds in full)
+have no open copy; the Bone & Joint (Jakob) and RSNA (Rogers) pages could not be read by script. So the
+claims left open after the fourth check were looked for in open full-text reviews (Europe PMC, read
+in full text XML), and Alton 2015 was re-read on its PMC page (PMC4294919). Sources added to the
+page, each cited beside the original paper and checked on Crossref and PubMed:
+
+- DeFroda SF, Hansen H, Gil JA, Hawari AH, Cruz AI Jr. Radiographic evaluation of common pediatric
+  elbow injuries. Orthop Rev (Pavia). 2017;9(1):7030. doi:10.4081/or.2017.7030 (PMC5337779).
+- Álvarez Muñoz M, García de la Blanca JC, Anchía MV, Martí Ciruelos R, Calvo Calvo S, Menéndez
+  Crespo MT. Management of acute lateral humeral condyle fractures in children. Children (Basel).
+  2024;11(12):1421. doi:10.3390/children11121421 (PMC11674084).
+- Bašković M, Pešorda D, Zaninović L, Hasandić D, Lohman Vuga K, Pogorelić Z. Management of
+  pediatric elbow fractures and dislocations. Children (Basel). 2024;11(8):906.
+  doi:10.3390/children11080906 (PMC11352739).
+- Colozza A, Padovani S, Caruso G, Cavaciocchi M, Massari L. Arthroscopically-assisted reduction and
+  pinning of a radial neck fracture in a child: a case report and review of the literature. J Med
+  Case Rep. 2020;14(1):78. doi:10.1186/s13256-020-02390-0 (PMC7315511).
+
+| ID | Verdict | Evidence |
+|----|---------|----------|
+| PE4-3 | yes | DeFroda 2017: "the radial head should align with the capitellum in all views in order to rule out dislocation"; the radiocapitellar line "should intersect the capitellum at approximately its middle third on all radiographic views ... such as an ulna fracture which can be associated with a radiocapitellar joint dislocation (i.e. Monteggia fracture)"; "Monteggia fractures are complex injuries involving a fracture of the ulna associated with ... radiocapitellar dislocation"; "By definition, this will be disrupted in the case of a Monteggia fracture." With Iyer's "In dislocations, there is compromise of the radial head–capitellum line" (fourth check). DeFroda cited beside Iyer in step 4, the step 4 report note and the quiz. **For the author**: DeFroda also reports that Ramirez et al. found "in 8.6% of elbows the radiocapitellar line did not intersect the capitellum" in normal children, more reliable "when the line was drawn through the radial head rather than the neck" and "less likely to miss the capitellum in patients older than 5 years"; Bašković 2024 gives the rule "In most children older than 2 years". The page states it without exception ("passes through the capitellum in every view. If it does not, the radial head is dislocated") and draws it "along the radial neck". Left as it is. |
+| PE5-2 | yes (Gartland's own wording) | Alton 2015, PMC page: Gartland "described three types of extension injury based on degree of displacement: type I, nondisplaced; type II, moderately displaced; and type III, severely displaced injury, and he considered flexion-type injuries separately". Alton now cited beside Gartland for the sentence "Gartland graded extension fractures as undisplaced, moderately displaced and severely displaced". The Wilkins types were settled in the third check (Bašković's Table 1 agrees: "IIa posterior cortex intact, AHL anterior to capitellum ... III no cortical contact"). |
+| PE5-3 | yes | Alton 2015: Leitch "suggested the addition of a type IV injury believed to be difficult to treat owing to multiplanar instability, identified intraoperatively, from no intact periosteal hinge"; types II and III had "a torn anterior periosteum but an intact posterior hinge". Alton now cited beside Leitch. (Alton's Table 1 adds "Flexion and extension instability demonstrated radiographically", which agrees with Leitch's abstract: fluoroscopy under anaesthesia.) |
+| PE6-2 | yes | Álvarez Muñoz 2024: on radiographs "the incompletely ossified epiphysis can complicate fracture identification, especially when there is no or minimal displacement"; MRI "allows for the observation of the incompletely ossified epiphysis. It proves especially useful in patients with undisplaced or minimally displaced fractures, aiding in the assessment of articular cartilage integrity"; arthrography "remains a widely used intraoperative method to assess articular cartilage congruency". With Weiss's "as demonstrated by arthrogram" (abstract). Cited beside Weiss in step 6, its report note and the quiz. (Its Weiss types match Weiss's abstract: "<2 mm displacement, with an intact articular surface ... ≥2 mm displacement, maintaining the intact articular surface ... ≥2 mm displacement and loss of articular congruence".) |
+| PE6-3 | yes, with a note | Bašković 2024: "Jakob's classification, which divides fractures of the lateral condyle into incomplete, complete or complete with a rotated fractured fragment"; Table 3: "Incomplete: fracture does not extend to the articular surface; Complete: fracture extends to the articular surface, no rotated fragment; Complete with rotation: fracture extends to the articular surface, rotated fragment". With Jakob's abstract ("If the fracture is incomplete, with an intact hinge ... the fragment will not be displaced"). "Moderate" for stage II is in other reviews: Tomori 2018 (Medicine 97:e12182, PMC6133417) "stage II, fractures have >2 mm displacement with moderate displacement of the articular surface; and stage III, fractures have significant displacement and rotation"; JBJS Open Access 2020 (doi:10.2106/JBJS.OA.20.00035, PMC7556363) "Type II Moderate lateral translation with or without fragment tilt; Type III Major fragment tilt or rotation". Bašković cited beside Jakob. **For the author** (no change needed, the page gives no numbers): reviews attach millimetre cut-offs that disagree with one another, e.g. Álvarez Muñoz "type 1 ... (<2 mm) ... type 2 ... 2–4 mm ... type 3 ... greater than 4 mm with a rotational component"; Zale 2018 (J Child Orthop) "Type 2 is a minimally displaced fracture >2 mm with an intact cartilaginous hinge"; Indian J Orthop 2025 (PMC12496362) "Jakob type II: minimally displaced < 2 mm. C Jakob type III: displaced ≥ 2 mm and/or rotated". Jakob's own numbers, if any, need the paper. |
+| PE8-1 | yes | Colozza 2020: "In the O'Brien classification, type I fracture lines of the proximal and distal fragments have an angulation of less than 30 degrees, type II fractures range from an angulation of 30 degrees to 60 degrees, and type III fractures have an angulation that exceeds 60 degrees." Cited beside O'Brien in step 8, its report note and the quiz. (Macken 2022, World J Orthop, PMC8935328, Table 1 agrees: "O'Brien Type I < 30 Type II 30-60 Type III > 60"; not cited, one source being enough.) |
+| PE8-2 | yes, with a note | Bašković 2024, Table 10 "Judet classification": "I undisplacement or minimal displacement; II lateral displacement <50% shaft diameter, angulation <30°; III lateral displacement <100% shaft diameter, angulation 30°–60°; IVa complete displacement, angulation 60°–80°; IVb complete displacement, angulation >80°". Cited beside Judet. **For the author**: type IV is split (IVa, IVb), which the page's "types I to IV" covers; Colozza 2020 instead lists five grades ("grade IV fractures range from 60 degrees to 80 degrees; and grade V fractures exceed 80 degrees"). Left as it is. |
+
+Also re-read, nothing to change: PE7-2 (Edmonds abstract: "Internal oblique radiographs of the elbow appear to approximate the true anterior displacement") and PE4-1 (the page now says only what Rogers's and Herman's abstracts say).
+
+Changes made: the four sources above added to the references (17 now) with `<Cite doi>` links beside
+the originals; Alton cited beside Gartland (step 5) and Leitch (type IV). Every claim has now been read
+in an abstract or full text, so the source note no longer starts "Unchecked draft";
+`PediatricElbowStudy.test.ts` pins the new note and 17 references. One sentence outside the claims
+table has no citation: "In children the radial neck breaks rather than the head" (step 8); no open
+source stating it was found in this round.
+
+Needs a browser (could not be read by script): Jakob 1975,
+https://online.boneandjoint.org.uk/doi/10.1302/0301-620X.57B4.430 (stage wording and any
+millimetre cut-offs); Rogers 1978, https://pubs.rsna.org/doi/10.1148/128.1.145 (403; figure legends
+for PE4-1).

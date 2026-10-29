@@ -6,9 +6,9 @@
  *
  * Types I to III are checked against Mason's table as Iannuzzi and Leopold reproduce it (Clin
  * Orthop Relat Res 2012) and type IV against Johnston's paper. The 2 mm and 30% thresholds are
- * still unchecked: they are not in Broberg and Morrey's 1986 paper, which this used to cite, and
- * the 1987 paper is paywalled (claims MA-1 to MA-6 in
- * docs/superpowers/research/2026-10-23-elbow-mri-sources.md).
+ * not in Broberg and Morrey's 1986 paper, which this used to cite; the 1987 paper is paywalled,
+ * so they are checked against a review that states them (van der Windt et al., EFORT Open Rev
+ * 2024) (claims MA-1 to MA-6 in docs/superpowers/research/2026-10-23-elbow-mri-sources.md).
  */
 
 /** How the radial head is broken, worded as Mason's three original types. */

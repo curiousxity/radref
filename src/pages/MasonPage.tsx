@@ -36,6 +36,7 @@ const references: LessonReference[] = [
   { citation: 'Johnston GW. A follow-up of one hundred cases of fracture of the head of the radius with a review of the literature. Ulster Med J. 1962;31(1):51-56.' },
   { citation: 'Broberg MA, Morrey BF. Results of treatment of fracture-dislocations of the elbow. Clin Orthop Relat Res. 1987;(216):109-119.', doi: '10.1097/00003086-198703000-00017' },
   { citation: 'Iannuzzi NP, Leopold SS. In brief: the Mason classification of radial head fractures. Clin Orthop Relat Res. 2012;470(6):1799-1802.', doi: '10.1007/s11999-012-2319-2' },
+  { citation: 'van der Windt AE, Langenberg LC, Colaris JW, Eygendaal D. Which radial head fractures are best treated surgically? EFORT Open Rev. 2024;9(5):413-421.', doi: '10.1530/EOR-24-0035' },
 ]
 
 /** The value as a number, or undefined if empty or not a number. */
@@ -63,7 +64,7 @@ export function MasonPage() {
           <span className="calc-tag">Radial head</span>
         </div>
         <p>Type a radial head fracture from two questions, with copyable report text. Types I to III are Mason's own; type IV is Johnston's later addition.</p>
-        <p className="source-note">Unchecked draft: types I to III are checked against Mason's table as a review reproduces it (<Cite doi="10.1007/s11999-012-2319-2">Iannuzzi and Leopold, Clin Orthop Relat Res 2012</Cite>) and type IV against Johnston's own paper. The 2 mm and 30% thresholds are not yet checked: they are not in Broberg and Morrey's 1986 paper, and the review credits their 1987 paper, which is paywalled. Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
+        <p className="source-note">Types I to III are checked against Mason's table as a review reproduces it (<Cite doi="10.1007/s11999-012-2319-2">Iannuzzi and Leopold, Clin Orthop Relat Res 2012</Cite>) and type IV against Johnston's own paper. The 2 mm and 30% thresholds are not in Broberg and Morrey's 1986 paper; the reviews credit their 1987 paper, which is paywalled, so they are checked against a review that states them (<Cite doi="10.1530/EOR-24-0035">van der Windt et al., EFORT Open Rev 2024</Cite>). Sources: <Cite doi="10.1002/bjs.18004217203">Mason, Br J Surg 1954</Cite>; Johnston, Ulster Med J 1962.</p>
       </section>
 
       <section className="calculator-grid">
@@ -132,7 +133,7 @@ export function MasonPage() {
             </tbody>
           </table>
         </div>
-        <p>A dislocation makes the fracture type IV, whatever the pattern. Broberg and Morrey later put numbers on types I and II: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head (<Cite doi="10.1097/00003086-198703000-00017">Broberg and Morrey, Clin Orthop Relat Res 1987</Cite>; unchecked). A fragment displaced 2 mm or more but smaller than 30% of the head falls outside those numbers.</p>
+        <p>A dislocation makes the fracture type IV, whatever the pattern. Broberg and Morrey later put numbers on types I and II: type I displaced less than 2 mm, type II displaced 2 mm or more and involving 30% or more of the head (<Cite doi="10.1097/00003086-198703000-00017">Broberg and Morrey, Clin Orthop Relat Res 1987</Cite>; <Cite doi="10.1530/EOR-24-0035">van der Windt et al., EFORT Open Rev 2024</Cite>). A fragment displaced 2 mm or more but smaller than 30% of the head falls outside those numbers.</p>
       </section>
 
       <section className="info-card">
@@ -140,7 +141,7 @@ export function MasonPage() {
         <ScanFigures images={[masonScans.type1, masonScans.type2, masonScans.type2Ct, masonScans.type3, masonScans.type4]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. Johnston is read in full and Mason's types in the 2012 review's reproduction of his table; Broberg and Morrey 1987 is paywalled." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. Johnston is read in full and Mason's types in the 2012 review's reproduction of his table; Broberg and Morrey 1987 is paywalled, and its thresholds are read in the 2024 review." />
     </div>
   )
 }

@@ -3,9 +3,10 @@ import { classifyNeer, emptyNeerInput, isDisplaced } from './neer'
 import type { LineStatus, NeerInput, NeerLine } from './neer'
 
 /*
- * Neer classification (Neer, J Bone Joint Surg Am 1970). UNCHECKED: the paper is matched on
- * PubMed but has no abstract and is paywalled, so the quoted rules are still from memory of the
- * paper, listed as N1-N6 in docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
+ * Neer classification (Neer, J Bone Joint Surg Am 1970). The paper is matched on PubMed but has
+ * no abstract and is paywalled, so the rules are quoted from two reviews of the classification
+ * (Kilcoyne et al., AJR 1990; Carofino and Leopold, Clin Orthop Relat Res 2013), listed as N1-N6
+ * in docs/superpowers/research/2026-10-23-shoulder-mri-sources.md.
  */
 function input(lines: Partial<Record<NeerLine, LineStatus>>, extra: Partial<NeerInput> = {}): NeerInput {
   return { ...emptyNeerInput, ...extra, lines: { ...emptyNeerInput.lines, ...lines } }
@@ -36,8 +37,8 @@ describe('Neer: parts', () => {
     expect(classifyNeer(emptyNeerInput).report).toBe('')
   })
 
-  // N3 (to check): with no displaced segment the fracture is one-part, whatever the number of
-  // fracture lines.
+  // N3: "a fracture with no fragments considered displaced is defined as a one-part fracture
+  // regardless of the actual number of fracture lines or their location" (Carofino and Leopold 2013).
   test('undisplaced lines on every segment are one-part', () => {
     const result = classifyNeer(input({ anatomicalNeck: 'undisplaced', surgicalNeck: 'undisplaced', greaterTuberosity: 'undisplaced', lesserTuberosity: 'undisplaced' }))
     expect(result.parts).toBe(1)
@@ -45,8 +46,8 @@ describe('Neer: parts', () => {
     expect(result.unusual).toBe(false)
   })
 
-  // N4 (to check): two-part fractures are of the anatomical neck, surgical neck, greater
-  // tuberosity or lesser tuberosity.
+  // N4: two-part fractures are of the anatomical neck, surgical neck, greater tuberosity or lesser
+  // tuberosity (Kilcoyne et al. 1990, Figs. 1-4; Carofino and Leopold 2013: one segment displaced).
   test.each([
     ['anatomicalNeck', 'Two-part (anatomical neck displaced)'],
     ['surgicalNeck', 'Two-part (surgical neck displaced)'],
@@ -58,7 +59,8 @@ describe('Neer: parts', () => {
     expect(result.label).toBe(label)
   })
 
-  // N4 (to check): three-part is the surgical neck with one tuberosity displaced.
+  // N4: three-part, "one tuberosity is displaced and the surgical neck fracture is displaced"
+  // (Carofino and Leopold 2013).
   test.each([
     ['greaterTuberosity', 'Three-part (surgical neck and greater tuberosity displaced)'],
     ['lesserTuberosity', 'Three-part (surgical neck and lesser tuberosity displaced)'],
@@ -69,7 +71,7 @@ describe('Neer: parts', () => {
     expect(result.unusual).toBe(false)
   })
 
-  // N4 (to check): four-part is both tuberosities displaced with the articular segment.
+  // N4: four-part, "All four segments ... meet criteria for displacement" (Carofino and Leopold 2013).
   test('both tuberosities and the neck is four-part', () => {
     const result = classifyNeer(input({ surgicalNeck: 'displaced', greaterTuberosity: 'displaced', lesserTuberosity: 'displaced' }))
     expect(result.parts).toBe(4)
@@ -95,8 +97,8 @@ describe('Neer: parts', () => {
 })
 
 describe('Neer: dislocation and articular surface', () => {
-  // N5 (to check): fracture-dislocations (anterior or posterior) and articular surface
-  // fractures (head-splitting, impression) are separate groups.
+  // N5: fracture-dislocations, and articular surface injuries in "two varieties, head-splitting
+  // fractures and impaction fractures", are separate groups (Carofino and Leopold 2013).
   test('a fracture-dislocation is named with its parts', () => {
     const result = classifyNeer(input({ greaterTuberosity: 'displaced' }, { dislocation: 'anterior' }))
     expect(result.label).toBe('Two-part (greater tuberosity displaced), anterior fracture-dislocation')
