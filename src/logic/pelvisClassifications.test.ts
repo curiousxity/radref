@@ -6,11 +6,13 @@ import { diastasisOver, ybDescriptions, ybGroup, ybSentence, ybStability, ybType
  * The two pelvic classifications. Each case quotes its claim from
  * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md by ID. The papers are
  * matched on PubMed; the claims marked verified there were read in an abstract or in a review
- * read in full (Alton and Gee, Durkee, Halawi, Leone, Gänsslen). Still unread: parts of the
- * Letournel posterior column, anterior wall and anterior column wording (LT-2).
+ * read in full (Alton and Gee, Durkee, Halawi, Leone, Gänsslen). Every Young-Burgess claim is now
+ * stated in one of them, with the author's decisions of 2026-10-29 (33 to 38) on the wording.
+ * Still unread: parts of the Letournel posterior column, anterior wall and anterior column
+ * wording (LT-2).
  */
 
-describe('Young-Burgess (unchecked)', () => {
+describe('Young-Burgess', () => {
   // YB-1: "LC I sacral compression and transverse rami fractures on the side of impact; LC II
   // adds an iliac wing (crescent) fracture; LC III adds an open book of the other side."
   // LC II was the crescent fracture only. Alton and Gee 2014: "The resulting posterior pelvic
@@ -35,13 +37,40 @@ describe('Young-Burgess (unchecked)', () => {
   })
 
   // YB-3, YB-4: vertical displacement is vertical shear, or a combined mechanism with lateral
-  // compression. CMI said "most often lateral compression with vertical shear"; Alton and Gee:
-  // most "resulted from LC injuries being combined with AP or VS patterns".
+  // compression. CMI said "most often lateral compression with vertical shear", then (Alton and
+  // Gee) "most often lateral compression with AP compression or vertical shear". Decision 38
+  // separates the definition from the frequency: "Complex injury patterns are a combination of any
+  // three primary patterns (APC, LC, or VS)" (Alton and Gee); Leone's commonest pairing is on the page.
   test('vertical displacement wins', () => {
     expect(youngBurgess({ vertical: true })).toBe('VS')
     expect(youngBurgess({ vertical: true, symphysisWidened: true, sacroiliac: 'complete' })).toBe('VS')
     expect(youngBurgess({ vertical: true, lateral: 'sacral' })).toBe('CMI')
-    expect(ybDescriptions.CMI).toBe('combined mechanism, most often lateral compression with AP compression or vertical shear')
+    expect(ybDescriptions.CMI).toBe('combined mechanism: features of more than one primary pattern (lateral compression, AP compression, vertical shear)')
+  })
+
+  // Decision 34: "VS injuries result from an axially loaded force delivered over one or both
+  // hemipelves" (Alton and Gee); "Vertical displacement of one or both hemipelvices" (Halawi). It
+  // said "of a hemipelvis".
+  test('vertical shear can be one or both sides', () => {
+    expect(ybDescriptions.VS).toContain('one or both hemipelves')
+  })
+
+  // Decisions 33 and 35: 2.5 cm stays the conventional APC I threshold, and APC III needs no
+  // vertical displacement ("APCIII can be differentiated from VS injury by the absence of vertical
+  // displacement of the hemipelvis", Halawi) yet stays vertically unstable (Leone, Table 1:
+  // "Multidirectional instability").
+  test('APC I threshold and APC III', () => {
+    expect(ybDescriptions['APC I']).toBe('symphyseal diastasis, conventionally less than 2.5 cm, with no posterior instability')
+    expect(ybDescriptions['APC III']).toContain('vertical displacement need not be present')
+    expect(ybStability['APC III']).toBe('rotationally and vertically unstable, even without vertical displacement')
+  })
+
+  // Decision 36: LC III was "rotationally unstable, vertically stable". Leone: "Lateral compression
+  // grade 3 injuries have a multidirectional instability"; "the degree of involvement of the
+  // posterior tension band, affect the stability of the pelvic ring".
+  test('LC III is unstable, not vertically stable', () => {
+    expect(ybStability['LC III']).toBe('unstable, to a degree and in a direction set by the posterior ring injury')
+    expect(ybStability['LC III']).not.toMatch(/vertically stable/)
   })
 
   test('no disruption entered is no type', () => {
@@ -57,7 +86,7 @@ describe('Young-Burgess (unchecked)', () => {
     expect(diastasisOver(26)).toBe(true)
   })
 
-  // YB-8: stability by type, and the sentence.
+  // YB-8: the usual stability implication by type, and the sentence.
   test('every type has a description, a group and a stability', () => {
     for (const type of ybTypes) {
       expect(ybDescriptions[type]).toBeTruthy()
@@ -69,7 +98,7 @@ describe('Young-Burgess (unchecked)', () => {
   })
 })
 
-describe('Letournel (unchecked)', () => {
+describe('Letournel (unchecked draft: parts of LT-2 unread)', () => {
   // LT-1: five elementary and five associated types.
   test('ten types, five of each', () => {
     expect(ltElementary).toHaveLength(5)
@@ -99,6 +128,9 @@ describe('Letournel (unchecked)', () => {
   })
 
   // LT-5, LT-7: no joint surface on the intact ilium is both-column; otherwise T-shaped or ACPHT.
+  // Decision 39: a fracture into the iliac wing never decides both-column (Gänsslen: iliac fossa
+  // involvement "is usually seen in AC, ACPHT and ABC fractures"; "ABC definition: ... no articular
+  // fragment connected to the SI-joint"), so the logic has no iliac wing input.
   test('both lines, obturator ring broken', () => {
     expect(letournel({ lines: 'both', obturatorBroken: true, articularOnIlium: false })).toBe('BC')
     expect(letournel({ lines: 'both', obturatorBroken: true, articularOnIlium: true, pattern: 'stem' })).toBe('TS')

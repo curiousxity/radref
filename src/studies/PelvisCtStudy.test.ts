@@ -125,11 +125,14 @@ describe('pelvis CT report: whole cases', () => {
   })
 })
 
-describe('pelvis CT rules (unchecked)', () => {
-  // YB-8: stability as usually taught.
+describe('pelvis CT rules (unchecked draft)', () => {
+  // YB-8: the usual stability implication. Decision 36 (2026-10-29): LC III was "rotationally
+  // unstable, vertically stable"; Leone: "Lateral compression grade 3 injuries have a
+  // multidirectional instability".
   test('Young-Burgess chip', () => {
     expect(chips(study, 'ring', { ring: 'present', 'ring-type': 'LC I' })['Young-Burgess']).toBe('LC I: usually stable')
     expect(chips(study, 'ring', { ring: 'present', 'ring-type': 'VS' })['Young-Burgess']).toBe('VS: usually rotationally and vertically unstable')
+    expect(chips(study, 'ring', { ring: 'present', 'ring-type': 'LC III' })['Young-Burgess']).toBe('LC III: usually unstable, to a degree and in a direction set by the posterior ring injury')
   })
 
   // YB-6: "A symphyseal diastasis over 2.5 cm usually means APC II or worse."
@@ -147,6 +150,8 @@ describe('pelvis CT rules (unchecked)', () => {
     expect(report(study, { ...normal, ring: 'present', 'ring-type': 'LC II', l5: 'yes' }).warnings)
       .toContain('An L5 transverse process fracture marks vertical instability, but LC II is usually vertically stable: look again for vertical displacement.')
     expect(report(study, { ...normal, ring: 'present', 'ring-type': 'VS', l5: 'yes' }).warnings).toEqual([])
+    // Decision 36: LC III is no longer taught as vertically stable, so the L5 marker does not contradict it.
+    expect(report(study, { ...normal, ring: 'present', 'ring-type': 'LC III', l5: 'yes' }).warnings).toEqual([])
   })
 
   // P3-1: "Neurological deficit in about 6% in zone 1, 28% in zone 2 and 57% in zone 3."

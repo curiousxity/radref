@@ -53,10 +53,15 @@ const sacroiliacOptions: { value: YbSacroiliac; label: string }[] = [
 
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
+const ALTON = <Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>
+const HALAWI = <Cite doi="10.1016/j.jcot.2015.08.002">Halawi, J Clin Orthop Trauma 2015</Cite>
+const LEONE = <Cite doi="10.3390/diagnostics12020384">Leone et al., Diagnostics 2022</Cite>
+
 const references: LessonReference[] = [
   { citation: 'Young JW, Burgess AR, Brumback RJ, Poka A. Pelvic fractures: value of plain radiography in early assessment and management. Radiology. 1986;160(2):445-451.', doi: '10.1148/radiology.160.2.3726125' },
   { citation: 'Burgess AR, Eastridge BJ, Young JW, Ellison TS, Ellison PS Jr, Poka A, Bathon GH, Brumback RJ. Pelvic ring disruptions: effective classification system and treatment protocols. J Trauma. 1990;30(7):848-856.', doi: '10.1097/00005373-199007000-00015' },
   { citation: 'Alton TB, Gee AO. Classifications in brief: Young and Burgess classification of pelvic ring injuries. Clin Orthop Relat Res. 2014;472(8):2338-2342.', doi: '10.1007/s11999-014-3693-8' },
+  { citation: 'Halawi MJ. Pelvic ring injuries: emergency assessment and management. J Clin Orthop Trauma. 2015;6(4):252-258.', doi: '10.1016/j.jcot.2015.08.002' },
   { citation: 'Leone E, Garipoli A, Ripani U, Lanzetti RM, Spoliti M, Creta D, Giannace C, Galluzzo A, Trinci M, Galluzzo M. Imaging review of pelvic ring fractures and its complications in high-energy trauma. Diagnostics (Basel). 2022;12(2):384.', doi: '10.3390/diagnostics12020384' },
   { citation: 'Khurana B, Sheehan SE, Sodickson AD, Weaver MJ. Pelvic ring fractures: what the orthopedic surgeon wants to know. RadioGraphics. 2014;34(5):1317-1333.', doi: '10.1148/rg.345135113' },
 ]
@@ -84,14 +89,14 @@ export function YoungBurgessPage() {
           <span className="calc-tag">Pelvic ring</span>
         </div>
         <p>Type a pelvic ring injury by the force that caused it, from what CT shows at the sacrum, the sacroiliac joints and the symphysis, with copyable report text.</p>
-        <p className="source-note">The original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description (<Cite doi="10.1007/s11999-014-3693-8">Alton and Gee, Clin Orthop Relat Res 2014</Cite>) and an open imaging review (<Cite doi="10.3390/diagnostics12020384">Leone et al., Diagnostics 2022</Cite>). Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
+        <p className="source-note">The original papers are paywalled, so the wording of each type and the 2.5 cm diastasis are checked against a review of Young's 1986 description ({ALTON}), a review that tabulates the types from Burgess's paper ({HALAWI}) and an open imaging review ({LEONE}). Sources: <Cite doi="10.1148/radiology.160.2.3726125">Young et al., Radiology 1986</Cite>; <Cite doi="10.1097/00005373-199007000-00015">Burgess et al., J Trauma 1990</Cite>.</p>
       </section>
 
       <section className="calculator-grid">
         <article className="info-card form-card">
           <h3>Injury</h3>
           <div className="form-grid">
-            <ChoiceGroup label="Is one hemipelvis displaced upwards (vertically)?" layout="row" value={form.vertical} options={yesNo} onChange={set('vertical')} />
+            <ChoiceGroup label="Is one hemipelvis, or both, displaced upwards (vertically)?" layout="row" value={form.vertical} options={yesNo} onChange={set('vertical')} />
             <ChoiceGroup label="Lateral compression on the side of impact" layout="stack" value={form.lateral} options={lateralOptions} onChange={set('lateral')} />
             {lateral && <ChoiceGroup label="Is the other hemipelvis opened (open book)?" layout="row" value={form.otherSideOpen} options={yesNo} onChange={set('otherSideOpen')} />}
             {!lateral && <ChoiceGroup label="Pubic symphysis" layout="row" value={form.symphysis} options={symphysisOptions} onChange={set('symphysis')} />}
@@ -128,7 +133,7 @@ export function YoungBurgessPage() {
         <div className="table-wrap">
           <table className="ref-table">
             <thead>
-              <tr><th>Type</th><th>Injury</th><th>Usually taught as</th></tr>
+              <tr><th>Type</th><th>Injury</th><th>Stability implication</th></tr>
             </thead>
             <tbody>
               {ybTypes.map((t) => (
@@ -137,7 +142,10 @@ export function YoungBurgessPage() {
             </tbody>
           </table>
         </div>
-        <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. In Young's original description, a symphyseal diastasis of 2.5 cm was what separated APC I from APC II. Stability is not part of the Young-Burgess system itself (Alton and Gee); the stability column is how the types are usually taught alongside it, and the posterior ring decides it.</p>
+        <p>Young-Burgess classifies pelvic ring injuries by the main direction of the force and the disruption it causes ({ALTON}; {LEONE}). The patterns inform the assessment of stability, but do not replace a direct look at the posterior ring or the stability-based Tile and AO/OTA classifications ({ALTON}; {LEONE}); the last column gives the usual implication of each type.</p>
+        <p>Vertical displacement names the type first: with lateral compression it is a combined mechanical injury, otherwise vertical shear. Vertical shear comes from an axial force through one or both hemipelves ({ALTON}; {HALAWI}). APC III is rotationally and vertically unstable, but it has no vertical displacement, which is what separates it from vertical shear ({HALAWI}; {LEONE}): no displacement on a static image does not prove vertical stability ({ALTON}). LC III is unstable; how unstable, and in which direction, depends on the posterior ring injury ({LEONE}).</p>
+        <p>In Young's original description, a symphyseal diastasis of 2.5 cm was what separated APC I from APC II ({ALTON}; {LEONE}). Published thresholds vary ({HALAWI}), and diastasis alone does not establish stability: it is measured on a single static image, and the pelvis may have sprung back or been reduced by a binder ({ALTON}).</p>
+        <p>A combined mechanism has features of more than one primary pattern ({ALTON}); Leone describes lateral compression with vertical shear as the commonest combination ({LEONE}). This calculator names a combined mechanism only for vertical displacement with lateral compression.</p>
       </section>
 
       <section className="info-card">
@@ -145,7 +153,7 @@ export function YoungBurgessPage() {
         <ScanFigures images={[youngBurgessScans.apc, youngBurgessScans.lc]} />
       </section>
 
-      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review and Leone's 2022 open review." />
+      <LessonReferences references={references} note="Matched on PubMed and Crossref. The 1986 and 1990 papers are paywalled; the type wording is checked against Alton and Gee's 2014 review, Halawi's 2015 review and Leone's 2022 open review." />
     </div>
   )
 }

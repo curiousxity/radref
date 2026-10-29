@@ -7,8 +7,11 @@
  *
  * Unchecked draft: the column lines, the transverse and T-shaped questions, the isolated
  * posterior wall and the spur sign are checked against Durkee's full text; the associated types,
- * the inferior ramus (obturator ring) per type and the joint surface left on the ilium against
- * Gänsslen et al. (Arch Orthop Trauma Surg 2024, open). Still unread: the posterior column through
+ * the inferior ramus (obturator ring) per type, the joint surface left on the ilium, the iliac
+ * wing and the obturator oblique view for the spur sign against Gänsslen et al. (Arch Orthop
+ * Trauma Surg 2024, open). Both-column is decided by the joint surface on the ilium ("no articular
+ * fragment connected to the SI-joint"), never by a fracture into the iliac wing, which AC and
+ * ACPHT fractures can have too (the author's decision 39, 2026-10-29). Still unread: the posterior column through
  * the greater sciatic notch, the anterior wall at the middle of the iliopectineal line and the
  * anterior column's upper end (claims LT-1 to LT-9 in
  * docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md).

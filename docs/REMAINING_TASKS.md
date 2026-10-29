@@ -14,8 +14,8 @@ by the author's choice).
   for a whole domain.
 - Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
   "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
-- **Regions, decisions to confirm.** The home page, menu and `/regions/<slug>` pages are by
-  region since 2026-10-28. Choices made without the author:
+- **Regions: confirmed by the author 2026-10-29.** The home page, menu and `/regions/<slug>` pages
+  are by region since 2026-10-28. The choices, all kept:
   - a 13th region, "General", for pages with no body part (contrast pages, IR
     anticoagulation, vessel diameters, ellipsoid volume, Doppler indices);
   - Hip has only Letournel of its own, so the pelvis CT study and the pelvis 3D model are also
@@ -238,10 +238,13 @@ Drafted 2026-10-23 as an unchecked draft (`/studies/wrist-mri`). Every paper and
 - [x] Open sources (2026-10-29, "Third check" in the wrist sources doc): W2-5, W3-1, W4-1, W5-1, W5-2,
   W6-1 and W6-2 are now cited beside the originals (Andersson 2017, Ng 2024, Chen 2009, von Borstel
   2017).
-- [ ] Still unchecked: the SL angle bounds (W3-2; for the author, reviews put DISI at >60°, >70° or
-  >80°), the perilunate mechanism (W1-1; for the author, reviews say high-energy trauma) and
-  Linscheid as the source for LT disruption and VISI (W4-1; for the author, his abstract does not
-  mention the LT ligament).
+- [x] Decided by the author 2026-10-29 (the wrist sources doc, "The author's decisions"): above 60°
+  is beyond normal and supports SL malalignment, above 70° strongly suggests DISI, 80° not required
+  (Pang, Vassa, Zhou); perilunate injuries usually follow high-energy trauma, a fall on the
+  outstretched hand one example (Dvorsky, Okoro); Linscheid kept for the history, LT disruption and
+  VISI cited to Reagan 1984, Andersson, Vassa and Wilson 2023; Mayfield stages named by the
+  structures, with the reviews' differing "perilunate dislocation" labels noted.
+- [ ] Still unchecked: whether B5 is in Herbert 1984 (the wrist study and the Herbert page).
 
 ### Wrist calculators (Mayfield, Herbert, Palmer, Lichtman)
 
@@ -254,9 +257,10 @@ Every paper and claim is in `docs/superpowers/research/2026-10-23-wrist-calculat
 - [x] Open sources (2026-10-29, "Sixth check" in the calculators sources doc): the greater-arc sentence
   (Chen 2009) and Palmer's class 2 (von Borstel 2017); MF-2, MF-3, HB-1 to HB-4 and LI-2 to LI-4 were
   already settled. The Mayfield and Lichtman pages no longer say "Unchecked draft".
-- [ ] Still unchecked: whether B5 is in Herbert 1984 (Herbert page), and Palmer 1B and 1C (for the
-  author: the table says "ulnar avulsion with or without distal ulnar fracture" and just "distal
-  avulsion"; the page says "ulnar styloid" and "from the lunate or triquetrum").
+- [x] Decided by the author 2026-10-29: Palmer 1B and 1C use the table labels, the 1C anatomy cited
+  to Vassa (the Palmer and Mayfield pages no longer say "Unchecked draft"); Herbert B2 keeps AO's
+  "complete waist fracture", with Steinmann and Adams's "displaced or mobile" noted.
+- [ ] Still unchecked: whether B5 is in Herbert 1984 (needs the paper).
 
 ### Foot MRI study
 
@@ -368,13 +372,13 @@ is in `docs/superpowers/research/2026-10-23-pelvis-calculators-sources.md`.
   claim is now read, so its page no longer says "Unchecked draft".
 - [ ] Still unchecked (Letournel, LT-2): posterior column "through the greater sciatic notch",
   anterior wall "the middle of the line", anterior column "or the anterior border".
-- [ ] For the author: LC III is "rotationally unstable, vertically stable" on the page, but
-  "multidirectional instability" in Leone; Leone says the system "combines the mechanism and the
-  stability", against Alton's "not a part"; Leone gives LC with VS as the commonest combined
-  mechanism (page: "LC with APC or VS"); Gänsslen says ACPHT also reaches the iliac fossa, which
-  the "up into the iliac wing is both-column, otherwise T-shaped" sentence (study and Letournel
-  hint) leaves out; Gänsslen sees the spur best on the obturator oblique view. Still open from
-  before: Halawi's 2 cm against 2.5 cm, and vertical shear on "one or both" sides.
+- [x] Decided by the author 2026-10-29 (the pelvis calculators doc, "The author's decisions"): APC I
+  keeps 2.5 cm with a caveat that thresholds vary and diastasis alone does not prove stability; VS
+  on one or both sides; APC III unstable even without vertical displacement; LC III unstable, the
+  posterior ring setting the direction; Young-Burgess as a force-vector classification whose
+  patterns inform stability ("Stability implication" column); Leone's LC with VS as the commonest
+  combination; iliac-wing extension in anterior-column (including ACPHT) and both-column fractures;
+  the spur best seen on the obturator oblique view.
 
 ### Foot calculators (Hawkins, Sanders, Myerson)
 

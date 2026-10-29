@@ -15,8 +15,10 @@ import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition,
  * elementary-type wording and Roy-Camille's own use of the U or H shape are still unread (see
  * the sourceNote). The claims table, with each claim's status, is
  * docs/superpowers/research/2026-10-23-pelvis-ct-sources.md (P claims); the Young-Burgess and
- * Letournel wording is in 2026-10-23-pelvis-calculators-sources.md (YB and LT claims). Rule
- * chips and warnings carry their claim IDs.
+ * Letournel wording is in 2026-10-23-pelvis-calculators-sources.md (YB and LT claims, and the
+ * author's decisions of 2026-10-29 on the APC I threshold, vertical shear, APC III and LC III
+ * stability, the combined mechanism, the iliac wing and the spur sign). Rule chips and warnings
+ * carry their claim IDs.
  */
 
 const YOUNG_DOI = '10.1148/radiology.160.2.3726125'
@@ -82,7 +84,7 @@ const ybTable = (
   <div className="table-wrap">
     <table className="ref-table">
       <thead>
-        <tr><th>Type</th><th>Injury</th><th>Usually taught as</th></tr>
+        <tr><th>Type</th><th>Injury</th><th>Stability implication</th></tr>
       </thead>
       <tbody>
         {ybTypes.map((t) => (
@@ -128,11 +130,11 @@ const learn: LearnSection[] = [
     title: 'Step 2. Pelvic ring',
     body: (
       <>
-        <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}; {LEONE}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear pushes one hemipelvis upwards. The Young-Burgess calculator on this site applies the same rules.</p>
+        <p>The pelvic ring is classified by the force that broke it ({YOUNG}; {BURGESS}; {LEONE}). Lateral compression drives one hemipelvis inwards: the sacrum is compressed and the pubic rami break horizontally. AP compression opens the ring like a book: the symphysis widens, then the ligaments in front of the sacroiliac joint tear, then those behind it. Vertical shear, from an axial force, pushes one or both hemipelves upwards ({ALTON}; {HALAWI}; {LEONE}). A combined mechanism has features of more than one primary pattern ({ALTON}); Leone describes lateral compression with vertical shear as the commonest combination ({LEONE}). The Young-Burgess calculator on this site applies the same rules.</p>
         {ybTable}
         <p>The ring rarely breaks in one place only: when the front is broken, look hard at the sacrum and the sacroiliac joints ({KHURANA}; {HALAWI}).</p>
-        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}; {LEONE}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>
-        <p>Stability is not part of the Young-Burgess system itself; the last column is how the types are usually taught alongside it ({ALTON}).</p>
+        <p>A symphyseal diastasis over 2.5 cm usually means the pelvic floor ligaments and the front of the sacroiliac joint are torn, APC II or worse: in Young's original description, 2.5 cm was what separated APC I from APC II ({ALTON}; {LEONE}). Published thresholds vary ({HALAWI}), and diastasis alone does not establish stability: it is measured on a single static image, and the pelvis may have sprung back or been reduced by a binder ({ALTON}). A fracture of the L5 transverse process is a marker of vertical instability ({KHURANA}; {LEONE}).</p>
+        <p>Young-Burgess classifies pelvic ring injuries by the main direction of the force and the disruption it causes ({ALTON}; {LEONE}). The patterns inform the assessment of stability, but do not replace a direct look at the posterior ring or the stability-based Tile and AO/OTA classifications ({ALTON}; {LEONE}); the last column gives the usual implication of each type. APC III is rotationally and vertically unstable, but it has no vertical displacement, which is what separates it from vertical shear ({HALAWI}; {LEONE}): no displacement on a static image does not prove vertical stability ({ALTON}). LC III is unstable; how unstable, and in which direction, depends on the posterior ring injury ({LEONE}).</p>
         <p>The type predicted the pattern of organ injury and the resuscitation needed in Dalal's series of patients with multiple injuries: needs rose with the grade of AP compression, and APC III needed the most fluid in the first 24 hours ({DALAL}).</p>
       </>
     ),
@@ -157,7 +159,7 @@ const learn: LearnSection[] = [
         {ltTable(ltElementary)}
         <p>and five associated types, made of two or more elementary ones ({GANSSLEN}):</p>
         {ltTable(ltAssociated)}
-        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}; {GANSSLEN}). With both lines broken and the obturator ring intact, the fracture is transverse; with the ring broken too, a fracture running up into the iliac wing is both-column and one that does not is T-shaped ({DURKEE}). A both-column fracture leaves no joint surface on the intact ilium; the spur sign is the sciatic buttress left behind, a shard of bone pointing backwards at the level of the acetabular roof ({DURKEE}). An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line ({DURKEE}). The Letournel calculator on this site asks the same questions.</p>
+        <p>On CT, ask which column lines are broken, whether there is a posterior wall fragment, whether the obturator ring is broken, and whether any joint surface stays on the intact ilium ({DURKEE}; {SCHEINFELD}; {GANSSLEN}). With both lines broken and the obturator ring intact, the fracture is transverse ({DURKEE}). With the ring broken too, the fracture is T-shaped, anterior column with posterior hemitransverse, or both-column, and what makes it both-column is that no articular fragment stays connected to the sacroiliac joint, not a fracture into the iliac wing ({GANSSLEN}). Iliac wing extension may occur in anterior column fractures, including the anterior column with posterior hemitransverse, and in both-column fractures; a T-shaped fracture usually does not reach the iliac wing ({DURKEE}; {GANSSLEN}). The spur sign of a both-column fracture is best seen on the obturator oblique view: it is the iliac fragment left attached to the sacroiliac joint with no joint surface on it ({GANSSLEN}), a shard of bone pointing backwards at the level of the acetabular roof ({DURKEE}). An isolated posterior wall fracture leaves the iliopectineal line intact, but its fragment can break the ilioischial line ({DURKEE}). The Letournel calculator on this site asks the same questions.</p>
         <p>Then describe the femoral head (concentric, subluxed or dislocated), intra-articular fragments, marginal impaction and the articular gap or step. These descriptors are this site's checklist.</p>
       </>
     ),
@@ -326,7 +328,8 @@ function diastasis(values: Values): number | undefined {
   return ringPresent(values) ? num(values, 'diastasis') : undefined
 }
 
-const VERTICALLY_STABLE: YbType[] = ['LC I', 'LC II', 'LC III', 'APC I', 'APC II']
+/** YB-8: the types whose usual implication is vertically stable. LC III left with decision 36 (2026-10-29). */
+const VERTICALLY_STABLE: YbType[] = ['LC I', 'LC II', 'APC I', 'APC II']
 
 /* Rule chips. */
 
@@ -334,7 +337,7 @@ function deriveRing(values: Values): Derived[] {
   if (!ringPresent(values)) return []
   const out: Derived[] = []
   const type = ringType(values)
-  // YB-8: stability as usually taught.
+  // YB-8: the usual stability implication.
   if (type) out.push({ label: 'Young-Burgess', value: `${type}: usually ${ybStability[type]}`, tone: ybStability[type] === 'stable' ? 'neutral' : 'warn' })
   // YB-6: diastasis over 2.5 cm.
   const gap = diastasis(values)
@@ -690,7 +693,7 @@ const study: StudyDefinition = {
       question: 'What defines a both-column acetabular fracture?',
       options: ['Any fracture of both columns', 'No joint surface left attached to the intact ilium', 'A posterior wall fragment with a transverse fracture', 'An intact obturator ring'],
       answer: 1,
-      explanation: <p>Both columns are separated from each other and from the ilium, so no joint surface stays on the intact ilium; the spike of ilium left behind is the spur sign ({LETOURNEL}; {SCHEINFELD}; {GANSSLEN}).</p>,
+      explanation: <p>Both columns are separated from each other and from the ilium, so no joint surface stays on the intact ilium; the iliac fragment left attached to the sacroiliac joint is the spur sign, best seen on the obturator oblique view ({LETOURNEL}; {SCHEINFELD}; {GANSSLEN}). A fracture into the iliac wing does not define it: anterior column fractures, with or without a posterior hemitransverse, can reach the wing too ({GANSSLEN}).</p>,
     },
     {
       id: 'occult-hip',
