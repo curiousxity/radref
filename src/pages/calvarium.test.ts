@@ -4,9 +4,9 @@ import { CALVARIUM_SOURCES, calvariumImages } from '../data/calvariumImages'
 
 const publicDir = new URL('../../public/', import.meta.url)
 
-// The scans are cropped from open-access figures published under CC BY 4.0 (Gomez et al., Insights
-// Imaging 2018; Pons Escoda et al., Insights Imaging 2020; three case reports), which allows reuse
-// with credit. Each must exist, stay small (they are cached for offline use), and name its source
+// The scans are cropped from open-access figures published under CC BY (Gomez et al., Insights
+// Imaging 2018; Pons Escoda et al., Insights Imaging 2020; three case reports; Lynnerup et al., Head
+// Face Med 2005, under 2.0), which allows reuse with credit. Each must exist, stay small (they are cached for offline use), and name its source
 // figure.
 describe('calvarial lesions page images', () => {
   const images = Object.values(calvariumImages)
@@ -20,6 +20,7 @@ describe('calvarial lesions page images', () => {
   test('every image credits a CC BY source figure', () => {
     for (const image of images) {
       expect(Object.keys(CALVARIUM_SOURCES)).toContain(image.source)
+      expect(CALVARIUM_SOURCES[image.source].licence).toMatch(/^CC BY \d\.\d$/)
       expect(image.figure).toMatch(/^Fig\. \d+[a-zA-Z]?$/)
       expect(image.alt.length).toBeGreaterThan(20)
     }
@@ -28,6 +29,6 @@ describe('calvarial lesions page images', () => {
   test('the page shows each image and the CC BY notice', () => {
     const page = readFileSync(new URL('./CalvariumPage.tsx', import.meta.url), 'utf8')
     for (const key of Object.keys(calvariumImages)) expect(page).toContain(`calvariumImages.${key}`)
-    expect(page).toContain('{CC_BY}')
+    expect(page).toContain('({source.licence})')
   })
 })
