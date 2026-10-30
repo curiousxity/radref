@@ -487,7 +487,8 @@ Still without an image:
   CC BY 2.0 only in the licence URL), perilunate on MRI. Okoro 2023 Fig. 30b (a lunate dislocation
   radiograph) would fit but is not MRI and is already the Mayfield stage IV example.
 - Mason: type I seen only as a fat pad sign (two "Mason type I" papers in Acta Orthop are CC BY-NC).
-- Mayfield: stage II (every captioned figure found was stage III or IV).
+- Mayfield: stage II (every captioned figure found was stage III or IV). Filled later the same
+  day: Okoro 2023 Fig. 28 (see "Second gap search").
 - Herbert: C, D1 (Wang 2020 has D1 patients but only graphs; PMC13307208 uses a D1–D4 scheme whose
   D2 differs from the page's).
 - Palmer: 2A, 2B, 2C, 2E (Wang and Ding 2026's 2C image is arthroscopic; Cerezal 2026 is "used with
@@ -512,3 +513,28 @@ Notes and mismatches:
   names no plane. Focsa 2025 and Albano 2026 say "Sugaya stage" and "Patte 3"; the study says type
   and stage.
 - Gensior 2023 Fig. 1a (PCL) has no arrows; its legend names an intraligamentous tear.
+
+## Second gap search (2026-10-29, later)
+
+Searched again for turf toe, os acromiale, Mayfield II, Herbert C and D1, Palmer 2A–2C and 2E, and a
+labyrinthine fistula. Searches and rejected candidates are in the agents' notes (scratchpad
+`gaps2/*/notes.md`); the outcome:
+
+| Page | Key | Source | Licence |
+|------|-----|--------|---------|
+| Shoulder MRI (variants) | osAcromiale | Vaz and Trippia 2018, Radiol Bras, Fig. 6b (axial fat-suppressed T2) | CC BY 4.0 in the article's licence URL (PMC XML); Crossref has no licence record, which is a gap, not a conflict. Reconsidered from the first search: the source caption swaps its panel labels (it calls panel B coronal; it is axial), so the site's caption follows the image, not the label. |
+| Hearing loss CT (labyrinthine fistula) | labyrinthineFistula | Miwa et al. 2026, Clin Case Rep, Fig. 1c (coronal CT; RED=1 for the yellow arrow) | CC BY 4.0, article and Crossref |
+| Hearing loss CT (labyrinthine fistula) | labyrinthineFistulaAxial | Thangavelu et al. 2022, Eur Arch Otorhinolaryngol, Fig. 5 (axial CT) | CC BY 4.0, article and Crossref |
+| Mayfield | stage2 | Okoro et al. 2023, Life, Fig. 28 (sagittal CT: "dorsal dislocation of the capitate in stage two perilunate dislocation") | CC BY 4.0, article and Crossref |
+
+Not used:
+- Herbert C: Chammas et al. 2023 (J Orthop Traumatol, CC BY 4.0) Fig. 1c shows "delayed union of a
+  scaphoid waist fracture", but after screw fixation, with no time from injury, and the source names
+  no Herbert type, so calling it type C would be an inference. Left out; offered to the author.
+
+Still without an image: turf toe (about 30 figure-legend searches and ~370 CC BY articles' captions
+scanned; the only candidate, Limaye 2024 Fig. 1, shows no visible defect), Herbert C (above) and D1
+(fibrous non-union appears only in surgical photos and text), Palmer 2A, 2B, 2C and 2E (about 250
+TFCC and ulnar impaction papers' captions scanned; Yan 2022's figure names no class, Wang and Ding
+2026 Fig. 1b is low-resolution with burned-in labels, Vassa 2020 is CC BY-NC-ND, Cerezal 2026 is
+"used with permission").

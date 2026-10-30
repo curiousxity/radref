@@ -136,4 +136,11 @@ export const shoulderMriScans = {
     source: S.goncalves2026,
     figure: 'Fig. 3a',
   },
+  osAcromiale: {
+    src: '/scans/shoulder-mri/os-acromiale.jpg',
+    alt: 'Axial fat-suppressed T2-weighted MRI of the right shoulder: the anterior acromial fragment (arrow) is separated from the rest of the acromion by a transverse line, the synchondrosis, with bright marrow signal on both sides.',
+    caption: 'T2-weighted MRI of the right shoulder showing bone edema, suggestive of inflammatory changes, in the os acromiale (arrow) and in the distal portion of the acromion.',
+    source: S.vaz2018,
+    figure: 'Fig. 6b',
+  },
 } satisfies Record<string, ScanImage>

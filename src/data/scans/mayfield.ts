@@ -38,4 +38,11 @@ export const mayfieldScans = {
     source: S.rachunekMedved2025,
     figure: 'Fig. 1b',
   },
+  stage2: {
+    src: '/scans/mayfield/stage2.jpg',
+    alt: 'Sagittal CT of the wrist showing the lunate still seated on the distal radius while the capitate has left the lunate\'s concavity and sits dorsal to it.',
+    caption: 'Stage II, capitolunate disruption: sagittal CT showing dorsal dislocation of the capitate in a stage two perilunate dislocation.',
+    source: S.okoro2023,
+    figure: 'Fig. 28',
+  },
 } satisfies Record<string, ScanImage>

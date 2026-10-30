@@ -80,6 +80,9 @@ export const SCAN_SOURCES = {
   dorner2024: { short: 'Dörner et al. 2024', doi: '10.1007/s10143-024-02419-8', licence: 'CC BY 4.0' },
   vlachodimitropoulos2026: { short: 'Vlachodimitropoulos et al. 2026', doi: '10.4102/sajr.v30i1.3278', licence: 'CC BY 4.0' },
   pontesMadruga2022: { short: 'Pontes-Madruga et al. 2022', doi: '10.1016/j.bjorl.2020.05.027', licence: 'CC BY 4.0' },
+  // Labyrinthine fistula: both state CC BY 4.0 in the article's licence statement and in Crossref.
+  miwa2026: { short: 'Miwa et al. 2026', doi: '10.1002/ccr3.72505', licence: 'CC BY 4.0' },
+  thangavelu2022: { short: 'Thangavelu et al. 2022', doi: '10.1007/s00405-021-07058-z', licence: 'CC BY 4.0' },
   // Temporal bone CT study
   touska2025: { short: 'Touska and Connor 2025', doi: '10.1007/s00330-024-11021-x', licence: 'CC BY 4.0' },
   gulati2019: { short: 'Gulati et al. 2019', doi: '10.1186/s13244-019-0782-y', licence: 'CC BY 4.0' },
@@ -115,6 +118,7 @@ export const SCAN_SOURCES = {
   albano2026: { short: 'Albano et al. 2026', doi: '10.1007/s11547-026-02248-3', licence: 'CC BY 4.0' },
   gulati2026: { short: 'Gulati et al. 2026', doi: '10.1007/s00256-025-05014-0', licence: 'CC BY 4.0' },
   focsa2025: { short: 'Focsa et al. 2025', doi: '10.1016/j.asmr.2024.101009', licence: 'CC BY 4.0' },
+  vaz2018: { short: 'Vaz and Trippia 2018', doi: '10.1590/0100-3984.2017.0147', licence: 'CC BY 4.0' },
   // Mercouris Part 1; mercouris2023 above is Part 2.
   mercouris2023b: { short: 'Mercouris and Mercouris 2023', doi: '10.4102/sajr.v27i1.2706', licence: 'CC BY 4.0' },
   goncalves2026: { short: 'Gonçalves et al. 2026', doi: '10.1590/0100-3984.2025.0132', licence: 'CC BY 4.0' },

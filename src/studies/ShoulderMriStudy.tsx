@@ -325,7 +325,7 @@ const learn: LearnSection[] = [
           <li><strong>Sublabral recess:</strong> a recess between the superior labrum and the glenoid at the biceps anchor, with an appearance similar to SLAP lesions ({SMITH}); it can be mistaken for a type II SLAP lesion and vice versa ({WOERTLER}).</li>
           <li><strong>Os acromiale:</strong> an unfused ossification centre of the acromion, associated with rotator cuff impingement ({PARK}).</li>
         </ul>
-        <ScanFigures images={[shoulderMriScans.sublabralRecess, shoulderMriScans.bufordComplex, shoulderMriScans.sublabralForamen]} />
+        <ScanFigures images={[shoulderMriScans.sublabralRecess, shoulderMriScans.bufordComplex, shoulderMriScans.sublabralForamen, shoulderMriScans.osAcromiale]} />
       </>
     ),
   },
