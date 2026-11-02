@@ -66,7 +66,11 @@ const haematomaStages: HaematomaStage[] = [
     stage: 'Hyperacute',
     time: 'Under 24 hours',
     product: 'Oxyhaemoglobin, in red cells',
-    t1: 'Like brain or slightly dark',
+    t1: (
+      <>
+        Like brain or slightly dark (<Cite doi={DOI.penckofer}>Penckofer et al.</Cite>)
+      </>
+    ),
     t2: 'Bright',
     swi: (
       <>
@@ -83,7 +87,11 @@ const haematomaStages: HaematomaStage[] = [
     stage: 'Acute',
     time: '1–3 days',
     product: 'Deoxyhaemoglobin, in red cells',
-    t1: 'Like brain or slightly dark',
+    t1: (
+      <>
+        Like brain or slightly dark (<Cite doi={DOI.penckofer}>Penckofer et al.</Cite>)
+      </>
+    ),
     t2: 'Dark',
     swi: 'Dark',
     ct: (
