@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { neonatalChestXrayScans } from '../data/scans/neonatalChestXray'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -218,6 +220,7 @@ const learn: LearnSection[] = [
         <p>The tip belongs in the body of the stomach ({NARLA}). A radiograph is the only certain way to confirm it; a tip just through the cardia or in the lower oesophagus went with apnoea, desaturation and bradycardia on feeding ({ZUBI}). A tube coiled in an upper oesophageal pouch shows oesophageal atresia, and gas in the stomach then means a distal fistula ({GALLACHER}); a tube that ends in the chest can mean the stomach has herniated through the diaphragm ({LOVRENSKI}).</p>
         <h3>Chest drain</h3>
         <p>For a pneumothorax the tip drains best anterior to the lung, for fluid posterior to it, and an AP and a lateral film are advised after insertion ({ZUBI}). Phrenic nerve palsy after chest drains was related to where the medial end of the drain lay; Odita advises the medial end be no less than 1 cm from the spine on the frontal film ({ODITA}).</p>
+        <ScanFigures images={[neonatalChestXrayScans.ettLandmarks, neonatalChestXrayScans.ettRightBronchus, neonatalChestXrayScans.umbilicalCatheters, neonatalChestXrayScans.uvcLateral, neonatalChestXrayScans.uvcInLiver, neonatalChestXrayScans.piccInLiver]} />
       </>
     ),
   },
@@ -232,6 +235,7 @@ const learn: LearnSection[] = [
         <p><strong>Meconium aspiration.</strong> Hyperinflation, which may be the only finding in mild cases, coarse irregular bilateral opacities with segmental atelectasis and pneumonitis; pneumothorax occurs in up to 10% to 20%. With bilateral coarse opacities, meconium aspiration cannot be told from pneumonia on the film ({LOVRENSKI}).</p>
         <p><strong>Pneumonia.</strong> Alveolar opacities, usually diffuse and bilateral, or lobar consolidation with air bronchograms, coarse or reticular opacities, with or without an effusion; it is on the differential of RDS, TTN and meconium aspiration ({LOVRENSKI}). The film may be normal at first ({GALLACHER}).</p>
         <p><strong>Bronchopulmonary dysplasia.</strong> Early, mild perihilar opacities and fine granularity; later, coarse reticular opacities, cystic lucencies, atelectasis and hyperinflation. It is a clinical diagnosis: born before 32 weeks and still needing oxygen at 36 weeks' postmenstrual age ({LOVRENSKI}). Gallacher defines it as oxygen for at least 28 days and at 36 weeks' corrected age, notes that it affects 73% of babies born at 23 weeks and 23% at 28 weeks, and that the film often does not match how ill the baby is ({GALLACHER}).</p>
+        <ScanFigures images={[neonatalChestXrayScans.rdsGrade2, neonatalChestXrayScans.transientTachypnoea, neonatalChestXrayScans.meconiumAspiration]} />
       </>
     ),
   },
@@ -245,6 +249,7 @@ const learn: LearnSection[] = [
         <p><strong>Pulmonary interstitial emphysema.</strong> Interstitial air from ventilator barotrauma: rounded or tubular perihilar lucencies ({LOVRENSKI}).</p>
         <p><strong>Pneumomediastinum.</strong> In infants, air can lift the thymus off the heart, its lobes turned up and out (the spinnaker sign). It is diagnosed on the film alone and is mostly found with air elsewhere ({HAURI}).</p>
         <p><strong>Pneumopericardium.</strong> A halo of air round the heart was the main sign, in 96% of Burt's 50 babies, most of them ventilated preterm babies with RDS; when absent, a pericardial line helped. 72% of them died ({BURT}).</p>
+        <ScanFigures images={[neonatalChestXrayScans.supinePneumothorax, neonatalChestXrayScans.interstitialEmphysema, neonatalChestXrayScans.spinnakerSail]} />
       </>
     ),
   },

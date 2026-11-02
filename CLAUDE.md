@@ -410,6 +410,8 @@ Lessons and quick references show real example scans through `ScanFigures`
   as `<page>Scans.<key>` (so import the list under its own name, not an alias).
 - Studies put them in a Learn section's `body`; no framework change is needed. The MSK MRI studies
   (ankle, foot, diabetic foot, knee, shoulder, elbow, wrist) each have a list, `<study>Mri.ts`.
+  The X-ray studies have `<study>Xray.ts` (radiographs; they also reuse images from the
+  Schatzker, Mason, Mayfield, Lisfranc and fifth metatarsal lists).
 - Sources, licence evidence and crop notes are in
   `docs/superpowers/research/2026-10-28-example-scans.md`. Only CC BY with a stated version is
   used (no NC or ND); one panel per file, cropped, greyscale.

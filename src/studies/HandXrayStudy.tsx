@@ -1,5 +1,7 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { handXrayScans } from '../data/scans/handXray'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -182,6 +184,7 @@ const learn: LearnSection[] = [
         <p>The fourth and fifth CMC joints are injured most often, frequently with fractures of the metacarpal bases and the distal carpal row, and a delayed diagnosis makes closed reduction difficult ({STEINMETZ}). Plain radiographs can mislead ({CZARNECKI}). The carpal injuries that come with these dislocations are often hard to see on radiographs; CT changed the operative plan in 58% of Sendek's cases, and the authors advise CT routinely ({SENDEK}). With a clinical or radiographic suspicion of a CMC dislocation, thin-slice CT should be considered ({BUREN}).</p>
         <h3>The finger and thumb joints</h3>
         <p>Say whether each MCP and interphalangeal joint is congruent. When radiographs show malalignment of an MCP, PIP or DIP joint without a fracture, the ACR rates MRI without contrast 9 and ultrasound 7 as the next test ({ACR}). The V sign at the PIP joint is in step 4.</p>
+        <ScanFigures images={[handXrayScans.cmcFractureDislocationOblique, handXrayScans.cmcDorsalDislocationLateral]} />
       </>
     ),
   },
@@ -198,6 +201,7 @@ const learn: LearnSection[] = [
         <p>Extra-articular fractures can usually be treated without surgery, except a severely displaced shaft fracture with a disrupted axis. Fractures into the CMC, MCP or PIP joints often have displaced articular fragments, rotational misalignment, angulation or shortening; standard views are often not enough, and CT, increasingly cone-beam CT, is used ({CZARNECKI}). A fracture of the fourth or fifth metacarpal base sends you back to the CMC joints ({FISHER}).</p>
         <h3>The thumb metacarpal</h3>
         <p>Liverneaux and colleagues distinguish trapeziometacarpal dislocations, small- and large-fragment Bennett fractures, three-fragment articular Rolando and comminuted fractures, and extra-articular fractures of the base; all risk narrowing the first web ({LIVERNEAUX}). A Bennett fracture is an intra-articular fracture of the first metacarpal with dislocation of the CMC joint: the shaft, the largest fragment, is pulled by abductor pollicis longus and adductor pollicis, while the palmar oblique ligament holds the small volar fragment ({DAHER}).</p>
+        <ScanFigures images={[handXrayScans.boxerFractureOblique, handXrayScans.bennettFracture, handXrayScans.rolandoFracture]} />
       </>
     ),
   },
@@ -219,6 +223,7 @@ const learn: LearnSection[] = [
         <p>On the radiograph, look for a fleck at the ulnar base of the proximal phalanx. A fleck displaced proximal to the MCP joint line, the displaced fleck sign, was seen in 7.5% of UCL injuries and had a positive predictive value of 100% for a grade III rupture and 94.1% for a Stener lesion ({DARYOUSH}). With an avulsion fracture, MCP instability rather than the size of the fragment went with surgery ({LEGERSTEE}). For a hand fracture with a suspected ligament or tendon injury, the ACR rates MRI 9 and ultrasound 7 ({ACR}).</p>
         <h3>Other phalangeal fractures</h3>
         <p>Give the phalanx, the site, whether the fracture enters the joint and whether it is displaced. Fractures into the joint often need more than the standard views ({CZARNECKI}).</p>
+        <ScanFigures images={[handXrayScans.pipDorsalFractureSubluxation, handXrayScans.bonyMallet, handXrayScans.thumbUclAvulsion]} />
       </>
     ),
   },
@@ -228,6 +233,7 @@ const learn: LearnSection[] = [
     body: (
       <>
         <p>Swelling, bruising or deformity raise the suspicion of a fracture ({SOUTHALL}). After a cut or puncture, look for a foreign body. In a tissue model, radiographs found radiopaque foreign bodies (gravel, glass, metal) 98% of the time and never found radiolucent ones (wood, plastic, a cactus spine) ({MANTHEY}). Glass was seen on radiographs in 25 of 26 patients; in 9 it had been missed at earlier visits where the wound was only inspected or probed ({GRON}). When a foreign body is still suspected and the radiographs are negative, the ACR rates ultrasound 9, CT 7 and MRI 6 ({ACR}).</p>
+        <ScanFigures images={[handXrayScans.foreignBody]} />
       </>
     ),
   },

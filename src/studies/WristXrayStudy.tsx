@@ -1,5 +1,8 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { mayfieldScans } from '../data/scans/mayfield'
+import { wristXrayScans } from '../data/scans/wristXray'
 import { herbertDescriptions, herbertGroup, herbertSentence, herbertTypes } from '../logic/herbert'
 import type { HerbertType } from '../logic/herbert'
 import { mayfield, mayfieldDescriptions, mayfieldGaps, mayfieldSentence, mayfieldStages } from '../logic/mayfield'
@@ -161,6 +164,7 @@ const learn: LearnSection[] = [
         <p>Check the positioning. On the PA, the groove for extensor carpi ulnaris should be in profile, at or radial to the base of the ulnar styloid ({SHARMA}). On a true lateral, the palmar cortex of the pisiform lies between the palmar cortices of the scaphoid and the capitate, ideally midway ({SHARMA}; {OKORO}). The carpal angles are accurate only on a true lateral ({OKORO}), and even slight rotation can give a false reading of the distal radioulnar joint ({SHARMA}).</p>
         <h4>The suspected scaphoid fracture</h4>
         <p>Most patients with a scaphoid fracture are tender in the anatomical snuffbox or over the scaphoid tubercle and have pain on longitudinal compression of the thumb; the examination is sensitive, but its specificity is only 74% to 80% ({STEINMANN}). In the Cochrane review, a true fracture was found in a median of 20% of clinically suspected scaphoid fractures ({MALLEE}). When the first films are negative or equivocal, the ACR rates repeat radiographs at 10 to 14 days 8, MRI without contrast 8 and CT without contrast 7, all usually appropriate ({ACR}); step 4 has the rest.</p>
+        <ScanFigures images={[wristXrayScans.trueLateral]} />
       </>
     ),
   },
@@ -179,6 +183,7 @@ const learn: LearnSection[] = [
         <p>The rule for the angles is the wrist MRI study's, with its sources. A normal scapholunate angle is 30° to 60° ({KITAY}; {ZHOU}; {OKORO}). An angle over 60° is beyond that range and supports scapholunate malalignment ({ANDERSSON}; {PANG}); over 70° is consistent with DISI ({ZHOU}) and highly suggestive of increased flexion, or rotatory subluxation, of the scaphoid ({KITAY}), and this site reads it as strongly suggestive. Some reviews set the bar at 80° ({VASSA}); this site does not require it. DISI itself is dorsal tilt of the lunate ({VASSA}): on a true lateral, dorsal radiolunate angulation greater than 15° indicates DISI ({KITAY}; {PANG}). The normal capitolunate angle is 0° to 30°, and an angle outside the normal range suggests carpal instability ({OKORO}); a scapholunate angle under 30° with a capitolunate angle over 30° suggests VISI ({VASSA}). The angles are best measured on a true lateral radiograph ({VASSA}).</p>
         <h4>The distal radioulnar joint</h4>
         <p>On the PA, DRUJ injury can show as widening of the radioulnar interval, shortening of the radius or a fracture into the sigmoid notch. On a true lateral, more than 6 mm between the dorsal cortices of the radius and ulna indicates DRUJ instability, but even slight rotation can mislead, and CT is the standard test for a DRUJ dislocation ({SHARMA}). Nakamura and colleagues compared both wrists on standardised laterals: in normal wrists the right and left radioulnar distances differed by no more than 4 mm when the pisoscaphoid distances differed by less than 3 mm; of 36 injured patients so positioned, 15 had a radioulnar distance of 5 mm or more, and CT confirmed a dislocation in 14 ({NAKAMURA}). The two sources differ (6 mm on one wrist, against 5 mm with the other wrist for comparison); this form flags over 6 mm. For DRUJ or carpal malalignment with no fracture, the ACR rates CT of both wrists 9, MRI 8 and MR arthrography 7 ({ACR}).</p>
+        <ScanFigures images={[wristXrayScans.gilulaArcs, mayfieldScans.stage1]} />
       </>
     ),
   },
@@ -203,6 +208,7 @@ const learn: LearnSection[] = [
         <p>Distal radius fractures go with fractures of the ulnar styloid (55% to 61%) and distal ulna (6% to 9%), and with injuries of the triangular fibrocartilage (39% to 43%), the scapholunate ligament (16% to 40%) and the lunotriquetral ligament (9% to 15%) ({SHAHABPOUR}). With a fracture and a suspected tendon or ligament injury, the ACR rates MRI without contrast and MR arthrography 9, and CT arthrography and ultrasound 7 ({ACR}).</p>
         <h4>The ulna</h4>
         <p>Most ulnar styloid fractures are at the tip. Fractures through the base of the styloid, and those extending into the joint, often go with DRUJ dislocation and instability. Isolated ulnar head fractures are uncommon but usually unstable ({SHARMA}).</p>
+        <ScanFigures images={[wristXrayScans.collesLateral]} />
       </>
     ),
   },
@@ -220,6 +226,7 @@ const learn: LearnSection[] = [
         <p>A scaphoid fracture is often occult on the first radiographs: up to 65% in Okoro's review ({OKORO}), and around 30% of all wrist fractures in Sharma's ({SHARMA}). Non-union occurs in up to 12% of patients if an occult fracture is not found and immobilised ({STEINMANN}).</p>
         <p>The sources differ on what comes next. The ACR rates repeat radiographs at 10 to 14 days 8, MRI without contrast 8 and CT without contrast 7, all usually appropriate, and bone scan 1 ({ACR}). Okoro and colleagues give cross-sectional imaging, or immobilisation and repeat radiographs in 7 to 10 days ({OKORO}). The classic approach was 2 weeks in a cast with repeat examination and radiographs, but MRI is superior to repeat radiographs for an occult fracture ({STEINMANN}); and Chen and colleagues say MRI is warranted if the radiographs are normal and suspicion is high ({CHEN}). MRI 2.8 days after the injury found occult scaphoid fractures with 100% sensitivity and specificity in 32 patients whose two routine and four scaphoid views were normal ({GAEBLER}). Sharma and colleagues favour CT, with MRI limited by availability, time and cost ({SHARMA}).</p>
         <p>In the Cochrane review, CT was 72% sensitive and 99% specific, MRI 88% and 100%, and bone scan 99% and 86%. Bone scan was statistically the most accurate, but more invasive, with radiation and a delay of at least 72 hours, and with a median of 20% of suspected fractures real, it overtreats more patients than CT or MRI ({MALLEE}). This form's impression offers MRI or CT, or repeat radiographs at 10 to 14 days, as the ACR rates them; after repeat films it offers MRI or CT.</p>
+        <ScanFigures images={[wristXrayScans.scaphoidUlnarDeviation, wristXrayScans.occultScaphoidFollowUp]} />
       </>
     ),
   },
@@ -237,6 +244,7 @@ const learn: LearnSection[] = [
         <h4>The other carpal bones</h4>
         <p>The triquetrum is the second commonest carpal fracture ({SHARMA}; {OKORO}), 13% to 14% of carpal fractures ({SHAHABPOUR}). Most are on its dorsal surface and are best seen on the lateral or the oblique ({SHARMA}; {OKORO}). Sharma and colleagues put them down to impaction by the ulnar styloid in hyperextension or ligament avulsion in hyperflexion ({SHARMA}); Okoro and colleagues to avulsion of the shared attachment of the dorsal radiocarpal and dorsal intercarpal ligaments ({OKORO}). They are almost never associated with carpal instability ({SHAHABPOUR}). A fracture of the triquetral body, by contrast, often goes with an intrinsic ligament injury such as a lunotriquetral tear ({OKORO}).</p>
         <p>A hook of hamate fracture is hard to see on the PA: look for an absent hook or indistinct margins. The carpal tunnel view shows it, CT shows it in all cases, and a bipartite hamate (os hamuli proprium) can be mistaken for it. Hamate body fractures go with fractures of the fourth and fifth metacarpal bases and carpometacarpal dislocation ({SHARMA}). In Welling's series, cited by Shahabpour and colleagues, radiographs showed no lunate, trapezoid or capitate fracture, and only 20% of triquetral and 40% of hamate fractures ({SHAHABPOUR}).</p>
+        <ScanFigures images={[wristXrayScans.triquetralDorsalFracture, mayfieldScans.stage4]} />
       </>
     ),
   },
@@ -247,6 +255,7 @@ const learn: LearnSection[] = [
       <>
         <p>Soft-tissue swelling and obliteration of the pronator quadratus fat stripe may be a clue to a subtle distal radius fracture, and the scaphoid fat stripe may be obliterated in an occult scaphoid fracture ({SHARMA}). Look also for a radio-opaque foreign body ({CHEN}).</p>
         <p>The stripes are not reliable on their own. Against MRI, an abnormal scaphoid fat stripe was 50% sensitive and 50% specific for a scaphoid fracture, and an abnormal pronator stripe 26% sensitive and 70% specific for a distal radius fracture ({ANNAMALAI}). In Fallahi's series a positive pronator quadratus sign (raised, interrupted or obliterated) was 65% sensitive and 69% specific for an occult fracture, though the authors thought it useful in justifying MRI ({FALLAHI}). So this form records an abnormal stripe without calling it a fracture, and a normal stripe does not exclude one.</p>
+        <ScanFigures images={[wristXrayScans.scaphoidFatStripe]} />
       </>
     ),
   },

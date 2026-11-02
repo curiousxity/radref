@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { ankleXrayScans } from '../data/scans/ankleXray'
+import { fifthMetatarsalScans } from '../data/scans/fifthMetatarsal'
 import { StudyPage } from '../study/StudyPage'
 import { lines, list, num, optionLabel, str } from '../study/types'
 import type { Derived, Field, LearnSection, Option, ReportStep, StudyDefinition, Values } from '../study/types'
@@ -166,6 +169,7 @@ const learn: LearnSection[] = [
         <p>In Beumer's normal ankles the medial clear space was never wider than the superior clear space, and a medial clear space wider than the superior clear space points to a deltoid injury ({BEUMER}). On a stress view in dorsiflexion and external rotation, 5 mm or more was the most reliable predictor of deep deltoid disruption after a Weber B fracture; 4 mm was less specific and 6 mm less sensitive ({PARK}).</p>
         <p>Rydberg notes that over 4 mm has often been used to call an ankle unstable, without a scientific basis, on non-weight-bearing images. On weight-bearing radiographs Gregersen called the ankle stable with a medial clear space under 5.0 mm and no more than 1.0 mm wider than the uninjured side ({RYDBERG}). This lesson gives each threshold with its view.</p>
         {measurementTable}
+        <ScanFigures images={[ankleXrayScans.clearSpaces, ankleXrayScans.tfcsWidening, ankleXrayScans.stressView]} />
       </>
     ),
   },
@@ -188,6 +192,7 @@ const learn: LearnSection[] = [
         <p>Lateral process fractures can be radiographically occult and need a higher index of suspicion ({MELENEVSKY}). Plain films are negative in up to 40%, so CT is the imaging of choice ({CHAN}).</p>
         <h3>The base of the fifth metatarsal</h3>
         <p>The zones follow Lawrence and Botte ({LAWRENCE}), as on the {fifthMetatarsalLink}. Zone 1 is the tuberosity, proximal to the joint between the fourth and fifth metatarsal bases: the tuberosity avulsion, more than 90% of fifth metatarsal fractures, usually from inversion. Zone 2 is the metaphyseal-diaphyseal junction, a fracture running into the 4–5 intermetatarsal joint (the Jones fracture). Zone 3 is the proximal shaft just beyond that joint, within about 1.5 cm: the proximal diaphyseal stress fracture. Fractures beyond zone 3 are dancer's fractures ({CHLOROS}).</p>
+        <ScanFigures images={[ankleXrayScans.weberA, ankleXrayScans.weberB, ankleXrayScans.weberC, ankleXrayScans.maisonneuveFibula, ankleXrayScans.maisonneuveAnkle, ankleXrayScans.posteriorMalleolus, ankleXrayScans.lateralProcessCt, fifthMetatarsalScans.zone1]} />
       </>
     ),
   },

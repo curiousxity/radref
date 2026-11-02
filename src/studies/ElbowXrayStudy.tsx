@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { elbowXrayScans } from '../data/scans/elbowXray'
+import { masonScans } from '../data/scans/mason'
 import { brobergMorrey, brobergMorreySentence, mason, masonDescriptions, masonSentence } from '../logic/mason'
 import type { MasonPattern, MasonResult, MasonType } from '../logic/mason'
 import { StudyPage } from '../study/StudyPage'
@@ -216,6 +219,7 @@ const learn: LearnSection[] = [
         <p>A line that misses the capitellum raises the suspicion of a subluxed or dislocated radial head: then look at the ulna. Monteggia described a fracture of the proximal third of the ulna with anterior dislocation of the radial head ({RING_2013}). It is easily missed: in 47 patients aged 3 to 70, radiologists missed it in 25.5% and the clinicians at the bedside in 14.9%, most often the radial head dislocation or subluxation, then a subtle ulnar fracture or plastic deformity, and attention to the radiocapitellar alignment and the ulna is the remedy ({MATHUR}).</p>
         <h4>The ulnohumeral joint</h4>
         <p>Check that the ulnohumeral joint is congruent. After a dislocation is reduced, an increased ulnohumeral distance on the routine unstressed lateral, which Coonrad and colleagues called the drop sign, may warn of instability when it persists after the first reduction film ({COONRAD}). After a dislocation, standard radiographs may also show small avulsions (under 2 mm), impaction of the posterior capitellum (the Osborne-Cotterill lesion) or ulnohumeral subluxation ({BARCO}).</p>
+        <ScanFigures images={[elbowXrayScans.monteggiaAnterior]} />
       </>
     ),
   },
@@ -243,6 +247,7 @@ const learn: LearnSection[] = [
         <p>Bado classified Monteggia injuries by the direction of the dislocated radial head: anterior (type I), posterior (II) and lateral or anterolateral (III); in type IV the radius and ulna are both broken at the same level proximally, with the radial head dislocated anteriorly ({CALDERAZZI}). In adults the posterior type is the commonest: 38 of Ring and colleagues' 48, and 26 of those 38 also had a radial head fracture ({RING_1998}).</p>
         <p>A fracture of the radial shaft with disruption of the distal radioulnar joint is a Galeazzi fracture ({GARG}). In Rettig and Raskin's series, fractures in the distal third, within 7.5 cm of the joint surface of the distal radius, were the ones that went with an unstable distal radioulnar joint (12 of 22, against 1 of 18 further up) ({RETTIG}). So a radial shaft fracture on the elbow films sends you to the wrist.</p>
         {gradingTable}
+        <ScanFigures images={[elbowXrayScans.terribleTriad, elbowXrayScans.coronoid, elbowXrayScans.doubleArc, elbowXrayScans.monteggiaPosterior, elbowXrayScans.galeazzi, masonScans.type1, masonScans.type3]} />
       </>
     ),
   },
@@ -255,6 +260,7 @@ const learn: LearnSection[] = [
         <p>An effusion with no fracture seen usually hides one. On MRI, 75% of 20 adults with an effusion and no fracture on radiographs had an occult fracture, 86.6% of them in the radial head; the size of the effusion did not predict a fracture, and the MRI changed no one's treatment ({ODWYER}). All six adults in Major and Crawford's series had a fracture on MRI ({MAJOR}). In 193 patients aged 15 to 82 with a fat pad sign and no fracture seen on the AP, repeat radiographs at 7 to 10 days showed a fracture in 95%: the radial neck in 58% and the radial head in 37% ({PAVIC}). The two series differ on where the fracture lies, the head on MRI and more often the neck on follow-up films, so the report says the radial head or neck.</p>
         <p>The sign is sensitive rather than specific. For a radial head or neck fracture it was 85.4% sensitive and 50% specific, and its absence was the more reliable sign that there is no such fracture ({IRSHAD}).</p>
         <p>The supinator fat pad lies against the radius. In adults with radial head or neck fractures it was displaced, more so from Mason type I to type III, and it is a useful adjunct sign ({HUSSEIN}).</p>
+        <ScanFigures images={[elbowXrayScans.fatPads]} />
       </>
     ),
   },

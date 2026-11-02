@@ -1,5 +1,8 @@
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { kneeXrayScans } from '../data/scans/kneeXray'
+import { schatzkerScans } from '../data/scans/schatzker'
 import { schatzker, schatzkerDescriptions, schatzkerSentence, schatzkerTypes } from '../logic/schatzker'
 import type { DepressionSite, LateralPattern, Plateau, SchatzkerResult } from '../logic/schatzker'
 import { StudyPage } from '../study/StudyPage'
@@ -207,6 +210,7 @@ const learn: LearnSection[] = [
         <p>The Insall–Salvati index is the length of the patellar tendon, from the lower pole to the tibial tuberosity, divided by the length of the patella, measured on a true lateral. The normal range on radiographs is 0.8 to 1.3; over 1.3 is patella alta and under 0.8 patella baja ({CRONE}). After an injury, a lower pole avulsion is a bony avulsion of the patellar tendon and comes with patella alta, and an upper pole avulsion goes with patella baja ({JARRAYA}).</p>
         <h3>The lateral femoral notch</h3>
         <p>On the lateral view, measure the depth of the sulcus on the lateral femoral condyle. In Cobby's series no knee with a normal ACL had a sulcus deeper than 1.2 mm, and a sulcus deeper than 1.5 mm was a reliable indirect sign of a torn ACL ({COBBY}). Lodewijks and colleagues, in patients 45 or younger, found a depth over 1.0 mm a good predictor of ACL injury, with a positive predictive value of 96% ({LODEWIJKS}). The two cut-offs differ; this lesson gives both.</p>
+        <ScanFigures images={[kneeXrayScans.lateralFemoralNotch, kneeXrayScans.patellaAlta]} />
       </>
     ),
   },
@@ -219,6 +223,7 @@ const learn: LearnSection[] = [
         {schatzkerTable}
         <p>Type III is split by where the depression sits: lateral (IIIA) or central (IIIB). Dissociation of the metaphysis from the diaphysis makes a fracture type VI, whichever plateaus are broken. The fracture-dislocation mechanism of type IV raises the risk of injury to the peroneal nerve and the popliteal vessels ({MARKHARDT}).</p>
         <p>CT and MRI are more accurate than radiographs for the Schatzker type, and surgical plans made from radiographs were changed after CT or MRI ({MARKHARDT}). With a plateau fracture on radiographs, the ACR rates MRI 9 and CT 8 for further bone or soft-tissue injury, and CT is often done to plan surgery on complex plateau fractures ({ACR}).</p>
+        <ScanFigures images={[schatzkerScans.type6]} />
       </>
     ),
   },
@@ -238,6 +243,7 @@ const learn: LearnSection[] = [
         <h3>Cruciate avulsions</h3>
         <p>A cruciate ligament injury is sometimes an avulsion of bone, usually from the tibia, and it can be seen on radiographs. Commoner in children, in adults it more often comes with other injuries ({WHITE}).</p>
         <p>Tibial spine (ACL) avulsions are graded by Meyers and McKeever ({MEYERS}; the types as {LI} give them): type I undisplaced or minimally displaced; type II with the anterior part of the fragment raised and the posterior part still attached (a "bird's beak"); type III completely detached. A type IV, displaced and comminuted, was added later ({LI}). The one radiographic measurement with good reliability is the superior displacement of the anterior part of the fragment on the lateral view ({ELLIS}); record it in millimetres.</p>
+        <ScanFigures images={[kneeXrayScans.segond, kneeXrayScans.arcuateSign]} />
       </>
     ),
   },
@@ -256,6 +262,7 @@ const learn: LearnSection[] = [
         <p>Melvin defined displacement as more than 3 mm of separation between the fragments, or more than 2 mm of articular incongruity, and displacement should raise the suspicion of a retinacular injury ({JARRAYA}).</p>
         <h3>Bipartite patella</h3>
         <p>An important differential diagnosis: a bipartite patella is an accessory ossification centre that never fused, and a fragment at the superolateral corner of the patella favours it ({JARRAYA}). Saupe's types are by site: I at the inferior pole, II at the lateral margin, III at the superolateral pole. In Akdag's 61 patients, 59 fragments were superolateral; its prevalence is given as 0.8% to 2% ({AKDAG}). Radiographs show only its anatomy; MRI can show oedema at the fragment in a painful one ({AKDAG}).</p>
+        <ScanFigures images={[kneeXrayScans.patellarFracture, kneeXrayScans.bipartitePatella]} />
       </>
     ),
   },
@@ -266,6 +273,7 @@ const learn: LearnSection[] = [
       <>
         <p>The AO/OTA system types a distal femoral fracture as A, extra-articular; B, partial articular; or C, complete articular, with no continuity between the diaphysis and the articular surface ({FOGAGNOLO}).</p>
         <p>AP and lateral radiographs show the general pattern, but a complete assessment needs CT for the articular extension, occult fracture lines and Hoffa fractures ({FOGAGNOLO}). A Hoffa fracture is a coronal fracture of a femoral condyle. Nork found one with 38.1% of supracondylar-intercondylar fractures, mostly in the lateral condyle, in 47% of knees that had CT against 29% of those that did not; ten were found only at surgery, none in a knee that had had CT ({NORK}). They are in over 30% of type C fractures and may be missed in up to 25% ({FOGAGNOLO}). The ACR notes CT is often done to plan surgery on complex distal femoral fractures ({ACR}).</p>
+        <ScanFigures images={[kneeXrayScans.hoffa]} />
       </>
     ),
   },
