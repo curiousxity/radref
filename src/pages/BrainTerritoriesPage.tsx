@@ -1,6 +1,8 @@
 import { BrainTerritoryMap } from '../components/BrainTerritoryMap'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { brainTerritoriesScans } from '../data/scans/brainTerritories'
 
 // Every statement below was read in its paper first (abstract or open full text); the claims, their
 // verdicts and the quoted sentences are in
@@ -91,7 +93,8 @@ export function BrainTerritoriesPage() {
           </p>
           <p className="source-note">
             Written on 2026-11-02 with the paper databases reachable; every statement was read in its source (an abstract or an open full text) first.
-            The drawings are schematics, not to scale.
+            The drawings are schematics, not to scale. The scans are panels from open-access figures published under CC BY licences, credited under
+            each.
           </p>
         </div>
       </section>
@@ -143,6 +146,7 @@ export function BrainTerritoriesPage() {
           </li>
           <li>ACA infarcts are uncommon: 1.8% of cerebral infarcts in one registry (<Cite doi={DOI.arboix}>Arboix et al.</Cite>).</li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.acaInfarct]} />
 
         <h4 className="fm-subhead" id="mca">Middle cerebral artery</h4>
         <ul className="plain-list">
@@ -160,6 +164,8 @@ export function BrainTerritoriesPage() {
             The MCA is the commonest site of stroke (<Cite doi={DOI.chandra}>Chandra et al.</Cite>; <Cite doi={DOI.liu}>Liu et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.mcaInfarct]} />
+        <p className="source-note">No open-access image of an infarct of the superior or inferior division of the MCA alone was found.</p>
 
         <h4 className="fm-subhead" id="pca">Posterior cerebral artery</h4>
         <ul className="plain-list">
@@ -172,6 +178,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.chandra}>Chandra et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.pcaInfarct]} />
 
         <h4 className="fm-subhead" id="acha">Anterior choroidal artery</h4>
         <ul className="plain-list">
@@ -189,6 +196,7 @@ export function BrainTerritoriesPage() {
             triad is hemiparesis, hemianaesthesia and hemianopia (<Cite doi={DOI.yu}>Yu et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.achaInfarct]} />
 
         <h4 className="fm-subhead" id="perforators">Deep perforators</h4>
         <ul className="plain-list">
@@ -218,6 +226,8 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.rauch}>Rauch et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.thalamicInfarct]} />
+        <p className="source-note">No open-access image of an infarct of the recurrent artery of Heubner was found.</p>
       </section>
 
       <section className="info-card" id="brainstem">
@@ -257,6 +267,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.zedde2022}>Zedde et al. 2022</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.lateralMedullary]} />
 
         <h4 className="fm-subhead">Pons</h4>
         <ul className="plain-list">
@@ -282,6 +293,7 @@ export function BrainTerritoriesPage() {
             2022</Cite>). Proximal basilar occlusion takes the lower pons and gives the locked-in syndrome (<Cite doi={DOI.nouh}>Nouh et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.paramedianPontine]} />
 
         <h4 className="fm-subhead">Midbrain</h4>
         <ul className="plain-list">
@@ -324,6 +336,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.nouh}>Nouh et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.picaInfarct, brainTerritoriesScans.scaInfarct]} />
       </section>
 
       <section className="info-card" id="border-zones">
@@ -350,6 +363,7 @@ export function BrainTerritoriesPage() {
             al.</Cite>); bilateral parieto-occipital (MCA–PCA) ones, Balint's syndrome (<Cite doi={DOI.nouh}>Nouh et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.corticalBorderZone, brainTerritoriesScans.internalBorderZone]} />
 
         <h4 className="fm-subhead">Variants</h4>
         <ul className="plain-list">
@@ -376,6 +390,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.deSousa}>de Sousa et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.percheron]} />
 
         <h4 className="fm-subhead">Lacunes</h4>
         <ul className="plain-list">
@@ -392,6 +407,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.dogariu}>Dogariu et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.lacune]} />
       </section>
 
       <section className="info-card" id="venous">
@@ -447,6 +463,7 @@ export function BrainTerritoriesPage() {
             haemorrhage (<Cite doi={DOI.li}>Li et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.parasagittalVenousInfarct, brainTerritoriesScans.temporalVenousInfarct]} />
 
         <h4 className="fm-subhead" id="venous-deep">Deep veins</h4>
         <ul className="plain-list">
@@ -465,6 +482,7 @@ export function BrainTerritoriesPage() {
             infarct does not keep to one thalamic arterial zone (<Cite doi={DOI.lazzaro}>Lazzaro et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.deepVenousThalami]} />
 
         <h4 className="fm-subhead" id="venous-posterior-fossa">Posterior fossa veins</h4>
         <ul className="plain-list">
@@ -528,6 +546,7 @@ export function BrainTerritoriesPage() {
             <strong>DWI</strong>: the clot can be bright, even without a parenchymal lesion (<Cite doi={DOI.oliveira}>Oliveira et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.denseSinus, brainTerritoriesScans.cordSign, brainTerritoriesScans.emptyDelta, brainTerritoriesScans.venographyDefect, brainTerritoriesScans.swiBlooming]} />
 
         <h4 className="fm-subhead">Indirect signs</h4>
         <ul className="plain-list">
@@ -580,6 +599,8 @@ export function BrainTerritoriesPage() {
             Knowing the normal venous anatomy and its variants is what avoids these pitfalls (<Cite doi={DOI.leach}>Leach et al.</Cite>).
           </li>
         </ul>
+        <ScanFigures images={[brainTerritoriesScans.arachnoidGranulation, brainTerritoriesScans.hypoplasticTransverse, brainTerritoriesScans.flowGap]} />
+        <p className="source-note">No clear open-access image of a dense sinus from a high haematocrit was found.</p>
       </section>
 
       <LessonReferences references={references} />

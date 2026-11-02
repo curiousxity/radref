@@ -677,3 +677,48 @@ PMC8762863 (about 200 px; the full-size copy was not reachable).
 Still without an image: the knee's horizontal-beam lateral with a lipohaemarthrosis, the reverse
 Segond and tibial spine or PCL avulsions; the radiocapitellar view; radial inclination drawn on a PA;
 the ankle effusion (teardrop) sign; Torg types; the neonatal UAC's loop through the pelvis.
+
+## Brain territories (2026-11-02)
+
+CT and MRI for the brain vascular territories page (`src/data/scans/brainTerritories.ts`), made as
+above (CC BY with a stated version, one panel per file, greyscale, under 40 KB, in
+`public/scans/brain-territories/`). Each image sits under the section of
+`src/pages/BrainTerritoriesPage.tsx` that teaches its finding, and its caption keeps to the source
+figure's caption. The figure leads came from the appendix of
+`2026-11-02-brain-territories-sources.md`; the gaps there were searched again (Europe PMC, including
+figure captions with `FIG:`). Searches, crop boxes and rejected candidates are in the scratchpad
+`bt-scans/notes.md`.
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| acaInfarct | Sano et al. Cureus 2025;17:e80688 (PMC12000702) | Fig. 2A | "CC-BY 4.0" / none | right ACA territory; the series is of ACA dissection; red arrow kept via the red channel |
+| mcaInfarct | John et al. J Med Case Rep 2008;2:148 (PMC2396650) | Fig. 2 | CC BY (by/2.0 link) / by/2.0 | CT 72 h after admission; burned-in patient and scanner text cropped off |
+| pcaInfarct, paramedianPontine, picaInfarct | Nouh et al. Front Neurol 2014;5:30 (PMC3985033) | Figs. 3C, 4A, 4D | "CC BY", PMC licence link by/3.0 / none | the PICA caption names the cut-off PICA only as panel C of the same figure |
+| achaInfarct | Tsika et al. Neurol Int 2024;16:289 (PMC10961810) | Fig. 1b | CC BY (by/4.0) / by/4.0 | left AChA territory, DWI |
+| thalamicInfarct | Renard et al. Behav Neurol 2014;2014:154631 (PMC4101959) | Fig. 2a | CC BY (by/3.0) / by/3.0 | thalamogeniculate territory (arrow) with a PCA cortical infarct (arrowhead) |
+| deepVenousThalami | Renard 2014 | Fig. 7a | as above | bilateral thalamic oedema, deep venous thrombosis |
+| lateralMedullary | Xin et al. BMC Neurol 2020;20:211 (PMC7249651) | Fig. 1b | CC BY 4.0 / by/4.0 | red arrow kept via the red channel; burned-in text of panel A cropped off |
+| scaInfarct | Gollwitzer et al. J Clin Med 2025;14:8229 (PMC12653350) | Fig. 1A | CC BY (by/4.0) / by/4.0 | SCA occlusion shown in panel B |
+| corticalBorderZone, internalBorderZone | Dogariu et al. J Med Life 2023;16:842-850 (PMC10478671) | Figs. 2b, 3 | CC BY 3.0 / by/4.0 | article and Crossref differ; the article's 3.0 is used; Fig. 2b is small (217 px) |
+| percheron | Kichloo et al. J Investig Med High Impact Case Rep 2019;7 (PMC6689919) | Fig. 2 | CC BY 4.0 / TDM only | |
+| lacune | Furtner and Prayer. Wien Med Wochenschr 2021;171:274-281 (PMC8397686) | Fig. 5b | CC BY 4.0 / by/4.0 | coronal T2; the axial FLAIR (5a) is too dark to show it |
+| parasagittalVenousInfarct | Li et al. Front Radiol 2021;1:687045 (PMC10365275) | Fig. 6A | "CC BY" / by/4.0 | small in the source (140 px); red arrow kept via the red channel |
+| temporalVenousInfarct, cordSign, emptyDelta, venographyDefect | Oliveira et al. Radiol Bras 2022;55:54-61 (PMC8864687) | Figs. 4B, 2, 5A, 9B | CC BY (by/4.0) / by/4.0 | orange arrows kept via the red channel |
+| denseSinus, swiBlooming, hypoplasticTransverse | Sadik et al. Life 2022;12:1215 (PMC9410175) | Figs. 15, 9b, 22b | CC BY (by/4.0) / by/4.0 | no arrows in these figures |
+| arachnoidGranulation | Delgado et al. Insights Imaging 2026;17:230 (PMC13588991) | Fig. 5a | CC BY 4.0 / by/4.0 | figures are WebP in the supplementary files |
+| flowGap | Zedde and Pascarella. Neurol Int 2025;17:9 (PMC11767902) | Fig. 9a | CC BY (by/4.0) / by/4.0 | contrast-enhanced venography (9b) did not confirm the gaps |
+
+Not used: Canedo-Antelo 2019 (RadioGraphics, not CC BY); Nouh Fig. 3A (lateral medullary FLAIR, no
+arrow and the lesion not visible at the source's size); Yilmaz 2016, Heubner infarct (PMC4884235;
+PMC gives by/2.5 but Crossref by-nc/4.0); Markus and de Leeuw 2022, Fig. 1b lacune (PMC9806465; captioned
+"Copyright Hugh Markus"); Stringer 2020 review, Fig. 3 (PMC7803876; the caption's left-to-right order
+does not match the panels); Pereira 2025 Wallenberg case (PMC12634019; its "DWI" panel is a T2
+image); Kaplanoğlu 2023 arachnoid granulations (Eurasian J Med, CC BY-NC); Abdrabou 2025 dense torcula
+from a high haematocrit (PMC12125052, Fig. 3A; 230 px, the density and the ROI label not readable);
+Sadik Fig. 23 (arachnoid granulation not visible without an arrow); Delgado Fig. 1a (zoomed views,
+little anatomy; Sadik Fig. 15 used instead); Takada 2025 and Yanusha 2025 MCA infarcts (faint DWI;
+photographed film with burned-in text).
+
+Still without an image: an infarct of the MCA superior or inferior division alone, a Heubner
+infarct, and a dense sinus from a high haematocrit (the page says so in each section). The
+high-riding jugular bulb is not on the page, so none was sought.
