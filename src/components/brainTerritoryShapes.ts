@@ -165,19 +165,20 @@ const basalGanglia = supratentorial('basal-ganglia', 'Basal ganglia and thalamus
   ],
   deep: {
     arterial: [
-      t('bg-a-heubner', 'heubner', 'Caudate head and anterior limb of the internal capsule', 'Recurrent artery of Heubner (ACA)', blob(170, 178, 13, 21, -15)),
-      t('bg-a-ls', 'lenticulostriate', 'Lentiform nucleus and upper internal capsule', 'Lenticulostriate arteries (MCA)', blob(143, 228, 17, 36, 12)),
-      t('bg-a-acha', 'acha', 'Posterior limb of the internal capsule', 'Anterior choroidal artery (ICA)', blob(163, 255, 5, 24, 25)),
-      t('bg-a-thal', 'thalamic', 'Thalamus', 'Thalamic branches of the PCA and posterior communicating artery', blob(181, 266, 13, 28, 15)),
+      t('bg-a-heubner', 'heubner', 'Caudate head and anterior limb of the internal capsule', 'Recurrent artery of Heubner (ACA)', blob(168, 178, 12, 21, -15)),
+      t('bg-a-ls', 'lenticulostriate', 'Lentiform nucleus and upper internal capsule', 'Lenticulostriate arteries (MCA)', blob(141, 228, 17, 36, 12)),
+      t('bg-a-acha', 'acha', 'Posterior limb of the internal capsule', 'Anterior choroidal artery (ICA)', blob(158, 256, 4.5, 24, 25)),
+      t('bg-a-thal', 'thalamic', 'Thalamus', 'Thalamic branches of the PCA and posterior communicating artery', blob(175, 266, 12, 27, 15)),
     ],
     venous: [
-      t('bg-v-deep-caudate', 'deep', 'Caudate head', 'Thalamostriate vein to the internal cerebral vein', blob(170, 178, 13, 21, -15)),
-      t('bg-v-deep-lentiform', 'deep', 'Lentiform nucleus', 'Deep veins to the basal vein of Rosenthal and internal cerebral vein', blob(143, 228, 17, 36, 12)),
-      t('bg-v-deep-thal', 'deep', 'Thalamus', 'Internal cerebral vein to the vein of Galen and straight sinus', blob(181, 266, 13, 28, 15)),
+      t('bg-v-deep-caudate', 'deep', 'Caudate head', 'Thalamostriate vein to the internal cerebral vein', blob(168, 178, 12, 21, -15)),
+      t('bg-v-deep-lentiform', 'deep', 'Lentiform nucleus', 'Deep veins to the basal vein of Rosenthal and internal cerebral vein', blob(141, 228, 17, 36, 12)),
+      t('bg-v-deep-thal', 'deep', 'Thalamus', 'Internal cerebral vein to the vein of Galen and straight sinus', blob(175, 266, 12, 27, 15)),
     ],
   },
-  // Frontal horn, third ventricle (it meets its mirror image at the midline), atrium.
-  ventricles: [blob(187, 175, 7, 20, -15), blob(197, 262, 3, 26, 0), blob(182, 335, 7, 16, 25)],
+  // Frontal horn, the right half of the third ventricle (against the thalamus), atrium; each stays
+  // inside the hemisphere outline.
+  ventricles: [blob(183, 176, 6, 19, -15), blob(189, 264, 2.2, 22, 0), blob(176, 335, 6, 15, 25)],
   borderZones: [
     t('bg-z-am', 'borderZone', 'Cortical border zone, ACA and MCA', 'Between the ACA and MCA cortical branches', sector(BG, BG_FROM.arterial, 350, 360, 0.45, 1)),
     t('bg-z-mp', 'borderZone', 'Cortical border zone, MCA and PCA', 'Between the MCA and PCA cortical branches', sector(BG, BG_FROM.arterial, 198, 212, 0.45, 1)),
@@ -213,11 +214,12 @@ const medulla: Level = {
       ['petrosal', 'Anterior cerebellum', 'Petrosal group to the superior petrosal sinus', 290, 15],
       ['tentorial', 'Inferior and posterior cerebellum', 'Tentorial group to the transverse sinus and torcular', 15, 290],
     ], 'med-cb'),
+    // Large anteromedial, small anterolateral, large lateral and small dorsal territories (T-C91).
     midline(MED, { x: 200, y: 192 }, [
-      ['vertebral', 'Anteromedial medulla', 'Anterior spinal artery (lower medulla) and paramedian branches of the vertebral artery (upper medulla)', 340, 360],
-      ['vertebral', 'Anterolateral medulla', 'Anterior spinal and vertebral arteries; the anterior spinal and posterior inferior cerebellar arteries lower down', 300, 340],
-      ['pica', 'Lateral medulla', 'Vertebral artery mainly, and the posterior inferior cerebellar artery; the basilar and anterior inferior cerebellar arteries higher up', 230, 300],
-      ['pica', 'Dorsal medulla', 'Posterior inferior cerebellar and posterior spinal arteries', 180, 230],
+      ['vertebral', 'Anteromedial medulla', 'Anterior spinal artery (lower medulla) and paramedian branches of the vertebral artery (upper medulla)', 320, 360],
+      ['vertebral', 'Anterolateral medulla', 'Anterior spinal and vertebral arteries; the anterior spinal and posterior inferior cerebellar arteries lower down', 300, 320],
+      ['vertebral', 'Lateral medulla', 'Circumferential branches of the vertebral artery mainly, with the posterior inferior cerebellar artery; the basilar and anterior inferior cerebellar arteries higher up', 220, 300],
+      ['pica', 'Dorsal medulla', 'Posterior inferior cerebellar and posterior spinal arteries', 180, 220],
     ], [
       ['petrosal', 'Medulla', 'Anterior medullary veins to the petrosal group', 180, 360],
     ], 'med-bs', { cx: 200, cy: 192, a: 40, b: 36, n: 2.2 }),
@@ -240,10 +242,12 @@ const pons: Level = {
     ], [
       ['labbe', 'Lateral and inferior temporal lobe', 'Vein of Labbé to the transverse sinus', 0, 360],
     ], 'pons-temp'),
+    // Both modes split the cerebellum at the same angles where they name the same region.
     side(PONS_CB, { x: 140, y: 286 }, [
       ['aica', 'Middle cerebellar peduncle and anterior cerebellum', 'Anterior inferior cerebellar artery', 300, 60],
-      ['pica', 'Inferior vermis and suboccipital (posterior inferior) surface of the cerebellum', 'Posterior inferior cerebellar artery', 60, 190],
-      ['sca', 'Superior cerebellar hemisphere', 'Superior cerebellar artery', 190, 300],
+      ['sca', 'Superior vermis and medial cerebellum', 'Superior cerebellar artery', 60, 150],
+      ['pica', 'Suboccipital (posterior inferior) surface of the cerebellum', 'Posterior inferior cerebellar artery', 150, 240],
+      ['sca', 'Superior cerebellar hemisphere', 'Superior cerebellar artery', 240, 300],
     ], [
       ['petrosal', 'Anterior cerebellum', 'Petrosal group to the superior petrosal sinus', 300, 60],
       ['galenic', 'Superior vermis and medial cerebellum', 'Galenic group to the vein of Galen', 60, 150],
@@ -286,8 +290,8 @@ const midbrain: Level = {
       venous: [t('mid-v-deep-uncus', 'deep', 'Uncus', 'Uncal vein to the basal vein of Rosenthal', blob(140, 226, 10, 13, 12))],
     },
     midline(MID, { x: 200, y: 240 }, [
-      ['pca', 'Anteromedial midbrain', 'Paramedian perforators of the basilar tip, the P1 segment of the PCA and the superior cerebellar artery', 330, 360],
-      ['acha', 'Anterolateral midbrain', 'Collicular, anterior choroidal and posterior medial choroidal arteries', 280, 330],
+      ['basilar', 'Anteromedial midbrain', 'Paramedian perforators of the basilar tip, the P1 segment of the PCA and the superior cerebellar artery', 330, 360],
+      ['pca', 'Anterolateral midbrain', 'Collicular, anterior choroidal and posterior medial choroidal arteries', 280, 330],
       ['pca', 'Lateral midbrain', 'Collicular and posterior medial choroidal arteries and branches of the PCA', 225, 280],
       ['pca', 'Dorsal midbrain', 'Collicular and posterior medial choroidal arteries', 180, 225],
     ], [

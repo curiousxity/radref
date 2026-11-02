@@ -39,7 +39,29 @@ describe('brain territory geometry', () => {
     expect(d.endsWith('Z')).toBe(true)
     expect(d).not.toMatch(/NaN|Infinity/)
   })
+
+  // One closed loop would need a seam from the outer edge to the inner, drawn as a boundary line.
+  test('a full ring is two loops, the outer and the inner, with no seam', () => {
+    const d = sector(oval, { x: 100, y: 100 }, 0, 360, 0.45, 1)
+    expect(d.match(/M/g)).toHaveLength(2)
+    expect(d.match(/Z/g)).toHaveLength(2)
+  })
 })
+
+// The vertices of a path built by the geometry module (M x y L x y ... Z).
+function vertices(d: string) {
+  const n = d.match(/-?\d+(\.\d+)?/g)!.map(Number)
+  return Array.from({ length: n.length / 2 }, (_, i) => ({ x: n[2 * i], y: n[2 * i + 1] }))
+}
+
+function insidePolygon(p: { x: number; y: number }, polygon: { x: number; y: number }[]) {
+  let inside = false
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const [a, b] = [polygon[i], polygon[j]]
+    if (a.y > p.y !== b.y > p.y && p.x < ((b.x - a.x) * (p.y - a.y)) / (b.y - a.y) + a.x) inside = !inside
+  }
+  return inside
+}
 
 describe('brain territory data', () => {
   test('six axial levels, each with arterial and venous territories', () => {
@@ -63,6 +85,17 @@ describe('brain territory data', () => {
         }
       }
       for (const zone of level.borderZones) expect(zone.family, zone.id).toBe('borderZone')
+    }
+  })
+
+  // A nucleus or ventricle crossing the edge would open onto the medial surface.
+  test('the basal ganglia nuclei and ventricles lie inside the hemisphere', () => {
+    const level = LEVELS.find((l) => l.id === 'basal-ganglia')!
+    const hemisphere = vertices(level.parts[0].outline)
+    const deep = level.parts.slice(1).flatMap((p) => [...p.arterial, ...p.venous]).map((t) => [t.id, t.d])
+    const ventricles = level.ventricles.map((d, i) => [`ventricle ${i}`, d])
+    for (const [id, d] of [...deep, ...ventricles]) {
+      for (const p of vertices(d)) expect(insidePolygon(p, hemisphere), `${id} at ${p.x} ${p.y}`).toBe(true)
     }
   })
 

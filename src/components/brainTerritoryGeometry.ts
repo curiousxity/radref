@@ -46,16 +46,17 @@ function path(points: Point[]) {
 /**
  * The part of the oval clockwise from `start` to `end`, between `inner` and `outer` fractions of
  * the reach. With `inner` 0 the sector closes at the origin; a full turn with `inner` above 0 is a
- * ring, drawn as one keyhole outline.
+ * ring, drawn as the outer loop and then the inner loop the other way round, so the nonzero fill
+ * rule leaves a hole with no seam.
  */
 export function sector(o: Oval, from: Point, start: number, end: number, inner = 0, outer = 1): string {
   const span = (((end - start) % 360) + 360) % 360 || 360
   const steps = Math.max(2, Math.ceil(span / 3))
   const angles = Array.from({ length: steps + 1 }, (_, i) => start + (span * i) / steps)
   const points = angles.map((deg) => at(o, from, deg, outer))
-  if (inner > 0) points.push(...angles.reverse().map((deg) => at(o, from, deg, inner)))
-  else if (span < 360) points.push(from)
-  return path(points)
+  if (inner === 0) return path(span < 360 ? [...points, from] : points)
+  const back = angles.reverse().map((deg) => at(o, from, deg, inner))
+  return span < 360 ? path([...points, ...back]) : `${path(points)} ${path(back)}`
 }
 
 /** The whole oval's edge. */

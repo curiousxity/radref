@@ -317,6 +317,18 @@ T-C67) and 3 not stated (T-C12, T-C38, T-C158). Of the 70 map rows (T-C1 to T-C7
   sulcus. The drawing keeps the basilar colour (two sources); the page text gives both.
 - **Lateral pons** (T-C59). Nouh: AICA. Zedde: lateral pontine perforators from the basilar, AICA or
   SCA, the AICA mainly in the lower pons. The drawing uses the AICA; the caption names all three.
+- **Lateral medulla** (T-C68, T-C63, T-C99). Nouh, Table 1 gives the lateral medulla to the PICA
+  ("PICA | Inferior posterior cerebellar hemisphere, inferior vermis, lateral medulla"). Zedde: "The
+  lateral medulla oblongata is mostly supplied by the circumferentially penetrating branches from the
+  VA, while the PICA supplies the remaining lateral and posterior portion of the medulla oblongata."
+  The map follows Zedde: the lateral medulla takes the vertebral colour, and its caption names the
+  PICA (and, higher up, the basilar and AICA).
+- **Anteromedial and anterolateral midbrain colours** (T-C43, T-C103, T-C44). The anteromedial
+  (paramedian) territory takes the basilar colour: Bogousslavsky gives "the paramedian territory
+  supplied by the basilar artery", and Zedde lists the basilar first among its perforators ("BA, SCA
+  and P1 PCA"). The anterolateral territory takes the PCA colour: Rauch's anterolateral group names
+  the collicular artery first ("CA, ACHA, posterior medial choroidal artery [PMCA]"), and the
+  collicular and posterior medial choroidal arteries are PCA branches. The caption names all three.
 - **How much of the internal capsule the AChA supplies** (T-C27, T-C83). Chandra: "the posterior
   two-thirds of the internal capsule". Morales-Roccuzzo: "genu of the internal capsule, the
   inferior half of posterior limb of IC". Yu: "the posterior limb of the internal capsule". The
