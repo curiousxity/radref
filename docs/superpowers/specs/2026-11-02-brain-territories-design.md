@@ -73,7 +73,7 @@ territory up in, not a report form, so it is built like the calvarial lesions pa
 - **Colour**: by parent vessel, the same at every level (the MCA is one colour throughout).
   Perforator territories have their own colours. Brainstem sub-territories take their source
   artery's colour, and selecting one names it exactly (e.g. "Anteromedial pons: basilar paramedian
-  branches"). About ten `--color-territory-*` tokens for arterial and up to six for venous, in both
+  branches"). About ten `--color-territory-*` tokens for arterial and up to seven for venous (superficial: superior sagittal sinus, superficial middle cerebral vein, vein of Labbé; deep; posterior fossa: Rhoton's galenic, petrosal and tentorial groups), in both
   palettes in `src/styles.css`, no literals (`src/styles.test.ts`); each keeps at least 3:1 against
   its neighbours' boundary lines and the outline.
 - **Selection**: the legend under the figure is a row of buttons and is also the selector.
