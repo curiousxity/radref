@@ -418,6 +418,30 @@ input:hover, select:hover, textarea:hover { border-color: var(--color-text-muted
 .ear-anatomy .ear-mass { fill: var(--color-warn-soft); stroke: var(--color-warn); stroke-width: 3; }
 .ear-anatomy .ear-speck { fill: var(--color-ear-bone-edge); }
 .ear-anatomy .ear-gap { fill: var(--color-figure-bg); stroke: var(--color-ear-bone-edge); stroke-width: 2; }
+
+/* Vascular territories map (BrainTerritoryMap). Fills come from --color-territory-* tokens. */
+.bt-map { display: grid; gap: 0.75rem; }
+.bt-controls { display: grid; gap: 0.25rem; }
+.bt-controls .choice-group--stack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.bt-zones-toggle { justify-content: center; margin-top: 0.5rem; }
+.bt-zones-toggle[aria-pressed='true'] { border-color: var(--color-primary); background: var(--color-primary-soft); box-shadow: inset 0 0 0 1px var(--color-primary); }
+.bt-svg { display: block; width: 100%; max-width: 32rem; height: auto; margin: 0 auto; background: var(--color-figure-bg); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); }
+.bt-svg .bt-t { stroke: var(--color-figure-bg); stroke-width: 1.5; stroke-linejoin: round; cursor: pointer; transition: opacity 120ms; }
+.bt-svg .bt-dim { opacity: 0.28; }
+.bt-svg .bt-t.bt-on { stroke: var(--color-text); stroke-width: 2; }
+.bt-svg .bt-zone { fill: url(#bt-zone-hatch); stroke: var(--color-territory-border-zone); stroke-width: 1.5; stroke-dasharray: 4 3; cursor: pointer; }
+.bt-svg .bt-hatch { stroke: var(--color-territory-border-zone); stroke-width: 1.6; }
+.bt-svg .bt-stripe { stroke: var(--color-figure-bg); stroke-width: 2; }
+.bt-svg .bt-csf { fill: var(--color-figure-bg); }
+.bt-svg .bt-outline { fill: none; stroke: var(--color-text-muted); stroke-width: 1.5; pointer-events: none; }
+.bt-svg .bt-side { font-family: var(--font-mono); font-size: 14px; font-weight: 600; fill: var(--color-text-muted); }
+.bt-svg .bt-side-end { text-anchor: end; }
+.bt-caption { min-height: 2.8em; margin: 0; font-size: 0.92rem; line-height: 1.45; }
+.bt-caption a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.bt-legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+.bt-key { display: flex; align-items: center; gap: 0.6rem; width: 100%; min-height: 44px; padding: 0.4rem 0.7rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font: inherit; font-size: 0.86rem; text-align: left; cursor: pointer; }
+.bt-key[aria-pressed='true'] { border-color: var(--color-primary); box-shadow: inset 0 0 0 1px var(--color-primary); }
+.bt-swatch { flex: none; width: 1.1rem; height: 1.1rem; border-radius: 3px; }
 .fm-context { fill: var(--color-figure-context); stroke: var(--color-text-muted); stroke-width: 1.5; }
 .fm-bone { fill: var(--color-figure-bone); }
 .fm-outline { fill: none; stroke: var(--color-text); stroke-width: 2; }
