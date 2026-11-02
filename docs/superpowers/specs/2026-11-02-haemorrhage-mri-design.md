@@ -46,7 +46,8 @@ built on `LessonPage` like the brain territories and calvarial lesions pages, no
    only if a read source states them. Columns: finding, appearance, what it points to.
 5. Source note and **References** (the shared list from `LessonPage`, inline `<Cite doi="...">`).
 
-Each table has a `<caption>` and `<th scope>` headers and sits in the existing `.table-wrap` /
+Each table is named by its section heading (`aria-labelledby`; the site's tables have no caption
+style), has `<th scope>` headers, and sits in the existing `.table-wrap` /
 `.ref-table` pattern (horizontal scroll on a phone, as on the Fleischner and calvarium pages). Each
 table section has an id so the scan rows and links can anchor to it.
 
