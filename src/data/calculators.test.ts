@@ -159,7 +159,7 @@ describe('registry', () => {
   // The calvarial lesions, hearing loss and brain territories pages are teaching pages, not
   // calculators: they are studies, and the old addresses of the first two still lead to them.
   test('reference pages are studies and their old paths redirect', () => {
-    for (const path of ['/studies/calvarium', '/studies/hearing-loss-ct', '/studies/brain-territories']) {
+    for (const path of ['/studies/calvarium', '/studies/hearing-loss-ct', '/studies/brain-territories', '/studies/haemorrhage-mri']) {
       expect(calculators.find((item) => item.path === path)?.kind, path).toBe('study')
     }
     expect(movedPaths['/calvarium']).toBe('/studies/calvarium')
