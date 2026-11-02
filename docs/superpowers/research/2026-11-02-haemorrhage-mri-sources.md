@@ -102,32 +102,32 @@ the page.
 | H-C3 | Hyperacute · T1 | Like brain or slightly dark | H-R4, H-R3 | read: full text | Penckofer, Table 1: "Hyperacute (<24 h) \| Hypointense/isointense". Weerink: "Clot formation leads to decreased “free” water content, which reduces T1 and T2 relaxation times, resulting in an isointense T1 signal." |
 | H-C4 | Hyperacute · T2 | Bright | H-R3 | read: full text | Weerink: "The T2 signal is slightly lowered compared to the “free water” signal of the CSF, but remains hyperintense compared to the brain parenchyma." Table 2: T2WI "High". |
 | H-C5 | Hyperacute · SWI/GRE | Centre intermediate to bright, dark rim | H-R3, H-R5 | read: full text | Weerink: "The diamagnetic properties of oxyhemoglobin and subsequently the lack of paramagnetic effects lead to an intermediate to high signal on SWI"; deoxyhaemoglobin at the periphery gives "the low signal rim on SWI". Kang (conventional GRE): "mixed iso- or hyperintensity at the center of the hemorrhage and a more noticeable hypointense rim at its periphery". Penckofer disagrees (see below). |
-| H-C6 | Hyperacute · CT | Under 60 HU, before the clot forms | H-R6 | read: full text | Popescu (CT): "In the hyperacute phase, before blood has had time to form a clot, the density of the hematoma will be under 60 Hounsfield units (HU); it is also a reflection of the patient’s hematocrit." (Head-trauma review: the sentence is about haematomas in general, not intracerebral alone.) |
+| H-C6 | Hyperacute · CT | Bright once clotted; under 60 HU before the clot forms | H-R6 | read: full text | Popescu (CT): "In the hyperacute phase, before blood has had time to form a clot, the density of the hematoma will be under 60 Hounsfield units (HU); it is also a reflection of the patient’s hematocrit. In the acute phase of the blood, the clot is already established, and the density will have increased, measuring between 60–90 HU." On intracerebral haemorrhage: "On NECT they appear as hyperdense collections." Popescu's CT phases are defined by clot state, not by Weerink's clock windows (see "Where the sources disagree"); the cell therefore does not say a haematoma under 24 hours is under 60 HU. |
 | H-C7 | Acute · Time | 1–3 days | H-R3, H-R4 | read: full text | Weerink: "The acute stage is defined as 1–3 days after onset of the ICH." Penckofer: "acute (1–3 days, intracellular deoxyhemoglobin". |
 | H-C8 | Acute · Blood product | Deoxyhaemoglobin, in red cells | H-R3, H-R1 | read: full text | Weerink, Table 2: "Acute(1–3 days) \| Deoxyhemoglobin". Bradley (abstract): "acute (intracellular deoxyhemoglobin, long T1, short T2)". |
 | H-C9 | Acute · T1 | Like brain or slightly dark | H-R4, H-R3 | read: full text | Penckofer, Table 1: "Acute (1–3 days) \| Isointense/slightly hypointense". Weerink: "The T1 signal remains isointense due to the decrease in “free” water content in the ICH similar to the hyperacute stage." |
 | H-C10 | Acute · T2 | Dark | H-R3, H-R4 | read: full text | Weerink: "The T2 signal is strongly lowered due to the strong paramagnetic effects of deoxyhemoglobin." Penckofer, Table 1: "Hypointense with hyperintense rim". |
 | H-C11 | Acute · SWI/GRE | Dark | H-R3, H-R4 | read: full text | Weerink: the change to deoxyhaemoglobin "eventually reaches the center of the hematoma, which results in a low signal on SWI images in the entire hematoma". Penckofer, Table 1, GRE: "Marked hypointensity". |
-| H-C12 | Acute · CT | Bright (60–90 HU) | H-R6 | read: full text | Popescu (CT): "In the acute phase of the blood, the clot is already established, and the density will have increased, measuring between 60–90 HU. ... The blood at this time is hyperdense enough to be “seen”." |
+| H-C12 | Acute · CT | Bright (60–90 HU) | H-R6 | read: full text | Popescu (CT): "In the acute phase of the blood, the clot is already established, and the density will have increased, measuring between 60–90 HU. This is the time when we get most of our patients to the CT scan. The blood at this time is hyperdense enough to be “seen”." (Popescu's acute phase is defined by an established clot, not by 1–3 days; see "Where the sources disagree".) |
 | H-C13 | Early subacute · Time | 3–7 days | H-R3, H-R4 | read: full text | Weerink: "In the early subacute stage, 3–7 days after onset of the ICH, methemoglobin forms". Penckofer: "early subacute (3–7 days, intracellular methemoglobin". |
 | H-C14 | Early subacute · Blood product | Methaemoglobin, in red cells | H-R3, H-R1 | read: full text | Weerink, Table 2: "Early subacute(3–7 days) \| Intracellular methemoglobin". Bradley (abstract): "early subacute (intracellular methemoglobin, short T1, short T2)". |
 | H-C15 | Early subacute · T1 | Bright | H-R3, H-R4 | read: full text | Weerink: "This causes shortening of the T1 relaxation time resulting in a high T1 signal." Penckofer, Table 1: "Hyperintense". |
 | H-C16 | Early subacute · T2 | Dark | H-R3, H-R4 | read: full text | Weerink: "The T2 signal remains low due the paramagnetic effects of methemoglobin." Penckofer, Table 1: "Hypointense". |
 | H-C17 | Early subacute · SWI/GRE | Dark | H-R3, H-R4 | read: full text | Weerink: "The confinement of the methemoglobin to the intracellular compartment of the red blood cell leads to a magnetic gradient which disturbs the local magnetic field causing a low signal on SWI and T2 images". Penckofer, GRE: "Hypointense". |
-| H-C18 | Early subacute · CT | Fading to like brain | H-R6 | read: full text | Popescu (CT): "In the subacute phase, days after the trauma, the clot starts to become less dense, and the density is almost the same as that of the cortex. This is the moment when the hematoma becomes isodense to the brain parenchyma and can be easily overlooked." The source has one subacute phase; the same cell serves both subacute rows (H-C24). |
+| H-C18 | Early subacute · CT | Bright, fading slowly as the dense part shrinks | H-R7, H-R6 | read: abstract | Dolinskas (abstract, intracerebral haematoma): "Intracerebral hematomas decrease in density by an average of 0.7 EMI units per day. The dense portion of the hematoma decreases in size by an average of 0.65 mm per day." Popescu (CT) gives the starting point, an established clot "measuring between 60–90 HU" that is "hyperdense enough to be “seen”". Together: still bright at 3–7 days, losing density slowly. |
 | H-C19 | Late subacute · Time | 7–28 days | H-R3, H-R4 | read: full text | Weerink: "The late subacute stage is defined as 7–28 days after the initial bleeding." Penckofer: "late subacute (7–28 days, extracellular methemoglobin". |
 | H-C20 | Late subacute · Blood product | Methaemoglobin, outside red cells | H-R3, H-R1 | read: full text | Weerink, Table 2: "Late subacute(7–28 days) \| Extracellular methemoglobin"; "Lysis of the clot and red blood cells occurs in the late subacute stage. This causes the spread of methemoglobin to the extracellular space." Bradley (abstract): "late subacute (extracellular methemoglobin, short T1, long T2)". |
 | H-C21 | Late subacute · T1 | Bright | H-R3, H-R4 | read: full text | Weerink: "The T1 signal remains high due to the persistent presence of inner sphere relaxation." Penckofer, Table 1: "Hyperintense". |
 | H-C22 | Late subacute · T2 | Bright | H-R3, H-R4 | read: full text | Weerink: "The T2 signal increases due to the loss of compartmentalization of the methemoglobin and the increased water contents of the lysed red blood cells." Table 2: "High". Penckofer, Table 1: "Hyperintense". |
 | H-C23 | Late subacute · SWI/GRE | Bright centre, dark rim | H-R3, H-R5 | read: full text | Weerink: "This is known as the T1 shine-through effect, which leads to a high signal on SWI centrally in the ICH"; haemosiderin and ferritin at the periphery: "This leads to a low signal rim." Kang (GRE): "gradient-echo images demonstrated heterogeneous hyperintensity". Penckofer disagrees (see below). |
-| H-C24 | Late subacute · CT | Fading to like brain | H-R6 | read: full text | As H-C18. |
+| H-C24 | Late subacute · CT | Fading to like brain | H-R6, H-R7 | read: full text | Popescu (CT): "In the subacute phase, days after the trauma, the clot starts to become less dense, and the density is almost the same as that of the cortex. This is the moment when the hematoma becomes isodense to the brain parenchyma and can be easily overlooked." Dolinskas (abstract): density falls "by an average of 0.7 EMI units per day". Popescu gives no day count for its subacute phase; the cell is placed in the 7–28 day row because the fall is slow (H-C18). |
 | H-C25 | Chronic · Time | Over 1 month | H-R3, H-R4 | read: full text | Weerink: "The chronic stage begins approximately one month after the ICH occurred." Penckofer: "chronic (>1-month, extracellular ferritin and hemosiderin". |
 | H-C26 | Chronic · Blood product | Haemosiderin and ferritin | H-R1, H-R4, H-R3 | read: full text | Bradley (abstract): "chronic (ferritin and hemosiderin, short T2)". Penckofer: "extracellular ferritin and hemosiderin". Weerink, Table 2: "Hemosiderin". |
 | H-C27 | Chronic · T1 | Dark | H-R3, H-R4, H-R5 | read: full text | Weerink: "the presence of water leads to a high signal on T2WI and a low signal on T1WI, although in the latter the signal can be iso- or hyperintense due to residual methemoglobin or iron molecules in the solution." Penckofer, Table 1: "Hypointense". Kang, Fig 6B: "T1-weighted image reveals a hypointense hematoma". |
 | H-C28 | Chronic · T2 | Bright centre, dark rim | H-R3, H-R5 | read: full text | Weerink, Table 2: T2WI "High center, low rim". Kang: "On T2-weighted and gradient-echo images, a complete hypointense rim surrounded the hematoma’s hyperintense center". Penckofer disagrees (see below). |
 | H-C29 | Chronic · SWI/GRE | Dark rim; centre varies | H-R3, H-R4 | read: full text | Weerink: "This results in a low signal rim on SWI, T2WI and b1000 images"; "The transformation of the hematoma into a cystic cavity leads to a variable appearance on SWI". Penckofer, GRE: "Hyperintense/Isointense core with hypointense rim". |
 | H-C30 | Chronic · CT | Dark, like CSF; focal atrophy | H-R6, H-R7 | read: full text | Popescu (CT): "In the chronic stage, the collection becomes isodense to the cerebrospinal fluid." Dolinskas (abstract): "Intracerebral hematomas decrease in density by an average of 0.7 EMI units per day"; "Posthematoma residua include decreased parenchymal density, focal atrophy, and ventricular enlargement." |
-| H-C31 | Note under the table | Time ranges differ between sources; this table uses Weerink 2023. | H-R3, H-R5 | read: full text | Weerink: "The hyperacute phase is often arbitrarily defined as the first 12–24 h after the onset of hemorrhage." Kang: "There were five stages: hyperacute (0-12 hrs; n=6), acute (13 hrs-3 days; n=7), early subacute (4-7 days; n=7), late subacute (8-30 days; n=10), and chronic (31 days or more; n=8)." |
+| H-C31 | Note under the table | Time ranges differ between sources; this table uses Weerink 2023. The CT source defines its phases by clot state, not by days. | H-R3, H-R5, H-R6 | read: full text | Popescu (CT): "In the hyperacute phase, before blood has had time to form a clot"; "In the acute phase of the blood, the clot is already established"; "In the subacute phase, days after the trauma". Weerink: "The hyperacute phase is often arbitrarily defined as the first 12–24 h after the onset of hemorrhage." Kang: "There were five stages: hyperacute (0-12 hrs; n=6), acute (13 hrs-3 days; n=7), early subacute (4-7 days; n=7), late subacute (8-30 days; n=10), and chronic (31 days or more; n=8)." |
 | H-C32 | Note under the table | Signal depends on field strength and sequence: the dark effect of blood products is stronger at higher field and on gradient echo, weaker on fast spin echo. | H-R1, H-R2 | read: abstract | Bradley: "The T2 shortening due to magnetic susceptibility effects is enhanced on higher-field-strength systems and on gradient-echo images and is reduced with “fast spin-echo” MR techniques." Parizel: signal "is influenced by multiple variables including: (a) age, location, and size of the lesion; (b) technical factors (e.g., sequence type and parameters, field strength); and (c) biological factors". |
 
 ### 2. Subdural haematoma (rows Acute, Subacute, Chronic; columns Time, CT, T1, T2, FLAIR)
@@ -137,7 +137,7 @@ the page.
 | H-C33 | Acute · Time | Under 3 days | H-R9 | read: full text | Tripathy: "Duration of onset of <3 days constitute ASDH, 4–21 days SASDH, and >21 days CSDH." |
 | H-C34 | Acute · CT | Bright crescent | H-R6 | read: full text | Popescu (CT): "The acute SDHs appear as hyperdense crescent-shape extra-axial collections, mainly distributed along the convexity of the brain parenchyma". |
 | H-C35 | Acute · T1 | Like brain | H-R8 | read: full text | Popescu (MRI): "In the acute stage of the hematoma, an MRI will show a crescent-shaped collection with an isointense T1 signal and a decreasing signal on T2 (from hyperintense in the hyperacute phase to isointense in a few days)". |
-| H-C36 | Acute · T2 | Bright at first, like brain within days | H-R8 | read: full text | As H-C35: "a decreasing signal on T2 (from hyperintense in the hyperacute phase to isointense in a few days)". |
+| H-C36 | Acute · T2 | Like brain or dark (ages as brain haematoma does) | H-R10, H-R11, H-R8, H-R3 | read: full text | Fobben (abstract): "Subdural hematomas evolved in a pattern similar to intracerebral hemorrhage with the exception of chronic subdural hematomas". Hasan: "A hematoma in the subdural space is expected to go through the same stages as parenchymal blood, only more slowly". Intracerebral blood at 1–3 days, Weerink: "The T2 signal is strongly lowered due to the strong paramagnetic effects of deoxyhemoglobin." Popescu (MRI), Fig 6 (acute subdural): "(c) isointense T2 signal". |
 | H-C37 | Acute · FLAIR | Bright | H-R8 | read: full text | Popescu (MRI), Fig 6, the figure for the acute stage: "Left-sided parietal subdural hematoma (yellow arrow)- A crescent-shaped collection with high-intensity FLAIR signal". (One case.) |
 | H-C38 | Subacute · Time | 4–21 days | H-R9 | read: full text | As H-C33. |
 | H-C39 | Subacute · CT | Like brain or slightly bright | H-R9, H-R6 | read: full text | Tripathy: "SASDH are typically crescentic fluid collections that are iso to slightly hyperdense, compared to the underlying cortex on any CT." Popescu (CT): "subacute ones are isodense to the brain, and the chronic ones are hypodense." |
@@ -162,20 +162,20 @@ each row's cells.
 | ID | Row · Column | Cell | Ref | Verdict | Evidence |
 |---|---|---|---|---|---|
 | H-C51 | Acute SAH · Appearance | Bright sulci and cisterns on FLAIR | H-R8, H-R17 | read: full text | Popescu (MRI): "The best imaging tool for this lesion is the FLAIR sequence, where the tSAH appears as fine lines with intense hypersignal". Weidauer (convexity SAH): "focal hyperdense sulcus on CT and hyperintense sulcal signal changes on fluid attenuated inversion recovery (FLAIR) images". |
-| H-C52 | Acute SAH · Appearance | Dark on SWI and T2* GRE; T2* GRE is the most sensitive sequence | H-R17, H-R14 | read: full text | Weidauer: "Whereas in the acute or subacute stage T2* WI and SWI show often homogeneous signal loss, in the chronic stage bilinear track-like appearance is typical". Mitchell (abstract): "The gradient echo T2* was the most sensitive sequence, with sensitivities of 94% in the acute phase and 100% in the subacute phase. Next most sensitive was FLAIR with values of 81% and 87% for the acute and subacute phases respectively." |
-| H-C53 | Acute SAH · Appearance | Bright on CT; CT finds all within 6 hours, fewer each day after (58% by day 5) | H-R15, H-R16, H-R6 | read: abstract | Popescu (CT, full text): traumatic SAH "on NECT scans it appears as hyperdense curvilinear shape that follow the anatomy of the convexity sulci". Perry (abstract): "For the 953 patients scanned within six hours of headache onset, all 121 patients with subarachnoid haemorrhage were identified by computed tomography, yielding a sensitivity of 100%". Ferrante (full text): "The sensitivity of CT for the detection of SAH declines with increasing time from haemorrhage onset, falling to 86% on day one, 76% after 2 days, and 58% after 5 days" (citing van Gijn and van Dongen, 1982). |
+| H-C52 | Acute SAH · Appearance | Dark on SWI and T2* GRE; in one series T2* GRE was more sensitive than FLAIR (94% against 81% in the acute phase) | H-R17, H-R14 | read: full text | Weidauer: "Whereas in the acute or subacute stage T2* WI and SWI show often homogeneous signal loss, in the chronic stage bilinear track-like appearance is typical". Mitchell (abstract; it compared T1, T2, single shot fast spin echo, FLAIR and gradient echo T2*, not SWI): "The gradient echo T2* was the most sensitive sequence, with sensitivities of 94% in the acute phase and 100% in the subacute phase. Next most sensitive was FLAIR with values of 81% and 87% for the acute and subacute phases respectively." |
+| H-C53 | Acute SAH · Appearance | Bright on CT; near 100% sensitive within 6 hours of headache onset on modern CT; sensitivity falls over days (58% by day 5 in a 1982 series) | H-R6, H-R15, H-R16 | read: abstract | Popescu (CT, full text): traumatic SAH "on NECT scans it appears as hyperdense curvilinear shape that follow the anatomy of the convexity sulci". Perry (abstract; neurologically intact adults with headache peaking within one hour, third generation CT): "For the 953 patients scanned within six hours of headache onset, all 121 patients with subarachnoid haemorrhage were identified by computed tomography, yielding a sensitivity of 100% (97.0% to 100.0%)"; "Modern third generation computed tomography is extremely sensitive in identifying subarachnoid haemorrhage when it is carried out within six hours of headache onset and interpreted by a qualified radiologist." Ferrante (full text): "The sensitivity of CT for the detection of SAH declines with increasing time from haemorrhage onset, falling to 86% on day one, 76% after 2 days, and 58% after 5 days", citing van Gijn and van Dongen, Neuroradiology 1982. |
 | H-C54 | Acute SAH · What it points to | Blood in the subarachnoid space; MRI still shows it after CT sensitivity falls | H-R14 | read: abstract | Mitchell: "MRI can be used to detect subacute and acute subarachnoid haemorrhage and has significant advantages over CT in the detection of subacute subarachnoid haemorrhage." |
 | H-C55 | Acute SAH · What it points to | Over the convexity in an older patient: a marker of CAA (the acute form of cortical siderosis) | H-R18 | read: full text | Charidimou: "cSS and acute cSAH are rated as equivalent MRI markers of CAA, with the understanding that cSAH is the acute form and cSS the chronic form of the same underlying process of superficial cortical haemorrhage." |
 | H-C56 | Superficial siderosis · Appearance | Dark line along the brain surface on SWI or T2* GRE (SWI more sensitive) | H-R17 | read: full text | Weidauer: "SS exhibits characteristic imaging features with signal loss, i.e. dark rims on the surface of the affected structures"; Fig 2: "In T2*-GRE (f) and susceptibility-weighted imaging (SWI) (b,g), SS is revealed by dark rims on the surface of affected structures ... with SWI being more sensitive." |
 | H-C57 | Superficial siderosis · Appearance | Old cortical siderosis: a double, track-like dark line | H-R17 | read: full text | Weidauer: "in the chronic stage bilinear track-like appearance is typical". |
 | H-C58 | Superficial siderosis · What it points to | Posterior fossa and cord: repeated slight bleeding into the subarachnoid space, often from a spinal dural defect | H-R17 | read: full text | Weidauer (abstract): "Infratentorial (i) SS is likely due to recurrent or continuous slight bleeding into the subarachnoid space. It is assumed that spinal dural pathologies often resulting in cerebrospinal fluid (CSF) leakage is the most important etiological group which causes iSS". |
 | H-C59 | Superficial siderosis · What it points to | Over the convexity: CAA in older people; also aneurysm, AVM, RCVS, vasculitis, venous thrombosis, trauma | H-R17 | read: full text | Weidauer: "Especially in older patients cSS is often due to cerebral amyloid angiopathy (CAA) ... Further etiologies of cSS are aneurysm related SAH, AVM, reversible cerebral vasoconstriction syndrome (RCVS), vasculitis, arterial proximal high-grade stenosis, cerebral vein and/or sinus thrombosis, cranial trauma and also amyloid beta targeting antibody treatment". |
-| H-C60 | Superficial siderosis · What it points to | Multifocal cortical siderosis alone meets probable CAA (Boston v2.0) | H-R18 | read: full text | Charidimou: "The incorporation of cSS multifocality as well as presence is one of the core updates of the Boston criteria v2.0, counting multifocal cSAH-cSS as ≥2 haemorrhagic lesions that can alone meet the definition of probable CAA." |
+| H-C60 | Superficial siderosis · What it points to | Multifocal cortical siderosis counts as two lobar bleeds towards probable CAA (Boston v2.0) | H-R18 | read: full text | Charidimou: "The incorporation of cSS multifocality as well as presence is one of the core updates of the Boston criteria v2.0, counting multifocal cSAH-cSS as ≥2 haemorrhagic lesions that can alone meet the definition of probable CAA." The other criteria (age, presentation, no deep bleeds, no other cause) are in H-C65. |
 | H-C61 | Microbleeds · Appearance | Small round or oval dark dots that bloom on SWI or T2* GRE | H-R20 | read: full text | STRIVE-1: "Cerebral microbleeds are visualised as small (generally 2–5 mm in diameter, but up to 10 mm) areas of signal void with associated blooming seen on T2*-weighted MRI or other sequences that are sensitive to susceptibility effects"; "cerebral microbleeds are well defined, of homogeneous low signal, and are either round or oval in shape". |
 | H-C62 | Microbleeds · Appearance | Generally 2–5 mm, up to 10 mm; no fixed size cut-off, as blooming varies with field strength and sequence | H-R20, H-R19 | read: full text | STRIVE-1: "Because the blooming artifact, and therefore the visualised size, depends on MR field strength and sequence, we do not recommend an absolute criterion for size." Greenberg: "Various size cut-points have been used for discriminating microbleeds from macrobleeds, typically ranging up to a maximum diameter of 5 to 10 mm and in some studies a minimum of 2 mm". |
 | H-C63 | Microbleeds · Appearance | Not seen on CT, FLAIR, T1 or T2 | H-R20 | read: full text | STRIVE-1: microbleeds "are generally not seen on CT, or on FLAIR, T1-weighted, or T2-weighted sequences." |
 | H-C64 | Microbleeds · What it points to | Strictly lobar: CAA. Deep or infratentorial: hypertensive vasculopathy | H-R19 | read: full text | Greenberg: "CMB location may correlate with specific vascular pathologies (i.e. deep hemispheric or infratentorial CMB suggesting hypertensive vasculopathy, a strictly lobar distribution suggesting CAA)". |
-| H-C65 | Microbleeds · What it points to | Two or more strictly lobar bleeds (microbleeds, haematomas or siderosis foci) at age 50 or over: probable CAA (Boston v2.0) | H-R18 | read: abstract | Charidimou: "patients aged 50 years and older"; "provisional criteria for probable CAA requiring the presence of at least two strictly lobar haemorrhagic lesions (ie, intracerebral haemorrhages, cerebral microbleeds, or foci of cortical superficial siderosis) or at least one strictly lobar haemorrhagic lesion and at least one white matter characteristic". |
+| H-C65 | Microbleeds · What it points to | Probable CAA (Boston v2.0): age 50 or over; presenting with spontaneous ICH, transient focal neurological episodes or cognitive impairment; two or more strictly lobar bleeds (microbleeds, haematomas or siderosis foci); no deep bleeds; no other cause | H-R18 | read: full text | Charidimou, Table 2, "3. Probable CAA": "Age ≥50 years"; "Presentation with spontaneous ICH, TFNEs, or CI/Dementia"; "≥2 of the following strictly lobar haemorrhagic lesions on T2*-weighted MRI, in any combination: ICH, CMB, cSS/cSAH foci"; "Absence of any deep haemorrhagic lesions (ICH, CMB) on T2*weighted -MRI" [sic]; "Absence of other cause of haemorrhagic lesions*". (The table's alternative, one lobar lesion plus one white matter feature, is not on the page.) |
 | H-C66 | Microbleeds · What it points to | Mimics: calcification and iron (CT shows calcium), flow voids and veins (linear or tubular), cavernous malformations, melanoma metastases | H-R19 | read: full text | Greenberg: "Both calcium and iron deposits may appear as small foci of low signal intensity on T2*-weighted MRI ... CT can help identify suspected calcification"; flow voids are distinguished "by their sulcal location, their equal visibility on T2-weighted SE and GRE sequences ..., and their linear structure"; venules require "the reader to rely on their tubular structure"; "Cavernous malformations can be considered as a secondary cause of CMB"; "Metastatic melanoma in the brain can appear hypointense on T2*-weighted MRI". |
 | H-C67 | Microbleeds · What it points to | SWI phase images tell calcium from blood | H-R3 | read: full text | Weerink: "The phase information is processed into a filtered phase image and can be used to differentiate hemorrhage from calcification." |
 | H-C68 | FLAIR mimics · Appearance | Bright CSF in the basal cisterns and convexity sulci on FLAIR | H-R21 | read: abstract | Deliganis: "eight had resultant images that showed increased CSF signal intensity within the basal cisterns and sulci over the cerebral convexities." |
@@ -185,15 +185,15 @@ each row's cells.
 
 ## Counts
 
-71 cells: 62 read in full text, 8 read in abstract only (H-C32, H-C48, H-C53, H-C54, H-C65,
-H-C68, H-C69, H-C70; H-C48 and H-C53 also quote a full text, but their main claim rests on an
-abstract), 0 differs and 1 not stated (H-C71). By table:
+71 cells: 62 read in full text, 8 read in abstract only (H-C18, H-C32, H-C48, H-C53, H-C54,
+H-C68, H-C69, H-C70; H-C18, H-C48 and H-C53 also quote a full text, but their main claim rests on
+an abstract), 0 differs and 1 not stated (H-C71). By table:
 
-- Intracerebral haematoma: 30 cells (5 rows × 6 columns) plus 2 notes; all 32 read (31 full text,
-  1 abstract).
+- Intracerebral haematoma: 30 cells (5 rows × 6 columns) plus 2 notes; all 32 read (30 full text,
+  2 abstract).
 - Subdural haematoma: 15 cells (3 rows × 5 columns) plus 3 notes; all 18 read (17 full text, 1
   abstract).
-- Subarachnoid haemorrhage and microbleeds: 21 cells over 4 rows; 20 read (14 full text, 6
+- Subarachnoid haemorrhage and microbleeds: 21 cells over 4 rows; 20 read (15 full text, 5
   abstract), 1 not stated.
 
 ## Where the sources disagree
@@ -224,21 +224,35 @@ abstract), 0 differs and 1 not stated (H-C71). By table:
   Not used; Weerink, Penckofer and Kang all give bright.
 - **CT density by stage** (H-C6, H-C12, H-C18, H-C24, H-C30). No open source found gives CT density
   per stage for intracerebral haematoma specifically (Parizel's tables are behind the paywall).
-  Popescu (CT) gives four phases (hyperacute, acute, subacute, chronic) for haematomas in head
-  trauma in general, without splitting early and late subacute. Dolinskas (abstract, intracerebral
-  haematoma) confirms the gradual fall in density and the low-density residue. Decision: use
-  Popescu's phases, with the same subacute cell in both subacute rows.
+  Popescu (CT) gives four phases for haematomas in head trauma in general, and defines them by
+  clot state, not by time: hyperacute is "before blood has had time to form a clot" (under 60 HU),
+  acute is when "the clot is already established" (60–90 HU, "the time when we get most of our
+  patients to the CT scan"), subacute is "days after the trauma", and there is no early/late split.
+  The table's rows use Weerink's clock windows (under 24 h, 1–3 days, 3–7 days). Read literally,
+  Popescu's hyperacute figure would put every haematoma under 24 hours below 60 HU, which its own
+  sentence on intracerebral haemorrhage ("On NECT they appear as hyperdense collections")
+  contradicts. Dolinskas (abstract, intracerebral haematoma) gives the rate: density falls "by an
+  average of 0.7 EMI units per day" and the dense part shrinks "by an average of 0.65 mm per day",
+  so a 3–7 day haematoma is still mostly bright. Decision: hyperacute CT says "bright once clotted"
+  and keeps the under-60 HU figure only for blood that has not yet clotted (H-C6); early subacute
+  says bright and fading slowly (H-C18, Dolinskas); Popescu's isodense subacute phase goes in the
+  late subacute row (H-C24). The note under the table (H-C31) should say that the CT phases in the
+  source are defined by clot state.
 - **Subdural time ranges** (H-C33, H-C38, H-C43). Tripathy: under 3 days, 4–21 days, over 21 days.
   Hasan: chronic when trauma was "more than 3 weeks before admission". Fobben grouped collections
   as acute, early subacute, late subacute and chronic but its abstract gives no times. Tripathy
   also says subacute subdural haematoma "is the result of subdural effusion in the 1-3 week period".
   Sieswerda-Hoogendoorn: the intervals are "broad and overlapping". Decision: Tripathy's ranges,
   with the note H-C50.
-- **Acute subdural T2** (H-C36). Popescu (MRI) says the T2 signal falls from bright to isointense
-  within days. Fobben says subdural haematomas evolve "in a pattern similar to intracerebral
-  hemorrhage" (where acute blood is dark on T2), and Tripathy says early subacute collections are
-  "hypointense on T2". No read source says an acute subdural is dark on T2. Decision: the cell uses
-  Popescu's wording; the page should not add "dark".
+- **Acute subdural T2** (H-C36). Only Popescu (MRI), a paediatric pictorial essay, describes
+  T2-bright subdural blood, and only in the hyperacute phase ("from hyperintense in the hyperacute
+  phase to isointense in a few days"); its acute case (Fig 6) is "isointense". Fobben says subdural
+  haematomas "evolved in a pattern similar to intracerebral hemorrhage with the exception of
+  chronic subdural hematomas", Hasan that they go "through the same stages as parenchymal blood",
+  and intracerebral blood at 1–3 days is dark on T2 (Weerink, H-C10). Tripathy says early subacute
+  collections are "hypointense on T2". Decision: "Like brain or dark (ages as brain haematoma
+  does)", following Fobben and Hasan, with Popescu's isointense case; the page does not say
+  "bright" for the acute row.
 - **Chronic subdural T1** (H-C45). Fobben: iso- or hypointense to grey matter. Hasan: mixed in 52%,
   T1-dark with T2-bright in 15%, and one case "homogenously hyperintense on T1w images" (Fig 2).
   Decision: "Mixed; often like or darker than brain".
@@ -246,10 +260,13 @@ abstract), 0 differs and 1 not stated (H-C71). By table:
   hematomas." Hasan (T2*-GRE and SWI): "Hypointensity was noticed on T2*-GRE and SWI in 24 hematomas
   (89%)", in 10 of them only as lines along the membranes or septa. The table has no SWI column for
   subdurals, so neither is on the page; if Task 2 adds one, follow Hasan (more recent, with SWI).
-- **CT sensitivity for SAH** (H-C53). Perry 2011 (modern third-generation CT): 100% within 6 hours,
-  92.9% overall. Ferrante 2011 quotes van Gijn and van Dongen 1982 (older scanners): 86% on day one,
-  76% after 2 days, 58% after 5 days. Decision: the cell gives Perry's 6-hour figure and the day-5
-  figure; Task 2 may say the day figures come from an older series.
+- **CT sensitivity for SAH** (H-C53). The two figures come from different cohorts and scanners.
+  Perry 2011: third generation CT in neurologically intact adults with headache peaking within one
+  hour, read by a qualified radiologist; 100% (95% CI 97.0% to 100.0%) within 6 hours of headache
+  onset, 92.9% overall, concluding CT is "extremely sensitive" in that window. Ferrante 2011 quotes
+  van Gijn and van Dongen 1982 (older scanners): 86% on day one, 76% after 2 days, 58% after 5 days.
+  Decision: the cell says "near 100% within 6 hours on modern CT" and gives the day-5 figure as
+  coming from a 1982 series.
 - **Propofol or oxygen** (H-C69, H-C71). Filippi 2001 attributes the FLAIR CSF signal to propofol
   and lists oxygen among other possible causes. Deliganis 2001: "Anesthetic phantom measurements
   showed T1 shortening only when the agent was administered with high concentrations of oxygen".
@@ -263,10 +280,9 @@ abstract), 0 differs and 1 not stated (H-C71). By table:
 
 - **Propofol as a FLAIR mimic** (H-C71). Read only in Filippi 2001 (abstract), which has no DOI;
   Frigon 2004 and Deliganis 2001 attribute the effect to oxygen. Left off the page.
-- **CT density split between early and late subacute haematoma**. The read CT source gives one
-  subacute phase; the page repeats one cell (H-C18 = H-C24) rather than invent a split.
-- **CT "bright" for the hyperacute haematoma**. Popescu gives a density (under 60 HU), not a word
-  against brain; the cell keeps the number.
+- **A day count for each CT phase**. The read CT source defines its phases by clot state, not by
+  days; no read source gives CT density at a stated day except through Dolinskas's daily rate. The
+  CT cells are placed by that rate (see "Where the sources disagree"), not by a stated window.
 - **Signal against grey matter for every haematoma stage**. No read source states all stages
   against grey matter; see the note on reference tissue above. The page should say "like brain",
   not "like grey matter", for the intracerebral table.
