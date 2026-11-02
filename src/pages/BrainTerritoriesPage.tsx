@@ -164,8 +164,8 @@ export function BrainTerritoriesPage() {
             The MCA is the commonest site of stroke (<Cite doi={DOI.chandra}>Chandra et al.</Cite>; <Cite doi={DOI.liu}>Liu et al.</Cite>).
           </li>
         </ul>
-        <ScanFigures images={[brainTerritoriesScans.mcaInfarct]} />
-        <p className="source-note">No open-access image of an infarct of the superior or inferior division of the MCA alone was found.</p>
+        <ScanFigures images={[brainTerritoriesScans.mcaInfarct, brainTerritoriesScans.mcaSuperiorDivision]} />
+        <p className="source-note">No open-access image of an infarct of the inferior division of the MCA alone was found.</p>
 
         <h4 className="fm-subhead" id="pca">Posterior cerebral artery</h4>
         <ul className="plain-list">
@@ -226,8 +226,7 @@ export function BrainTerritoriesPage() {
             <Cite doi={DOI.rauch}>Rauch et al.</Cite>).
           </li>
         </ul>
-        <ScanFigures images={[brainTerritoriesScans.thalamicInfarct]} />
-        <p className="source-note">No open-access image of an infarct of the recurrent artery of Heubner was found.</p>
+        <ScanFigures images={[brainTerritoriesScans.heubnerInfarct, brainTerritoriesScans.thalamicInfarct]} />
       </section>
 
       <section className="info-card" id="brainstem">
@@ -314,7 +313,7 @@ export function BrainTerritoriesPage() {
             Top of the basilar: the midbrain, thalami and the medial temporal and occipital lobes (<Cite doi={DOI.nouh}>Nouh et al.</Cite>).
           </li>
         </ul>
-        <p className="source-note">No open-access image of a midbrain infarct was found.</p>
+        <ScanFigures images={[brainTerritoriesScans.midbrainInfarct]} />
       </section>
 
       <section className="info-card" id="cerebellum">
@@ -552,8 +551,18 @@ export function BrainTerritoriesPage() {
             <strong>DWI</strong>: the clot can be bright, even without a parenchymal lesion (<Cite doi={DOI.oliveira}>Oliveira et al.</Cite>).
           </li>
         </ul>
-        <ScanFigures images={[brainTerritoriesScans.denseSinus, brainTerritoriesScans.cordSign, brainTerritoriesScans.emptyDelta, brainTerritoriesScans.venographyDefect, brainTerritoriesScans.swiBlooming]} />
-        <p className="source-note">No open-access image of loss of the flow void, of a clot bright on T1 or of a clot bright on DWI was found.</p>
+        <ScanFigures
+          images={[
+            brainTerritoriesScans.denseSinus,
+            brainTerritoriesScans.cordSign,
+            brainTerritoriesScans.emptyDelta,
+            brainTerritoriesScans.venographyDefect,
+            brainTerritoriesScans.flowVoidLoss,
+            brainTerritoriesScans.t1BrightClot,
+            brainTerritoriesScans.swiBlooming,
+            brainTerritoriesScans.dwiBrightClot,
+          ]}
+        />
 
         <h4 className="fm-subhead">Indirect signs</h4>
         <ul className="plain-list">
@@ -606,8 +615,14 @@ export function BrainTerritoriesPage() {
             Knowing the normal venous anatomy and its variants is what avoids these pitfalls (<Cite doi={DOI.leach}>Leach et al.</Cite>).
           </li>
         </ul>
-        <ScanFigures images={[brainTerritoriesScans.arachnoidGranulation, brainTerritoriesScans.hypoplasticTransverse, brainTerritoriesScans.flowGap]} />
-        <p className="source-note">No clear open-access image of a dense sinus from a high haematocrit was found.</p>
+        <ScanFigures
+          images={[
+            brainTerritoriesScans.arachnoidGranulation,
+            brainTerritoriesScans.hypoplasticTransverse,
+            brainTerritoriesScans.flowGap,
+            brainTerritoriesScans.polycythaemiaDenseSinus,
+          ]}
+        />
       </section>
 
       <LessonReferences references={references} />

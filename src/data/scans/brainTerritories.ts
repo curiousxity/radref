@@ -17,6 +17,13 @@ export const brainTerritoriesScans = {
     source: S.john2008,
     figure: 'Fig. 2',
   },
+  mcaSuperiorDivision: {
+    src: '/scans/brain-territories/mca-superior-division.jpg',
+    alt: 'Axial diffusion-weighted MRI: a bright patch in the lateral left frontal lobe beside the insula, on the right of the image',
+    caption: 'Acute infarct of the superior division of the left middle cerebral artery on DWI, in a 60-year-old man.',
+    source: S.kim2026,
+    figure: 'Fig. 4c',
+  },
   pcaInfarct: {
     src: '/scans/brain-territories/pca-infarct.jpg',
     alt: 'Axial CT: low density in the left occipital lobe, behind the lateral ventricle on the right of the image',
@@ -30,6 +37,14 @@ export const brainTerritoriesScans = {
     caption: 'Acute infarct in the left basal ganglia on DWI, in the territory of the left anterior choroidal artery.',
     source: S.tsika2024,
     figure: 'Fig. 1b',
+  },
+  heubnerInfarct: {
+    src: '/scans/brain-territories/heubner-infarct.jpg',
+    alt: 'Axial FLAIR MRI: a small bright lesion in the head of the left caudate nucleus beside the frontal horn, marked by an arrow with an asterisk; a second arrow marks a faint bright patch in the left parietal cortex',
+    caption:
+      'Subacute or chronic lesion of the head of the left caudate nucleus, in the territory of the recurrent artery of Heubner (arrow with asterisk), on FLAIR; the other arrow marks one of several recent lesions in the left MCA territory.',
+    source: S.deLorenzo2023,
+    figure: 'Fig. 1',
   },
   thalamicInfarct: {
     src: '/scans/brain-territories/thalamic-infarct.jpg',
@@ -52,6 +67,13 @@ export const brainTerritoriesScans = {
     caption: 'Right ventral pontine infarct on DWI (arrow).',
     source: S.nouh2014,
     figure: 'Fig. 4A',
+  },
+  midbrainInfarct: {
+    src: '/scans/brain-territories/midbrain-infarct.jpg',
+    alt: 'Axial diffusion-weighted MRI at the level of the midbrain: a small bright spot in the right side of the midbrain beside the midline, marked by an arrow',
+    caption: 'Acute infarct in the right rostral paramedian midbrain on DWI (arrow), in a patient with isolated body lateropulsion.',
+    source: S.sakai2025,
+    figure: 'Fig. 1a',
   },
   picaInfarct: {
     src: '/scans/brain-territories/pica-infarct.jpg',
@@ -148,12 +170,33 @@ export const brainTerritoriesScans = {
     source: S.oliveira2022,
     figure: 'Fig. 9B',
   },
+  flowVoidLoss: {
+    src: '/scans/brain-territories/flow-void-loss.jpg',
+    alt: 'Axial T2-weighted MRI of the posterior fossa: the left transverse sinus, on the right of the image, carries signal instead of the dark flow void; an arrow points to it',
+    caption: 'Loss of the flow void in the thrombosed left transverse sinus on axial T2 (arrow).',
+    source: S.karagulle2026,
+    figure: 'Fig. 2C',
+  },
+  t1BrightClot: {
+    src: '/scans/brain-territories/t1-bright-clot.jpg',
+    alt: 'Axial T1-weighted MRI of the posterior fossa: a bright band along the left transverse sinus, on the right of the image, marked by an arrow',
+    caption: 'Bright signal in the thrombosed left transverse sinus on axial T1 (arrow); same patient as the T2 image.',
+    source: S.karagulle2026,
+    figure: 'Fig. 2B',
+  },
   swiBlooming: {
     src: '/scans/brain-territories/swi-blooming.jpg',
     alt: 'Axial T2* gradient-echo MRI at the vertex: several dark, thick cortical veins against bright brain',
     caption: 'Dark cortical veins at the vertex on T2* gradient echo, suggesting cortical vein thrombi.',
     source: S.sadik2022,
     figure: 'Fig. 9b',
+  },
+  dwiBrightClot: {
+    src: '/scans/brain-territories/dwi-bright-clot.jpg',
+    alt: 'Axial diffusion-weighted MRI of the posterior fossa: a bright band along the left transverse sinus, on the right of the image, marked by an arrow',
+    caption: 'Bright signal in the thrombosed left transverse sinus on DWI (arrow); same patient as the T2 and T1 images.',
+    source: S.karagulle2026,
+    figure: 'Fig. 2E',
   },
   arachnoidGranulation: {
     src: '/scans/brain-territories/arachnoid-granulation.jpg',
@@ -176,5 +219,13 @@ export const brainTerritoriesScans = {
       'Flow gaps on time-of-flight venography in parts of both transverse sinuses; contrast-enhanced venography of the same patient did not confirm them.',
     source: S.zedde2025,
     figure: 'Fig. 9a',
+  },
+  polycythaemiaDenseSinus: {
+    src: '/scans/brain-territories/polycythaemia-dense-sinus.jpg',
+    alt: "Axial plain CT of a child's head: the straight sinus and the back of the superior sagittal sinus are brighter than the brain; a dark round lesion with a rim sits in the left parietal lobe, on the right of the image",
+    caption:
+      'Hyperdense straight and superior sagittal sinuses on plain CT in a child with polycythaemia from cyanotic heart disease, with a left parietal abscess; on contrast CT the sinuses enhanced.',
+    source: S.gayathri2010,
+    figure: 'Fig. 2',
   },
 } satisfies Record<string, ScanImage>

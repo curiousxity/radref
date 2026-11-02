@@ -707,6 +707,11 @@ figure captions with `FIG:`). Searches, crop boxes and rejected candidates are i
 | denseSinus, swiBlooming, hypoplasticTransverse | Sadik et al. Life 2022;12:1215 (PMC9410175) | Figs. 15, 9b, 22b | CC BY (by/4.0) / by/4.0 | no arrows in these figures |
 | arachnoidGranulation | Delgado et al. Insights Imaging 2026;17:230 (PMC13588991) | Fig. 5a | CC BY 4.0 / by/4.0 | figures are WebP in the supplementary files |
 | flowGap | Zedde and Pascarella. Neurol Int 2025;17:9 (PMC11767902) | Fig. 9a | CC BY (by/4.0) / by/4.0 | contrast-enhanced venography (9b) did not confirm the gaps |
+| mcaSuperiorDivision | Kim et al. Neuroradiology 2026;68:965-974 (PMC13139282) | Fig. 4c | CC BY 4.0 / by/4.0 | case 1, left MCA superior division infarct on DWI; small in the source (191 px) |
+| heubnerInfarct | De Lorenzo et al. BMC Neurol 2023;23:399 (PMC10631111) | Fig. 1 | CC BY 4.0 / by/4.0 | upper right (FLAIR) panel; the caption names the Heubner territory (arrow with asterisk); the other arrow is an MCA lesion |
+| midbrainInfarct | Sakai et al. Cureus 2025;17:e93448 (PMC12571697) | Fig. 1a | "CC-BY 4.0" / none | right rostral paramedian midbrain on DWI; the paper names no artery |
+| flowVoidLoss, t1BrightClot, dwiBrightClot | Karagulle et al. Diagnostics 2026;16:1771 (PMC13298027) | Figs. 2C, 2B, 2E | "CC BY", by/4.0 link / by/4.0 | one patient, left transverse sinus thrombosis; panels about 240 px in the source |
+| polycythaemiaDenseSinus | Gayathri et al. J Pediatr Neurosci 2010;5:27 (PMC2964806) | Fig. 2 | "CC BY", PMC licence link by/2.0 / none | case 2 (tetralogy of Fallot, haematocrit 66%); the sinuses enhanced on contrast CT (Fig. 4); burned-in date and labels cropped off |
 
 Not used: Canedo-Antelo 2019 (RadioGraphics, not CC BY); Nouh Fig. 3A (lateral medullary FLAIR, no
 arrow and the lesion not visible at the source's size); Yilmaz 2016, Heubner infarct (PMC4884235;
@@ -719,8 +724,17 @@ Sadik Fig. 23 (arachnoid granulation not visible without an arrow); Delgado Fig.
 little anatomy; Sadik Fig. 15 used instead); Takada 2025 and Yanusha 2025 MCA infarcts (faint DWI;
 photographed film with burned-in text).
 
-Still without an image: an infarct of the MCA superior or inferior division alone, a Heubner
-infarct, a midbrain infarct, loss of the flow void, a clot bright on T1, a clot bright on DWI, and a
-dense sinus from a high haematocrit (the page says so in each section; the midbrain and the three
-sinus-thrombosis signs were added to the page's notes in the final review, 2026-11-02). The
+Gap search (2026-11-02, later; searches, candidates and crop boxes in the scratchpad
+`bt-gaps/notes.md`): the MCA superior division, Heubner, midbrain, flow-void, T1, DWI and
+polycythaemia images above were added. Not used: Happonen 2023 (PMC10297083, Fig. 2; CC BY 4.0, but
+its T2 flow-void panel is subtler than Karagulle's, so one patient's set was kept); Alattas 2022
+(PMC9761486; small coloured arrows on a busy figure); Iyer 2025 dehydration CT (PMC12398339, Fig. 2;
+no arrow, the density is slight and the brain is diffusely abnormal); the Sci Rep 2021 plateau study
+(PMC7954789, Fig. 3a; 135 px panels); Babici 2023 caudate infarct (PMC10693717; clear, but the paper
+does not put it in the Heubner territory); Carranza 2025 Claude syndrome (PMC12334073; lesion faint),
+Weber syndrome case 2022 (PMC9142634; faint, no arrow), Haymes 2021 (PMC8500245; DWI too dark);
+inferior-division candidates PMC12358175 (multifocal infarcts) and PMC11669874 (motion artefact, per
+its caption).
+
+Still without an image: an infarct of the MCA inferior division alone (the page says so). The
 high-riding jugular bulb is not on the page, so none was sought.

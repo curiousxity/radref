@@ -243,7 +243,10 @@ export const SCAN_SOURCES = {
   // Crossref has none. Li's gives no version; Crossref gives 4.0. Dogariu's article states 3.0
   // while Crossref gives 4.0, so the article's 3.0 is used. Sano (Cureus) states "CC-BY 4.0" and
   // Kichloo (SAGE) 4.0, with no Crossref licence. John's licence link and Crossref give 2.0;
-  // Renard's give 3.0. The rest state CC BY 4.0 in the article and in Crossref.
+  // Renard's give 3.0. Sakai (Cureus) states "CC-BY 4.0", with no Crossref licence. Karagulle's
+  // statement gives no version; its licence link and Crossref give 4.0. Gayathri's gives no version;
+  // its PMC licence link gives 2.0 and Crossref has none. The rest state CC BY 4.0 in the article and
+  // in Crossref.
   nouh2014: { short: 'Nouh et al. 2014', doi: '10.3389/fneur.2014.00030', licence: 'CC BY 3.0' },
   sano2025: { short: 'Sano et al. 2025', doi: '10.7759/cureus.80688', licence: 'CC BY 4.0' },
   john2008: { short: 'John et al. 2008', doi: '10.1186/1752-1947-2-148', licence: 'CC BY 2.0' },
@@ -259,4 +262,9 @@ export const SCAN_SOURCES = {
   sadik2022: { short: 'Sadik et al. 2022', doi: '10.3390/life12081215', licence: 'CC BY 4.0' },
   delgado2026: { short: 'Delgado et al. 2026', doi: '10.1186/s13244-026-02381-7', licence: 'CC BY 4.0' },
   zedde2025: { short: 'Zedde and Pascarella 2025', doi: '10.3390/neurolint17010009', licence: 'CC BY 4.0' },
+  kim2026: { short: 'Kim et al. 2026', doi: '10.1007/s00234-026-03955-4', licence: 'CC BY 4.0' },
+  deLorenzo2023: { short: 'De Lorenzo et al. 2023', doi: '10.1186/s12883-023-03448-4', licence: 'CC BY 4.0' },
+  sakai2025: { short: 'Sakai et al. 2025', doi: '10.7759/cureus.93448', licence: 'CC BY 4.0' },
+  karagulle2026: { short: 'Karagulle et al. 2026', doi: '10.3390/diagnostics16121771', licence: 'CC BY 4.0' },
+  gayathri2010: { short: 'Gayathri et al. 2010', doi: '10.4103/1817-1745.66679', licence: 'CC BY 2.0' },
 } as const satisfies Record<string, ScanSource>
