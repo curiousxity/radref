@@ -38,6 +38,25 @@
   --color-ear-iac: #dde7ed;
   --color-ear-iac-edge: #7e9aa9;
   --color-ear-window: #c58b4d;
+  /* Brain vascular territories map: arterial families, venous families, then the border-zone
+     overlay. Each keeps 3:1 on --color-figure-bg, the colour of the lines between territories. */
+  --color-territory-aca: #b5477a;
+  --color-territory-mca: #2f7fc1;
+  --color-territory-pca: #2e9461;
+  --color-territory-acha: #b06f18;
+  --color-territory-vertebral: #8a6d3b;
+  --color-territory-basilar: #7a5bc4;
+  --color-territory-pica: #c2522d;
+  --color-territory-aica: #1f8f99;
+  --color-territory-sca: #6b8f1f;
+  --color-territory-superior: #3a6ea5;
+  --color-territory-sylvian: #3f8f7f;
+  --color-territory-labbe: #a5673a;
+  --color-territory-deep: #8e4fa0;
+  --color-territory-galenic: #b04a5a;
+  --color-territory-petrosal: #5c7f3a;
+  --color-territory-tentorial: #5f64a8;
+  --color-territory-border-zone: #111415;
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Consolas, 'Liberation Mono', Menlo, monospace;
   --radius: 3px;
@@ -89,6 +108,23 @@
   --color-ear-iac: #1f2b32;
   --color-ear-iac-edge: #6f8a99;
   --color-ear-window: #d9a066;
+  --color-territory-aca: #d978a3;
+  --color-territory-mca: #5fa6e3;
+  --color-territory-pca: #5cc28e;
+  --color-territory-acha: #e0a24f;
+  --color-territory-vertebral: #c4a271;
+  --color-territory-basilar: #a68cf0;
+  --color-territory-pica: #ec8461;
+  --color-territory-aica: #4fc2cc;
+  --color-territory-sca: #a3c454;
+  --color-territory-superior: #6f9fd6;
+  --color-territory-sylvian: #6cc2b0;
+  --color-territory-labbe: #d69a6a;
+  --color-territory-deep: #c086d3;
+  --color-territory-galenic: #e07d8c;
+  --color-territory-petrosal: #93b86b;
+  --color-territory-tentorial: #9599dc;
+  --color-territory-border-zone: #e6e8e9;
 }
 
 * { box-sizing: border-box; }
