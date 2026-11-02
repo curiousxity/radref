@@ -538,3 +538,142 @@ scanned; the only candidate, Limaye 2024 Fig. 1, shows no visible defect), Herbe
 TFCC and ulnar impaction papers' captions scanned; Yan 2022's figure names no class, Wang and Ding
 2026 Fig. 1b is low-resolution with burned-in labels, Vassa 2020 is CC BY-NC-ND, Cerezal 2026 is
 "used with permission").
+
+## The seven X-ray studies (2026-11-02)
+
+Example radiographs for the neonatal chest study and the six adult injury studies, made the same way
+as above (CC BY with a stated version, one panel per file, greyscale, under 40 KB). The injury studies
+show adults only; the neonatal study, newborns. Each image sits in the learn section (step) that
+teaches it. Searches, crop boxes and rejected candidates are in the agents' notes (scratchpad
+`xs/*/notes.md`).
+
+Reused from other pages, not copied: `schatzker.type6` (knee, plateau); `mason.type1` and `type3`
+(elbow, bones); `mayfield.stage1` (wrist, alignment) and `stage4` (wrist, carpus);
+`fifthMetatarsal.zone1` (ankle, bones; its source calls it an ankle film); `lisfranc.diastasis`
+(foot, alignment), `lisfranc.fleck` (foot, midfoot), and `fifthMetatarsal.zones`, `zone2` and `zone3`
+(foot, metatarsals).
+
+### Neonatal chest X-ray (`src/data/scans/neonatalChestXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| ettLandmarks | lines | Tippmann et al. 2026 (PMC12971967) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| ettRightBronchus | lines | Dominguez and Alvares 2018 (PMC5846321) | Fig. 1 | CC BY 4.0; Crossref none |
+| umbilicalCatheters | lines | Judd et al. 2026 (PMC12807581) | Fig. 1A | CC BY 4.0; Crossref by/4.0 |
+| uvcLateral | lines | Al-Dajani et al. 2023 (PMC10560078) | Fig. 3 | CC BY 3.0; Crossref none |
+| uvcInLiver | lines | Sohane et al. 2025 (PMC12426201) | Fig. 5B | CC BY 4.0; Crossref by/4.0 |
+| piccInLiver | lines | Song et al. 2026 (PMC13057524) | Fig. 2A | CC BY 4.0; Crossref by/4.0 |
+| rdsGrade2 | lungs | Lovrenski et al. 2025 (PMC12226615) | Fig. 2B | CC BY 4.0; Crossref by/4.0 |
+| transientTachypnoea | lungs | Chavan et al. 2022 (PMC9079322) | Fig. 1 | CC BY 3.0; Crossref none |
+| meconiumAspiration | lungs | Olicker et al. 2021 (PMC8005197) | Fig. 2 | CC BY 4.0; Crossref by/4.0 |
+| supinePneumothorax | air-leak | Hammon et al. 2019 (PMC6322299) | Fig. 3c | CC BY 4.0; Crossref by/4.0 |
+| interstitialEmphysema | air-leak | Lei et al. 2019 (PMC6676513) | Fig. 2 | CC BY 4.0; Crossref by/4.0 |
+| spinnakerSail | air-leak | Zamlout et al. 2025 (PMC11995531) | Fig. 1A | CC BY 4.0; Crossref by/4.0 |
+
+### Knee X-ray (`src/data/scans/kneeXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| segond | avulsions | Adwan et al. 2025 (PMC12007960) | Fig. 1 | CC BY 4.0; Crossref none |
+| arcuateSign | avulsions | Paul et al. 2025 (PMC12124724) | Fig. 8a | CC BY 4.0; Crossref by/4.0 |
+| lateralFemoralNotch | alignment | Lodewijks et al. 2019 (PMC6394542) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| patellaAlta | alignment | Wood et al. 2026 (PMC13135814) | Fig. 1 | CC BY 4.0; Crossref none |
+| patellarFracture | patella | Potla et al. 2023 (PMC10630152) | Fig. 1 | CC BY 3.0; Crossref none |
+| bipartitePatella | patella | Kroustalakis et al. 2025 (PMC12701556) | Fig. 1a | CC BY 4.0; Crossref none |
+| hoffa | femur | Kitamura et al. 2023 (PMC10072071) | Fig. 1b | CC BY 3.0; Crossref none |
+
+### Elbow X-ray (`src/data/scans/elbowXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| fatPads | soft-tissues | Huhtanen et al. 2022 (PMC9276721) | Fig. 8c | CC BY 4.0; Crossref by/4.0 |
+| terribleTriad | bones | Wang et al. 2023 (PMC10356941) | Fig. 2a | CC BY 4.0; Crossref by/4.0 |
+| coronoid | bones | Barati et al. 2023 (PMC10704758) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| doubleArc | bones | Bellato et al. 2022 (PMC8788494) | Fig. 5 | CC BY 4.0; Crossref by/4.0 |
+| monteggiaPosterior | bones | Uchôa and Uchôa 2024 (PMC11328982) | Fig. 1a | CC BY 4.0; Crossref none |
+| monteggiaAnterior | alignment | Moldovan 2025 (PMC12028828) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| galeazzi | bones | Zaher et al. 2024 (PMC11323951) | Fig. 1b | CC BY 4.0; Crossref none |
+
+### Wrist X-ray (`src/data/scans/wristXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| trueLateral | technique | Clark et al. 2025 (PMC12328503) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| gilulaArcs | alignment | Okoro et al. 2023 (PMC10381215) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| collesLateral | radius | Wong et al. 2015 (PMC4519440) | Fig. 5a | CC BY 4.0; Crossref by/4.0 |
+| scaphoidUlnarDeviation | scaphoid | Hernáiz Ferrer et al. 2025 (PMC12546487) | Fig. 4a | CC BY 4.0; Crossref by/4.0 |
+| occultScaphoidFollowUp | scaphoid | Jarraya et al. 2013 (PMC3613077) | Fig. 3c | CC BY 3.0; Crossref by/3.0 |
+| triquetralDorsalFracture | carpus | Jarraya et al. 2013 (PMC3613077) | Fig. 4b | CC BY 3.0; Crossref by/3.0 |
+| scaphoidFatStripe | soft-tissues | Miyahara et al. 2022 (PMC8993176) | Fig. 6 | CC BY 4.0; Crossref by/4.0 |
+
+### Hand X-ray (`src/data/scans/handXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| cmcFractureDislocationOblique | alignment | Valdés-Medina et al. 2026 (PMC12981997) | Fig. 2 | CC BY 4.0; Crossref none |
+| cmcDorsalDislocationLateral | alignment | Kalatzis et al. 2024 (PMC11707556) | Fig. 1 | CC BY 4.0; Crossref none |
+| boxerFractureOblique | metacarpals | Hussain et al. 2020 (PMC7451089) | Fig. 2 | CC BY 3.0; Crossref none |
+| bennettFracture | metacarpals | Wong et al. 2015 (PMC4519440) | Fig. 7 | CC BY 4.0; Crossref by/4.0 |
+| rolandoFracture | metacarpals | Florek et al. 2024 (PMC11493467) | Fig. 1 | CC BY 4.0; Crossref none |
+| pipDorsalFractureSubluxation | phalanges | Barrached et al. 2023 (PMC10670557) | Fig. 1B | CC BY 3.0; Crossref none |
+| bonyMallet | phalanges | Stumpfe et al. 2023 (PMC10896929) | Fig. 1b | CC BY 4.0; Crossref by/4.0 |
+| thumbUclAvulsion | phalanges | Manneck et al. 2021 (PMC7811990) | Fig. 3b | CC BY 4.0; Crossref by/4.0 |
+| foreignBody | soft-tissues | Sabir and Akkaya 2024 (PMC11371867) | Fig. 1a | CC BY 4.0; Crossref by/4.0 |
+
+### Ankle X-ray (`src/data/scans/ankleXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| weberA | bones | Surmanowicz et al. 2025 (PMC12385429) | Fig. 1 | CC BY 4.0; Crossref by/4.0 |
+| weberB | bones | Surmanowicz et al. 2025 (PMC12385429) | Fig. 2 | CC BY 4.0; Crossref by/4.0 |
+| weberC | bones | Surmanowicz et al. 2025 (PMC12385429) | Fig. 3 | CC BY 4.0; Crossref by/4.0 |
+| clearSpaces | alignment | Surmanowicz et al. 2025 (PMC12385429) | Fig. 4 | CC BY 4.0; Crossref by/4.0 |
+| tfcsWidening | alignment | Crone et al. 2026 (PMC13198512) | Fig. 5b | CC BY 4.0; Crossref by/4.0 |
+| stressView | alignment | Zeni et al. 2023 (PMC10209918) | Fig. 1B | CC BY 3.0; Crossref none |
+| maisonneuveFibula | bones | Tafti et al. 2020 (PMC7537486) | Fig. 10c | CC BY 3.0; Crossref none |
+| maisonneuveAnkle | bones | Tafti et al. 2020 (PMC7537486) | Fig. 10b | CC BY 3.0; Crossref none |
+| posteriorMalleolus | bones | Tafti et al. 2020 (PMC7537486) | Fig. 10a | CC BY 3.0; Crossref none |
+| lateralProcessCt | bones | Jin et al. 2022 (PMC9533565) | Fig. 1c | CC BY 4.0; Crossref by/4.0 |
+
+### Foot X-ray (`src/data/scans/footXray.ts`)
+
+| Key | Section | Source (PMCID) | Figure | Licence |
+|---|---|---|---|---|
+| lisfrancFractureDislocation | alignment | Wong et al. 2015 (PMC4512960) | Fig. 5a | CC BY 4.0; Crossref by/4.0 |
+| lisfrancMalalignment | alignment | Wong et al. 2015 (PMC4512960) | Fig. 5d | CC BY 4.0; Crossref by/4.0 |
+| lisfrancLateralDislocation | midfoot | Kim et al. 2021 (PMC7982150) | Fig. 1B | CC BY 4.0; Crossref by/4.0 |
+| bohlerReduced | alignment | Sturz-Jantsch et al. 2025 (PMC12346960) | Fig. 1a | CC BY 4.0; Crossref by/4.0 |
+| bohlerNormal | alignment | Crone et al. 2026 (PMC13198512) | Fig. 7 | CC BY 4.0; Crossref by/4.0 |
+| talarFractureLateral | hindfoot | Chen et al. 2020 (PMC7328999) | Fig. 2 | CC BY 4.0; Crossref by/4.0 |
+| hawkinsSign | hindfoot | Chen et al. 2020 (PMC7328999) | Fig. 8A | CC BY 4.0; Crossref by/4.0 |
+| metatarsalStressFracture | metatarsals | Palka et al. 2025 (PMC12041408) | Fig. 9A | CC BY 4.0; Crossref by/4.0 |
+
+Where an image differs from the study's text (the captions follow the source):
+- ettLandmarks uses the clavicle line as the upper limit, which the study (after Blayney) calls
+  variable from film to film; it is also a nasotracheal tube.
+- interstitialEmphysema arose on nasal CPAP, without mechanical ventilation.
+- umbilicalCatheters calls a UVC tip at T8 "optimal": within D'Andrea's T8–T9, just above Verheij's
+  T9–T10.
+- patellaAlta is a patellar tendon rupture, not a lower-pole avulsion; the source contradicts itself
+  on the side, and the image matches its Fig. 1.
+- bipartitePatella is a traumatic separation of a Saupe III fragment, which the source calls
+  "anterosuperior".
+- doubleArc: the source names the smaller arc the trochlea, where the study says the lateral trochlear
+  ridge. monteggiaAnterior gives no Bado type, because its author questions type I.
+- hawkinsSign is at 3 months; the study gives 6 to 8 weeks for the sign to appear.
+- talarFractureLateral is captioned "talar fracture" in the source; the neck fracture is named in its
+  CT caption.
+- metatarsalStressFracture is in a 17-year-old with closed physes.
+- thumbUclAvulsion is undisplaced; boxerFractureOblique's source says "volar angulation" (the study's
+  apex dorsal); foreignBody is a chronic retained fragment.
+- lateralProcessCt is CT: the paper's radiograph shows only "obscure" lines with no arrow.
+
+Not used: knee lipohaemarthrosis (Wong 2015 Part 2, Fig. 2b; 234 px, the fat-fluid level not
+visible at that size), the hand volar plate fleck (Lee 2021, Fig. 4A; small and unmarked), a
+terrible triad figure in the Open Orthopaedics Journal (Bentham Open, on predatory-publisher lists),
+Torg radiographs in PMC5155254 (CC BY-NC), and Myerson divergent and homolateral patterns in
+PMC8762863 (about 200 px; the full-size copy was not reachable).
+
+Still without an image: the knee's horizontal-beam lateral with a lipohaemarthrosis, the reverse
+Segond and tibial spine or PCL avulsions; the radiocapitellar view; radial inclination drawn on a PA;
+the ankle effusion (teardrop) sign; Torg types; the neonatal UAC's loop through the pelvis.

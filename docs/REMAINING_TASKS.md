@@ -145,8 +145,10 @@ region at a time, end to end, following the ankle pilot
 
 - [x] X-ray studies (the author's choice, 2026-11-01): the neonatal chest X-ray (lines check and
   respiratory distress) and adult injury X-rays of the knee, elbow, wrist, hand, ankle and foot,
-  written with every claim read; specs `docs/superpowers/specs/2026-11-01-*.md`. Example scans for
-  them are not added yet.
+  written with every claim read; specs `docs/superpowers/specs/2026-11-01-*.md`. Example radiographs
+  added 2026-11-02 (71 images, 60 new); still without one: knee lipohaemarthrosis, reverse Segond and
+  tibial spine/PCL avulsion, the radiocapitellar view, radial inclination, the ankle teardrop sign,
+  Torg types and the UAC's pelvic loop (see the example-scans doc).
 
 For each region, ask first which exam the study covers and what history usually comes
 with it. The ankle was MRI with a history of "pain" only.

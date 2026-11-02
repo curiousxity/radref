@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Cite } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { fifthMetatarsalScans } from '../data/scans/fifthMetatarsal'
+import { footXrayScans } from '../data/scans/footXray'
+import { lisfrancScans } from '../data/scans/lisfranc'
 import { hawkins, hawkinsDescriptions, hawkinsGaps, hawkinsSentence, hawkinsTypes } from '../logic/hawkins'
 import type { HawkinsInput, HawkinsType } from '../logic/hawkins'
 import { myerson, myersonDescriptions, myersonGroup, myersonSentence, myersonTypes } from '../logic/myerson'
@@ -241,6 +245,7 @@ const learn: LearnSection[] = [
         <p>Böhler's angle is formed by a line from the tip of the anterior calcaneal process to the top of the posterior facet and a line from the posterior facet to the top of the tuberosity. Böhler gave 30° to 35°, with under 28° abnormal; the generally accepted normal values are 25° to 40°, and under 25° suggests depression of the posterior facet. A normal Böhler's angle does not exclude an undisplaced calcaneal fracture ({CRONE}). Sposeto and colleagues give 20° to 40° ({SPOSETO}); in 143 normal Chinese feet the angle was 31.6° ± 5.19° (range 20.1° to 47.2°) ({MA}).</p>
         <p>The critical angle of Gissane is formed by lines along the top of the anterior process and along the posterior facet. The generally accepted normal values are 120° to 145°, and the angle enlarges as the posterior facet collapses; reported normal values range from 95° to 150°, and in severely comminuted fractures the landmarks may not be seen ({CRONE}). Sposeto and colleagues give 95° to 105° ({SPOSETO}). This form uses Crone's ranges.</p>
         {anglesTable}
+        <ScanFigures images={[footXrayScans.lisfrancFractureDislocation, footXrayScans.lisfrancMalalignment, footXrayScans.bohlerReduced, footXrayScans.bohlerNormal, lisfrancScans.diastasis]} />
       </>
     ),
   },
@@ -258,6 +263,7 @@ const learn: LearnSection[] = [
         <p>When the radiographs are inconclusive and suspicion is high, CT shows occult fractures and subtle subluxations, and MRI shows the ligaments ({HAMMAD}). The ACR rates MRI and CT without contrast 9 each when a Lisfranc injury or an occult fracture or dislocation is suspected and the radiographs are normal or equivocal ({ACR}).</p>
         <h3>Navicular, cuboid and cuneiforms</h3>
         <p>For navicular fractures in elite athletes, the 2025 consensus starts with plain radiographs; in athletes a CT is routinely done to assess displacement or complexity; a bone scan is not routinely recommended when the radiographs are negative; and if CT is negative or inconclusive, MRI should follow. Navicular stress fractures are typically diagnosed more than six months after the pain starts ({WEBBER}). On CT, all 55 of Kiss's navicular stress fractures involved the central third of the proximal dorsal margin, 96% were partial, and 11% were missed at the first reading because they were small ({KISS}).</p>
+        <ScanFigures images={[footXrayScans.lisfrancLateralDislocation, lisfrancScans.fleck]} />
       </>
     ),
   },
@@ -275,6 +281,7 @@ const learn: LearnSection[] = [
         <p>The radiographic signs of a stress fracture are usually absent early; well-defined linear lucencies appear 2 to 6 weeks after the injury, with a variable periosteal reaction ({CHLOROS}). In a systematic review, radiographs were 12% to 56% sensitive and 88% to 96% specific for lower-limb stress fractures, and MRI was the most sensitive and specific test ({WRIGHT}). The ACR makes radiography the first test, with MRI for stress fractures the radiographs do not show ({ACR_STRESS}).</p>
         <h3>Toes</h3>
         <p>For a suspected injury of a metatarsophalangeal joint, a metatarsal or a toe outside the Ottawa zones, the ACR rates foot radiographs 9 ({ACR}). The sources read for this lesson give no further rules for toe fractures, so the form records them as described.</p>
+        <ScanFigures images={[footXrayScans.metatarsalStressFracture, fifthMetatarsalScans.zones, fifthMetatarsalScans.zone2, fifthMetatarsalScans.zone3]} />
       </>
     ),
   },
@@ -292,6 +299,7 @@ const learn: LearnSection[] = [
         {hawkinsTable}
         <p>In Halvorson's 848 talar fractures, as Alton reports them, osteonecrosis followed 5.7% of type I, 18.4% of type II, 44.7% of type III and 12.1% of the rare type IV ({ALTON}). In Canale and Kelly's series it followed 2 of 13 undisplaced fractures, half of those with subtalar subluxation or dislocation, and 16 of 19 with complete dislocation of the talar body ({CANALE}).</p>
         <p>The Hawkins sign is subchondral atrophy in the talar dome on the AP radiograph 6 to 8 weeks after the injury, a good prognostic sign; its absence is not a reliable sign of osteonecrosis ({ALTON}). In Tezval's 31 patients it was 100% sensitive and 57.7% specific, appeared between the 6th and 9th weeks, and was seldom seen on the lateral view ({TEZVAL}).</p>
+        <ScanFigures images={[footXrayScans.talarFractureLateral, footXrayScans.hawkinsSign]} />
       </>
     ),
   },
