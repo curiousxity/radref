@@ -92,7 +92,9 @@ describe('brain territories page', () => {
   // cross the midline"; "At the midbrain level, midline infarctions can be visualized".
   test('paramedian medullary and pontine infarcts stop at the midline; midbrain ones can cross it', () => {
     expect(page).toContain('stop at the midline')
-    expect(page).toContain('Midbrain infarcts can cross it')
+    expect(page).toContain('Paramedian medullary and pontine infarcts are sharply marginated, long in the sagittal plane, and stop at the midline')
+    expect(page).toContain('midbrain infarcts can cross it')
+    expect(page).not.toContain('Most medullary and pontine infarcts')
   })
 
   // T-C151, Pai 2020 and Zedde 2025 (citing Ayanzen): "31% of non-dominant transverse sinuses

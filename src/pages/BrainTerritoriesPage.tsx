@@ -228,8 +228,8 @@ export function BrainTerritoriesPage() {
         </p>
         <ul className="plain-list">
           <li>
-            Most medullary and pontine infarcts are paramedian, sharply marginated and long in the sagittal plane, and they stop at the midline: the
-            paramedian branches never cross it. Midbrain infarcts can cross it, as their many branches are not limited to a paramedian distribution (
+            Paramedian medullary and pontine infarcts are sharply marginated, long in the sagittal plane, and stop at the midline: the paramedian
+            branches never cross it; midbrain infarcts can cross it, as their many branches are not limited to a paramedian distribution (
             <Cite doi={DOI.zedde2022}>Zedde et al. 2022</Cite>).
           </li>
         </ul>
