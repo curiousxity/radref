@@ -711,7 +711,7 @@ figure captions with `FIG:`). Searches, crop boxes and rejected candidates are i
 | heubnerInfarct | De Lorenzo et al. BMC Neurol 2023;23:399 (PMC10631111) | Fig. 1 | CC BY 4.0 / by/4.0 | upper right (FLAIR) panel; the caption names the Heubner territory (arrow with asterisk); the other arrow is an MCA lesion |
 | midbrainInfarct | Sakai et al. Cureus 2025;17:e93448 (PMC12571697) | Fig. 1a | "CC-BY 4.0" / none | right rostral paramedian midbrain on DWI; the paper names no artery |
 | flowVoidLoss, t1BrightClot, dwiBrightClot | Karagulle et al. Diagnostics 2026;16:1771 (PMC13298027) | Figs. 2C, 2B, 2E | "CC BY", by/4.0 link / by/4.0 | one patient, left transverse sinus thrombosis; panels about 240 px in the source |
-| polycythaemiaDenseSinus | Gayathri et al. J Pediatr Neurosci 2010;5:27 (PMC2964806) | Fig. 2 | "CC BY", PMC licence link by/2.0 / none | case 2 (tetralogy of Fallot, haematocrit 66%); the sinuses enhanced on contrast CT (Fig. 4); burned-in date and labels cropped off |
+| polycythaemiaDenseSinus | Gayathri et al. J Pediatr Neurosci 2010;5:27 (PMC2964806) | Fig. 2 | "CC BY", PMC licence link by/2.0 / none | case 2 (tetralogy of Fallot, haematocrit 66%); the sinuses enhanced on contrast CT (Fig. 4) but there was no venography and the authors say clot must be ruled out, so the caption claims neither; burned-in date and labels cropped off |
 
 Not used: Canedo-Antelo 2019 (RadioGraphics, not CC BY); Nouh Fig. 3A (lateral medullary FLAIR, no
 arrow and the lesion not visible at the source's size); Yilmaz 2016, Heubner infarct (PMC4884235;

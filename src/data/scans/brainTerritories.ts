@@ -71,7 +71,7 @@ export const brainTerritoriesScans = {
   midbrainInfarct: {
     src: '/scans/brain-territories/midbrain-infarct.jpg',
     alt: 'Axial diffusion-weighted MRI at the level of the midbrain: a small bright spot in the right side of the midbrain beside the midline, marked by an arrow',
-    caption: 'Acute infarct in the right rostral paramedian midbrain on DWI (arrow), in a patient with isolated body lateropulsion.',
+    caption: 'Acute infarct in the right rostral paramedian midbrain on DWI (arrow).',
     source: S.sakai2025,
     figure: 'Fig. 1a',
   },
@@ -222,9 +222,9 @@ export const brainTerritoriesScans = {
   },
   polycythaemiaDenseSinus: {
     src: '/scans/brain-territories/polycythaemia-dense-sinus.jpg',
-    alt: "Axial plain CT of a child's head: the straight sinus and the back of the superior sagittal sinus are brighter than the brain; a dark round lesion with a rim sits in the left parietal lobe, on the right of the image",
+    alt: "Axial plain CT of a child's head: the straight sinus and the back of the superior sagittal sinus are brighter than the brain; a dark round lesion sits in the left parietal lobe, on the right of the image",
     caption:
-      'Hyperdense straight and superior sagittal sinuses on plain CT in a child with polycythaemia from cyanotic heart disease, with a left parietal abscess; on contrast CT the sinuses enhanced.',
+      'Hyperdense straight and superior sagittal sinuses on plain CT in a child with polycythaemia from cyanotic heart disease; the dark left parietal lesion with oedema is a separate finding.',
     source: S.gayathri2010,
     figure: 'Fig. 2',
   },
