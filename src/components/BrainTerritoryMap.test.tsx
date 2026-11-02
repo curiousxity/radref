@@ -1,8 +1,8 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, test } from 'vitest'
-import { BrainTerritoryMap } from './BrainTerritoryMap'
+import { BrainTerritoryMap, TerritoryCaption } from './BrainTerritoryMap'
 import { LEVELS } from './brainTerritoryShapes'
-import { familiesShown, territoriesShown } from './brainTerritoryViews'
+import { captionEntries, familiesShown, territoriesShown } from './brainTerritoryViews'
 
 const level = (id: string) => LEVELS.find((l) => l.id === id)!
 
@@ -32,5 +32,28 @@ describe('brain territory map', () => {
     const families = familiesShown(level('basal-ganglia'), 'arterial', false)
     expect(html.match(/class="bt-key"/g)?.length).toBe(families.length)
     expect(html).toContain('Tap a territory')
+  })
+
+  test('a legend selection captions every territory of the family at the level, once each', () => {
+    const pons = level('pons')
+    const family = 'basilar'
+    const entries = captionEntries(pons, 'arterial', false, { family })
+    const expected = territoriesShown(pons, 'arterial', false).filter((t) => t.family === family)
+    expect(entries.length).toBeGreaterThan(1)
+    expect(entries.map((t) => t.id)).toEqual([...new Set(expected.map((t) => t.id))])
+    const html = renderToStaticMarkup(<TerritoryCaption level={pons} mode="arterial" zones={false} selection={{ family }} />)
+    for (const t of entries) {
+      expect(html).toContain(t.name)
+      expect(html).toContain(t.supply)
+    }
+    expect(html).toContain('Read more')
+  })
+
+  test('a tapped territory captions only itself', () => {
+    const pons = level('pons')
+    const [first, second] = captionEntries(pons, 'arterial', false, { family: 'basilar' })
+    const html = renderToStaticMarkup(<TerritoryCaption level={pons} mode="arterial" zones={false} selection={{ family: 'basilar', territory: first }} />)
+    expect(html).toContain(first.name)
+    expect(html).not.toContain(second.name)
   })
 })

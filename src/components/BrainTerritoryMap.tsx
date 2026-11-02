@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { ChoiceGroup } from './ChoiceGroup'
 import { FAMILIES, LEVELS, VIEW } from './brainTerritoryShapes'
-import type { Family, LevelId, Mode, Territory } from './brainTerritoryShapes'
-import { familiesShown, territoriesShown } from './brainTerritoryViews'
+import type { Family, Level, LevelId, Mode, Territory } from './brainTerritoryShapes'
+import { captionEntries, familiesShown, territoriesShown } from './brainTerritoryViews'
 
 /*
  * The vascular territories map: one schematic axial level at a time, coloured by arterial supply
@@ -26,6 +26,29 @@ function swatch(family: Family) {
 type Selection = { family: Family; territory?: Territory }
 
 const MIRROR = `matrix(-1 0 0 1 ${VIEW.width} 0)`
+
+/** A legend selection names every territory of the family at this level, so the sub-territories
+ *  and their supply are reachable without tapping the drawing; a tapped territory names itself. */
+export function TerritoryCaption({ level, mode, zones, selection }: { level: Level; mode: Mode; zones: boolean; selection: Selection | null }) {
+  if (!selection) return <div className="bt-caption" aria-live="polite">Tap a territory or pick one below.</div>
+  const info = FAMILIES[selection.family]
+  const entries = captionEntries(level, mode, zones, selection)
+  return (
+    <div className="bt-caption" aria-live="polite">
+      {selection.territory ? (
+        <p><strong>{selection.territory.name}</strong> · {selection.territory.supply}</p>
+      ) : (
+        <>
+          <p><strong>{info.label}</strong></p>
+          <ul className="bt-caption-list">
+            {entries.map((t) => <li key={t.id}><strong>{t.name}</strong> · {t.supply}</li>)}
+          </ul>
+        </>
+      )}
+      <a href={`#${info.section}`}>Read more</a>
+    </div>
+  )
+}
 
 export function BrainTerritoryMap() {
   const [levelId, setLevelId] = useState<LevelId>('basal-ganglia')
@@ -107,15 +130,7 @@ export function BrainTerritoryMap() {
         <text x={VIEW.width - 12} y="24" className="bt-side bt-side-end">L</text>
       </svg>
 
-      <p className="bt-caption" aria-live="polite">
-        {active ? (
-          <>
-            <strong>{active.territory?.name ?? FAMILIES[active.family].label}</strong>
-            {active.territory && <> · {active.territory.supply}</>}{' '}
-            <a href={`#${FAMILIES[active.family].section}`}>Read more</a>
-          </>
-        ) : 'Tap a territory or pick one below.'}
-      </p>
+      <TerritoryCaption level={level} mode={mode} zones={zones} selection={active} />
 
       <ul className="bt-legend">
         {families.map((f) => (
