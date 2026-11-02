@@ -291,9 +291,9 @@ const midbrain: Level = {
     },
     midline(MID, { x: 200, y: 240 }, [
       ['basilar', 'Anteromedial midbrain', 'Paramedian perforators of the basilar tip, the P1 segment of the PCA and the superior cerebellar artery', 330, 360],
-      ['pca', 'Anterolateral midbrain', 'Collicular, anterior choroidal and posterior medial choroidal arteries', 280, 330],
-      ['pca', 'Lateral midbrain', 'Collicular and posterior medial choroidal arteries and branches of the PCA', 225, 280],
-      ['pca', 'Dorsal midbrain', 'Collicular and posterior medial choroidal arteries', 180, 225],
+      ['pca', 'Anterolateral midbrain (upper midbrain)', 'Collicular, anterior choroidal and posterior medial choroidal arteries', 280, 330],
+      ['pca', 'Lateral midbrain (upper midbrain)', 'Collicular and posterior medial choroidal arteries and branches of the PCA', 225, 280],
+      ['pca', 'Dorsal midbrain (upper midbrain)', 'Collicular and posterior medial choroidal arteries', 180, 225],
     ], [
       ['deep', 'Midbrain', 'Peduncular veins to the basal vein of Rosenthal', 180, 360],
     ], 'mid-bs', { cx: 200, cy: 240, a: 50, b: 50, n: 2.2 }),

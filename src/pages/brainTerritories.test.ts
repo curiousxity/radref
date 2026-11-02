@@ -123,4 +123,21 @@ describe('brain territories page', () => {
     expect(page).toContain('a normal CT does not exclude thrombosis')
     expect(page).not.toContain('one third')
   })
+
+  // T-C63 and T-C68. Nouh 2014, Table 1: "PICA | Inferior posterior cerebellar hemisphere, inferior
+  // vermis, lateral medulla". Zedde 2022: "The lateral medulla oblongata is mostly supplied by the
+  // circumferentially penetrating branches from the VA, while the PICA supplies the remaining lateral
+  // and posterior portion of the medulla oblongata." The map follows Zedde, so the PICA item gives both.
+  test('the PICA item gives both views of the lateral medulla', () => {
+    expect(page).toContain('another review gives most of the lateral medulla to the vertebral artery, with the PICA')
+  })
+
+  // T-C47 and T-C122. Ota 2024, part II, Fig 2: "The peduncular and lateral pontomesencephalic veins
+  // drain into the basal vein of Rosenthal." Part I: some deep veins "drain into the basal vein of
+  // Rosenthal (BVR), which head toward the great cerebral vein of Galen (VOG)." The map's midbrain
+  // venous territory links to the Deep veins section, so that section names it.
+  test('the deep veins section says how the midbrain drains', () => {
+    const deep = page.slice(page.indexOf('id="venous-deep"'), page.indexOf('id="venous-posterior-fossa"'))
+    expect(deep).toContain('The midbrain drains through the peduncular veins to the basal vein of Rosenthal')
+  })
 })

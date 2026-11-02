@@ -152,7 +152,7 @@ export function BrainTerritoriesPage() {
         <ul className="plain-list">
           <li>
             The insula and opercula, the superior and middle temporal gyri, the inferior parietal lobule, the inferior and middle frontal gyri and
-            most of the precentral and postcentral gyri (<Cite doi={DOI.chandra}>Chandra et al.</Cite>): the lateral surface of the hemisphere, less
+            much of the precentral and postcentral gyri (<Cite doi={DOI.chandra}>Chandra et al.</Cite>): the lateral surface of the hemisphere, less
             the ACA's strip and the lower temporal lobe, which is PCA (<Cite doi={DOI.dogariu}>Dogariu et al.</Cite>).
           </li>
           <li>
@@ -184,7 +184,7 @@ export function BrainTerritoriesPage() {
         <ul className="plain-list">
           <li>
             Deep branches to the posterior two-thirds of the internal capsule, the optic and auditory radiations beside it, the medial globus
-            pallidus and the tail of the caudate; superficial branches to the uncus, hippocampal head, amygdala and lateral geniculate body (
+            pallidus and the tail of the caudate; superficial branches to the uncus, hippocampal head, amygdala and the lateral part of the lateral geniculate body (
             <Cite doi={DOI.chandra}>Chandra et al.</Cite>).
           </li>
           <li>
@@ -314,6 +314,7 @@ export function BrainTerritoriesPage() {
             Top of the basilar: the midbrain, thalami and the medial temporal and occipital lobes (<Cite doi={DOI.nouh}>Nouh et al.</Cite>).
           </li>
         </ul>
+        <p className="source-note">No open-access image of a midbrain infarct was found.</p>
       </section>
 
       <section className="info-card" id="cerebellum">
@@ -321,7 +322,8 @@ export function BrainTerritoriesPage() {
         <ul className="plain-list">
           <li>
             <strong>PICA</strong>: the inferior posterior cerebellar hemisphere, the inferior vermis and the lateral medulla (
-            <Cite doi={DOI.nouh}>Nouh et al.</Cite>), its cortical branches running on the suboccipital and inferior vermian surface. Its typical
+            <Cite doi={DOI.nouh}>Nouh et al.</Cite>); another review gives most of the lateral medulla to the vertebral artery, with the PICA
+            supplying the rest (<Cite doi={DOI.zedde2022}>Zedde et al. 2022</Cite>; see Medulla, above). Its cortical branches run on the suboccipital and inferior vermian surface. Its typical
             infarct is the lateral medullary (Wallenberg) syndrome, the dorsolateral medulla being hit most often (<Cite doi={DOI.blaszczyk}>Błaszczyk
             et al.</Cite>).
           </li>
@@ -369,7 +371,7 @@ export function BrainTerritoriesPage() {
         <ul className="plain-list">
           <li>
             <strong>Fetal PCA</strong>: the PCA arises from the internal carotid artery, mostly on one side; reported in 10% to 29% of people (
-            <Cite doi={DOI.nouh}>Nouh et al.</Cite>), though figures vary between reports (<Cite doi={DOI.chandra}>Chandra et al.</Cite>). Embolism in
+            <Cite doi={DOI.nouh}>Nouh et al.</Cite>), and in 11% to 29% by another review (<Cite doi={DOI.chandra}>Chandra et al.</Cite>). Embolism in
             the anterior circulation can then infarct the PCA territory, alone or with the MCA and ACA territories of the same hemisphere (
             <Cite doi={DOI.lambert}>Lambert et al.</Cite>).
           </li>
@@ -382,7 +384,7 @@ export function BrainTerritoriesPage() {
           </li>
           <li>
             The thalamic involvement is asymmetric in two-thirds (<Cite doi={DOI.nouh}>Nouh et al.</Cite>); the clinical triad is altered mental
-            status, vertical gaze palsy and memory impairment (<Cite doi={DOI.lazzaro}>Lazzaro et al.</Cite>). Deep venous thrombosis also takes both
+            status, vertical gaze palsy and memory impairment (<Cite doi={DOI.lazzaro}>Lazzaro et al.</Cite>). Deep venous thrombosis can also take both
             thalami (see Deep veins, below).
           </li>
           <li>
@@ -474,6 +476,10 @@ export function BrainTerritoriesPage() {
             the inferior sagittal sinus to form the straight sinus (<Cite doi={DOI.sadik}>Sadik et al.</Cite>).
           </li>
           <li>
+            The midbrain drains through the peduncular veins to the basal vein of Rosenthal (<Cite doi={DOI.ota2}>Ota, part II</Cite>), and so on to
+            the vein of Galen (<Cite doi={DOI.ota1}>Ota, part I</Cite>).
+          </li>
+          <li>
             <strong>Deep venous thrombosis</strong> (internal cerebral veins, vein of Galen, straight sinus): the thalami, often both, and sometimes the
             caudate and the deep white matter (<Cite doi={DOI.sadik}>Sadik et al.</Cite>; <Cite doi={DOI.oliveira}>Oliveira et al.</Cite>).
           </li>
@@ -547,6 +553,7 @@ export function BrainTerritoriesPage() {
           </li>
         </ul>
         <ScanFigures images={[brainTerritoriesScans.denseSinus, brainTerritoriesScans.cordSign, brainTerritoriesScans.emptyDelta, brainTerritoriesScans.venographyDefect, brainTerritoriesScans.swiBlooming]} />
+        <p className="source-note">No open-access image of loss of the flow void, of a clot bright on T1 or of a clot bright on DWI was found.</p>
 
         <h4 className="fm-subhead">Indirect signs</h4>
         <ul className="plain-list">
@@ -574,7 +581,7 @@ export function BrainTerritoriesPage() {
             <strong>Flow gaps on time-of-flight MR venography</strong>, common in hypoplastic sinuses. In one study (Ayanzen et al., as cited) they
             were seen in 31% of non-dominant transverse sinuses, and none in dominant transverse sinuses or the rest of the dural venous system (
             <Cite doi={DOI.pai}>Pai et al.</Cite>; <Cite doi={DOI.zedde2025}>Zedde and Pascarella</Cite>). Contrast-enhanced MR venography, which does
-            not depend on flow, confirms the sinus is patent (<Cite doi={DOI.zedde2025}>Zedde and Pascarella</Cite>).
+            not depend on flow, is used to confirm patency (<Cite doi={DOI.zedde2025}>Zedde and Pascarella</Cite>).
           </li>
           <li>
             <strong>In-plane saturation</strong>: signal loss where a patent sinus runs in the plane of a time-of-flight acquisition (
@@ -587,8 +594,8 @@ export function BrainTerritoriesPage() {
           </li>
           <li>
             <strong>Dense sinuses without clot</strong>: a high haematocrit, polycythaemia or dehydration (<Cite doi={DOI.sadik}>Sadik et al.</Cite>),
-            and newborns; the arteries then look dense too. Diffuse brain oedema can make the veins look relatively dense (
-            <Cite doi={DOI.oliveira}>Oliveira et al.</Cite>).
+            and newborns; the arteries then look dense too (<Cite doi={DOI.oliveira}>Oliveira et al.</Cite>). Diffuse brain oedema can make the
+            veins look relatively dense (<Cite doi={DOI.oliveira}>Oliveira et al.</Cite>).
           </li>
           <li>
             <strong>A false empty delta</strong>: an early split of the superior sagittal sinus, a septum, or a high or asymmetric torcular (

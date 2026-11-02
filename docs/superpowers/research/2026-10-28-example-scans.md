@@ -720,5 +720,7 @@ little anatomy; Sadik Fig. 15 used instead); Takada 2025 and Yanusha 2025 MCA in
 photographed film with burned-in text).
 
 Still without an image: an infarct of the MCA superior or inferior division alone, a Heubner
-infarct, and a dense sinus from a high haematocrit (the page says so in each section). The
+infarct, a midbrain infarct, loss of the flow void, a clot bright on T1, a clot bright on DWI, and a
+dense sinus from a high haematocrit (the page says so in each section; the midbrain and the three
+sinus-thrombosis signs were added to the page's notes in the final review, 2026-11-02). The
 high-riding jugular bulb is not on the page, so none was sought.

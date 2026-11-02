@@ -161,7 +161,9 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   files, so they work offline once the page has been opened signed in; keep any new photo small and
   greyscale.
   The example scans on the other pages (`public/scans/<page>/`, below) are precached (`jpg` is in `globPatterns`);
-  each page's set is 100 to 260 KB, about 1660 KB in all (2026-10-28). Use about 340 px for
+  each page's set is 25 to 475 KB, about 7000 KB in all across 40 pages (2026-11-02); the largest
+  are shoulder MRI (about 475 KB), the neonatal chest X-ray (about 400 KB), brain territories (about
+  370 KB) and knee MRI (about 360 KB). Use about 340 px for
   ultrasound, whose speckle compresses poorly.
 - The anatomy viewers' shared stylesheet, `public/members/anatomy/shared/radref.css`, is a members
   file, cached with the first viewer opened. `woff2` is still in `globPatterns`, but no font ships any more, so it

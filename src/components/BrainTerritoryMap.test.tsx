@@ -14,7 +14,7 @@ describe('brain territory map', () => {
     expect(familiesShown(bg, 'venous', true)).not.toContain('borderZone')
   })
 
-  test('the legend lists each family at the level once, in drawing order', () => {
+  test('the legend lists each family at the level once, and only those at the level', () => {
     const families = familiesShown(level('pons'), 'arterial', false)
     expect(new Set(families).size).toBe(families.length)
     expect(families).toEqual(expect.arrayContaining(['basilar', 'aica', 'sca', 'pica', 'mca', 'pca']))
