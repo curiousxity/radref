@@ -463,7 +463,8 @@ type, each with three tabs:
 Studies: rectal MRI, prostate MRI (PI-RADS v2.1), renal mass CT and MRI, adnexal mass
 MRI (O-RADS MRI), pancreatic mass CT, pancreatic cysts (ACR 2017, Fukuoka 2017, Kyoto
 2024), CT colonography (C-RADS 2023), epilepsy MRI (HARNESS-MRI), sinus CT before
-FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI, skull base MRI and CT (below), brachial plexus MRI (below). Drafted from the guidelines (ankle MRI from the published
+FESS, temporal bone CT, suprahyoid neck CT and MRI, larynx CT and MRI, skull base MRI and CT (below), brachial plexus MRI (below), the neonatal chest X-ray and six adult
+injury X-ray studies (knee, elbow, wrist, hand, ankle, foot; below). Drafted from the guidelines (ankle MRI from the published
 papers in its reference list) rather than from the site author's
 notes: thyroid ultrasound (ACR TI-RADS 2017), liver CT and MRI (LI-RADS v2018), lung
 screening CT (Lung-RADS v2022), incidental lung nodule CT (Fleischner 2017), ankle MRI.
@@ -532,7 +533,18 @@ scenarios) was written the same way on 2026-10-29, every claim read in an abstra
 text or the ACR's published ratings tables (`docs/superpowers/research/2026-10-29-brachial-plexus-sources.md`,
 spec `docs/superpowers/specs/2026-10-29-brachial-plexus-study-design.md`); its note does not start
 "Unchecked draft". The ACR ratings tables are free at acsearch.acr.org ("Ratings & Appendix"), while
-the JACR narratives sit behind a robot check. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+the JACR narratives sit behind a robot check. The X-ray studies (2026-11-01, the author's choice) were written
+the same way, every claim read first: the neonatal chest X-ray (`/studies/neonatal-chest-xray`, Chest;
+step 1 picks a lines check, respiratory distress or both, and every line and tube tip is recorded by
+vertebral level against its sourced range) and six adult injury studies, one per joint
+(`/studies/{knee,elbow,wrist,hand,ankle,foot}-xray`, each in its joint's region and linked to its
+calculators). They reuse the calculators' logic files (Schatzker, Mason, Herbert, Mayfield, Myerson,
+Sanders, Hawkins) and the fifth metatarsal page's wording, so a study never contradicts its calculator;
+the Ottawa knee, ankle and foot rules and the Amsterdam wrist rules are recorded as the reason for the
+film; the ankle study names Weber A, B or C (no Weber calculator, the author's choice). Specs:
+`docs/superpowers/specs/2026-11-01-neonatal-chest-xray-study-design.md` and
+`docs/superpowers/specs/2026-11-01-adult-injury-xray-studies-design.md`; claims in
+`docs/superpowers/research/2026-11-01-*-xray-sources.md`. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
 `doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
 and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
 Europe PMC API on `www.ebi.ac.uk`.

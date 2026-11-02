@@ -24,12 +24,24 @@ describe('registry', () => {
 
   // The author's decision (2026-10-28): body region is the main way in, and each region page lists
   // everything for that area under a heading per kind. The wrist was the worked example.
-  test('the wrist region holds the study, the four classifications and the 3D wrist', () => {
+  test('the wrist region holds the studies, the four classifications and the 3D wrist', () => {
     expect(regionGroups('Wrist and hand').map(({ kind, items }) => [kind, items.map((item) => item.path)])).toEqual([
-      ['study', ['/studies/wrist-mri']],
+      ['study', ['/studies/wrist-mri', '/studies/wrist-xray', '/studies/hand-xray']],
       ['classification', ['/mayfield', '/herbert', '/palmer', '/lichtman']],
       ['anatomy', ['/wrist']],
     ])
+  })
+
+  // The X-ray studies of 2026-11-01: each sits in its joint's region and is a members page.
+  test('the X-ray studies sit in their regions and load as members pages', () => {
+    const regionOf = (path: string) => calculators.find((item) => item.path === path)?.region
+    expect(regionOf('/studies/neonatal-chest-xray')).toBe('Chest')
+    expect(regionOf('/studies/knee-xray')).toBe('Knee')
+    expect(regionOf('/studies/elbow-xray')).toBe('Elbow')
+    expect(regionOf('/studies/wrist-xray')).toBe('Wrist and hand')
+    expect(regionOf('/studies/hand-xray')).toBe('Wrist and hand')
+    expect(regionOf('/studies/ankle-xray')).toBe('Ankle and foot')
+    expect(regionOf('/studies/foot-xray')).toBe('Ankle and foot')
   })
 
   test('each fracture classification sits in its joint\'s region', () => {
