@@ -18,8 +18,11 @@ by the author's choice).
 
 - Done 2026-10-28: members sign-in is live (see CLAUDE.md, "Members pages"). Only the author's
   email is on the "Rad Ref members" policy, and the author is the only member for now
-  (2026-10-29). To add one later: Zero Trust → Access controls → Policies, or "Emails ending in"
-  for a whole domain.
+  (2026-10-29). Since 2026-11-02 sign-in is Google only (the author's choice). To add a member: their
+  Google email in Zero Trust → Access controls → Policies, and as a test user in Google Cloud →
+  Google Auth Platform → Audience (project `rad-ref`, Testing mode, up to 100). A whole domain
+  ("Emails ending in") would also need the Google app published, which asks for a verified home
+  page and privacy policy.
 - Done 2026-10-28: Cloudflare's own Git build is disabled (Worker radref → Settings → Builds →
   "Disable builds"; the repo stays connected), so only the GitHub Action deploys.
 - **Regions: confirmed by the author 2026-10-29.** The home page, menu and `/regions/<slug>` pages

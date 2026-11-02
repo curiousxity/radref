@@ -26,7 +26,7 @@ export function MembersOnly() {
           </p>
           {!offline && (
             <div className="hero-actions">
-              <a href={signInHref(location.pathname + location.search)} className="primary-button">Sign in</a>
+              <a href={signInHref(location.pathname + location.search)} className="primary-button">Sign in with Google</a>
             </div>
           )}
         </div>

@@ -131,15 +131,18 @@ path Cloudflare Access guards:
   The example scans in `public/scans/` stay public: several are shared with classification pages,
   and all are open-access CC BY figures.
 - Without a session the chunk fetch is redirected to the Access login and fails, so `membersPage`
-  renders `MembersOnly` (`src/components/MembersOnly.tsx`) with a "Sign in" link to
+  renders `MembersOnly` (`src/components/MembersOnly.tsx`) with a "Sign in with Google" link to
   `/members/signin/?to=<page>`. Access asks for the sign-in there, then
   `public/members/signin/index.html` returns the reader to the page; it accepts only a same-site
   path (pinned in `calculators.test.ts`).
 - Access is set up in the Cloudflare dashboard, not in this repo (2026-10-28): Zero Trust Free,
   team `nameless-smoke-e0f8`; self-hosted application "radref" on `radref.hash.immo/members/*`;
-  Allow policy "Rad Ref members" listing members' emails; login by email one-time PIN (or a
-  Cloudflare account). To add a member, add their email to that policy. Without an Access
-  application `/members/` would be open.
+  Allow policy "Rad Ref members" listing members' emails. Login is Google only (the author's
+  choice, 2026-11-02; no one-time PIN), with Instant Auth on: Access sends the reader straight to
+  Google. The Google OAuth client is "Rad Ref Cloudflare Access" in Google Cloud project `rad-ref`,
+  whose consent screen is in Testing mode, so Google lets in only its listed test users (up to 100).
+  To add a member, add their Google email to the Access policy and as a test user in Google Auth
+  Platform → Audience. Without an Access application `/members/` would be open.
 
 ## Offline / PWA
 
