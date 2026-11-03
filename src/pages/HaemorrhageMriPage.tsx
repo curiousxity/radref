@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { Cite, LessonReferences } from '../components/LessonPage'
 import type { LessonReference } from '../components/LessonPage'
+import { ScanFigures } from '../components/ScanFigures'
+import { haemorrhageMriScans } from '../data/scans/haemorrhageMri'
 
 // Every cell below was read in its paper first (abstract or open full text); the cells, their
 // verdicts and the quoted sentences are in
@@ -379,6 +381,15 @@ export function HaemorrhageMriPage() {
           dark effect of blood products is stronger at higher field and on gradient echo, weaker on fast spin echo (<Cite doi={DOI.bradley}>Bradley</Cite>;{' '}
           <Cite doi={DOI.parizel}>Parizel et al.</Cite>).
         </p>
+        <ScanFigures
+          images={[
+            haemorrhageMriScans.hyperacuteHaematoma,
+            haemorrhageMriScans.acuteHaematoma,
+            haemorrhageMriScans.lateSubacuteHaematoma,
+            haemorrhageMriScans.chronicHaematoma,
+          ]}
+        />
+        <p className="source-note">No open-access image of an early subacute intracerebral haematoma was found.</p>
       </section>
 
       <section className="info-card" id="subdural">
@@ -419,6 +430,8 @@ export function HaemorrhageMriPage() {
           <Cite doi={DOI.fobben}>Fobben et al.</Cite>; <Cite doi={DOI.tripathy}>Tripathy et al.</Cite>). Chronic collections have membranes and septa, and the
           outer membrane enhances (<Cite doi={DOI.hasan}>Hasan et al.</Cite>).
         </p>
+        <ScanFigures images={[haemorrhageMriScans.subacuteSubdural, haemorrhageMriScans.chronicSubdural]} />
+        <p className="source-note">No open-access image of an acute subdural haematoma on MRI was found.</p>
       </section>
 
       <section className="info-card" id="sah-microbleeds">
@@ -444,6 +457,7 @@ export function HaemorrhageMriPage() {
             </tbody>
           </table>
         </div>
+        <ScanFigures images={[haemorrhageMriScans.sahFlair, haemorrhageMriScans.superficialSiderosis, haemorrhageMriScans.microbleeds]} />
       </section>
 
       <LessonReferences references={references} />

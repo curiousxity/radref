@@ -738,3 +738,39 @@ its caption).
 
 Still without an image: an infarct of the MCA inferior division alone (the page says so). The
 high-riding jugular bulb is not on the page, so none was sought.
+
+## Haemorrhage on MRI (2026-11-02)
+
+MRI for the haemorrhage on MRI page (`src/data/scans/haemorrhageMri.ts`), made as above (CC BY with
+a stated version, one panel per file, greyscale, under 40 KB, in `public/scans/haemorrhage-mri/`).
+Each row of images sits under the table of `src/pages/HaemorrhageMriPage.tsx` it illustrates, in
+table-row order, and each caption keeps to the source figure's caption and to the table's cell. The
+figure leads came from the appendix of `2026-11-02-haemorrhage-mri-sources.md`; the gaps were
+searched in Europe PMC, including figure captions with `FIG:`. Larger copies of the same figures
+were taken from the publishers (Frontiers, Springer) where Europe PMC's were small. Searches, crop
+boxes and rejected candidates are in the scratchpad `hm-scans/notes.md`.
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| hyperacuteHaematoma, acuteHaematoma, lateSubacuteHaematoma | Penckofer et al. Front Neurosci 2024;18:1408288 (PMC11111865) | Fig. 1A (panels A2, B2, D1) | CC BY 4.0 / by/4.0 | plainly different patients; the caption gives no patient details; B2 is labelled T2 FLAIR but the CSF is bright, so the caption says T2-weighted and gives the source's label |
+| chronicHaematoma | Patra et al. Indian J Crit Care Med 2019;23:S104-S114 (PMC6707490) | Fig. 7B | CC BY 4.0 / none | right basal ganglia, T2; figure taken from PMC (the Europe PMC supplementary files failed) |
+| subacuteSubdural | Tabibkhooei et al. New Microbes New Infect 2021;40:100848 (PMC7879972) | Fig. 3a | CC BY 4.0 / by/4.0 | case 2; the authors date it early subacute from the signal, though the case text says a CT on the admission day showed no bleed and the MRI was on the second day |
+| chronicSubdural | Kuczyński et al. J Clin Med 2026;15:4134 (PMC13258658) | Fig. 6 | "CC BY", by/4.0 link / by/4.0 | "Own material"; green arrows kept via the green channel; orientation letters and ruler cropped off |
+| sahFlair, superficialSiderosis, microbleeds | Weidauer et al. Clin Neuroradiol 2023;33:293-306 (PMC10220152) | Figs. 6b, 5b, 7g | CC BY 4.0 / by/4.0 | three patients; the convexity SAH is from CAA (no open aneurysmal SAH on FLAIR was found); the dates above Fig. 6 cropped off |
+
+Not used: Penckofer Fig. 1A C1/C2 (early subacute; a small midline brainstem lesion, faint on T1)
+and E1/E2 (chronic; a small dark focus on GRE, no arrow, could be taken for a microbleed); Hasan 2022
+Fig. 3A (PMC9393587; clear, but carries an arrowhead its caption does not explain, so Kuczyński's
+was used); Patra Fig. 4 (subacute subdural, labelled T1 but the cortex is brighter than the white
+matter, as on FLAIR); Arai 2024 acute subdural (PMC11297714, Fig. 1C; the MRI was about a week
+after the fall, past the page's 3-day acute window); Pineda 2024 (PMC11168240; bright on T2, in
+intracranial hypotension); the Clin Case Rep 2026 and Cureus 2025 subdurals (PMC13051822,
+PMC12535179; bright on T2 or T1, against the page's acute row); Iliescu 2015 (PMC4556906; a
+neuroradiologycases.com watermark, no licence version); the Turk J Haematol 2012 subdurals
+(PMC3986758; burned-in patient text, no licence version); Ahmad 2021 (PMC8325620; thin rims with
+measurement text); Padarti 2023 cavernoma bleed (PMC9996543; a small dot); Sporns 2020
+paediatric review (PMC7290500, Fig. 3; T2* and contrast T1 only); the Alzheimers Dement 2023 CAA
+panels (PMC10916950, Fig. 1A; dark, low contrast).
+
+Still without an image: an early subacute intracerebral haematoma and an acute subdural haematoma on
+MRI (the page says so).

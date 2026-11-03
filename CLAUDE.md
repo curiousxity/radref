@@ -161,7 +161,7 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   files, so they work offline once the page has been opened signed in; keep any new photo small and
   greyscale.
   The example scans on the other pages (`public/scans/<page>/`, below) are precached (`jpg` is in `globPatterns`);
-  each page's set is 25 to 475 KB, about 7000 KB in all across 40 pages (2026-11-02); the largest
+  each page's set is 25 to 475 KB, about 7250 KB in all across 41 pages (2026-11-02); the largest
   are shoulder MRI (about 475 KB), brain territories (about 445 KB), the neonatal chest X-ray (about
   400 KB) and knee MRI (about 360 KB). Use about 340 px for
   ultrasound, whose speckle compresses poorly.
