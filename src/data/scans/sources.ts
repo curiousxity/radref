@@ -272,7 +272,6 @@ export const SCAN_SOURCES = {
   // 4.0 in the article and in Crossref.
   penckofer2024: { short: 'Penckofer et al. 2024', doi: '10.3389/fnins.2024.1408288', licence: 'CC BY 4.0' },
   patra2019: { short: 'Patra et al. 2019', doi: '10.5005/jp-journals-10071-23186', licence: 'CC BY 4.0' },
-  tabibkhooei2021: { short: 'Tabibkhooei et al. 2021', doi: '10.1016/j.nmni.2021.100848', licence: 'CC BY 4.0' },
   kuczynski2026: { short: 'Kuczyński et al. 2026', doi: '10.3390/jcm15114134', licence: 'CC BY 4.0' },
   weidauer2023: { short: 'Weidauer et al. 2023', doi: '10.1007/s00062-022-01231-5', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

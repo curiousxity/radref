@@ -31,13 +31,6 @@ export const haemorrhageMriScans = {
     source: S.patra2019,
     figure: 'Fig. 7B',
   },
-  subacuteSubdural: {
-    src: '/scans/haemorrhage-mri/subacute-subdural.jpg',
-    alt: 'Axial T1-weighted MRI: a crescent-shaped collection over the right hemisphere, on the left of the image, with a bright outer rim and a grey inner part',
-    caption: 'Early subacute subdural haematoma over the right fronto-temporo-parietal convexity, with a bright rim on T1, in an 84-year-old woman with COVID-19.',
-    source: S.tabibkhooei2021,
-    figure: 'Fig. 3a',
-  },
   chronicSubdural: {
     src: '/scans/haemorrhage-mri/chronic-subdural.jpg',
     alt: 'Axial FLAIR MRI: bright crescent-shaped collections over both hemispheres, marked by arrows; the right one, on the left of the image, is uneven in signal',

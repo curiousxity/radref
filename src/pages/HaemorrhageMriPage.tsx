@@ -430,8 +430,8 @@ export function HaemorrhageMriPage() {
           <Cite doi={DOI.fobben}>Fobben et al.</Cite>; <Cite doi={DOI.tripathy}>Tripathy et al.</Cite>). Chronic collections have membranes and septa, and the
           outer membrane enhances (<Cite doi={DOI.hasan}>Hasan et al.</Cite>).
         </p>
-        <ScanFigures images={[haemorrhageMriScans.subacuteSubdural, haemorrhageMriScans.chronicSubdural]} />
-        <p className="source-note">No open-access image of an acute subdural haematoma on MRI was found.</p>
+        <ScanFigures images={[haemorrhageMriScans.chronicSubdural]} />
+        <p className="source-note">No open-access image of an acute or subacute subdural haematoma on MRI was found.</p>
       </section>
 
       <section className="info-card" id="sah-microbleeds">
