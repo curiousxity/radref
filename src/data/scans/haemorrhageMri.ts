@@ -33,8 +33,8 @@ export const haemorrhageMriScans = {
   },
   chronicSubdural: {
     src: '/scans/haemorrhage-mri/chronic-subdural.jpg',
-    alt: 'Axial FLAIR MRI: bright crescent-shaped collections over both hemispheres, marked by arrows; the right one, on the left of the image, is uneven in signal',
-    caption: 'Bilateral chronic subdural haematomas, bright on T2 FLAIR at 3 T (arrows).',
+    alt: 'Axial FLAIR MRI: bright crescent-shaped collections over both hemispheres, marked by arrows; each has dark pockets with flat lower edges at the front',
+    caption: 'Bilateral chronic subdural haematomas, bright on T2 FLAIR at 3 T (arrows); the dark pockets at the front are not explained in the source.',
     source: S.kuczynski2026,
     figure: 'Fig. 6',
   },

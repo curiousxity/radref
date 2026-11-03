@@ -136,7 +136,7 @@ const haematomaStages: HaematomaStage[] = [
     stage: 'Chronic',
     time: 'Over 1 month',
     product: 'Haemosiderin and ferritin',
-    t1: 'Dark',
+    t1: 'Dark (can be like brain or bright from residual methaemoglobin)',
     t2: 'Bright centre, dark rim',
     swi: 'Dark rim; centre varies',
     ct: (
@@ -178,7 +178,7 @@ const subduralStages: SubduralStage[] = [
     time: '4–21 days',
     ct: (
       <>
-        Like brain or slightly bright (<Cite doi={DOI.popescuCt}>Popescu et al.</Cite>)
+        Like brain or slightly bright (<Cite doi={DOI.popescuCt}>Popescu et al.</Cite>; <Cite doi={DOI.tripathy}>Tripathy et al.</Cite>)
       </>
     ),
     t1: 'Like brain early, then bright',
@@ -220,11 +220,11 @@ const otherBleeds: OtherBleed[] = [
           Bright sulci and cisterns on FLAIR (<Cite doi={DOI.popescuMri}>Popescu et al.</Cite>; <Cite doi={DOI.weidauer}>Weidauer et al.</Cite>)
         </li>
         <li>
-          Dark on SWI and T2* GRE (<Cite doi={DOI.weidauer}>Weidauer et al.</Cite>); in one series T2* GRE was more sensitive than FLAIR, 94% against
+          Often dark on SWI and T2* GRE (<Cite doi={DOI.weidauer}>Weidauer et al.</Cite>); in one series T2* GRE was more sensitive than FLAIR, 94% against
           81% in the acute phase (<Cite doi={DOI.mitchell}>Mitchell et al.</Cite>)
         </li>
         <li>
-          Bright on CT (<Cite doi={DOI.popescuCt}>Popescu et al.</Cite>, in trauma); near 100% sensitive within 6 hours of headache onset on modern CT (
+          Bright on CT (<Cite doi={DOI.popescuCt}>Popescu et al.</Cite>, in trauma); near 100% sensitive within 6 hours of headache onset on modern CT, in neurologically intact adults, read by a qualified radiologist (
           <Cite doi={DOI.perry}>Perry et al.</Cite>); sensitivity falls over days (58% by day 5 in a 1982 series, quoted by{' '}
           <Cite doi={DOI.ferrante}>Ferrante et al.</Cite>)
         </li>
@@ -425,7 +425,7 @@ export function HaemorrhageMriPage() {
         </div>
         <p className="source-note">
           Subdural blood ages like brain haematoma but more slowly, and CT or MRI cannot date it accurately (<Cite doi={DOI.hasan}>Hasan et al.</Cite>;{' '}
-          <Cite doi={DOI.sieswerda}>Sieswerda-Hoogendoorn et al.</Cite>). The acute FLAIR signal comes from a single case. Rebleeding gives layers of different
+          <Cite doi={DOI.sieswerda}>Sieswerda-Hoogendoorn et al.</Cite>). The acute FLAIR signal comes from a single paediatric case. Rebleeding gives layers of different
           ages; bright T1 blood in an old collection suggests a rebleed, and mixed density on CT suggests fresh blood in a chronic collection (
           <Cite doi={DOI.fobben}>Fobben et al.</Cite>; <Cite doi={DOI.tripathy}>Tripathy et al.</Cite>). Chronic collections have membranes and septa, and the
           outer membrane enhances (<Cite doi={DOI.hasan}>Hasan et al.</Cite>).

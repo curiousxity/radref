@@ -156,7 +156,7 @@ describe('registry', () => {
     expect(elbow).toContain('/mason')
     expect(relatedTo('/mason').map((item) => item.path)).toContain('/studies/elbow-mri')
   })
-  // The calvarial lesions, hearing loss and brain territories pages are teaching pages, not
+  // The calvarial lesions, hearing loss, brain territories and haemorrhage on MRI pages are teaching or reference pages, not
   // calculators: they are studies, and the old addresses of the first two still lead to them.
   test('reference pages are studies and their old paths redirect', () => {
     for (const path of ['/studies/calvarium', '/studies/hearing-loss-ct', '/studies/brain-territories', '/studies/haemorrhage-mri']) {

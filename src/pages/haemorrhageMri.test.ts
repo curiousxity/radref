@@ -91,7 +91,30 @@ describe('haemorrhage on MRI page', () => {
     expect(page).toContain('Like brain to dark')
     expect(page).not.toContain('iso- to hypodense')
     expect(page).toContain('mixed density on CT suggests fresh blood in a chronic collection')
-    expect(page).toContain('The acute FLAIR signal comes from a single case')
+    expect(page).toContain('The acute FLAIR signal comes from a single paediatric case')
     expect(page).toContain('Multifocal cortical siderosis counts as two or more lobar bleeds towards probable CAA')
+  })
+
+  // Perry (H-C53): third generation CT, "neurologically intact adults" with headache peaking within one
+  // hour, "interpreted by a qualified radiologist".
+  test('the CT sensitivity for subarachnoid haemorrhage keeps Perry\'s cohort limits', () => {
+    expect(page).toContain('near 100% sensitive within 6 hours of headache onset on modern CT, in neurologically intact adults, read by a qualified radiologist')
+  })
+
+  // Weidauer (H-C52): "T2* WI and SWI show often homogeneous signal loss".
+  test('subarachnoid blood is often, not always, dark on SWI and T2* GRE', () => {
+    expect(page).toContain('Often dark on SWI and T2* GRE')
+  })
+
+  // Weerink (H-C27): the chronic T1 signal "can be iso- or hyperintense due to residual methemoglobin".
+  test('the chronic haematoma T1 cell keeps the residual methaemoglobin caveat', () => {
+    expect(page).toContain("t1: 'Dark (can be like brain or bright from residual methaemoglobin)'")
+  })
+
+  // Tripathy (H-C39): subacute subdural haematomas are "iso to slightly hyperdense" on CT; Popescu: "isodense".
+  test('the subacute subdural CT cell cites Tripathy for the slightly bright part', () => {
+    const row = page.slice(page.indexOf("stage: 'Subacute'", page.indexOf('const subduralStages')), page.indexOf("stage: 'Chronic'", page.indexOf('const subduralStages')))
+    expect(row).toContain('Like brain or slightly bright')
+    expect(row).toContain('DOI.tripathy')
   })
 })
