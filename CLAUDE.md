@@ -161,7 +161,9 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   files, so they work offline once the page has been opened signed in; keep any new photo small and
   greyscale.
   The example scans on the other pages (`public/scans/<page>/`, below) are precached (`jpg` is in `globPatterns`);
-  each page's set is 100 to 260 KB, about 1660 KB in all (2026-10-28). Use about 340 px for
+  each page's set is 25 to 475 KB, about 7250 KB in all across 41 pages (2026-11-02); the largest
+  are shoulder MRI (about 475 KB), brain territories (about 445 KB), the neonatal chest X-ray (about
+  400 KB) and knee MRI (about 360 KB). Use about 340 px for
   ultrasound, whose speckle compresses poorly.
 - The anatomy viewers' shared stylesheet, `public/members/anatomy/shared/radref.css`, is a members
   file, cached with the first viewer opened. `woff2` is still in `globPatterns`, but no font ships any more, so it
@@ -294,6 +296,8 @@ standard report sections, correctly capitalised and punctuated:
 - Fifth metatarsal fractures (quick reference: Lawrence-Botte zones, Torg grading, mimics; schematic inline SVG figures, each paired with CC BY radiographs from `src/data/scans/fifthMetatarsal.ts` except the dancer's fracture, for which no open image was found)
 - Calvarial lesions (teaching page, a study in the Neuro region, at `/studies/calvarium`; `/calvarium` redirects: normal variants, lucent and dense skull vault lesions compared, schematic inline SVG cross-sections plus CT and MRI panels cropped from CC BY 4.0 open-access reviews (and, for the burr hole and osteomyelitis, three CC BY 4.0 case reports; for the layers, a CC BY 2.0 radiograph of a vault biopsy), credited per image with each source's licence; image list in `src/data/calvariumImages.ts`, files in `public/members/calvarium/`, checked by `src/pages/calvarium.test.ts`; drafted from the cited reviews, not yet reviewed by the author)
 - Hearing loss on temporal bone CT (teaching page, a study in the Head and neck region, at `/studies/hearing-loss-ct`; `/hearing-loss-ct` redirects: adult SNHL findings drawn on one inner ear cutaway (`src/components/InnerEarAnatomy.tsx`, shapes in `innerEarShapes.ts`, colours `--color-ear-*`), report wording, cochlear implant checklist; CT panels cropped from CC BY open-access figures, credited per image with each source's exact licence version; image list in `src/data/scans/hearingLoss.ts` (files in `public/scans/hearing-loss/`), shared with the temporal bone CT study; claims checked against the databases, with open questions for the author; unchecked draft, see `docs/superpowers/research/2026-10-28-hearing-loss-ct-sources.md`)
+- Vascular territories of the brain (teaching page, a study in the Neuro region, at `/studies/brain-territories`, related to `/carotid-stenosis`: interactive axial map (`src/components/BrainTerritoryMap.tsx`, shapes in `brainTerritoryShapes.ts` built by `brainTerritoryGeometry.ts`, what each level shows and the caption entries in `brainTerritoryViews.ts`, colours `--color-territory-*`) of arterial and venous territories at six levels, with border zones; sections on each territory, variants, venous drainage and dural venous sinus thrombosis; 31 CT and MRI panels cropped from 20 CC BY papers, image list in `src/data/scans/brainTerritories.ts` (files in `public/scans/brain-territories/`, none reused from other pages); no open image was found for the MCA inferior division infarct; every claim read first, see `docs/superpowers/research/2026-11-02-brain-territories-sources.md`)
+- Haemorrhage on MRI (reference page, a study in the Neuro region, at `/studies/haemorrhage-mri`: three tables, intracerebral haematoma by stage on T1, T2, SWI/GRE and CT, subdural haematoma by stage, subarachnoid haemorrhage and microbleeds, each with CC BY scans from `src/data/scans/haemorrhageMri.ts` (files in `public/scans/haemorrhage-mri/`); no open image was found for an early subacute haematoma or an acute or subacute subdural on MRI; every cell read first, see `docs/superpowers/research/2026-11-02-haemorrhage-mri-sources.md`)
 - Early pregnancy loss (SRU criteria, diagnostic versus suspicious findings)
 - Contrast reactions (severity triage, bedside actions, chart text)
 - Contrast premedication (oral and accelerated IV regimens)
@@ -437,7 +441,7 @@ and the region pages.
 - The list is ordered by region, then kind; within a kind, list order is the order shown. Bone
   and joint classifications go in their joint's region, and a test pins where they sit.
 - Teaching pages that are not built on `StudyPage` are still `kind: 'study'` (the calvarial
-  lesions and hearing loss pages, moved under `/studies/` 2026-10-28). A page that moves keeps
+  lesions, hearing loss, brain territories and haemorrhage on MRI pages; the first two moved under `/studies/` 2026-10-28). A page that moves keeps
   its old path working through `movedPaths` in `src/data/calculators.ts`, which `App.tsx` turns
   into redirects. Companion calculators share a region (adrenal washout and chemical shift under
   Abdomen); a test pins it.
@@ -549,7 +553,7 @@ the Ottawa knee, ankle and foot rules and the Amsterdam wrist rules are recorded
 film; the ankle study names Weber A, B or C (no Weber calculator, the author's choice). Specs:
 `docs/superpowers/specs/2026-11-01-neonatal-chest-xray-study-design.md` and
 `docs/superpowers/specs/2026-11-01-adult-injury-xray-studies-design.md`; claims in
-`docs/superpowers/research/2026-11-01-*-xray-sources.md`. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
+`docs/superpowers/research/2026-11-01-*-xray-sources.md`. The brain territories page (2026-11-02) was written the same way: 34 references, every claim read in an abstract or an open full text, its note does not start "Unchecked draft" (`docs/superpowers/research/2026-11-02-brain-territories-sources.md`, spec `docs/superpowers/specs/2026-11-02-brain-territories-design.md`; scans in `docs/superpowers/research/2026-10-28-example-scans.md` under "Brain territories"). The haemorrhage on MRI page (2026-11-02) too: every table cell is tied to a quoted source in `docs/superpowers/research/2026-11-02-haemorrhage-mri-sources.md`. The environment also allows `api.unpaywall.org` (free copies of paywalled papers),
 `doi.org`, `pmc.ncbi.nlm.nih.gov` and `cdn.ncbi.nlm.nih.gov` (PubMed Central pages and the table
 and figure images inside them); `europepmc.org` itself refuses automated requests, so use the
 Europe PMC API on `www.ebi.ac.uk`.

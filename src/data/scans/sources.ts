@@ -239,4 +239,39 @@ export const SCAN_SOURCES = {
   uchoa2024: { short: 'Uchôa and Uchôa 2024', doi: '10.7759/cureus.64745', licence: 'CC BY 4.0' },
   moldovan2025: { short: 'Moldovan 2025', doi: '10.3390/life15040637', licence: 'CC BY 4.0' },
   zaher2024: { short: 'Zaher et al. 2024', doi: '10.7759/cureus.64552', licence: 'CC BY 4.0' },
+  // Brain territories. Nouh's licence statement gives no version; its PMC licence link gives 3.0 and
+  // Crossref has none. Li's gives no version; Crossref gives 4.0. Dogariu's article states 3.0
+  // while Crossref gives 4.0, so the article's 3.0 is used. Sano (Cureus) states "CC-BY 4.0" and
+  // Kichloo (SAGE) 4.0, with no Crossref licence. John's licence link and Crossref give 2.0;
+  // Renard's give 3.0. Sakai (Cureus) states "CC-BY 4.0", with no Crossref licence. Karagulle's
+  // statement gives no version; its licence link and Crossref give 4.0. Gayathri's gives no version;
+  // its PMC licence link gives 2.0 and Crossref has none. The rest state CC BY 4.0 in the article and
+  // in Crossref.
+  nouh2014: { short: 'Nouh et al. 2014', doi: '10.3389/fneur.2014.00030', licence: 'CC BY 3.0' },
+  sano2025: { short: 'Sano et al. 2025', doi: '10.7759/cureus.80688', licence: 'CC BY 4.0' },
+  john2008: { short: 'John et al. 2008', doi: '10.1186/1752-1947-2-148', licence: 'CC BY 2.0' },
+  tsika2024: { short: 'Tsika et al. 2024', doi: '10.3390/neurolint16020020', licence: 'CC BY 4.0' },
+  renard2014: { short: 'Renard et al. 2014', doi: '10.1155/2014/154631', licence: 'CC BY 3.0' },
+  xin2020: { short: 'Xin et al. 2020', doi: '10.1186/s12883-020-01786-1', licence: 'CC BY 4.0' },
+  gollwitzer2025: { short: 'Gollwitzer et al. 2025', doi: '10.3390/jcm14228229', licence: 'CC BY 4.0' },
+  dogariu2023: { short: 'Dogariu et al. 2023', doi: '10.25122/jml-2023-0127', licence: 'CC BY 3.0' },
+  kichloo2019: { short: 'Kichloo et al. 2019', doi: '10.1177/2324709619867355', licence: 'CC BY 4.0' },
+  furtner2021: { short: 'Furtner and Prayer 2021', doi: '10.1007/s10354-021-00825-x', licence: 'CC BY 4.0' },
+  li2021: { short: 'Li et al. 2021', doi: '10.3389/fradi.2021.687045', licence: 'CC BY 4.0' },
+  oliveira2022: { short: 'Oliveira et al. 2022', doi: '10.1590/0100-3984.2021.0019', licence: 'CC BY 4.0' },
+  sadik2022: { short: 'Sadik et al. 2022', doi: '10.3390/life12081215', licence: 'CC BY 4.0' },
+  delgado2026: { short: 'Delgado et al. 2026', doi: '10.1186/s13244-026-02381-7', licence: 'CC BY 4.0' },
+  zedde2025: { short: 'Zedde and Pascarella 2025', doi: '10.3390/neurolint17010009', licence: 'CC BY 4.0' },
+  kim2026: { short: 'Kim et al. 2026', doi: '10.1007/s00234-026-03955-4', licence: 'CC BY 4.0' },
+  deLorenzo2023: { short: 'De Lorenzo et al. 2023', doi: '10.1186/s12883-023-03448-4', licence: 'CC BY 4.0' },
+  sakai2025: { short: 'Sakai et al. 2025', doi: '10.7759/cureus.93448', licence: 'CC BY 4.0' },
+  karagulle2026: { short: 'Karagulle et al. 2026', doi: '10.3390/diagnostics16121771', licence: 'CC BY 4.0' },
+  gayathri2010: { short: 'Gayathri et al. 2010', doi: '10.4103/1817-1745.66679', licence: 'CC BY 2.0' },
+  // Haemorrhage on MRI. Patra's article states CC BY 4.0, with no Crossref licence. Kuczyński's
+  // (MDPI) statement gives no version; its licence link and Crossref give 4.0. The rest state CC BY
+  // 4.0 in the article and in Crossref.
+  penckofer2024: { short: 'Penckofer et al. 2024', doi: '10.3389/fnins.2024.1408288', licence: 'CC BY 4.0' },
+  patra2019: { short: 'Patra et al. 2019', doi: '10.5005/jp-journals-10071-23186', licence: 'CC BY 4.0' },
+  kuczynski2026: { short: 'Kuczyński et al. 2026', doi: '10.3390/jcm15114134', licence: 'CC BY 4.0' },
+  weidauer2023: { short: 'Weidauer et al. 2023', doi: '10.1007/s00062-022-01231-5', licence: 'CC BY 4.0' },
 } as const satisfies Record<string, ScanSource>

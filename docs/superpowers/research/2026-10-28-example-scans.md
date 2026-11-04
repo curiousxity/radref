@@ -677,3 +677,102 @@ PMC8762863 (about 200 px; the full-size copy was not reachable).
 Still without an image: the knee's horizontal-beam lateral with a lipohaemarthrosis, the reverse
 Segond and tibial spine or PCL avulsions; the radiocapitellar view; radial inclination drawn on a PA;
 the ankle effusion (teardrop) sign; Torg types; the neonatal UAC's loop through the pelvis.
+
+## Brain territories (2026-11-02)
+
+CT and MRI for the brain vascular territories page (`src/data/scans/brainTerritories.ts`), made as
+above (CC BY with a stated version, one panel per file, greyscale, under 40 KB, in
+`public/scans/brain-territories/`). Each image sits under the section of
+`src/pages/BrainTerritoriesPage.tsx` that teaches its finding, and its caption keeps to the source
+figure's caption. The figure leads came from the appendix of
+`2026-11-02-brain-territories-sources.md`; the gaps there were searched again (Europe PMC, including
+figure captions with `FIG:`). Searches, crop boxes and rejected candidates are in the scratchpad
+`bt-scans/notes.md`.
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| acaInfarct | Sano et al. Cureus 2025;17:e80688 (PMC12000702) | Fig. 2A | "CC-BY 4.0" / none | right ACA territory; the series is of ACA dissection; red arrow kept via the red channel |
+| mcaInfarct | John et al. J Med Case Rep 2008;2:148 (PMC2396650) | Fig. 2 | CC BY (by/2.0 link) / by/2.0 | CT 72 h after admission; burned-in patient and scanner text cropped off |
+| pcaInfarct, paramedianPontine, picaInfarct | Nouh et al. Front Neurol 2014;5:30 (PMC3985033) | Figs. 3C, 4A, 4D | "CC BY", PMC licence link by/3.0 / none | the PICA caption names the cut-off PICA only as panel C of the same figure |
+| achaInfarct | Tsika et al. Neurol Int 2024;16:289 (PMC10961810) | Fig. 1b | CC BY (by/4.0) / by/4.0 | left AChA territory, DWI |
+| thalamicInfarct | Renard et al. Behav Neurol 2014;2014:154631 (PMC4101959) | Fig. 2a | CC BY (by/3.0) / by/3.0 | thalamogeniculate territory (arrow) with a PCA cortical infarct (arrowhead) |
+| deepVenousThalami | Renard 2014 | Fig. 7a | as above | bilateral thalamic oedema, deep venous thrombosis |
+| lateralMedullary | Xin et al. BMC Neurol 2020;20:211 (PMC7249651) | Fig. 1b | CC BY 4.0 / by/4.0 | red arrow kept via the red channel; burned-in text of panel A cropped off |
+| scaInfarct | Gollwitzer et al. J Clin Med 2025;14:8229 (PMC12653350) | Fig. 1A | CC BY (by/4.0) / by/4.0 | SCA occlusion shown in panel B |
+| corticalBorderZone, internalBorderZone | Dogariu et al. J Med Life 2023;16:842-850 (PMC10478671) | Figs. 2b, 3 | CC BY 3.0 / by/4.0 | article and Crossref differ; the article's 3.0 is used; Fig. 2b is small (217 px) |
+| percheron | Kichloo et al. J Investig Med High Impact Case Rep 2019;7 (PMC6689919) | Fig. 2 | CC BY 4.0 / TDM only | |
+| lacune | Furtner and Prayer. Wien Med Wochenschr 2021;171:274-281 (PMC8397686) | Fig. 5b | CC BY 4.0 / by/4.0 | coronal T2; the axial FLAIR (5a) is too dark to show it |
+| parasagittalVenousInfarct | Li et al. Front Radiol 2021;1:687045 (PMC10365275) | Fig. 6A | "CC BY" / by/4.0 | small in the source (140 px); red arrow kept via the red channel |
+| temporalVenousInfarct, cordSign, emptyDelta, venographyDefect | Oliveira et al. Radiol Bras 2022;55:54-61 (PMC8864687) | Figs. 4B, 2, 5A, 9B | CC BY (by/4.0) / by/4.0 | orange arrows kept via the red channel |
+| denseSinus, swiBlooming, hypoplasticTransverse | Sadik et al. Life 2022;12:1215 (PMC9410175) | Figs. 15, 9b, 22b | CC BY (by/4.0) / by/4.0 | no arrows in these figures |
+| arachnoidGranulation | Delgado et al. Insights Imaging 2026;17:230 (PMC13588991) | Fig. 5a | CC BY 4.0 / by/4.0 | figures are WebP in the supplementary files |
+| flowGap | Zedde and Pascarella. Neurol Int 2025;17:9 (PMC11767902) | Fig. 9a | CC BY (by/4.0) / by/4.0 | contrast-enhanced venography (9b) did not confirm the gaps |
+| mcaSuperiorDivision | Kim et al. Neuroradiology 2026;68:965-974 (PMC13139282) | Fig. 4c | CC BY 4.0 / by/4.0 | case 1, left MCA superior division infarct on DWI; small in the source (191 px) |
+| heubnerInfarct | De Lorenzo et al. BMC Neurol 2023;23:399 (PMC10631111) | Fig. 1 | CC BY 4.0 / by/4.0 | upper right (FLAIR) panel; the caption names the Heubner territory (arrow with asterisk); the other arrow is an MCA lesion |
+| midbrainInfarct | Sakai et al. Cureus 2025;17:e93448 (PMC12571697) | Fig. 1a | "CC-BY 4.0" / none | right rostral paramedian midbrain on DWI; the paper names no artery |
+| flowVoidLoss, t1BrightClot, dwiBrightClot | Karagulle et al. Diagnostics 2026;16:1771 (PMC13298027) | Figs. 2C, 2B, 2E | "CC BY", by/4.0 link / by/4.0 | one patient, left transverse sinus thrombosis; panels about 240 px in the source |
+| polycythaemiaDenseSinus | Gayathri et al. J Pediatr Neurosci 2010;5:27 (PMC2964806) | Fig. 2 | "CC BY", PMC licence link by/2.0 / none | case 2 (tetralogy of Fallot, haematocrit 66%); the sinuses enhanced on contrast CT (Fig. 4) but there was no venography and the authors say clot must be ruled out, so the caption claims neither; burned-in date and labels cropped off |
+
+Not used: Canedo-Antelo 2019 (RadioGraphics, not CC BY); Nouh Fig. 3A (lateral medullary FLAIR, no
+arrow and the lesion not visible at the source's size); Yilmaz 2016, Heubner infarct (PMC4884235;
+PMC gives by/2.5 but Crossref by-nc/4.0); Markus and de Leeuw 2022, Fig. 1b lacune (PMC9806465; captioned
+"Copyright Hugh Markus"); Stringer 2020 review, Fig. 3 (PMC7803876; the caption's left-to-right order
+does not match the panels); Pereira 2025 Wallenberg case (PMC12634019; its "DWI" panel is a T2
+image); Kaplanoğlu 2023 arachnoid granulations (Eurasian J Med, CC BY-NC); Abdrabou 2025 dense torcula
+from a high haematocrit (PMC12125052, Fig. 3A; 230 px, the density and the ROI label not readable);
+Sadik Fig. 23 (arachnoid granulation not visible without an arrow); Delgado Fig. 1a (zoomed views,
+little anatomy; Sadik Fig. 15 used instead); Takada 2025 and Yanusha 2025 MCA infarcts (faint DWI;
+photographed film with burned-in text).
+
+Gap search (2026-11-02, later; searches, candidates and crop boxes in the scratchpad
+`bt-gaps/notes.md`): the MCA superior division, Heubner, midbrain, flow-void, T1, DWI and
+polycythaemia images above were added. Not used: Happonen 2023 (PMC10297083, Fig. 2; CC BY 4.0, but
+its T2 flow-void panel is subtler than Karagulle's, so one patient's set was kept); Alattas 2022
+(PMC9761486; small coloured arrows on a busy figure); Iyer 2025 dehydration CT (PMC12398339, Fig. 2;
+no arrow, the density is slight and the brain is diffusely abnormal); the Sci Rep 2021 plateau study
+(PMC7954789, Fig. 3a; 135 px panels); Babici 2023 caudate infarct (PMC10693717; clear, but the paper
+does not put it in the Heubner territory); Carranza 2025 Claude syndrome (PMC12334073; lesion faint),
+Weber syndrome case 2022 (PMC9142634; faint, no arrow), Haymes 2021 (PMC8500245; DWI too dark);
+inferior-division candidates PMC12358175 (multifocal infarcts) and PMC11669874 (motion artefact, per
+its caption).
+
+Still without an image: an infarct of the MCA inferior division alone (the page says so). The
+high-riding jugular bulb is not on the page, so none was sought.
+
+## Haemorrhage on MRI (2026-11-02)
+
+MRI for the haemorrhage on MRI page (`src/data/scans/haemorrhageMri.ts`), made as above (CC BY with
+a stated version, one panel per file, greyscale, under 40 KB, in `public/scans/haemorrhage-mri/`).
+Each row of images sits under the table of `src/pages/HaemorrhageMriPage.tsx` it illustrates, in
+table-row order, and each caption keeps to the source figure's caption and to the table's cell. The
+figure leads came from the appendix of `2026-11-02-haemorrhage-mri-sources.md`; the gaps were
+searched in Europe PMC, including figure captions with `FIG:`. Larger copies of the same figures
+were taken from the publishers (Frontiers, Springer) where Europe PMC's were small. Searches, crop
+boxes and rejected candidates are in the scratchpad `hm-scans/notes.md`.
+
+| Key | Source (PMCID) | Figure | Licence: article / Crossref | Notes |
+|---|---|---|---|---|
+| hyperacuteHaematoma, acuteHaematoma, lateSubacuteHaematoma | Penckofer et al. Front Neurosci 2024;18:1408288 (PMC11111865) | Fig. 1A (panels A2, B2, D1) | CC BY 4.0 / by/4.0 | plainly different patients; the caption gives no patient details; B2 is labelled T2 FLAIR but the CSF is bright, so the caption says T2-weighted and gives the source's label |
+| chronicHaematoma | Patra et al. Indian J Crit Care Med 2019;23:S104-S114 (PMC6707490) | Fig. 7B | CC BY 4.0 / none | right basal ganglia, T2; figure taken from PMC (the Europe PMC supplementary files failed) |
+| chronicSubdural | Kuczyński et al. J Clin Med 2026;15:4134 (PMC13258658) | Fig. 6 | "CC BY", by/4.0 link / by/4.0 | "Own material"; green arrows kept via the green channel; orientation letters and ruler cropped off |
+| sahFlair, superficialSiderosis, microbleeds | Weidauer et al. Clin Neuroradiol 2023;33:293-306 (PMC10220152) | Figs. 6b, 5b, 7g | CC BY 4.0 / by/4.0 | three patients; the convexity SAH is from CAA (no open aneurysmal SAH on FLAIR was found); the dates above Fig. 6 cropped off |
+
+Not used: Penckofer Fig. 1A C1/C2 (early subacute; a small midline brainstem lesion, faint on T1)
+and E1/E2 (chronic; a small dark focus on GRE, no arrow, could be taken for a microbleed); Hasan 2022
+Fig. 3A (PMC9393587; clear, but carries an arrowhead its caption does not explain, so Kuczyński's
+was used); Tabibkhooei 2021 (PMC7879972, Fig. 3a; CC BY 4.0, a T1-bright rim the authors call
+early subacute, but their case text says a CT on the admission day showed no bleed and the MRI was on
+the second day, so the bleed was at most about 2 days old, inside the page's acute row, where T1 is
+like brain); Patra Fig. 4 (subacute subdural, labelled T1 but the cortex is brighter than the white
+matter, as on FLAIR); Arai 2024 acute subdural (PMC11297714, Fig. 1C; the MRI was about a week
+after the fall, past the page's 3-day acute window); Pineda 2024 (PMC11168240; bright on T2, in
+intracranial hypotension); the Clin Case Rep 2026 and Cureus 2025 subdurals (PMC13051822,
+PMC12535179; bright on T2 or T1, against the page's acute row); Iliescu 2015 (PMC4556906; a
+neuroradiologycases.com watermark, no licence version); the Turk J Haematol 2012 subdurals
+(PMC3986758; burned-in patient text, no licence version); Ahmad 2021 (PMC8325620; thin rims with
+measurement text); Padarti 2023 cavernoma bleed (PMC9996543; a small dot); Sporns 2020
+paediatric review (PMC7290500, Fig. 3; T2* and contrast T1 only); the Alzheimers Dement 2023 CAA
+panels (PMC10916950, Fig. 1A; dark, low contrast).
+
+Still without an image: an early subacute intracerebral haematoma, and an acute or subacute subdural
+haematoma on MRI (the page says so).
