@@ -196,4 +196,19 @@ describe('members pages', () => {
     for (const ok of ['/', '/studies/knee-mri', '/studies/knee-mri?tab=report']) expect(safe.test(ok), ok).toBe(true)
     for (const bad of ['//evil.example', '/\\evil.example', 'https://evil.example', 'javascript:alert(1)', '']) expect(safe.test(bad), bad).toBe(false)
   })
+
+  test('the service worker leaves the sign-in round trip to the network', () => {
+    // Access sends the reader to /members/signin/, then to Google, then back to
+    // /cdn-cgi/access/authorized, which sets the session cookie. Each is a navigation; one answered
+    // with the React shell showed "That page does not exist" and the sign-in never finished.
+    const config = readFileSync(new URL('../../vite.config.ts', import.meta.url), 'utf8')
+    const list = config.match(/navigateFallbackDenylist: \[(.+)\]/)?.[1]
+    expect(list).toBeDefined()
+    const denied = list!.split(', ').map((pattern) => new RegExp(pattern.slice(1, -1)))
+    const leftToNetwork = (path: string) => denied.some((pattern) => pattern.test(path))
+    for (const path of ['/cdn-cgi/access/authorized', '/cdn-cgi/access/logout', '/members/signin/', '/members/anatomy/knee.html']) {
+      expect(leftToNetwork(path), path).toBe(true)
+    }
+    for (const path of ['/', '/studies/knee-mri', '/ti-rads']) expect(leftToNetwork(path), path).toBe(false)
+  })
 })

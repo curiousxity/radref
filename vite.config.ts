@@ -153,8 +153,11 @@ export default defineConfig({
         // navigation, so without this the service worker would serve the React shell
         // inside the frame instead of the viewer. Opening a reference PDF is a navigation
         // too, so /references/ is left to the network the same way. /members/ must reach
-        // the network so that Cloudflare Access can ask for a sign-in.
-        navigateFallbackDenylist: [/^\/members\//, /^\/references\//],
+        // the network so that Cloudflare Access can ask for a sign-in. /cdn-cgi/ is Cloudflare's
+        // own: after the Google sign-in, Access returns the reader to /cdn-cgi/access/authorized,
+        // which sets the session cookie. Answered with the React shell, that showed the 404 page
+        // and no one could finish signing in (2026-11-13).
+        navigateFallbackDenylist: [/^\/members\//, /^\/references\//, /^\/cdn-cgi\//],
         globPatterns: ['**/*.{js,css,html,svg,png,jpg,ico,woff2}'],
         // Members files are never precached: without a session they are a redirect to the
         // Access login. They are kept instead once fetched while signed in (below).

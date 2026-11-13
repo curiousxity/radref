@@ -172,7 +172,10 @@ The site is a PWA via `vite-plugin-pwa` (configured in `vite.config.ts`), so it 
   iframe load counts as a navigation, so without it the service worker answers the
   anatomy frame's request with the React shell and the viewer renders the whole app
   inside itself; the sign-in page must also reach the network so Access can step in. Any future
-  standalone HTML page needs the same treatment.
+  standalone HTML page needs the same treatment. `/^\/cdn-cgi\//` is in the list too: after the
+  Google sign-in, Access returns the reader to `/cdn-cgi/access/authorized`, which sets the session
+  cookie. Without it the service worker answered with the React shell, the reader saw the 404 page
+  and the sign-in never finished (fixed 2026-11-13; `calculators.test.ts` pins it).
 
 ## Deployment notes
 
